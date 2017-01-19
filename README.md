@@ -34,10 +34,20 @@ Release can either be ALPHA, BETA, SNAPSHOT, or RELEASE
 package me.zero.example;
 
 public class ExampleClient extends Client {
-    
+
     @Override
-    public void init() {
-        // load
+    public void preInit() {
+        
+    }
+
+    @Override
+    public void onInit() {
+
+    }
+
+    @Override
+    public void postInit() {
+
     }
 }
 ```
