@@ -16,7 +16,7 @@ API designed to make Clients have Universal Support
 
 ## Introduction
 
-#### Client.json
+### Client.json
 * **Name** Client Name
 * **Authors** Client Authors-
 * **ID** Unique ID
@@ -33,7 +33,7 @@ API designed to make Clients have Universal Support
   "main": "me.zero.example.ExampleClient"
 }
 ```
-#### Main Class
+### Main Class
 ```java
 package me.zero.example;
 
