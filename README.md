@@ -18,13 +18,14 @@ API designed to make Clients have Universal Support
 The following information can be viewed [Here](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/java). This is just an overview
 
 ### Client.json
+Release can either be ALPHA, BETA, SNAPSHOT, or RELEASE
 ```json
 {
   "name": "Example Client",
   "authors": [ "Zero" ],
   "id": "example",
   "build": 1.0,
-  "type": "RELEASE", // Can be ALPHA, BETA, SNAPSHOT, or RELEASE
+  "type": "RELEASE",
   "main": "me.zero.example.ExampleClient"
 }
 ```
