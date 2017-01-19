@@ -12,7 +12,7 @@ API designed to make Clients have Universal Support
 * Module data storage
 * Halfpetal's CapesAPI integration
 
---
+---
 
 ## Introduction
 
