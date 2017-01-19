@@ -5,4 +5,5 @@ package me.zero.api.client;
  */
 public abstract class Client {
 
+    public abstract void init();
 }
