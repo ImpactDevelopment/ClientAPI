@@ -11,3 +11,26 @@ API designed to make Clients have Universal Support
 * Tab GUI and Click GUI API
 * Module data storage
 * Halfpetal's CapesAPI integration
+
+### Overview
+
+##### Client.json
+```json
+{
+  "name": "Example Client",
+  "id": "example",
+  "main": "me.zero.example.ExampleClient"
+}
+```
+##### Main Class
+```java
+package me.zero.example;
+
+public class ExampleClient extends Client {
+    
+    @Override
+    public void init() {
+        // load
+    }
+}
+```
