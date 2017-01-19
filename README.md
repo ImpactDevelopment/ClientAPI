@@ -14,13 +14,13 @@ API designed to make Clients have Universal Support
 
 ### Overview
 
-##### Client.json
-Name: Client Name
-Authors: Client Authors-
-ID: Unique ID
-Build: The Current Build/Version
-Type: Build Type, Can be "SNAPSHOT", "ALPHA", "BETA", or "RELEASE"
-Main: Path to Main Class
+#### Client.json
+* **Name** Client Name
+* **Authors** Client Authors-
+* **ID** Unique ID
+* **Build** The Current Build/Version
+* **Type** Build Type, Can be "SNAPSHOT", "ALPHA", "BETA", or "RELEASE"
+* **Main** Path to Main Class
 ```json
 {
   "name": "Example Client",
@@ -31,7 +31,7 @@ Main: Path to Main Class
   "main": "me.zero.example.ExampleClient"
 }
 ```
-##### Main Class
+#### Main Class
 ```java
 package me.zero.example;
 
