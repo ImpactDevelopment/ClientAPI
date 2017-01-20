@@ -52,6 +52,8 @@ public class ClickEvent {
         }
 
         /**
+         * @since 1.0
+         *
          * @return The ID of the Mouse Button
          */
         public int getID() {
