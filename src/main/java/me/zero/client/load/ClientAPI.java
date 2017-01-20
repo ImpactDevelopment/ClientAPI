@@ -1,8 +1,8 @@
-package me.zero.client;
+package me.zero.client.load;
 
-import me.zero.client.exception.ActionNotSupportedException;
+import me.zero.client.api.exception.ActionNotSupportedException;
 
-import static me.zero.client.ClientAPI.Stage.LOAD;
+import static me.zero.client.load.ClientAPI.Stage.LOAD;
 
 /**
  * Created by Brady on 1/19/2017.

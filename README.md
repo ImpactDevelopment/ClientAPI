@@ -15,7 +15,7 @@ API designed to make Clients have Universal Support
 ---
 
 ## Introduction
-The following information can be viewed [Here](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/java). This is just an overview
+The following information can be viewed [Here](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/). This is just an overview
 
 ### Client.json
 Release can either be ALPHA, BETA, SNAPSHOT, or RELEASE
@@ -37,17 +37,17 @@ public class ExampleClient extends Client {
 
     @Override
     public void preInit() {
-        
+        // Transformers and Module Types
     }
 
     @Override
     public void onInit() {
-
+        // Modules and UI
     }
 
     @Override
     public void postInit() {
-
+        // Nothing at the moment
     }
 }
 ```
