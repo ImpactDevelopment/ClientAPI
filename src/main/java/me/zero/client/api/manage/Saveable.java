@@ -12,5 +12,10 @@ package me.zero.client.api.manage;
  */
 public interface Saveable {
 
+    /**
+     * Save function
+     *
+     * @since 1.0
+     */
     void save();
 }

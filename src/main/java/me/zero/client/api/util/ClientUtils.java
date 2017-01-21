@@ -11,6 +11,13 @@ import java.util.Arrays;
  */
 public class ClientUtils {
 
+    /**
+     * Concatenates 2 generic arrays
+     *
+     * @param first The first array
+     * @param second The seccond array
+     * @return The concatenated array
+     */
     public static <T> T[] concat(T[] first, T[] second) {
         T[] result = Arrays.copyOf(first, first.length + second.length);
         System.arraycopy(second, 0, result, first.length, second.length);
