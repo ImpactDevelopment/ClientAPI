@@ -47,7 +47,7 @@ public class ExampleClient extends Client {
 
     @Override
     public void postInit() {
-        // Nothing at the moment
+        // UI
     }
 }
 ```
