@@ -1,6 +1,7 @@
 package me.zero.client.api.util;
 
 import me.zero.client.api.transformer.reference.ClassReference;
+import me.zero.client.api.transformer.reference.MethodReference;
 
 import java.util.Arrays;
 
@@ -13,14 +14,30 @@ import java.util.Arrays;
  */
 public class MethodDescriptorBuilder {
 
+    /**
+     * Return value of Method
+     */
     private final ClassReference returnValue;
+
+    /**
+     * Parameters of Method
+     */
     private final ClassReference[] parameters;
+
+    public MethodDescriptorBuilder(MethodReference reference) {
+        this(reference.getReturnType(), reference.getParameters());
+    }
 
     public MethodDescriptorBuilder(ClassReference returnValue, ClassReference... parameters) {
         this.returnValue = returnValue;
         this.parameters = parameters;
     }
 
+    /**
+     * Builds the Method Descriptor from the Return value and parameters
+     *
+     * @return Built Method Descriptor as a {@code String}
+     */
     public String build() {
         StringBuilder paramDesc = new StringBuilder();
         Arrays.asList(this.parameters).forEach(param -> paramDesc.append(param.getDescriptor()));
