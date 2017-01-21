@@ -1,5 +1,7 @@
 package me.zero.client.api.gui.tab;
 
+import me.zero.client.api.manage.Loadable;
+
 /**
  * Base for Tab Gui Handlers
  *
@@ -9,5 +11,5 @@ package me.zero.client.api.gui.tab;
  *
  * Created by Brady on 1/20/2017.
  */
-public interface ITabGui {
+public interface ITabGui extends Loadable {
 }

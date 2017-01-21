@@ -1,12 +1,19 @@
 package me.zero.client.api.util.logger;
 
 /**
+ * Implementation of ILogger
+ *
+ * @see me.zero.client.api.util.logger.ILogger
+ *
  * @since 1.0
  *
  * Created by Brady on 1/21/2017.
  */
 public class Logger implements ILogger {
 
+    /**
+     * Instance of the Logger
+     */
     public static final Logger instance = new Logger();
 
     @Override
