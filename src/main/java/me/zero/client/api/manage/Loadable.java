@@ -12,5 +12,5 @@ package me.zero.client.api.manage;
  */
 public interface Loadable {
 
-    void save();
+    void load();
 }
