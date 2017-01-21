@@ -1,6 +1,7 @@
 package me.zero.client.load;
 
 import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.transformer.reference.MethodReference;
 
 import static me.zero.client.load.ClientAPI.Stage.LOAD;
 

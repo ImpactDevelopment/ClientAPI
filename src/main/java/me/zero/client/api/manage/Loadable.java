@@ -12,5 +12,10 @@ package me.zero.client.api.manage;
  */
 public interface Loadable {
 
+    /**
+     * Load function
+     *
+     * @since 1.0
+     */
     void load();
 }
