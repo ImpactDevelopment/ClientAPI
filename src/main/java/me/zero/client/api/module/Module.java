@@ -40,12 +40,12 @@ public class Module implements IModule, IBindable {
     }
 
     @Override
-    public void toggle() {
+    public final void toggle() {
         this.setState(!this.getState());
     }
 
     @Override
-    public void setState(boolean state) {
+    public final void setState(boolean state) {
         if (state == this.state) return;
 
         if (this.state = state) {
@@ -56,22 +56,22 @@ public class Module implements IModule, IBindable {
     }
 
     @Override
-    public boolean getState() {
+    public final boolean getState() {
         return this.state;
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
     @Override
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 
     @Override
-    public ModuleType getType() {
+    public final ModuleType getType() {
         return this.type;
     }
 }
