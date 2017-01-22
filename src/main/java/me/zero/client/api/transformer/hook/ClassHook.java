@@ -1,5 +1,6 @@
 package me.zero.client.api.transformer.hook;
 
+import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
@@ -20,5 +21,5 @@ public interface ClassHook {
      * @param ctClass Class being hooked
      * @throws NotFoundException
      */
-    void accept(CtClass ctClass) throws NotFoundException;
+    void accept(CtClass ctClass) throws NotFoundException, CannotCompileException;
 }
