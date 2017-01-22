@@ -1,5 +1,6 @@
 package me.zero.client.api.transformer.hook;
 
+import javassist.CannotCompileException;
 import javassist.CtMethod;
 
 /**
@@ -19,5 +20,5 @@ public interface MethodHook {
      *
      * @param ctMethod Method going to get transformed
      */
-    void accept(CtMethod ctMethod);
+    void accept(CtMethod ctMethod) throws CannotCompileException;
 }

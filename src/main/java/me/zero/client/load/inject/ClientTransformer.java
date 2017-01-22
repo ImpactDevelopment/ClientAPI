@@ -64,16 +64,12 @@ public class ClientTransformer implements IClassTransformer, Loadable {
 
                 return ctClass.toBytecode();
 
-            } catch (CannotCompileException | IOException | NotFoundException exception) {
-
-                if (exception instanceof CannotCompileException)
-                    Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, className);
-
-                if (exception instanceof IOException)
-                    Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_UNEXPECTED_IOEXCEPTION, className);
-
-                if (exception instanceof NotFoundException)
-                    Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CLASS_NOT_FOUND, className);
+            } catch (CannotCompileException exception) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, className);
+            } catch (IOException e) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_UNEXPECTED_IOEXCEPTION, className);
+            } catch (NotFoundException e) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CLASS_NOT_FOUND, className);
             }
         }
 
