@@ -56,7 +56,7 @@ public class ModuleType {
      * @param name
      */
     public static void create(String name) {
-        ClientAPI.getAPI().check(PRE, "Module Type creation after Initialization");
+        ClientAPI.getAPI().check(PRE, "Module Type creation after Pre-Initialization");
 
         name = name.toLowerCase();
         for (ModuleType type : types) {
