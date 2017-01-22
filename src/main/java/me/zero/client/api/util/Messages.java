@@ -18,4 +18,6 @@ public interface Messages {
     String TRANSFORM_METHOD_NOT_FOUND          = "Unable to Transform, Method not found!";
     String TRANSFOM_CANNOT_COMPILE             = "Unable to Compile Class! %s";
     String TRANSFOM_UNEXPECTED_IOEXCEPTION     = "Unexpected IOException after Compiling Class %s";
+
+    String EVENT_UNABLE_CALL                   = "Unable to Call Event %s";
 }
