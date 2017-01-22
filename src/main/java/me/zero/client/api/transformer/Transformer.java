@@ -1,5 +1,6 @@
 package me.zero.client.api.transformer;
 
+import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -42,6 +43,8 @@ public abstract class Transformer implements ITransformer {
                 hook.accept(ctClass);
             } catch (NotFoundException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_METHOD_NOT_FOUND);
+            } catch (CannotCompileException e) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, ctClass.getName());
             }
         });
     }
