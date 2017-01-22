@@ -4,6 +4,7 @@ import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +14,20 @@ import java.util.List;
  */
 public class ClientTweaker implements ITweaker {
 
+    private List<String> args = new ArrayList<>();
+
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
+        this.args.addAll(args);
 
+        this.args.add("--gameDir");
+        this.args.add(gameDir.getAbsolutePath());
+
+        this.args.add("--assetsDir");
+        this.args.add(assetsDir.getAbsolutePath());
+
+        this.args.add("--version");
+        this.args.add(profile);
     }
 
     @Override
@@ -30,6 +42,6 @@ public class ClientTweaker implements ITweaker {
 
     @Override
     public String[] getLaunchArguments() {
-        return new String[0];
+        return this.args.toArray(new String[this.args.size()]);
     }
 }
