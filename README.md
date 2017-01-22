@@ -42,7 +42,7 @@ public class ExampleClient extends Client {
 
     @Override
     public void onInit() {
-        // Modules and UI
+        // Modules
     }
 
     @Override

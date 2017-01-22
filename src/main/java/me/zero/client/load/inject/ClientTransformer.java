@@ -33,6 +33,7 @@ public class ClientTransformer implements IClassTransformer, Loadable {
     @Override
     public void load() {
         // Load Default and Client Transformers
+        ClassPool.getDefault();
     }
 
     @Override
