@@ -21,5 +21,5 @@ public @interface EventHandler {
     /**
      * @return The priority of the Event
      */
-    byte value() default EventPriority.MEDIUM;
+    byte value() default EventPriority.DEFAULT;
 }

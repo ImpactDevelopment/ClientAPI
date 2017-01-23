@@ -81,7 +81,7 @@ public final class EventManager {
     private static void subscribe(Listener listener){
         eventBuffer.clear();
 
-        List<Listener> listeners = SUBSCRIPTION_MAP.get(listener.getType());
+        List<Listener> listeners = SUBSCRIPTION_MAP.get(listener.getTarget());
         if (listeners != null && listeners.size() > 0)
             eventBuffer.addAll(listeners);
 
@@ -94,7 +94,7 @@ public final class EventManager {
             }
         }
         eventBuffer.add(index, listener);
-        SUBSCRIPTION_MAP.put(listener.getType(), eventBuffer);
+        SUBSCRIPTION_MAP.put(listener.getTarget(), eventBuffer);
     }
 
     /**
