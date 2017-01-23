@@ -14,12 +14,12 @@ import java.lang.reflect.Method;
  *
  * Created by Brady on 1/21/2017.
  */
-final class Listener {
+final class Listener implements IListener {
 
     /**
      * Event Class
      */
-    private Class<?> type;
+    private Class<?> target;
 
     /**
      * Object that Method is contained within
@@ -36,10 +36,11 @@ final class Listener {
      */
     private byte priority;
 
-    Listener(Class<?> type, Object parent, Method method, byte priority) {
-        this.type = type;
+    Listener(Class<?> target, Object parent, Method method, byte priority) {
+        this.target = target;
         this.parent = parent;
         this.method = method;
+        this.priority = priority;
     }
 
     /**
@@ -47,8 +48,9 @@ final class Listener {
      *
      * @return Class that belongs to the Event that is being listened for
      */
-    Class<?> getType() {
-        return this.type;
+    @Override
+    public Class<?> getTarget() {
+        return this.target;
     }
 
     /**
@@ -74,7 +76,8 @@ final class Listener {
      *
      * @return Priority of Listener
      */
-    byte getPriority() {
+    @Override
+    public byte getPriority() {
         return priority;
     }
 
@@ -86,7 +89,8 @@ final class Listener {
      *
      * @param event Event being called
      */
-    void invoke(Object event) {
+    @Override
+    public void invoke(Object event) {
         try {
             method.invoke(parent, event);
         } catch (InvocationTargetException | IllegalAccessException e) {

@@ -9,5 +9,5 @@ package me.zero.client.api.event;
  */
 public interface EventPriority {
 
-    byte HIGHEST = 1, HIGH = 2, MEDIUM = 3, LOW = 4, LOWEST = 5;
+    byte HIGHEST = 1, HIGH = 2, MEDIUM = 3, LOW = 4, LOWEST = 5, DEFAULT = MEDIUM;
 }
