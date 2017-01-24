@@ -1,7 +1,6 @@
 package me.zero.client.api.module;
 
 import me.zero.client.api.exception.UnexpectedOutcomeException;
-import me.zero.client.api.util.IBindable;
 import me.zero.client.load.ClientAPI;
 
 import static me.zero.client.load.ClientAPI.Stage.INIT;
@@ -15,7 +14,7 @@ import static me.zero.client.load.ClientAPI.Stage.INIT;
  *
  * Created by Brady on 1/19/2017.
  */
-public class Module implements IModule, IBindable {
+public abstract class Module implements IModule {
 
     private String name, description;
     private ModuleType type;
@@ -49,9 +48,9 @@ public class Module implements IModule, IBindable {
         if (state == this.state) return;
 
         if (this.state = state) {
-            enable();
+            onEnable();
         } else {
-            disable();
+            onDisable();
         }
     }
 
