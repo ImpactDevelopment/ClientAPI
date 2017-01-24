@@ -18,12 +18,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Used to Transform the game classes in order
+ * to inject events and make code modifications
+ *
  * @since 1.0
  *
  * Created by Brady on 1/20/2017.
  */
 public class ClientTransformer implements IClassTransformer, Loadable {
 
+    /**
+     * List of all of the Transformers
+     */
     private List<ITransformer> transformers = new ArrayList<>();
 
     public ClientTransformer() {

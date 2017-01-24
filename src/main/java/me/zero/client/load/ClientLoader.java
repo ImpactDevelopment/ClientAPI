@@ -1,6 +1,7 @@
 package me.zero.client.load;
 
 import com.google.gson.GsonBuilder;
+import com.sun.xml.internal.ws.addressing.model.ActionNotSupportedException;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
 
@@ -21,10 +22,21 @@ import java.util.jar.JarFile;
  *
  * Created by Brady on 1/24/2017.
  */
-public class ClientLoader {
+class ClientLoader {
 
+    /**
+     * The file of the Client Jar
+     */
     private File file;
+
+    /**
+     * Jar File representing the Client Jar
+     */
     private JarFile jarFile;
+
+    /**
+     * Client itself
+     */
     private Client client;
 
     ClientLoader(File file) throws IOException {
@@ -33,10 +45,25 @@ public class ClientLoader {
         this.client = getClient();
     }
 
+    /**
+     * Loads the Client
+     *
+     * @since 1.0
+     */
     void loadClient() {
         // Do client loading stuff (preInit, onInit, postInit, etc.)
+        if (client != null)
+            throw new ActionNotSupportedException("A Client cannot be loaded if it is Null");
     }
 
+    /**
+     * Loads the Client from the file
+     * and then returns it.
+     *
+     * @since 1.0
+     *
+     * @return Client found from File
+     */
     private Client getClient() {
         ClientInfo info = getClientInfo();
 
@@ -57,6 +84,13 @@ public class ClientLoader {
         return null;
     }
 
+    /**
+     * Grabs the client.json from the client file
+     *
+     * @since 1.0
+     *
+     * @return Client info from file
+     */
     private ClientInfo getClientInfo() {
         try {
             JarEntry entry = jarFile.getJarEntry("client.json");
@@ -73,7 +107,7 @@ public class ClientLoader {
         return null;
     }
 
-    public Client getDiscoveredClient() {
+    Client getDiscoveredClient() {
         return this.client;
     }
 }
