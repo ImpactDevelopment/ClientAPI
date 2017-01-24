@@ -9,12 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Calls the transformer and loads
+ * the target Client
+ *
  * @since 1.0
  *
  * Created by Brady on 1/20/2017.
  */
 public class ClientTweaker implements ITweaker {
 
+    /**
+     * The Game Launch Arguments
+     */
     private List<String> args = new ArrayList<>();
 
     @Override
@@ -47,6 +53,11 @@ public class ClientTweaker implements ITweaker {
         return this.args.toArray(new String[this.args.size()]);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The Game Launch Arguments
+     */
     public List<String> getArguments() {
         return this.args;
     }
