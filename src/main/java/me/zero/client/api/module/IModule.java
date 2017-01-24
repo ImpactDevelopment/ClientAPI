@@ -1,5 +1,8 @@
 package me.zero.client.api.module;
 
+import me.zero.client.api.util.interfaces.IBindable;
+import me.zero.client.api.util.interfaces.IToggleable;
+
 /**
  * Base for Module
  *
@@ -9,44 +12,7 @@ package me.zero.client.api.module;
  *
  * Created by Brady on 1/21/2017.
  */
-interface IModule {
-
-    /**
-     * Called when the Module is enabled
-     *
-     * @since 1.0
-     */
-    default void enable() {}
-
-    /**
-     * Called when the Module is disabled
-     *
-     * @since 1.0
-     */
-    default void disable() {}
-
-    /**
-     * Used to toggle the state of the Module
-     *
-     * @since 1.0
-     */
-    void toggle();
-
-    /**
-     * Directly sets the state of the Module
-     *
-     * @since 1.0
-     */
-    void setState(boolean state);
-
-    /**
-     * Returns the current state
-     *
-     * @since 1.0
-     *
-     * @return The state of the Module
-     */
-    boolean getState();
+interface IModule extends IToggleable, IBindable {
 
     /**
      * @since 1.0

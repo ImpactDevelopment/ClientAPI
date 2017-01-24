@@ -1,4 +1,4 @@
-package me.zero.client.api.util;
+package me.zero.client.api.util.interfaces;
 
 import org.lwjgl.input.Keyboard;
 
