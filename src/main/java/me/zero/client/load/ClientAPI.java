@@ -1,9 +1,15 @@
 package me.zero.client.load;
 
+import me.zero.client.api.Client;
 import me.zero.client.api.exception.ActionNotValidException;
-import me.zero.client.api.transformer.reference.MethodReference;
+import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.load.inject.ClientTweaker;
 
-import static me.zero.client.load.ClientAPI.Stage.LOAD;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import static me.zero.client.load.ClientAPI.Stage.*;
 
 /**
  * Client API base, handles Client Loading
@@ -33,11 +39,44 @@ public class ClientAPI {
      * Runs the Init process
      *
      * @since 1.0
+     *
+     * @param tweaker The tweaker loaded by the game
      */
-    public void init() {
-        if (stage != LOAD) return;
+    public void init(ClientTweaker tweaker) {
+        String clientPath = null;
 
-        // Discover Clients
+        List<String> args = tweaker.getArguments();
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("--clientPath")) {
+                int index = args.indexOf(arg) + 1;
+                if (index > 0 && index < args.size()) {
+                    clientPath = args.get(index);
+                }
+            }
+        }
+
+        if (clientPath == null)
+            throw new UnexpectedOutcomeException("Client File undefined");
+
+        File clientFile = new File(clientPath);
+
+        if (!clientFile.exists())
+            throw new UnexpectedOutcomeException("Client File doesn't exist");
+
+        if (!clientFile.getAbsolutePath().endsWith(".jar"))
+            throw new UnexpectedOutcomeException("Client File isn't a jar file");
+
+        try {
+            ClientLoader loader = new ClientLoader(clientFile);
+            Client client = loader.getDiscoveredClient();
+
+            if (client == null)
+                throw new UnexpectedOutcomeException("Unable to load Client, Client is null!");
+
+            loader.loadClient();
+        } catch (IOException e) {
+            throw new UnexpectedOutcomeException("Error while loading client, " + e.getClass().getCanonicalName());
+        }
     }
 
     /**
