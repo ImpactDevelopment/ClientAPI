@@ -1,5 +1,6 @@
 package me.zero.client.load.inject;
 
+import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
@@ -32,6 +33,7 @@ public class ClientTweaker implements ITweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
+        ClientAPI.getAPI().init(this);
         classLoader.registerTransformer("me.zero.client.load.inject.ClientTransformer");
     }
 
@@ -43,5 +45,9 @@ public class ClientTweaker implements ITweaker {
     @Override
     public String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
+    }
+
+    public List<String> getArguments() {
+        return this.args;
     }
 }

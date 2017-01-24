@@ -15,6 +15,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.javassist', name: 'javassist', version: '3.20.0-GA'
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
     compile 'net.minecraft:launchwrapper:1.12'
 }
 

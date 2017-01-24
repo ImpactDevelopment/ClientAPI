@@ -3,8 +3,8 @@ API designed to make Clients have Universal Support
 
 ## Concept
 * Clients will be stored in a "Clients" folder inside of ".minecraft"
-* To launch a client, you will install the Client API and then launcher the Client API version
-* On launch, a screen will appear prompting for the Client wanting to be used
+* To launch a client, you run the "ClientAPI Launcher" and choose the desired Client
+* Minecraft will automatically open with the Client running
 
 ## Planned Features
 * Fully functional Event, Management, and Value system.
