@@ -3,10 +3,24 @@ package me.zero.client.api.util;
 import java.lang.reflect.Field;
 
 /**
+ * Util file used to clean up usages of the
+ * reflection api throughout the client api
+ *
+ * @since 1.0
+ *
  * Created by Brady on 1/23/2017.
  */
 public class ReflectionUtils {
 
+    /**
+     * Gets the value of a field from an Object
+     *
+     * @since 1.0
+     *
+     * @param object Object that field belongs to
+     * @param field Field that is being retrieved
+     * @return The value of the field
+     */
     public static Object getField(Object object, Field field) {
         Object value = null;
         try {
@@ -20,6 +34,16 @@ public class ReflectionUtils {
         return value;
     }
 
+    /**
+     * Sets the value of a field in an object
+     *
+     * @since 1.0
+     *
+     * @param object The object that the field belongs to
+     * @param field The field being set
+     * @param value The value that the field is being set to
+     * @return true if setting the field was successful, false if otherwise
+     */
     public static boolean setField(Object object, Field field, Object value) {
         try {
             boolean accessible = field.isAccessible();
