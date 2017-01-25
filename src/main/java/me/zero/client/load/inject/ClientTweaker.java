@@ -40,7 +40,7 @@ public class ClientTweaker implements ITweaker {
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         ClientAPI.getAPI().init(this);
-        classLoader.registerTransformer("me.zero.client.load.inject.ClientTransformer");
+        classLoader.registerTransformer(ClientTransformer.class.getCanonicalName());
     }
 
     @Override

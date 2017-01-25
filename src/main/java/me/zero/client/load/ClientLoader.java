@@ -91,7 +91,7 @@ public class ClientLoader {
         this.info = info;
 
         try {
-            ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURL() });
+            ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
 
             Client client = (Client) classLoader.loadClass(info.getMain()).newInstance();
             client.setInfo(info);
