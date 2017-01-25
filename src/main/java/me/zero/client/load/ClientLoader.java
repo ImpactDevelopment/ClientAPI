@@ -1,9 +1,10 @@
 package me.zero.client.load;
 
 import com.google.gson.GsonBuilder;
-import com.sun.xml.internal.ws.addressing.model.ActionNotSupportedException;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.transformer.ITransformer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,8 +13,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import static me.zero.client.load.ClientAPI.Stage.PRE;
 
 /**
  * Used to get Client instances from Files
@@ -22,7 +27,7 @@ import java.util.jar.JarFile;
  *
  * Created by Brady on 1/24/2017.
  */
-class ClientLoader {
+public class ClientLoader {
 
     /**
      * The file of the Client Jar
@@ -39,6 +44,16 @@ class ClientLoader {
      */
     private Client client;
 
+    /**
+     * ClientInfo for Client
+     */
+    private ClientInfo info;
+
+    /**
+     * The list of Transformers loaded by the Client
+     */
+    private List<ITransformer> transformers = new ArrayList<>();
+
     ClientLoader(File file) throws IOException {
         this.file = file;
         this.jarFile = new JarFile(file);
@@ -51,9 +66,12 @@ class ClientLoader {
      * @since 1.0
      */
     void loadClient() {
-        // Do client loading stuff (preInit, onInit, postInit, etc.)
-        if (client != null)
-            throw new ActionNotSupportedException("A Client cannot be loaded if it is Null");
+        if (client == null)
+            throw new ActionNotValidException("A Client cannot be loaded if it is Null");
+
+        client.preInit();
+        client.onInit();
+        client.postInit();
     }
 
     /**
@@ -69,6 +87,8 @@ class ClientLoader {
 
         if (info == null)
             return null;
+
+        this.info = info;
 
         try {
             ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURL() });
@@ -107,7 +127,53 @@ class ClientLoader {
         return null;
     }
 
+    /**
+     * @return Client discovered by this Client Loader
+     */
     Client getDiscoveredClient() {
         return this.client;
+    }
+
+    /**
+     * @return Client Info discovered by this Client Loader
+     */
+    public ClientInfo getDiscoveredInfo() {
+        return this.info;
+    }
+
+    /**
+     * Regsiters Multiple Transformers
+     *
+     * @param transformers Transformers being registered
+     */
+    public void registerTransformer(ITransformer... transformers) {
+        for (ITransformer transformer : transformers) {
+            this.registerTransformer(transformers);
+        }
+    }
+
+    /**
+     * Registers a Transformer
+     *
+     * @since 1.0
+     *
+     * @param transformer Transformer being registered
+     */
+    public void registerTransformer(ITransformer transformer) {
+        ClientAPI.getAPI().check(PRE, "Transformer Registration creation after Pre-Initialization");
+
+        if (!transformers.contains(transformer))
+            transformers.add(transformer);
+    }
+
+    /**
+     * Returns a copy of all of the Transformers
+     *
+     * @since 1.0
+     *
+     * @return The list of transformers
+     */
+    public List<ITransformer> getTransformers() {
+        return new ArrayList<>(transformers);
     }
 }
