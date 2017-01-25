@@ -45,7 +45,7 @@ public abstract class Transformer implements ITransformer {
             } catch (NotFoundException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_METHOD_NOT_FOUND);
             } catch (CannotCompileException e) {
-                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, ctClass.getName());
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CANNOT_COMPILE, ctClass.getName());
             }
         });
     }
