@@ -6,6 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Annotation to mark fields as Number Values
+ *
+ * @since 1.0
+ *
  * Created by Brady on 1/23/2017.
  */
 @Retention(RetentionPolicy.RUNTIME)

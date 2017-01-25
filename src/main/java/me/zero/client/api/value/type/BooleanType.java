@@ -6,6 +6,12 @@ import me.zero.client.api.value.Value;
 import java.lang.reflect.Field;
 
 /**
+ * Basic type for Boolean values
+ *
+ * @see me.zero.client.api.value.annotation.BooleanValue
+ *
+ * @since 1.0
+ *
  * Created by Brady on 1/23/2017.
  */
 public class BooleanType extends Value<Boolean> implements IToggleable {
