@@ -128,6 +128,8 @@ public class ClientLoader {
     }
 
     /**
+     * @since 1.0
+     *
      * @return Client discovered by this Client Loader
      */
     Client getDiscoveredClient() {
@@ -143,6 +145,8 @@ public class ClientLoader {
 
     /**
      * Regsiters Multiple Transformers
+     *
+     * @since 1.0
      *
      * @param transformers Transformers being registered
      */

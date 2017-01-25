@@ -16,7 +16,7 @@ import java.util.List;
  *
  * Created by Brady on 1/24/2017.
  */
-public class RunTickTransformer extends Transformer {
+public class MinecraftTransformer extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
