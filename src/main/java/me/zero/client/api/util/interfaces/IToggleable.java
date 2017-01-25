@@ -10,21 +10,29 @@ package me.zero.client.api.util.interfaces;
 public interface IToggleable {
 
     /**
+     * @since 1.0
+     *
      * Called when the state is changed from false to true
      */
     void onEnable();
 
     /**
+     * @since 1.0
+     *
      * Called when the state is changed from true to false
      */
     void onDisable();
 
     /**
+     * @since 1.0
+     *
      * Toggles the state
      */
     void toggle();
 
     /**
+     * @since 1.0
+     *
      * Directly sets the state
      *
      * @param state The new state
@@ -32,6 +40,8 @@ public interface IToggleable {
     void setState(boolean state);
 
     /**
+     * @since 1.0
+     *
      * @return The current state
      */
     boolean getState();
