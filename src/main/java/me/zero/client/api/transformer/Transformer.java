@@ -34,6 +34,7 @@ public abstract class Transformer implements ITransformer {
     public final void transform(CtClass ctClass) {
         List<String> imports = new ArrayList<>();
         this.loadImports(imports);
+        this.loadDefaultImports(imports);
         imports.forEach(ClassPool.getDefault()::importPackage);
 
         List<ClassHook> hooks = new ArrayList<>();
@@ -47,5 +48,10 @@ public abstract class Transformer implements ITransformer {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, ctClass.getName());
             }
         });
+    }
+
+    private void loadDefaultImports(List<String> imports) {
+        imports.add("me.zero.client.api.event");
+        imports.add("me.zero.client.api.event.defaults");
     }
 }
