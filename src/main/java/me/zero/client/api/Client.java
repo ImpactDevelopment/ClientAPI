@@ -14,8 +14,6 @@ public abstract class Client {
      */
     private ClientInfo info;
 
-    public Client() {}
-
     /**
      * Called right after the Client API loads.
      * Used for Class Transformers and Module Type creation.
