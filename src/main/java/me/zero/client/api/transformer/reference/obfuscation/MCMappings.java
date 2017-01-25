@@ -21,4 +21,5 @@ public interface MCMappings {
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft") });
 
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick") }, Void.TYPE);
+    MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop") }, Void.TYPE);
 }

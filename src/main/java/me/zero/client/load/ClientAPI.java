@@ -18,7 +18,7 @@ import static me.zero.client.load.ClientAPI.Stage.*;
  *
  * Created by Brady on 1/19/2017.
  */
-public class ClientAPI {
+public final class ClientAPI {
 
     /**
      * Instance of the API
@@ -29,6 +29,11 @@ public class ClientAPI {
      * Version of this Release
      */
     private static final double VERSION = 1.0;
+
+    /**
+     * Current Client Loader
+     */
+    private ClientLoader loader;
 
     /**
      * Current init stage
@@ -67,7 +72,7 @@ public class ClientAPI {
             throw new UnexpectedOutcomeException("Client File isn't a jar file");
 
         try {
-            ClientLoader loader = new ClientLoader(clientFile);
+            this.loader = new ClientLoader(clientFile);
             Client client = loader.getDiscoveredClient();
 
             if (client == null)
@@ -95,6 +100,17 @@ public class ClientAPI {
     public void check(Stage stage, String message) {
         if (this.stage.ordinal() > stage.ordinal())
             throw new ActionNotValidException(message);
+    }
+
+    /**
+     * Returns the Client Loader
+     *
+     * @since 1.0
+     *
+     * @return Client Loader
+     */
+    public ClientLoader getLoader() {
+        return this.loader;
     }
 
     /**

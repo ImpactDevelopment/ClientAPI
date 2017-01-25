@@ -6,10 +6,12 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
 import me.zero.client.api.transformer.ITransformer;
+import me.zero.client.api.transformer.defaults.RunTickTransformer;
 import me.zero.client.api.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
+import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.IClassTransformer;
 
 import java.io.IOException;
@@ -38,8 +40,12 @@ public class ClientTransformer implements IClassTransformer, Loadable {
 
     @Override
     public void load() {
-        // Load Default and Client Transformers
         ClassPool.getDefault();
+        // Load Client Transformers
+        this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
+
+        // Load Default Transformers
+        this.transformers.add(new RunTickTransformer());
     }
 
     @Override
