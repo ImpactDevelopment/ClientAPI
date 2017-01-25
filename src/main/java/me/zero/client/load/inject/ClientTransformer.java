@@ -6,13 +6,14 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
 import me.zero.client.api.transformer.ITransformer;
-import me.zero.client.api.transformer.defaults.RunTickTransformer;
+import me.zero.client.api.transformer.Transformer;
 import me.zero.client.api.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.IClassTransformer;
+import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,11 +42,19 @@ public class ClientTransformer implements IClassTransformer, Loadable {
     @Override
     public void load() {
         ClassPool.getDefault();
+
         // Load Client Transformers
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
-        this.transformers.add(new RunTickTransformer());
+        Reflections reflections = new Reflections("me.zero.client.api.transformer.defaults");
+        for (Class<? extends Transformer> transformer : reflections.getSubTypesOf(Transformer.class)) {
+            try {
+                this.transformers.add(transformer.newInstance());
+            } catch (IllegalAccessException | InstantiationException e) {
+                Logger.instance.logf(Level.WARNING, Messages.TRANSFORM_INSTANTIATION, transformer.getCanonicalName());
+            }
+        }
     }
 
     @Override
@@ -77,9 +86,9 @@ public class ClientTransformer implements IClassTransformer, Loadable {
                 return ctClass.toBytecode();
 
             } catch (CannotCompileException exception) {
-                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_CANNOT_COMPILE, className);
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CANNOT_COMPILE, className);
             } catch (IOException e) {
-                Logger.instance.logf(Level.SEVERE, Messages.TRANSFOM_UNEXPECTED_IOEXCEPTION, className);
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_UNEXPECTED_IOEXCEPTION, className);
             } catch (NotFoundException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CLASS_NOT_FOUND, className);
             }
