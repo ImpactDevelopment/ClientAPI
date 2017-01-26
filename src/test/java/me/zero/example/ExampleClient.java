@@ -21,11 +21,14 @@ public class ExampleClient extends Client {
         // Retrieve ClientInfo for later usage
         this.info = loader.getDiscoveredInfo();
 
+        // Register Transformer
+        loader.registerTransformer(new ExampleTransformer());
+
         // Register Module Types
         ModuleType.create("Combat", "Movement", "Player", "Exploit");
 
-        // Register Transformer
-        loader.registerTransformer(new ExampleTransformer());
+        // Create Module Manager
+        this.setModuleManager(new ExampleModManager());
     }
 
     @Override

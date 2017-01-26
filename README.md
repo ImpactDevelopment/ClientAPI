@@ -37,7 +37,7 @@ public class ExampleClient extends Client {
 
     @Override
     public void preInit() {
-        // Transformers and Module Types
+        // Transformers, Module Types, and Manager initialization
     }
 
     @Override
