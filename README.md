@@ -1,6 +1,8 @@
 # ClientAPI
 API designed to make Clients have Universal Support
 
+[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
+
 ## Concept
 * Clients will be stored in a "Clients" folder inside of ".minecraft"
 * To launch a client, you run the "ClientAPI Launcher" and choose the desired Client
