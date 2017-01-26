@@ -7,16 +7,12 @@ package me.zero.client.api;
  *
  * Created by Brady on 1/19/2017.
  */
-public abstract class Client {
-
-    /**
-     * Info of the Client
-     */
-    private ClientInfo info;
+public abstract class Client extends ClientBase {
 
     /**
      * Called right after the Client API loads.
-     * Used for Class Transformers and Module Type creation.
+     * Used for Class Transformers, Module Type
+     * creation, and Manager initialization.
      *
      * @see #onInit()
      * @see #postInit()
@@ -49,26 +45,4 @@ public abstract class Client {
      * @since 1.0
      */
     public abstract void postInit();
-
-    /**
-     * Sets the info, only works if the
-     * current info is null
-     *
-     * @since 1.0
-     *
-     * @param info Info being set
-     */
-    public void setInfo(ClientInfo info) {
-        if (this.info != null) return;
-        this.info = info;
-    }
-
-    /**
-     * @since 1.0
-     *
-     * @return The Client Info
-     */
-    public ClientInfo getInfo() {
-        return this.info;
-    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  *
  * Created by Brady on 1/19/2017.
  */
-public class Manager<T> {
+public abstract class Manager<T> implements Loadable, Saveable {
 
     /**
      * The list of all of the entries that this Manager contains
@@ -106,7 +106,7 @@ public class Manager<T> {
      * @return All of the entries that this manager holds
      */
     public final List<T> getData() {
-        return this.data;
+        return new ArrayList<>(this.data);
     }
 
     /**
