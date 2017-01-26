@@ -2,6 +2,7 @@
 API designed to make Clients have Universal Support
 
 [![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
+[![license](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
 
 ## Concept
 * Clients will be stored in a "Clients" folder inside of ".minecraft"
