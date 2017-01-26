@@ -71,7 +71,7 @@ public class ClientLoader {
 
         client.preInit();
         client.onInit();
-        client.postInit();
+        // Post Init call is injected
     }
 
     /**
@@ -105,7 +105,7 @@ public class ClientLoader {
     }
 
     /**
-     * Grabs the client.json from the client file
+     * Grabs the "client.json" from the client file
      *
      * @since 1.0
      *
@@ -151,9 +151,8 @@ public class ClientLoader {
      * @param transformers Transformers being registered
      */
     public void registerTransformer(ITransformer... transformers) {
-        for (ITransformer transformer : transformers) {
-            this.registerTransformer(transformers);
-        }
+        for (ITransformer transformer : transformers)
+            this.registerTransformer(transformer);
     }
 
     /**
