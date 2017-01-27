@@ -43,6 +43,7 @@ public class PluginLoader {
     public PluginLoader(String pluginDir) {
         ClientAPI.getAPI().check(ClientAPI.Stage.INIT, "Plugin Loading after Initialization");
         this.pluginDir = pluginDir;
+        this.loadPlugins();
     }
 
     /**
