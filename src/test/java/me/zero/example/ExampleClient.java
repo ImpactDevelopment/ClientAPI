@@ -2,7 +2,10 @@ package me.zero.example;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.module.Module;
 import me.zero.client.api.module.ModuleType;
+import me.zero.client.api.module.plugin.Plugin;
+import me.zero.client.api.module.plugin.PluginLoader;
 import me.zero.client.load.ClientAPI;
 import me.zero.client.load.ClientLoader;
 
@@ -25,7 +28,7 @@ public class ExampleClient extends Client {
         loader.registerTransformer(new ExampleTransformer());
 
         // Register Module Types
-        ModuleType.create("Combat", "Movement", "Player", "Exploit");
+        ModuleType.create("Combat", "Movement", "Player", "Exploit", "Misc");
 
         // Create Module Manager
         this.setModuleManager(new ExampleModManager());
@@ -33,7 +36,7 @@ public class ExampleClient extends Client {
 
     @Override
     public void onInit() {
-        // Modules
+        this.getModuleManager().load();
     }
 
     @Override

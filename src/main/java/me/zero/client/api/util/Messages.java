@@ -20,5 +20,12 @@ public interface Messages {
     String TRANSFORM_UNEXPECTED_IOEXCEPTION    = "Unexpected IOException after Compiling Class %s";
     String TRANSFORM_INSTANTIATION             = "Unable to instantiate Transformer, %s";
 
-    String EVENT_UNABLE_CALL                   = "Unable to Call Event %s";
+    String EVENT_UNABLE_CALL                   = "Unable to Call Event, %s";
+
+    String PLUGIN_LOAD                         = "Loaded plugin from %s";
+    String PLUGIN_JARFILE_CREATE               = "Unable to Create plugin JarFile, %s";
+    String PLUGIN_INSTANTIATION                = "Unable to instantiate PluginMain, %s";
+    String PLUGIN_CANT_CREATE_MODULE           = "Unable to create Module, %s";
+    String PLUGIN_CANT_LOAD_CLASS              = "Unable to load Class, %s";
+    String PLUGIN_CANT_CREATE_INPUTSTREAM      = "Unable to create jar InputStream, %s";
 }
