@@ -30,8 +30,14 @@ import java.util.jar.JarFile;
  */
 public class PluginLoader {
 
+    /**
+     * The list of the Plugins discovered
+     */
     private List<Plugin> plugins = new ArrayList<>();
 
+    /**
+     * Directory containing possible plugins
+     */
     private String pluginDir;
 
     public PluginLoader(String pluginDir) {
@@ -39,30 +45,41 @@ public class PluginLoader {
         this.pluginDir = pluginDir;
     }
 
+    /**
+     * Loads plugins
+     *
+     * @since 1.0
+     */
     private void loadPlugins() {
-        List<File> possiblePlugins = new ArrayList<>();
-
         File dir = new File(this.pluginDir);
 
         if (!dir.isDirectory()) return;
 
         for (File file : dir.listFiles()) {
             if (file.getAbsolutePath().endsWith(".jar")) {
-                possiblePlugins.add(file);
-            }
-        }
-
-        for (File file : possiblePlugins) {
-            try {
-                loadPlugin(file, new JarFile(file));
+                loadPlugin(file);
                 Logger.instance.logf(Level.INFO, Messages.PLUGIN_LOAD, file.getAbsolutePath());
-            } catch (IOException e) {
-                Logger.instance.logf(Level.WARNING, Messages.PLUGIN_JARFILE_CREATE, e);
             }
         }
     }
 
-    private void loadPlugin(File file, JarFile jarFile) {
+    /**
+     * Loads a single plugin from the file
+     *
+     * @since 1.0
+     *
+     * @param file The file of the plugin
+     */
+    private void loadPlugin(File file) {
+        JarFile jarFile;
+
+        try {
+            jarFile = new JarFile(file);
+        } catch (IOException e) {
+            Logger.instance.logf(Level.WARNING, Messages.PLUGIN_JARFILE_CREATE, e);
+            return;
+        }
+
         JarEntry pJson = jarFile.getJarEntry("plugin.json");
 
         if (pJson == null)
@@ -113,6 +130,11 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The list of plugins that were discovered
+     */
     public List<Plugin> getPlugins() {
         return this.plugins;
     }
