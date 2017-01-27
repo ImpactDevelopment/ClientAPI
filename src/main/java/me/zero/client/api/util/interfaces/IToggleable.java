@@ -14,14 +14,14 @@ public interface IToggleable {
      *
      * Called when the state is changed from false to true
      */
-    void onEnable();
+    default void onEnable() {}
 
     /**
      * @since 1.0
      *
      * Called when the state is changed from true to false
      */
-    void onDisable();
+    default void onDisable() {}
 
     /**
      * @since 1.0
