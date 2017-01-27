@@ -9,24 +9,50 @@ package me.zero.client.api.module.plugin;
  */
 class PluginInfo {
 
+    /**
+     * Name of the Plugin
+     */
     private String name;
+
+    /**
+     * Description of the Plugin
+     */
     private String description;
+
+    /**
+     * Main class of the Plugin
+     */
     private String main;
 
     public PluginInfo(String name, String description, String main) {
-        this.main = main;
+        this.name = name;
         this.description = description;
         this.main = main;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The name of this plugin
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The description of this plugin
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The main class of this plugin
+     */
     public String getMain() {
         return main;
     }
