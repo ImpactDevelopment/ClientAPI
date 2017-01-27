@@ -55,3 +55,30 @@ public class ExampleClient extends Client {
     }
 }
 ```
+
+## Plugins
+Plugins are external extensions for Clients. They can contain multiple modules.
+
+### Plugin.json
+```json
+{
+  "name": "Example",
+  "description": "Just an example plugin",
+  "main": "me.zero.example.PluginMain"
+}
+```
+
+### Plugin Main
+```java
+package me.zero.example;
+
+public class PluginMain extends Plugin {
+    
+    @Override
+    public void init() {
+        // Plugin creator decides what to do with this
+        // All modules are automatically loaded
+        // This method is called after Client#postInit()
+    }
+}
+```
