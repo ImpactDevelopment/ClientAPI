@@ -23,4 +23,16 @@ public class ClientUtils {
         System.arraycopy(second, 0, result, first.length, second.length);
         return result;
     }
+
+    /**
+     * Checks if a generic list contains any null members.
+     *
+     * @param members The Members to be Checked
+     */
+    public static <T> boolean containsNull(T... members) {
+        for (T member : members)
+            if (member == null)
+                return true;
+        return false;
+    }
 }
