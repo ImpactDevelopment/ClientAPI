@@ -1,6 +1,8 @@
 package me.zero.client.api.module;
 
+import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.ClientUtils;
 import me.zero.client.load.ClientAPI;
 
 import static me.zero.client.load.ClientAPI.Stage.INIT;
@@ -16,8 +18,24 @@ import static me.zero.client.load.ClientAPI.Stage.INIT;
  */
 public abstract class Module implements IModule {
 
-    private String name, description;
+    /**
+     * The name of the module
+     */
+    private String name;
+
+    /**
+     * The description of the module
+     */
+    private String description;
+
+    /**
+     * The type/category of the module
+     */
     private ModuleType type;
+
+    /**
+     * The state of the module, indicated whether it is on or off
+     */
     private boolean state;
 
     public Module() {
@@ -34,7 +52,8 @@ public abstract class Module implements IModule {
         } else {
             throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
         }
-        if (name == null || description == null || type == null)
+
+        if (ClientUtils.containsNull(name, description, type))
             throw new UnexpectedOutcomeException("One or more Mod members were null!");
     }
 
@@ -49,8 +68,10 @@ public abstract class Module implements IModule {
 
         if (this.state = state) {
             onEnable();
+            EventManager.subscribe(this);
         } else {
             onDisable();
+            EventManager.unsubscribe(this);
         }
     }
 

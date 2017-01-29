@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import static me.zero.client.load.ClientAPI.Stage.INIT;
+
 /**
  * Used to Load plugins
  *
@@ -41,7 +43,7 @@ public class PluginLoader {
     private String pluginDir;
 
     public PluginLoader(String pluginDir) {
-        ClientAPI.getAPI().check(ClientAPI.Stage.INIT, "Plugin Loading after Initialization");
+        ClientAPI.getAPI().check(INIT, "Plugin Loading after Initialization");
         this.pluginDir = pluginDir;
         this.loadPlugins();
     }
