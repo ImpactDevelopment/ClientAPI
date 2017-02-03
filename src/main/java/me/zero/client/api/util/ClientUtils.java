@@ -1,5 +1,7 @@
 package me.zero.client.api.util;
 
+import me.zero.client.api.exception.ActionNotValidException;
+
 import java.util.Arrays;
 
 /**
@@ -10,6 +12,24 @@ import java.util.Arrays;
  * Created by Brady on 1/20/2017.
  */
 public class ClientUtils {
+
+    /**
+     * Concatenates an array of generic arrays
+     *
+     * @param arrays The arrays being concatenated
+     * @return The concatenated array
+     */
+    public static <T> T[] concat(T[]... arrays) {
+        if (arrays.length < 2)
+            throw new ActionNotValidException("At least 2 arrays should be supplied");
+
+        T[] result = arrays[0];
+        for (int i = 1; i < arrays.length; i++) {
+            result = concat(result, arrays[i]);
+        }
+
+        return result;
+    }
 
     /**
      * Concatenates 2 generic arrays
