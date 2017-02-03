@@ -16,6 +16,8 @@ public class ClientUtils {
     /**
      * Concatenates an array of generic arrays
      *
+     * @since 1.0
+     *
      * @param arrays The arrays being concatenated
      * @return The concatenated array
      */
@@ -37,6 +39,8 @@ public class ClientUtils {
     /**
      * Checks if a generic list contains any null members.
      *
+     * @since 1.0
+     *
      * @param members The Members to be Checked
      */
     public static <T> boolean containsNull(T... members) {
@@ -44,5 +48,22 @@ public class ClientUtils {
             if (member == null)
                 return true;
         return false;
+    }
+
+    /**
+     * Gets and returns the class that called the method that is calling this method
+     *
+     * @since 1.0
+     *
+     * @return The class found
+     */
+    public static Class<?> traceSource() {
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        if (elements.length > 3) {
+            try {
+                return Class.forName(elements[3].getClassName());
+            } catch (ClassNotFoundException e) {}
+        }
+        return null;
     }
 }
