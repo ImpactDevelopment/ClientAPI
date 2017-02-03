@@ -32,6 +32,12 @@ public class ExampleClient extends Client {
 
         // Create Module Manager
         this.setModuleManager(new ExampleModManager());
+
+        // Gets the Module Manager, casted to our implementation
+        this.getModuleManager(ExampleModManager.class);
+
+        // Gets the Module Manager, as a Manager<Module>
+        this.getModuleManager();
     }
 
     @Override
