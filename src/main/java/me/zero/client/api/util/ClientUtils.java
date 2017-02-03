@@ -19,28 +19,18 @@ public class ClientUtils {
      * @param arrays The arrays being concatenated
      * @return The concatenated array
      */
-    public static <T> T[] concat(T[]... arrays) {
+    @SafeVarargs
+    public static <T> T[] concat(T[]... arrays){
         if (arrays.length < 2)
             throw new ActionNotValidException("At least 2 arrays should be supplied");
 
         T[] result = arrays[0];
         for (int i = 1; i < arrays.length; i++) {
-            result = concat(result, arrays[i]);
+            T[] newArray = Arrays.copyOf(result, result.length + arrays[i].length);
+            System.arraycopy(arrays[i], 0, newArray, result.length, arrays[i].length);
+            result = newArray;
         }
 
-        return result;
-    }
-
-    /**
-     * Concatenates 2 generic arrays
-     *
-     * @param first The first array
-     * @param second The seccond array
-     * @return The concatenated array
-     */
-    public static <T> T[] concat(T[] first, T[] second) {
-        T[] result = Arrays.copyOf(first, first.length + second.length);
-        System.arraycopy(second, 0, result, first.length, second.length);
         return result;
     }
 
