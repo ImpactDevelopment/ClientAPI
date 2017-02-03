@@ -53,7 +53,7 @@ class ClientBase {
      *
      * @param moduleManager The Module Manager
      */
-    public void setModuleManager(Manager<Module> moduleManager) {
+    protected void setModuleManager(Manager<Module> moduleManager) {
         ClientAPI.getAPI().check(PRE, "Manager Initialization after Pre-Initialization");
 
         if (this.moduleManager != null) return;
@@ -67,5 +67,19 @@ class ClientBase {
      */
     public Manager<Module> getModuleManager() {
         return this.moduleManager;
+    }
+
+    /**
+     * Returns the module manager casted to the specified type
+     *
+     * @param impl The class of the implementation
+     *
+     * @since 1.0
+     *
+     * @return The Module Manager casted to this Client's implementation
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends Manager<Module>> T getModuleManager(Class<T> impl) {
+        return (T) this.moduleManager;
     }
 }
