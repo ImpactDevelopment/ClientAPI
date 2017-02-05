@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Calls the transformer and loads
- * the target Client
+ * Calls the transformer and loads the target Client
  *
  * @since 1.0
  *
