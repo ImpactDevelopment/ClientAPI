@@ -51,11 +51,6 @@ public class Camera {
         if (Camera.capturing || !mc.inGameHasFocus || !handle.visible())
             return;
 
-        // Run framebuffer update check
-        checkUpdate();
-        if (!updated)
-            createNewFramebuffer();
-
         // Gets the entity util for the render view entity and if it is null then the code stops
         EntityUtil entity = new EntityUtil(mc.getRenderViewEntity());
         if (entity.getEntity() == null)
@@ -92,6 +87,11 @@ public class Camera {
         mc.gameSettings.thirdPersonView = 0;
         mc.gameSettings.viewBobbing = false;
         mc.gameSettings.hideGUI = true;
+
+        // Run framebuffer update check
+        checkUpdate();
+        if (!updated)
+            createNewFramebuffer();
 
         // Render camera
         setCapture(true);
