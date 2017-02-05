@@ -51,7 +51,7 @@ public class ClientUtils {
     }
 
     /**
-     * Gets and returns the class that called the method that is calling this method
+     * Gets and returns the class that called the method that is calling this method.
      *
      * @since 1.0
      *
