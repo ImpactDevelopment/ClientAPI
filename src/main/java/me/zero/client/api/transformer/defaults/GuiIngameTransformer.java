@@ -8,21 +8,19 @@ import me.zero.client.api.transformer.reference.obfuscation.MCMappings;
 import java.util.List;
 
 /**
- * Creates a hook for the Tick and Loop Events
+ * Creates a hook for the Render 2D Event
  *
- * @see me.zero.client.api.event.defaults.TickEvent
- * @see me.zero.client.api.event.defaults.LoopEvent
+ * @see me.zero.client.api.event.defaults.Render2DEvent
  *
  * @since 1.0
  *
- * Created by Brady on 1/24/2017.
+ * Created by Brady on 2/6/2017.
  */
-public class MinecraftTransformer extends Transformer {
+public class GuiIngameTransformer extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
-        hooks.add(MCMappings.runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
-        hooks.add(MCMappings.runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
+        hooks.add(MCMappings.renderGameOverlay.createHook(method -> method.insertAfter("{ EventManager.post(new Render2DEvent($1)); }")));
     }
 
     @Override
@@ -30,6 +28,6 @@ public class MinecraftTransformer extends Transformer {
 
     @Override
     public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { MCMappings.Minecraft };
+        return new ClassReference[] { MCMappings.GuiIngame };
     }
 }
