@@ -26,5 +26,6 @@ public interface MCMappings {
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
     MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop"), from(VANILLA, "av") }, Void.TYPE);
+    MethodReference startGame = new MethodReference(new ObfuscationName[] { from(MCP, "startGame"), from(VANILLA, "an") }, Void.TYPE);
     MethodReference renderGameOverlay = new MethodReference(new ObfuscationName[] { from(MCP, "renderGameOverlay"), from(VANILLA, "a") }, Void.TYPE, Float.TYPE);
 }

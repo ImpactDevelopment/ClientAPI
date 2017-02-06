@@ -3,6 +3,8 @@ package me.zero.client.load;
 import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.defaults.GameStartEvent;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.transformer.ITransformer;
 
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import static me.zero.client.load.ClientAPI.Stage.INIT;
+import static me.zero.client.load.ClientAPI.Stage.POST;
 import static me.zero.client.load.ClientAPI.Stage.PRE;
 
 /**
@@ -27,7 +31,7 @@ import static me.zero.client.load.ClientAPI.Stage.PRE;
  *
  * Created by Brady on 1/24/2017.
  */
-public class ClientLoader {
+public final class ClientLoader {
 
     /**
      * The file of the Client Jar
@@ -69,9 +73,22 @@ public class ClientLoader {
         if (client == null)
             throw new ActionNotValidException("A Client cannot be loaded if it is Null");
 
+        ClientAPI.getAPI().stage = PRE;
         client.preInit();
+    }
+
+    /**
+     * Calls the onInit and onPostInit for the client.
+     * Calls once the game has started.
+     *
+     * @param event
+     */
+    @EventHandler
+    private void onGameStart(GameStartEvent event) {
+        ClientAPI.getAPI().stage = INIT;
         client.onInit();
-        // Post Init call is injected
+        ClientAPI.getAPI().stage = POST;
+        client.postInit();
     }
 
     /**

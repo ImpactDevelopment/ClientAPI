@@ -15,7 +15,7 @@ import java.util.List;
  *
  * Created by Brady on 1/20/2017.
  */
-public class ClientTweaker implements ITweaker {
+public final class ClientTweaker implements ITweaker {
 
     /**
      * The Game Launch Arguments

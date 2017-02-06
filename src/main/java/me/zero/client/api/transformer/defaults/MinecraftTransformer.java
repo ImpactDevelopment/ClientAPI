@@ -17,12 +17,13 @@ import java.util.List;
  *
  * Created by Brady on 1/24/2017.
  */
-public class MinecraftTransformer extends Transformer {
+public final class MinecraftTransformer extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
         hooks.add(MCMappings.runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(MCMappings.runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
+        hooks.add(MCMappings.startGame.createHook(method -> method.insertAfter("EventManager.pos(new GameStartEvent());")));
     }
 
     @Override

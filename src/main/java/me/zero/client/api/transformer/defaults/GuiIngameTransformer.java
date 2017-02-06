@@ -16,7 +16,7 @@ import java.util.List;
  *
  * Created by Brady on 2/6/2017.
  */
-public class GuiIngameTransformer extends Transformer {
+public final class GuiIngameTransformer extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {

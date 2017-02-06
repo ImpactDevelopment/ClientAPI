@@ -7,7 +7,7 @@ package me.zero.client.api;
  *
  * Created by Brady on 1/24/2017.
  */
-public class ClientInfo {
+public final class ClientInfo {
 
     /**
      * Client name
