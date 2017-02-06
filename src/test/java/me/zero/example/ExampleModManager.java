@@ -20,16 +20,12 @@ public class ExampleModManager extends Manager<Module> {
                 new ExampleModule()
         );
 
-        // Plugin Loader
-        this.loadPlugins(new PluginLoader("path/to/plugins"));
+        // Loads Modules from the discovered Plugins by the Plugin loaders
+        ExampleClient.getInstance().getPlugins().forEach(plugin -> this.addData(plugin.getModules()));
     }
 
     @Override
     public void save() {
         // Save Modules
-    }
-
-    private void loadPlugins(PluginLoader pluginLoader) {
-        pluginLoader.getPlugins().forEach(plugin -> this.addData(plugin.getModules()));
     }
 }
