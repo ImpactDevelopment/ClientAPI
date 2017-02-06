@@ -4,6 +4,7 @@ import me.zero.client.api.transformer.reference.ClassReference;
 import me.zero.client.api.transformer.reference.MethodReference;
 
 import static me.zero.client.api.transformer.reference.obfuscation.Obfuscation.MCP;
+import static me.zero.client.api.transformer.reference.obfuscation.Obfuscation.VANILLA;
 import static me.zero.client.api.transformer.reference.obfuscation.ObfuscationName.from;
 
 /**
@@ -18,8 +19,12 @@ import static me.zero.client.api.transformer.reference.obfuscation.ObfuscationNa
  */
 public interface MCMappings {
 
-    ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft") });
+    // Classes
+    ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
+    ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiIngame"), from(VANILLA, "bfh") });
 
-    MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick") }, Void.TYPE);
-    MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop") }, Void.TYPE);
+    // Methods
+    MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
+    MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop"), from(VANILLA, "av") }, Void.TYPE);
+    MethodReference renderGameOverlay = new MethodReference(new ObfuscationName[] { from(MCP, "renderGameOverlay"), from(VANILLA, "a") }, Void.TYPE, Float.TYPE);
 }
