@@ -23,12 +23,13 @@ public abstract class Client extends ClientBase {
     public abstract void preInit();
 
     /**
-     * Called after Class Transformers are run
-     * Used for Module Registry
+     * Called after the game has initialized
+     * Used for Module Registry and Plugin loading
      *
      * @see #preInit()
      * @see #postInit()
      * @see me.zero.client.api.module.Module
+     * @see me.zero.client.api.module.plugin.Plugin
      *
      * @since 1.0
      */

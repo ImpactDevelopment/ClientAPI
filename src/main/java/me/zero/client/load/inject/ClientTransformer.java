@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  *
  * Created by Brady on 1/20/2017.
  */
-public class ClientTransformer implements IClassTransformer, Loadable {
+public final class ClientTransformer implements IClassTransformer, Loadable {
 
     /**
      * List of all of the Transformers

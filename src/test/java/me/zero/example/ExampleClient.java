@@ -14,7 +14,12 @@ import me.zero.client.load.ClientLoader;
  */
 public class ExampleClient extends Client {
 
+    private static ExampleClient instance;
     private ClientInfo info;
+
+    public ExampleClient() {
+        instance = this;
+    }
 
     @Override
     public void preInit() {
@@ -43,6 +48,7 @@ public class ExampleClient extends Client {
     @Override
     public void onInit() {
         this.getModuleManager().load();
+        this.loadPlugins("path/to/plugins");
     }
 
     @Override
@@ -56,5 +62,9 @@ public class ExampleClient extends Client {
 
     public double getVersion() {
         return this.info.getBuild();
+    }
+
+    public static ExampleClient getInstance() {
+        return instance;
     }
 }

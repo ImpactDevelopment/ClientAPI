@@ -38,7 +38,7 @@ public final class ClientAPI {
     /**
      * Current init stage
      */
-    private Stage stage = LOAD;
+    protected Stage stage = LOAD;
 
     /**
      * Runs the Init process
@@ -50,6 +50,8 @@ public final class ClientAPI {
     public void init(ClientTweaker tweaker) {
         String clientPath = null;
 
+        // Clean this up
+        // Maybe make a system for parsing arguments?
         List<String> args = tweaker.getArguments();
         for (String arg : args) {
             if (arg.equalsIgnoreCase("--clientPath")) {

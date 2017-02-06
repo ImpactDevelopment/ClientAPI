@@ -4,6 +4,7 @@ import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.load.ClientAPI;
+import net.minecraft.client.Minecraft;
 
 import static me.zero.client.load.ClientAPI.Stage.INIT;
 
@@ -17,6 +18,11 @@ import static me.zero.client.load.ClientAPI.Stage.INIT;
  * Created by Brady on 1/19/2017.
  */
 public abstract class Module implements IModule {
+
+    /**
+     * The instance of the Minecraft game
+     */
+    protected static Minecraft mc = Minecraft.getMinecraft();
 
     /**
      * The name of the module
