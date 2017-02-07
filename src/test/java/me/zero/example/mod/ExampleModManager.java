@@ -1,15 +1,16 @@
-package me.zero.example;
+package me.zero.example.mod;
 
 import me.zero.client.api.manage.Manager;
 import me.zero.client.api.module.Module;
-import me.zero.client.api.module.plugin.PluginLoader;
+import me.zero.example.ExampleClient;
+import me.zero.example.mod.ExampleModule;
 
 /**
  * Created by Brady on 1/25/2017.
  */
 public class ExampleModManager extends Manager<Module> {
 
-    ExampleModManager() {
+    public ExampleModManager() {
         super("Module");
     }
 

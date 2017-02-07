@@ -40,16 +40,4 @@ public @interface Mod {
      * @since 1.0
      */
     int bind() default Keyboard.KEY_NONE;
-
-    /**
-     * The type of the module represented as a {@code String}
-     * {@code ModuleTypes} can be registered using either of
-     * the following methods.
-     *
-     * @see me.zero.client.api.module.ModuleType#create(String)
-     * @see me.zero.client.api.module.ModuleType#create(String...)
-     *
-     * @since 1.0
-     */
-    String type();
 }
