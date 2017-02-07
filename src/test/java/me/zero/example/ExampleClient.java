@@ -2,12 +2,9 @@ package me.zero.example;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
-import me.zero.client.api.module.Module;
-import me.zero.client.api.module.ModuleType;
-import me.zero.client.api.module.plugin.Plugin;
-import me.zero.client.api.module.plugin.PluginLoader;
 import me.zero.client.load.ClientAPI;
 import me.zero.client.load.ClientLoader;
+import me.zero.example.mod.ExampleModManager;
 
 /**
  * Created by Brady on 1/19/2017.
@@ -23,6 +20,8 @@ public class ExampleClient extends Client {
 
     @Override
     public void preInit() {
+        System.out.println("ExampleClient: preInit()");
+
         // Retrieve the ClientLoader
         ClientLoader loader = ClientAPI.getAPI().getLoader();
 
@@ -31,9 +30,6 @@ public class ExampleClient extends Client {
 
         // Register Transformer
         loader.registerTransformer(new ExampleTransformer());
-
-        // Register Module Types
-        ModuleType.create("Combat", "Movement", "Player", "Exploit", "Misc");
 
         // Create Module Manager
         this.setModuleManager(new ExampleModManager());
@@ -47,12 +43,15 @@ public class ExampleClient extends Client {
 
     @Override
     public void onInit() {
+        System.out.println("ExampleClient: onInit()");
+
         this.getModuleManager().load();
         this.loadPlugins("path/to/plugins");
     }
 
     @Override
     public void postInit() {
+        System.out.println("ExampleClient: postInit()");
         // UI
     }
 
