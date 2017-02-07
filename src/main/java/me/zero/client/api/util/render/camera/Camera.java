@@ -119,7 +119,7 @@ public class Camera {
         if (reflected)
             RenderUtils.drawReflectedTexturedRect(x, y, x1, y1);
         else
-            RenderUtils.drawFlippedTexturedModalRect(x, y, x1, y1);
+            RenderUtils.drawFlippedTexturedRect(x, y, x1, y1);
 
         framebuffer.unbindFramebufferTexture();
     }
