@@ -21,6 +21,8 @@ public enum Obfuscation {
 
     static {
         // Determine Obfuscation State
+        // Automatically MCP for testing purposes
+        type = Obfuscation.MCP;
     }
 
     /**
