@@ -1,9 +1,9 @@
 package me.zero.example;
 
-import me.zero.client.api.transformer.Transformer;
-import me.zero.client.api.transformer.hook.ClassHook;
-import me.zero.client.api.transformer.reference.ClassReference;
-import me.zero.client.api.transformer.reference.obfuscation.MCMappings;
+import me.zero.client.load.inject.transformer.Transformer;
+import me.zero.client.load.inject.transformer.hook.ClassHook;
+import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings;
 
 import java.util.List;
 

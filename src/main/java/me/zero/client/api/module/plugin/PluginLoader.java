@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder;
 import javassist.bytecode.Descriptor;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
-import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;

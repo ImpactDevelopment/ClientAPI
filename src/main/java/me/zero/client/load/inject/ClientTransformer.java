@@ -5,10 +5,11 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
-import me.zero.client.api.transformer.ITransformer;
-import me.zero.client.api.transformer.defaults.GuiIngameTransformer;
-import me.zero.client.api.transformer.defaults.MinecraftTransformer;
-import me.zero.client.api.transformer.reference.ClassReference;
+import me.zero.client.load.inject.transformer.ITransformer;
+import me.zero.client.load.inject.transformer.defaults.TGuiIngame;
+import me.zero.client.load.inject.transformer.defaults.TMinecraft;
+import me.zero.client.load.inject.transformer.defaults.TNetworkManager;
+import me.zero.client.load.inject.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
@@ -47,8 +48,9 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
-        this.transformers.add(new MinecraftTransformer());
-        this.transformers.add(new GuiIngameTransformer());
+        this.transformers.add(new TMinecraft());
+        this.transformers.add(new TGuiIngame());
+        this.transformers.add(new TNetworkManager());
     }
 
     @Override
@@ -79,7 +81,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
 
                 return ctClass.toBytecode();
 
-            } catch (CannotCompileException exception) {
+            } catch (CannotCompileException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CANNOT_COMPILE, className);
             } catch (IOException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_UNEXPECTED_IOEXCEPTION, className);
