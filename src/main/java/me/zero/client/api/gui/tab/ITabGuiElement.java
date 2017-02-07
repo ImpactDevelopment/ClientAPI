@@ -1,5 +1,7 @@
 package me.zero.client.api.gui.tab;
 
+import me.zero.client.api.gui.IRenderer;
+
 /**
  * Base for Tab Gui Elements
  *
@@ -9,7 +11,7 @@ package me.zero.client.api.gui.tab;
  *
  * Created by Brady on 1/20/2017.
  */
-public interface ITabGuiElement {
+public interface ITabGuiElement extends IRenderer {
 
     /**
      * @see #getTextColor()
@@ -27,7 +29,9 @@ public interface ITabGuiElement {
      *
      * @return The color of the Text that is rendered
      */
-    int getTextColor();
+    default int getTextColor() {
+        return 0xFFFFFFFF;
+    }
 
     /**
      * Called whenever a key is pressed
