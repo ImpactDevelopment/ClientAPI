@@ -3,10 +3,7 @@ package me.zero.client.api.module;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
-import me.zero.client.load.ClientAPI;
 import net.minecraft.client.Minecraft;
-
-import static me.zero.client.load.ClientAPI.Stage.INIT;
 
 /**
  * The base for all cheats
@@ -45,8 +42,6 @@ public abstract class Module implements IModule {
     private boolean state;
 
     public Module() {
-        ClientAPI.getAPI().check(INIT, "Module creation after Initialization");
-
         if (this.getClass().isAnnotationPresent(Mod.class)) {
             Mod data = this.getClass().getAnnotation(Mod.class);
 

@@ -78,7 +78,7 @@ public final class EventManager {
      *
      * @param listener The listener being registered
      */
-    private static void subscribe(Listener listener){
+    private static void subscribe(Listener listener) {
         eventBuffer.clear();
 
         List<Listener> listeners = SUBSCRIPTION_MAP.get(listener.getTarget());
@@ -95,6 +95,12 @@ public final class EventManager {
         }
         eventBuffer.add(index, listener);
         SUBSCRIPTION_MAP.put(listener.getTarget(), eventBuffer);
+        System.out.println(Thread.currentThread());
+        for (Class<?> c : SUBSCRIPTION_MAP.keySet()) {
+            for (Listener l : SUBSCRIPTION_MAP.get(c)) {
+                System.out.println(c + " >" + l.getMethod().getName());
+            }
+        }
     }
 
     /**

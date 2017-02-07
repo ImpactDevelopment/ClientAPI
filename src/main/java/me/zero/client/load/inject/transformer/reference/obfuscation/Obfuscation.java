@@ -1,4 +1,4 @@
-package me.zero.client.api.transformer.reference.obfuscation;
+package me.zero.client.load.inject.transformer.reference.obfuscation;
 
 /**
  * Used to manage obfuscation states

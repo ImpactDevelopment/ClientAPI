@@ -1,10 +1,10 @@
-package me.zero.client.api.transformer;
+package me.zero.client.load.inject.transformer;
 
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.api.transformer.hook.ClassHook;
+import me.zero.client.load.inject.transformer.hook.ClassHook;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Implementation of ITransformer
  *
- * @see me.zero.client.api.transformer.ITransformer
+ * @see me.zero.client.load.inject.transformer.ITransformer
  *
  * @since 1.0
  *
