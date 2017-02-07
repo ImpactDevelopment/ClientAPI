@@ -3,6 +3,8 @@ package me.zero.client.load;
 import me.zero.client.api.Client;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.logger.Level;
+import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.inject.ClientTweaker;
 
 import java.io.File;
@@ -53,13 +55,19 @@ public final class ClientAPI {
         // Clean this up
         // Maybe make a system for parsing arguments?
         List<String> args = tweaker.getArguments();
+        int index = -1;
         for (String arg : args) {
             if (arg.equalsIgnoreCase("--clientPath")) {
-                int index = args.indexOf(arg) + 1;
-                if (index > 0 && index < args.size()) {
-                    clientPath = args.get(index);
+                int i = args.indexOf(arg) + 1;
+                if (i > 0 && i < args.size()) {
+                    index = i - 1;
+                    clientPath = args.get(i);
                 }
             }
+        }
+        if (index >= 0) {
+            args.remove(index);
+            args.remove(index);
         }
 
         if (clientPath == null)
@@ -73,13 +81,17 @@ public final class ClientAPI {
         if (!clientFile.getAbsolutePath().endsWith(".jar"))
             throw new UnexpectedOutcomeException("Client File isn't a jar file");
 
+        Logger.instance.log(Level.INFO, "Loading Client");
+
         try {
             this.loader = new ClientLoader(clientFile);
+            Logger.instance.log(Level.INFO, "Loaded Client");
             Client client = loader.getDiscoveredClient();
 
             if (client == null)
                 throw new UnexpectedOutcomeException("Unable to load Client, Client is null!");
 
+            Logger.instance.log(Level.INFO, "Running Client Init");
             loader.loadClient();
         } catch (IOException e) {
             throw new UnexpectedOutcomeException("Error while loading client, " + e.getClass().getCanonicalName());

@@ -2,6 +2,7 @@ package me.zero.client.load.inject;
 
 import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.ITweaker;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 
 import java.io.File;
@@ -21,6 +22,10 @@ public final class ClientTweaker implements ITweaker {
      * The Game Launch Arguments
      */
     private List<String> args = new ArrayList<>();
+
+    public ClientTweaker() {
+        Launch.classLoader.addClassLoaderExclusion("org.objectweb.asm.");
+    }
 
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {

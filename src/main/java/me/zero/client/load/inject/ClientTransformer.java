@@ -6,14 +6,14 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
 import me.zero.client.api.transformer.ITransformer;
-import me.zero.client.api.transformer.Transformer;
+import me.zero.client.api.transformer.defaults.GuiIngameTransformer;
+import me.zero.client.api.transformer.defaults.MinecraftTransformer;
 import me.zero.client.api.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,14 +47,8 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
-        Reflections reflections = new Reflections("me.zero.client.api.transformer.defaults");
-        for (Class<? extends Transformer> transformer : reflections.getSubTypesOf(Transformer.class)) {
-            try {
-                this.transformers.add(transformer.newInstance());
-            } catch (IllegalAccessException | InstantiationException e) {
-                Logger.instance.logf(Level.WARNING, Messages.TRANSFORM_INSTANTIATION, transformer.getCanonicalName());
-            }
-        }
+        this.transformers.add(new MinecraftTransformer());
+        this.transformers.add(new GuiIngameTransformer());
     }
 
     @Override
