@@ -1,5 +1,6 @@
 package me.zero.client.api.gui.tab;
 
+import me.zero.client.api.gui.IRenderer;
 import me.zero.client.api.manage.Loadable;
 
 /**
@@ -11,5 +12,12 @@ import me.zero.client.api.manage.Loadable;
  *
  * Created by Brady on 1/20/2017.
  */
-public interface ITabGui extends Loadable {
+public interface ITabGui extends Loadable, IRenderer {
+
+    /**
+     * @since 1.0
+     *
+     * @return The main menu of this Tab GUI
+     */
+    ITabGuiMenu getMenu();
 }
