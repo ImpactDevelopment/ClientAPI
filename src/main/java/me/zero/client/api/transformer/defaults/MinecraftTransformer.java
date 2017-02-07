@@ -23,7 +23,7 @@ public final class MinecraftTransformer extends Transformer {
     public void loadHooks(List<ClassHook> hooks) {
         hooks.add(MCMappings.runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(MCMappings.runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
-        hooks.add(MCMappings.startGame.createHook(method -> method.insertAfter("EventManager.pos(new GameStartEvent());")));
+        hooks.add(MCMappings.startGame.createHook(method -> method.insertAfter("EventManager.post(new GameStartEvent());")));
     }
 
     @Override
