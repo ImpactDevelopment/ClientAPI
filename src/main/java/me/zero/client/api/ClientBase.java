@@ -10,7 +10,6 @@ import me.zero.client.load.ClientAPI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.zero.client.load.ClientAPI.Stage.INIT;
 import static me.zero.client.load.ClientAPI.Stage.PRE;
 
 /**
@@ -106,8 +105,6 @@ class ClientBase {
      * @return The created PluginLoader
      */
     protected PluginLoader loadPlugins(String path) {
-        ClientAPI.getAPI().check(INIT, "Plugin Loading after Initialization");
-
         PluginLoader loader = new PluginLoader(path);
         pluginLoaders.add(loader);
         return loader;

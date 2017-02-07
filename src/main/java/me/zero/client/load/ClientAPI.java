@@ -40,7 +40,9 @@ public final class ClientAPI {
     /**
      * Current init stage
      */
-    protected Stage stage = LOAD;
+    Stage stage = LOAD;
+
+    private ClientAPI() {}
 
     /**
      * Runs the Init process

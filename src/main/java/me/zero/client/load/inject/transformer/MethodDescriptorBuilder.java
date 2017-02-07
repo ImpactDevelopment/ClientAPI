@@ -1,7 +1,7 @@
-package me.zero.client.api.util;
+package me.zero.client.load.inject.transformer;
 
-import me.zero.client.api.transformer.reference.ClassReference;
-import me.zero.client.api.transformer.reference.MethodReference;
+import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.inject.transformer.reference.MethodReference;
 
 import java.util.Arrays;
 

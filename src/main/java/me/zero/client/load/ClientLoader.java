@@ -3,10 +3,9 @@ package me.zero.client.load;
 import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.defaults.GameStartEvent;
+import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.ActionNotValidException;
-import me.zero.client.api.transformer.ITransformer;
+import me.zero.client.load.inject.transformer.ITransformer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,9 +19,7 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import static me.zero.client.load.ClientAPI.Stage.INIT;
-import static me.zero.client.load.ClientAPI.Stage.POST;
-import static me.zero.client.load.ClientAPI.Stage.PRE;
+import static me.zero.client.load.ClientAPI.Stage.*;
 
 /**
  * Used to get Client instances from Files
@@ -62,6 +59,8 @@ public final class ClientLoader {
         this.file = file;
         this.jarFile = new JarFile(file);
         this.client = getClient();
+
+        EventManager.subscribe(this);
     }
 
     /**
@@ -78,17 +77,17 @@ public final class ClientLoader {
     }
 
     /**
-     * Calls the onInit and onPostInit for the client.
+     * Calls the onInit and postInit for the client.
      * Calls once the game has started.
-     *
-     * @param event
      */
-    @EventHandler
-    private void onGameStart(GameStartEvent event) {
+    public void runClientGameInit() {
+        ClientAPI.getAPI().check(PRE, "Client Game Init after Pre Init");
+
         ClientAPI.getAPI().stage = INIT;
         client.onInit();
         ClientAPI.getAPI().stage = POST;
         client.postInit();
+        ClientAPI.getAPI().stage = FINISH;
     }
 
     /**

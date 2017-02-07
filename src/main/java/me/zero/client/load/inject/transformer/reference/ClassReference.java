@@ -1,15 +1,15 @@
-package me.zero.client.api.transformer.reference;
+package me.zero.client.load.inject.transformer.reference;
 
 import javassist.bytecode.Descriptor;
-import me.zero.client.api.transformer.reference.obfuscation.Obfuscation;
-import me.zero.client.api.transformer.reference.obfuscation.ObfuscationName;
+import me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation;
+import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName;
 
 import java.lang.reflect.Type;
 
 /**
  * Type of {@code Reference} designed for Classes.
  *
- * @see me.zero.client.api.transformer.reference.MethodReference
+ * @see me.zero.client.load.inject.transformer.reference.MethodReference
  *
  * @since 1.0
  *
@@ -40,7 +40,7 @@ public final class ClassReference extends Reference {
      *
      * @since 1.0
      *
-     * @see me.zero.client.api.transformer.reference.obfuscation.ObfuscationName
+     * @see me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName
      *
      * @param type The Type
      * @return An Array of ObfuscationNames
