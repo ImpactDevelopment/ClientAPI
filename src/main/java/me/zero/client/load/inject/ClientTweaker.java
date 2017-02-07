@@ -26,14 +26,20 @@ public final class ClientTweaker implements ITweaker {
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.args.addAll(args);
 
-        this.args.add("--gameDir");
-        this.args.add(gameDir.getAbsolutePath());
+        if (gameDir != null) {
+            this.args.add("--gameDir");
+            this.args.add(gameDir.getAbsolutePath());
+        }
 
-        this.args.add("--assetsDir");
-        this.args.add(assetsDir.getAbsolutePath());
+        if (assetsDir != null) {
+            this.args.add("--assetsDir");
+            this.args.add(assetsDir.getAbsolutePath());
+        }
 
-        this.args.add("--version");
-        this.args.add(profile);
+        if (profile != null) {
+            this.args.add("--version");
+            this.args.add(profile);
+        }
     }
 
     @Override

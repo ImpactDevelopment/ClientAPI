@@ -11,7 +11,7 @@ import static me.zero.client.load.ClientAPI.Stage.INIT;
 /**
  * The base for all cheats
  *
- * @see me.zero.client.api.module.ModuleType
+ * @see me.zero.client.api.module.Category
  *
  * @since 1.0
  *
@@ -37,7 +37,7 @@ public abstract class Module implements IModule {
     /**
      * The type/category of the module
      */
-    private ModuleType type;
+    private String type;
 
     /**
      * The state of the module, indicated whether it is on or off
@@ -52,9 +52,14 @@ public abstract class Module implements IModule {
 
             this.name = data.name();
             this.description = data.description();
-            this.type = ModuleType.get(data.type());
 
             this.setBind(data.bind());
+
+            this.type = "Default";
+
+            for (Class<?> c : this.getClass().getInterfaces())
+                if (c.isAnnotationPresent(Category.class))
+                    this.type = c.getAnnotation(Category.class).name();
         } else {
             throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
         }
@@ -97,7 +102,7 @@ public abstract class Module implements IModule {
     }
 
     @Override
-    public final ModuleType getType() {
+    public final String getType() {
         return this.type;
     }
 }

@@ -33,5 +33,5 @@ interface IModule extends IToggleable, IBindable {
      *
      * @return The type of the Module
      */
-    ModuleType getType();
+    String getType();
 }
