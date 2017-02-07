@@ -31,6 +31,7 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void setValue(T value) {
         super.setValue((T) MathUtils.clamp(value, minimum, maximum));
     }
@@ -51,5 +52,28 @@ public class NumberType<T extends Number> extends Value<T> {
      */
     public T getMaximum() {
         return this.maximum;
+    }
+
+    /**
+     * Increments the value by the number specified
+     * times the number range divided by 10
+     *
+     * @since 1.0
+     */
+    @SuppressWarnings("unchecked")
+    public void increment(float multiplier) {
+        double range = maximum.doubleValue() - minimum.doubleValue();
+        this.setValue((T) (Number) (this.getValue().doubleValue() + (range / 10.0 * multiplier)));
+    }
+
+    /**
+     * Decrement the value by the number specified
+     * times the number range divided by 10
+     *
+     * @since 1.0
+     */
+    @SuppressWarnings("unchecked")
+    public void decrement(float multiplier) {
+        this.increment(-multiplier);
     }
 }
