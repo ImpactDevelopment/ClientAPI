@@ -1,4 +1,4 @@
-package me.zero.example.mod;
+package me.zero.example.mod.mods;
 
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;

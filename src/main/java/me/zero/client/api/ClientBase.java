@@ -5,12 +5,9 @@ import me.zero.client.api.manage.Manager;
 import me.zero.client.api.module.Module;
 import me.zero.client.api.module.plugin.Plugin;
 import me.zero.client.api.module.plugin.PluginLoader;
-import me.zero.client.load.ClientAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static me.zero.client.load.ClientAPI.Stage.PRE;
 
 /**
  * @since 1.0
@@ -65,8 +62,6 @@ class ClientBase {
      * @param moduleManager The Module Manager
      */
     protected void setModuleManager(Manager<Module> moduleManager) {
-        ClientAPI.getAPI().check(PRE, "Manager Initialization after Pre-Initialization");
-
         if (this.moduleManager != null) return;
         this.moduleManager = moduleManager;
     }

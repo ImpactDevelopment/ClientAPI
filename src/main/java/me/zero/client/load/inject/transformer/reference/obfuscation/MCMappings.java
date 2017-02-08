@@ -21,6 +21,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.Obfus
 public interface MCMappings {
 
     // Classes
+    ClassReference Main = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.main.Main"), from(VANILLA, "net.minecraft.client.main.Main") });
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
     ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.gui.GuiIngame"), from(VANILLA, "bfh") });
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
@@ -28,6 +29,7 @@ public interface MCMappings {
     ClassReference Packet = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.Packet"), from(VANILLA, "fm") });
 
     // Methods
+    MethodReference main = new MethodReference(new ObfuscationName[] { from(MCP, "main"), from(VANILLA, "main")}, Void.TYPE);
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
     MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop"), from(VANILLA, "av") }, Void.TYPE);
     MethodReference startGame = new MethodReference(new ObfuscationName[] { from(MCP, "startGame"), from(VANILLA, "an") }, Void.TYPE);
