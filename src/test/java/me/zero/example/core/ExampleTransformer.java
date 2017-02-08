@@ -1,5 +1,6 @@
-package me.zero.example;
+package me.zero.example.core;
 
+import me.zero.client.load.inject.transformer.LoadTransformer;
 import me.zero.client.load.inject.transformer.Transformer;
 import me.zero.client.load.inject.transformer.hook.ClassHook;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Brady on 1/22/2017.
  */
+@LoadTransformer
 public class ExampleTransformer extends Transformer implements MCMappings {
 
     @Override

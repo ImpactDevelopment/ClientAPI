@@ -7,7 +7,6 @@ import me.zero.client.api.module.Module;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
-import me.zero.client.load.ClientAPI;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,8 +19,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import static me.zero.client.load.ClientAPI.Stage.INIT;
 
 /**
  * Used to Load plugins
@@ -43,7 +40,6 @@ public class PluginLoader {
     private String pluginDir;
 
     public PluginLoader(String pluginDir) {
-        ClientAPI.getAPI().check(INIT, "Plugin Loading after Initialization");
         this.pluginDir = pluginDir;
         this.loadPlugins();
     }

@@ -9,24 +9,22 @@ import java.util.List;
 import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.*;
 
 /**
- * Creates a hook for the Render 2D Event
- *
- * @since 1.0
- *
- * Created by Brady on 2/6/2017.
+ * Created by Brady on 2/8/2017.
  */
-public final class TGuiIngame extends Transformer {
+public class TMain extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
-        hooks.add(renderGameOverlay.createHook(method -> method.insertAfter("{ EventManager.post(new Render2DEvent($1)); }")));
+        hooks.add(main.createHook(method -> method.insertBefore("ClientLoader.getGameLoader($1);"), "([Ljava/lang/String;)V"));
     }
 
     @Override
-    public void loadImports(List<String> imports) {}
+    public void loadImports(List<String> imports) {
+        imports.add("me.zero.client.load");
+    }
 
     @Override
     public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { GuiIngame };
+        return new ClassReference[] { Main };
     }
 }

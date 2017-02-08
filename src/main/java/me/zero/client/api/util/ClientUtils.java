@@ -3,6 +3,7 @@ package me.zero.client.api.util;
 import me.zero.client.api.exception.ActionNotValidException;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utils that the Client API uses
@@ -12,6 +13,38 @@ import java.util.Arrays;
  * Created by Brady on 1/20/2017.
  */
 public class ClientUtils {
+
+    /**
+     * Gets the ClientPath from the List of Arguments
+     *
+     * @since 1.0
+     *
+     * @param args The arguments
+     * @return The ClientPath
+     */
+    public static String getClientPath(String[] args) {
+        return ClientUtils.getClientPath(Arrays.asList(args));
+    }
+
+    /**
+     * Gets the ClientPath from the List of Arguments
+     *
+     * @since 1.0
+     *
+     * @param args The arguments
+     * @return The ClientPath
+     */
+    public static String getClientPath(List<String> args) {
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("--clientPath")) {
+                int i = args.indexOf(arg) + 1;
+                if (i > 0 && i < args.size()) {
+                    return args.get(i);
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Concatenates an array of generic arrays
