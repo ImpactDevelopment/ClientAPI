@@ -1,7 +1,5 @@
 package me.zero.client.api.event.defaults;
 
-import net.minecraft.client.Minecraft;
-
 /**
  * Called after GuiIngame#renderGameOverlay(float) is called.
  *
