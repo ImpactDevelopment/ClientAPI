@@ -1,8 +1,7 @@
 package me.zero.client.load;
 
-import me.zero.client.api.Client;
-import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.inject.ClientTweaker;
@@ -10,8 +9,6 @@ import me.zero.client.load.inject.ClientTweaker;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static me.zero.client.load.ClientAPI.Stage.*;
 
 /**
  * Client API base, handles Client Loading
@@ -37,11 +34,6 @@ public final class ClientAPI {
      */
     private ClientLoader loader;
 
-    /**
-     * Current init stage
-     */
-    Stage stage = LOAD;
-
     private ClientAPI() {}
 
     /**
@@ -52,25 +44,7 @@ public final class ClientAPI {
      * @param tweaker The tweaker loaded by the game
      */
     public void init(ClientTweaker tweaker) {
-        String clientPath = null;
-
-        // Clean this up
-        // Maybe make a system for parsing arguments?
-        List<String> args = tweaker.getArguments();
-        int index = -1;
-        for (String arg : args) {
-            if (arg.equalsIgnoreCase("--clientPath")) {
-                int i = args.indexOf(arg) + 1;
-                if (i > 0 && i < args.size()) {
-                    index = i - 1;
-                    clientPath = args.get(i);
-                }
-            }
-        }
-        if (index >= 0) {
-            args.remove(index);
-            args.remove(index);
-        }
+        String clientPath = ClientUtils.getClientPath(tweaker.getArguments());
 
         if (clientPath == null)
             throw new UnexpectedOutcomeException("Client File undefined");
@@ -83,39 +57,14 @@ public final class ClientAPI {
         if (!clientFile.getAbsolutePath().endsWith(".jar"))
             throw new UnexpectedOutcomeException("Client File isn't a jar file");
 
-        Logger.instance.log(Level.INFO, "Loading Client");
+        Logger.instance.log(Level.INFO, "Initializing LaunchClassLoader ClientLoader");
 
         try {
             this.loader = new ClientLoader(clientFile);
-            Logger.instance.log(Level.INFO, "Loaded Client");
-            Client client = loader.getDiscoveredClient();
-
-            if (client == null)
-                throw new UnexpectedOutcomeException("Unable to load Client, Client is null!");
-
-            Logger.instance.log(Level.INFO, "Running Client Init");
-            loader.loadClient();
+            Logger.instance.log(Level.INFO, "Initialized ClientLoader");
         } catch (IOException e) {
             throw new UnexpectedOutcomeException("Error while loading client, " + e.getClass().getCanonicalName());
         }
-    }
-
-    /**
-     * Checks if the specified stage will be run after
-     * the current one. If the specified stage has
-     * already been run, an {@code ActionNotValidException}
-     * will be thrown.
-     *
-     * @see me.zero.client.api.exception.ActionNotValidException
-     *
-     * @since 1.0
-     *
-     * @param stage The stage being checked
-     * @param message The message that will be
-     */
-    public void check(Stage stage, String message) {
-        if (this.stage.ordinal() > stage.ordinal())
-            throw new ActionNotValidException(message);
     }
 
     /**
@@ -127,13 +76,6 @@ public final class ClientAPI {
      */
     public ClientLoader getLoader() {
         return this.loader;
-    }
-
-    /**
-     * Init stage
-     */
-    public enum Stage {
-        LOAD, PRE, INIT, POST, FINISH
     }
 
     /**

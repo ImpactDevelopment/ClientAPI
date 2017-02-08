@@ -19,40 +19,31 @@ public class ExampleClient extends Client {
     }
 
     @Override
-    public void preInit() {
-        System.out.println("ExampleClient: preInit()");
+    public void onInit(ClientLoader loader) {
+        System.out.println("ExampleClient: onInit()");
 
-        // Retrieve the ClientLoader
-        ClientLoader loader = ClientAPI.getAPI().getLoader();
-
-        // Retrieve ClientInfo for later usage
+        // Gets the client info for later usage
         this.info = loader.getDiscoveredInfo();
-
-        // Register Transformer
-        loader.registerTransformer(new ExampleTransformer());
 
         // Create Module Manager
         this.setModuleManager(new ExampleModManager());
 
+        // Gets the module manager as a generic Manager<Module>
+        this.getModuleManager();
+
         // Gets the Module Manager, casted to our implementation
         this.getModuleManager(ExampleModManager.class);
 
-        // Gets the Module Manager, as a Manager<Module>
-        this.getModuleManager();
-    }
-
-    @Override
-    public void onInit() {
-        System.out.println("ExampleClient: onInit()");
-
-        this.getModuleManager().load();
+        // Load plugins
         this.loadPlugins("path/to/plugins");
+
+        // Load mods
+        this.getModuleManager().load();
     }
 
     @Override
     public void postInit() {
         System.out.println("ExampleClient: postInit()");
-        // UI
     }
 
     public String getName() {

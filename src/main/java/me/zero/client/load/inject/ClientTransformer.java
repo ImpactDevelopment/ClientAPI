@@ -7,6 +7,7 @@ import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
 import me.zero.client.load.inject.transformer.ITransformer;
 import me.zero.client.load.inject.transformer.defaults.TGuiIngame;
+import me.zero.client.load.inject.transformer.defaults.TMain;
 import me.zero.client.load.inject.transformer.defaults.TMinecraft;
 import me.zero.client.load.inject.transformer.defaults.TNetworkManager;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
@@ -48,6 +49,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
+        this.transformers.add(new TMain());
         this.transformers.add(new TMinecraft());
         this.transformers.add(new TGuiIngame());
         this.transformers.add(new TNetworkManager());

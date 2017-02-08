@@ -85,8 +85,25 @@ public final class MethodReference extends Reference {
      * @return The CtMethod representation
      * @throws NotFoundException if the method cannot be found
      */
-    public CtMethod getMethod(CtClass ctClass) throws NotFoundException {
-        return ctClass.getMethod(this.getName(), new MethodDescriptorBuilder(this).build());
+    private CtMethod getMethod(CtClass ctClass) throws NotFoundException {
+        return this.getMethod(ctClass, new MethodDescriptorBuilder(this).build());
+    }
+
+    /**
+     * Retrieves the {@code CtMethod} representation of the Method
+     * represented by this {@code MethodReference} based
+     * on the parent {@code CtClass}
+     *
+     * @since 1.0
+     *
+     * @see #createHook(MethodHook)
+     *
+     * @param ctClass Parent Class
+     * @return The CtMethod representation
+     * @throws NotFoundException if the method cannot be found
+     */
+    private CtMethod getMethod(CtClass ctClass, String description) throws NotFoundException {
+        return ctClass.getMethod(this.getName(), description);
     }
 
     /**
@@ -103,5 +120,21 @@ public final class MethodReference extends Reference {
      */
     public ClassHook createHook(MethodHook hook) {
         return ctClass -> hook.accept(getMethod(ctClass));
+    }
+
+    /**
+     * Creates a ClassHook from the CtMethod that is
+     * represented by this class. Used during transformation
+     * to load all of the {@code ClassHooks} used by a {@code Transformer}
+     *
+     * @since 1.0
+     *
+     * @see me.zero.client.load.inject.transformer.ITransformer
+     *
+     * @param hook The hook to the method
+     * @return ClassHook to be passed to a {@code Transformer}
+     */
+    public ClassHook createHook(MethodHook hook, String descriptor) {
+        return ctClass -> hook.accept(getMethod(ctClass, descriptor));
     }
 }

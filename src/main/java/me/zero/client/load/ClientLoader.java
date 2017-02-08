@@ -1,11 +1,15 @@
 package me.zero.client.load;
 
 import com.google.gson.GsonBuilder;
+import javassist.bytecode.Descriptor;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
-import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.ClientUtils;
 import me.zero.client.load.inject.transformer.ITransformer;
+import me.zero.client.load.inject.transformer.LoadTransformer;
+import me.zero.client.load.inject.transformer.Transformer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,11 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-
-import static me.zero.client.load.ClientAPI.Stage.*;
+import java.util.jar.JarFile;;
 
 /**
  * Used to get Client instances from Files
@@ -41,53 +44,47 @@ public final class ClientLoader {
     private JarFile jarFile;
 
     /**
-     * Client itself
-     */
-    private Client client;
-
-    /**
      * ClientInfo for Client
      */
     private ClientInfo info;
 
     /**
-     * The list of Transformers loaded by the Client
+     * Instance of the ClientLoader for the Game ClassLoader
      */
-    private List<ITransformer> transformers = new ArrayList<>();
+    private static ClientLoader loader;
 
     ClientLoader(File file) throws IOException {
         this.file = file;
         this.jarFile = new JarFile(file);
-        this.client = getClient();
-
-        EventManager.subscribe(this);
     }
 
     /**
-     * Loads the Client
-     *
-     * @since 1.0
+     * Creates the Game ClientLoader
      */
-    void loadClient() {
+    public static void getGameLoader(String[] args) {
+        if (loader != null)
+            throw new ActionNotValidException("Game Loader has already been created");
+
+        try {
+            loader = new ClientLoader(new File(ClientUtils.getClientPath(args)));
+        } catch (IOException e) {
+            throw new UnexpectedOutcomeException("ClientLoader unable to Create. Suspending rocess.");
+        }
+    }
+
+    /**
+     * Loads the Game ClientLoader
+     */
+    public static void initGameLoader() {
+        if (loader == null)
+            throw new ActionNotValidException("Unable to load client if the loader is null");
+
+        Client client = loader.getClient();
         if (client == null)
-            throw new ActionNotValidException("A Client cannot be loaded if it is Null");
+            throw new UnexpectedOutcomeException("Client found by Game ClientLoader is null!");
 
-        ClientAPI.getAPI().stage = PRE;
-        client.preInit();
-    }
-
-    /**
-     * Calls the onInit and postInit for the client.
-     * Calls once the game has started.
-     */
-    public void runClientGameInit() {
-        ClientAPI.getAPI().check(PRE, "Client Game Init after Pre Init");
-
-        ClientAPI.getAPI().stage = INIT;
-        client.onInit();
-        ClientAPI.getAPI().stage = POST;
+        client.onInit(loader);
         client.postInit();
-        ClientAPI.getAPI().stage = FINISH;
     }
 
     /**
@@ -109,7 +106,8 @@ public final class ClientLoader {
         try {
             ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
 
-            Client client = (Client) classLoader.loadClass(info.getMain()).newInstance();
+            Class<?> clientClass = classLoader.loadClass(info.getMain());
+            Client client = (Client) clientClass.newInstance();
             client.setInfo(info);
 
             return client;
@@ -144,45 +142,10 @@ public final class ClientLoader {
     }
 
     /**
-     * @since 1.0
-     *
-     * @return Client discovered by this Client Loader
-     */
-    Client getDiscoveredClient() {
-        return this.client;
-    }
-
-    /**
      * @return Client Info discovered by this Client Loader
      */
     public ClientInfo getDiscoveredInfo() {
         return this.info;
-    }
-
-    /**
-     * Regsiters Multiple Transformers
-     *
-     * @since 1.0
-     *
-     * @param transformers Transformers being registered
-     */
-    public void registerTransformer(ITransformer... transformers) {
-        for (ITransformer transformer : transformers)
-            this.registerTransformer(transformer);
-    }
-
-    /**
-     * Registers a Transformer
-     *
-     * @since 1.0
-     *
-     * @param transformer Transformer being registered
-     */
-    public void registerTransformer(ITransformer transformer) {
-        ClientAPI.getAPI().check(PRE, "Transformer Registration creation after Pre-Initialization");
-
-        if (!transformers.contains(transformer))
-            transformers.add(transformer);
     }
 
     /**
@@ -193,6 +156,27 @@ public final class ClientLoader {
      * @return The list of transformers
      */
     public List<ITransformer> getTransformers() {
-        return new ArrayList<>(transformers);
+        List<ITransformer> transformers = new ArrayList<>();
+        try {
+            ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
+            Enumeration<JarEntry> entries = jarFile.entries();
+            while (entries.hasMoreElements()) {
+                JarEntry e = entries.nextElement();
+                String name = e.getName();
+                if (name.endsWith(".class")) {
+                    try {
+                        Class clazz = Class.forName(Descriptor.toJavaName(name.substring(0, name.length() - 6)), true, classLoader);
+                        if (clazz != null && !clazz.isInterface() && clazz.getSuperclass().equals(Transformer.class) && clazz.isAnnotationPresent(LoadTransformer.class)) {
+                            transformers.add((ITransformer) clazz.newInstance());
+                        }
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
+
+                    }
+                }
+            }
+        } catch (MalformedURLException e) {
+
+        }
+        return transformers;
     }
 }

@@ -11,9 +11,6 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
 /**
  * Creates a hook for the Tick and Loop Events
  *
- * @see me.zero.client.api.event.defaults.TickEvent
- * @see me.zero.client.api.event.defaults.LoopEvent
- *
  * @since 1.0
  *
  * Created by Brady on 1/24/2017.
@@ -24,7 +21,7 @@ public final class TMinecraft extends Transformer {
     public void loadHooks(List<ClassHook> hooks) {
         hooks.add(runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
-        hooks.add(startGame.createHook(method -> method.insertAfter("ClientAPI.getAPI().getLoader().runClientGameInit();")));
+        hooks.add(startGame.createHook(method -> method.insertAfter("ClientLoader.initGameLoader();")));
     }
 
     @Override
