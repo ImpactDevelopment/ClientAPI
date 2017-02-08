@@ -95,12 +95,6 @@ public final class EventManager {
         }
         eventBuffer.add(index, listener);
         SUBSCRIPTION_MAP.put(listener.getTarget(), eventBuffer);
-        System.out.println(Thread.currentThread());
-        for (Class<?> c : SUBSCRIPTION_MAP.keySet()) {
-            for (Listener l : SUBSCRIPTION_MAP.get(c)) {
-                System.out.println(c + " >" + l.getMethod().getName());
-            }
-        }
     }
 
     /**

@@ -7,6 +7,8 @@ import me.zero.client.api.ClientInfo;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.logger.Level;
+import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.inject.transformer.ITransformer;
 import me.zero.client.load.inject.transformer.LoadTransformer;
 import me.zero.client.load.inject.transformer.Transformer;
@@ -19,10 +21,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
-import java.util.jar.JarFile;;
+import java.util.jar.JarFile;
 
 /**
  * Used to get Client instances from Files
@@ -108,6 +111,15 @@ public final class ClientLoader {
 
             Client client = (Client) classLoader.loadClass(info.getMain()).newInstance();
             client.setInfo(info);
+
+            Logger l = Logger.instance;
+            String authors = Arrays.toString(info.getAuthors());
+            authors = authors.substring(1, authors.length() - 1);
+            l.log(Level.INFO, "Loaded Client");
+            l.log(Level.INFO, "> Name      : " + info.getName());
+            l.log(Level.INFO, "> Build     : " + info.getBuild() + "-" + info.getType());
+            l.log(Level.INFO, "> ID        : " + info.getId());
+            l.log(Level.INFO, "> Author(s) : " + authors);
 
             return client;
         } catch (ClassNotFoundException | MalformedURLException | InstantiationException | IllegalAccessException e) {
