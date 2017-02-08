@@ -89,7 +89,7 @@ public class PluginLoader {
             PluginInfo info = new GsonBuilder().setPrettyPrinting().create().fromJson(reader, PluginInfo.class);
 
             if (info != null) {
-                ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
+                ClassLoader classLoader = new URLClassLoader(new URL[] { file.toURI().toURL() }, this.getClass().getClassLoader());
 
                 Plugin plugin;
 
