@@ -23,7 +23,7 @@ public interface MCMappings {
     // Classes
     ClassReference Main = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.main.Main"), from(VANILLA, "net.minecraft.client.main.Main") });
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
-    ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.gui.GuiIngame"), from(VANILLA, "bfh") });
+    ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiIngame"), from(VANILLA, "bfh") });
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
     ClassReference NetworkManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.NetworkManager"), from(VANILLA, "er") });
     ClassReference Packet = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.Packet"), from(VANILLA, "fm") });
