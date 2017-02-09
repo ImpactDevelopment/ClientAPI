@@ -31,6 +31,7 @@ public interface MCMappings {
     ClassReference Entity = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.Entity"), from(VANILLA, "sn") });
     ClassReference MoverType = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.MoverType"), from(VANILLA, "tc") });
     ClassReference WorldClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.WorldClient"), from(VANILLA, "bnq") });
+    ClassReference Profiler = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.profiler.Profiler"), from(VANILLA, "bqe") });
 
     // Methods
     MethodReference main = new MethodReference(new ObfuscationName[] { from(MCP, "main"), from(VANILLA, "main")}, Void.TYPE);
@@ -46,4 +47,5 @@ public interface MCMappings {
     MethodReference rightClickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "rightClickMouse"), from(VANILLA, "ax")}, Void.TYPE);
     MethodReference middleClickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "middleClickMouse"), from(VANILLA, "aC")}, Void.TYPE);
     MethodReference loadWorld = new MethodReference(new ObfuscationName[] { from(MCP, "loadWorld"), from(VANILLA, "a") }, Void.TYPE, WorldClient, String.class);
+    MethodReference startSection = new MethodReference(new ObfuscationName[] { from(MCP, "startSection"), from(VANILLA, "a") }, Void.TYPE, String.class);
 }
