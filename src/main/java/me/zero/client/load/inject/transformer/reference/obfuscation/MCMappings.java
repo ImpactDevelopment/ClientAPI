@@ -27,6 +27,9 @@ public interface MCMappings {
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
     ClassReference NetworkManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.NetworkManager"), from(VANILLA, "er") });
     ClassReference Packet = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.Packet"), from(VANILLA, "fm") });
+    ClassReference EntityPlayerSP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.entity.EntityPlayerSP"), from(VANILLA, "bps") });
+    ClassReference Entity = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.Entity"), from(VANILLA, "sn") });
+    ClassReference MoverType = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.MoverType"), from(VANILLA, "tc") });
 
     // Methods
     MethodReference main = new MethodReference(new ObfuscationName[] { from(MCP, "main"), from(VANILLA, "main")}, Void.TYPE);
@@ -36,4 +39,9 @@ public interface MCMappings {
     MethodReference renderGameOverlay = new MethodReference(new ObfuscationName[] { from(MCP, "renderGameOverlay"), from(VANILLA, "a") }, Void.TYPE, Float.TYPE);
     MethodReference channelRead0 = new MethodReference(new ObfuscationName[] { from(MCP, "channelRead0"), from(VANILLA, "a" )}, Void.TYPE, ChannelHandlerContext.class, Packet);
     MethodReference sendPacket1 = new MethodReference(new ObfuscationName[] { from(MCP, "sendPacket" ), from(VANILLA, "a")}, Void.TYPE, Packet);
+    MethodReference onUpdate = new MethodReference(new ObfuscationName[] { from(MCP, "onUpdate"), from(VANILLA, "A_") }, Void.TYPE);
+    MethodReference moveEntity = new MethodReference(new ObfuscationName[] { from(MCP, "moveEntity"), from(VANILLA, "a")}, Void.TYPE, MoverType, Double.TYPE, Double.TYPE, Double.TYPE);
+    MethodReference clickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "clickMouse"), from(VANILLA, "aw")}, Void.TYPE);
+    MethodReference rightClickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "rightClickMouse"), from(VANILLA, "ax")}, Void.TYPE);
+    MethodReference middleClickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "middleClickMouse"), from(VANILLA, "aC")}, Void.TYPE);
 }

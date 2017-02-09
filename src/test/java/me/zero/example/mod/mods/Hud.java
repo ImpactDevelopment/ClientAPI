@@ -18,6 +18,6 @@ public class Hud extends Module implements IRender {
 
     @EventHandler
     public void onRender2D(Render2DEvent event) {
-        mc.fontRendererObj.drawString("ExampleClient", 2, 2, -1);
+        mc.fontRendererObj.drawStringWithShadow("ExampleClient", 2, 2, -1);
     }
 }
