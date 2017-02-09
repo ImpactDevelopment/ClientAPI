@@ -52,6 +52,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.add(new TNetworkManager());
         this.transformers.add(new TEntityPlayerSP());
         this.transformers.add(new TEntity());
+        this.transformers.add(new TProfiler());
     }
 
     @Override
