@@ -93,7 +93,7 @@ final class Listener implements IListener {
     public void invoke(Object event) {
         try {
             method.invoke(parent, event);
-        } catch (InvocationTargetException | IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException | IllegalArgumentException e) {
             Logger.instance.logf(Level.WARNING, Messages.EVENT_UNABLE_CALL, event);
         }
     }

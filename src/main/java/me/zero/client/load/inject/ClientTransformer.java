@@ -6,10 +6,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.manage.Loadable;
 import me.zero.client.load.inject.transformer.ITransformer;
-import me.zero.client.load.inject.transformer.defaults.TGuiIngame;
-import me.zero.client.load.inject.transformer.defaults.TMain;
-import me.zero.client.load.inject.transformer.defaults.TMinecraft;
-import me.zero.client.load.inject.transformer.defaults.TNetworkManager;
+import me.zero.client.load.inject.transformer.defaults.*;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
@@ -53,6 +50,8 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.add(new TMinecraft());
         this.transformers.add(new TGuiIngame());
         this.transformers.add(new TNetworkManager());
+        this.transformers.add(new TEntityPlayerSP());
+        this.transformers.add(new TEntity());
     }
 
     @Override

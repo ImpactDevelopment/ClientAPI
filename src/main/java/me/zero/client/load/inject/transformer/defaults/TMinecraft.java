@@ -22,6 +22,10 @@ public final class TMinecraft extends Transformer {
         hooks.add(runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
         hooks.add(startGame.createHook(method -> method.insertAfter("ClientLoader.initGameLoader();")));
+
+        hooks.add(clickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.LEFT));")));
+        hooks.add(rightClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.RIGHT));")));
+        hooks.add(middleClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.MIDDLE));")));
     }
 
     @Override
