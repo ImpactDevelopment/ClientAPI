@@ -33,6 +33,8 @@ public interface MCMappings {
     ClassReference World = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.world.World"), from(VANILLA, "bpp") });
     ClassReference WorldClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.WorldClient"), from(VANILLA, "bnq") });
     ClassReference Profiler = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.profiler.Profiler"), from(VANILLA, "bqe") });
+    ClassReference GuiNewChat = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiNewChat"), from(VANILLA, "bfn") });
+    ClassReference ITextComponent = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.text"), from(VANILLA, "fb") });
 
     // Methods
     MethodReference main = new MethodReference(new ObfuscationName[] { from(MCP, "main"), from(VANILLA, "main")}, Void.TYPE);
@@ -51,4 +53,5 @@ public interface MCMappings {
     MethodReference startSection = new MethodReference(new ObfuscationName[] { from(MCP, "startSection"), from(VANILLA, "a") }, Void.TYPE, String.class);
     MethodReference onLivingUpdate = new MethodReference(new ObfuscationName[] { from(MCP, "onLivingUpdate"), from(VANILLA, "n") }, Void.TYPE);
     MethodReference sendChatMessage = new MethodReference(new ObfuscationName[] { from(MCP, "sendChatMessage"), from(VANILLA, "g") }, Void.TYPE, String.class);
+    MethodReference printChatMessageWithOptionalDeletion = new MethodReference(new ObfuscationName[] { from(MCP, "printChatMessageWithOptionalDeletion"), from(VANILLA, "a") }, ITextComponent, Integer.TYPE);
 }
