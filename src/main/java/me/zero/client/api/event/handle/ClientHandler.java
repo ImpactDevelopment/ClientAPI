@@ -46,18 +46,6 @@ public final class ClientHandler implements Helper {
     }
 
     @EventHandler
-    private void onPacket(PacketEvent event) {
-        if (event.getPacket() instanceof CPacketChatMessage) {
-            CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
-            EventManager.post(new ChatEvent(packet.getMessage(), ChatEvent.Type.RECEIVE));
-        }
-        if (event.getPacket() instanceof SPacketChat) {
-            SPacketChat packet = (SPacketChat) event.getPacket();
-            EventManager.post(new ChatEvent(packet.getChatComponent().getUnformattedText(), ChatEvent.Type.RECEIVE));
-        }
-    }
-
-    @EventHandler
     private void onTick(TickEvent event) {
         if (mc.currentScreen != null) return;
 

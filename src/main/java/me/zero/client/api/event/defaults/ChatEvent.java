@@ -2,6 +2,7 @@ package me.zero.client.api.event.defaults;
 
 import me.zero.client.api.event.type.Cancellable;
 import me.zero.client.api.exception.ActionNotValidException;
+import net.minecraft.util.text.ITextComponent;
 
 /**
  * Called whenever a chat message is sent or received.
@@ -18,6 +19,10 @@ public final class ChatEvent extends Cancellable {
     public ChatEvent(String message, Type type) {
         this.message = message;
         this.type = type;
+    }
+
+    public ChatEvent(ITextComponent message, Type type) {
+        this(message.getFormattedText(), type);
     }
 
     public String getMessage() {
