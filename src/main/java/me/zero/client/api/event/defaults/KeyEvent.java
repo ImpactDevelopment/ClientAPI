@@ -9,7 +9,7 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 1/20/2017.
  */
-public class KeyEvent {
+public final class KeyEvent {
 
     /**
      * Key code that belongs to the pressed key

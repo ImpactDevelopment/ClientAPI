@@ -9,7 +9,7 @@ import net.minecraft.client.multiplayer.WorldClient;
  *
  * Created by Brady on 2/9/2017.
  */
-public class WorldLoadEvent {
+public final class WorldLoadEvent {
 
     private final WorldClient world;
 

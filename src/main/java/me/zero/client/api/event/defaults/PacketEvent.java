@@ -10,7 +10,7 @@ import net.minecraft.network.Packet;
  *
  * Created by Brady on 2/7/2017.
  */
-public class PacketEvent implements Cancellable {
+public final class PacketEvent implements Cancellable {
 
     private Packet<?> packet;
     private Type type;

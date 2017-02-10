@@ -7,4 +7,4 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 2/8/2017.
  */
-public class UpdateEvent {}
+public final class UpdateEvent {}
