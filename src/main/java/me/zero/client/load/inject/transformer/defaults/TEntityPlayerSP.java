@@ -7,6 +7,7 @@ import me.zero.client.load.inject.transformer.reference.ClassReference;
 import java.util.List;
 
 import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.EntityPlayerSP;
+import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.onLivingUpdate;
 import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.onUpdate;
 
 /**
@@ -21,6 +22,10 @@ public class TEntityPlayerSP extends Transformer {
     @Override
     public void loadHooks(List<ClassHook> hooks) {
         hooks.add(onUpdate.createHook(method -> method.insertBefore("EventManager.post(new UpdateEvent());")));
+        hooks.add(onLivingUpdate.createHook(method -> {
+            method.insertBefore("EventManager.post(new LivingUpdateEvent(EventState.PRE));");
+            method.insertAfter("EventManager.post(new LivingUpdateEvent(EventState.POST));");
+        }));
     }
 
     @Override
