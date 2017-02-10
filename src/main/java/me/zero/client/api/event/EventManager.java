@@ -94,7 +94,7 @@ public final class EventManager {
             }
         }
         eventBuffer.add(index, listener);
-        SUBSCRIPTION_MAP.put(listener.getTarget(), eventBuffer);
+        SUBSCRIPTION_MAP.put(listener.getTarget(), new ArrayList<>(eventBuffer));
     }
 
     /**
@@ -116,7 +116,7 @@ public final class EventManager {
                     eventBuffer.add(listener);
                 }
             }
-            SUBSCRIPTION_MAP.put(eventClass, eventBuffer);
+            SUBSCRIPTION_MAP.put(eventClass, new ArrayList<>(eventBuffer));
         }
     }
 
