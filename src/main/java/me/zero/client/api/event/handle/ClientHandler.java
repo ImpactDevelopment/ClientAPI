@@ -3,15 +3,15 @@ package me.zero.client.api.event.handle;
 import me.zero.client.api.Client;
 import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.defaults.KeyEvent;
-import me.zero.client.api.event.defaults.Render2DEvent;
-import me.zero.client.api.event.defaults.TickEvent;
+import me.zero.client.api.event.defaults.*;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.module.Module;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.render.camera.CameraManager;
 import me.zero.client.load.ClientLoader;
+import net.minecraft.network.play.client.CPacketChatMessage;
+import net.minecraft.network.play.server.SPacketChat;
 import org.lwjgl.input.Keyboard;
 
 import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
@@ -43,6 +43,18 @@ public final class ClientHandler implements Helper {
     @EventHandler
     private void onKey(KeyEvent event) {
         client.getModuleManager().getData().stream().filter(module -> module.getBind() == event.getKey()).forEach(Module::toggle);
+    }
+
+    @EventHandler
+    private void onPacket(PacketEvent event) {
+        if (event.getPacket() instanceof CPacketChatMessage) {
+            CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
+            EventManager.post(new ChatEvent(packet.getMessage(), ChatEvent.Type.RECEIVE));
+        }
+        if (event.getPacket() instanceof SPacketChat) {
+            SPacketChat packet = (SPacketChat) event.getPacket();
+            EventManager.post(new ChatEvent(packet.getChatComponent().getUnformattedText(), ChatEvent.Type.RECEIVE));
+        }
     }
 
     @EventHandler

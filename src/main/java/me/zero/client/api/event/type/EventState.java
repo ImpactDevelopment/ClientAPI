@@ -1,4 +1,4 @@
-package me.zero.client.api.event;
+package me.zero.client.api.event.type;
 
 /**
  * The state of an event

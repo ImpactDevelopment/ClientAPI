@@ -1,5 +1,7 @@
 package me.zero.client.api.event;
 
+import me.zero.client.api.event.type.EventPriority;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

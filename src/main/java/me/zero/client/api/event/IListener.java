@@ -1,5 +1,7 @@
 package me.zero.client.api.event;
 
+import me.zero.client.api.event.type.EventPriority;
+
 /**
  * Created by Brady on 1/22/2017.
  */
@@ -13,7 +15,7 @@ interface IListener {
     Class<?> getTarget();
 
     /**
-     * @see me.zero.client.api.event.EventPriority
+     * @see EventPriority
      *
      * @since 1.0
      *
