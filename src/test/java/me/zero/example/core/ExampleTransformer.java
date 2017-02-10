@@ -19,7 +19,8 @@ public class ExampleTransformer extends Transformer implements MCMappings {
         // Create a new hook from "runTick"
         hooks.add(runTick.createHook(ctMethod -> {
             // Insert our code at the top of the method
-            ctMethod.insertBefore("System.out.println(\"Running Game Tick\");");
+            // Commented out b/c console spam
+            // ctMethod.insertBefore("System.out.println(\"Running Game Tick\");");
         }));
     }
 
