@@ -36,13 +36,15 @@ public class Camera {
         this.reflected = handle.reflected();
         this.framebuffer = new Framebuffer(handle.width(), handle.height(), true);
         this.createNewFramebuffer();
+
+        CameraManager.getInstance().register(this);
     }
 
     /**
      * Updates the current Framebuffer
      * Can only be called from {@code GuiIngame}
      */
-    public void updateFramebuffer() {
+    public void updateFramebuffer(float partialTicks) {
         // Make sure that GuiIngame is the only place that is calling this method
         if (ClientUtils.traceSource() != GuiIngame.class)
             return;
@@ -63,7 +65,7 @@ public class Camera {
         boolean hideGUI = mc.gameSettings.hideGUI, viewBobbing = mc.gameSettings.viewBobbing;
 
         // Render the camera
-        this.render(entity);
+        this.render(entity, partialTicks);
 
         // Reset all of the settings
         entity.setAll(pos, prevPos, lastTickPos, angles, prevAngles);
@@ -79,7 +81,7 @@ public class Camera {
      *
      * @param entity The game's view entity
      */
-    private void render(EntityUtil entity) {
+    private void render(EntityUtil entity, float partialTicks) {
         // Setup camera
         entity.setAll(this.position, this.rotation);
         mc.displayWidth = handle.width();
@@ -95,7 +97,7 @@ public class Camera {
 
         // Render camera
         setCapture(true);
-        mc.entityRenderer.updateCameraAndRender(0.0F /*partialTicks*/, System.nanoTime());
+        mc.entityRenderer.updateCameraAndRender(partialTicks, System.nanoTime());
         setCapture(false);
 
         updated = true;
@@ -161,7 +163,7 @@ public class Camera {
      *
      * @since 1.0
      *
-     * @param capture
+     * @param capture Whether or not to capture
      */
     private void setCapture(boolean capture) {
         if (capture)

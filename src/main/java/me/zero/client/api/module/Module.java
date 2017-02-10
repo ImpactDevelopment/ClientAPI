@@ -3,7 +3,7 @@ package me.zero.client.api.module;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
-import net.minecraft.client.Minecraft;
+import me.zero.client.api.util.interfaces.Helper;
 
 /**
  * The base for all cheats
@@ -14,12 +14,7 @@ import net.minecraft.client.Minecraft;
  *
  * Created by Brady on 1/19/2017.
  */
-public abstract class Module implements IModule {
-
-    /**
-     * The instance of the Minecraft game
-     */
-    protected static Minecraft mc = Minecraft.getMinecraft();
+public abstract class Module implements IModule, Helper {
 
     /**
      * The name of the module

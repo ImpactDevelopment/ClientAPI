@@ -1,7 +1,7 @@
 package me.zero.client.api.gui.tab;
 
 import me.zero.client.api.gui.IRenderer;
-import me.zero.client.api.manage.Loadable;
+import me.zero.client.api.util.interfaces.Loadable;
 
 /**
  * Base for Tab Gui Handlers

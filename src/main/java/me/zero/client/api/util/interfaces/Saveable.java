@@ -1,10 +1,10 @@
-package me.zero.client.api.manage;
+package me.zero.client.api.util.interfaces;
 
 /**
  * Simple interface to tag classes for being Saveable
  *
  * @see me.zero.client.api.manage.Manager
- * @see me.zero.client.api.manage.Loadable
+ * @see Loadable
  *
  * @since 1.0
  *

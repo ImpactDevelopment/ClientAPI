@@ -14,9 +14,7 @@ API designed to make Clients have Universal Support
 * Fully functional Event, Management, and Value system.
 * Tab GUI and Click GUI API
 * Module data storage
-* Halfpetal's CapesAPI integration
-
----
+* Halfpetal's [CapesAPI](https://github.com/halfpetal/CapesAPI) integration
 
 ## Usage
 Refer to the [Example](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/) to view how to make a Client using the ClientAPI
