@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.util.interfaces.Cancellable;
+import me.zero.client.api.event.type.Cancellable;
 import net.minecraft.network.Packet;
 
 /**
@@ -10,11 +10,10 @@ import net.minecraft.network.Packet;
  *
  * Created by Brady on 2/7/2017.
  */
-public final class PacketEvent implements Cancellable {
+public class PacketEvent extends Cancellable {
 
     private Packet<?> packet;
     private Type type;
-    private boolean cancelled;
 
     public PacketEvent(Packet<?> packet, Type type) {
         this.packet = packet;
@@ -31,16 +30,6 @@ public final class PacketEvent implements Cancellable {
 
     public Type getType() {
         return this.type;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
     }
 
     public enum Type {
