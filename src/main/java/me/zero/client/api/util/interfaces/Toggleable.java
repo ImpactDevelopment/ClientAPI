@@ -7,7 +7,7 @@ package me.zero.client.api.util.interfaces;
  *
  * Created by Brady on 1/23/2017.
  */
-public interface IToggleable {
+public interface Toggleable {
 
     /**
      * @since 1.0

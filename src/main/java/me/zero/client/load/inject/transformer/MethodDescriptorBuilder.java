@@ -36,6 +36,8 @@ public class MethodDescriptorBuilder {
     /**
      * Builds the Method Descriptor from the Return value and parameters
      *
+     * @since 1.0
+     *
      * @return Built Method Descriptor as a {@code String}
      */
     public String build() {

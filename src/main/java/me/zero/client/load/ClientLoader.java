@@ -4,6 +4,8 @@ import com.google.gson.GsonBuilder;
 import javassist.bytecode.Descriptor;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
@@ -62,9 +64,11 @@ public final class ClientLoader {
     }
 
     /**
+     * @since 1.0
+     *
      * Creates the Game ClientLoader
      */
-    public static void getGameLoader(String[] args) {
+    public static void genGameLoader(String[] args) {
         if (loader != null)
             throw new ActionNotValidException("Game Loader has already been created");
 
@@ -76,6 +80,17 @@ public final class ClientLoader {
     }
 
     /**
+     * @since 1.0
+     *
+     * @return The Game ClientLoader
+     */
+    public static ClientLoader getGameLoader() {
+        return loader;
+    }
+
+    /**
+     * @since 1.0
+     *
      * Loads the Game ClientLoader
      */
     public static void initGameLoader() {
@@ -87,6 +102,7 @@ public final class ClientLoader {
             throw new UnexpectedOutcomeException("Client found by Game ClientLoader is null!");
 
         client.onInit(loader);
+        EventManager.subscribe(new ClientHandler(client));
         client.postInit();
     }
 

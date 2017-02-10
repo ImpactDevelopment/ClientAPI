@@ -1,4 +1,4 @@
-package me.zero.client.api.event;
+package me.zero.client.api.util.interfaces;
 
 /**
  * Interface that should be implemented in events that should be cancellable

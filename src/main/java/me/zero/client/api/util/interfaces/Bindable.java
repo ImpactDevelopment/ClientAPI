@@ -15,12 +15,12 @@ import java.util.Map;
  *
  * Created by Brady on 1/21/2017.
  */
-public interface IBindable {
+public interface Bindable {
 
     /**
      * Stores all of the binds for each instance of {@code IBindable}
      */
-    Map<IBindable, Integer> BIND_MAP = new HashMap<>();
+    Map<Bindable, Integer> BIND_MAP = new HashMap<>();
 
     /**
      * Sets the bind that corresponds with this

@@ -4,7 +4,7 @@ import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.api.manage.Loadable;
+import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.load.inject.transformer.ITransformer;
 import me.zero.client.load.inject.transformer.defaults.*;
 import me.zero.client.load.inject.transformer.reference.ClassReference;

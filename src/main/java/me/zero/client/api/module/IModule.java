@@ -1,7 +1,7 @@
 package me.zero.client.api.module;
 
-import me.zero.client.api.util.interfaces.IBindable;
-import me.zero.client.api.util.interfaces.IToggleable;
+import me.zero.client.api.util.interfaces.Bindable;
+import me.zero.client.api.util.interfaces.Toggleable;
 
 /**
  * Base for Module
@@ -12,7 +12,7 @@ import me.zero.client.api.util.interfaces.IToggleable;
  *
  * Created by Brady on 1/21/2017.
  */
-interface IModule extends IToggleable, IBindable {
+interface IModule extends Toggleable, Bindable {
 
     /**
      * @since 1.0
