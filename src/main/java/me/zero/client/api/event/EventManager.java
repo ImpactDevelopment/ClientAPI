@@ -1,5 +1,6 @@
 package me.zero.client.api.event;
 
+import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 
 import java.lang.reflect.Method;

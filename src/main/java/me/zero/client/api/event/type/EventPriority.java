@@ -1,4 +1,4 @@
-package me.zero.client.api.event;
+package me.zero.client.api.event.type;
 
 /**
  * Contains all of the Event Priorities.

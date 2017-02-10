@@ -1,7 +1,6 @@
 package me.zero.example.mod.mods;
 
 import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.EventState;
 import me.zero.client.api.event.defaults.LivingUpdateEvent;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
