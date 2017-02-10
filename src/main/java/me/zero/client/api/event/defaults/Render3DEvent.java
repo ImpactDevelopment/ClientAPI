@@ -7,4 +7,4 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 2/9/2017.
  */
-public class Render3DEvent {}
+public final class Render3DEvent {}

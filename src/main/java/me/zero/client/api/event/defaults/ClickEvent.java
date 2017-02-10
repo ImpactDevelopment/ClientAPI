@@ -9,7 +9,7 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 1/20/2017.
  */
-public class ClickEvent {
+public final class ClickEvent {
 
     /**
      * The Mouse button that was clicked

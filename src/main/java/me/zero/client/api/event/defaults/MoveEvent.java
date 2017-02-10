@@ -11,7 +11,7 @@ import net.minecraft.entity.MoverType;
  *
  * Created by Brady on 2/9/2017.
  */
-public class MoveEvent {
+public final class MoveEvent {
 
     private final MoverType type;
     private double x, y, z;

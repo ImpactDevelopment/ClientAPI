@@ -7,7 +7,7 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 2/6/2017.
  */
-public class Render2DEvent {
+public final class Render2DEvent {
 
     private final float partialTicks;
 
