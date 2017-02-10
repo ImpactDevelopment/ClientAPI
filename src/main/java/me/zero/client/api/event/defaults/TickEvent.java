@@ -8,4 +8,4 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 1/24/2017.
  */
-public class TickEvent {}
+public final class TickEvent {}
