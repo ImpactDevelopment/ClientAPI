@@ -19,7 +19,7 @@ public class TEntity extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
-        hooks.add(moveEntity.createHook(method -> method.insertBefore("{ if (this instanceof " + EntityPlayerSP.getName() + ") { MoveEvent event = new MoveEvent($1, $2, $3, $4); EventManager.post(event); $2 = event.getX(); $3 = event.getY(); $4 = event.getZ(); }")));
+        hooks.add(moveEntity.createHook(method -> method.insertBefore("{ if (this instanceof " + EntityPlayerSP.getName() + ") { MoveEvent event = new MoveEvent($1, $2, $3, $4); EventManager.post(event); $2 = event.getX(); $3 = event.getY(); $4 = event.getZ(); }}")));
     }
 
     @Override
