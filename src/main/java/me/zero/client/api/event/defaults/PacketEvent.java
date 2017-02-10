@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.Cancellable;
+import me.zero.client.api.util.interfaces.Cancellable;
 import net.minecraft.network.Packet;
 
 /**

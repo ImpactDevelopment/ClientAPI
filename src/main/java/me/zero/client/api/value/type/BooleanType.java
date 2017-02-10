@@ -1,6 +1,6 @@
 package me.zero.client.api.value.type;
 
-import me.zero.client.api.util.interfaces.IToggleable;
+import me.zero.client.api.util.interfaces.Toggleable;
 import me.zero.client.api.value.Value;
 
 import java.lang.reflect.Field;
@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  *
  * Created by Brady on 1/23/2017.
  */
-public class BooleanType extends Value<Boolean> implements IToggleable {
+public class BooleanType extends Value<Boolean> implements Toggleable {
 
     public BooleanType(String name, Object object, Field field) {
         super(name, object, field);

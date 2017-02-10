@@ -1,5 +1,8 @@
 package me.zero.client.api.manage;
 
+import me.zero.client.api.util.interfaces.Loadable;
+import me.zero.client.api.util.interfaces.Saveable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,8 +11,8 @@ import java.util.List;
  * Manager used to store arrays of information.
  * Just a way to keep things consistent.
  *
- * @see me.zero.client.api.manage.Loadable
- * @see me.zero.client.api.manage.Saveable
+ * @see Loadable
+ * @see Saveable
  *
  * @since 1.0
  *

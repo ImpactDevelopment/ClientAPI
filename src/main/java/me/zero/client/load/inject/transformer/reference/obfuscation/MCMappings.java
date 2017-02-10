@@ -30,6 +30,7 @@ public interface MCMappings {
     ClassReference EntityPlayerSP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.entity.EntityPlayerSP"), from(VANILLA, "bps") });
     ClassReference Entity = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.Entity"), from(VANILLA, "sn") });
     ClassReference MoverType = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.MoverType"), from(VANILLA, "tc") });
+    ClassReference World = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.world.World"), from(VANILLA, "bpp") });
     ClassReference WorldClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.WorldClient"), from(VANILLA, "bnq") });
     ClassReference Profiler = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.profiler.Profiler"), from(VANILLA, "bqe") });
 

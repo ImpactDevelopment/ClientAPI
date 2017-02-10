@@ -15,7 +15,7 @@ public class TMain extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
-        hooks.add(main.createHook(method -> method.insertBefore("ClientLoader.getGameLoader($1);"), "([Ljava/lang/String;)V"));
+        hooks.add(main.createHook(method -> method.insertBefore("ClientLoader.genGameLoader($1);"), "([Ljava/lang/String;)V"));
     }
 
     @Override
