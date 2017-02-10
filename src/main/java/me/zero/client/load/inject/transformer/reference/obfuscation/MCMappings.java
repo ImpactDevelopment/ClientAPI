@@ -49,4 +49,5 @@ public interface MCMappings {
     MethodReference middleClickMouse = new MethodReference(new ObfuscationName[] { from(MCP, "middleClickMouse"), from(VANILLA, "aC")}, Void.TYPE);
     MethodReference loadWorld = new MethodReference(new ObfuscationName[] { from(MCP, "loadWorld"), from(VANILLA, "a") }, Void.TYPE, WorldClient, String.class);
     MethodReference startSection = new MethodReference(new ObfuscationName[] { from(MCP, "startSection"), from(VANILLA, "a") }, Void.TYPE, String.class);
+    MethodReference onLivingUpdate = new MethodReference(new ObfuscationName[] { from(MCP, "onLivingUpdate"), from(VANILLA, "n") }, Void.TYPE);
 }
