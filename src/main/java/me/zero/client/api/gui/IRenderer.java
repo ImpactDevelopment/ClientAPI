@@ -15,6 +15,8 @@ public interface IRenderer {
     /**
      * Renders this object
      *
+     * @since 1.0
+     *
      * @param x The X position of where this render object will start
      * @param y The Y position of where this render object will start
      * @param font The FontRenderer being used in drawing
