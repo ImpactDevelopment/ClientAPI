@@ -1,10 +1,8 @@
 package me.zero.client.api.util.render.camera;
 
-import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.render.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.math.Vec2f;
@@ -27,7 +25,7 @@ public class Camera {
     protected Vec3d position;
     protected Vec2f rotation;
     private Framebuffer framebuffer;
-    private CameraHandle handle;
+    protected CameraHandle handle;
     private int lastWidth, lastHeight;
     private boolean updated, reflected;
 
@@ -45,16 +43,12 @@ public class Camera {
      * Can only be called from {@code GuiIngame}
      */
     public void updateFramebuffer(float partialTicks) {
-        // Make sure that GuiIngame is the only place that is calling this method
-        if (ClientUtils.traceSource() != GuiIngame.class)
-            return;
-
         // Check if we are able to update the framebuffer
         if (Camera.capturing || !mc.inGameHasFocus || !handle.visible())
             return;
 
         // Gets the entity util for the render view entity and if it is null then the code stops
-        EntityUtil entity = new EntityUtil(mc.getRenderViewEntity());
+        EntityUtil entity = EntityUtil.get(mc.getRenderViewEntity());
         if (entity.getEntity() == null)
             return;
 
@@ -108,6 +102,7 @@ public class Camera {
      * Stretches the Framebuffer over the specified area.
      */
     public void draw(float x, float y, float x1, float y1) {
+        GlStateManager.pushMatrix();
         GlStateManager.enableTexture2D();
         GlStateManager.disableLighting();
         GlStateManager.disableAlpha();
@@ -124,6 +119,7 @@ public class Camera {
             RenderUtils.drawFlippedTexturedRect(x, y, x1, y1);
 
         framebuffer.unbindFramebufferTexture();
+        GlStateManager.popMatrix();
     }
 
     /**
