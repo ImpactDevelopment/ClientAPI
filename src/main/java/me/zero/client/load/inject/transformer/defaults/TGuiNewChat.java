@@ -15,7 +15,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
  *
  * Created by Brady on 2/10/2017.
  */
-public class TGuiNewChat extends Transformer {
+public final class TGuiNewChat extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
