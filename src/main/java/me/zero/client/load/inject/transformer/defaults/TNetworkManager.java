@@ -15,7 +15,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
  *
  * Created by Brady on 2/7/2017.
  */
-public class TNetworkManager extends Transformer {
+public final class TNetworkManager extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {

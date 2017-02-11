@@ -11,7 +11,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
 /**
  * Created by Brady on 2/9/2017.
  */
-public class TProfiler extends Transformer {
+public final class TProfiler extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
