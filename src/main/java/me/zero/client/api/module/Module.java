@@ -4,6 +4,7 @@ import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
+import me.zero.client.api.util.keybind.Keybind;
 
 /**
  * The base for all cheats
@@ -32,6 +33,11 @@ public abstract class Module implements IModule, Helper {
     private String type;
 
     /**
+     * The Keybind of this Module
+     */
+    private Keybind bind;
+
+    /**
      * The state of the module, indicated whether it is on or off
      */
     private boolean state;
@@ -43,7 +49,19 @@ public abstract class Module implements IModule, Helper {
             this.name = data.name();
             this.description = data.description();
 
-            this.setBind(data.bind());
+            this.bind = new Keybind(data.bind()) {
+
+                @Override
+                public void onClick() {
+                    Module.this.toggle();
+                }
+
+                @Override
+                public void onPress() {}
+
+                @Override
+                public void onRelease() {}
+            };
 
             this.type = "Default";
 
@@ -94,5 +112,10 @@ public abstract class Module implements IModule, Helper {
     @Override
     public final String getType() {
         return this.type;
+    }
+
+    @Override
+    public final Keybind getBind() {
+        return this.bind;
     }
 }

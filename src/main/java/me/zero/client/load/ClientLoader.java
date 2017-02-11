@@ -102,7 +102,7 @@ public final class ClientLoader {
             throw new UnexpectedOutcomeException("Client found by Game ClientLoader is null!");
 
         client.onInit(loader);
-        EventManager.subscribe(new ClientHandler(client));
+        EventManager.subscribe(new ClientHandler());
         client.postInit();
     }
 
