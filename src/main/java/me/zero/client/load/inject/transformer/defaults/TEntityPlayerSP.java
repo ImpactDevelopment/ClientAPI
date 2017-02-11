@@ -26,6 +26,7 @@ public class TEntityPlayerSP extends Transformer {
             method.insertAfter("EventManager.post(new LivingUpdateEvent(EventState.POST));");
         }));
         hooks.add(sendChatMessage.createHook(method -> method.insertBefore("{ ChatEvent event = new ChatEvent($1, ChatEvent.Type.SEND); EventManager.post(event); if (event.isCancelled()) return; $1 = event.getMessage(); }")));
+        hooks.add(moveEntity.createHook(method -> method.insertBefore("{ MoveEvent event = new MoveEvent($1, $2, $3, $4); EventManager.post(event); $2 = event.getX(); $3 = event.getY(); $4 = event.getZ(); }")));
     }
 
     @Override
