@@ -1,4 +1,4 @@
-package me.zero.client.api.util.render.notification;
+package me.zero.client.api.gui.notification;
 
 /**
  * Implementation of INotification.
@@ -8,9 +8,31 @@ package me.zero.client.api.util.render.notification;
  * Created by Brady on 1/6/2017.
  */
 public class Notification implements INotification {
-	
-	private String header, subtext;
-	private long start, fade, displayTime;
+
+	/**
+	 * Header text
+	 */
+	private String header;
+
+	/**
+	 * Subtext
+	 */
+	private String subtext;
+
+	/**
+	 * Time when notification was created
+	 */
+	private long start;
+
+	/**
+	 * Fade in/out timer
+	 */
+	private long fade;
+
+	/**
+	 * How long the notification will be displayed
+	 */
+	private long displayTime;
 	
 	Notification(String header, String subtext, long fade, long displayTime) {
 		this.header = header;
