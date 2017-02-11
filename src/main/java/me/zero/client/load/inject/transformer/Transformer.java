@@ -52,6 +52,7 @@ public abstract class Transformer implements ITransformer {
 
     private void loadDefaultImports(List<String> imports) {
         imports.add("me.zero.client.api.event");
+        imports.add("me.zero.client.api.event.type");
         imports.add("me.zero.client.api.event.defaults");
     }
 }
