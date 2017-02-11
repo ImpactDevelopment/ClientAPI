@@ -20,7 +20,7 @@ public class RearViewCamera extends Camera {
 
     @Override
     public void updateFramebuffer(float partialTicks) {
-        EntityUtil entity = new EntityUtil(mc.player);
+        EntityUtil entity = EntityUtil.get(mc.player);
         Vec2f rotations = entity.getRotations();
         this.position = entity.getPos();
         this.rotation = new Vec2f(rotations.x + 180, rotations.y * -1);
