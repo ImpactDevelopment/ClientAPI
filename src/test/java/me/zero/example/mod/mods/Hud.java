@@ -33,7 +33,7 @@ public class Hud extends Module implements IRender {
         y = sr.getScaledHeight() - 12;
         int x = sr.getScaledWidth() - 2;
         ExampleClient.getInstance().getModuleManager().getData().stream().filter(Module::getState).sorted(Comparator.comparingInt(m -> -fr.getStringWidth(m.getName()))).forEach(module -> {
-            fr.drawString(module.getName(), x - fr.getStringWidth(module.getName()), y, -1);
+            fr.drawStringWithShadow(module.getName(), x - fr.getStringWidth(module.getName()), y, -1);
             y -= 10;
         });
     }

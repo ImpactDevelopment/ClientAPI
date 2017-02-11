@@ -1,8 +1,12 @@
 package me.zero.client.api.util;
 
+import me.zero.client.api.util.interfaces.Helper;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A way to easily interact with entities without
@@ -12,15 +16,55 @@ import net.minecraft.util.math.Vec3d;
  *
  * Created by Brady on 2/4/2017.
  */
-public class EntityUtil {
+public class EntityUtil implements Helper {
+
+    /**
+     * Map of {@code EntityUtils} to make sure we're not
+     * creating tons of them every single render tick.
+     */
+    private static Map<Entity, EntityUtil> utils = new ConcurrentHashMap<>();
 
     /**
      * Entity represented by this {@code EntityUtil}
      */
     private Entity entity;
 
-    public EntityUtil(Entity entity) {
+    private EntityUtil(Entity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * Returns the {@code EntityUtil} associated with the
+     * specified entity. This is better than creating a new
+     * EntityUtil because it stores the EntityUtils associated
+     * with entities inside of a List, so if the util already
+     * exists, then we don't need to create a new one.
+     *
+     * @since 1.0
+     *
+     * @param entity The entity
+     * @return The entityutil
+     */
+    public static EntityUtil get(Entity entity) {
+        EntityUtil util = utils.get(entity);
+        if (util != null)
+            return util;
+        utils.put(entity, new EntityUtil(entity));
+        cleanUp();
+        return get(entity);
+    }
+
+    /**
+     * Cleans up any entities that no longer exist, and
+     * removes the {@code EntityUtil} associated with them.
+     *
+     * @since 1.0
+     */
+    private static void cleanUp() {
+        utils.keySet().forEach(entity -> {
+            if (!mc.world.loadedEntityList.contains(entity))
+                utils.remove(entity);
+        });
     }
 
     /**
