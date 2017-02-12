@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class Aura extends Module implements ICombat {
 
     private Entity target;
-    private int ticks;
 
     @EventHandler
     private Listener<MotionUpdateEvent> motionUpdateListener = new Listener<>(event -> {
@@ -44,13 +43,9 @@ public class Aura extends Module implements ICombat {
                break;
            }
            case POST: {
-               if (target != null) {
-                   ticks++;
-                   if (ticks > 2) {
-                       ticks = 0;
-                       mc.playerController.attackEntity(mc.player, target);
-                       mc.player.swingArm(EnumHand.MAIN_HAND);
-                   }
+               if (target != null && mc.player.getCooledAttackStrength(0F) == 1F) {
+                   mc.playerController.attackEntity(mc.player, target);
+                   mc.player.swingArm(EnumHand.MAIN_HAND);
                }
                break;
            }
