@@ -21,14 +21,6 @@ public class CFontRenderer extends CFont {
     private final int[] colorCode = new int[32];
     private final String colorcodeIdentifiers = "0123456789abcdefklmnor";
 
-    public CFontRenderer(FontRetriever font, int style, float size) {
-        this(font.get(style, size), true, false);
-    }
-
-    public CFontRenderer(FontRetriever font, int style, float size, boolean antiAlias, boolean fractionalMetrics) {
-        this(font.get(style, size), antiAlias, fractionalMetrics);
-    }
-
     public CFontRenderer(Font font) {
         this(font, true, false);
     }
