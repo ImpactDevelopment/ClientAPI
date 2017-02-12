@@ -22,7 +22,6 @@ public class ExampleModManager extends Manager<Module> {
 
         // Load Modules
         this.addData(
-                new ExampleModule(),
                 new Hud(),
                 new Fly(),
                 new NoSlow(),

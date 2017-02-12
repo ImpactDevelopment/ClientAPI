@@ -1,12 +1,12 @@
 package me.zero.client.api.util.render.camera;
 
 import me.zero.client.api.util.EntityUtil;
+import me.zero.client.api.util.math.Vec2;
+import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
 
 /**
  * The base for Cameras.
@@ -22,8 +22,8 @@ public class Camera {
     protected static Minecraft mc = Minecraft.getMinecraft();
     private static boolean capturing;
 
-    protected Vec3d position;
-    protected Vec2f rotation;
+    protected Vec3 position;
+    protected Vec2 rotation;
     private Framebuffer framebuffer;
     protected CameraHandle handle;
     private int lastWidth, lastHeight;
@@ -53,8 +53,8 @@ public class Camera {
             return;
 
         // Preserve all of the settings before entity change them.
-        Vec3d pos = entity.getPos(), prevPos = entity.getPrevPos(), lastTickPos = entity.getLastTickPos();
-        Vec2f angles = entity.getRotations(), prevAngles = entity.getPrevRotations();
+        Vec3 pos = entity.getPos(), prevPos = entity.getPrevPos(), lastTickPos = entity.getLastTickPos();
+        Vec2 angles = entity.getRotations(), prevAngles = entity.getPrevRotations();
         int displayWidth = mc.displayWidth, displayHeight = mc.displayHeight, thirdPersonView = mc.gameSettings.thirdPersonView;
         boolean hideGUI = mc.gameSettings.hideGUI, viewBobbing = mc.gameSettings.viewBobbing;
 
