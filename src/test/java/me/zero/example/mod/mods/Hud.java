@@ -43,5 +43,5 @@ public class Hud extends Module implements IRender {
             font.drawStringWithShadow(module.getName(), sr.getScaledWidth() - 2 - font.getStringWidth(module.getName()), y, color);
             y -= font.getHeight();
         });
-    }, EventPriority.HIGHEST);
+    });
 }
