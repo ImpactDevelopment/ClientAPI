@@ -16,8 +16,8 @@ import java.lang.reflect.Field;
  */
 public class BooleanType extends Value<Boolean> implements Toggleable {
 
-    public BooleanType(String name, Object object, Field field) {
-        super(name, object, field);
+    public BooleanType(String name, String description, Object object, Field field) {
+        super(name, description, object, field);
     }
 
     @Override
@@ -27,12 +27,12 @@ public class BooleanType extends Value<Boolean> implements Toggleable {
     public void onDisable() {}
 
     @Override
-    public void toggle() {
+    public final void toggle() {
         this.setState(!this.getState());
     }
 
     @Override
-    public void setState(boolean state) {
+    public final void setState(boolean state) {
         this.setValue(state);
 
         if (this.getState()) {
@@ -43,7 +43,7 @@ public class BooleanType extends Value<Boolean> implements Toggleable {
     }
 
     @Override
-    public boolean getState() {
+    public final boolean getState() {
         return super.getValue();
     }
 }

@@ -14,7 +14,4 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface StringValue {
-
-    String name();
-}
+public @interface StringValue {}

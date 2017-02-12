@@ -5,6 +5,7 @@ import me.zero.client.api.event.defaults.Render2DEvent;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
+import me.zero.client.api.util.interfaces.annotation.Label;
 import me.zero.client.api.util.render.camera.defaults.OverheadCamera;
 import me.zero.client.api.value.annotation.NumberValue;
 import me.zero.example.mod.category.IRender;
@@ -17,7 +18,8 @@ import org.lwjgl.input.Keyboard;
 @Mod(name = "Camera", description = "", bind = Keyboard.KEY_B)
 public class Camera extends Module implements IRender {
 
-    @NumberValue(name = "Height", minimum = 10, maximum = 50)
+    @Label(name = "Height", description = "How high up the camera is")
+    @NumberValue(min = 10, max = 50)
     private double height = 30;
 
     @EventHandler(EventPriority.HIGHEST)

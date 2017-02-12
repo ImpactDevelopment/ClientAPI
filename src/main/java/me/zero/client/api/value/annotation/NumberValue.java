@@ -16,9 +16,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface NumberValue {
 
-    String name();
+    double min();
 
-    double minimum();
-
-    double maximum();
+    double max();
 }
