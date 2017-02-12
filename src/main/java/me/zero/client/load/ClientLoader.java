@@ -103,7 +103,6 @@ public final class ClientLoader {
 
         client.onInit(loader);
         EventManager.subscribe(new ClientHandler());
-        client.postInit();
     }
 
     /**

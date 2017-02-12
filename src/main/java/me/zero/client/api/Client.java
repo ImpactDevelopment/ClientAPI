@@ -12,11 +12,8 @@ import me.zero.client.load.ClientLoader;
 public abstract class Client extends ClientBase {
 
     /**
-     * Called after the game has initialized
-     * Used for Creation of managers,
-     * Module Registry and Plugin loading
+     * Called after the game has initialized.
      *
-     * @see #postInit()
      * @see me.zero.client.api.module.Module
      * @see me.zero.client.api.module.plugin.Plugin
      *
@@ -25,15 +22,4 @@ public abstract class Client extends ClientBase {
      * @since 1.0
      */
     public abstract void onInit(ClientLoader loader);
-
-    /**
-     * Last init call once everything else is done
-     * Used for GUI things such as Fonts and Click/Tab GUIs
-     *
-     * @see #onInit(ClientLoader)
-     * @see me.zero.client.api.gui.tab.ITabGui
-     *
-     * @since 1.0
-     */
-    public abstract void postInit();
 }
