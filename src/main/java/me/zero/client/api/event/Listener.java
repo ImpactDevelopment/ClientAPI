@@ -2,12 +2,6 @@ package me.zero.client.api.event;
 
 import me.zero.client.api.event.type.EventPriority;
 import net.jodah.typetools.TypeResolver;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
-
-import java.lang.invoke.SerializedLambda;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 /**
  * Used to contain event method data
