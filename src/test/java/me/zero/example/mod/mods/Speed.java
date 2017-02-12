@@ -1,6 +1,7 @@
 package me.zero.example.mod.mods;
 
 import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.MoveEvent;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
@@ -20,7 +21,7 @@ public class Speed extends Module implements IMovement {
     private double speed = 3;
 
     @EventHandler
-    public void onMove(MoveEvent event) {
+    private Listener<MoveEvent> moveListener = new Listener<>(event -> {
         event.setX(event.getX() * speed).setZ(event.getZ() * speed);
-    }
+    });
 }

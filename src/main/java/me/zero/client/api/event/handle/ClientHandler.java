@@ -1,7 +1,9 @@
 package me.zero.client.api.event.handle;
 
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.*;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.util.ClientUtils;
@@ -32,17 +34,17 @@ public final class ClientHandler implements Helper {
     }
 
     @EventHandler
-    private void onRender2D(Render2DEvent event) {
+    private Listener<Render2DEvent> render2DListener = new Listener<>(event -> {
         CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks()));
-    }
+    });
 
     @EventHandler
-    private void onKey(KeyEvent event) {
+    private Listener<KeyEvent> keyListener = new Listener<>(event -> {
         Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick);
-    }
+    });
 
     @EventHandler
-    private void onTick(TickEvent event) {
+    private Listener<TickEvent> tickListener = new Listener<>(event -> {
         if (mc.currentScreen != null) return;
 
         for (int i = 1; i < KEYBOARD_SIZE; i++) {
@@ -58,5 +60,5 @@ public final class ClientHandler implements Helper {
                     keybinds.forEach(Keybind::onRelease);
             }
         }
-    }
+    });
 }

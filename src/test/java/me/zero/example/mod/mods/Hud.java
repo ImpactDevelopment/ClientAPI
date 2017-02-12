@@ -1,7 +1,9 @@
 package me.zero.example.mod.mods;
 
 import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.Render2DEvent;
+import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.gui.font.CFontRenderer;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
@@ -27,7 +29,7 @@ public class Hud extends Module implements IRender {
     }
 
     @EventHandler
-    public void onRender2D(Render2DEvent event) {
+    private Listener<Render2DEvent> render2DListener = new Listener<>(event -> {
         ScaledResolution sr = new ScaledResolution(mc);
 
         int color = 0xFF98ABB8;
@@ -36,9 +38,10 @@ public class Hud extends Module implements IRender {
 
         y = sr.getScaledHeight() - 12;
 
-        ExampleClient.getInstance().getModuleManager().getData().stream().filter(Module::getState).sorted(Comparator.comparingInt(m -> -font.getStringWidth(m.getName()))).forEach(module -> {
+        ExampleClient.getInstance().getModuleManager().getData().stream().filter(Module::getState)
+                .sorted(Comparator.comparingInt(m -> -font.getStringWidth(m.getName()))).forEach(module -> {
             font.drawStringWithShadow(module.getName(), sr.getScaledWidth() - 2 - font.getStringWidth(module.getName()), y, color);
             y -= font.getHeight();
         });
-    }
+    }, EventPriority.HIGHEST);
 }

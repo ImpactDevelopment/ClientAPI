@@ -1,6 +1,7 @@
 package me.zero.example.mod.mods;
 
 import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.Render2DEvent;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.module.Mod;
@@ -22,13 +23,7 @@ public class Camera extends Module implements IRender {
     @NumberValue(min = 10, max = 50)
     private double height = 30;
 
-    @EventHandler(EventPriority.HIGHEST)
-    private void onRender2D(Render2DEvent event) {
-        ScaledResolution sr = new ScaledResolution(mc);
-        float size = sr.getScaledWidth() / 5F;
-        camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(), size);
-    }
-
+    // Must be instantiated before the Render2DEvent Listener
     private OverheadCamera camera = new OverheadCamera(new OverheadCamera.OverheadHandle() {
 
         @Override
@@ -60,5 +55,12 @@ public class Camera extends Module implements IRender {
         public int height() {
             return mc.displayHeight;
         }
+    });
+
+    @EventHandler
+    private Listener<Render2DEvent> render2DListener = new Listener<>(event -> {
+        ScaledResolution sr = new ScaledResolution(mc);
+        float size = sr.getScaledWidth() / 5F;
+        camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(), size);
     });
 }
