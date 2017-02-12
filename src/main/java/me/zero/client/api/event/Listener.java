@@ -21,7 +21,7 @@ public final class Listener<T> implements EventHook<T> {
     /**
      * The hook for this Listener
      */
-    private EventHook hook;
+    private EventHook<T> hook;
 
     /**
      * Priority of Listener

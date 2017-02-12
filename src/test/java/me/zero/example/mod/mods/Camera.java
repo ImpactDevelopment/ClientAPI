@@ -62,5 +62,5 @@ public class Camera extends Module implements IRender {
         ScaledResolution sr = new ScaledResolution(mc);
         float size = sr.getScaledWidth() / 5F;
         camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(), size);
-    });
+    }, EventPriority.HIGHEST);
 }
