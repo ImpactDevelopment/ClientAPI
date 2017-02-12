@@ -23,7 +23,6 @@ public class MotionUpdateEvent implements Helper {
 
     public MotionUpdateEvent(EventState type) {
         this.type = type;
-
         if (type == EventState.POST) return;
 
         EntityUtil util = EntityUtil.get(mc.player);
@@ -56,6 +55,10 @@ public class MotionUpdateEvent implements Helper {
     public MotionUpdateEvent pitch(float pitch) {
         nRotation.y(pitch);
         return this;
+    }
+
+    public EventState getType() {
+        return this.type;
     }
 
     public static void apply() {

@@ -26,7 +26,8 @@ public class ExampleModManager extends Manager<Module> {
                 new Fly(),
                 new NoSlow(),
                 new Speed(),
-                new Camera()
+                new Camera(),
+                new Aura()
         );
 
         // Loads Modules from the discovered Plugins by the Plugin loaders
