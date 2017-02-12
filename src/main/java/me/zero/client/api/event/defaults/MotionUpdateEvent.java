@@ -59,18 +59,14 @@ public class MotionUpdateEvent implements Helper {
     }
 
     public static void apply() {
-        mc.player.posX          = nPos.getX();
-        mc.player.posY          = nPos.getY();
-        mc.player.posZ          = nPos.getZ();
-        mc.player.rotationYaw   = nRotation.getX();
-        mc.player.rotationPitch = nRotation.getY();
+        EntityUtil util = EntityUtil.get(mc.player);
+        util.setPos(nPos);
+        util.setRotations(nRotation);
     }
 
     public static void reset() {
-        mc.player.posX          = oPos.getX();
-        mc.player.posY          = oPos.getY();
-        mc.player.posZ          = oPos.getZ();
-        mc.player.rotationYaw   = oRotation.getX();
-        mc.player.rotationPitch = oRotation.getY();
+        EntityUtil util = EntityUtil.get(mc.player);
+        util.setPos(oPos);
+        util.setRotations(oRotation);
     }
 }
