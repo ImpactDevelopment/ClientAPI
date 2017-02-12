@@ -54,6 +54,6 @@ public interface MCMappings {
     MethodReference startSection = new MethodReference(new ObfuscationName[] { from(MCP, "startSection"), from(VANILLA, "a") }, Void.TYPE, String.class);
     MethodReference onLivingUpdate = new MethodReference(new ObfuscationName[] { from(MCP, "onLivingUpdate"), from(VANILLA, "n") }, Void.TYPE);
     MethodReference sendChatMessage = new MethodReference(new ObfuscationName[] { from(MCP, "sendChatMessage"), from(VANILLA, "g") }, Void.TYPE, String.class);
-    MethodReference printChatMessageWithOptionalDeletion = new MethodReference(new ObfuscationName[] { from(MCP, "printChatMessageWithOptionalDeletion"), from(VANILLA, "a") }, ITextComponent, Integer.TYPE);
-    MethodReference getFOVModifier = new MethodReference(new ObfuscationName[] { from(MCP, "getFOVModifier"), from(VANILLA, "a")}, Float.TYPE, Boolean.TYPE);
+    MethodReference printChatMessageWithOptionalDeletion = new MethodReference(new ObfuscationName[] { from(MCP, "printChatMessageWithOptionalDeletion"), from(VANILLA, "a") }, Void.TYPE, ITextComponent, Integer.TYPE);
+    MethodReference getFOVModifier = new MethodReference(new ObfuscationName[] { from(MCP, "getFOVModifier"), from(VANILLA, "a")}, Float.TYPE, Float.TYPE, Boolean.TYPE);
 }

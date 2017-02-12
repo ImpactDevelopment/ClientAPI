@@ -28,12 +28,14 @@ public class Hud extends Module implements IRender {
         ScaledResolution sr = new ScaledResolution(mc);
         FontRenderer fr = mc.fontRendererObj;
 
-        fr.drawStringWithShadow("ExampleClient", 2, 2, -1);
+        int color = 0xFF98ABB8;
+
+        fr.drawStringWithShadow("ExampleClient", 2, 2, color);
 
         y = sr.getScaledHeight() - 12;
-        int x = sr.getScaledWidth() - 2;
+
         ExampleClient.getInstance().getModuleManager().getData().stream().filter(Module::getState).sorted(Comparator.comparingInt(m -> -fr.getStringWidth(m.getName()))).forEach(module -> {
-            fr.drawStringWithShadow(module.getName(), x - fr.getStringWidth(module.getName()), y, -1);
+            fr.drawStringWithShadow(module.getName(), sr.getScaledWidth() - 2 - fr.getStringWidth(module.getName()), y, color);
             y -= 10;
         });
     }

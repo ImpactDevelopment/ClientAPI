@@ -76,6 +76,9 @@ public abstract class Keybind {
         return Keybind.keybinds;
     }
 
+    /**
+     * Keybind type
+     */
     public enum Type {
         TOGGLE, HOLD
     }
