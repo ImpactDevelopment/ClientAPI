@@ -21,8 +21,6 @@ public class ExampleClient extends Client {
 
     @Override
     public void onInit(ClientLoader loader) {
-        System.out.println("ExampleClient: onInit()");
-
         // Login to our account
         AuthenticationFactory.create().username("example@host.xyz").password("12345").login();
 
@@ -43,11 +41,6 @@ public class ExampleClient extends Client {
 
         // Load mods
         this.getModuleManager().load();
-    }
-
-    @Override
-    public void postInit() {
-        System.out.println("ExampleClient: postInit()");
     }
 
     public String getName() {

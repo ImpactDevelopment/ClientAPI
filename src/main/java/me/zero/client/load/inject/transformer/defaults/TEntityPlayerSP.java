@@ -1,5 +1,6 @@
 package me.zero.client.load.inject.transformer.defaults;
 
+import me.zero.client.load.inject.transformer.LoadTransformer;
 import me.zero.client.load.inject.transformer.Transformer;
 import me.zero.client.load.inject.transformer.hook.ClassHook;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
@@ -16,6 +17,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
  *
  * Created by Brady on 2/8/2017.
  */
+@LoadTransformer
 public final class TEntityPlayerSP extends Transformer {
 
     @Override
