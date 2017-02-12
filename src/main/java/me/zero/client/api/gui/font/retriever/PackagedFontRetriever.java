@@ -11,19 +11,19 @@ import java.awt.*;
  *
  * Created by Brady on 2/11/2017.
  */
-public class PackagedRetriever implements FontRetriever {
+public class PackagedFontRetriever implements FontRetriever {
 
     /**
      * The font name on DaFont
      */
     private String path;
 
-    public PackagedRetriever(String path) {
+    public PackagedFontRetriever(String path) {
         this.path = path;
     }
 
     @Override
     public Font get(int style, float size) {
-        return get(PackagedRetriever.class.getResourceAsStream(path), style, size);
+        return get(PackagedFontRetriever.class.getResourceAsStream(path), style, size);
     }
 }
