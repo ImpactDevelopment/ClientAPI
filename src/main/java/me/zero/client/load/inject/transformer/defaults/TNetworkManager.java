@@ -26,9 +26,6 @@ public final class TNetworkManager extends Transformer {
     }
 
     @Override
-    public void loadImports(List<String> imports) {}
-
-    @Override
     public ClassReference[] getTargetClasses() {
         return new ClassReference[]  { NetworkManager };
     }

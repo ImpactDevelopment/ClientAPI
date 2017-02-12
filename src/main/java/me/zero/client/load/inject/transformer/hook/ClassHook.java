@@ -19,7 +19,8 @@ public interface ClassHook {
      * @since 1.0
      *
      * @param ctClass Class being hooked
-     * @throws NotFoundException
+     * @throws NotFoundException If one of the methods
+     * @throws CannotCompileException If there was a syntax error in the Java code being injected
      */
     void accept(CtClass ctClass) throws NotFoundException, CannotCompileException;
 }

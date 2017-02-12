@@ -6,6 +6,8 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.load.inject.transformer.ITransformer;
+import me.zero.client.load.inject.transformer.LoadTransformer;
+import me.zero.client.load.inject.transformer.Transformer;
 import me.zero.client.load.inject.transformer.defaults.*;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
@@ -13,6 +15,7 @@ import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.IClassTransformer;
+import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,13 +49,15 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
-        this.transformers.add(new TMain());
-        this.transformers.add(new TMinecraft());
-        this.transformers.add(new TGuiIngame());
-        this.transformers.add(new TNetworkManager());
-        this.transformers.add(new TEntityPlayerSP());
-        this.transformers.add(new TProfiler());
-        this.transformers.add(new TEntityRenderer());
+        Reflections reflections = new Reflections("me.zero.client.load.inject.transformer.defaults");
+        for (Class<? extends Transformer> transformer : reflections.getSubTypesOf(Transformer.class)) {
+            if (!transformer.isAnnotationPresent(LoadTransformer.class)) continue;
+            try {
+                this.transformers.add(transformer.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_INSTANTIATION, transformer);
+            }
+        }
     }
 
     @Override
@@ -69,12 +74,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
 
         if (!valid.isEmpty()) {
             try {
-
-                ClassPool pool = ClassPool.getDefault();
-                CtClass ctClass = pool.get(className);
-
-                ctClass.stopPruning(true);
-                ctClass.defrost();
+                CtClass ctClass = ClassPool.getDefault().get(className);
 
                 valid.forEach(transformer -> {
                     Logger.instance.logf(Level.INFO, Messages.TRANSFORM, className, transformer.getClass().getCanonicalName());
