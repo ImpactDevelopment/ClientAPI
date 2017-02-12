@@ -9,5 +9,5 @@ package me.zero.client.api.event.type;
  */
 public enum EventState {
 
-    PRE, POST;
+    PRE, POST
 }

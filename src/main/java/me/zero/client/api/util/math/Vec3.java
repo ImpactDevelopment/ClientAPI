@@ -35,14 +35,26 @@ public class Vec3 {
         return this;
     }
 
+    public Vec3 x(double x) {
+        return x((float) x);
+    }
+
     public Vec3 y(float y) {
         this.y = y;
         return this;
     }
 
+    public Vec3 y(double y) {
+        return y((float) y);
+    }
+
     public Vec3 z(float z) {
         this.z = z;
         return this;
+    }
+
+    public Vec3 z(double z) {
+        return z((float) z);
     }
 
     public float getX() {
