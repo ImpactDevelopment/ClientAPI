@@ -11,6 +11,10 @@ public class Vec2 {
 
     private float x, y;
 
+    public Vec2(double x, double y) {
+        this((float) x, (float) y);
+    }
+
     public Vec2(float x, float y) {
         this.x = x;
         this.y = y;
@@ -38,8 +42,24 @@ public class Vec2 {
         return new Vec2(this.x + vector.x, this.y + vector.y);
     }
 
+    public Vec2 add(double x, double y) {
+        return add(new Vec2(x, y));
+    }
+
+    public Vec2 add(float x, float y) {
+        return add(new Vec2(x, y));
+    }
+
     public Vec2 sub(Vec2 vector) {
         return new Vec2(this.x - vector.x, this.y - vector.y);
+    }
+
+    public Vec2 sub(double x, double y) {
+        return add(new Vec2(x, y));
+    }
+
+    public Vec2 sub(float x, float y) {
+        return add(new Vec2(x, y));
     }
 
     public Vec2 scale(float scale) {
