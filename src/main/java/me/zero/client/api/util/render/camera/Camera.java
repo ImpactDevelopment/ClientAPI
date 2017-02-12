@@ -112,13 +112,12 @@ public class Camera {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         framebuffer.bindFramebufferTexture();
-
         if (reflected)
             RenderUtils.drawReflectedTexturedRect(x, y, x1, y1);
         else
             RenderUtils.drawFlippedTexturedRect(x, y, x1, y1);
-
         framebuffer.unbindFramebufferTexture();
+
         GlStateManager.popMatrix();
     }
 
