@@ -1,9 +1,9 @@
 package me.zero.client.api.util;
 
 import me.zero.client.api.util.interfaces.Helper;
+import me.zero.client.api.util.math.Vec2;
+import me.zero.client.api.util.math.Vec3;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -76,7 +76,7 @@ public class EntityUtil implements Helper {
      * @param pos The position
      * @param angles The rotation
      */
-    public void setAll(Vec3d pos, Vec2f angles) {
+    public void setAll(Vec3 pos, Vec2 angles) {
         this.setAll(pos, pos, pos, angles, angles);
     }
 
@@ -92,7 +92,7 @@ public class EntityUtil implements Helper {
      * @param angles The angles
      * @param prevAngles The previous angles
      */
-    public void setAll(Vec3d pos, Vec3d prev, Vec3d lastTick, Vec2f angles, Vec2f prevAngles) {
+    public void setAll(Vec3 pos, Vec3 prev, Vec3 lastTick, Vec2 angles, Vec2 prevAngles) {
         this.setPos(pos);
         this.setPrevPos(prev);
         this.setLastTickPos(lastTick);
@@ -107,10 +107,10 @@ public class EntityUtil implements Helper {
      *
      * @param pos New position
      */
-    public void setPos(Vec3d pos) {
-        entity.posX = pos.xCoord;
-        entity.posY = pos.yCoord;
-        entity.posZ = pos.zCoord;
+    public void setPos(Vec3 pos) {
+        entity.posX = pos.getX();
+        entity.posY = pos.getY();
+        entity.posZ = pos.getZ();
     }
 
     /**
@@ -120,10 +120,10 @@ public class EntityUtil implements Helper {
      *
      * @param pos New position
      */
-    public void setPrevPos(Vec3d pos) {
-        entity.prevPosX = pos.xCoord;
-        entity.prevPosY = pos.yCoord;
-        entity.prevPosZ = pos.zCoord;
+    public void setPrevPos(Vec3 pos) {
+        entity.prevPosX = pos.getX();
+        entity.prevPosY = pos.getY();
+        entity.prevPosZ = pos.getZ();
     }
 
     /**
@@ -133,10 +133,10 @@ public class EntityUtil implements Helper {
      *
      * @param pos New position
      */
-    public void setLastTickPos(Vec3d pos) {
-        entity.lastTickPosX = pos.xCoord;
-        entity.lastTickPosY = pos.yCoord;
-        entity.lastTickPosZ = pos.zCoord;
+    public void setLastTickPos(Vec3 pos) {
+        entity.lastTickPosX = pos.getX();
+        entity.lastTickPosY = pos.getY();
+        entity.lastTickPosZ = pos.getZ();
     }
 
     /**
@@ -146,9 +146,9 @@ public class EntityUtil implements Helper {
      *
      * @param rotations New position
      */
-    public void setRotations(Vec2f rotations) {
-        entity.rotationYaw = rotations.x;
-        entity.rotationPitch = rotations.y;
+    public void setRotations(Vec2 rotations) {
+        entity.rotationYaw = rotations.getX();
+        entity.rotationPitch = rotations.getY();
     }
 
     /**
@@ -158,9 +158,9 @@ public class EntityUtil implements Helper {
      *
      * @param rotations New position
      */
-    public void setPrevRotations(Vec2f rotations) {
-        entity.prevRotationYaw = rotations.x;
-        entity.prevRotationPitch = rotations.y;
+    public void setPrevRotations(Vec2 rotations) {
+        entity.prevRotationYaw = rotations.getX();
+        entity.prevRotationPitch = rotations.getY();
     }
 
     /**
@@ -170,8 +170,8 @@ public class EntityUtil implements Helper {
      *
      * @return Position as a {@code Vec3d}
      */
-    public Vec3d getPos() {
-        return new Vec3d(entity.posX, entity.posY, entity.posZ);
+    public Vec3 getPos() {
+        return new Vec3(entity.posX, entity.posY, entity.posZ);
     }
 
     /**
@@ -181,8 +181,8 @@ public class EntityUtil implements Helper {
      *
      * @return Previous position as a {@code Vec3d}
      */
-    public Vec3d getPrevPos() {
-        return new Vec3d(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
+    public Vec3 getPrevPos() {
+        return new Vec3(entity.prevPosX, entity.prevPosY, entity.prevPosZ);
     }
 
     /**
@@ -192,8 +192,8 @@ public class EntityUtil implements Helper {
      *
      * @return Last tick position as a {@code Vec3d}
      */
-    public Vec3d getLastTickPos() {
-        return new Vec3d(entity.lastTickPosX, entity.lastTickPosY, entity.lastTickPosZ);
+    public Vec3 getLastTickPos() {
+        return new Vec3(entity.lastTickPosX, entity.lastTickPosY, entity.lastTickPosZ);
     }
 
     /**
@@ -205,8 +205,8 @@ public class EntityUtil implements Helper {
      * @param ticks Time in ticks predicted
      * @return The predicted position
      */
-    public Vec3d predictPos(int ticks) {
-        return getPos().add(getPos().subtract(getLastTickPos()).scale(ticks));
+    public Vec3 predictPos(int ticks) {
+        return getPos().add(getPos().sub(getLastTickPos()).scale(ticks));
     }
 
     /**
@@ -216,8 +216,8 @@ public class EntityUtil implements Helper {
      *
      * @return Rotations as a {@code Vec2f}
      */
-    public Vec2f getRotations() {
-        return new Vec2f(entity.rotationYaw, entity.rotationPitch);
+    public Vec2 getRotations() {
+        return new Vec2(entity.rotationYaw, entity.rotationPitch);
     }
 
     /**
@@ -227,8 +227,8 @@ public class EntityUtil implements Helper {
      *
      * @return Previous rotations as a {@code Vec2f}
      */
-    public Vec2f getPrevRotations() {
-        return new Vec2f(entity.prevRotationYaw, entity.prevRotationPitch);
+    public Vec2 getPrevRotations() {
+        return new Vec2(entity.prevRotationYaw, entity.prevRotationPitch);
     }
 
     /**
