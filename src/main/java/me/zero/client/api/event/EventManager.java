@@ -2,7 +2,9 @@ package me.zero.client.api.event;
 
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -34,16 +36,16 @@ public final class EventManager {
      * form of {@code Listeners}
      *
      * @see me.zero.client.api.event.Listener
-     * @see #subscribe(Object, Method)
+     * @see #subscribe(Object, Field)
      *
      * @since 1.0
      *
      * @param object The object containing possible Event Methods
      */
     public static void subscribe(Object object) {
-        for (Method method : object.getClass().getDeclaredMethods())
-            if (isValidMethod(method))
-                subscribe(object, method);
+        for (Field field : object.getClass().getDeclaredFields())
+            if (isValidField(field))
+                subscribe(object, field);
     }
 
     /**
@@ -56,18 +58,13 @@ public final class EventManager {
      * @since 1.0
      *
      * @param object Parent object
-     * @param method Event method
+     * @param field Listener field
      */
-    private static void subscribe(Object object, Method method) {
-        Class<?> eventClass = method.getParameterTypes()[0];
-        EventHandler eventHandler = method.getAnnotation(EventHandler.class);
-        Listener listener = new Listener(eventClass, object, method, eventHandler.value());
+    private static void subscribe(Object object, Field field) {
+        Listener listener = (Listener) ReflectionUtils.getField(object, field);
 
         if (listener.getPriority() > EventPriority.LOWEST || listener.getPriority() < EventPriority.HIGHEST)
             throw new UnexpectedOutcomeException("Event Priority out of bounds! %s");
-
-        if (!method.isAccessible())
-            method.setAccessible(true);
 
         subscribe(listener);
     }
@@ -109,11 +106,16 @@ public final class EventManager {
      * @param object
      */
     public static void unsubscribe(Object object) {
+        List<Listener> objectListeners = new ArrayList<>();
+        for (Field field : object.getClass().getDeclaredFields())
+            if (isValidField(field))
+                objectListeners.add((Listener) ReflectionUtils.getField(object, field));
+
         for (Class<?> eventClass : SUBSCRIPTION_MAP.keySet()) {
             List<Listener> listeners = SUBSCRIPTION_MAP.get(eventClass);
             eventBuffer.clear();
             for (Listener listener : listeners) {
-                if (!listener.getParent().equals(object)) {
+                if (!objectListeners.contains(listener)) {
                     eventBuffer.add(listener);
                 }
             }
@@ -122,19 +124,19 @@ public final class EventManager {
     }
 
     /**
-     * Checks if a Method is a valid Event Handler method.
-     * Done by checking the parameter count and presence
+     * Checks if a Field is a valid Event Handler field.
+     * Done by checking the field type and presence
      * of the {@code EventHandler} annotation;
      *
      * @see me.zero.client.api.event.EventHandler
      *
      * @since 1.0
      *
-     * @param method Method being checked
-     * @return Whether or not the Method is valid
+     * @param field Field being checked
+     * @return Whether or not the Field is valid
      */
-    private static boolean isValidMethod(Method method) {
-        return method.isAnnotationPresent(EventHandler.class) && method.getParameterTypes().length == 1;
+    private static boolean isValidField(Field field) {
+        return field.isAnnotationPresent(EventHandler.class) && field.getType() == Listener.class;
     }
 
     /**
