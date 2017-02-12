@@ -1,6 +1,7 @@
 package me.zero.client.api.value;
 
 import me.zero.client.api.util.ReflectionUtils;
+import me.zero.client.api.util.interfaces.Nameable;
 
 import java.lang.reflect.Field;
 
@@ -13,12 +14,17 @@ import java.lang.reflect.Field;
  *
  * Created by Brady on 1/23/2017.
  */
-public class Value<T> implements IValue<T> {
+public class Value<T> implements IValue<T>, Nameable {
 
     /**
      * Name of the Value
      */
     private String name;
+
+    /**
+     * Description of the Value
+     */
+    private String description;
 
     /**
      * The Object that the field representing the Value is inside
@@ -30,7 +36,7 @@ public class Value<T> implements IValue<T> {
      */
     private Field field;
 
-    public Value(String name, Object object, Field field) {
+    public Value(String name, String description, Object object, Field field) {
         this.name = name;
         this.object = object;
         this.field = field;
@@ -47,12 +53,13 @@ public class Value<T> implements IValue<T> {
         ReflectionUtils.setField(object, field, value);
     }
 
-    /**
-     * @since 1.0
-     *
-     * @return The name of the value
-     */
+    @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 }

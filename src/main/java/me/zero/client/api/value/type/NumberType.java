@@ -26,8 +26,10 @@ public class NumberType<T extends Number> extends Value<T> {
      */
     private T maximum;
 
-    public NumberType(String name, Object object, Field field, T minimum, T maximum) {
-        super(name, object, field);
+    public NumberType(String name, String description, Object object, Field field, T minimum, T maximum) {
+        super(name, description, object, field);
+        this.minimum = minimum;
+        this.maximum = maximum;
     }
 
     @Override

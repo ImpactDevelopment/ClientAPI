@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
  */
 public class StringType extends Value<String> {
 
-    public StringType(String name, Object object, Field field) {
-        super(name, object, field);
+    public StringType(String name, String description, Object object, Field field) {
+        super(name, description, object, field);
     }
 }
