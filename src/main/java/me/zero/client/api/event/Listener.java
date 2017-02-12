@@ -1,11 +1,13 @@
 package me.zero.client.api.event;
 
-import me.zero.client.api.util.Messages;
-import me.zero.client.api.util.logger.Level;
-import me.zero.client.api.util.logger.Logger;
+import me.zero.client.api.event.type.EventPriority;
+import net.jodah.typetools.TypeResolver;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Used to contain event method data
@@ -14,61 +16,42 @@ import java.lang.reflect.Method;
  *
  * Created by Brady on 1/21/2017.
  */
-final class Listener implements IListener {
+public final class Listener<T> implements EventHook<T> {
 
     /**
-     * Event Class
+     * Class representation of the Event being
+     * listened for.
      */
-    private Class<?> target;
+    private Class<T> target;
 
     /**
-     * Object that Method is contained within
+     * The hook for this Listener
      */
-    private Object parent;
-
-    /**
-     * The method itself
-     */
-    private Method method;
+    private EventHook hook;
 
     /**
      * Priority of Listener
      */
     private byte priority;
 
-    Listener(Class<?> target, Object parent, Method method, byte priority) {
-        this.target = target;
-        this.parent = parent;
-        this.method = method;
+    public Listener(EventHook<T> hook) {
+        this(hook, EventPriority.DEFAULT);
+    }
+
+    @SuppressWarnings("unchecked")
+    public Listener(EventHook<T> hook, byte priority) {
+        this.hook = hook;
         this.priority = priority;
+        this.target = (Class<T>) TypeResolver.resolveRawArguments(EventHook.class, hook.getClass())[0];
     }
 
     /**
      * @since 1.0
      *
-     * @return Class that belongs to the Event that is being listened for
+     * @return The class of T
      */
-    @Override
-    public Class<?> getTarget() {
+    public final Class<T> getTarget() {
         return this.target;
-    }
-
-    /**
-     * @since 1.0
-     *
-     * @return Parent, Object that contains the method
-     */
-    Object getParent() {
-        return this.parent;
-    }
-
-    /**
-     * @since 1.0
-     *
-     * @return Method that is waiting for an event to be passed down
-     */
-    Method getMethod() {
-        return method;
     }
 
     /**
@@ -76,8 +59,7 @@ final class Listener implements IListener {
      *
      * @return Priority of Listener
      */
-    @Override
-    public byte getPriority() {
+    public final byte getPriority() {
         return priority;
     }
 
@@ -90,11 +72,7 @@ final class Listener implements IListener {
      * @param event Event being called
      */
     @Override
-    public void invoke(Object event) {
-        try {
-            method.invoke(parent, event);
-        } catch (InvocationTargetException | IllegalAccessException | IllegalArgumentException e) {
-            Logger.instance.logf(Level.WARNING, Messages.EVENT_UNABLE_CALL, event);
-        }
+    public final void invoke(T event) {
+        this.hook.invoke(event);
     }
 }

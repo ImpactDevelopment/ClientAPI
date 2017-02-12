@@ -17,11 +17,5 @@ import java.lang.annotation.Target;
  * Created by Brady on 1/21/2017.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface EventHandler {
-
-    /**
-     * @return The priority of the Event
-     */
-    byte value() default EventPriority.DEFAULT;
-}
+@Target(ElementType.FIELD)
+public @interface EventHandler {}

@@ -1,6 +1,7 @@
 package me.zero.example.mod.mods;
 
 import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.UpdateEvent;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
@@ -14,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 public class Fly extends Module implements IMovement {
 
     @EventHandler
-    public void onUpdate(UpdateEvent event) {
+    private Listener<UpdateEvent> updateListener = new Listener<>(event -> {
         mc.player.motionY = new Boolean(mc.gameSettings.keyBindJump.isKeyDown()).compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2;
-    }
+    });
 }
