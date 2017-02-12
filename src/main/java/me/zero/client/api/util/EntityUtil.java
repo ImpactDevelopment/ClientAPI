@@ -46,12 +46,16 @@ public class EntityUtil implements Helper {
      * @return The entityutil
      */
     public static EntityUtil get(Entity entity) {
+        return new EntityUtil(entity);
+
+        /*
         EntityUtil util = utils.get(entity);
         if (util != null)
             return util;
         utils.put(entity, new EntityUtil(entity));
         cleanUp();
         return get(entity);
+         */
     }
 
     /**
