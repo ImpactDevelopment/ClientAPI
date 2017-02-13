@@ -34,7 +34,7 @@ public interface MCMappings {
     ClassReference WorldClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.WorldClient"), from(VANILLA, "bnq") });
     ClassReference Profiler = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.profiler.Profiler"), from(VANILLA, "bqe") });
     ClassReference GuiNewChat = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiNewChat"), from(VANILLA, "bfn") });
-    ClassReference ITextComponent = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.text"), from(VANILLA, "fb") });
+    ClassReference ITextComponent = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.text.ITextComponent"), from(VANILLA, "fb") });
     ClassReference EntityRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.EntityRenderer"), from(VANILLA, "bqe") });
 
     // Methods
