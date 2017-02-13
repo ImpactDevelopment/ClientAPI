@@ -4,11 +4,11 @@ import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import javassist.bytecode.Descriptor;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.load.inject.transformer.ITransformer;
 import me.zero.client.load.inject.transformer.LoadTransformer;
 import me.zero.client.load.inject.transformer.Transformer;
-import me.zero.client.load.inject.transformer.defaults.*;
 import me.zero.client.load.inject.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
@@ -62,27 +62,11 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        final String className = transformedName.replaceAll("/", ".");
-
-        List<ITransformer> valid = transformers.stream().filter(transformer -> {
-            for (ClassReference target : transformer.getTargetClasses()) {
-                if (target.getName().equalsIgnoreCase(className))
-                    return true;
-            }
-            return false;
-        }).collect(Collectors.toList());
-
+        String className = Descriptor.toJavaName(transformedName);
+        List<ITransformer> valid = getTransformers(className);
         if (!valid.isEmpty()) {
             try {
-                CtClass ctClass = ClassPool.getDefault().get(className);
-
-                valid.forEach(transformer -> {
-                    Logger.instance.logf(Level.INFO, Messages.TRANSFORM, className, transformer.getClass().getCanonicalName());
-                    transformer.transform(ctClass);
-                });
-
-                return ctClass.toBytecode();
-
+                return this.transform(ClassPool.getDefault().get(className), valid);
             } catch (CannotCompileException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_CANNOT_COMPILE, className);
             } catch (IOException e) {
@@ -93,5 +77,70 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         }
 
         return basicClass;
+    }
+
+    /**
+     * Sets up the ClassPool for the next transformer
+     *
+     * @since 1.0
+     *
+     * @param transformer The transformer
+     */
+    private void setup(ITransformer transformer) {
+        List<String> imports = new ArrayList<>();
+        transformer.loadImports(imports);
+        this.loadDefaultImports(imports);
+        imports.forEach(ClassPool.getDefault()::importPackage);
+    }
+
+    /**
+     * Gets the transformers that are targeting
+     * the specified class name.
+     *
+     * @since 1.0
+     *
+     * @param className The class name
+     */
+    private List<ITransformer> getTransformers(String className) {
+        return transformers.stream().filter(transformer -> {
+            for (ClassReference target : transformer.getTargetClasses())
+                if (target.getName().equalsIgnoreCase(className))
+                    return true;
+            return false;
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * Transforms the specified class with
+     * the specified list of transformers.
+     *
+     * @since 1.0
+     *
+     * @param ctClass The CtClass being transformed
+     * @param transformers The transformers being used
+     * @return The transformed class, represented as bytecode
+     */
+    private byte[] transform(CtClass ctClass, List<ITransformer> transformers) throws CannotCompileException, IOException {
+        transformers.forEach(transformer -> {
+            this.setup(transformer);
+            Logger.instance.logf(Level.INFO, Messages.TRANSFORM, ctClass.getName(), transformer.getClass().getCanonicalName());
+            transformer.transform(ctClass);
+        });
+        return ctClass.toBytecode();
+    }
+
+
+    /**
+     * Loads any imports that're going to be used for
+     * a large majority of the transformers.
+     *
+     * @since 1.0
+     *
+     * @param imports The list being appended to
+     */
+    private void loadDefaultImports(List<String> imports) {
+        imports.add("me.zero.client.api.event");
+        imports.add("me.zero.client.api.event.type");
+        imports.add("me.zero.client.api.event.defaults");
     }
 }
