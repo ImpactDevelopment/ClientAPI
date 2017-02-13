@@ -1,4 +1,4 @@
-package me.zero.client.load.inject.transformer;
+package me.zero.client.api.util;
 
 import me.zero.client.load.inject.transformer.reference.ClassReference;
 import me.zero.client.load.inject.transformer.reference.MethodReference;

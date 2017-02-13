@@ -6,11 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Put on transformers to ensure loading.
- *
- * Only used within clients to tag classes
- * that extend Transformer. Just a way of
- * "registering" the transformers.
+ * Annotation is put on transformer classes
+ * to ensure that they get loaded.
  *
  * @since 1.0
  *

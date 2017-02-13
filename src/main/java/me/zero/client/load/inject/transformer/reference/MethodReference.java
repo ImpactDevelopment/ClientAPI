@@ -4,7 +4,7 @@ import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import me.zero.client.load.inject.transformer.hook.ClassHook;
-import me.zero.client.load.inject.transformer.MethodDescriptorBuilder;
+import me.zero.client.api.util.MethodDescriptorBuilder;
 import me.zero.client.load.inject.transformer.hook.MethodHook;
 import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName;
 
