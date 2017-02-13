@@ -32,11 +32,6 @@ public abstract class Transformer implements ITransformer {
      */
     @Override
     public final void transform(CtClass ctClass) {
-        List<String> imports = new ArrayList<>();
-        this.loadImports(imports);
-        this.loadDefaultImports(imports);
-        imports.forEach(ClassPool.getDefault()::importPackage);
-
         List<ClassHook> hooks = new ArrayList<>();
         this.loadHooks(hooks);
         hooks.forEach(hook -> {
@@ -55,22 +50,8 @@ public abstract class Transformer implements ITransformer {
      * ITransformer so that any classes extending this
      * are not required to have any extra imports.
      *
-     * Only here to clean things up
+     * Only here to clean things up.
      */
     @Override
     public void loadImports(List<String> imports) {}
-
-    /**
-     * Loads any imports that're going to be used for
-     * a large majority of the transformers.
-     *
-     * @since 1.0
-     *
-     * @param imports The list being appended to
-     */
-    private void loadDefaultImports(List<String> imports) {
-        imports.add("me.zero.client.api.event");
-        imports.add("me.zero.client.api.event.type");
-        imports.add("me.zero.client.api.event.defaults");
-    }
 }
