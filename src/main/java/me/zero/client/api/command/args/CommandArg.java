@@ -1,7 +1,7 @@
 package me.zero.client.api.command.args;
 
 /**
- *
+ * Represents an argument
  *
  * @since 1.0
  *
