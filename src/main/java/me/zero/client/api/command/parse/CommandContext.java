@@ -33,12 +33,13 @@ public class CommandContext {
     }
 
     /**
-     * Checks if there is an argument corresponding with the specified label.
+     * Checks if there is a value corresponding with the argument
+     * associated with the specified label.
      *
      * @since 1.0
      *
      * @param label The label
-     * @return
+     * @return True if there is a value, false if not
      */
     public boolean hasArg(String label) {
         return get(label) != null;
@@ -50,7 +51,7 @@ public class CommandContext {
      * @since 1.0
      *
      * @param label The label
-     * @return
+     * @return The CommandArg from the label
      */
     private CommandArg<?> getArg(String label) {
         List<CommandArg<?>> list = arguments.stream().filter(arg -> arg.getLabel().equalsIgnoreCase(label)).collect(Collectors.toList());
@@ -91,7 +92,7 @@ public class CommandContext {
     public boolean isComplete() {
         lastBadSyntax.clear();
         for (CommandArg<?> arg : arguments)
-            if (get(arg.getLabel()) == null)
+            if (!hasArg(arg.getLabel()))
                 lastBadSyntax.add(String.format("Missing required argument: %s, with type %s", arg.getLabel(), arg.getType()));
 
         return lastBadSyntax.size() <= 0;
