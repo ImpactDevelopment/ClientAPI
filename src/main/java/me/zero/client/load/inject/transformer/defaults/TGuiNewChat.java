@@ -21,7 +21,7 @@ public final class TGuiNewChat extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {
-        hooks.add(printChatMessageWithOptionalDeletion.createHook(method -> method.insertBefore("EventManager.post(new ChatEvent($1, ChatEvent.TYPE.RECEIVE));")));
+        hooks.add(printChatMessageWithOptionalDeletion.createHook(method -> method.insertBefore("EventManager.post(new ChatEvent($1, ChatEvent.Type.RECEIVE));")));
     }
 
     @Override
