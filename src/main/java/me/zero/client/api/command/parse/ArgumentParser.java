@@ -1,4 +1,4 @@
-package me.zero.client.api.command.args;
+package me.zero.client.api.command.parse;
 
 import me.zero.client.api.util.interfaces.Parser;
 
