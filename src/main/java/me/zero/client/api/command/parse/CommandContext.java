@@ -54,10 +54,7 @@ public class CommandContext {
      * @return The CommandArg from the label
      */
     private CommandArg<?> getArg(String label) {
-        List<CommandArg<?>> list = arguments.stream().filter(arg -> arg.getLabel().equalsIgnoreCase(label)).collect(Collectors.toList());
-        if (list.size() > 0)
-            return list.get(0);
-        return null;
+        return arguments.stream().filter(arg -> arg.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
     }
 
     /**

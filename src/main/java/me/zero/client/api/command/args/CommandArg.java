@@ -1,5 +1,7 @@
 package me.zero.client.api.command.args;
 
+import me.zero.client.api.command.parse.ArgumentParser;
+
 /**
  * Represents an argument
  *
