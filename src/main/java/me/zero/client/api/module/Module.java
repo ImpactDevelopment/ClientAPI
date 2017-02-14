@@ -6,6 +6,8 @@ import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 
+import java.util.Arrays;
+
 /**
  * The base for all cheats
  *
@@ -62,12 +64,10 @@ public abstract class Module implements IModule, Helper {
                 @Override
                 public void onRelease() {}
             };
-
-            this.type = "Default";
-
-            for (Class<?> c : this.getClass().getInterfaces())
-                if (c.isAnnotationPresent(Category.class))
-                    this.type = c.getAnnotation(Category.class).name();
+            this.type = Arrays.stream(this.getClass().getInterfaces())
+                    .filter(c -> c.isAnnotationPresent(Category.class))
+                    .findFirst().orElse(Default.class)
+                    .getAnnotation(Category.class).name();
         } else {
             throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
         }
@@ -118,4 +118,7 @@ public abstract class Module implements IModule, Helper {
     public final Keybind getBind() {
         return this.bind;
     }
+
+    @Category(name = "Default")
+    private class Default {}
 }

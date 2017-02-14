@@ -10,6 +10,7 @@ import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationN
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
