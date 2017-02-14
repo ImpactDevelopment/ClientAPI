@@ -4,8 +4,8 @@ import me.zero.client.api.command.Command;
 import me.zero.client.api.command.args.CommandArg;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static me.zero.client.api.util.Messages.COMMAND_MISSING_ARGS;
 
 /**
  * Used to handle command parsing
@@ -17,19 +17,13 @@ import java.util.stream.Stream;
 public class CommandContext {
 
     private List<CommandArg<?>> arguments = new ArrayList<>();
-    private Map<String, Object> keys = new HashMap<>();
-
     private List<String> lastBadSyntax = new ArrayList<>();
-
-    private String message;
     private String[] args;
 
     @SuppressWarnings("unchecked")
-    public CommandContext(String messasge, String[] args, Command command) {
-        this.arguments = Arrays.asList(command.arguments());
-        this.message = message;
+    public CommandContext(Command command, String[] args) {
         this.args = args;
-
+        this.arguments = Arrays.asList(command.arguments());
     }
 
     /**
@@ -88,9 +82,8 @@ public class CommandContext {
      */
     public boolean isComplete() {
         lastBadSyntax.clear();
-        for (CommandArg<?> arg : arguments)
-            if (!hasArg(arg.getLabel()))
-                lastBadSyntax.add(String.format("Missing required argument: %s, with type %s", arg.getLabel(), arg.getType()));
+        arguments.stream().filter(arg -> !hasArg(arg.getLabel()))
+                .forEach(arg -> lastBadSyntax.add(String.format(COMMAND_MISSING_ARGS, arg.getLabel(), arg.getType())));
 
         return lastBadSyntax.size() <= 0;
     }

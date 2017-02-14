@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -54,12 +55,12 @@ public class PluginLoader {
 
         if (!dir.isDirectory()) return;
 
-        for (File file : dir.listFiles()) {
+        Arrays.stream(dir.listFiles()).forEach(file -> {
             if (file.getAbsolutePath().endsWith(".jar")) {
                 loadPlugin(file);
                 Logger.instance.logf(Level.INFO, Messages.PLUGIN_LOAD, file.getAbsolutePath());
             }
-        }
+        });
     }
 
     /**

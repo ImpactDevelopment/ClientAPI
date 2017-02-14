@@ -95,12 +95,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SuppressWarnings("unchecked")
     public final <I extends T> I get(Class<I> clazz) {
-        for (T data : getData()) {
-            if (data.getClass().equals(clazz)) {
-                return (I) data;
-            }
-        }
-        return null;
+        return (I) getData().stream().filter(data -> data.getClass().equals(clazz)).findFirst().orElse(null);
     }
 
     /**

@@ -1,10 +1,13 @@
 package me.zero.client.api;
 
+import me.zero.client.api.command.Command;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.manage.Manager;
 import me.zero.client.api.module.Module;
 import me.zero.client.api.module.plugin.Plugin;
 import me.zero.client.api.module.plugin.PluginLoader;
+import me.zero.client.api.util.interfaces.Helper;
+import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,7 @@ import java.util.List;
  *
  * Created by Brady on 1/25/2017.
  */
-class ClientBase {
+class ClientBase implements Helper {
 
     /**
      * Info of the Client
@@ -22,9 +25,19 @@ class ClientBase {
     private ClientInfo info;
 
     /**
+     * The Message Prefix
+     */
+    private String prefix;
+
+    /**
      * The Module Manager
      */
     private Manager<Module> moduleManager;
+
+    /**
+     * The Command Manager
+     */
+    private Manager<Command> commandManager;
 
     /**
      * The list of plugin loaders that have been used by this client
@@ -32,8 +45,7 @@ class ClientBase {
     private List<PluginLoader> pluginLoaders = new ArrayList<>();
 
     /**
-     * Sets the info, only works if the
-     * current info is null
+     * Sets the info, only works if the current info is null
      *
      * @since 1.0
      *
@@ -51,6 +63,27 @@ class ClientBase {
      */
     public ClientInfo getInfo() {
         return this.info;
+    }
+
+    /**
+     * Sets the prefix, only set if it hasn't been set yet
+     *
+     * @since 1.0
+     *
+     * @param prefix The prefix being set
+     */
+    public void setPrefix(String prefix) {
+        if (this.prefix != null) return;
+        this.prefix = prefix;
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The prefix
+     */
+    public String getPrefix() {
+        return this.prefix;
     }
 
     /**
@@ -93,6 +126,45 @@ class ClientBase {
     }
 
     /**
+     * Sets the Command Manager, it will
+     * only be set if the commandManager is null.
+     *
+     * @since 1.0
+     *
+     * @param commandManager The Module Manager
+     */
+    protected void setCommandManager(Manager<Command> commandManager) {
+        if (this.commandManager != null) return;
+        this.commandManager = commandManager;
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The Command Manager
+     */
+    public Manager<Command> getCommandManager() {
+        if (this.commandManager == null)
+            throw new ActionNotValidException("Command Manager has not yet been initialized");
+
+        return this.commandManager;
+    }
+
+    /**
+     * Returns the command manager casted to the specified type
+     *
+     * @param impl The class of the implementation
+     *
+     * @since 1.0
+     *
+     * @return The Command Manager casted to this Client's implementation
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends Manager<Command>> T getCommandManager(Class<T> impl) {
+        return (T) this.commandManager;
+    }
+
+    /**
      * Creates and registers a PluginLoader from the specified directory
      *
      * @since 1.0
@@ -130,5 +202,17 @@ class ClientBase {
         List<Plugin> plugins = new ArrayList<>();
         this.pluginLoaders.forEach(loader -> plugins.addAll(loader.getPlugins()));
         return plugins;
+    }
+
+    /**
+     * Prints a chat message
+     *
+     * @since 1.0
+     *
+     * @param message The message
+     */
+    // TODO: Create a chat builder and change "message" to it
+    public void printChatMessage(String message) {
+        mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(prefix + " " + message));
     }
 }
