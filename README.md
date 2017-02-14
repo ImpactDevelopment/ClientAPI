@@ -2,7 +2,7 @@
 API designed to make Clients have Universal Support
 
 [![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
-[![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/releases)
 
 ## Concept
