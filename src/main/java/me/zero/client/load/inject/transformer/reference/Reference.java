@@ -4,6 +4,8 @@ import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation;
 import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName;
 
+import java.util.Arrays;
+
 /**
  * The base for References
  *
@@ -57,11 +59,9 @@ public abstract class Reference {
      * @return
      */
     public final String getName(Obfuscation obfuscation) {
-        for (ObfuscationName name : this.getNames()) {
-            if (name.getType() == obfuscation) {
-                return name.getName();
-            }
-        }
-        throw new UnexpectedOutcomeException("Name not found for Obfuscation state");
+        String name = Arrays.stream(this.getNames()).filter(obfName -> obfName.getType() == obfuscation).findFirst().orElse(null).getName();
+        if (name == null)
+            throw new UnexpectedOutcomeException("Name not found for Obfuscation state");
+        return name;
     }
 }

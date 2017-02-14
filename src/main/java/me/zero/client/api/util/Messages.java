@@ -3,7 +3,9 @@ package me.zero.client.api.util;
 import me.zero.client.api.util.logger.Level;
 
 /**
- * Storage for all Messages used by the Logger's logf method.
+ * Storage for all Messages used by the Logger's logf method
+ * as well as some generic messages sent to the client from
+ * the api.
  *
  * @see me.zero.client.api.util.logger.ILogger#logf(Level, String, Object...)
  *
@@ -26,4 +28,6 @@ public interface Messages {
     String PLUGIN_CANT_CREATE_MODULE           = "Unable to create Module, %s";
     String PLUGIN_CANT_LOAD_CLASS              = "Unable to load Class, %s";
     String PLUGIN_CANT_CREATE_INPUTSTREAM      = "Unable to create jar InputStream, %s";
+
+    String COMMAND_MISSING_ARGS                = "Missing required argument: %s, with type %s";
 }

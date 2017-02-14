@@ -1,5 +1,7 @@
 package me.zero.client.api.command;
 
+import me.zero.client.api.command.parse.CommandContext;
+
 /**
  * An executor for a Command
  *
@@ -9,5 +11,5 @@ package me.zero.client.api.command;
  */
 interface CommandExecutor {
 
-    void execute(String message, String[] args);
+    void execute(CommandContext context);
 }

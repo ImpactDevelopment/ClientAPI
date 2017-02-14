@@ -3,6 +3,7 @@ package me.zero.client.api.event;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ReflectionUtils;
+import net.minecraft.network.play.server.SPacketCombatEvent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -43,9 +44,9 @@ public final class EventManager {
      * @param object The object containing possible Event Methods
      */
     public static void subscribe(Object object) {
-        for (Field field : object.getClass().getDeclaredFields())
-            if (isValidField(field))
-                subscribe(object, field);
+        Arrays.stream(object.getClass().getDeclaredFields())
+                .filter(EventManager::isValidField)
+                .forEach(field -> subscribe(object, field));
     }
 
     /**
@@ -103,24 +104,21 @@ public final class EventManager {
      *
      * @since 1.0
      *
-     * @param object
+     * @param object The object being unsubscribed
      */
     public static void unsubscribe(Object object) {
         List<Listener> objectListeners = new ArrayList<>();
-        for (Field field : object.getClass().getDeclaredFields())
-            if (isValidField(field))
-                objectListeners.add((Listener) ReflectionUtils.getField(object, field));
 
-        for (Class<?> eventClass : SUBSCRIPTION_MAP.keySet()) {
+        Arrays.stream(object.getClass().getDeclaredFields())
+                .filter(EventManager::isValidField)
+                .forEach(field -> objectListeners.add((Listener) ReflectionUtils.getField(object, field)));
+
+        SUBSCRIPTION_MAP.keySet().forEach(eventClass -> {
             List<Listener> listeners = SUBSCRIPTION_MAP.get(eventClass);
             eventBuffer.clear();
-            for (Listener listener : listeners) {
-                if (!objectListeners.contains(listener)) {
-                    eventBuffer.add(listener);
-                }
-            }
+            listeners.stream().filter(listener -> !objectListeners.contains(listener)).forEach(eventBuffer::add);
             SUBSCRIPTION_MAP.put(eventClass, new ArrayList<>(eventBuffer));
-        }
+        });
     }
 
     /**
