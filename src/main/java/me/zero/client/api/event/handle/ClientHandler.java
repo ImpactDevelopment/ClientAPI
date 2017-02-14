@@ -34,14 +34,12 @@ public final class ClientHandler implements Helper {
     }
 
     @EventHandler
-    private Listener<Render2DEvent> render2DListener = new Listener<>(event -> {
-        CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks()));
-    });
+    private Listener<Render2DEvent> render2DListener = new Listener<>(event ->
+        CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())));
 
     @EventHandler
-    private Listener<KeyEvent> keyListener = new Listener<>(event -> {
-        Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick);
-    });
+    private Listener<KeyEvent> keyListener = new Listener<>(event ->
+        Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
 
     @EventHandler
     private Listener<TickEvent> tickListener = new Listener<>(event -> {

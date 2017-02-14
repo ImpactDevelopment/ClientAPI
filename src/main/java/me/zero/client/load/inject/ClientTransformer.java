@@ -49,15 +49,14 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
 
         // Load Default Transformers
-        Reflections reflections = new Reflections("me.zero.client.load.inject.transformer.defaults");
-        for (Class<? extends Transformer> transformer : reflections.getSubTypesOf(Transformer.class)) {
-            if (!transformer.isAnnotationPresent(LoadTransformer.class)) continue;
+        new Reflections("me.zero.client.load.inject.transformer.defaults")
+                .getSubTypesOf(Transformer.class).forEach(transformer -> {
             try {
                 this.transformers.add(transformer.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_INSTANTIATION, transformer);
             }
-        }
+        });
     }
 
     @Override
