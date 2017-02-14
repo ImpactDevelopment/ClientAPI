@@ -7,7 +7,7 @@ package me.zero.client.api.util.interfaces;
  *
  * Created by Brady on 2/13/2017.
  */
-public interface Parser<F, T> {
+public interface Parser<F, T> extends Helper {
 
     /**
      * Parses from a type to another type
