@@ -29,5 +29,8 @@ public interface Messages {
     String PLUGIN_CANT_LOAD_CLASS              = "Unable to load Class, %s";
     String PLUGIN_CANT_CREATE_INPUTSTREAM      = "Unable to create jar InputStream, %s";
 
+    String CLIENT_INSTANTIATION                = "Unable to instantiate Client, %s";
+    String CLIENT_NOT_FOUND                    = "Unable to find Client Class, %s";
+
     String COMMAND_MISSING_ARGS                = "Missing required argument: %s, with type %s";
 }

@@ -1,13 +1,13 @@
-package me.zero.client.load.inject.transformer.defaults;
+package me.zero.client.load.transformer.defaults;
 
-import me.zero.client.load.inject.transformer.LoadTransformer;
-import me.zero.client.load.inject.transformer.Transformer;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.LoadTransformer;
+import me.zero.client.load.transformer.Transformer;
+import me.zero.client.load.transformer.hook.ClassHook;
+import me.zero.client.load.transformer.reference.ClassReference;
 
 import java.util.List;
 
-import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.*;
+import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
  * Creates a hook for the Render 2D Event

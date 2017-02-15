@@ -15,38 +15,6 @@ import java.util.List;
 public class ClientUtils {
 
     /**
-     * Gets the ClientPath from the List of Arguments
-     *
-     * @since 1.0
-     *
-     * @param args The arguments
-     * @return The ClientPath
-     */
-    public static String getClientPath(String[] args) {
-        return ClientUtils.getClientPath(Arrays.asList(args));
-    }
-
-    /**
-     * Gets the ClientPath from the List of Arguments
-     *
-     * @since 1.0
-     *
-     * @param args The arguments
-     * @return The ClientPath
-     */
-    public static String getClientPath(List<String> args) {
-        for (String arg : args) {
-            if (arg.equalsIgnoreCase("--clientPath")) {
-                int i = args.indexOf(arg) + 1;
-                if (i > 0 && i < args.size()) {
-                    return args.get(i);
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
      * Concatenates an array of generic arrays
      *
      * @since 1.0

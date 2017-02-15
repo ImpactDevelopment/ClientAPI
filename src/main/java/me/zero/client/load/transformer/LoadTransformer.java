@@ -1,4 +1,4 @@
-package me.zero.client.load.inject.transformer;
+package me.zero.client.load.transformer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

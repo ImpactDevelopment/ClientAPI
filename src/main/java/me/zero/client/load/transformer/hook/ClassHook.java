@@ -1,4 +1,4 @@
-package me.zero.client.load.inject.transformer.hook;
+package me.zero.client.load.transformer.hook;
 
 import javassist.CannotCompileException;
 import javassist.CtClass;
@@ -7,7 +7,7 @@ import javassist.NotFoundException;
 /**
  * Used in transformers to hook classes
  *
- * @see me.zero.client.load.inject.transformer.hook.MethodHook
+ * @see me.zero.client.load.transformer.hook.MethodHook
  *
  * @since 1.0
  *

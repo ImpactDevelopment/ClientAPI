@@ -1,13 +1,13 @@
-package me.zero.client.load.inject.transformer.defaults;
+package me.zero.client.load.transformer.defaults;
 
-import me.zero.client.load.inject.transformer.LoadTransformer;
-import me.zero.client.load.inject.transformer.Transformer;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.LoadTransformer;
+import me.zero.client.load.transformer.Transformer;
+import me.zero.client.load.transformer.hook.ClassHook;
+import me.zero.client.load.transformer.reference.ClassReference;
 
 import java.util.List;
 
-import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.*;
+import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
  * Used to patch the Camera FOV modifier
@@ -17,7 +17,7 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMap
  * Created by Brady on 2/11/2017.
  */
 @LoadTransformer
-public class TEntityRenderer extends Transformer {
+public final class TEntityRenderer extends Transformer {
 
     @Override
     public void loadHooks(List<ClassHook> hooks) {

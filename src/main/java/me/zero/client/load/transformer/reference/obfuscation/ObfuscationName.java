@@ -1,4 +1,4 @@
-package me.zero.client.load.inject.transformer.reference.obfuscation;
+package me.zero.client.load.transformer.reference.obfuscation;
 
 /**
  * An Object to pair a name with a type of Obfuscation
