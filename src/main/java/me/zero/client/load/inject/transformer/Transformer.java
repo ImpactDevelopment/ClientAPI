@@ -1,13 +1,12 @@
 package me.zero.client.load.inject.transformer;
 
 import javassist.CannotCompileException;
-import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
+import me.zero.client.load.inject.transformer.hook.ClassHook;
 
 import java.util.ArrayList;
 import java.util.List;
