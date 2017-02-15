@@ -5,16 +5,13 @@ API designed to make Clients have Universal Support
 [![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/releases)
 
+## Development Kit
+To use the Client API, you must download [Development Kit](https://github.com/ZeroMemes/ClientAPI-CDK). Instructions on how to set it up will be posted in the README.
+
 ## Concept
 * Clients will be stored in a "Clients" folder inside of ".minecraft"
 * To launch a client, you run the "ClientAPI Launcher" and choose the desired Client
 * Minecraft will automatically open with the Client running
 
-## Planned Features
-* Fully functional Event, Management, and Value system.
-* Tab GUI and Click GUI API
-* Module data storage
-* Halfpetal's [CapesAPI](https://github.com/halfpetal/CapesAPI) integration
-
 ## Usage
-Refer to the [Example](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/) to view how to make a Client using the ClientAPI
+Refer to the [Example](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/) to view how clients using the ClientAPI are structured.
