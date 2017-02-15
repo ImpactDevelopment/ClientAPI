@@ -1,6 +1,5 @@
 package me.zero.client.api.event.handle;
 
-import com.sun.javafx.property.adapter.PropertyDescriptor;
 import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.Listener;
@@ -10,7 +9,6 @@ import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.camera.CameraManager;
-import me.zero.client.load.ClientLoader;
 import org.lwjgl.input.Keyboard;
 
 import java.util.stream.Stream;
@@ -27,11 +25,6 @@ import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
 public final class ClientHandler implements Helper {
 
     private boolean[] keyMap = new boolean[KEYBOARD_SIZE];
-
-    public ClientHandler() {
-        if (ClientUtils.traceSource() != ClientLoader.class)
-            throw new ActionNotValidException("The ClientHandler can only be initialized from the ClientLoader");
-    }
 
     @EventHandler
     private Listener<Render2DEvent> render2DListener = new Listener<>(event ->

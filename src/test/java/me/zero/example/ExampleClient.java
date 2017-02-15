@@ -3,8 +3,6 @@ package me.zero.example;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
 import me.zero.client.api.util.factory.AuthenticationFactory;
-import me.zero.client.load.ClientAPI;
-import me.zero.client.load.ClientLoader;
 import me.zero.example.mod.ExampleModManager;
 
 /**
@@ -20,12 +18,12 @@ public class ExampleClient extends Client {
     }
 
     @Override
-    public void onInit(ClientLoader loader) {
+    public void onInit(ClientInfo info) {
         // Login to our account
         AuthenticationFactory.create().username("example@host.xyz").password("12345").login();
 
         // Gets the client info for later usage
-        this.info = loader.getDiscoveredInfo();
+        this.info = info;
 
         // Create Module Manager
         this.setModuleManager(new ExampleModManager());

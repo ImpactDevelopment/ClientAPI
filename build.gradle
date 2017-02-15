@@ -27,7 +27,7 @@ compileJava {
 minecraft {
     version = '1.11.2'
     runDir = 'run'
-    tweakClass = 'me.zero.client.load.inject.ClientTweaker'
+    tweakClass = 'me.zero.client.load.tweak.ClientTweaker'
     mappings = 'snapshot_20170215'
 
     makeObfSourceJar = true

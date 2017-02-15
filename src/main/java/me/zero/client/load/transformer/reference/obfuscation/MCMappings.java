@@ -1,18 +1,18 @@
-package me.zero.client.load.inject.transformer.reference.obfuscation;
+package me.zero.client.load.transformer.reference.obfuscation;
 
 import io.netty.channel.ChannelHandlerContext;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
-import me.zero.client.load.inject.transformer.reference.MethodReference;
+import me.zero.client.load.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.reference.MethodReference;
 
-import static me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation.MCP;
-import static me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation.VANILLA;
-import static me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName.from;
+import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.MCP;
+import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.VANILLA;
+import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationName.from;
 
 /**
  * Contains class and method references for the game
  * that are required by the API's default transformers.
  *
- * @see me.zero.client.load.inject.transformer.ITransformer
+ * @see me.zero.client.load.transformer.ITransformer
  *
  * @since 1.0
  *
@@ -20,7 +20,6 @@ import static me.zero.client.load.inject.transformer.reference.obfuscation.Obfus
  */
 public interface MCMappings {
     // Classes
-    ClassReference Main = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.main.Main"), from(VANILLA, "net.minecraft.client.main.Main") });
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
     ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiIngame"), from(VANILLA, "bfh") });
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
@@ -37,7 +36,6 @@ public interface MCMappings {
     ClassReference EntityRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.EntityRenderer"), from(VANILLA, "bqe") });
 
     // Methods
-    MethodReference main = new MethodReference(new ObfuscationName[] { from(MCP, "main"), from(VANILLA, "main")}, Void.TYPE);
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
     MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop"), from(VANILLA, "av") }, Void.TYPE);
     MethodReference init = new MethodReference(new ObfuscationName[] { from(MCP, "init"), from(VANILLA, "an") }, Void.TYPE);

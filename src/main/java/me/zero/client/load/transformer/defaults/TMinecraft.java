@@ -1,13 +1,13 @@
-package me.zero.client.load.inject.transformer.defaults;
+package me.zero.client.load.transformer.defaults;
 
-import me.zero.client.load.inject.transformer.LoadTransformer;
-import me.zero.client.load.inject.transformer.Transformer;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.LoadTransformer;
+import me.zero.client.load.transformer.Transformer;
+import me.zero.client.load.transformer.hook.ClassHook;
+import me.zero.client.load.transformer.reference.ClassReference;
 
 import java.util.List;
 
-import static me.zero.client.load.inject.transformer.reference.obfuscation.MCMappings.*;
+import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
  * Creates a hook for the Tick and Loop Events
@@ -23,7 +23,7 @@ public final class TMinecraft extends Transformer {
     public void loadHooks(List<ClassHook> hooks) {
         hooks.add(runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
-        hooks.add(init.createHook(method -> method.insertAfter("ClientLoader.initGameLoader();")));
+        hooks.add(init.createHook(method -> method.insertAfter("ClientLoader.runClient();")));
 
         hooks.add(clickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.LEFT));")));
         hooks.add(rightClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.RIGHT));")));
@@ -33,7 +33,7 @@ public final class TMinecraft extends Transformer {
 
     @Override
     public void loadImports(List<String> imports) {
-        imports.add("me.zero.client.load");
+        imports.add("me.zero.client.load.discover");
     }
 
     @Override
