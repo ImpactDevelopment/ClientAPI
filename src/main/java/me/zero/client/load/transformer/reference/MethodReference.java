@@ -1,22 +1,21 @@
-package me.zero.client.load.inject.transformer.reference;
+package me.zero.client.load.transformer.reference;
 
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
+import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.api.util.MethodDescriptorBuilder;
-import me.zero.client.load.inject.transformer.hook.MethodHook;
-import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName;
+import me.zero.client.load.transformer.hook.MethodHook;
+import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Type of {@code Reference} designed for Methods.
  *
- * @see me.zero.client.load.inject.transformer.reference.ClassReference
+ * @see me.zero.client.load.transformer.reference.ClassReference
  *
  * @since 1.0
  *
@@ -114,7 +113,7 @@ public final class MethodReference extends Reference {
      *
      * @since 1.0
      *
-     * @see me.zero.client.load.inject.transformer.ITransformer
+     * @see me.zero.client.load.transformer.ITransformer
      *
      * @param hook The hook to the method
      * @return ClassHook to be passed to a {@code Transformer}
@@ -130,7 +129,7 @@ public final class MethodReference extends Reference {
      *
      * @since 1.0
      *
-     * @see me.zero.client.load.inject.transformer.ITransformer
+     * @see me.zero.client.load.transformer.ITransformer
      *
      * @param hook The hook to the method
      * @return ClassHook to be passed to a {@code Transformer}

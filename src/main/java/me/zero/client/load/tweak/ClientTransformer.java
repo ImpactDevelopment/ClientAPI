@@ -1,4 +1,4 @@
-package me.zero.client.load.inject;
+package me.zero.client.load.tweak;
 
 import javassist.CannotCompileException;
 import javassist.ClassPool;
@@ -6,14 +6,13 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import javassist.bytecode.Descriptor;
 import me.zero.client.api.util.interfaces.Loadable;
-import me.zero.client.load.inject.transformer.ITransformer;
-import me.zero.client.load.inject.transformer.LoadTransformer;
-import me.zero.client.load.inject.transformer.Transformer;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.discover.ClientLoader;
+import me.zero.client.load.transformer.ITransformer;
+import me.zero.client.load.transformer.Transformer;
+import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
-import me.zero.client.load.ClientAPI;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.reflections.Reflections;
 
@@ -46,7 +45,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         ClassPool.getDefault();
 
         // Load Client Transformers
-        this.transformers.addAll(ClientAPI.getAPI().getLoader().getTransformers());
+        this.transformers.addAll(ClientLoader.getTransformers());
 
         // Load Default Transformers
         new Reflections("me.zero.client.load.inject.transformer.defaults")

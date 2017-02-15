@@ -1,7 +1,5 @@
 package me.zero.client.api;
 
-import me.zero.client.load.ClientLoader;
-
 /**
  * The base for all Clients
  *
@@ -17,9 +15,9 @@ public abstract class Client extends ClientBase {
      * @see me.zero.client.api.module.Module
      * @see me.zero.client.api.module.plugin.Plugin
      *
-     * @param loader The ClientLoader used to load the client from within the game. (Not LaunchClassLoader)
+     * @param info The ClientInfo object from the client.json
      *
      * @since 1.0
      */
-    public abstract void onInit(ClientLoader loader);
+    public abstract void onInit(ClientInfo info);
 }

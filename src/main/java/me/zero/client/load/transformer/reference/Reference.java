@@ -1,16 +1,16 @@
-package me.zero.client.load.inject.transformer.reference;
+package me.zero.client.load.transformer.reference;
 
 import me.zero.client.api.exception.UnexpectedOutcomeException;
-import me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation;
-import me.zero.client.load.inject.transformer.reference.obfuscation.ObfuscationName;
+import me.zero.client.load.transformer.reference.obfuscation.Obfuscation;
+import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
 import java.util.Arrays;
 
 /**
  * The base for References
  *
- * @see me.zero.client.load.inject.transformer.reference.ClassReference
- * @see me.zero.client.load.inject.transformer.reference.MethodReference
+ * @see me.zero.client.load.transformer.reference.ClassReference
+ * @see me.zero.client.load.transformer.reference.MethodReference
  *
  * @since 1.0
  *
@@ -41,7 +41,7 @@ public abstract class Reference {
      *
      * @since 1.0
      *
-     * @see me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation
+     * @see me.zero.client.load.transformer.reference.obfuscation.Obfuscation
      *
      * @return
      */
@@ -54,7 +54,7 @@ public abstract class Reference {
      *
      * @since 1.0
      *
-     * @see me.zero.client.load.inject.transformer.reference.obfuscation.Obfuscation
+     * @see me.zero.client.load.transformer.reference.obfuscation.Obfuscation
      *
      * @return
      */

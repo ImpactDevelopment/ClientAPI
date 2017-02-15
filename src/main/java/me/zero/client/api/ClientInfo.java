@@ -39,13 +39,19 @@ public final class ClientInfo {
      */
     private String main;
 
-    public ClientInfo(String name, String[] authors, String id, double build, ReleaseType type, String main) {
+    /**
+     * The transformer package
+     */
+    private String transformers;
+
+    public ClientInfo(String name, String[] authors, String id, double build, ReleaseType type, String main, String transformers) {
         this.name = name;
         this.authors = authors;
         this.id = id;
         this.build = build;
         this.type = type;
         this.main = main;
+        this.transformers = transformers;
     }
 
     /**
@@ -100,6 +106,15 @@ public final class ClientInfo {
      */
     public String getMain() {
         return main;
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return Package containing transformers
+     */
+    public String getTransformers() {
+        return this.transformers;
     }
 
     public enum ReleaseType {

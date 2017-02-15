@@ -1,15 +1,15 @@
-package me.zero.client.load.inject.transformer;
+package me.zero.client.load.transformer;
 
 import javassist.CtClass;
-import me.zero.client.load.inject.transformer.hook.ClassHook;
-import me.zero.client.load.inject.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.hook.ClassHook;
+import me.zero.client.load.transformer.reference.ClassReference;
 
 import java.util.List;
 
 /**
  * The Base for Transformers
  *
- * @see me.zero.client.load.inject.transformer.Transformer
+ * @see me.zero.client.load.transformer.Transformer
  *
  * @since 1.0
  *
