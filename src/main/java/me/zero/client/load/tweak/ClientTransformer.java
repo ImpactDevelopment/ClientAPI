@@ -42,13 +42,16 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
 
     @Override
     public void load() {
+        Logger.instance.log(Level.INFO, "Initializing ClassPool");
         ClassPool.getDefault();
+
+        Logger.instance.log(Level.INFO, "Loading Transformers");
 
         // Load Client Transformers
         this.transformers.addAll(ClientLoader.getTransformers());
 
         // Load Default Transformers
-        new Reflections("me.zero.client.load.inject.transformer.defaults")
+        new Reflections("me.zero.client.load.transformer.defaults")
                 .getSubTypesOf(Transformer.class).forEach(transformer -> {
             try {
                 this.transformers.add(transformer.newInstance());
