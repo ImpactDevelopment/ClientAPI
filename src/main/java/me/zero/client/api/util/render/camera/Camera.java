@@ -40,7 +40,10 @@ public class Camera {
 
     /**
      * Updates the current Framebuffer
-     * Can only be called from {@code GuiIngame}
+     *
+     * @since 1.0
+     *
+     * @param partialTicks The Render 2D partial ticks
      */
     public void updateFramebuffer(float partialTicks) {
         // Check if we are able to update the framebuffer
@@ -100,6 +103,8 @@ public class Camera {
     /**
      * Draws the camera to the screen.
      * Stretches the Framebuffer over the specified area.
+     *
+     * @since 1.0
      */
     public void draw(float x, float y, float x1, float y1) {
         GlStateManager.pushMatrix();
@@ -170,6 +175,8 @@ public class Camera {
     }
 
     /**
+     * @since 1.0
+     *
      * @return Whether or not any of the cameras are currently capturing
      */
     public static boolean isCapturing() {
