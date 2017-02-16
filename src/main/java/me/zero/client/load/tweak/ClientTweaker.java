@@ -1,5 +1,7 @@
 package me.zero.client.load.tweak;
 
+import me.zero.client.api.ClientInfo;
+import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.discover.ClientLoader;
@@ -37,6 +39,13 @@ public final class ClientTweaker implements ITweaker {
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference.obfuscation");
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.discover");
         Launch.classLoader.addClassLoaderExclusion("org.objectweb.asm.");
+
+        ClientInfo info = ClientLoader.getInfo();
+        if (info == null)
+            throw new UnexpectedOutcomeException("Unable to create LaunchClassLoader exclusions. ClientInfo not found.");
+
+        if (info.getTransformers().length() > 0)
+            Launch.classLoader.addClassLoaderExclusion(info.getTransformers());
     }
 
     @Override
