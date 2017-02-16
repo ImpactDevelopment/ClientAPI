@@ -1,5 +1,8 @@
 package me.zero.client.load.tweak;
 
+import me.zero.client.api.util.logger.Level;
+import me.zero.client.api.util.logger.Logger;
+import me.zero.client.load.discover.ClientLoader;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -23,6 +26,16 @@ public final class ClientTweaker implements ITweaker {
     private List<String> args = new ArrayList<>();
 
     public ClientTweaker() {
+        // Add all of this so that we don't get any
+        // errors that actually drove me insane for
+        // the past hour and a half hahahah kill me
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.tweak");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.defaults");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.hook");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference.obfuscation");
+        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.discover");
         Launch.classLoader.addClassLoaderExclusion("org.objectweb.asm.");
     }
 
@@ -30,25 +43,15 @@ public final class ClientTweaker implements ITweaker {
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.args.addAll(args);
 
-        if (gameDir != null) {
-            this.args.add("--gameDir");
-            this.args.add(gameDir.getAbsolutePath());
-        }
-
-        if (assetsDir != null) {
-            this.args.add("--assetsDir");
-            this.args.add(assetsDir.getAbsolutePath());
-        }
-
-        if (profile != null) {
-            this.args.add("--version");
-            this.args.add(profile);
-        }
+        addArg("gameDir", gameDir);
+        addArg("assetsDir", assetsDir);
+        addArg("version", profile);
     }
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        classLoader.registerTransformer(ClientTransformer.class.getCanonicalName());
+        Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
+        classLoader.registerTransformer("me.zero.client.load.tweak.ClientTransformer");
     }
 
     @Override
@@ -59,5 +62,17 @@ public final class ClientTweaker implements ITweaker {
     @Override
     public String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
+    }
+
+    private void addArg(String label, File file) {
+        if (file != null)
+            addArg(label, file.getAbsolutePath());
+    }
+
+    private void addArg(String label, String value) {
+        if (value != null) {
+            this.args.add("--" + label);
+            this.args.add(value);
+        }
     }
 }

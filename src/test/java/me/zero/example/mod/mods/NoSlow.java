@@ -8,9 +8,6 @@ import me.zero.client.api.module.Module;
 import net.minecraft.util.EnumHand;
 import org.lwjgl.input.Keyboard;
 
-import static me.zero.client.api.event.type.EventState.POST;
-import static me.zero.client.api.event.type.EventState.PRE;
-
 /**
  * Created by Brady on 2/10/2017.
  */
