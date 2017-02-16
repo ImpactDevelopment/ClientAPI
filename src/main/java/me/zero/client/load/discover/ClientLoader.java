@@ -42,6 +42,9 @@ public class ClientLoader {
             throw new UnexpectedOutcomeException("Unable to get Transformers, ClientInfo not found!");
 
         List<ITransformer> transformers = new ArrayList<>();
+        if (info.getTransformers().length() == 0)
+            return transformers;
+
         new Reflections(info.getTransformers()).getSubTypesOf(Transformer.class).forEach(transformer -> {
             try {
                 transformers.add(transformer.newInstance());
