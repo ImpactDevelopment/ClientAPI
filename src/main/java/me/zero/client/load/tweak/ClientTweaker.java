@@ -60,13 +60,4 @@ public final class ClientTweaker implements ITweaker {
     public String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
     }
-
-    /**
-     * @since 1.0
-     *
-     * @return The Game Launch Arguments
-     */
-    public List<String> getArguments() {
-        return this.args;
-    }
 }
