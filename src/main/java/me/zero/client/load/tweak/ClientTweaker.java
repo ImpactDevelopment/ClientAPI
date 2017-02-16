@@ -38,7 +38,6 @@ public final class ClientTweaker implements ITweaker {
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference");
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference.obfuscation");
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.discover");
-        Launch.classLoader.addClassLoaderExclusion("org.objectweb.asm.");
 
         ClientInfo info = ClientLoader.getInfo();
         if (info == null)
