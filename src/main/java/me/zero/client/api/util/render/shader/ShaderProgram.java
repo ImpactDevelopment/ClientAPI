@@ -1,5 +1,6 @@
 package me.zero.client.api.util.render.shader;
 
+import me.zero.client.api.util.interfaces.Action;
 import me.zero.client.api.util.io.StreamReader;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import static org.lwjgl.opengl.ARBVertexShader.GL_VERTEX_SHADER_ARB;
  *
  * Created by Brady on 2/16/2017.
  */
-public abstract class ShaderProgram {
+public abstract class ShaderProgram implements Action {
 
     private List<UniformVariable> uniforms = new ArrayList<>();
     private int programID, fragmentID, vertexID;
@@ -33,17 +34,19 @@ public abstract class ShaderProgram {
         loadUniforms();
     }
 
+    @Override
     public final void start() {
         glUseProgramObjectARB(programID);
     }
 
+    @Override
     public final void stop() {
         glUseProgramObjectARB(0);
     }
 
-    public abstract void loadUniforms();
+    protected abstract void loadUniforms();
 
-    public final void loadUniform(String name) {
+    protected final void loadUniform(String name) {
         this.uniforms.add(UniformVariable.get(programID, name));
     }
 
