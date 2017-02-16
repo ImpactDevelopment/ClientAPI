@@ -2,6 +2,9 @@ package me.zero.client.api.util.keybind;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
+import static me.zero.client.api.util.keybind.Keybind.Action.*;
 
 /**
  * A keybind that is used to create key hooks
@@ -10,7 +13,7 @@ import java.util.List;
  *
  * Created by Brady on 2/10/2017.
  */
-public abstract class Keybind {
+public class Keybind {
 
     /**
      * The List of all Keybind Objects
@@ -22,8 +25,14 @@ public abstract class Keybind {
      */
     private int key;
 
-    public Keybind(int key) {
+    /**
+     * The consumer that handles various key events
+     */
+    private Consumer<Action> consumer;
+
+    public Keybind(int key, Consumer<Action> consumer) {
         this.key = key;
+        this.consumer = consumer;
         Keybind.keybinds.add(this);
     }
 
@@ -51,21 +60,27 @@ public abstract class Keybind {
      *
      * @since 1.0
      */
-    public abstract void onClick();
+    public final void onClick() {
+        consumer.accept(CLICK);
+    }
 
     /**
      * Called when a key is pressed
      *
      * @since 1.0
      */
-    public abstract void onPress();
+    public final void onPress() {
+        consumer.accept(PRESS);
+    }
 
     /**
      * Claled when a key is released
      *
      * @since 1.0
      */
-    public abstract void onRelease();
+    public final void onRelease() {
+        consumer.accept(RELEASE);
+    }
 
     /**
      * @since 1.0
@@ -81,5 +96,9 @@ public abstract class Keybind {
      */
     public enum Type {
         TOGGLE, HOLD
+    }
+
+    public enum Action {
+        CLICK, PRESS, RELEASE
     }
 }

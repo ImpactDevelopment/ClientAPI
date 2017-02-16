@@ -8,6 +8,8 @@ import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.Arrays;
 
+import static me.zero.client.api.util.keybind.Keybind.Action.*;
+
 /**
  * The base for all cheats
  *
@@ -51,19 +53,11 @@ public abstract class Module implements IModule, Helper {
             this.name = data.name();
             this.description = data.description();
 
-            this.bind = new Keybind(data.bind()) {
-
-                @Override
-                public void onClick() {
+            this.bind = new Keybind(data.bind(), type -> {
+                if (type == CLICK)
                     Module.this.toggle();
-                }
+            });
 
-                @Override
-                public void onPress() {}
-
-                @Override
-                public void onRelease() {}
-            };
             this.type = Arrays.stream(this.getClass().getInterfaces())
                     .filter(c -> c.isAnnotationPresent(Category.class))
                     .findFirst().orElse(Default.class)
