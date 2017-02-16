@@ -3,7 +3,6 @@ package me.zero.client.load.discover;
 import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
-import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
@@ -53,7 +52,7 @@ public class ClientLoader {
         return transformers;
     }
 
-    public static Client getClient(ClientInfo info) {
+    private static Client getClient(ClientInfo info) {
         if (info == null)
             throw new UnexpectedOutcomeException("Unable to create Client, ClientInfo not found!");
 
