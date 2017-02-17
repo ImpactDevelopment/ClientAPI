@@ -2,6 +2,7 @@ package me.zero.example;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.event.EventManager;
 import me.zero.client.api.util.factory.AuthenticationFactory;
 import me.zero.example.mod.ExampleModManager;
 
@@ -20,7 +21,7 @@ public class ExampleClient extends Client {
     @Override
     public void onInit(ClientInfo info) {
         // Login to our account
-        AuthenticationFactory.create().username("example@host.xyz").password("12345").login();
+        // AuthenticationFactory.create().username("example@host.xyz").password("12345").login();
 
         // Gets the client info for later usage
         this.info = info;
@@ -35,10 +36,15 @@ public class ExampleClient extends Client {
         this.getModuleManager(ExampleModManager.class);
 
         // Load plugins
-        this.loadPlugins("path/to/plugins");
+        // this.loadPlugins("path/to/plugins");
 
         // Load mods
         this.getModuleManager().load();
+
+        // Allows
+        ProtocolPatcher patcher = new ProtocolPatcher();
+        patcher.setProtocol(315);
+        EventManager.subscribe(patcher);
     }
 
     public String getName() {
