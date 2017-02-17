@@ -40,6 +40,25 @@ public class ReflectionUtils {
      * @since 1.0
      *
      * @param object The object that the field belongs to
+     * @param fieldName The name of the field being set
+     * @param value The value that the field is being set to
+     * @return true if setting the field was successful, false if otherwise
+     */
+    public static boolean setField(Object object, String fieldName, Object value) {
+        for (Field field : object.getClass().getDeclaredFields()) {
+            if (field.getName().equals(fieldName)) {
+                return setField(object, field, value);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sets the value of a field in an object
+     *
+     * @since 1.0
+     *
+     * @param object The object that the field belongs to
      * @param field The field being set
      * @param value The value that the field is being set to
      * @return true if setting the field was successful, false if otherwise
