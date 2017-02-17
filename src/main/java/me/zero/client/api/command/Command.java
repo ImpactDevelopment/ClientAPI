@@ -1,6 +1,6 @@
 package me.zero.client.api.command;
 
-import me.zero.client.api.command.args.CommandArg;
+import me.zero.client.api.command.parse.CommandArg;
 
 /**
  * A command

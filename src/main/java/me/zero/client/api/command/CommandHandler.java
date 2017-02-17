@@ -2,6 +2,9 @@ package me.zero.client.api.command;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.command.parse.CommandContext;
+import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.Listener;
+import me.zero.client.api.event.defaults.ChatEvent;
 import me.zero.client.api.manage.Manager;
 
 import java.util.ArrayList;
@@ -21,8 +24,22 @@ public class CommandHandler {
     private Manager<Command> manager;
 
     public CommandHandler(Client client) {
+        this.client = client;
         this.manager = client.getCommandManager();
     }
+
+    @EventHandler
+    private Listener<ChatEvent> chatListener = new Listener<>(event -> {
+        if (event.getType() != ChatEvent.Type.SEND)
+            return;
+
+        String message = event.getMessage();
+        if (message.startsWith(".")) {
+            message = message.replaceFirst(".", "");
+
+            event.setCancelled(run(message));
+        }
+    });
 
     public boolean run(String message) {
         String[] split = message.split(" ");
@@ -49,7 +66,7 @@ public class CommandHandler {
 
         if (!context.isComplete()) {
             context.getError().forEach(client::printChatMessage);
-            return false;
+            return true;
         }
 
         command.execute(context);

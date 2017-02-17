@@ -1,6 +1,4 @@
-package me.zero.client.api.command.args;
-
-import me.zero.client.api.command.parse.ArgumentParser;
+package me.zero.client.api.command.parse;
 
 /**
  * Represents an argument
@@ -11,9 +9,9 @@ import me.zero.client.api.command.parse.ArgumentParser;
  */
 public class CommandArg<T> {
 
-    private String label;
-    private Class<T> type;
-    private ArgumentParser<T> parser;
+    private final String label;
+    private final Class<T> type;
+    private final ArgumentParser<T> parser;
     private boolean optional;
 
     CommandArg(String label, Class<T> type, ArgumentParser<T> parser, boolean optional) {
@@ -37,5 +35,10 @@ public class CommandArg<T> {
 
     public boolean isOptional() {
         return this.optional;
+    }
+
+    public CommandArg<T> optional() {
+        this.optional = true;
+        return this;
     }
 }
