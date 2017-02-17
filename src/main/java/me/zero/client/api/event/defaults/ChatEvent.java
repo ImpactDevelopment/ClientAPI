@@ -38,6 +38,10 @@ public final class ChatEvent extends Cancellable {
         return this;
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
     public enum Type {
         SEND, RECEIVE
     }
