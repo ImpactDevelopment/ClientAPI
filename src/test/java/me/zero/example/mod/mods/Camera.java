@@ -45,16 +45,6 @@ public class Camera extends Module implements IRender {
         public boolean reflected() {
             return false;
         }
-
-        @Override
-        public int width() {
-            return mc.displayWidth;
-        }
-
-        @Override
-        public int height() {
-            return mc.displayHeight;
-        }
     });
 
     @EventHandler

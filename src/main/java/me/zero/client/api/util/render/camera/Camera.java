@@ -7,6 +7,7 @@ import me.zero.client.api.util.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
+import org.lwjgl.opengl.Display;
 
 /**
  * The base for Cameras.
@@ -32,7 +33,7 @@ public class Camera {
     public Camera(CameraHandle handle) {
         this.handle = handle;
         this.reflected = handle.reflected();
-        this.framebuffer = new Framebuffer(handle.width(), handle.height(), true);
+        this.framebuffer = new Framebuffer(Display.getWidth(), Display.getHeight(), true);
         this.createNewFramebuffer();
 
         CameraManager.getInstance().register(this);
@@ -81,8 +82,6 @@ public class Camera {
     private void render(EntityUtil entity, float partialTicks) {
         // Setup camera
         entity.setAll(this.position, this.rotation);
-        mc.displayWidth = handle.width();
-        mc.displayWidth = handle.height();
         mc.gameSettings.thirdPersonView = 0;
         mc.gameSettings.viewBobbing = false;
         mc.gameSettings.hideGUI = true;
@@ -141,11 +140,11 @@ public class Camera {
      * @since 1.0
      */
     private void checkUpdate() {
-        if (lastWidth != handle.width() || lastHeight != handle.height())
+        if (lastWidth != Display.getWidth() || lastHeight != Display.getHeight())
             updated = false;
 
-        lastWidth = handle.width();
-        lastHeight = handle.height();
+        lastWidth = Display.getWidth();
+        lastHeight = Display.getHeight();
     }
 
     /**
@@ -155,7 +154,7 @@ public class Camera {
      * @since 1.0
      */
     private void createNewFramebuffer() {
-        this.framebuffer.createFramebuffer(handle.width(), handle.height());
+        this.framebuffer.createFramebuffer(Display.getWidth(), Display.getHeight());
     }
 
     /**

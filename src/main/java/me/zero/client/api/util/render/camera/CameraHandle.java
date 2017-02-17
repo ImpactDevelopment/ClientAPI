@@ -22,24 +22,4 @@ public interface CameraHandle {
      * @return Whether or not this camera is reflected
      */
     boolean reflected();
-
-    /**
-     * This shouldn't be changed often, every time
-     * it is changed, the FrameBuffer has to recreate
-     *
-     * @since 1.0
-     *
-     * @return The width of the Camera Framebuffer
-     */
-    int width();
-
-    /**
-     * This shouldn't be changed often, every time
-     * it is changed, the FrameBuffer has to recreate
-     *
-     * @since 1.0
-     *
-     * @return The height of the Camera Framebuffer
-     */
-    int height();
 }
