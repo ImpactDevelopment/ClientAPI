@@ -1,7 +1,6 @@
 package me.zero.client.api.command.parse;
 
 import me.zero.client.api.command.Command;
-import me.zero.client.api.command.args.CommandArg;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ import static me.zero.client.api.util.Messages.COMMAND_MISSING_ARGS;
 public class CommandContext {
 
     private List<CommandArg<?>> arguments = new ArrayList<>();
-    private List<String> lastBadSyntax = new ArrayList<>();
+    private List<String> errorStack = new ArrayList<>();
     private String[] args;
 
     @SuppressWarnings("unchecked")
@@ -65,7 +64,13 @@ public class CommandContext {
         if (argument == null)
             return null;
 
-        Object val = argument.getParser().parse(args[arguments.indexOf(argument)]);
+        Object val;
+
+        try {
+            val = argument.getParser().parse(args[arguments.indexOf(argument)]);
+        } catch (IndexOutOfBoundsException e) {
+            val = null;
+        }
 
         if (!argument.isOptional() && val == null)
             return null;
@@ -81,11 +86,11 @@ public class CommandContext {
      * @return True/False depending on argument satisfaction
      */
     public boolean isComplete() {
-        lastBadSyntax.clear();
+        errorStack.clear();
         arguments.stream().filter(arg -> !hasArg(arg.getLabel()))
-                .forEach(arg -> lastBadSyntax.add(String.format(COMMAND_MISSING_ARGS, arg.getLabel(), arg.getType())));
+                .forEach(arg -> errorStack.add(String.format(COMMAND_MISSING_ARGS, arg.getLabel(), arg.getType())));
 
-        return lastBadSyntax.size() <= 0;
+        return errorStack.size() <= 0;
     }
 
     /**
@@ -94,6 +99,6 @@ public class CommandContext {
      * @return The last error stack
      */
     public List<String> getError() {
-        return this.lastBadSyntax;
+        return this.errorStack;
     }
 }

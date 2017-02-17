@@ -2,8 +2,10 @@ package me.zero.example;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.command.CommandHandler;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.util.factory.AuthenticationFactory;
+import me.zero.example.command.CommandManager;
 import me.zero.example.mod.ExampleModManager;
 
 /**
@@ -20,31 +22,25 @@ public class ExampleClient extends Client {
 
     @Override
     public void onInit(ClientInfo info) {
-        // Login to our account
-        // AuthenticationFactory.create().username("example@host.xyz").password("12345").login();
+        /*
+        AuthenticationFactory.create().username("example@host.xyz").password("12345").login(); // Login to our account
+        */
 
-        // Gets the client info for later usage
-        this.info = info;
+        this.info = info;                                // Gets the client info for later usage
+        this.setModuleManager(new ExampleModManager());  // Create Module Manager
+        this.getModuleManager();                         // Gets the module manager as a generic Manager<Module>
+        this.getModuleManager(ExampleModManager.class);  // Gets the Module Manager, casted to our implementation
+        this.loadPlugins("path/to/plugins");             // Load plugins
+        this.getModuleManager().load();                  // Load mods
 
-        // Create Module Manager
-        this.setModuleManager(new ExampleModManager());
+        this.setPrefix("[Client]");                      // Sets the message prefix
+        this.setCommandManager(new CommandManager());    // Create Command Manager
+        this.getCommandManager().load();                 // Load Commands
+        EventManager.subscribe(new CommandHandler(this));// Handles all command related stuff
 
-        // Gets the module manager as a generic Manager<Module>
-        this.getModuleManager();
-
-        // Gets the Module Manager, casted to our implementation
-        this.getModuleManager(ExampleModManager.class);
-
-        // Load plugins
-        // this.loadPlugins("path/to/plugins");
-
-        // Load mods
-        this.getModuleManager().load();
-
-        // Allows
+        // Simple Protocol Hack (Used for connecting to b0at.xyz for testing)
         ProtocolPatcher patcher = new ProtocolPatcher();
         patcher.setProtocol(315);
-        EventManager.subscribe(patcher);
     }
 
     public String getName() {
