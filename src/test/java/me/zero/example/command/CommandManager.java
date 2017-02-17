@@ -18,6 +18,9 @@ public class CommandManager extends Manager<Command> {
 
     @Override
     public void load() {
+        // Para, if you see this please hit the back button in your browser
+        // kthanks
+        // anonymous classes XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
         this.addData(new Command() {
 
             @Override
