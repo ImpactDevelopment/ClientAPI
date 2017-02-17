@@ -3,10 +3,8 @@ package me.zero.client.api.event;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.ReflectionUtils;
-import net.minecraft.network.play.server.SPacketCombatEvent;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.*;
 
 /**

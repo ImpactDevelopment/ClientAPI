@@ -28,16 +28,8 @@ public final class ClientTweaker implements ITweaker {
     private List<String> args = new ArrayList<>();
 
     public ClientTweaker() {
-        // Add all of this so that we don't get any
-        // errors that actually drove me insane for
-        // the past hour and a half hahahah kill me
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.tweak");
+        // Exclude Transformers so that this doesn't break!
         Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer");
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.defaults");
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.hook");
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference");
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.transformer.reference.obfuscation");
-        Launch.classLoader.addClassLoaderExclusion("me.zero.client.load.discover");
 
         ClientInfo info = ClientLoader.getInfo();
         if (info == null)

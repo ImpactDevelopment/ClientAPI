@@ -3,6 +3,8 @@ package me.zero.client.load.discover;
 import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
+import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
@@ -81,5 +83,6 @@ public class ClientLoader {
             throw new UnexpectedOutcomeException("Client loaded is null");
 
         client.onInit(info);
+        EventManager.subscribe(new ClientHandler());
     }
 }
