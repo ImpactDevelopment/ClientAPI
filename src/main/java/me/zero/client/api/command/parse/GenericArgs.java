@@ -26,6 +26,6 @@ public class GenericArgs {
     }
 
     private static <T> CommandArg<T> create(String label, Class<T> tClass, ArgumentParser<T> parser) {
-        return new CommandArg<>(label, tClass, parser, false);
+        return new CommandArg<>(label, tClass, parser);
     }
 }
