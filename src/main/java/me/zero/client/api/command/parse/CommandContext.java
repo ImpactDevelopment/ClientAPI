@@ -64,18 +64,11 @@ public class CommandContext {
         if (argument == null)
             return null;
 
-        Object val;
-
         try {
-            val = argument.getParser().parse(args[arguments.indexOf(argument)]);
+            return argument.getParser().parse(args[arguments.indexOf(argument)]);
         } catch (IndexOutOfBoundsException e) {
-            val = null;
-        }
-
-        if (!argument.isOptional() && val == null)
             return null;
-
-        return val;
+        }
     }
 
     /**
