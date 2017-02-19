@@ -205,7 +205,7 @@ public class EntityUtil implements Helper {
      * @param ticks Time in ticks predicted
      * @return The predicted position
      */
-    public Vec3 predictPos(int ticks) {
+    public Vec3 interpolate(float ticks) {
         return getPos().add(getPos().sub(getLastTickPos()).scale(ticks));
     }
 

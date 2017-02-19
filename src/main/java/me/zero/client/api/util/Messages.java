@@ -32,5 +32,7 @@ public interface Messages {
     String CLIENT_INSTANTIATION                = "Unable to instantiate Client, %s";
     String CLIENT_NOT_FOUND                    = "Unable to find Client Class, %s";
 
+    String MODULE_INSTANTIATION                = "Unable to instantiate Module, %s";
+
     String COMMAND_MISSING_ARGS                = "Missing required argument: %s, with type %s";
 }

@@ -8,6 +8,7 @@ import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
+import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraManager;
 import org.lwjgl.input.Keyboard;
 
@@ -28,7 +29,7 @@ public final class ClientHandler implements Helper {
 
     @EventHandler
     private Listener<Render2DEvent> render2DListener = new Listener<>(event ->
-        CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())));
+        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())));
 
     @EventHandler
     private Listener<KeyEvent> keyListener = new Listener<>(event ->

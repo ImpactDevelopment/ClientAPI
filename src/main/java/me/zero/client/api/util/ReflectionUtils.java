@@ -1,6 +1,8 @@
 package me.zero.client.api.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Util file used to clean up usages of the
@@ -11,6 +13,24 @@ import java.lang.reflect.Field;
  * Created by Brady on 1/23/2017.
  */
 public class ReflectionUtils {
+
+    /**
+     * Gets the value of a field from an Object
+     *
+     * @since 1.0
+     *
+     * @param object Object that field belongs to
+     * @param fieldName Field that is being retrieved
+     * @return The value of the field
+     */
+    public static Object getField(Object object, String fieldName) {
+        for (Field field : object.getClass().getDeclaredFields()) {
+            if (field.getName().equals(fieldName)) {
+                return getField(object, field);
+            }
+        }
+        return false;
+    }
 
     /**
      * Gets the value of a field from an Object
@@ -74,5 +94,32 @@ public class ReflectionUtils {
             // This should never happen because we're setting access
         }
         return false;
+    }
+
+    public static Method getMethod(Object object, String name, Class<?>... parameters) {
+        for (Method method : object.getClass().getDeclaredMethods()) {
+            if (method.getName().equals(name) && method.getParameterTypes().length == parameters.length) {
+                boolean match = true;
+                for (int i = 0; i < parameters.length; i++) {
+                    if (method.getParameterTypes()[i] != parameters[i])
+                        match = false;
+                }
+                if (match)
+                    return method;
+            }
+        }
+        return null;
+    }
+
+    public static boolean callMethod(Object object, Method method, Object... parameters) {
+        try {
+            boolean accessible = method.isAccessible();
+            method.setAccessible(true);
+            method.invoke(object, parameters);
+            method.setAccessible(accessible);
+            return true;
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            return false;
+        }
     }
 }

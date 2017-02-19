@@ -174,6 +174,17 @@ public class Camera {
     }
 
     /**
+     * Returns the visibility state of the Camera
+     *
+     * @since 1.0
+     *
+     * @return Whether or not the camera is visible
+     */
+    public boolean isVisible() {
+        return this.handle.visible();
+    }
+
+    /**
      * @since 1.0
      *
      * @return Whether or not any of the cameras are currently capturing
