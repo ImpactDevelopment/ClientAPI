@@ -3,6 +3,7 @@ package me.zero.client.api.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * Util file used to clean up usages of the
@@ -29,7 +30,7 @@ public class ReflectionUtils {
                 return getField(object, field);
             }
         }
-        return false;
+        return null;
     }
 
     /**
