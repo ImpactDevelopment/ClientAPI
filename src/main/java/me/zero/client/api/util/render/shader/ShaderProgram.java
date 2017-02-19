@@ -1,7 +1,9 @@
 package me.zero.client.api.util.render.shader;
 
-import me.zero.client.api.util.interfaces.Action;
+import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.io.StreamReader;
+import me.zero.client.api.util.render.EXTFramebuffer;
+import net.minecraft.client.shader.Framebuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,10 @@ import java.util.List;
 import static org.lwjgl.opengl.ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 import static org.lwjgl.opengl.ARBVertexShader.GL_VERTEX_SHADER_ARB;
+import static org.lwjgl.opengl.EXTFramebufferObject.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 /**
  * Used to create ARB Shader Programs with OpenGL
@@ -17,46 +23,83 @@ import static org.lwjgl.opengl.ARBVertexShader.GL_VERTEX_SHADER_ARB;
  *
  * Created by Brady on 2/16/2017.
  */
-public abstract class ShaderProgram implements Action {
+public abstract class ShaderProgram implements Helper {
 
     private List<UniformVariable> uniforms = new ArrayList<>();
     private int programID, fragmentID, vertexID;
+    protected EXTFramebuffer framebuffer;
 
-    public ShaderProgram(String vertex, String fragment) {
+    public ShaderProgram(String vertex, String fragment, Framebuffer fbo) {
+        framebuffer = new EXTFramebuffer(fbo);
         programID = glCreateProgramObjectARB();
         vertexID = loadShader(vertex, GL_VERTEX_SHADER_ARB);
         fragmentID = loadShader(fragment, GL_FRAGMENT_SHADER_ARB);
 
-        attachShader(vertexID);
-        attachShader(fragmentID);
+        glAttachObjectARB(programID, vertexID);
+        glAttachObjectARB(programID, fragmentID);
 
         loadProgram();
-        loadUniforms();
     }
 
-    @Override
-    public final void start() {
+    final void update(int textureID) {
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebuffer.getFramebufferID());
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
         glUseProgramObjectARB(programID);
-    }
 
-    @Override
-    public final void stop() {
+        glActiveTexture(GL_TEXTURE0);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+
+        this.update();
+
+        glPushMatrix();
+        glColor4f(1, 1, 1, 1);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR);
+        glBegin(GL_POLYGON);
+        glTexCoord2d(0, 1);
+        glVertex2d(0, 0);
+        glTexCoord2d(0, 0);
+        glVertex2d(0, framebuffer.getFramebufferHeight() / 2);
+        glTexCoord2d(1, 0);
+        glVertex2d(framebuffer.getFramebufferWidth() / 2, framebuffer.getFramebufferHeight() / 2);
+        glTexCoord2d(1, 0);
+        glVertex2d(framebuffer.getFramebufferWidth() / 2, framebuffer.getFramebufferHeight() / 2);
+        glTexCoord2d(1, 1);
+        glVertex2d(framebuffer.getFramebufferWidth() / 2, 0);
+        glTexCoord2d(0, 1);
+        glVertex2d(0, 0);
+        glEnd();
+        glDisable(GL_BLEND);
+        glPopMatrix();
+
         glUseProgramObjectARB(0);
     }
 
-    protected abstract void loadUniforms();
-
-    protected final void loadUniform(String name) {
-        this.uniforms.add(UniformVariable.get(programID, name));
-    }
-
-    public final void cleanUp() {
-        stop();
+    public final void delete() {
+        glUseProgramObjectARB(0);
         glDetachObjectARB(programID, vertexID);
         glDetachObjectARB(programID, fragmentID);
         glDeleteObjectARB(vertexID);
         glDeleteObjectARB(fragmentID);
         glDeleteObjectARB(programID);
+        framebuffer.delete();
+    }
+
+    public abstract void update();
+
+    private UniformVariable loadUniform(String name) {
+        UniformVariable v = UniformVariable.get(programID, name);
+        this.uniforms.add(v);
+        return v;
+    }
+
+    protected UniformVariable getUniform(String name) {
+        UniformVariable v = uniforms.stream().filter(uniform -> uniform.getName().equals(name)).findFirst().orElse(null);
+        if (v == null)
+            return loadUniform(name);
+        return v;
     }
 
     private int loadShader(String path, int type) {
@@ -68,15 +111,15 @@ public abstract class ShaderProgram implements Action {
         return shaderID;
     }
 
-    private void attachShader(int shaderID) {
-        glAttachObjectARB(programID, shaderID);
-    }
-
     private void loadProgram() {
         glLinkProgramARB(programID);
         ShaderHelper.checkObjecti(programID, GL_OBJECT_LINK_STATUS_ARB);
         glValidateProgramARB(programID);
         ShaderHelper.checkObjecti(programID, GL_OBJECT_VALIDATE_STATUS_ARB);
-        stop();
+        glUseProgramObjectARB(0);
+    }
+
+    EXTFramebuffer getFramebuffer() {
+        return this.framebuffer;
     }
 }

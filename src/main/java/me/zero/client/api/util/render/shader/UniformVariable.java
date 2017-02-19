@@ -14,9 +14,11 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
  */
 public class UniformVariable {
 
+    private String name;
     private int location;
 
-    private UniformVariable(int location) {
+    private UniformVariable(String name, int location) {
+        this.name = name;
         this.location = location;
     }
 
@@ -40,11 +42,15 @@ public class UniformVariable {
         glUniform3fARB(location, value.getX(), value.getY(), value.getZ());
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public int getLocation() {
         return this.location;
     }
 
     public static UniformVariable get(int shaderID, String uniformName) {
-        return new UniformVariable(glGetUniformLocationARB(shaderID, uniformName));
+        return new UniformVariable(uniformName, glGetUniformLocationARB(shaderID, uniformName));
     }
 }

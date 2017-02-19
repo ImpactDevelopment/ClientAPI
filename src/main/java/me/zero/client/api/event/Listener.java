@@ -1,7 +1,9 @@
 package me.zero.client.api.event;
 
+import me.zero.client.api.event.defaults.Render2DEvent;
 import me.zero.client.api.event.type.EventPriority;
 import net.jodah.typetools.TypeResolver;
+import net.minecraft.client.renderer.GlStateManager;
 
 /**
  * Used to contain event method data
