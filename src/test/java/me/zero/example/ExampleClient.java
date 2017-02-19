@@ -29,7 +29,7 @@ public class ExampleClient extends Client {
         this.info = info;                                // Gets the client info for later usage
         this.setModuleManager(new ExampleModManager());  // Create Module Manager
         this.getModuleManager();                         // Gets the module manager as a generic Manager<Module>
-        this.getModuleManager(ExampleModManager.class);  // Gets the Module Manager, casted to our implementation
+        <ExampleModManager>this.getModuleManager();      // Gets the Module Manager, casted to our implementation
         this.loadPlugins("path/to/plugins");             // Load plugins
         this.getModuleManager().load();                  // Load mods
 

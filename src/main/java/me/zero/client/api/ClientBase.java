@@ -100,28 +100,17 @@ class ClientBase implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
-     * @return The Module Manager
-     */
-    public Manager<Module> getModuleManager() {
-        if (this.moduleManager == null)
-            throw new ActionNotValidException("Module Manager has not yet been initialized");
-
-        return this.moduleManager;
-    }
-
-    /**
      * Returns the module manager casted to the specified type
-     *
-     * @param impl The class of the implementation
      *
      * @since 1.0
      *
      * @return The Module Manager casted to this Client's implementation
      */
     @SuppressWarnings("unchecked")
-    public <T extends Manager<Module>> T getModuleManager(Class<T> impl) {
+    public <T extends Manager<Module>> T getModuleManager() {
+        if (this.moduleManager == null)
+            throw new ActionNotValidException("Module Manager has not yet been initialized");
+
         return (T) this.moduleManager;
     }
 
@@ -139,28 +128,17 @@ class ClientBase implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
-     * @return The Command Manager
-     */
-    public Manager<Command> getCommandManager() {
-        if (this.commandManager == null)
-            throw new ActionNotValidException("Command Manager has not yet been initialized");
-
-        return this.commandManager;
-    }
-
-    /**
      * Returns the command manager casted to the specified type
-     *
-     * @param impl The class of the implementation
      *
      * @since 1.0
      *
      * @return The Command Manager casted to this Client's implementation
      */
     @SuppressWarnings("unchecked")
-    public <T extends Manager<Command>> T getCommandManager(Class<T> impl) {
+    public <T extends Manager<Command>> T getCommandManager() {
+        if (this.commandManager == null)
+            throw new ActionNotValidException("Command Manager has not yet been initialized");
+
         return (T) this.commandManager;
     }
 
