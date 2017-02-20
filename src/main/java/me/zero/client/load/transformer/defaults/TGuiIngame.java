@@ -5,7 +5,7 @@ import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
@@ -20,7 +20,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
 public final class TGuiIngame extends Transformer {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(renderGameOverlay.createHook(method -> method.insertAfter("{ EventManager.post(new Render2DEvent($1)); }")));
     }
 
