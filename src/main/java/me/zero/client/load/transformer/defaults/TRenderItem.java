@@ -4,7 +4,7 @@ import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.RenderItem;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.renderEffect;
@@ -19,7 +19,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.r
 public class TRenderItem extends Transformer {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(renderEffect.createHook(method -> method.insertBefore("{ GlintEffectEvent event = new GlintEffectEvent(GlintEffectEvent.GlintTarget.ITEM); EventManager.post(event); if (event.isCancelled()) return; }")));
     }
 

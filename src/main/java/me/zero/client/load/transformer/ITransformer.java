@@ -4,7 +4,7 @@ import javassist.CtClass;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * The Base for Transformers
@@ -24,7 +24,7 @@ public interface ITransformer {
      *
      * @param hooks The list getting appended to
      */
-    void loadHooks(List<ClassHook> hooks);
+    void loadHooks(Collection<ClassHook> hooks);
 
     /**
      * Used to append imports to a list
@@ -33,7 +33,7 @@ public interface ITransformer {
      *
      * @param imports The list getting appended to
      */
-    void loadImports(List<String> imports);
+    void loadImports(Collection<String> imports);
 
     /**
      * Transforms the specified CtClass

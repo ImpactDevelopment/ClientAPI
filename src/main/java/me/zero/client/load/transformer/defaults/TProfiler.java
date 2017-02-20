@@ -5,7 +5,7 @@ import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
@@ -20,7 +20,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
 public final class TProfiler extends Transformer {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(startSection.createHook(method -> method.insertBefore("if ($1 != null && $1.equalsIgnoreCase(\"hand\")) { EventManager.post(new Render3DEvent()); }")));
     }
 

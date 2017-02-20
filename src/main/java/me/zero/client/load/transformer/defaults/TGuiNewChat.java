@@ -5,7 +5,7 @@ import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
@@ -20,7 +20,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
 public final class TGuiNewChat extends Transformer {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(printChatMessageWithOptionalDeletion.createHook(method -> method.insertBefore("EventManager.post(new ChatEvent($1, ChatEvent.Type.RECEIVE));")));
     }
 

@@ -1,6 +1,6 @@
 package me.zero.client.api.gui.notification;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Used to render notifications
@@ -18,5 +18,5 @@ public interface INotificationRenderer {
 	 *
 	 * @param notifications The notifications getting rendered
 	 */
-	void draw(List<INotification> notifications);
+	void draw(Collection<INotification> notifications);
 }

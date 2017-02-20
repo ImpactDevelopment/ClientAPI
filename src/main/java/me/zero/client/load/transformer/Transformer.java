@@ -1,5 +1,6 @@
 package me.zero.client.load.transformer;
 
+import com.google.common.collect.Sets;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -8,8 +9,8 @@ import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.transformer.hook.ClassHook;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Implementation of ITransformer
@@ -31,7 +32,7 @@ public abstract class Transformer implements ITransformer {
      */
     @Override
     public final void transform(CtClass ctClass) {
-        List<ClassHook> hooks = new ArrayList<>();
+        Set<ClassHook> hooks = Sets.newHashSet();
         this.loadHooks(hooks);
         hooks.forEach(hook -> {
             try {
@@ -52,5 +53,5 @@ public abstract class Transformer implements ITransformer {
      * Only here to clean things up.
      */
     @Override
-    public void loadImports(List<String> imports) {}
+    public void loadImports(Collection<String> imports) {}
 }
