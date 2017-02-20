@@ -25,16 +25,28 @@ import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
  */
 public final class ClientHandler implements Helper {
 
+    /**
+     * A map of all key states
+     */
     private boolean[] keyMap = new boolean[KEYBOARD_SIZE];
 
+    /**
+     * Handles camera updates
+     */
     @EventHandler
     private Listener<Render2DEvent> render2DListener = new Listener<>(event ->
         CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())));
 
+    /**
+     * Handles keybinds
+     */
     @EventHandler
     private Listener<KeyEvent> keyListener = new Listener<>(event ->
         Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
 
+    /**
+     * Handles key states
+     */
     @EventHandler
     private Listener<TickEvent> tickListener = new Listener<>(event -> {
         if (mc.currentScreen != null) return;

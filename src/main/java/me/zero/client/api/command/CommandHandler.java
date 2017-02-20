@@ -20,7 +20,14 @@ import java.util.List;
  */
 public class CommandHandler {
 
+    /**
+     * The client associated with the CommandHandler
+     */
     private Client client;
+
+    /**
+     * The command manager belonging to the Client
+     */
     private Manager<Command> manager;
 
     public CommandHandler(Client client) {
@@ -41,12 +48,20 @@ public class CommandHandler {
         }
     });
 
-    public boolean run(String message) {
+    /**
+     * Parses the message and then forwards the
+     * data to #run(String, List<String>)
+     *
+     * @since 1.0
+     *
+     * @param message The message
+     * @return Whether or not parsing was successful
+     */
+    private boolean run(String message) {
         String[] split = message.split(" ");
         if (split.length == 0)
             return false;
 
-        String header = split[0];
         List<String> args = new ArrayList<>();
         for (int i = 1; i < split.length; i++) {
             String arg = split[i];
@@ -54,11 +69,20 @@ public class CommandHandler {
                 args.add(arg);
             }
         }
-        return run(header, args);
+        return run(split[0], args);
     }
 
-    private boolean run(String header, List<String> args) {
-        Command command = manager.getData().stream().filter(cmd -> labelMatch(header, cmd)).findFirst().orElse(null);
+    /**
+     * Attempts to run a command from the given chat message
+     *
+     * @since 1.0
+     *
+     * @param label The command label
+     * @param args The arguments for the command
+     * @return Whether or not command execution was successful
+     */
+    private boolean run(String label, List<String> args) {
+        Command command = manager.getData().stream().filter(cmd -> labelMatch(label, cmd)).findFirst().orElse(null);
         if (command == null)
             return false;
 
@@ -73,6 +97,16 @@ public class CommandHandler {
         return true;
     }
 
+    /**
+     * Loops through a Command's labels and sees if the specified
+     * header matches one of them.
+     *
+     * @since 1.0
+     *
+     * @param label The label being checked
+     * @param cmd The command being checked
+     * @return Whether or not the label matches
+     */
     private boolean labelMatch(String label, Command cmd) {
         return Arrays.stream(cmd.label()).filter(label::equalsIgnoreCase).findFirst().orElse(null) != null;
     }

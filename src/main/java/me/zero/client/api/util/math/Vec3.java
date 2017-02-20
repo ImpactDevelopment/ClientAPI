@@ -30,73 +30,208 @@ public class Vec3 {
         this.z = z;
     }
 
+    /**
+     * Sets the Vector X value
+     *
+     * @since 1.0
+     *
+     * @param x The new X value
+     * @return This Vector
+     */
     public Vec3 x(float x) {
         this.x = x;
         return this;
     }
 
+    /**
+     * Sets the Vector X value
+     *
+     * @since 1.0
+     *
+     * @param x The new X value
+     * @return This Vector
+     */
     public Vec3 x(double x) {
         return x((float) x);
     }
 
+    /**
+     * Sets the Vector Y value
+     *
+     * @since 1.0
+     *
+     * @param y The new Y value
+     * @return This Vector
+     */
     public Vec3 y(float y) {
         this.y = y;
         return this;
     }
 
+    /**
+     * Sets the Vector Y value
+     *
+     * @since 1.0
+     *
+     * @param y The new Y value
+     * @return This Vector
+     */
     public Vec3 y(double y) {
         return y((float) y);
     }
 
+    /**
+     * Sets the Vector Z value
+     *
+     * @since 1.0
+     *
+     * @param z The new Z value
+     * @return This Vector
+     */
     public Vec3 z(float z) {
         this.z = z;
         return this;
     }
 
+    /**
+     * Sets the Vector Z value
+     *
+     * @since 1.0
+     *
+     * @param z The new Z value
+     * @return This Vector
+     */
     public Vec3 z(double z) {
         return z((float) z);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The vector x value
+     */
     public float getX() {
         return this.x;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The vector y value
+     */
     public float getY() {
         return this.y;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The vector z value
+     */
     public float getZ() {
         return this.z;
     }
 
+    /**
+     * Adds the X, Y and Z of one vector to this vector
+     *
+     * @since 1.0
+     *
+     * @param vector Vector being added
+     * @return The new vector
+     */
     public Vec3 add(Vec3 vector) {
         return new Vec3(this.x + vector.x, this.y + vector.y, this.z + vector.z);
     }
 
+    /**
+     * Adds the specified X, Y and Z to this vector
+     *
+     * @since 1.0
+     *
+     * @param x X value being added
+     * @param y Y value being added
+     * @param z Z value being added
+     * @return The new vector
+     */
     public Vec3 add(double x, double y, double z) {
         return add(new Vec3(x, y, z));
     }
 
+    /**
+     * Adds the specified X, Y and Z to this vector
+     *
+     * @since 1.0
+     *
+     * @param x X value being added
+     * @param y Y value being added
+     * @param z Z value being added
+     * @return The new vector
+     */
     public Vec3 add(float x, float y, float z) {
         return add(new Vec3(x, y, z));
     }
 
+    /**
+     * Subtracts the X, Y and Z of one vector from this vector
+     *
+     * @since 1.0
+     *
+     * @param vector Vector being added
+     * @return The new vector
+     */
     public Vec3 sub(Vec3 vector) {
         return new Vec3(this.x - vector.x, this.y - vector.y, this.z - vector.z);
     }
 
+    /**
+     * Subtracts the specified X, Y and Z from this vector
+     *
+     * @since 1.0
+     *
+     * @param x X value being subtracted
+     * @param y Y value being subtracted
+     * @param z Z value being subtracted
+     * @return The new vector
+     */
     public Vec3 sub(double x, double y, double z) {
-        return sub(new Vec3(x, y, z));
+        return sub(new Vec3(-x, -y, -z));
     }
 
+    /**
+     * Subtracts the specified X, Y and Z from this vector
+     *
+     * @since 1.0
+     *
+     * @param x X value being subtracted
+     * @param y Y value being subtracted
+     * @param z Z value being subtracted
+     * @return The new vector
+     */
     public Vec3 sub(float x, float y, float z) {
-        return sub(new Vec3(x, y, z));
+        return sub(new Vec3(-x, -y, -z));
     }
 
+    /**
+     * Multiplies the X, Y and Z of this vector by a scale
+     *
+     * @since 1.0
+     *
+     * @param scale The scale
+     * @return The new vector
+     */
     public Vec3 scale(float scale) {
         return new Vec3(this.x * scale, this.y * scale, this.z * scale);
     }
 
+    /**
+     * Determines the rotations from this vector to another vector
+     *
+     * @since 1.0
+     *
+     * @param vector The other vector
+     * @return The rotations
+     */
     public Vec2 rotationsTo(Vec3 vector) {
         double diffX = vector.x - x;
         double diffY = vector.y - y;
@@ -107,6 +242,13 @@ public class Vec3 {
         return new Vec2(yaw, pitch);
     }
 
+    /**
+     * Returns the projected coordinates of this Vector
+     *
+     * @since 1.0
+     *
+     * @return Projected Coordinates as a Vec3
+     */
     public Vec3 toScreen() {
         FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
         IntBuffer viewport = BufferUtils.createIntBuffer(16);

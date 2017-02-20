@@ -14,12 +14,22 @@ import java.io.InputStreamReader;
  */
 public class StreamReader {
 
+    /**
+     * Stream being read
+     */
     private InputStream stream;
 
     public StreamReader(InputStream stream) {
         this.stream = stream;
     }
 
+    /**
+     * Reads the stream and returns the output
+     *
+     * @since 1.0
+     *
+     * @return The stream's output
+     */
     public String read() {
         BufferedReader br = null;
         String data = "";

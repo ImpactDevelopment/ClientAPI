@@ -1,6 +1,7 @@
 package me.zero.client.api.command;
 
 import me.zero.client.api.command.parse.CommandArg;
+import me.zero.client.api.command.parse.CommandContext;
 
 /**
  * A command
@@ -9,7 +10,7 @@ import me.zero.client.api.command.parse.CommandArg;
  *
  * Created by Brady on 2/13/2017.
  */
-public interface Command extends CommandExecutor {
+public interface Command {
 
     /**
      * @since 1.0
@@ -31,4 +32,13 @@ public interface Command extends CommandExecutor {
      * @return The arguments that the command needs to execute
      */
     CommandArg[] arguments();
+
+    /**
+     * Executes this command with the given context
+     *
+     * @since 1.0
+     *
+     * @param context The command context
+     */
+    void execute(CommandContext context);
 }

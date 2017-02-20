@@ -9,8 +9,19 @@ package me.zero.client.api.command.parse;
  */
 public class CommandArg<T> {
 
+    /**
+     * The label used to refer to the argument
+     */
     private final String label;
+
+    /**
+     * The argument type
+     */
     private final Class<T> type;
+
+    /**
+     * The parser used to get the type from a String
+     */
     private final ArgumentParser<T> parser;
 
     CommandArg(String label, Class<T> type, ArgumentParser<T> parser) {
@@ -19,14 +30,29 @@ public class CommandArg<T> {
         this.parser = parser;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The label
+     */
     public String getLabel() {
         return this.label;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The type
+     */
     public Class<T> getType() {
         return this.type;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The parser
+     */
     public ArgumentParser<T> getParser() {
         return this.parser;
     }

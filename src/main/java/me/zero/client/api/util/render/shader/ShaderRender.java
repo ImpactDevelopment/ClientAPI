@@ -23,7 +23,14 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class ShaderRender implements Helper, Action {
 
+    /**
+     * Program handled by this renderer
+     */
     private final ShaderProgram program;
+
+    /**
+     * Framebuffer that is used to update the program
+     */
     private final Framebuffer fbo;
 
     public ShaderRender(ShaderProgram program, Framebuffer fbo) {
@@ -60,6 +67,11 @@ public class ShaderRender implements Helper, Action {
         draw();
     }
 
+    /**
+     * Draws the framebuffer to the screen
+     *
+     * @since 1.0
+     */
     private void draw() {
         glPushMatrix();
         glColor4f(1, 1, 1, 1);

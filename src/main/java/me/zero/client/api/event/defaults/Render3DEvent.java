@@ -1,7 +1,7 @@
 package me.zero.client.api.event.defaults;
 
 /**
- * Called when EntityRenderer#renderWorldPass(int, float, long)
+ * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
  * @since 1.0
  *
