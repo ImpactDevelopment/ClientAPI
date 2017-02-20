@@ -11,12 +11,20 @@ import net.minecraft.client.multiplayer.WorldClient;
  */
 public final class WorldLoadEvent {
 
+    /**
+     * World being loaded
+     */
     private final WorldClient world;
 
     public WorldLoadEvent(WorldClient world) {
         this.world = world;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The world being loaded
+     */
     public WorldClient getWorld() {
         return this.world;
     }

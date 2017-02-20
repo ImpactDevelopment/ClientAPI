@@ -13,7 +13,14 @@ import net.minecraft.util.text.ITextComponent;
  */
 public final class ChatEvent extends Cancellable {
 
+    /**
+     * The ChatEvent's message
+     */
     private String message;
+
+    /**
+     * The Type of event (SEND/RECEIVE)
+     */
     private final Type type;
 
     public ChatEvent(String message, Type type) {
@@ -25,10 +32,24 @@ public final class ChatEvent extends Cancellable {
         this(message.getFormattedText(), type);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The message for this event
+     */
     public String getMessage() {
         return this.message;
     }
 
+    /**
+     * Sets this event's chat message, only works if the
+     * message is being sent.
+     *
+     * @since 1.0
+     *
+     * @param message Message being set
+     * @return This Event
+     */
     public ChatEvent setMessage(String message) {
         if (type == Type.SEND)
             this.message = message;
@@ -38,10 +59,18 @@ public final class ChatEvent extends Cancellable {
         return this;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The type of event
+     */
     public Type getType() {
         return this.type;
     }
 
+    /**
+     * ChatEvent Type
+     */
     public enum Type {
         SEND, RECEIVE
     }

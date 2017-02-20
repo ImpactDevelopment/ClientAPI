@@ -25,8 +25,19 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
  */
 public abstract class ShaderProgram implements Helper {
 
+    /**
+     * The uniform variables for this shader
+     */
     private List<UniformVariable> uniforms = new ArrayList<>();
+
+    /**
+     * Various Object IDs
+     */
     private int programID, fragmentID, vertexID;
+
+    /**
+     * EXTFramebuffer used to render shader
+     */
     protected EXTFramebuffer framebuffer;
 
     public ShaderProgram(String vertex, String fragment, Framebuffer fbo) {
@@ -41,6 +52,14 @@ public abstract class ShaderProgram implements Helper {
         loadProgram();
     }
 
+    /**
+     * Updates this framebuffer with the values
+     * from the specified framebuffer texture
+     *
+     * @since 1.0
+     *
+     * @param textureID Framebuffer texture
+     */
     final void update(int textureID) {
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebuffer.getFramebufferID());
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -77,6 +96,11 @@ public abstract class ShaderProgram implements Helper {
         glUseProgramObjectARB(0);
     }
 
+    /**
+     * Deletes this ShaderProgram
+     *
+     * @since 1.0
+     */
     public final void delete() {
         glUseProgramObjectARB(0);
         glDetachObjectARB(programID, vertexID);
@@ -87,14 +111,35 @@ public abstract class ShaderProgram implements Helper {
         framebuffer.delete();
     }
 
+    /**
+     * Called to update Uniform Variables
+     *
+     * @since 1.0
+     */
     public abstract void update();
 
+    /**
+     * Loads a Uniform Variable from the specified name
+     *
+     * @since 1.0
+     *
+     * @param name The Uniform Name
+     * @return The Uniform Variable
+     */
     private UniformVariable loadUniform(String name) {
         UniformVariable v = UniformVariable.get(programID, name);
         this.uniforms.add(v);
         return v;
     }
 
+    /**
+     * Gets a uniform variable from the specified name
+     *
+     * @since 1.0
+     *
+     * @param name The Uniform Name
+     * @return The Uniform Variable
+     */
     protected UniformVariable getUniform(String name) {
         UniformVariable v = uniforms.stream().filter(uniform -> uniform.getName().equals(name)).findFirst().orElse(null);
         if (v == null)
@@ -102,6 +147,15 @@ public abstract class ShaderProgram implements Helper {
         return v;
     }
 
+    /**
+     * Loads a shader of the specified type from the specified path
+     *
+     * @since 1.0
+     *
+     * @param path Shader path
+     * @param type Shader type
+     * @return The Shader's Object ID
+     */
     private int loadShader(String path, int type) {
         String src = new StreamReader(ShaderProgram.class.getResourceAsStream(path)).read();
         int shaderID = glCreateShaderObjectARB(type);
@@ -111,6 +165,11 @@ public abstract class ShaderProgram implements Helper {
         return shaderID;
     }
 
+    /**
+     * Loads this ShaderProgram
+     *
+     * @since 1.0
+     */
     private void loadProgram() {
         glLinkProgramARB(programID);
         ShaderHelper.checkObjecti(programID, GL_OBJECT_LINK_STATUS_ARB);
@@ -119,6 +178,11 @@ public abstract class ShaderProgram implements Helper {
         glUseProgramObjectARB(0);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The Shader's Framebuffer
+     */
     EXTFramebuffer getFramebuffer() {
         return this.framebuffer;
     }

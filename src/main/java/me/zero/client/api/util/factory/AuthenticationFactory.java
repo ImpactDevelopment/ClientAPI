@@ -32,6 +32,8 @@ public class AuthenticationFactory {
     /**
      * Creates an authentication factory
      *
+     * @since 1.0
+     *
      * @return The created factory
      */
     public static AuthenticationFactory create() {
@@ -40,6 +42,8 @@ public class AuthenticationFactory {
 
     /**
      * Sets the Username for Authentication
+     *
+     * @since 1.0
      *
      * @param username The username
      * @return The Factory

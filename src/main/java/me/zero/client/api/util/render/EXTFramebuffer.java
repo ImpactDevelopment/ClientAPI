@@ -18,7 +18,14 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class EXTFramebuffer implements Helper {
 
+    /**
+     * Object IDs
+     */
     private int fboID, textureID, bufferID;
+
+    /**
+     * Width and Height of this EXT FBO
+     */
     private final int textureWidth, textureHeight;
 
     public EXTFramebuffer(Framebuffer fbo) {
@@ -31,6 +38,11 @@ public class EXTFramebuffer implements Helper {
         this.createFBO();
     }
 
+    /**
+     * Creates the FBO
+     *
+     * @since 1.0
+     */
     private void createFBO() {
         checkSetupFBO();
 
@@ -55,6 +67,12 @@ public class EXTFramebuffer implements Helper {
         glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_STENCIL_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, this.bufferID);
     }
 
+    /**
+     * Runs FBO Checks, ensures that stencil buffers
+     * are enabled.
+     *
+     * @since 1.0
+     */
     private static void checkSetupFBO() {
         Framebuffer fbo = mc.getFramebuffer();
 
@@ -69,26 +87,56 @@ public class EXTFramebuffer implements Helper {
         }
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return This Framebuffer's Object ID
+     */
     public final int getFramebufferID() {
         return this.fboID;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return This Framebuffer's Texture ID
+     */
     public final int getTextureID() {
         return this.textureID;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return This RenderBuffer's Object ID
+     */
     public final int getRenderBufferID() {
         return this.bufferID;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The width of the FBO
+     */
     public final int getFramebufferWidth() {
         return this.textureWidth;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The height of the FBO
+     */
     public final int getFramebufferHeight() {
         return this.textureHeight;
     }
 
+    /**
+     * Deletes the FBO
+     *
+     * @since 1.0
+     */
     public final void delete() {
         glDeleteRenderbuffersEXT(bufferID);
         glDeleteFramebuffersEXT(fboID);

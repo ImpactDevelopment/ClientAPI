@@ -11,12 +11,20 @@ import me.zero.client.api.event.type.EventState;
  */
 public final class LivingUpdateEvent {
 
+    /**
+     * The state of this event
+     */
     private final EventState state;
 
     public LivingUpdateEvent(EventState state) {
         this.state = state;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The event state
+     */
     public EventState getState() {
         return this.state;
     }

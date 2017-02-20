@@ -16,9 +16,19 @@ import me.zero.client.api.util.math.Vec3;
  */
 public class MotionUpdateEvent implements Helper {
 
+    /**
+     * State of this event
+     */
     private EventState type;
 
+    /**
+     * Original and New positions
+     */
     private static Vec3 oPos, nPos;
+
+    /**
+     * Original and New rotations
+     */
     private static Vec2 oRotation, nRotation;
 
     public MotionUpdateEvent(EventState type) {
@@ -32,41 +42,92 @@ public class MotionUpdateEvent implements Helper {
         nRotation = util.getRotations();
     }
 
+    /**
+     * Sets the X position
+     *
+     * @since 1.0
+     *
+     * @param x The new X position
+     * @return This event
+     */
     public MotionUpdateEvent x(double x) {
         nPos.x(x);
         return this;
     }
 
+    /**
+     * Sets the Y position
+     *
+     * @since 1.0
+     *
+     * @param y The new Y position
+     * @return This event
+     */
     public MotionUpdateEvent y(double y) {
         nPos.y(y);
         return this;
     }
 
+    /**
+     * Sets the Z position
+     *
+     * @since 1.0
+     *
+     * @param z The new Z position
+     * @return This event
+     */
     public MotionUpdateEvent z(double z) {
         nPos.z(z);
         return this;
     }
 
+    /**
+     * Sets the Yaw rotation
+     *
+     * @since 1.0
+     *
+     * @param yaw The new yaw rotation
+     * @return This event
+     */
     public MotionUpdateEvent yaw(float yaw) {
         nRotation.x(yaw);
         return this;
     }
 
+    /**
+     * Sets the Pitch rotation
+     *
+     * @since 1.0
+     *
+     * @param pitch The new pitch rotation
+     * @return This event
+     */
     public MotionUpdateEvent pitch(float pitch) {
         nRotation.y(pitch);
         return this;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The type of event
+     */
     public EventState getType() {
         return this.type;
     }
 
+    /**
+     * Applies the new position/rotations
+     */
     public static void apply() {
         EntityUtil util = EntityUtil.get(mc.player);
         util.setPos(nPos);
         util.setRotations(nRotation);
     }
 
+    /**
+     * Resets the original position/rotations
+     */
     public static void reset() {
         EntityUtil util = EntityUtil.get(mc.player);
         util.setPos(oPos);

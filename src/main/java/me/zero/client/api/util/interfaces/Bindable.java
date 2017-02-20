@@ -14,5 +14,10 @@ import me.zero.client.api.util.keybind.Keybind;
  */
 public interface Bindable {
 
+    /**
+     * @since 1.0
+     *
+     * @return The bind associated with this object
+     */
     Keybind getBind();
 }
