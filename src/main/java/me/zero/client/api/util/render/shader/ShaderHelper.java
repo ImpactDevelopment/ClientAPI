@@ -13,11 +13,27 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
  */
 public class ShaderHelper {
 
+    /**
+     * Checks an arb object parameter
+     *
+     * @since 1.0
+     *
+     * @param objID The object's ID
+     * @param name The name of the object
+     */
     public static void checkObjecti(int objID, int name) {
         if (glGetObjectParameteriARB(objID, name) == 0)
             throw new UnexpectedOutcomeException(getLogInfo(objID));
     }
 
+    /**
+     * Gets the error that an object produced
+     *
+     * @since 1.0
+     *
+     * @param objID The object's ID
+     * @return The error
+     */
     public static String getLogInfo(int objID) {
         return glGetInfoLogARB(objID, glGetObjectParameteriARB(objID, GL_OBJECT_INFO_LOG_LENGTH_ARB));
     }

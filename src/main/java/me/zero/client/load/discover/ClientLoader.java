@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Discovers the Client JSON file.
+ * Used to load all elements of a Client
  *
  * @since 1.0
  *
@@ -29,6 +29,13 @@ import java.util.List;
  */
 public class ClientLoader {
 
+    /**
+     * Retrieves the ClientInfo from the Client.json
+     *
+     * @since 1.0
+     *
+     * @return The ClientInfo
+     */
     public static ClientInfo getInfo() {
         InputStream stream = ClientLoader.class.getResourceAsStream("/client.json");
 
@@ -39,6 +46,14 @@ public class ClientLoader {
         return new GsonBuilder().setPrettyPrinting().create().fromJson(reader, ClientInfo.class);
     }
 
+    /**
+     * Retrieves the list of Class Transformers from the
+     * specified class in the Client.json
+     *
+     * @since 1.0
+     *
+     * @return The list of Transformers
+     */
     public static List<ITransformer> getTransformers() {
         ClientInfo info = getInfo();
         if (info == null)
@@ -59,6 +74,14 @@ public class ClientLoader {
         return transformers;
     }
 
+    /**
+     * Instantiates a Client from the ClientInfo
+     *
+     * @since 1.0
+     *
+     * @param info Client Info
+     * @return Client instance
+     */
     private static Client getClient(ClientInfo info) {
         if (info == null)
             throw new UnexpectedOutcomeException("Unable to create Client, ClientInfo not found!");
@@ -78,6 +101,11 @@ public class ClientLoader {
         return null;
     }
 
+    /**
+     * Runs the client, this method call is injected.
+     *
+     * @since 1.0
+     */
     public static void runClient() {
         ClientInfo info = getInfo();
         Client client = getClient(info);

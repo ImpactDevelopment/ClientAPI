@@ -12,16 +12,27 @@ import me.zero.client.api.event.type.Cancellable;
  */
 public class GlintEffectEvent extends Cancellable {
 
+    /**
+     * The object getting a glint effect applied to it
+     */
     private GlintTarget target;
 
     public GlintEffectEvent(GlintTarget target) {
         this.target = target;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The glint object
+     */
     public GlintTarget getTarget() {
         return this.target;
     }
 
+    /**
+     * Glint Object
+     */
     public enum GlintTarget {
         ARMOR, ITEM
     }

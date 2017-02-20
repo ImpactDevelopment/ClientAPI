@@ -59,7 +59,7 @@ public abstract class Plugin {
      *
      * @since 1.0
      *
-     * @param module
+     * @param module Module being loaded
      */
     void loadModule(Module module) {
         this.modules.add(module);

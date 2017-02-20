@@ -15,8 +15,19 @@ import static me.zero.client.api.util.Messages.COMMAND_MISSING_ARGS;
  */
 public class CommandContext {
 
+    /**
+     * The list of arguments
+     */
     private List<CommandArg<?>> arguments = new ArrayList<>();
+
+    /**
+     * The error stack, updated when a command isn't executed properly
+     */
     private List<String> errorStack = new ArrayList<>();
+
+    /**
+     * The raw args that were provided by the user
+     */
     private String[] args;
 
     @SuppressWarnings("unchecked")

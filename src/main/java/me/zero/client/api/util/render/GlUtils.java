@@ -67,11 +67,26 @@ public class GlUtils {
         return texId;
     }
 
+    /**
+     * Sets the color from a hex value
+     *
+     * @since 1.0
+     *
+     * @param hex The hex value
+     */
     public static void glColor(int hex) {
         float[] color = getColor(hex);
         GlStateManager.color(color[0], color[1], color[2], color[3]);
     }
 
+    /**
+     * Parses the ARGB from a hex value
+     *
+     * @since 1.0
+     *
+     * @param hex The Hex Color
+     * @return The parsed ARGB array
+     */
     public static float[] getColor(int hex) {
         return new float[] {
                 (hex >> 16 & 255) / 255F,

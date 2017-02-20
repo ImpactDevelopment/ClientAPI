@@ -68,6 +68,20 @@ public class RenderUtils {
         tessellator.draw();
     }
 
+    /**
+     * Draws a Textured Rectangle
+     *
+     * @since 1.0
+     *
+     * @param x Rect X
+     * @param y Rect Y
+     * @param width Rect Width
+     * @param height Rect Height
+     * @param u Tex U
+     * @param v Tex V
+     * @param t Tex T
+     * @param s Tex S
+     */
     public static void drawTextureRect(float x, float y, float width, float height, float u, float v, float t, float s) {
         renderer.begin(GL_TRIANGLES, POSITION_TEX);
         renderer.pos(x + width, y, 0F).tex(t, v).endVertex();
@@ -77,18 +91,60 @@ public class RenderUtils {
         tessellator.draw();
     }
 
+    /**
+     * Draws a line from one Vec2 to another
+     *
+     * @since 1.0
+     *
+     * @param start Starting Vec2
+     * @param end Ending Vec2
+     * @param width Line width
+     */
     public static void drawLine(Vec2 start, Vec2 end, float width) {
         drawLine(start.getX(), start.getY(), end.getX(), end.getY(), width);
     }
 
+    /**
+     * Draws a line from one Vec3 to another
+     *
+     * @since 1.0
+     *
+     * @param start Starting Vec3
+     * @param end Ending Vec3
+     * @param width Line width
+     */
     public static void drawLine(Vec3 start, Vec3 end, float width) {
         drawLine(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ(), width);
     }
 
+    /**
+     * Draws a line from one position to another
+     *
+     * @since 1.0
+     *
+     * @param x Start X
+     * @param y Start Y
+     * @param x1 End X
+     * @param y1 End Y
+     * @param width Line width
+     */
     public static void drawLine(float x, float y, float x1, float y1, float width) {
         drawLine(x, y, 0, x1, y1, 0, width);
     }
 
+    /**
+     * Draws a line from one position to another
+     *
+     * @since 1.0
+     *
+     * @param x Start X
+     * @param y Start Y
+     * @param z Start X
+     * @param x1 End X
+     * @param y1 End Y
+     * @param z1 End Z
+     * @param width Line width
+     */
     public static void drawLine(float x, float y, float z, float x1, float y1, float z1, float width) {
         preRender();
         glLineWidth(width);
@@ -99,6 +155,9 @@ public class RenderUtils {
         postRender();
     }
 
+    /**
+     * Called before rendering
+     */
     public static void preRender() {
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -109,6 +168,9 @@ public class RenderUtils {
         GlStateManager.depthMask(false);
     }
 
+    /**
+     * Called after rendering
+     */
     public static void postRender() {
         GlStateManager.disableBlend();
         GlStateManager.enableTexture2D();
