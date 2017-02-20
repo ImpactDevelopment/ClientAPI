@@ -16,7 +16,7 @@ public class Notifications {
 	/**
 	 * The list of notifications for this notification handler
 	 */
-	private Set<INotification> notifications = Sets.newHashSet();
+	private Set<INotification> notifications = Sets.newLinkedHashSet();
 
 	/**
 	 * The renderer for this notification handler
