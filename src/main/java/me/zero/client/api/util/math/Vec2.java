@@ -65,4 +65,8 @@ public class Vec2 {
     public Vec2 scale(float scale) {
         return new Vec2(this.x * scale, this.y * scale);
     }
+
+    public Vec3 toVec3() {
+        return new Vec3(x, y, 0);
+    }
 }
