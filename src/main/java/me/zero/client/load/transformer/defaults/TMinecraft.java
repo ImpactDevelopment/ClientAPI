@@ -5,7 +5,7 @@ import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 
-import java.util.List;
+import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
@@ -20,7 +20,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
 public final class TMinecraft extends Transformer {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(runTick.createHook(method -> method.insertBefore("EventManager.post(new TickEvent());")));
         hooks.add(runGameLoop.createHook(method -> method.insertBefore("EventManager.post(new LoopEvent());")));
         hooks.add(init.createHook(method -> method.insertAfter("ClientLoader.runClient();")));
@@ -32,7 +32,7 @@ public final class TMinecraft extends Transformer {
     }
 
     @Override
-    public void loadImports(List<String> imports) {
+    public void loadImports(Collection<String> imports) {
         imports.add("me.zero.client.load.discover");
     }
 

@@ -1,7 +1,8 @@
 package me.zero.client.api.gui.notification;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.Sets;
+
+import java.util.Set;
 
 /**
  * Essentially a Notification Manager, only takes in a renderer
@@ -15,7 +16,7 @@ public class Notifications {
 	/**
 	 * The list of notifications for this notification handler
 	 */
-	private List<INotification> notifications = new ArrayList<>();
+	private Set<INotification> notifications = Sets.newHashSet();
 
 	/**
 	 * The renderer for this notification handler
