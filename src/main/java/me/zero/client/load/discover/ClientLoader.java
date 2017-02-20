@@ -10,6 +10,7 @@ import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.transformer.ITransformer;
+import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
 import org.reflections.Reflections;
 
@@ -49,7 +50,8 @@ public class ClientLoader {
 
         new Reflections(info.getTransformers()).getSubTypesOf(Transformer.class).forEach(transformer -> {
             try {
-                transformers.add(transformer.newInstance());
+                if (transformer.isAnnotationPresent(LoadTransformer.class))
+                    transformers.add(transformer.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_INSTANTIATION, transformer);
             }
