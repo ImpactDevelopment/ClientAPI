@@ -127,7 +127,7 @@ public class Vec2 {
      * @return The new vector
      */
     public Vec2 sub(double x, double y) {
-        return add(new Vec2(-x, -y));
+        return add(new Vec2(x, y));
     }
 
     /**
@@ -140,7 +140,7 @@ public class Vec2 {
      * @return The new vector
      */
     public Vec2 sub(float x, float y) {
-        return add(new Vec2(-x, -y));
+        return add(new Vec2(x, y));
     }
 
     /**
