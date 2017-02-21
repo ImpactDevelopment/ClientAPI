@@ -28,7 +28,7 @@ public final class TNetworkManager extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[]  { NetworkManager };
+    public ClassReference getTargetClass() {
+        return NetworkManager;
     }
 }

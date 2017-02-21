@@ -9,7 +9,6 @@ import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.load.discover.ClientLoader;
 import me.zero.client.load.transformer.ITransformer;
 import me.zero.client.load.transformer.Transformer;
-import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
@@ -103,12 +102,7 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
      * @param className The class name
      */
     private List<ITransformer> getTransformers(String className) {
-        return transformers.stream().filter(transformer -> {
-            for (ClassReference target : transformer.getTargetClasses())
-                if (target.getName().equalsIgnoreCase(className))
-                    return true;
-            return false;
-        }).collect(Collectors.toList());
+        return transformers.stream().filter(transformer -> transformer.getTargetClass().getName().equalsIgnoreCase(className)).collect(Collectors.toList());
     }
 
     /**

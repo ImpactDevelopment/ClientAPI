@@ -1,7 +1,10 @@
 package me.zero.client.load.transformer.reference;
 
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.NotFoundException;
 import javassist.bytecode.Descriptor;
-import me.zero.client.load.transformer.reference.obfuscation.Obfuscation;
+import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
 import java.lang.reflect.Type;
@@ -28,28 +31,18 @@ public final class ClassReference extends Reference {
     /**
      * @since 1.0
      *
-     * @return Class
+     * @return The Descriptor of this Class
      */
     public String getDescriptor() {
         return Descriptor.of(this.getName());
     }
 
     /**
-     * Creates an Array of {@code ObfuscationNames} for
-     * each obfuscation type based on the Type inputted.
-     *
      * @since 1.0
      *
-     * @see me.zero.client.load.transformer.reference.obfuscation.ObfuscationName
-     *
-     * @param type The Type
-     * @return An Array of ObfuscationNames
+     * @return The CtClass representation of this Class
      */
-    private static ObfuscationName[] from(Type type) {
-        Obfuscation[] types = Obfuscation.values();
-        ObfuscationName[] names = new ObfuscationName[types.length];
-        for (int i = 0; i < types.length; i++)
-            names[i] = ObfuscationName.from(types[i], type.getTypeName());
-        return names;
+    public CtClass getCtClass() throws NotFoundException {
+        return ClassPool.getDefault().get(this.getName());
     }
 }
