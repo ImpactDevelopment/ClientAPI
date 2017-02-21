@@ -11,6 +11,8 @@ import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.shader.ShaderRender;
+import me.zero.client.api.wrapper.IMinecraft;
+import me.zero.client.api.wrapper.IRenderManager;
 import me.zero.example.mod.mods.esp.OutlineShader;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
@@ -46,12 +48,10 @@ public class ESP extends Module {
 
         checkFBO();
 
-        float partialTicks = ((Timer) ReflectionUtils.getField(mc, "timer")).renderPartialTicks;
-        double renderX = (double) ReflectionUtils.getField(mc.getRenderManager(), "renderPosX");
-        double renderY = (double) ReflectionUtils.getField(mc.getRenderManager(), "renderPosY");
-        double renderZ = (double) ReflectionUtils.getField(mc.getRenderManager(), "renderPosZ");
+        float partialTicks = ((IMinecraft) mc).getTimer().renderPartialTicks;
 
-        Vec3 view = new Vec3(renderX, renderY, renderZ);
+        IRenderManager renderManager = (IRenderManager) mc.getRenderManager();
+        Vec3 view = new Vec3(renderManager.getRenderPosX(), renderManager.getRenderPosY(), renderManager.getRenderPosZ());
 
         glPushMatrix();
         glEnable(GL_BLEND);
