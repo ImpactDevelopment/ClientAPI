@@ -2,3 +2,4 @@ TODO
 - Command System
 - Saving (JsonObject)
 - Value registry
+- Fix interpolate method
