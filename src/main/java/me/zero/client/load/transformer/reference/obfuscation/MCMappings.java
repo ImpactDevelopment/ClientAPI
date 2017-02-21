@@ -42,6 +42,7 @@ public interface MCMappings {
     ClassReference IBakedModel = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.block.model.IBakedModel"), from(VANILLA, "cbh") });
     ClassReference RenderItem = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.RenderItem"), from(VANILLA, "bwz") });
     ClassReference Timer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Timer"), from(VANILLA, "bey") });
+    ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity"), from(VANILLA, "bur") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
