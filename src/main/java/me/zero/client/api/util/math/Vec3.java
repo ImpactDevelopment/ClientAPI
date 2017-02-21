@@ -195,7 +195,7 @@ public class Vec3 {
      * @return The new vector
      */
     public Vec3 sub(double x, double y, double z) {
-        return sub(new Vec3(-x, -y, -z));
+        return sub(new Vec3(x, y, z));
     }
 
     /**
@@ -209,7 +209,7 @@ public class Vec3 {
      * @return The new vector
      */
     public Vec3 sub(float x, float y, float z) {
-        return sub(new Vec3(-x, -y, -z));
+        return sub(new Vec3(x, y, z));
     }
 
     /**
