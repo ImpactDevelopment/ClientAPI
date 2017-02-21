@@ -30,7 +30,7 @@ public final class TEntityRenderer extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { EntityRenderer };
+    public ClassReference getTargetClass() {
+        return EntityRenderer;
     }
 }

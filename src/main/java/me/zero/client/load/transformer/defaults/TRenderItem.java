@@ -24,7 +24,7 @@ public class TRenderItem extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { RenderItem };
+    public ClassReference getTargetClass() {
+        return RenderItem;
     }
 }

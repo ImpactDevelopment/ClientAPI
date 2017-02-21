@@ -25,7 +25,7 @@ public final class TGuiIngame extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { GuiIngame };
+    public ClassReference getTargetClass() {
+        return GuiIngame;
     }
 }

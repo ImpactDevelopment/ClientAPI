@@ -3,11 +3,10 @@ package me.zero.client.api.util.render.shader;
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.interfaces.Action;
 import me.zero.client.api.util.interfaces.Helper;
+import me.zero.client.api.wrapper.IMinecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.Timer;
-import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Method;
 
@@ -44,7 +43,7 @@ public class ShaderRender implements Helper, Action {
         ReflectionUtils.callMethod(
                 mc.entityRenderer,
                 setupCameraTransform,
-                ((Timer) ReflectionUtils.getField(mc, "timer")).renderPartialTicks,
+                ((IMinecraft) mc).getTimer().renderPartialTicks,
                 0
         );
 

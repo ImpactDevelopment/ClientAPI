@@ -1,5 +1,7 @@
 package me.zero.client.load.transformer.defaults;
 
+import javassist.*;
+import me.zero.client.api.wrapper.IMinecraft;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
@@ -29,6 +31,12 @@ public final class TMinecraft extends Transformer {
         hooks.add(rightClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.RIGHT));")));
         hooks.add(middleClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.MIDDLE));")));
         hooks.add(loadWorld.createHook(method -> method.insertAfter("if ($1 != null) { EventManager.post(new WorldLoadEvent($1)); }")));
+
+        // TODO: Create "Wrapper" system
+        hooks.add(ctClass -> {
+            ctClass.addInterface(ClassPool.getDefault().get(IMinecraft.class.getName()));
+            ctClass.addMethod(CtNewMethod.make(Timer.getCtClass(), "getTimer", new CtClass[0], new CtClass[0], "return this.timer;", ctClass));
+        });
     }
 
     @Override
@@ -37,7 +45,7 @@ public final class TMinecraft extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { Minecraft };
+    public ClassReference getTargetClass() {
+        return Minecraft;
     }
 }

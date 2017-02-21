@@ -26,7 +26,7 @@ public class TLayerArmorBase extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { LayerArmorBase };
+    public ClassReference getTargetClass() {
+        return LayerArmorBase;
     }
 }

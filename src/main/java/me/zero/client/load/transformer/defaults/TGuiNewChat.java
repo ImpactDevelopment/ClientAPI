@@ -25,7 +25,7 @@ public final class TGuiNewChat extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { GuiNewChat };
+    public ClassReference getTargetClass() {
+        return GuiNewChat;
     }
 }

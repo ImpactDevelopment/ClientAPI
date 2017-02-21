@@ -4,6 +4,7 @@ import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.load.transformer.reference.obfuscation.Obfuscation;
 import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 /**
@@ -63,5 +64,24 @@ public abstract class Reference {
         if (name == null)
             throw new UnexpectedOutcomeException("Name not found for Obfuscation state");
         return name;
+    }
+
+    /**
+     * Creates an Array of {@code ObfuscationNames} for
+     * each obfuscation type based on the Type inputted.
+     *
+     * @since 1.0
+     *
+     * @see me.zero.client.load.transformer.reference.obfuscation.ObfuscationName
+     *
+     * @param type The Type
+     * @return An Array of ObfuscationNames
+     */
+    protected static ObfuscationName[] from(Type type) {
+        Obfuscation[] types = Obfuscation.values();
+        ObfuscationName[] names = new ObfuscationName[types.length];
+        for (int i = 0; i < types.length; i++)
+            names[i] = ObfuscationName.from(types[i], type.getTypeName());
+        return names;
     }
 }

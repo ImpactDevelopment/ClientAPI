@@ -36,7 +36,7 @@ public final class TEntityPlayerSP extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { EntityPlayerSP };
+    public ClassReference getTargetClass() {
+        return EntityPlayerSP;
     }
 }
