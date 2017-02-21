@@ -6,6 +6,7 @@ import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.load.transformer.reference.obfuscation.MCMappings;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 public class ExampleTransformer extends Transformer implements MCMappings {
 
     @Override
-    public void loadHooks(List<ClassHook> hooks) {
+    public void loadHooks(Collection<ClassHook> hooks) {
         // Create a new hook from "runTick"
         hooks.add(runTick.createHook(ctMethod -> {
             // Insert our code at the top of the method
@@ -25,13 +26,13 @@ public class ExampleTransformer extends Transformer implements MCMappings {
     }
 
     @Override
-    public void loadImports(List<String> imports) {
+    public void loadImports(Collection<String> imports) {
         // No Imports Required
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
+    public ClassReference getTargetClass() {
         // We're targeting the "runTick" method inside of "Minecraft"
-        return new ClassReference[] { Minecraft };
+        return Minecraft;
     }
 }

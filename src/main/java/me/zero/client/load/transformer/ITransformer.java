@@ -47,7 +47,7 @@ public interface ITransformer {
     /**
      * @since 1.0
      *
-     * @return Classes that are being targeted for Transformation
+     * @return Class being targeted for Transformation
      */
-    ClassReference[] getTargetClasses();
+    ClassReference getTargetClass();
 }

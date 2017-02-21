@@ -19,7 +19,7 @@ import org.lwjgl.input.Keyboard;
 @Mod(name = "Camera", description = "", bind = Keyboard.KEY_B)
 public class Camera extends Module implements IRender {
 
-    @Label(name = "Height", description = "How high up the camera is")
+    @Label(name = "Height", id = "offset", description = "How high up the camera is")
     @NumberValue(min = 10, max = 50)
     private double height = 30;
 
@@ -38,7 +38,7 @@ public class Camera extends Module implements IRender {
 
         @Override
         public boolean visible() {
-            return true;
+            return Camera.this.getState();
         }
 
         @Override

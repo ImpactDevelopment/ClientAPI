@@ -16,7 +16,7 @@ import org.lwjgl.input.Keyboard;
 @Mod(name = "Speed", description = "A basic speed module", bind = Keyboard.KEY_Z)
 public class Speed extends Module implements IMovement {
 
-    @Label(name = "Speed", description = "The multiplier for your speed")
+    @Label(name = "Speed", id = "speed", description = "The multiplier for your speed")
     @NumberValue(min = 1, max = 10)
     private double speed = 3;
 

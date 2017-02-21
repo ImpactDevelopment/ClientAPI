@@ -25,7 +25,7 @@ public final class TProfiler extends Transformer {
     }
 
     @Override
-    public ClassReference[] getTargetClasses() {
-        return new ClassReference[] { Profiler };
+    public ClassReference getTargetClass() {
+        return Profiler;
     }
 }
