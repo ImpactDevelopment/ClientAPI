@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
  * Type of {@code Reference} designed for Classes.
  *
  * @see me.zero.client.load.transformer.reference.MethodReference
+ * @see me.zero.client.load.transformer.reference.FieldReference
  *
  * @since 1.0
  *

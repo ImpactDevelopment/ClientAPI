@@ -12,12 +12,13 @@ import java.util.Arrays;
  *
  * @see me.zero.client.load.transformer.reference.ClassReference
  * @see me.zero.client.load.transformer.reference.MethodReference
+ * @see me.zero.client.load.transformer.reference.FieldReference
  *
  * @since 1.0
  *
  * Created by Brady on 1/20/2017.
  */
-public abstract class Reference {
+abstract class Reference {
 
     /**
      * The names for this reference
