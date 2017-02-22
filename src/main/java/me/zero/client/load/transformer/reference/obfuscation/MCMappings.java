@@ -2,6 +2,7 @@ package me.zero.client.load.transformer.reference.obfuscation;
 
 import io.netty.channel.ChannelHandlerContext;
 import me.zero.client.load.transformer.reference.ClassReference;
+import me.zero.client.load.transformer.reference.FieldReference;
 import me.zero.client.load.transformer.reference.MethodReference;
 
 import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.MCP;
@@ -66,4 +67,10 @@ public interface MCMappings {
     MethodReference updatePlayerList = new MethodReference(new ObfuscationName[] { from(MCP, "updatePlayerList"), from(VANILLA, "a") }, Void.TYPE, Boolean.TYPE);
     MethodReference renderEnchantedGlint = new MethodReference(new ObfuscationName[] { from(MCP, "renderEnchantedGlint"), from(VANILLA, "") }, Void.TYPE, RenderLivingBase, EntityLivingBase, ModelBase, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE);
     MethodReference renderEffect = new MethodReference(new ObfuscationName[] { from(MCP, "renderEffect"), from(VANILLA, "a") }, Void.TYPE, IBakedModel);
+
+    // Fields
+    FieldReference timer = new FieldReference(new ObfuscationName[] { from(MCP, "timer"), from(VANILLA, "Y") });
+    FieldReference renderPosX = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosX"), from(VANILLA, "o") });
+    FieldReference renderPosY = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosY"), from(VANILLA, "p") });
+    FieldReference renderPosZ = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosZ"), from(VANILLA, "q") });
 }
