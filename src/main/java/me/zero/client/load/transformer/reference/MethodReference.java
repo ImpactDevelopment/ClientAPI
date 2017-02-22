@@ -16,6 +16,7 @@ import java.util.List;
  * Type of {@code Reference} designed for Methods.
  *
  * @see me.zero.client.load.transformer.reference.ClassReference
+ * @see me.zero.client.load.transformer.reference.FieldReference
  *
  * @since 1.0
  *

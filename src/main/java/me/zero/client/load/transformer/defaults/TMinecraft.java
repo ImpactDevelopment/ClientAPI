@@ -35,7 +35,7 @@ public final class TMinecraft extends Transformer {
         // TODO: Create "Wrapper" system
         hooks.add(ctClass -> {
             ctClass.addInterface(ClassPool.getDefault().get(IMinecraft.class.getName()));
-            ctClass.addMethod(CtNewMethod.make(Timer.getCtClass(), "getTimer", new CtClass[0], new CtClass[0], "return this.timer;", ctClass));
+            ctClass.addMethod(CtNewMethod.make(Timer.getCtClass(), "getTimer", new CtClass[0], new CtClass[0], timer.createReturn(), ctClass));
         });
     }
 
