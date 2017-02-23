@@ -4,10 +4,14 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import javassist.bytecode.Descriptor;
+import me.zero.client.api.util.logger.Level;
+import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
 import java.lang.reflect.Type;
+
+import static me.zero.client.api.util.Messages.REFERENCE_CLASS_CTCLASS;
 
 /**
  * Type of {@code Reference} designed for Classes.
@@ -43,7 +47,12 @@ public final class ClassReference extends Reference {
      *
      * @return The CtClass representation of this Class
      */
-    public CtClass getCtClass() throws NotFoundException {
-        return ClassPool.getDefault().get(this.getName());
+    public CtClass getCtClass() {
+        try {
+            return ClassPool.getDefault().get(this.getName());
+        } catch (NotFoundException e) {
+            Logger.instance.logf(Level.SEVERE, REFERENCE_CLASS_CTCLASS, this.getClass().getCanonicalName());
+            return null;
+        }
     }
 }
