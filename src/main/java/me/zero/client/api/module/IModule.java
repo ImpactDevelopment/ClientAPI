@@ -13,7 +13,7 @@ import me.zero.client.api.util.interfaces.Toggleable;
  *
  * Created by Brady on 1/21/2017.
  */
-interface IModule extends Toggleable, Bindable, Nameable {
+interface IModule extends Toggleable, Bindable {
 
     /**
      * @since 1.0
