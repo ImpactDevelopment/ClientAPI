@@ -18,35 +18,81 @@ import java.util.Set;
  */
 public class Node<T extends Node> implements Nameable {
 
+    /**
+     * Child nodes
+     */
     private Set<T> children = Sets.newLinkedHashSet();
+
+    /**
+     * Values
+     */
     private Set<Value> values = Sets.newLinkedHashSet();
 
+    /**
+     * Name of the node
+     */
     protected String name;
+
+    /**
+     * Description of the node
+     */
     protected String description;
+
 
     protected Node() {
         Values.discover(this);
     }
 
-    public final void addChildren(T... data) {
-        this.addChildren(Arrays.asList(data));
+    /**
+     * Adds children to the list of child nodes
+     *
+     * @since 1.0
+     *
+     * @param children The children
+     */
+    public final void addChildren(T... children) {
+        this.addChildren(Arrays.asList(children));
     }
 
+    /**
+     * Adds children to the list of child nodes
+     *
+     * @since 1.0
+     *
+     * @param children The children
+     */
     public final void addChildren(Collection<T> children) {
         this.children.addAll(children);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The set of all child nodes
+     */
     public final Set<T> getChildren() {
         return Sets.newLinkedHashSet(this.children);
     }
 
+    /**
+     * Adds a value to this node
+     *
+     * @since 1.0
+     *
+     * @param value The value
+     */
     public final void addValue(Value value) {
         if (!this.values.contains(value))
             this.values.add(value);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The set of all values
+     */
     public final Set<Value> getValues() {
-        return this.values;
+        return Sets.newLinkedHashSet(this.values);
     }
 
     @Override
