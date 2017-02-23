@@ -42,18 +42,6 @@ public abstract class Manager<T> implements Loadable, Saveable {
     public final void reset(){
         this.data.clear();
     }
-
-    /**
-     * Adds a single entry into the data array
-     *
-     * @since 1.0
-     *
-     * @param data The entry
-     */
-    protected final void addData(T data) {
-        this.data.add(data);
-    }
-
     /**
      * Adds multiple entries into the data array
      *

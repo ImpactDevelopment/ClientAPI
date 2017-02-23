@@ -2,6 +2,7 @@ package me.zero.client.api.module;
 
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
@@ -19,17 +20,7 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  *
  * Created by Brady on 1/19/2017.
  */
-public abstract class Module implements IModule, Helper {
-
-    /**
-     * The name of the module
-     */
-    private String name;
-
-    /**
-     * The description of the module
-     */
-    private String description;
+public abstract class Module extends Node<Module> implements IModule, Helper {
 
     /**
      * The type/category of the module
@@ -60,7 +51,7 @@ public abstract class Module implements IModule, Helper {
 
             this.type = Arrays.stream(this.getClass().getInterfaces())
                     .filter(c -> c.isAnnotationPresent(Category.class))
-                    .findFirst().orElse(Default.class)
+                    .findFirst().orElse(Category.Default.class)
                     .getAnnotation(Category.class).name();
         } else {
             throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
@@ -94,16 +85,6 @@ public abstract class Module implements IModule, Helper {
     }
 
     @Override
-    public final String getName() {
-        return this.name;
-    }
-
-    @Override
-    public final String getDescription() {
-        return this.description;
-    }
-
-    @Override
     public final String getType() {
         return this.type;
     }
@@ -112,7 +93,4 @@ public abstract class Module implements IModule, Helper {
     public final Keybind getBind() {
         return this.bind;
     }
-
-    @Category(name = "Default")
-    private class Default {}
 }
