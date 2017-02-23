@@ -19,16 +19,41 @@ import java.util.Arrays;
  */
 public class Values {
 
+    /**
+     * Discovers all of the Values in a node, then registers them
+     *
+     * @since 1.0
+     *
+     * @param node Node being scanned
+     */
     public static void discover(Node node) {
         Arrays.stream(node.getClass().getDeclaredFields())
                 .filter(Values::hasValueAnnotation)
                 .forEach(field -> node.addValue(getValue(node, field)));
     }
 
+    /**
+     * Returns whether or not the specified field
+     * has a value annotation or not.
+     *
+     * @since 1.0
+     *
+     * @param field Field being checked
+     * @return If the field has a value annotation
+     */
     private static boolean hasValueAnnotation(Field field) {
         return getValueAnnotation(field) != null;
     }
 
+    /**
+     * Gets the class of the value annotation belonging
+     * to a field, null if there is none.
+     *
+     * @since 1.0
+     *
+     * @param field Field being checked
+     * @return The value annotation of the field
+     */
     private static Class<? extends Annotation> getValueAnnotation(Field field) {
         if (field.isAnnotationPresent(Label.class))
             return Arrays.stream(field.getDeclaredAnnotations())
@@ -38,6 +63,16 @@ public class Values {
         return null;
     }
 
+    /**
+     * Executes checks before using the TypeResolver to
+     * get the Value from the Field.
+     *
+     * @since 1.0
+     *
+     * @param parent Object containing value field
+     * @param field Field representing value
+     * @return The resolved field
+     */
     private static Value getValue(Object parent, Field field) {
         Class<? extends Annotation> anno = getValueAnnotation(field);
 
