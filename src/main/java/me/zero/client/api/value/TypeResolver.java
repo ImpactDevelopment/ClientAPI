@@ -16,8 +16,20 @@ import java.lang.reflect.Field;
  */
 public interface TypeResolver<T extends Value> {
 
+    /**
+     * Resolves a Value from it's respective Field
+     *
+     * @since 1.0
+     *
+     * @param parent The object containing the field
+     * @param field The value field
+     * @return The resolved Value
+     */
     T resolve(Object parent, Field field);
 
+    /**
+     * Resolves Boolean Types
+     */
     TypeResolver<BooleanType> BOOLEAN = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
         Boolean value = (Boolean) ReflectionUtils.getField(parent, field);
@@ -29,6 +41,9 @@ public interface TypeResolver<T extends Value> {
         return type;
     };
 
+    /**
+     * Resolves String Types
+     */
     TypeResolver<StringType> STRING = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
         StringType type = new StringType(label.name(), label.description(), parent, field);
