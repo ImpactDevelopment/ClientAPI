@@ -22,6 +22,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationN
 public interface MCMappings {
     // Classes
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
+    ClassReference Session = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Session"), from(VANILLA, "bez") });
     ClassReference GuiScreen = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiScreen"), from(VANILLA, "bho") });
     ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiIngame"), from(VANILLA, "bfh") });
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
@@ -71,6 +72,7 @@ public interface MCMappings {
     MethodReference renderEffect = new MethodReference(new ObfuscationName[] { from(MCP, "renderEffect"), from(VANILLA, "a") }, Void.TYPE, IBakedModel);
 
     // Fields
+    FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });
     FieldReference timer = new FieldReference(new ObfuscationName[] { from(MCP, "timer"), from(VANILLA, "Y") });
     FieldReference renderPosX = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosX"), from(VANILLA, "o") });
     FieldReference renderPosY = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosY"), from(VANILLA, "p") });
