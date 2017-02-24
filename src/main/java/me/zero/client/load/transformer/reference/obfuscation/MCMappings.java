@@ -47,6 +47,7 @@ public interface MCMappings {
     ClassReference Timer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Timer"), from(VANILLA, "bey") });
     ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity"), from(VANILLA, "bur") });
     ClassReference CPacketPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.client.CPacketPlayer"), from(VANILLA, "iz") });
+    ClassReference PlayerControllerMP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.PlayerControllerMP"), from(VANILLA, "bnp") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -84,4 +85,6 @@ public interface MCMappings {
     FieldReference player_yaw = new FieldReference(new ObfuscationName[] { from(MCP, "yaw"), from(VANILLA, "d") });
     FieldReference player_pitch = new FieldReference(new ObfuscationName[] { from(MCP, "pitch"), from(VANILLA, "e") });
     FieldReference player_onground = new FieldReference(new ObfuscationName[] { from(MCP, "onGround"), from(VANILLA, "f") });
+    FieldReference curBlockDamageMP = new FieldReference(new ObfuscationName[] { from(MCP, "curBlockDamageMP"), from(VANILLA, "e") });
+    FieldReference isHittingBlock = new FieldReference(new ObfuscationName[] { from(MCP, "isHittingBlock"), from(VANILLA, "h") });
 }
