@@ -22,6 +22,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationN
 public interface MCMappings {
     // Classes
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
+    ClassReference GuiScreen = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiScreen"), from(VANILLA, "bho") });
     ClassReference GuiIngame = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.GuiIngame"), from(VANILLA, "bfh") });
     ClassReference NetHandlerPlayClient = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.network.NetHandlerPlayClient"), from(VANILLA, "bno") });
     ClassReference NetworkManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.NetworkManager"), from(VANILLA, "er") });
@@ -49,6 +50,7 @@ public interface MCMappings {
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
     MethodReference runGameLoop = new MethodReference(new ObfuscationName[] { from(MCP, "runGameLoop"), from(VANILLA, "av") }, Void.TYPE);
     MethodReference init = new MethodReference(new ObfuscationName[] { from(MCP, "init"), from(VANILLA, "an") }, Void.TYPE);
+    MethodReference displayGuiScreen = new MethodReference(new ObfuscationName[] { from(MCP, "displayGuiScreen"), from(VANILLA, "a") }, Void.TYPE, GuiScreen);
     MethodReference renderGameOverlay = new MethodReference(new ObfuscationName[] { from(MCP, "renderGameOverlay"), from(VANILLA, "a") }, Void.TYPE, Float.TYPE);
     MethodReference channelRead0 = new MethodReference(new ObfuscationName[] { from(MCP, "channelRead0"), from(VANILLA, "a" ) }, Void.TYPE, ChannelHandlerContext.class, Packet);
     MethodReference sendPacket1 = new MethodReference(new ObfuscationName[] { from(MCP, "sendPacket" ), from(VANILLA, "a") }, Void.TYPE, Packet);
