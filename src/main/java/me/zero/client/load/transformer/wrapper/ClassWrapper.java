@@ -143,7 +143,7 @@ public abstract class ClassWrapper {
             throw new ActionNotValidException("ClassHook cannot be created if implementation isn't complete!");
 
         return ctClass -> {
-            ctClass.addInterface(target);
+            ctClass.addInterface(ClassPool.getDefault().get(wrapper.getName()));
             methods.forEach(method -> {
                 try {
                     ctClass.addMethod(method);

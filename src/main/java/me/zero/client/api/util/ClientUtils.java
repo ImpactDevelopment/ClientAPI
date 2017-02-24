@@ -66,4 +66,61 @@ public class ClientUtils {
         }
         return null;
     }
+
+    /**
+     * Returns the Index of the specified Object in the Array, returns -1 if the
+     * object is not found in the array
+     *
+     * @since 1.0
+     *
+     * @param object Object to be searched for
+     * @param array Array to search for object in
+     * @return Index of the Object in the Array
+     */
+    public static <T> int indexOf(T object, T[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(object)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns if the specified object is present in the specified array
+     *
+     * @since 1.0
+     *
+     * @param object Object to check if is present in Array
+     * @param array Array that may/may not contain the Object
+     * @return true if the specified object is in the specified array, false if not
+     */
+    public static <T> boolean arrayContains(T object, T[] array) {
+        return indexOf(object, array) != -1;
+    }
+
+    /**
+     * Returns the specified Object from the Array, if the object is present in
+     * the array. If not, the first object present in the array will be
+     * returned, if the size of the array is greater than 1, if not, the
+     * specified Object will be returned.
+     *
+     * @since 1.0
+     *
+     * @param object The value trying to be set
+     * @param array The array that may/may not contain the value
+     * @return The value found from the array
+     */
+    public static <T> T objectFrom(T object, T[] array) {
+        int index = indexOf(object, array);
+        if (index != -1) {
+            return array[index];
+        } else {
+            if (array.length > 0) {
+                return array[0];
+            } else {
+                return object;
+            }
+        }
+    }
 }
