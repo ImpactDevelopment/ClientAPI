@@ -6,6 +6,8 @@ import me.zero.client.api.value.Value;
 import java.lang.reflect.Field;
 
 /**
+ * A value that can have a specific set of values
+ *
  * @since 1.0
  *
  * Created by Brady on 2/24/2017.
