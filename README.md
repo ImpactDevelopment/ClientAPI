@@ -5,6 +5,13 @@ API designed to make Clients have Universal Support
 [![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/releases)
 
+##Credits
+| Name                | Contribution         |
+|---------------------|----------------------|
+| Halalaboos & Brudin | CFont                |
+| MatthewH & MarcoMC  | CapesAPI Integration |
+| Nerxit              | Tab GUI System       |
+
 ## Development Kit
 To use the Client API, you must download [Development Kit](https://github.com/ZeroMemes/ClientAPI-CDK). Instructions on how to set it up will be posted in the README.
 
