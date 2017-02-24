@@ -1,7 +1,5 @@
 package me.zero.client.load.transformer.defaults;
 
-import javassist.*;
-import me.zero.client.api.wrapper.IMinecraft;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;

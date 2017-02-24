@@ -1,5 +1,7 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
+import javassist.CtClass;
+import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.IMinecraft;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
@@ -21,5 +23,6 @@ public class WMinecraft extends ClassWrapper {
     @Override
     protected void loadImplementations() {
         this.implement("getTimer", Timer.getCtClass(), timer);
+        this.implement("setTimer", CtPrimitiveType.voidType, new CtClass[] { Session.getCtClass() }, session.createReturn());
     }
 }
