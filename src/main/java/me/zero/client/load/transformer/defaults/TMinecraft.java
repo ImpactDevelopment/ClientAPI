@@ -31,6 +31,8 @@ public final class TMinecraft extends Transformer {
         hooks.add(clickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.LEFT));")));
         hooks.add(rightClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.RIGHT));")));
         hooks.add(middleClickMouse.createHook(method -> method.insertBefore("EventManager.post(new ClickEvent(ClickEvent.MouseButton.MIDDLE));")));
+
+        hooks.add(displayGuiScreen.createHook(method -> method.insertBefore("GuiEvent event = new GuiEvent($1); EventManager.post(event); $1 = event.getScreen();")));
         hooks.add(loadWorld.createHook(method -> method.insertAfter("if ($1 != null) { EventManager.post(new WorldLoadEvent($1)); }")));
 
         hooks.add(new WMinecraft().createClassHook());
