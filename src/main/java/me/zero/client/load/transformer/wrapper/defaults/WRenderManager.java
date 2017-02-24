@@ -21,8 +21,8 @@ public class WRenderManager extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implement("getRenderPosX", CtPrimitiveType.doubleType, renderPosX);
-        this.implement("getRenderPosY", CtPrimitiveType.doubleType, renderPosY);
-        this.implement("getRenderPosZ", CtPrimitiveType.doubleType, renderPosZ);
+        this.implementR("getRenderPosX", CtPrimitiveType.doubleType, renderPosX);
+        this.implementR("getRenderPosY", CtPrimitiveType.doubleType, renderPosY);
+        this.implementR("getRenderPosZ", CtPrimitiveType.doubleType, renderPosZ);
     }
 }

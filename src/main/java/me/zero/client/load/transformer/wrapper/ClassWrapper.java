@@ -52,6 +52,18 @@ public abstract class ClassWrapper {
     protected abstract void loadImplementations();
 
     /**
+     * Implements a setter method from a FieldReference
+     *
+     * @since 1.0
+     *
+     * @param methodName The name of the method
+     * @param paramType The return type of the method as a CtClass
+     */
+    protected void implementS(String methodName, CtClass paramType, FieldReference reference) {
+        this.implement(methodName, CtPrimitiveType.voidType, new CtClass[] { paramType }, reference.createReturn());
+    }
+
+    /**
      * Implements a return method from a FieldReference
      *
      * @since 1.0
@@ -59,7 +71,7 @@ public abstract class ClassWrapper {
      * @param methodName The name of the method
      * @param returnType The return type of the method as a CtClass
      */
-    protected void implement(String methodName, CtClass returnType, FieldReference reference) {
+    protected void implementR(String methodName, CtClass returnType, FieldReference reference) {
         this.implement(methodName, returnType, reference.createReturn());
     }
 
