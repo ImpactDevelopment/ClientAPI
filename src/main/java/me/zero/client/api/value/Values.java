@@ -55,11 +55,14 @@ public class Values {
      * @return The value annotation of the field
      */
     private static Class<? extends Annotation> getValueAnnotation(Field field) {
-        if (field.isAnnotationPresent(Label.class))
-            return Arrays.stream(field.getDeclaredAnnotations())
+        if (field.isAnnotationPresent(Label.class)) {
+            Annotation a = Arrays.stream(field.getDeclaredAnnotations())
                     .filter(annotation -> annotation.getClass().getCanonicalName().startsWith("me.zero.client.api.value.annotation"))
-                    .findFirst().orElse(null).getClass();
-
+                    .findFirst()
+                    .orElse(null);
+            if (a != null)
+                return a.getClass();
+        }
         return null;
     }
 
