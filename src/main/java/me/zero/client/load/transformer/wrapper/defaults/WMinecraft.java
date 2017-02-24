@@ -23,6 +23,6 @@ public class WMinecraft extends ClassWrapper {
     @Override
     protected void loadImplementations() {
         this.implement("getTimer", Timer.getCtClass(), timer);
-        this.implement("setTimer", CtPrimitiveType.voidType, new CtClass[] { Session.getCtClass() }, session.createReturn());
+        this.implement("setSession", CtPrimitiveType.voidType, new CtClass[] { Session.getCtClass() }, session.createReturn());
     }
 }
