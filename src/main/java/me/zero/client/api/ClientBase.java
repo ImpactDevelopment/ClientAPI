@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Base for Client file, only reason why this
+ * is separate is for the cleanlieness of the
+ * code.
+ *
  * @since 1.0
  *
  * Created by Brady on 1/25/2017.

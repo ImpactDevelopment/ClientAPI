@@ -5,6 +5,8 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
+import me.zero.client.api.util.interfaces.Helper;
+import me.zero.client.api.wrapper.IMinecraft;
 import net.minecraft.util.Session;
 
 import java.net.Proxy;
@@ -17,7 +19,7 @@ import java.net.Proxy;
  *
  * Created by Brady on 2/10/2017.
  */
-public class AuthenticationFactory {
+public class AuthenticationFactory implements Helper {
 
     /**
      * Authentication object
@@ -78,7 +80,7 @@ public class AuthenticationFactory {
             auth.logIn();
             GameProfile profile = auth.getSelectedProfile();
             Session session = new Session(profile.getName(), profile.getId().toString(), auth.getAuthenticatedToken(), "MOJANG");
-            // Set session via reflection
+            ((IMinecraft) mc).setSession(session);
             return true;
         } catch (AuthenticationException e) {
             return false;
