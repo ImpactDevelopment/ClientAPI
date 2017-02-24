@@ -46,6 +46,7 @@ public interface MCMappings {
     ClassReference RenderItem = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.RenderItem"), from(VANILLA, "bwz") });
     ClassReference Timer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Timer"), from(VANILLA, "bey") });
     ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity"), from(VANILLA, "bur") });
+    ClassReference CPacketPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.client.CPacketPlayer"), from(VANILLA, "iz") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -77,4 +78,10 @@ public interface MCMappings {
     FieldReference renderPosX = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosX"), from(VANILLA, "o") });
     FieldReference renderPosY = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosY"), from(VANILLA, "p") });
     FieldReference renderPosZ = new FieldReference(new ObfuscationName[] { from(MCP, "renderPosZ"), from(VANILLA, "q") });
+    FieldReference player_x = new FieldReference(new ObfuscationName[] { from(MCP, "x"), from(VANILLA, "a") });
+    FieldReference player_y = new FieldReference(new ObfuscationName[] { from(MCP, "y"), from(VANILLA, "b") });
+    FieldReference player_z = new FieldReference(new ObfuscationName[] { from(MCP, "z"), from(VANILLA, "c") });
+    FieldReference player_yaw = new FieldReference(new ObfuscationName[] { from(MCP, "yaw"), from(VANILLA, "d") });
+    FieldReference player_pitch = new FieldReference(new ObfuscationName[] { from(MCP, "pitch"), from(VANILLA, "e") });
+    FieldReference player_onground = new FieldReference(new ObfuscationName[] { from(MCP, "onGround"), from(VANILLA, "f") });
 }
