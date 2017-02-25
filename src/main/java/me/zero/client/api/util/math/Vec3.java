@@ -1,5 +1,6 @@
 package me.zero.client.api.util.math;
 
+import me.zero.client.api.util.render.GlUtils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.glu.GLU;
@@ -251,12 +252,10 @@ public class Vec3 {
      */
     public Vec3 toScreen() {
         FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
-        IntBuffer viewport = BufferUtils.createIntBuffer(16);
-        FloatBuffer modelView = BufferUtils.createFloatBuffer(16);
-        FloatBuffer projection = BufferUtils.createFloatBuffer(16);
-        glGetFloat(GL_MODELVIEW_MATRIX, modelView);
-        glGetFloat(GL_PROJECTION_MATRIX, projection);
-        glGetInteger(GL_VIEWPORT, viewport);
+        FloatBuffer modelView = GlUtils.getModelViewMatrix();
+        FloatBuffer projection = GlUtils.getProjectionMatrix();
+        IntBuffer viewport = GlUtils.getViewport();
+
         boolean result = GLU.gluProject(x, y, z, modelView, projection, viewport, screenCoords);
         if (result) {
             return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
