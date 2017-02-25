@@ -8,10 +8,13 @@ import javassist.bytecode.Descriptor;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.load.discover.ClientLoader;
 import me.zero.client.load.transformer.ITransformer;
+import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
+import me.zero.client.load.transformer.wrapper.ClassWrapper;
+import me.zero.client.load.transformer.wrapper.defaults.WCPacketPlayer;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.reflections.Reflections;
 
@@ -53,7 +56,19 @@ public final class ClientTransformer implements IClassTransformer, Loadable {
         new Reflections("me.zero.client.load.transformer.defaults")
                 .getSubTypesOf(Transformer.class).forEach(transformer -> {
             try {
-                this.transformers.add(transformer.newInstance());
+                if (transformer.isAnnotationPresent(LoadTransformer.class))
+                    this.transformers.add(transformer.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_INSTANTIATION, transformer);
+            }
+        });
+
+        // Load Default Wrappers
+        new Reflections("me.zero.client.load.transformer.wrapper.defaults")
+                .getSubTypesOf(ClassWrapper.class).forEach(transformer -> {
+            try {
+                if (transformer.isAnnotationPresent(LoadTransformer.class))
+                    this.transformers.add(transformer.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
                 Logger.instance.logf(Level.SEVERE, Messages.TRANSFORM_INSTANTIATION, transformer);
             }

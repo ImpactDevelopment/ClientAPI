@@ -48,6 +48,7 @@ public interface MCMappings {
     ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity"), from(VANILLA, "bur") });
     ClassReference CPacketPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.client.CPacketPlayer"), from(VANILLA, "iz") });
     ClassReference PlayerControllerMP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.PlayerControllerMP"), from(VANILLA, "bnp") });
+    ClassReference KeyBinding = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.settings.KeyBinding"), from(VANILLA, "bep") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -87,4 +88,5 @@ public interface MCMappings {
     FieldReference player_onground = new FieldReference(new ObfuscationName[] { from(MCP, "onGround"), from(VANILLA, "f") });
     FieldReference curBlockDamageMP = new FieldReference(new ObfuscationName[] { from(MCP, "curBlockDamageMP"), from(VANILLA, "e") });
     FieldReference isHittingBlock = new FieldReference(new ObfuscationName[] { from(MCP, "isHittingBlock"), from(VANILLA, "h") });
+    FieldReference pressed = new FieldReference(new ObfuscationName[] { from(MCP, "pressed"), from(VANILLA, "h") });
 }
