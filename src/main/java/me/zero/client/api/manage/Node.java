@@ -1,6 +1,7 @@
 package me.zero.client.api.manage;
 
 import com.google.common.collect.Sets;
+import me.zero.client.api.value.Property;
 import me.zero.client.api.util.interfaces.Nameable;
 import me.zero.client.api.value.Value;
 import me.zero.client.api.value.Values;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * Nodes can have children, values, and can be saved/loaded.
+ * Nodes can have children, values, properties, and can be saved/loaded.
  *
  * @since 1.0
  *
@@ -27,6 +28,11 @@ public class Node<T extends Node> implements Nameable {
      * Values
      */
     private Set<Value> values = Sets.newLinkedHashSet();
+
+    /**
+     * Properties
+     */
+    private Set<Property> properties = Sets.newLinkedHashSet();
 
     /**
      * Name of the node
@@ -50,7 +56,7 @@ public class Node<T extends Node> implements Nameable {
      *
      * @param children The children
      */
-    public final void addChildren(T... children) {
+    protected final void addChildren(T... children) {
         this.addChildren(Arrays.asList(children));
     }
 
@@ -84,6 +90,37 @@ public class Node<T extends Node> implements Nameable {
     public final void addValue(Value value) {
         if (!this.values.contains(value))
             this.values.add(value);
+    }
+
+    /**
+     * Sets the property with the specified label's value
+     *
+     * @since 1.0
+     *
+     * @param label Label of the property
+     * @param value Value being set
+     */
+    public void setProperty(String label, Object value) {
+        Property property = getProperty(label);
+        if (property != null) {
+            property.setValue(value);
+            return;
+        }
+
+        properties.add(property = new Property(label));
+        property.setValue(value);
+    }
+
+    /**
+     * Gets a property with the specified label from the properties set
+     *
+     * @since 1.0
+     *
+     * @param label Target property label
+     * @return Property found, null if not found
+     */
+    public Property getProperty(String label) {
+        return properties.stream().filter(property -> property.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
     }
 
     /**

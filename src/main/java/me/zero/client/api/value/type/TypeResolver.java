@@ -1,9 +1,8 @@
-package me.zero.client.api.value;
+package me.zero.client.api.value.type;
 
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.interfaces.annotation.Label;
-import me.zero.client.api.value.type.BooleanType;
-import me.zero.client.api.value.type.StringType;
+import me.zero.client.api.value.Value;
 
 import java.lang.reflect.Field;
 

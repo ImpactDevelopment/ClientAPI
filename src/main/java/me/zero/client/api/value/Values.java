@@ -5,6 +5,7 @@ import me.zero.client.api.util.interfaces.annotation.Label;
 import me.zero.client.api.value.annotation.BooleanValue;
 import me.zero.client.api.value.annotation.NumberValue;
 import me.zero.client.api.value.annotation.StringValue;
+import me.zero.client.api.value.type.TypeResolver;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

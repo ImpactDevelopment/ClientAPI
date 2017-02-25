@@ -1,5 +1,6 @@
 package me.zero.client.api.module;
 
+import com.google.common.collect.Sets;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
@@ -8,6 +9,7 @@ import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import static me.zero.client.api.util.keybind.Keybind.Action.*;
 
@@ -37,6 +39,16 @@ public abstract class Module extends Node<Module> implements IModule, Helper {
      */
     private boolean state;
 
+    /**
+     * List of Modes
+     */
+    private Set<ModuleMode> modes;
+
+    /**
+     * The Current Mode
+     */
+    private ModuleMode mode;
+
     public Module() {
         if (this.getClass().isAnnotationPresent(Mod.class)) {
             Mod data = this.getClass().getAnnotation(Mod.class);
@@ -61,6 +73,57 @@ public abstract class Module extends Node<Module> implements IModule, Helper {
             throw new UnexpectedOutcomeException("One or more Mod members were null!");
     }
 
+    /**
+     * Sets the modes of this module
+     *
+     * @since 1.0
+     *
+     * @param modes Modes for this mod
+     */
+    protected final void setModes(ModuleMode... modes) {
+        this.modes = Sets.newLinkedHashSet();
+        Arrays.stream(modes).forEach(this.modes::add);
+    }
+
+    /**
+     * Returns whether or not the module has modes
+     *
+     * @since 1.0
+     *
+     * @return True if this module has modes, false if not
+     */
+    public final boolean hasModes() {
+        return this.modes != null;
+    }
+
+    /**
+     * Sets the module's mode to the specified mode
+     *
+     * @since 1.0
+     *
+     * @param mode Mode being set
+     */
+    private void setMode(ModuleMode mode) {
+        if (!this.hasModes())
+            return;
+
+        if (this.mode != null)
+            this.mode.setState(false);
+
+        (this.mode = mode).setState(true);
+    }
+
+    /**
+     * Returns this Module's mode, if it has modes
+     *
+     * @since 1.0
+     *
+     * @return The current mode
+     */
+    public final ModuleMode getMode() {
+        return this.mode;
+    }
+
     @Override
     public final void toggle() {
         this.setState(!this.getState());
@@ -77,6 +140,9 @@ public abstract class Module extends Node<Module> implements IModule, Helper {
             onDisable();
             EventManager.unsubscribe(this);
         }
+
+        if (hasModes() && mode != null)
+            mode.setState(state);
     }
 
     @Override
