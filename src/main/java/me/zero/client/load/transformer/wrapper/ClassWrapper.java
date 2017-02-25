@@ -49,7 +49,6 @@ public abstract class ClassWrapper extends Transformer {
         this.wrapper = wrapper;
         this.targetRef = target;
         this.target = target.getCtClass();
-        this.loadImplementations();
     }
 
     /**
@@ -176,6 +175,7 @@ public abstract class ClassWrapper extends Transformer {
 
     @Override
     public final void loadHooks(Collection<ClassHook> hooks) {
+        this.loadImplementations();
         hooks.add(createClassHook());
     }
 
