@@ -45,7 +45,7 @@ public interface MCMappings {
     ClassReference IBakedModel = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.block.model.IBakedModel"), from(VANILLA, "cbh") });
     ClassReference RenderItem = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.RenderItem"), from(VANILLA, "bwz") });
     ClassReference Timer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Timer"), from(VANILLA, "bey") });
-    ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity"), from(VANILLA, "bur") });
+    ClassReference RenderManager = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.entity.RenderManager"), from(VANILLA, "bur") });
     ClassReference CPacketPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.client.CPacketPlayer"), from(VANILLA, "iz") });
     ClassReference PlayerControllerMP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.PlayerControllerMP"), from(VANILLA, "bnp") });
     ClassReference KeyBinding = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.settings.KeyBinding"), from(VANILLA, "bep") });
