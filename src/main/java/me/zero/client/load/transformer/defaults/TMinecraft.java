@@ -32,8 +32,6 @@ public final class TMinecraft extends Transformer {
 
         hooks.add(displayGuiScreen.createHook(method -> method.insertBefore("GuiEvent event = new GuiEvent($1); EventManager.post(event); $1 = event.getScreen();")));
         hooks.add(loadWorld.createHook(method -> method.insertAfter("if ($1 != null) { EventManager.post(new WorldLoadEvent($1)); }")));
-
-        hooks.add(new WMinecraft().createClassHook());
     }
 
     @Override

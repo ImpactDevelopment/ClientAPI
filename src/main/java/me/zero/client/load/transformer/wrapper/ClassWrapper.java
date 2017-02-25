@@ -5,10 +5,12 @@ import javassist.*;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
+import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
 import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.load.transformer.reference.FieldReference;
 
+import java.util.Collection;
 import java.util.Set;
 
 import static me.zero.client.api.util.Messages.TRANSFORM_WRAPPER_ADD_METHOD;
@@ -21,12 +23,17 @@ import static me.zero.client.api.util.Messages.TRANSFORM_WRAPPER_COMPILE_METHOD;
  *
  * Created by Brady on 2/23/2017.
  */
-public abstract class ClassWrapper {
+public abstract class ClassWrapper extends Transformer {
 
     /**
      * Set of CtMethod representations of the Methods in the Wrapper Interface
      */
     private Set<CtMethod> methods = Sets.newHashSet();
+
+    /**
+     * ClassReference to the class being wrapped
+     */
+    private ClassReference targetRef;
 
     /**
      * The target class being "wrapped"
@@ -40,6 +47,7 @@ public abstract class ClassWrapper {
 
     public ClassWrapper(ClassReference target, Class<?> wrapper) {
         this.wrapper = wrapper;
+        this.targetRef = target;
         this.target = target.getCtClass();
         this.loadImplementations();
     }
@@ -59,7 +67,7 @@ public abstract class ClassWrapper {
      * @param methodName The name of the method
      * @param paramType The return type of the method as a CtClass
      */
-    protected void implementS(String methodName, CtClass paramType, FieldReference reference) {
+    protected final void implementS(String methodName, CtClass paramType, FieldReference reference) {
         this.implement(methodName, CtPrimitiveType.voidType, new CtClass[] { paramType }, reference.createReturn());
     }
 
@@ -71,7 +79,7 @@ public abstract class ClassWrapper {
      * @param methodName The name of the method
      * @param returnType The return type of the method as a CtClass
      */
-    protected void implementR(String methodName, CtClass returnType, FieldReference reference) {
+    protected final void implementR(String methodName, CtClass returnType, FieldReference reference) {
         this.implement(methodName, returnType, reference.createReturn());
     }
 
@@ -84,7 +92,7 @@ public abstract class ClassWrapper {
      * @param returnType The return type of the method as a CtClass
      * @param src The source code of the method
      */
-    protected void implement(String methodName, CtClass returnType, String src) {
+    protected final void implement(String methodName, CtClass returnType, String src) {
         this.implement(methodName, returnType, new CtClass[0], src);
     }
 
@@ -98,7 +106,7 @@ public abstract class ClassWrapper {
      * @param parameters An array of method parameters
      * @param src The source code of the method
      */
-    protected void implement(String methodName, CtClass returnType, CtClass[] parameters, String src) {
+    protected final void implement(String methodName, CtClass returnType, CtClass[] parameters, String src) {
         this.implement(methodName, returnType, parameters, new CtClass[0], src);
     }
 
@@ -113,7 +121,7 @@ public abstract class ClassWrapper {
      * @param exceptions An array of exceptions being thrown
      * @param src The source code of the method
      */
-    protected void implement(String methodName, CtClass returnType, CtClass[] parameters, CtClass[] exceptions, String src) {
+    protected final void implement(String methodName, CtClass returnType, CtClass[] parameters, CtClass[] exceptions, String src) {
         try {
             this.implement(CtNewMethod.make(returnType, methodName, parameters, exceptions, src, target));
         } catch (CannotCompileException e) {
@@ -128,7 +136,7 @@ public abstract class ClassWrapper {
      *
      * @param method Method being implemented
      */
-    protected void implement(CtMethod method) {
+    protected final void implement(CtMethod method) {
         if (!methods.contains(method))
             methods.add(method);
     }
@@ -150,7 +158,7 @@ public abstract class ClassWrapper {
      *
      * @return Created ClassHook
      */
-    public ClassHook createClassHook() {
+    private ClassHook createClassHook() {
         if (isImplComplete())
             throw new ActionNotValidException("ClassHook cannot be created if implementation isn't complete!");
 
@@ -164,5 +172,15 @@ public abstract class ClassWrapper {
                 }
             });
         };
+    }
+
+    @Override
+    public final void loadHooks(Collection<ClassHook> hooks) {
+        hooks.add(createClassHook());
+    }
+
+    @Override
+    public final ClassReference getTargetClass() {
+        return targetRef;
     }
 }
