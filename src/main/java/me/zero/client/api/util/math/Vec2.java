@@ -1,5 +1,15 @@
 package me.zero.client.api.util.math;
 
+import me.zero.client.api.util.render.GlUtils;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.glu.GLU;
+
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
+import static org.lwjgl.opengl.GL11.*;
+
 /**
  * Vector with an X and Y position
  *
@@ -165,4 +175,27 @@ public class Vec2 {
     public Vec3 toVec3() {
         return new Vec3(x, y, 0);
     }
+
+    /**
+     * Uses GLU#gluUnproject to project the 2D position
+     * of this vector to a 3D position in the world.
+     *
+     * @since 1.0
+     *
+     * @return World position of this vector
+     */
+    public Vec3 toWorld() {
+        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
+        FloatBuffer modelView = GlUtils.getModelViewMatrix();
+        FloatBuffer projection = GlUtils.getProjectionMatrix();
+        IntBuffer viewport = GlUtils.getViewport();
+
+        boolean result = GLU.gluUnProject(x, y, 0, modelView, projection, viewport, screenCoords);
+        if (result)
+            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+
+        return null;
+    }
+
+
 }

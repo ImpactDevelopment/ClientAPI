@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -94,5 +96,44 @@ public class GlUtils {
                 (hex & 255) / 255F,
                 (hex >> 24 & 255) / 255F
         };
+    }
+
+    /**
+     * Gets the Model View Matrix as a FloatBuffer
+     *
+     * @since 1.0
+     *
+     * @return The Model View Matrix
+     */
+    public static FloatBuffer getModelViewMatrix() {
+        FloatBuffer modelview = BufferUtils.createFloatBuffer(16);
+        glGetFloat(GL_MODELVIEW_MATRIX, modelview);
+        return modelview;
+    }
+
+    /**
+     * Gets the Projection Matrix as a FloatBuffer
+     *
+     * @since 1.0
+     *
+     * @return The Projection Matrix
+     */
+    public static FloatBuffer getProjectionMatrix() {
+        FloatBuffer projection = BufferUtils.createFloatBuffer(16);
+        glGetFloat(GL_PROJECTION_MATRIX, projection);
+        return projection;
+    }
+
+    /**
+     * Gets the Render Viewport as an IntegerBuffer
+     *
+     * @since 1.0
+     *
+     * @return The Viewport
+     */
+    public static IntBuffer getViewport() {
+        IntBuffer viewport = BufferUtils.createIntBuffer(16);
+        glGetInteger(GL_VIEWPORT, viewport);
+        return viewport;
     }
 }
