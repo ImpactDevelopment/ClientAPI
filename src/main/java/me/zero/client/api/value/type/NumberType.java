@@ -33,6 +33,11 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     @Override
+    public T getValue() {
+        return super.getValue();
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public void setValue(T value) {
         super.setValue((T) MathUtils.clamp(value, minimum, maximum));
