@@ -28,7 +28,7 @@ public abstract class ClassWrapper extends Transformer {
     /**
      * Set of CtMethod representations of the Methods in the Wrapper Interface
      */
-    private Set<CtMethod> methods = Sets.newHashSet();
+    private Set<MethodData> methods = Sets.newLinkedHashSet();
 
     /**
      * ClassReference to the class being wrapped
@@ -121,23 +121,13 @@ public abstract class ClassWrapper extends Transformer {
      * @param src The source code of the method
      */
     protected final void implement(String methodName, CtClass returnType, CtClass[] parameters, CtClass[] exceptions, String src) {
-        try {
-            this.implement(CtNewMethod.make(returnType, methodName, parameters, exceptions, src, target));
-        } catch (CannotCompileException e) {
-            Logger.instance.logf(Level.SEVERE, TRANSFORM_WRAPPER_COMPILE_METHOD, methodName);
-        }
-    }
-
-    /**
-     * Implements a CtMethod
-     *
-     * @since 1.0
-     *
-     * @param method Method being implemented
-     */
-    protected final void implement(CtMethod method) {
-        if (!methods.contains(method))
-            methods.add(method);
+        MethodData data = new MethodData();
+        data.exceptions = exceptions;
+        data.methodName = methodName;
+        data.parameters = parameters;
+        data.returnType = returnType;
+        data.src = src;
+        this.methods.add(data);
     }
 
     /**
@@ -164,10 +154,21 @@ public abstract class ClassWrapper extends Transformer {
         return ctClass -> {
             ctClass.addInterface(ClassPool.getDefault().get(wrapper.getName()));
             methods.forEach(method -> {
+                CtMethod ctMethod = null;
+
                 try {
-                    ctClass.addMethod(method);
+                    ctMethod = CtNewMethod.make(method.returnType, method.methodName, method.parameters, method.exceptions, method.src, target);
                 } catch (CannotCompileException e) {
-                    Logger.instance.logf(Level.SEVERE, TRANSFORM_WRAPPER_ADD_METHOD, method.getName());
+                    Logger.instance.logf(Level.SEVERE, TRANSFORM_WRAPPER_COMPILE_METHOD, method.methodName);
+                }
+
+                if (ctMethod == null) return;
+
+                try {
+                    ctClass.addMethod(ctMethod);
+                } catch (CannotCompileException e) {
+                    e.printStackTrace();
+                    Logger.instance.logf(Level.SEVERE, TRANSFORM_WRAPPER_ADD_METHOD, method.methodName);
                 }
             });
         };
@@ -182,5 +183,16 @@ public abstract class ClassWrapper extends Transformer {
     @Override
     public final ClassReference getTargetClass() {
         return targetRef;
+    }
+
+    /**
+     * Basic Class to hold method data before it's compiled
+     */
+    private class MethodData {
+        private String methodName;
+        private CtClass returnType;
+        private CtClass[] parameters;
+        private CtClass[] exceptions;
+        private String src;
     }
 }
