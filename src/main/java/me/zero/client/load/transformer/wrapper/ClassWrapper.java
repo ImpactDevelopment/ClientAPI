@@ -122,10 +122,10 @@ public abstract class ClassWrapper extends Transformer {
      */
     protected final void implement(String methodName, CtClass returnType, CtClass[] parameters, CtClass[] exceptions, String src) {
         MethodData data = new MethodData();
-        data.exceptions = exceptions;
         data.methodName = methodName;
-        data.parameters = parameters;
         data.returnType = returnType;
+        data.parameters = parameters;
+        data.exceptions = exceptions;
         data.src = src;
         this.methods.add(data);
     }
