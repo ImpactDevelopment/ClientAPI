@@ -1,9 +1,9 @@
 package me.zero.client.api.util.render.camera.defaults;
 
-import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraHandle;
+import me.zero.client.api.wrapper.IEntity;
 
 /**
  * An implementation of Camera that renders what is directly behind the player.
@@ -20,7 +20,7 @@ public class RearViewCamera extends Camera {
 
     @Override
     public void updateFramebuffer(float partialTicks) {
-        EntityUtil entity = EntityUtil.get(mc.player);
+        IEntity entity = (IEntity) mc.player;
         Vec2 rotations = entity.getRotations();
         this.position = entity.getPos();
         this.rotation = new Vec2(rotations.getX() + 180, rotations.getY() * -1);

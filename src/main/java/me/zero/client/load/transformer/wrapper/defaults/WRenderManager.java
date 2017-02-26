@@ -1,10 +1,10 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.IRenderManager;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
+import static javassist.CtClass.doubleType;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
@@ -23,8 +23,8 @@ public class WRenderManager extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implementR("getRenderPosX", CtPrimitiveType.doubleType, renderPosX);
-        this.implementR("getRenderPosY", CtPrimitiveType.doubleType, renderPosY);
-        this.implementR("getRenderPosZ", CtPrimitiveType.doubleType, renderPosZ);
+        this.implementR("getRenderPosX", doubleType, renderPosX);
+        this.implementR("getRenderPosY", doubleType, renderPosY);
+        this.implementR("getRenderPosZ", doubleType, renderPosZ);
     }
 }

@@ -4,6 +4,7 @@ import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.RenderUtils;
+import me.zero.client.api.wrapper.IEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
@@ -52,8 +53,8 @@ public class Camera {
             return;
 
         // Gets the entity util for the render view entity and if it is null then the code stops
-        EntityUtil entity = EntityUtil.get(mc.getRenderViewEntity());
-        if (entity.getEntity() == null)
+        IEntity entity = (IEntity) mc.getRenderViewEntity();
+        if (entity == null)
             return;
 
         // Preserve all of the settings before entity change them.
@@ -79,7 +80,7 @@ public class Camera {
      *
      * @param entity The game's view entity
      */
-    private void render(EntityUtil entity, float partialTicks) {
+    private void render(IEntity entity, float partialTicks) {
         // Setup camera
         entity.setAll(this.position, this.rotation);
         mc.gameSettings.thirdPersonView = 0;

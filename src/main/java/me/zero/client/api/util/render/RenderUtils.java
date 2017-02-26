@@ -5,9 +5,7 @@ import me.zero.client.api.util.math.Vec3;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
-import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION;
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION_TEX;
 import static org.lwjgl.opengl.GL11.*;
 

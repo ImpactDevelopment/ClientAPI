@@ -1,10 +1,10 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.IKeyBinding;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
+import static javassist.CtClass.*;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
@@ -23,6 +23,6 @@ public class WKeyBinding extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implementS("setPressed", CtPrimitiveType.booleanType, pressed);
+        this.implementS("setPressed", booleanType, pressed);
     }
 }
