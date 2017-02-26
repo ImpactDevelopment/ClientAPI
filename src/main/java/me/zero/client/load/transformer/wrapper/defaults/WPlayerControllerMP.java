@@ -1,13 +1,11 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.IPlayerControllerMP;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
-import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.PlayerControllerMP;
-import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.curBlockDamageMP;
-import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.isHittingBlock;
+import static javassist.CtClass.*;
+import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
  * Wraps IPlayerControllerMP to PlayerControllerMP
@@ -25,8 +23,8 @@ public class WPlayerControllerMP extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implementR("isHittingBlock", CtPrimitiveType.booleanType, isHittingBlock);
-        this.implementR("getCurBlockDamage", CtPrimitiveType.floatType, curBlockDamageMP);
-        this.implementS("setCurBlockDamage", CtPrimitiveType.floatType, curBlockDamageMP);
+        this.implementR("isHittingBlock", booleanType, isHittingBlock);
+        this.implementR("getCurBlockDamage", floatType, curBlockDamageMP);
+        this.implementS("setCurBlockDamage", floatType, curBlockDamageMP);
     }
 }

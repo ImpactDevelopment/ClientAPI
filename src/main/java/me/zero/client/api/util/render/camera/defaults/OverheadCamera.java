@@ -1,9 +1,9 @@
 package me.zero.client.api.util.render.camera.defaults;
 
-import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraHandle;
+import me.zero.client.api.wrapper.IEntity;
 
 /**
  * An implementation of Camera that renders what is directly behind the player.
@@ -22,7 +22,7 @@ public class OverheadCamera extends Camera {
     public void updateFramebuffer(float partialTicks) {
         OverheadHandle handle = (OverheadHandle) this.handle;
 
-        EntityUtil entity = EntityUtil.get(mc.player);
+        IEntity entity = (IEntity) mc.player;
         this.position = entity.getPos().add(0, handle.camHeight(), 0);
         this.rotation = new Vec2(handle.camRotation(), 90);
         super.updateFramebuffer(partialTicks);

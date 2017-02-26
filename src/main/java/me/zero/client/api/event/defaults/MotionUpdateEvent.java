@@ -1,10 +1,10 @@
 package me.zero.client.api.event.defaults;
 
 import me.zero.client.api.event.type.EventState;
-import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
+import me.zero.client.api.wrapper.IEntity;
 
 /**
  * Called before and after packets are sent to
@@ -35,7 +35,7 @@ public class MotionUpdateEvent implements Helper {
         this.type = type;
         if (type == EventState.POST) return;
 
-        EntityUtil util = EntityUtil.get(mc.player);
+        IEntity util = (IEntity) mc.player;
         oPos      = util.getPos();
         oRotation = util.getRotations();
         nPos      = util.getPos();
@@ -120,7 +120,7 @@ public class MotionUpdateEvent implements Helper {
      * Applies the new position/rotations
      */
     public static void apply() {
-        EntityUtil util = EntityUtil.get(mc.player);
+        IEntity util = (IEntity) mc.player;
         util.setPos(nPos);
         util.setRotations(nRotation);
     }
@@ -129,7 +129,7 @@ public class MotionUpdateEvent implements Helper {
      * Resets the original position/rotations
      */
     public static void reset() {
-        EntityUtil util = EntityUtil.get(mc.player);
+        IEntity util = (IEntity) mc.player;
         util.setPos(oPos);
         util.setRotations(oRotation);
     }
