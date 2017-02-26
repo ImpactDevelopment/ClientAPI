@@ -5,6 +5,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.wrapper.IEntity;
+import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
 import static javassist.CtClass.*;
@@ -17,6 +18,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  *
  * Created by Brady on 2/25/2017.
  */
+@LoadTransformer
 public class WEntity extends ClassWrapper {
 
     private static CtClass Vec3, Vec2;
