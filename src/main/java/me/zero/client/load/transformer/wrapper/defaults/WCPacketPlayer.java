@@ -1,10 +1,10 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.ICPacketPlayer;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
+import static javassist.CtClass.*;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
@@ -23,11 +23,11 @@ public class WCPacketPlayer extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implementS("setX", CtPrimitiveType.doubleType, player_x);
-        this.implementS("setY", CtPrimitiveType.doubleType, player_y);
-        this.implementS("setZ", CtPrimitiveType.doubleType, player_z);
-        this.implementS("setYaw", CtPrimitiveType.floatType, player_yaw);
-        this.implementS("setPitch", CtPrimitiveType.floatType, player_pitch);
-        this.implementS("setOnGround", CtPrimitiveType.booleanType, player_onground);
+        this.implementS("setX", doubleType, player_x);
+        this.implementS("setY", doubleType, player_y);
+        this.implementS("setZ", doubleType, player_z);
+        this.implementS("setYaw", floatType, player_yaw);
+        this.implementS("setPitch", floatType, player_pitch);
+        this.implementS("setOnGround", booleanType, player_onground);
     }
 }

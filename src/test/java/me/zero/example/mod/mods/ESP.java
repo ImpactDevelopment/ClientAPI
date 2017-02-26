@@ -7,10 +7,9 @@ import me.zero.client.api.event.defaults.Render2DEvent;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
-import me.zero.client.api.util.EntityUtil;
-import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.shader.ShaderRender;
+import me.zero.client.api.wrapper.IEntity;
 import me.zero.client.api.wrapper.IMinecraft;
 import me.zero.client.api.wrapper.IRenderManager;
 import me.zero.example.mod.mods.esp.OutlineShader;
@@ -20,7 +19,6 @@ import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.util.Timer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Keyboard;
 
@@ -65,7 +63,7 @@ public class ESP extends Module {
             glPushMatrix();
             Render<Entity> entityRender = mc.getRenderManager().getEntityRenderObject(e);
             if (entityRender != null) {
-                Vec3 pos = EntityUtil.get(e).interpolate(partialTicks);
+                Vec3 pos = ((IEntity) e).interpolate(partialTicks);
                 glTranslated(pos.getX() - view.getX(), pos.getY() - view.getY(), pos.getZ() - view.getZ());
 
                 setupColor(0xFF6000C8);

@@ -92,4 +92,17 @@ public interface MCMappings {
     FieldReference pressed = new FieldReference(new ObfuscationName[] { from(MCP, "pressed"), from(VANILLA, "h") });
     FieldReference sleeping = new FieldReference(new ObfuscationName[] { from(MCP, "sleeping"), from(VANILLA, "bG") });
     FieldReference sleepTimer = new FieldReference(new ObfuscationName[] { from(MCP, "sleepTimer"), from(VANILLA, "d") });
+    FieldReference posX = new FieldReference(new ObfuscationName[] { from(MCP, "posX"), from(VANILLA, "p") });
+    FieldReference posY = new FieldReference(new ObfuscationName[] { from(MCP, "posY"), from(VANILLA, "q") });
+    FieldReference posZ = new FieldReference(new ObfuscationName[] { from(MCP, "posZ"), from(VANILLA, "r") });
+    FieldReference prevPosX = new FieldReference(new ObfuscationName[] { from(MCP, "prevPosX"), from(VANILLA, "m") });
+    FieldReference prevPosY = new FieldReference(new ObfuscationName[] { from(MCP, "prevPosY"), from(VANILLA, "n") });
+    FieldReference prevPosZ = new FieldReference(new ObfuscationName[] { from(MCP, "prevPosZ"), from(VANILLA, "o") });
+    FieldReference lastTickPosX = new FieldReference(new ObfuscationName[] { from(MCP, "lastTickPosX"), from(VANILLA, "M") });
+    FieldReference lastTickPosY = new FieldReference(new ObfuscationName[] { from(MCP, "lastTickPosY"), from(VANILLA, "N") });
+    FieldReference lastTickPosZ = new FieldReference(new ObfuscationName[] { from(MCP, "lastTickPosZ"), from(VANILLA, "O") });
+    FieldReference rotationYaw = new FieldReference(new ObfuscationName[] { from(MCP, "rotationYaw"), from(VANILLA, "v") });
+    FieldReference rotationPitch = new FieldReference(new ObfuscationName[] { from(MCP, "rotationPitch"), from(VANILLA, "w") });
+    FieldReference prevRotationYaw = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationYaw"), from(VANILLA, "y") });
+    FieldReference prevRotationPitch = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationPitch"), from(VANILLA, "z") });
 }

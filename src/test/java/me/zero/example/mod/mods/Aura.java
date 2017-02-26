@@ -5,8 +5,8 @@ import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.MotionUpdateEvent;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
-import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.math.Vec2;
+import me.zero.client.api.wrapper.IEntity;
 import me.zero.example.mod.category.ICombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,8 +35,8 @@ public class Aura extends Module implements ICombat {
                        .collect(Collectors.toList());
                if (entities.size() > 0) {
                    target = entities.get(0);
-                   EntityUtil me = EntityUtil.get(mc.player);
-                   EntityUtil them = EntityUtil.get(target);
+                   IEntity me = (IEntity) mc.player;
+                   IEntity them = (IEntity) target;
                    Vec2 rotations = me.getPos().rotationsTo(them.getPos());
                    event.yaw(rotations.getX()).pitch(rotations.getY());
                } else {

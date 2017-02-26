@@ -13,8 +13,8 @@ import me.zero.client.load.transformer.reference.FieldReference;
 import java.util.Collection;
 import java.util.Set;
 
-import static me.zero.client.api.util.Messages.TRANSFORM_WRAPPER_ADD_METHOD;
-import static me.zero.client.api.util.Messages.TRANSFORM_WRAPPER_COMPILE_METHOD;
+import static javassist.CtClass.*;
+import static me.zero.client.api.util.Messages.*;
 
 /**
  * Basic class wrapper, used to attach interfaces.
@@ -67,7 +67,7 @@ public abstract class ClassWrapper extends Transformer {
      * @param paramType The return type of the method as a CtClass
      */
     protected final void implementS(String methodName, CtClass paramType, FieldReference reference) {
-        this.implement(methodName, CtPrimitiveType.voidType, new CtClass[] { paramType }, reference.createReturn());
+        this.implement(methodName, voidType, new CtClass[] { paramType }, reference.createReturn());
     }
 
     /**

@@ -1,9 +1,9 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import javassist.CtPrimitiveType;
 import me.zero.client.api.wrapper.IEntityPlayer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
+import static javassist.CtClass.*;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
@@ -21,7 +21,7 @@ public class WEntityPlayer extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        this.implementS("setSleeping", CtPrimitiveType.booleanType, sleeping);
-        this.implementS("setSleepTimer", CtPrimitiveType.intType, sleepTimer);
+        this.implementS("setSleeping", booleanType, sleeping);
+        this.implementS("setSleepTimer", intType, sleepTimer);
     }
 }
