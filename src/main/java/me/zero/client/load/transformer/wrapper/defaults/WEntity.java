@@ -38,10 +38,10 @@ public class WEntity extends ClassWrapper {
 
     @Override
     protected void loadImplementations() {
-        String set2 = "this.%s = $1.getX(); this.%s = $1.getY();";
-        String set3 = set2 + "this.%s = $1.getZ();";
-        String new2 = "return new %s(%s, %s);";
-        String new3 = "return new %s(%s, %s, %s);";
+        String set2 = "{ this.%s = $1.getX(); this.%s = $1.getY(); }";
+        String set3 = "{ this.%s = $1.getX(); this.%s = $1.getY(); this.%s = $1.getZ(); }";
+        String new2 = "{ return new %s(%s, %s); }";
+        String new3 = "{ return new %s(%s, %s, %s); }";
 
         this.implement("setPos", voidType, new CtClass[] { Vec3 }, String.format(set3, posX.getName(), posY.getName(), posZ.getName()));
         this.implement("setPrevPos", voidType, new CtClass[] { Vec3 }, String.format(set3, prevPosX.getName(), prevPosY.getName(), prevPosZ.getName()));
@@ -55,6 +55,6 @@ public class WEntity extends ClassWrapper {
         this.implement("getRotations", Vec2, String.format(new2, Vec2.getName(), rotationYaw.getName(), rotationPitch.getName()));
         this.implement("getPrevRotations", Vec2, String.format(new2, Vec2.getName(), prevRotationYaw.getName(), prevRotationPitch.getName()));
 
-        this.implement("interpolate", Vec3, new CtClass[] { floatType }, "return this.getPos().add(this.getPos().sub(this.getLastTickPos()).scale(ticks));");
+        this.implement("interpolate", Vec3, new CtClass[] { floatType }, "{ return this.getPos().add(this.getPos().sub(this.getLastTickPos()).scale($1)); }");
     }
 }
