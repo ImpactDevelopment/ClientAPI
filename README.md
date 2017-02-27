@@ -8,7 +8,7 @@ API designed to make Clients have Universal Support
 ##Credits
 | Name                | Contribution         |
 |---------------------|----------------------|
-| Halalaboos & Brudin | CFont                |
+| Halalaboos          | CFont                |
 | MatthewH & MarcoMC  | CapesAPI Integration |
 | Nerxit              | Tab GUI System       |
 
