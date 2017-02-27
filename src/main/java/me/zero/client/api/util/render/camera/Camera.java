@@ -1,6 +1,5 @@
 package me.zero.client.api.util.render.camera;
 
-import me.zero.client.api.util.EntityUtil;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.RenderUtils;
