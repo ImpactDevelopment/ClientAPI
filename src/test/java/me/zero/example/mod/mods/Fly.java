@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 public class Fly extends Module implements IMovement {
 
     @EventHandler
-    private Listener<UpdateEvent> updateListener = new Listener<>(event -> {
-        mc.player.motionY = new Boolean(mc.gameSettings.keyBindJump.isKeyDown()).compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2;
-    });
+    private Listener<UpdateEvent> updateListener = new Listener<>(event ->
+        mc.player.motionY = Boolean.valueOf(mc.gameSettings.keyBindJump.isKeyDown()).compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2
+    );
 }
