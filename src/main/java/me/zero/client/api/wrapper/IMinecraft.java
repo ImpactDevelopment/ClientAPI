@@ -1,5 +1,6 @@
 package me.zero.client.api.wrapper;
 
+import me.zero.client.api.event.defaults.ClickEvent;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 
@@ -25,4 +26,13 @@ public interface IMinecraft {
      * @since 1.0
      */
     void setSession(Session session);
+
+    /**
+     * Clicks a mouse button
+     *
+     * @since 1.0
+     *
+     * @param button The button
+     */
+    void clickMouse(ClickEvent.MouseButton button);
 }
