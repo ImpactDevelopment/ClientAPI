@@ -50,6 +50,7 @@ public interface MCMappings {
     ClassReference PlayerControllerMP = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.multiplayer.PlayerControllerMP"), from(VANILLA, "bnp") });
     ClassReference KeyBinding = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.settings.KeyBinding"), from(VANILLA, "bep") });
     ClassReference EntityPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.EntityPlayer"), from(VANILLA, "aay") });
+    ClassReference DamageSource = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.DamageSource"), from(VANILLA, "ry") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -74,6 +75,7 @@ public interface MCMappings {
     MethodReference updatePlayerList = new MethodReference(new ObfuscationName[] { from(MCP, "updatePlayerList"), from(VANILLA, "a") }, Void.TYPE, Boolean.TYPE);
     MethodReference renderEnchantedGlint = new MethodReference(new ObfuscationName[] { from(MCP, "renderEnchantedGlint"), from(VANILLA, "") }, Void.TYPE, RenderLivingBase, EntityLivingBase, ModelBase, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE);
     MethodReference renderEffect = new MethodReference(new ObfuscationName[] { from(MCP, "renderEffect"), from(VANILLA, "a") }, Void.TYPE, IBakedModel);
+    MethodReference onDeath = new MethodReference(new ObfuscationName[] { from(MCP, "onDeath"), from(VANILLA, "a") }, Void.TYPE, DamageSource);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });

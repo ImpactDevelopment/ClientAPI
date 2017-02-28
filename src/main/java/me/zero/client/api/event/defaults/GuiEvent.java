@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiScreen;
  *
  * Created by Brady on 2/23/2017.
  */
-public class GuiEvent {
+public final class GuiEvent {
 
     private GuiScreen screen;
 
