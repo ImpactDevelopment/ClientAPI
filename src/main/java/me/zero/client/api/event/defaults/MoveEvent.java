@@ -47,8 +47,35 @@ public final class MoveEvent {
      * @param x New X motion
      * @return This event
      */
-    public MoveEvent setX(double x) {
+    public MoveEvent x(double x) {
         this.x = x;
+        return this;
+    }
+
+    /**
+     * Sets the Y motion value
+     *
+     * @since 1.0
+     *
+     * @param y New Y motion
+     * @return This event
+     */
+    public MoveEvent y(double y) {
+        this.y = y;
+        return this;
+    }
+
+
+    /**
+     * Sets the Z motion value
+     *
+     * @since 1.0
+     *
+     * @param z New Z motion
+     * @return This event
+     */
+    public MoveEvent z(double z) {
+        this.z = z;
         return this;
     }
 
@@ -62,38 +89,12 @@ public final class MoveEvent {
     }
 
     /**
-     * Sets the Y motion value
-     *
-     * @since 1.0
-     *
-     * @param y New Y motion
-     * @return This event
-     */
-    public MoveEvent setY(double y) {
-        this.y = y;
-        return this;
-    }
-
-    /**
      * @since 1.0
      *
      * @return The Y motion
      */
     public double getY() {
         return this.y;
-    }
-
-    /**
-     * Sets the Z motion value
-     *
-     * @since 1.0
-     *
-     * @param z New Z motion
-     * @return This event
-     */
-    public MoveEvent setZ(double z) {
-        this.z = z;
-        return this;
     }
 
     /**
