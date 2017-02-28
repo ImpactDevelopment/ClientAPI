@@ -5,7 +5,6 @@ import me.zero.client.api.event.EventManager;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
-import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.Arrays;
@@ -22,7 +21,7 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  *
  * Created by Brady on 1/19/2017.
  */
-public abstract class Module extends Node<Module> implements IModule, Helper {
+public abstract class Module extends Node<Module> implements IModule {
 
     /**
      * The type/category of the module
