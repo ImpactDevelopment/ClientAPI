@@ -10,7 +10,7 @@ import me.zero.client.api.event.type.Cancellable;
  *
  * Created by Brady on 2/19/2017.
  */
-public class GlintEffectEvent extends Cancellable {
+public final class GlintEffectEvent extends Cancellable {
 
     /**
      * The object getting a glint effect applied to it
