@@ -18,7 +18,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.r
  * Created by Brady on 2/19/2017.
  */
 @LoadTransformer
-public class TLayerArmorBase extends Transformer {
+public final class TLayerArmorBase extends Transformer {
 
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {

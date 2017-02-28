@@ -14,7 +14,7 @@ import me.zero.client.api.wrapper.IEntity;
  *
  * Created by Brady on 2/12/2017.
  */
-public class MotionUpdateEvent implements Helper {
+public final class MotionUpdateEvent implements Helper {
 
     /**
      * State of this event
