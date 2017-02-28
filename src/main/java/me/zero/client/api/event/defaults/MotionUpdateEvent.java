@@ -110,6 +110,51 @@ public class MotionUpdateEvent implements Helper {
     /**
      * @since 1.0
      *
+     * @return The X position
+     */
+    public double getX() {
+        return nPos.getX();
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The Y position
+     */
+    public double getY() {
+        return nPos.getY();
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The Z position
+     */
+    public double getZ() {
+        return nPos.getZ();
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The Yaw rotation
+     */
+    public double getYaw() {
+        return nRotation.getX();
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The Pitch rotation
+     */
+    public double getPitch() {
+        return nRotation.getY();
+    }
+
+    /**
+     * @since 1.0
+     *
      * @return The type of event
      */
     public EventState getType() {
