@@ -8,6 +8,7 @@ import me.zero.client.api.wrapper.IMinecraft;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
+import static javassist.CtClass.intType;
 import static javassist.CtClass.voidType;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
@@ -39,6 +40,7 @@ public class WMinecraft extends ClassWrapper {
     protected void loadImplementations() {
         this.implementR("getTimer", Timer.getCtClass(), timer);
         this.implementS("setSession", Session.getCtClass(), session);
+        this.implementS("setRightClickDelayTimer", intType, rightClickDelayTimer);
 
         String code = "{ if ($1 == %s) { this.%s(); } else if ($1 == %s) { this.%s(); } else if ($1 == %s) { this.%s(); } }";
         String format = String.format(code,
