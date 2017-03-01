@@ -81,18 +81,6 @@ public class Node<T extends Node> implements Nameable {
     }
 
     /**
-     * Adds a value to this node
-     *
-     * @since 1.0
-     *
-     * @param value The value
-     */
-    public final void addValue(Value value) {
-        if (!this.values.contains(value))
-            this.values.add(value);
-    }
-
-    /**
      * Sets the property with the specified label's value
      *
      * @since 1.0
@@ -121,6 +109,29 @@ public class Node<T extends Node> implements Nameable {
      */
     public Property getProperty(String label) {
         return properties.stream().filter(property -> property.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
+    }
+
+    /**
+     * Adds a value to this node
+     *
+     * @since 1.0
+     *
+     * @param value The value
+     */
+    public final void addValue(Value value) {
+        if (!this.values.contains(value))
+            this.values.add(value);
+    }
+
+    /**
+     * Gets a value from its ID
+     *
+     * @since 1.0
+     *
+     * @param id The value's ID
+     */
+    public final Value getValue(String id) {
+        return values.stream().filter(value -> value.getId().equals(id)).findFirst().orElse(null);
     }
 
     /**

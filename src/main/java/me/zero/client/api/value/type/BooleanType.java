@@ -16,8 +16,8 @@ import java.lang.reflect.Field;
  */
 public class BooleanType extends Value<Boolean> implements Toggleable {
 
-    public BooleanType(String name, String description, Object object, Field field) {
-        super(name, description, object, field);
+    public BooleanType(String name, String id, String description, Object object, Field field) {
+        super(name, id, description, object, field);
     }
 
     @Override
