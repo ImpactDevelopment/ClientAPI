@@ -35,7 +35,7 @@ public interface TypeResolver<T extends Value> {
         if (value == null)
             value = false;
 
-        BooleanType type = new BooleanType(label.name(), label.description(), parent, field);
+        BooleanType type = new BooleanType(label.name(), label.id(), label.description(), parent, field);
         type.setState(value);
         return type;
     };
@@ -45,7 +45,7 @@ public interface TypeResolver<T extends Value> {
      */
     TypeResolver<StringType> STRING = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
-        StringType type = new StringType(label.name(), label.description(), parent, field);
+        StringType type = new StringType(label.name(), label.id(), label.description(), parent, field);
         type.setValue((String) ReflectionUtils.getField(parent, field));
         return type;
     };
