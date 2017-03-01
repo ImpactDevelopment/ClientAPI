@@ -50,6 +50,7 @@ public interface MCMappings {
     ClassReference KeyBinding = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.settings.KeyBinding"), from(VANILLA, "bep") });
     ClassReference EntityPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.EntityPlayer"), from(VANILLA, "aay") });
     ClassReference DamageSource = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.DamageSource"), from(VANILLA, "ry") });
+    ClassReference SPacketPlayerPosLook = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.server.SPacketPlayerPosLook"), from(MCP, "hh") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
