@@ -19,8 +19,8 @@ public class MultiType extends Value<String> {
      */
     private String[] values;
 
-    public MultiType(String name, String description, Object object, Field field, String[] values) {
-        super(name, description, object, field);
+    public MultiType(String name, String id, String description, Object object, Field field, String[] values) {
+        super(name, id, description, object, field);
         this.values = values;
         this.setValue(values[0]);
     }

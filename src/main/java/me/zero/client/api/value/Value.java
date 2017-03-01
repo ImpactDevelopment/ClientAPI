@@ -1,6 +1,5 @@
 package me.zero.client.api.value;
 
-import com.google.common.collect.Sets;
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.interfaces.Nameable;
 
@@ -25,6 +24,11 @@ public class Value<T> implements IValue<T>, Nameable {
     /**
      * Description of the Value
      */
+    private String id;
+
+    /**
+     * Description of the Value
+     */
     private String description;
 
     /**
@@ -37,8 +41,10 @@ public class Value<T> implements IValue<T>, Nameable {
      */
     private Field field;
 
-    public Value(String name, String description, Object object, Field field) {
+    public Value(String name, String id, String description, Object object, Field field) {
         this.name = name;
+        this.id = id;
+        this.description = description;
         this.object = object;
         this.field = field;
     }
@@ -62,5 +68,9 @@ public class Value<T> implements IValue<T>, Nameable {
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    public String getId() {
+        return this.id;
     }
 }
