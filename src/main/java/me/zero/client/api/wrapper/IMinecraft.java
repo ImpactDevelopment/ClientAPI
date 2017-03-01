@@ -24,6 +24,8 @@ public interface IMinecraft {
      * Sets the game's session
      *
      * @since 1.0
+     *
+     * @param session The new Session
      */
     void setSession(Session session);
 
@@ -35,4 +37,13 @@ public interface IMinecraft {
      * @param button The button
      */
     void clickMouse(ClickEvent.MouseButton button);
+
+    /**
+     * Sets the right click delay timer
+     *
+     * @since 1.0
+     *
+     * @param delay The new right click delay
+     */
+    void setRightClickDelayTimer(int delay);
 }

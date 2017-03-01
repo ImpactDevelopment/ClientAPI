@@ -5,9 +5,8 @@ import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.load.transformer.reference.FieldReference;
 import me.zero.client.load.transformer.reference.MethodReference;
 
-import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.MCP;
-import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.VANILLA;
-import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationName.from;
+import static me.zero.client.load.transformer.reference.obfuscation.Obfuscation.*;
+import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationName.*;
 
 /**
  * Contains class and method references for the game
@@ -107,4 +106,5 @@ public interface MCMappings {
     FieldReference rotationPitch = new FieldReference(new ObfuscationName[] { from(MCP, "rotationPitch"), from(VANILLA, "w") });
     FieldReference prevRotationYaw = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationYaw"), from(VANILLA, "y") });
     FieldReference prevRotationPitch = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationPitch"), from(VANILLA, "z") });
+    FieldReference rightClickDelayTimer = new FieldReference(new ObfuscationName[] { from(MCP, "rightClickDelayTimer"), from(VANILLA, "aq") });
 }
