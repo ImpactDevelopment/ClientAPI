@@ -2,15 +2,10 @@ package me.zero.client.load.transformer.wrapper.defaults;
 
 import me.zero.client.api.wrapper.ISPacketPlayerPosLook;
 import me.zero.client.load.transformer.LoadTransformer;
-import me.zero.client.load.transformer.reference.ClassReference;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
-import static javassist.CtClass.booleanType;
-import static javassist.CtClass.doubleType;
-import static javassist.CtClass.floatType;
+import static javassist.CtClass.*;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
-import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.player_onground;
-import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.player_pitch;
 
 /**
  * Wraps ISPacketPlayerPosLook to SPacketPlayerPosLook
@@ -33,6 +28,5 @@ public class WSPacketPlayerPosLook extends ClassWrapper {
         this.implementS("setZ", doubleType, player_z);
         this.implementS("setYaw", floatType, player_yaw);
         this.implementS("setPitch", floatType, player_pitch);
-        this.implementS("setOnGround", booleanType, player_onground);
     }
 }
