@@ -19,6 +19,7 @@ public class PacketFilter implements Predicate<PacketEvent> {
      */
     private final Class<? extends Packet<?>>[] packets;
 
+    @SafeVarargs
     public PacketFilter(Class<? extends Packet<?>>... packets) {
         this.packets = packets;
     }
