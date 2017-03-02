@@ -139,7 +139,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Yaw rotation
      */
-    public double getYaw() {
+    public float getYaw() {
         return nRotation.getX();
     }
 
@@ -148,7 +148,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Pitch rotation
      */
-    public double getPitch() {
+    public float getPitch() {
         return nRotation.getY();
     }
 
