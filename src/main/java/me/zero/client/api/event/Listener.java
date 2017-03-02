@@ -35,10 +35,12 @@ public final class Listener<T> implements EventHook<T> {
      */
     private byte priority;
 
+    @SafeVarargs
     public Listener(EventHook<T> hook, Predicate<T>... filters) {
         this(hook, EventPriority.DEFAULT, filters);
     }
 
+    @SafeVarargs
     @SuppressWarnings("unchecked")
     public Listener(EventHook<T> hook, byte priority, Predicate<T>... filters) {
         this.hook = hook;
