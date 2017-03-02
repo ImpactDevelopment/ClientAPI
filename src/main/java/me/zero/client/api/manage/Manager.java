@@ -49,6 +49,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      *
      * @param data The entries
      */
+    @SafeVarargs
     protected final void addData(T... data) {
         this.data.addAll(Arrays.asList(data));
     }

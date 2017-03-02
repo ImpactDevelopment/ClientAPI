@@ -43,6 +43,7 @@ public class ClientUtils {
      *
      * @param members The Members to be Checked
      */
+    @SafeVarargs
     public static <T> boolean containsNull(T... members) {
         for (T member : members)
             if (member == null)
