@@ -177,6 +177,17 @@ public class Vec2 {
     }
 
     /**
+     * Calculates the distance to another Vec2
+     *
+     * @since 1.0
+     *
+     * @return The distance
+     */
+    public double distanceTo(Vec2 vec) {
+        return Math.sqrt(x * vec.x + y * vec.y);
+    }
+
+    /**
      * Uses GLU#gluUnproject to project the 2D position
      * of this vector to a 3D position in the world.
      *
