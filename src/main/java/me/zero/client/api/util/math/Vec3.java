@@ -226,6 +226,17 @@ public class Vec3 {
     }
 
     /**
+     * Calculates the distance to another Vec3
+     *
+     * @since 1.0
+     *
+     * @return The distance
+     */
+    public double distanceTo(Vec3 vec) {
+        return Math.sqrt(x * vec.x + y * vec.y + z * vec.z);
+    }
+
+    /**
      * Determines the rotations from this vector to another vector
      *
      * @since 1.0
