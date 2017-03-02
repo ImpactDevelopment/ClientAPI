@@ -14,15 +14,18 @@ import java.util.function.Predicate;
  */
 public class PacketFilter implements Predicate<PacketEvent> {
 
-    private final Class<Packet<?>>[] packets;
+    /**
+     * Packets allowed by this filter
+     */
+    private final Class<? extends Packet<?>>[] packets;
 
-    public PacketFilter(Class<Packet<?>>... packets) {
+    public PacketFilter(Class<? extends Packet<?>>... packets) {
         this.packets = packets;
     }
 
     @Override
     public boolean test(PacketEvent packetEvent) {
-        for (Class<Packet<?>> packet : packets)
+        for (Class<? extends Packet<?>> packet : packets)
             if (packetEvent.getPacket().getClass() == packet)
                 return true;
 
