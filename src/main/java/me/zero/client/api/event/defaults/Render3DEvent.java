@@ -14,7 +14,7 @@ public final class Render3DEvent implements Helper {
 
     private final float partialTicks;
 
-    private Render3DEvent() {
+    public Render3DEvent() {
         this.partialTicks = ((IMinecraft) mc).getTimer().renderPartialTicks;
     }
 
