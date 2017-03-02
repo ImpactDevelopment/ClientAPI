@@ -38,6 +38,11 @@ public final class EntityFilter implements Helper {
     private final BooleanType walls, team, invis, sleep, player, hostile, passive;
 
     @SafeVarargs
+    public EntityFilter(Node node, String player, String hostile, String passive, Predicate<Entity>... checks) {
+        this(node, null, null, null, null, player, hostile, passive, checks);
+    }
+
+    @SafeVarargs
     public EntityFilter(Node node, String invis, String sleep, String player, String hostile, String passive, Predicate<Entity>... checks) {
         this(node, null, null, invis, sleep, player, hostile, passive, checks);
     }
