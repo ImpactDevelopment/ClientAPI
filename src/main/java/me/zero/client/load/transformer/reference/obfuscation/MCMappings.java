@@ -76,6 +76,7 @@ public interface MCMappings {
     MethodReference renderEnchantedGlint = new MethodReference(new ObfuscationName[] { from(MCP, "renderEnchantedGlint"), from(VANILLA, "") }, Void.TYPE, RenderLivingBase, EntityLivingBase, ModelBase, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE);
     MethodReference renderEffect = new MethodReference(new ObfuscationName[] { from(MCP, "renderEffect"), from(VANILLA, "a") }, Void.TYPE, IBakedModel);
     MethodReference onDeath = new MethodReference(new ObfuscationName[] { from(MCP, "onDeath"), from(VANILLA, "a") }, Void.TYPE, DamageSource);
+    MethodReference doRender = new MethodReference(new ObfuscationName[] { from(MCP, "doRender"), from(VANILLA, "a") }, Void.TYPE, Entity, Double.TYPE, Double.TYPE, Double.TYPE, Float.TYPE, Float.TYPE);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });
