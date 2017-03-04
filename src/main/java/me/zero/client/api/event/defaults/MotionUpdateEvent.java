@@ -31,6 +31,11 @@ public final class MotionUpdateEvent implements Helper {
      */
     private static Vec2 oRotation, nRotation;
 
+    /**
+     * OnGround state
+     */
+    private static boolean oGround, nGround;
+
     public MotionUpdateEvent(EventState type) {
         this.type = type;
         if (type == EventState.POST) return;
@@ -38,8 +43,10 @@ public final class MotionUpdateEvent implements Helper {
         IEntity util = (IEntity) mc.player;
         oPos      = util.getPos();
         oRotation = util.getRotations();
+        oGround   = mc.player.onGround;
         nPos      = util.getPos();
         nRotation = util.getRotations();
+        nGround   = mc.player.onGround;
     }
 
     /**
@@ -108,6 +115,19 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
+     * Sets the onGround state
+     *
+     * @since 1.0
+     *
+     * @param onGround The new onGround state
+     * @return This event
+     */
+    public MotionUpdateEvent onGround(boolean onGround) {
+        nGround = onGround;
+        return this;
+    }
+
+    /**
      * @since 1.0
      *
      * @return The X position
@@ -150,6 +170,15 @@ public final class MotionUpdateEvent implements Helper {
      */
     public float getPitch() {
         return nRotation.getY();
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The OnGround state
+     */
+    public boolean isOnGround() {
+        return nGround;
     }
 
     /**
