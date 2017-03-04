@@ -197,6 +197,7 @@ public final class MotionUpdateEvent implements Helper {
         IEntity util = (IEntity) mc.player;
         util.setPos(nPos);
         util.setRotations(nRotation);
+        mc.player.onGround = nGround;
     }
 
     /**
@@ -206,5 +207,6 @@ public final class MotionUpdateEvent implements Helper {
         IEntity util = (IEntity) mc.player;
         util.setPos(oPos);
         util.setRotations(oRotation);
+        mc.player.onGround = oGround;
     }
 }
