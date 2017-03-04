@@ -3,8 +3,10 @@ package me.zero.client.api.util.render;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION_TEX;
 import static org.lwjgl.opengl.GL11.*;
@@ -175,5 +177,124 @@ public class RenderUtils {
         glDisable(GL_LINE_SMOOTH);
         GlStateManager.enableDepth();
         GlStateManager.depthMask(true);
+    }
+
+    // Normal
+
+    public static void rectangle(double x1, double y1, double x2, double y2, int color) {
+        if (x1 < x2) {
+            double var5 = x1;
+            x1 = x2;
+            x2 = var5;
+        }
+        if (y1 < y2) {
+            double var5 = y1;
+            y1 = y2;
+            y2 = var5;
+        }
+        float r = (color >> 16 & 0xFF) / 255.0F;
+        float g = (color >> 8 & 0xFF) / 255.0F;
+        float b = (color & 0xFF) / 255.0F;
+        float a = (color >> 24 & 0xFF) / 255.0F;
+
+        Tessellator tessellator = Tessellator.getInstance();
+        VertexBuffer worldRenderer = tessellator.getBuffer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        worldRenderer.pos(x1, y2, 0.0D).color(r, g, b, a).endVertex();
+        worldRenderer.pos(x2, y2, 0.0D).color(r, g, b, a).endVertex();
+        worldRenderer.pos(x2, y1, 0.0D).color(r, g, b, a).endVertex();
+        worldRenderer.pos(x1, y1, 0.0D).color(r, g, b, a).endVertex();
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    // Bordered
+
+    public static void rectangleBordered(double x, double y, double x1, double y1, int borderColor, int internalColor) {
+        rectangleBordered(x, y, x1, y1, 0.5, borderColor, internalColor);
+    }
+
+    public static void rectangleBordered(double x, double y, double x1, double y1, double width, int borderColor, int internalColor) {
+        rectangle(x + width, y + width, x1 - width, y1 - width, internalColor);
+        rectangle(x + width, y, x1 - width, y + width, borderColor);
+        rectangle(x, y, x + width, y1, borderColor);
+        rectangle(x1 - width, y, x1, y1, borderColor);
+        rectangle(x + width, y1 - width, x1 - width, y1, borderColor);
+    }
+
+    // Gradient
+
+    public static void rectangleGradient(double x1, double y1, double x2, double y2, int c1, int c2) {
+        rectangleGradient(x1, y1, x2, y2, new int[] { c1, c2 });
+    }
+
+    private static void rectangleGradient(double x1, double y1, double x2, double y2, int[] color) {
+        float[] r = new float[color.length];
+        float[] g = new float[color.length];
+        float[] b = new float[color.length];
+        float[] a = new float[color.length];
+        for (int i = 0; i < color.length; i++) {
+            r[i] = ((color[i] >> 16 & 0xFF) / 255.0F);
+            g[i] = ((color[i] >> 8 & 0xFF) / 255.0F);
+            b[i] = ((color[i] & 0xFF) / 255.0F);
+            a[i] = ((color[i] >> 24 & 0xFF) / 255.0F);
+        }
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.disableAlpha();
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GlStateManager.blendFunc(770, 771);
+        GlStateManager.shadeModel(7425);
+        Tessellator tessellator = Tessellator.getInstance();
+        VertexBuffer worldRenderer = tessellator.getBuffer();
+        worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        // Clean this up
+        if (color.length == 1) {
+            worldRenderer.pos(x2, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x1, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x1, y2, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x2, y2, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+        } else if (color.length == 2 || color.length == 3) {
+            worldRenderer.pos(x2, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x1, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x1, y2, 0.0D).color(r[1], g[1], b[1], a[1]).endVertex();
+            worldRenderer.pos(x2, y2, 0.0D).color(r[1], g[1], b[1], a[1]).endVertex();
+        } else if (color.length >= 4) {
+            worldRenderer.pos(x2, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
+            worldRenderer.pos(x1, y1, 0.0D).color(r[1], g[1], b[1], a[1]).endVertex();
+            worldRenderer.pos(x1, y2, 0.0D).color(r[2], g[2], b[2], a[2]).endVertex();
+            worldRenderer.pos(x2, y2, 0.0D).color(r[3], g[3], b[3], a[3]).endVertex();
+        }
+        tessellator.draw();
+        GlStateManager.shadeModel(7424);
+        GlStateManager.disableBlend();
+        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture2D();
+    }
+
+    // Bordered Gradient
+
+    public static void rectangleBorderedGradient(double x1, double y1, double x2, double y2, int border, int c1, int c2) {
+        rectangleBorderedGradient(x1, y1, x2, y2, border, c1, c2, 0.5);
+    }
+
+    public static void rectangleBorderedGradient(double x1, double y1, double x2, double y2, int border, int c1, int c2, double width) {
+        rectangleBorderedGradient(x1, y1, x2, y2, new int[] { c1, c2 }, new int[] { border }, width);
+    }
+
+    public static void rectangleBorderedGradient(double x1, double y1, double x2, double y2, int[] fill, int[] outline, double width) {
+        rectangleOutlinedGradient(x1, y1, x2, y2, outline, width);
+        rectangleGradient(x1 + width, y1 + width, x2 - width, y2 - width, fill);
+    }
+
+    public static void rectangleOutlinedGradient(double x1, double y1, double x2, double y2, int[] color, double width) {
+        rectangleGradient(x1, y1, x2, y1 + width, color);
+        rectangleGradient(x1, y2 - width, x2, y2, color);
+        rectangleGradient(x1, y1 + width, x1 + width, y2 - width, color);
+        rectangleGradient(x2 - width, y1 + width, x2, y2 - width, color);
     }
 }
