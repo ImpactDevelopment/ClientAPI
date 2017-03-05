@@ -214,16 +214,16 @@ public class RenderUtils {
 
     // Bordered
 
-    public static void rectangleBordered(double x, double y, double x1, double y1, int borderColor, int internalColor) {
-        rectangleBordered(x, y, x1, y1, 0.5, borderColor, internalColor);
+    public static void rectangleBordered(double x1, double y1, double x2, double y2, int borderColor, int internalColor) {
+        rectangleBordered(x1, y1, x2, y2, 0.5, borderColor, internalColor);
     }
 
-    public static void rectangleBordered(double x, double y, double x1, double y1, double width, int borderColor, int internalColor) {
-        rectangle(x + width, y + width, x1 - width, y1 - width, internalColor);
-        rectangle(x + width, y, x1 - width, y + width, borderColor);
-        rectangle(x, y, x + width, y1, borderColor);
-        rectangle(x1 - width, y, x1, y1, borderColor);
-        rectangle(x + width, y1 - width, x1 - width, y1, borderColor);
+    public static void rectangleBordered(double x1, double y1, double x2, double y2, double width, int borderColor, int internalColor) {
+        rectangle(x1 + width, y1 + width, x2 - width, y2 - width, internalColor);
+        rectangle(x1 + width, y1, x2 - width, y1 + width, borderColor);
+        rectangle(x1, y1, x1 + width, y2, borderColor);
+        rectangle(x2 - width, y1, x2, y2, borderColor);
+        rectangle(x1 + width, y2 - width, x2 - width, y2, borderColor);
     }
 
     // Gradient
@@ -246,9 +246,9 @@ public class RenderUtils {
         GlStateManager.disableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.disableAlpha();
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-        GlStateManager.blendFunc(770, 771);
-        GlStateManager.shadeModel(7425);
+        OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.shadeModel(GL_FLAT);
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer worldRenderer = tessellator.getBuffer();
         worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
@@ -270,7 +270,7 @@ public class RenderUtils {
             worldRenderer.pos(x2, y2, 0.0D).color(r[3], g[3], b[3], a[3]).endVertex();
         }
         tessellator.draw();
-        GlStateManager.shadeModel(7424);
+        GlStateManager.shadeModel(GL_FLAT);
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
         GlStateManager.enableTexture2D();
