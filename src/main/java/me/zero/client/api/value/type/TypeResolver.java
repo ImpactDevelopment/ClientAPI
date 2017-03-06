@@ -3,6 +3,8 @@ package me.zero.client.api.value.type;
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.interfaces.annotation.Label;
 import me.zero.client.api.value.Value;
+import me.zero.client.api.value.annotation.MultiValue;
+import me.zero.client.api.value.annotation.NumberValue;
 
 import java.lang.reflect.Field;
 
@@ -45,8 +47,43 @@ public interface TypeResolver<T extends Value> {
      */
     TypeResolver<StringType> STRING = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
-        StringType type = new StringType(label.name(), label.id(), label.description(), parent, field);
-        type.setValue((String) ReflectionUtils.getField(parent, field));
+        return new StringType(label.name(), label.id(), label.description(), parent, field);
+    };
+
+    /**
+     * Resolves Multi Types
+     */
+    TypeResolver<MultiType> MULTI = (parent, field) -> {
+        Label label = field.getAnnotation(Label.class);
+        MultiValue multi = field.getAnnotation(MultiValue.class);
+        MultiType type = new MultiType(label.name(), label.id(), label.description(), parent, field, multi.value());
+        if (type.getValue() == null)
+            type.setValue(multi.value()[0]);
         return type;
+    };
+
+    /**
+     * Resolves Number Types
+     */
+    TypeResolver<NumberType> NUMBER = (parent, field) -> {
+        Label label = field.getAnnotation(Label.class);
+        NumberValue num = field.getAnnotation(NumberValue.class);
+
+        // Clean up
+        if (field.getType() == Byte.class || field.getType() == Byte.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max());
+        } else if (field.getType() == Short.class || field.getType() == Short.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max());
+        } else if (field.getType() == Integer.class || field.getType() == Integer.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max());
+        } else if (field.getType() == Long.class || field.getType() == Long.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max());
+        } else if (field.getType() == Float.class || field.getType() == Float.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max());
+        } else if (field.getType() == Double.class || field.getType() == Double.TYPE) {
+            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, num.min(), num.max());
+        }
+
+        return null;
     };
 }
