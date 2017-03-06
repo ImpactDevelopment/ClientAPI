@@ -17,12 +17,12 @@ import java.util.Set;
  *
  * Created by Brady on 2/21/2017.
  */
-public class Node<T extends Node> implements Nameable {
+public class Node implements Nameable {
 
     /**
      * Child nodes
      */
-    private Set<T> children = Sets.newLinkedHashSet();
+    private Set<Node> children = Sets.newLinkedHashSet();
 
     /**
      * Values
@@ -57,7 +57,7 @@ public class Node<T extends Node> implements Nameable {
      * @param children The children
      */
     @SafeVarargs
-    protected final void addChildren(T... children) {
+    protected final void addChildren(Node... children) {
         this.addChildren(Arrays.asList(children));
     }
 
@@ -68,7 +68,7 @@ public class Node<T extends Node> implements Nameable {
      *
      * @param children The children
      */
-    public final void addChildren(Collection<T> children) {
+    public final void addChildren(Collection<Node> children) {
         this.children.addAll(children);
     }
 
@@ -77,7 +77,7 @@ public class Node<T extends Node> implements Nameable {
      *
      * @return The set of all child nodes
      */
-    public final Set<T> getChildren() {
+    public final Set<Node> getChildren() {
         return Sets.newLinkedHashSet(this.children);
     }
 

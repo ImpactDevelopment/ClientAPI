@@ -21,7 +21,7 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  *
  * Created by Brady on 1/19/2017.
  */
-public abstract class Module extends Node<Module> implements IModule {
+public abstract class Module extends Node implements IModule {
 
     /**
      * The type/category of the module
