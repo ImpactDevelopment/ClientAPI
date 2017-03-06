@@ -20,5 +20,5 @@ interface IModule extends Helper, Toggleable, Bindable {
      *
      * @return The type of the Module
      */
-    String getType();
+    Class<?> getType();
 }
