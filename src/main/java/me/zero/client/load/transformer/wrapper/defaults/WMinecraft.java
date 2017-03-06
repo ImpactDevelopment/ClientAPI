@@ -4,7 +4,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
-import me.zero.client.api.wrapper.IMinecraft;
+import me.zero.client.wrapper.IMinecraft;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 

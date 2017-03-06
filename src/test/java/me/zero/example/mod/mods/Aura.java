@@ -6,7 +6,7 @@ import me.zero.client.api.event.defaults.MotionUpdateEvent;
 import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
 import me.zero.client.api.util.math.Vec2;
-import me.zero.client.api.wrapper.IEntity;
+import me.zero.client.wrapper.IEntity;
 import me.zero.example.mod.category.ICombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,6 +1,6 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import me.zero.client.api.wrapper.IEntityPlayer;
+import me.zero.client.wrapper.IEntityPlayer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
 import static javassist.CtClass.*;

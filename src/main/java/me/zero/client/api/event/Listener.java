@@ -3,6 +3,7 @@ package me.zero.client.api.event;
 import me.zero.client.api.event.type.EventPriority;
 import net.jodah.typetools.TypeResolver;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
@@ -45,7 +46,7 @@ public final class Listener<T> implements EventHook<T> {
     public Listener(EventHook<T> hook, byte priority, Predicate<T>... filters) {
         this.hook = hook;
         this.priority = priority;
-        this.target = (Class<T>) TypeResolver.resolveRawArguments(EventHook.class, hook.getClass())[0];
+        this.target = (Class<T>) TypeResolver.resolveRawArgument(EventHook.class, hook.getClass());
         this.filters = filters;
     }
 
@@ -78,9 +79,8 @@ public final class Listener<T> implements EventHook<T> {
     @Override
     @SuppressWarnings("unchecked")
     public final void invoke(T event) {
-        for (Predicate filter : filters)
-            if (!filter.test(event))
-                return;
+        if (Arrays.stream(filters).filter(filter -> !filter.test(event)).count() > 0)
+            return;
 
         this.hook.invoke(event);
     }
