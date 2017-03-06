@@ -1,4 +1,4 @@
-package me.zero.client.api.wrapper;
+package me.zero.client.wrapper;
 
 /**
  * Used to get the X, Y and Z render positions

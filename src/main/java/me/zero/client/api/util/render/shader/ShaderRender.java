@@ -3,7 +3,7 @@ package me.zero.client.api.util.render.shader;
 import me.zero.client.api.util.ReflectionUtils;
 import me.zero.client.api.util.interfaces.Action;
 import me.zero.client.api.util.interfaces.Helper;
-import me.zero.client.api.wrapper.IMinecraft;
+import me.zero.client.wrapper.IMinecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.shader.Framebuffer;

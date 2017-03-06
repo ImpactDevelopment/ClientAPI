@@ -1,7 +1,7 @@
 package me.zero.client.api.event.defaults;
 
 import me.zero.client.api.util.interfaces.Helper;
-import me.zero.client.api.wrapper.IMinecraft;
+import me.zero.client.wrapper.IMinecraft;
 
 /**
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)

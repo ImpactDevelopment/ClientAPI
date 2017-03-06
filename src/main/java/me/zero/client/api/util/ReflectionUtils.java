@@ -3,6 +3,7 @@ package me.zero.client.api.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * Util file used to clean up usages of the
@@ -24,12 +25,10 @@ public class ReflectionUtils {
      * @return The value of the field
      */
     public static Object getField(Object object, String fieldName) {
-        for (Field field : object.getClass().getDeclaredFields()) {
-            if (field.getName().equals(fieldName)) {
-                return getField(object, field);
-            }
-        }
-        return null;
+        Field field = Arrays.stream(object.getClass().getDeclaredFields())
+                .filter(f -> f.getName().equals(fieldName)).findFirst().orElse(null);
+
+        return getField(object, field);
     }
 
     /**
@@ -48,8 +47,8 @@ public class ReflectionUtils {
             field.setAccessible(true);
             value = field.get(object);
             field.setAccessible(accessible);
-        } catch (IllegalAccessException e) {
-            // This should never happen because we're setting access
+        } catch (NullPointerException | IllegalAccessException e) {
+            // Should only throw nullpointer, access is being set
         }
         return value;
     }
@@ -65,12 +64,10 @@ public class ReflectionUtils {
      * @return true if setting the field was successful, false if otherwise
      */
     public static boolean setField(Object object, String fieldName, Object value) {
-        for (Field field : object.getClass().getDeclaredFields()) {
-            if (field.getName().equals(fieldName)) {
-                return setField(object, field, value);
-            }
-        }
-        return false;
+        Field field = Arrays.stream(object.getClass().getDeclaredFields())
+                .filter(f -> f.getName().equals(fieldName)).findFirst().orElse(null);
+
+        return setField(object, field, value);
     }
 
     /**
@@ -90,8 +87,8 @@ public class ReflectionUtils {
             field.set(object, value);
             field.setAccessible(accessible);
             return true;
-        } catch (IllegalAccessException e) {
-            // This should never happen because we're setting access
+        } catch (NullPointerException | IllegalAccessException e) {
+            // Should only throw nullpointer, access is being set
         }
         return false;
     }

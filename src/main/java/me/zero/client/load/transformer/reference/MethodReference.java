@@ -10,6 +10,7 @@ import me.zero.client.load.transformer.reference.obfuscation.ObfuscationName;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,12 +43,12 @@ public final class MethodReference extends Reference {
         this.returnType = returnType;
 
         List<ClassReference> parameterList = new ArrayList<>();
-        for (Object o : parameters) {
+        Arrays.stream(parameters).forEach(o -> {
             if (o instanceof ClassReference)
                 parameterList.add((ClassReference) o);
             if (o instanceof Type)
                 parameterList.add(new ClassReference((Type) o));
-        }
+        });
         this.parameters = parameterList.toArray(new ClassReference[0]);
     }
 
