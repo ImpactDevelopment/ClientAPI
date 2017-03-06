@@ -1,6 +1,6 @@
 package me.zero.client.load.transformer.wrapper.defaults;
 
-import me.zero.client.api.wrapper.IKeyBinding;
+import me.zero.client.wrapper.IKeyBinding;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 

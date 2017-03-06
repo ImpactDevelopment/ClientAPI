@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 
 /**
  * Generic Block Utils
@@ -17,7 +16,7 @@ import net.minecraft.util.math.MathHelper;
  *
  * Created by Brady on 2/24/2017.
  */
-public class BlockUtils implements Helper {
+public final class BlockUtils implements Helper {
 
     public static Block getBlock(int x, int y, int z) {
         return getBlock(new BlockPos(x, y, z));
@@ -45,8 +44,8 @@ public class BlockUtils implements Helper {
 
     public static Block getBlock(AxisAlignedBB bb) {
         int y = (int) bb.minY;
-        for (int x = MathHelper.floor(bb.minX); x < MathHelper.floor(bb.maxX) + 1; x++) {
-            for (int z = MathHelper.floor(bb.minZ); z < MathHelper.floor(bb.maxZ) + 1; z++) {
+        for (int x = (int) Math.floor(bb.minX); x < (int) Math.floor(bb.maxX) + 1; x++) {
+            for (int z = (int) Math.floor(bb.minZ); z < (int) Math.floor(bb.maxZ) + 1; z++) {
                 Block block =  getBlock(new BlockPos(x, y, z));
                 if (block != Blocks.AIR) {
                     return block;

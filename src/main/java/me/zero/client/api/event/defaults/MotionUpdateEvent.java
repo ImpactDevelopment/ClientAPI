@@ -4,7 +4,7 @@ import me.zero.client.api.event.type.EventState;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
-import me.zero.client.api.wrapper.IEntity;
+import me.zero.client.wrapper.IEntity;
 
 /**
  * Called before and after packets are sent to

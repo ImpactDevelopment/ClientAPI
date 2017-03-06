@@ -1,4 +1,4 @@
-package me.zero.client.api.wrapper;
+package me.zero.client.wrapper;
 
 /**
  * Wraps KeyBinding to allow direct setting of Keybind states

@@ -3,7 +3,7 @@ package me.zero.client.api.util.render.camera;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.api.util.render.RenderUtils;
-import me.zero.client.api.wrapper.IEntity;
+import me.zero.client.wrapper.IEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;

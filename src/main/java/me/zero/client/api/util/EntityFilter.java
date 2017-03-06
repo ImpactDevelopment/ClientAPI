@@ -14,6 +14,7 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -58,9 +59,8 @@ public final class EntityFilter implements Helper {
         this.passive = (BooleanType) node.getValue(passive);
 
         this.predicate = e -> {
-            for (Predicate<Entity> predicate : checks)
-                if (!predicate.test(e))
-                    return false;
+            if (Arrays.stream(checks).filter(filter -> !filter.test(e)).count() > 0)
+                return false;
 
             if (this.walls != null && !this.walls.getState() && !mc.player.canEntityBeSeen(e))
                 return false;
