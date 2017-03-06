@@ -73,7 +73,7 @@ public class ModuleMode<T extends Module> implements IModule {
     }
 
     @Override
-    public String getType() {
+    public Class<?> getType() {
         return null;
     }
 }
