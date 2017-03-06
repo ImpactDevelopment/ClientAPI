@@ -3,8 +3,10 @@ package me.zero.client.api.value;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.interfaces.annotation.Label;
 import me.zero.client.api.value.annotation.BooleanValue;
+import me.zero.client.api.value.annotation.MultiValue;
 import me.zero.client.api.value.annotation.NumberValue;
 import me.zero.client.api.value.annotation.StringValue;
+import me.zero.client.api.value.type.NumberType;
 import me.zero.client.api.value.type.TypeResolver;
 
 import java.lang.annotation.Annotation;
@@ -83,10 +85,31 @@ public class Values {
         if (anno == BooleanValue.class && field.getType() == Boolean.class) {
             return TypeResolver.BOOLEAN.resolve(parent, field);
         } else if (anno == NumberValue.class) {
-            // TODO: Create Resolver
+            NumberType type = TypeResolver.NUMBER.resolve(parent, field);
+            checkType(type, field);
         } else if (anno == StringValue.class && field.getType() == String.class) {
             return TypeResolver.STRING.resolve(parent, field);
+        } else if (anno == MultiValue.class && field.getType() == String.class) {
+            return TypeResolver.MULTI.resolve(parent, field);
         }
         return null;
+    }
+
+    /**
+     * Sets up the NumberType value
+     *
+     * @since 1.0
+     *
+     * @param type The type
+     * @param field The field that has the type
+     */
+    private static <T extends Number> void checkType(NumberType<T> type, Field field) {
+        if (field.getType().isPrimitive()) {
+            if (type.getValue().equals(0))
+                type.setValue(type.getMinimum());
+        } else {
+            if (type.getValue().equals(null))
+                type.setValue(type.getMinimum());
+        }
     }
 }
