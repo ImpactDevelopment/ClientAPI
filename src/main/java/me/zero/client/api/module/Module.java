@@ -26,7 +26,7 @@ public abstract class Module extends Node<Module> implements IModule {
     /**
      * The type/category of the module
      */
-    private String type;
+    private Class<?> type;
 
     /**
      * The Keybind of this Module
@@ -62,8 +62,7 @@ public abstract class Module extends Node<Module> implements IModule {
 
             this.type = Arrays.stream(this.getClass().getInterfaces())
                     .filter(c -> c.isAnnotationPresent(Category.class))
-                    .findFirst().orElse(Category.Default.class)
-                    .getAnnotation(Category.class).name();
+                    .findFirst().orElse(Category.Default.class);
         } else {
             throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
         }
@@ -150,7 +149,7 @@ public abstract class Module extends Node<Module> implements IModule {
     }
 
     @Override
-    public final String getType() {
+    public final Class<?> getType() {
         return this.type;
     }
 
