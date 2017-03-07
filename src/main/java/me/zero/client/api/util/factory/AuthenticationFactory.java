@@ -69,6 +69,23 @@ public class AuthenticationFactory implements Helper {
     }
 
     /**
+     * Creates a Session from the Factory
+     *
+     * @since 1.0
+     *
+     * @return The session
+     */
+    public Session session() {
+        try {
+            auth.logIn();
+            GameProfile profile = auth.getSelectedProfile();
+            return new Session(profile.getName(), profile.getId().toString(), auth.getAuthenticatedToken(), "MOJANG");
+        } catch (AuthenticationException e) {
+            return null;
+        }
+    }
+
+    /**
      * Logs in using the credentials provided
      *
      * @since 1.0
@@ -76,14 +93,11 @@ public class AuthenticationFactory implements Helper {
      * @return Whether or not the login was successful
      */
     public boolean login() {
-        try {
-            auth.logIn();
-            GameProfile profile = auth.getSelectedProfile();
-            Session session = new Session(profile.getName(), profile.getId().toString(), auth.getAuthenticatedToken(), "MOJANG");
-            ((IMinecraft) mc).setSession(session);
-            return true;
-        } catch (AuthenticationException e) {
+        Session session = session();
+        if (session == null)
             return false;
-        }
+
+        ((IMinecraft) mc).setSession(session);
+        return true;
     }
 }
