@@ -106,9 +106,8 @@ public class BotLogin implements INetHandlerLoginClient, Helper {
     @Override
     @ParametersAreNonnullByDefault
     public void handleEnableCompression(SPacketEnableCompression packetIn) {
-        if (!this.networkManager.isLocalChannel()) {
+        if (!this.networkManager.isLocalChannel())
             this.networkManager.setCompressionThreshold(packetIn.getCompressionThreshold());
-        }
     }
 
     @Override
