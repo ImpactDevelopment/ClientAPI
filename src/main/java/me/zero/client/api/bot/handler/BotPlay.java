@@ -172,13 +172,7 @@ public class BotPlay implements INetHandlerPlayClient {
 
     @Override
     @ParametersAreNonnullByDefault
-    public void handleJoinGame(SPacketJoinGame packetIn) {
-        // Create new Player
-        EntityPlayerSP player = bot.getPlayer();
-        player.dimension = packetIn.getDimension();
-        player.setEntityId(packetIn.getPlayerId());
-        player.setReducedDebug(packetIn.isReducedDebugInfo());
-    }
+    public void handleJoinGame(SPacketJoinGame packetIn) {}
 
     @Override
     @ParametersAreNonnullByDefault

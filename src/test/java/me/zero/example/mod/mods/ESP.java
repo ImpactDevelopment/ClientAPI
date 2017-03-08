@@ -55,7 +55,7 @@ public class ESP extends Module {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        shader.start();
+        shader.bind();
         mc.world.loadedEntityList.stream().filter(e -> (e instanceof EntityLivingBase || e instanceof EntityItem) && !e.isDead && e != mc.player).forEach(e -> {
             mc.entityRenderer.disableLightmap();
             RenderHelper.disableStandardItemLighting();
@@ -72,7 +72,9 @@ public class ESP extends Module {
             }
             glPopMatrix();
         });
-        shader.stop();
+        shader.unbind();
+
+        shader.draw();
 
         glDisable(GL_BLEND);
         glPopMatrix();

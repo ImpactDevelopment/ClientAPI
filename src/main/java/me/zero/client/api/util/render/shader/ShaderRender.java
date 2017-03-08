@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/17/2017.
  */
-public class ShaderRender implements Helper, Action {
+public class ShaderRender implements Helper {
 
     /**
      * Program handled by this renderer
@@ -37,8 +37,7 @@ public class ShaderRender implements Helper, Action {
         this.fbo = fbo;
     }
 
-    @Override
-    public final void start() {
+    public final void bind() {
         Method setupCameraTransform = ReflectionUtils.getMethod(mc.entityRenderer, "setupCameraTransform", float.class, int.class);
         ReflectionUtils.callMethod(
                 mc.entityRenderer,
@@ -53,8 +52,7 @@ public class ShaderRender implements Helper, Action {
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     }
 
-    @Override
-    public final void stop() {
+    public final void unbind() {
         mc.entityRenderer.disableLightmap();
         RenderHelper.disableStandardItemLighting();
         mc.entityRenderer.setupOverlayRendering();
@@ -63,7 +61,6 @@ public class ShaderRender implements Helper, Action {
 
         fbo.unbindFramebuffer();
         mc.getFramebuffer().bindFramebuffer(true);
-        draw();
     }
 
     /**
@@ -71,7 +68,7 @@ public class ShaderRender implements Helper, Action {
      *
      * @since 1.0
      */
-    private void draw() {
+    public void draw() {
         glPushMatrix();
         glColor4f(1, 1, 1, 1);
         GlStateManager.bindTexture(program.getFramebuffer().getTextureID());
