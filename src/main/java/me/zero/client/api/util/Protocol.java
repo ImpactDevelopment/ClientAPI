@@ -1,5 +1,7 @@
 package me.zero.client.api.util;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,22 +14,18 @@ import java.util.List;
  */
 public class Protocol {
 
-    private static List<Protocol> registry;
-
-    static {
-        registry = new ArrayList<>();
-
-        add(316, "1.11.x", "1.11", "1.11.2");
-        add(315, "1.11");
-        add(210, "1.10.x", "1.10", "1.10.1", "1.10.2");
-        add(110, "1.9.3", "1.9.3", "1.9.4");
-        add(109, "1.9.2", "1.9.2");
-        add(108, "1.9.1");
-        add(107, "1.9");
-        add(47, "1.8.x", "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5", "1.8.6", "1.8.7", "1.8.8", "1.8.9");
-        add(5, "1.7.10", "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10");
-        add(4, "1.7.2", "1.7.2", "1.7.4", "1.7.5");
-    }
+    private static ImmutableList<Protocol> protocols = new ImmutableList.Builder<Protocol>()
+            .add(build(316, "1.11.x", "1.11", "1.11.2"))
+            .add(build(315, "1.11"))
+            .add(build(210, "1.10.x", "1.10", "1.10.1", "1.10.2"))
+            .add(build(110, "1.9.3", "1.9.3", "1.9.4"))
+            .add(build(109, "1.9.2", "1.9.2"))
+            .add(build(108, "1.9.1"))
+            .add(build(107, "1.9"))
+            .add(build(47, "1.8.x", "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5", "1.8.6", "1.8.7", "1.8.8", "1.8.9"))
+            .add(build(5, "1.7.10", "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10"))
+            .add(build(4, "1.7.2", "1.7.2", "1.7.4", "1.7.5"))
+            .build();
 
     private int protocol;
     private String name;
@@ -51,10 +49,11 @@ public class Protocol {
         return this.versions;
     }
 
-    private static void add(int protocol, String name, String... versions) {
-        if (versions.length == 0)
-            versions = new String[] { name };
+    private static Protocol build(int protocol, String name, String... versions) {
+        return new Protocol(protocol, name, versions);
+    }
 
-        registry.add(new Protocol(protocol, name, versions));
+    public static List<Protocol> getProtocols() {
+        return protocols;
     }
 }
