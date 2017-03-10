@@ -60,7 +60,7 @@ public class Values {
     private static Class<? extends Annotation> getValueAnnotation(Field field) {
         if (field.isAnnotationPresent(Label.class)) {
             Annotation a = Arrays.stream(field.getDeclaredAnnotations())
-                    .filter(annotation -> annotation.getClass().getCanonicalName().startsWith("me.zero.client.api.value.annotation"))
+                    .filter(annotation -> annotation.annotationType().getCanonicalName().startsWith("me.zero.client.api.value.annotation"))
                     .findFirst()
                     .orElse(null);
             if (a != null)
