@@ -12,6 +12,7 @@ import me.zero.client.api.util.render.shader.ShaderRender;
 import me.zero.client.wrapper.IEntity;
 import me.zero.client.wrapper.IMinecraft;
 import me.zero.client.wrapper.IRenderManager;
+import me.zero.example.mod.category.IRender;
 import me.zero.example.mod.mods.esp.OutlineShader;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
@@ -31,7 +32,7 @@ import static org.lwjgl.opengl.GL13.*;
  * Created by Brady on 2/18/2017.
  */
 @Mod(name = "ESP", description = "Reveals entity location", bind = Keyboard.KEY_Y)
-public class ESP extends Module {
+public class ESP extends Module implements IRender {
 
     private final FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
 
