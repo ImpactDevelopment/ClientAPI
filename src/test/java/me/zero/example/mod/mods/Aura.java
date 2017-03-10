@@ -28,7 +28,7 @@ public class Aura extends Module implements ICombat {
     @EventHandler
     private Listener<MotionUpdateEvent> motionUpdateListener = new Listener<>(event -> {
        switch (event.getType()) {
-           case PRE: {
+           case PRE : {
                List<Entity> entities = mc.world.loadedEntityList.stream().filter(e ->
                        e instanceof EntityLivingBase && !e.isDead && e != mc.player && e.getDistanceToEntity(mc.player) < 4.25)
                        .sorted(Comparator.comparingDouble(e -> mc.player.getDistanceToEntity(e)))
@@ -44,7 +44,7 @@ public class Aura extends Module implements ICombat {
                }
                break;
            }
-           case POST: {
+           case POST : {
                if (target != null && mc.player.getCooledAttackStrength(0F) == 1F) {
                    mc.playerController.attackEntity(mc.player, target);
                    mc.player.swingArm(EnumHand.MAIN_HAND);

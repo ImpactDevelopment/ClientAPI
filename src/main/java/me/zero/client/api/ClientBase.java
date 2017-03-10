@@ -1,8 +1,10 @@
 package me.zero.client.api;
 
+import com.google.common.collect.Lists;
 import me.zero.client.api.command.Command;
 import me.zero.client.api.exception.ActionNotValidException;
 import me.zero.client.api.manage.Manager;
+import me.zero.client.api.module.Category;
 import me.zero.client.api.module.Module;
 import me.zero.client.api.module.plugin.Plugin;
 import me.zero.client.api.module.plugin.PluginLoader;
@@ -196,5 +198,44 @@ class ClientBase implements Helper {
     // TODO: Create a chat builder and change "message" to it
     public void printChatMessage(String message) {
         mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(prefix + " " + message));
+    }
+
+    /**
+     * Gets the list of module types/categories
+     * that exist.
+     *
+     * @since 1.0
+     *
+     * @return The categories
+     */
+    public List<Class<?>> getCategories() {
+        return this.getCategories(false);
+    }
+
+    /**
+     * Gets the list of module types/categories
+     * that exist.
+     *
+     * @since 1.0
+     *
+     * @param sort Whether or not to sort alphabetically
+     * @return The categories
+     */
+    public List<Class<?>> getCategories(boolean sort) {
+        List<Class<?>> categories = Lists.newArrayList();
+        getModuleManager().getData().forEach(module -> {
+            Class<?> category = module.getType();
+
+            if (!categories.contains(category))
+                categories.add(category);
+        });
+        if (sort) {
+            categories.sort((c1, c2) -> {
+                String n1 = c1.getAnnotation(Category.class).name();
+                String n2 = c2.getAnnotation(Category.class).name();
+                return String.CASE_INSENSITIVE_ORDER.compare(n1, n2);
+            });
+        }
+        return categories;
     }
 }
