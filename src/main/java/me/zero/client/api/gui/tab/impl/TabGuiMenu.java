@@ -1,11 +1,14 @@
 package me.zero.client.api.gui.tab.impl;
 
+import me.zero.client.api.gui.tab.ITabGui;
 import me.zero.client.api.gui.tab.ITabGuiElement;
 import me.zero.client.api.gui.tab.ITabGuiMenu;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.lwjgl.input.Keyboard.*;
 
 /**
  * Implementationm of ITabGuiMenu
@@ -38,13 +41,18 @@ public class TabGuiMenu implements ITabGuiMenu {
      */
     private int selected;
 
+    /**
+     * Last selected index
+     */
+    private int lastSelected;
+
     public TabGuiMenu(String text) {
         this.text = text;
     }
 
     @Override
     public void render(float x, float y, FontRenderer font) {
-        // Render
+        // To be overriden by superclass
     }
 
     @Override
@@ -69,7 +77,85 @@ public class TabGuiMenu implements ITabGuiMenu {
 
     @Override
     public void keyPress(int key) {
-        // handle key presses
+        ITabGuiElement element = selectedElement();
+        switch (key) {
+            case KEY_UP : {
+                if (!active) return;
+                if (element == null) return;
+                if (element.isActive()) {
+                    element.keyPress(key);
+                    return;
+                }
+
+                lastSelected = selected;
+                selected--;
+                if (selected < 0) {
+                    selected = elements.size() - 1;
+                }
+                break;
+            }
+            case KEY_DOWN : {
+                if (!active) return;
+                if (element == null) return;
+                if (element.isActive()) {
+                    element.keyPress(key);
+                    return;
+                }
+
+                lastSelected = selected;
+                selected++;
+                if (selected > elements.size() - 1) {
+                    selected = 0;
+                }
+                break;
+            }
+            case KEY_RIGHT : {
+                if (!active) {
+                    this.toggle();
+                    return;
+                }
+                if (element == null) {
+                    this.interact();
+                    return;
+                }
+                if (element.isActive()) {
+                    element.keyPress(key);
+                    return;
+                }
+
+                element.toggle();
+                break;
+            }
+            case KEY_LEFT : {
+                if (!active) { return; }
+                if (element == null) {
+                    this.toggle();
+                    return;
+                }
+                if (element.isActive()) {
+                    element.keyPress(key);
+                    return;
+                }
+
+                this.toggle();
+                break;
+            }
+            case KEY_RETURN : {
+                if (!active) {
+                    toggle();
+                    return;
+                }
+                if (element == null) {
+                    interact();
+                    return;
+                }
+                if (element.isActive()) {
+                    element.keyPress(key);
+                    return;
+                }
+                element.toggle();
+            }
+        }
     }
 
     @Override
@@ -87,4 +173,9 @@ public class TabGuiMenu implements ITabGuiMenu {
     }
 
     public void interact() {}
+
+    public ITabGuiElement selectedElement() {
+        if (selected < 0 || selected >= elements.size()) return null;
+        return elements.get(selected);
+    }
 }
