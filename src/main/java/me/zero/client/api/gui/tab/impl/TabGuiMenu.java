@@ -29,22 +29,22 @@ public class TabGuiMenu implements ITabGuiMenu {
     /**
      * The title of the menu
      */
-    private String text;
+    protected String text;
 
     /**
      * The state of whether or not the menu is open
      */
-    private boolean active;
+    protected boolean active;
 
     /**
      * Current selected index
      */
-    private int selected;
+    protected int selected;
 
     /**
      * Last selected index
      */
-    private int lastSelected;
+    protected int lastSelected;
 
     public TabGuiMenu(String text) {
         this.text = text;
