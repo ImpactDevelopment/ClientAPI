@@ -176,11 +176,11 @@ public class BotPlay implements INetHandlerPlayClient, Helper {
         int i = packetIn.getSlot();
 
         switch (packetIn.getWindowId()) {
-            case -1: {
+            case -1 : {
                 entityplayer.inventory.setItemStack(itemstack);
                 break;
             }
-            case -2: {
+            case -2 : {
                 entityplayer.inventory.setInventorySlotContents(i, itemstack);
                 break;
             }
