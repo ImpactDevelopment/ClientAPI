@@ -56,7 +56,6 @@ public class Node implements Nameable {
      *
      * @param children The children
      */
-    @SafeVarargs
     protected final void addChildren(Node... children) {
         this.addChildren(Arrays.asList(children));
     }
