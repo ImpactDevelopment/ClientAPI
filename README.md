@@ -5,7 +5,7 @@ API designed to make Clients have Universal Support
 [![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/releases)
 
-##Credits
+## Credits
 | Name                | Contribution         |
 |---------------------|----------------------|
 | Halalaboos          | CFont                |
