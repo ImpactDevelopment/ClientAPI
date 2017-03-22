@@ -4,10 +4,8 @@ import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.value.type.BooleanType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityShulker;
-import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntitySquid;
@@ -124,8 +122,7 @@ public final class EntityFilter implements Helper {
      * @return Whether or not the entity is a player
      */
     public static boolean isPlayer(Entity e) {
-        boolean c1 = e instanceof EntityPlayer;
-        return c1;
+        return e instanceof EntityPlayer;
     }
 
     /**
@@ -141,7 +138,8 @@ public final class EntityFilter implements Helper {
         boolean c2 = e instanceof EntitySlime;
         boolean c3 = e instanceof EntityShulker;
         boolean c4 = e instanceof EntityGhast;
-        return c1 || c2 || c3 || c4;
+        boolean c5 = e instanceof EntityDragon;
+        return c1 || c2 || c3 || c4 || c5;
     }
 
     /**
@@ -157,7 +155,9 @@ public final class EntityFilter implements Helper {
         boolean c2 = e instanceof EntitySquid;
         boolean c3 = e instanceof EntityBat;
         boolean c4 = e instanceof EntityVillager;
-        return c1 || c2 || c3 || c4;
+        boolean c5 = e instanceof EntitySnowman;
+        boolean c6 = e instanceof EntityIronGolem;
+        return c1 || c2 || c3 || c4 || c5 || c6;
     }
 
     /**
