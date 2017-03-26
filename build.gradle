@@ -28,7 +28,7 @@ minecraft {
     tweakClass = 'me.zero.client.load.tweak.ClientTweaker'
     mappings = 'snapshot_20170215'
 
-    makeObfSourceJar = true
+    makeObfSourceJar = false
 }
 
 repositories {
