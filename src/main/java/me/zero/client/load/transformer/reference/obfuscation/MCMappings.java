@@ -19,6 +19,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.ObfuscationN
  * Created by Brady on 1/22/2017.
  */
 public interface MCMappings {
+
     // Classes
     ClassReference Minecraft = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.Minecraft"), from(VANILLA, "bes") });
     ClassReference Session = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.Session"), from(VANILLA, "bez") });
@@ -51,6 +52,7 @@ public interface MCMappings {
     ClassReference EntityPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.entity.EntityPlayer"), from(VANILLA, "aay") });
     ClassReference DamageSource = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.DamageSource"), from(VANILLA, "ry") });
     ClassReference SPacketPlayerPosLook = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.server.SPacketPlayerPosLook"), from(MCP, "hh") });
+    ClassReference FontRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.FontRenderer"), from(VANILLA, "bfg") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -77,6 +79,8 @@ public interface MCMappings {
     MethodReference renderEffect = new MethodReference(new ObfuscationName[] { from(MCP, "renderEffect"), from(VANILLA, "a") }, Void.TYPE, IBakedModel);
     MethodReference onDeath = new MethodReference(new ObfuscationName[] { from(MCP, "onDeath"), from(VANILLA, "a") }, Void.TYPE, DamageSource);
     MethodReference doRender = new MethodReference(new ObfuscationName[] { from(MCP, "doRender"), from(VANILLA, "a") }, Void.TYPE, Entity, Double.TYPE, Double.TYPE, Double.TYPE, Float.TYPE, Float.TYPE);
+    MethodReference renderString = new MethodReference(new ObfuscationName[] { from(MCP, "renderString"), from(VANILLA, "b") }, Integer.TYPE, String.class, Float.TYPE, Float.TYPE, Integer.TYPE, Boolean.TYPE);
+    MethodReference getStringWidth = new MethodReference(new ObfuscationName[] { from(MCP, "getStringWidth"), from(VANILLA, "a") }, Integer.TYPE, String.class);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });
