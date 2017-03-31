@@ -28,7 +28,7 @@ public class WMinecraft extends ClassWrapper {
         try {
             MouseButton = ClassPool.getDefault().get("me.zero.client.api.event.defaults.ClickEvent$MouseButton");
         } catch (NotFoundException e) {
-            throw new UnexpectedOutcomeException("Unable to find MouseButton classes");
+            throw new UnexpectedOutcomeException("Unable to find MouseButton class");
         }
     }
 
