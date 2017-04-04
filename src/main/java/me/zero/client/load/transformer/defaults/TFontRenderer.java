@@ -11,10 +11,14 @@ import java.util.Collection;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
+ * Hooks the TextEvent
+ *
+ * @since 1.0
+ *
  * Created by Brady on 3/30/2017.
  */
 @LoadTransformer
-public class TFontRenderer extends Transformer {
+public final class TFontRenderer extends Transformer {
 
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {

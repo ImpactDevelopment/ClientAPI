@@ -13,7 +13,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  *
  * Created by Brady on 2/25/2017.
  */
-public class WEntityPlayer extends ClassWrapper {
+public final class WEntityPlayer extends ClassWrapper {
 
     public WEntityPlayer() {
         super(EntityPlayer, IEntityPlayer.class);

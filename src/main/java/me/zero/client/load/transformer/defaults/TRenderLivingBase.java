@@ -18,7 +18,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 3/2/2017.
  */
 @LoadTransformer
-public class TRenderLivingBase extends Transformer {
+public final class TRenderLivingBase extends Transformer {
 
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {
