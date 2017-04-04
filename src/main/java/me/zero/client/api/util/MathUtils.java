@@ -23,9 +23,9 @@ public class MathUtils {
      * @param maximum The maximum possible value
      * @return The clamped value
      */
-    public static Number clamp(Number value, Number minimum, Number maximum) {
+    public static <T extends Number> T clamp(T value, T minimum, T maximum) {
         if (minimum.doubleValue() > maximum.doubleValue()) {
-            Number temp = minimum;
+            T temp = minimum;
             minimum = maximum;
             maximum = temp;
         }
