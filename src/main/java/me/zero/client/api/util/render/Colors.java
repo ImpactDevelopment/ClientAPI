@@ -1,5 +1,6 @@
 package me.zero.client.api.util.render;
 
+import me.zero.client.api.util.MathUtils;
 import me.zero.client.api.util.interfaces.Helper;
 
 import java.awt.*;
@@ -40,6 +41,31 @@ public class Colors implements Helper {
      */
     public static int getColor(char cc) {
         return (0xFF << 24) | mc.fontRenderer.getColorCode(cc);
+    }
+
+    /**
+     * Blends two colors with the specified blend amount (percentage)
+     *
+     * @since 1.0
+     *
+     * @param c1 First color
+     * @param c2 Second color
+     * @param perc Amount of the first color that remains.
+     *             1.0 = 100% first color
+     *             0.5 = equally blended
+     *             0.0 = 100% second color
+     * @return
+     */
+    public static int blend(int c1, int c2, float perc) {
+        float inverse = 1.0F - perc;
+        float[] color1 = getColor(c1);
+        float[] color2 = getColor(c2);
+        return Colors.getColor(
+                color1[0] * perc + color2[0] * inverse,
+                color1[1] * perc + color2[1] * inverse,
+                color1[2] * perc + color2[2] * inverse,
+                color1[3] * perc + color2[3] * inverse
+        );
     }
 
     /**
@@ -112,6 +138,11 @@ public class Colors implements Helper {
      * @return The parsed hex value
      */
     public static int getColor(int r, int g, int b, int a) {
+        r = clamp(r);
+        g = clamp(g);
+        b = clamp(b);
+        a = clamp(a);
+
         return ((a & 0xFF) << 24) |
                 ((r & 0xFF) << 16) |
                 ((g & 0xFF) << 8) |
@@ -173,5 +204,31 @@ public class Colors implements Helper {
     public static int rainbow(float saturation, float brightness, int offset) {
         float hue = ((System.currentTimeMillis() + offset) % 1000) / 1000F;
         return Color.getHSBColor(hue, saturation, brightness).getRGB();
+    }
+
+    /**
+     * Clamps a float color channel value to be within
+     * the 0.0 to 1.0 bounds.
+     *
+     * @since 1.0
+     *
+     * @param val Color value
+     * @return Clamped value
+     */
+    public static float clamp(float val) {
+        return MathUtils.clamp(val, 0.0F, 1.0F);
+    }
+
+    /**
+     * Clamps a integer color channel value to be within
+     * the 0 to 255 bounds.
+     *
+     * @since 1.0
+     *
+     * @param val Color value
+     * @return Clamped value
+     */
+    public static int clamp(int val) {
+        return MathUtils.clamp(val, 0, 255);
     }
 }
