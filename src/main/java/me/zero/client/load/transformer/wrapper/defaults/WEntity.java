@@ -19,7 +19,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 2/25/2017.
  */
 @LoadTransformer
-public class WEntity extends ClassWrapper {
+public final class WEntity extends ClassWrapper {
 
     private static CtClass Vec3, Vec2;
 
