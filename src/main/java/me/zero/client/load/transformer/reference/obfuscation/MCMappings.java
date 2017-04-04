@@ -53,6 +53,7 @@ public interface MCMappings {
     ClassReference DamageSource = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.DamageSource"), from(VANILLA, "ry") });
     ClassReference SPacketPlayerPosLook = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.network.play.server.SPacketPlayerPosLook"), from(MCP, "hh") });
     ClassReference FontRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.FontRenderer"), from(VANILLA, "bfg") });
+    ClassReference ShaderGroup = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.shader.ShaderGroup"), from(VANILLA, "byh") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -113,4 +114,6 @@ public interface MCMappings {
     FieldReference prevRotationYaw = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationYaw"), from(VANILLA, "y") });
     FieldReference prevRotationPitch = new FieldReference(new ObfuscationName[] { from(MCP, "prevRotationPitch"), from(VANILLA, "z") });
     FieldReference rightClickDelayTimer = new FieldReference(new ObfuscationName[] { from(MCP, "rightClickDelayTimer"), from(VANILLA, "aq") });
+    FieldReference listShaders = new FieldReference(new ObfuscationName[] { from(MCP, "listShaders"), from(VANILLA, "d") });
+    FieldReference listFramebuffers = new FieldReference(new ObfuscationName[] { from (MCP, "listFramebuffers"), from(VANILLA, "f") });
 }
