@@ -55,6 +55,6 @@ public final class WEntity extends ClassWrapper {
         this.implement("getRotations", Vec2, String.format(new2, Vec2.getName(), rotationYaw.getName(), rotationPitch.getName()));
         this.implement("getPrevRotations", Vec2, String.format(new2, Vec2.getName(), prevRotationYaw.getName(), prevRotationPitch.getName()));
 
-        this.implement("interpolate", Vec3, new CtClass[] { floatType }, "{ return this.getPos().add(this.getPos().sub(this.getLastTickPos()).scale($1)); }");
+        this.implement("interpolate", Vec3, new CtClass[] { floatType }, "{ return this.getLastTickPos().add(this.getPos().sub(this.getLastTickPos()).scale($1)); }");
     }
 }
