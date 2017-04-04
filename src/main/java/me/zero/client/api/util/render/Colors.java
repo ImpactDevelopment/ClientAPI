@@ -1,5 +1,7 @@
 package me.zero.client.api.util.render;
 
+import java.awt.*;
+
 /**
  * A collection of methods to help with color values
  *
@@ -100,5 +102,62 @@ public class Colors {
                 ((r & 0xFF) << 16) |
                 ((g & 0xFF) << 8) |
                 (b & 0xFF);
+    }
+
+    /**
+     * Returns the current rainbow hex
+     *
+     * @since 1.0
+     *
+     * @return Rainbow hex
+     */
+    public static int rainbow() {
+        return rainbow(0);
+    }
+
+    /**
+     * Returns the current rainbow hex with custom
+     * saturation and brightness.
+     *
+     * @since 1.0
+     *
+     * @param saturation The color saturation applied (0.0 -> 1.0)
+     * @param brightness The color brightness applied (0.0 -> 1.0)
+     * @return Rainbow hex
+     */
+    public static int rainbow(float saturation, float brightness) {
+        return rainbow(saturation, brightness, 0);
+    }
+
+    /**
+     * Returns the current rainbow hex. An extra
+     * parameter, offset is used to offset the
+     * System current millisecond time
+     *
+     * @since 1.0
+     *
+     * @param offset The offset added onto the current millisecond time
+     * @return Rainbow hex
+     */
+    public static int rainbow(int offset) {
+        return rainbow(1.0F, 1.0F, offset);
+    }
+
+    /**
+     * Returns the current rainbow hex with custom
+     * saturation and brightness. An extra parameter,
+     * offset is used to offset the System current
+     * millisecond time
+     *
+     * @since 1.0
+     *
+     * @param saturation The color saturation applied (0.0 -> 1.0)
+     * @param brightness The color brightness applied (0.0 -> 1.0)
+     * @param offset The offset added onto the current millisecond time
+     * @return Rainbow hex
+     */
+    public static int rainbow(float saturation, float brightness, int offset) {
+        float hue = ((System.currentTimeMillis() + offset) % 1000) / 1000F;
+        return Color.getHSBColor(hue, saturation, brightness).getRGB();
     }
 }
