@@ -1,5 +1,7 @@
 package me.zero.client.api.util.render;
 
+import me.zero.client.api.util.interfaces.Helper;
+
 import java.awt.*;
 
 /**
@@ -9,7 +11,7 @@ import java.awt.*;
  *
  * Created by Brady on 4/4/2017.
  */
-public class Colors {
+public class Colors implements Helper {
 
     /**
      * Parses the RGBA values from a hex value
@@ -26,6 +28,18 @@ public class Colors {
                 (hex & 255) / 255F,
                 (hex >> 24 & 255) / 255F
         };
+    }
+
+    /**
+     * Gets the hex value from a color code
+     *
+     * @since 1.0
+     *
+     * @param cc The color code
+     * @return Hex corresponding to color code
+     */
+    public static int getColor(char cc) {
+        return (0xFF << 24) | mc.fontRenderer.getColorCode(cc);
     }
 
     /**
