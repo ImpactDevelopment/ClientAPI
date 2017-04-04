@@ -113,8 +113,59 @@ public class GlUtils {
         int a = color.length == 4 ? (int) (color[3] * 255F) : 255;
         return ((a & 0xFF) << 24) |
                 ((r & 0xFF) << 16) |
-                ((g & 0xFF) << 8)  |
+                ((g & 0xFF) << 8) |
                 (b & 0xFF);
+    }
+
+    /**
+     * Rotates on the X axis at the X, Y, and Z
+     * coordinates that are provided.
+     *
+     * @since 1.0
+     *
+     * @param angle The amount being rotated
+     * @param x The x position being rotated on
+     * @param y The y position being rotated on
+     * @param z The z position being rotated on
+     */
+    public static void rotateX(float angle, double x, double y, double z) {
+        glTranslated(x, y, z);
+        glRotated(angle, 1, 0, 0);
+        glTranslated(-x, -y, -z);
+    }
+
+    /**
+     * Rotates on the Y axis at the X, Y, and Z
+     * coordinates that are provided.
+     *
+     * @since 1.0
+     *
+     * @param angle The amount being rotated
+     * @param x The x position being rotated on
+     * @param y The y position being rotated on
+     * @param z The z position being rotated on
+     */
+    public static void rotateY(float angle, double x, double y, double z) {
+        glTranslated(x, y, z);
+        glRotated(angle, 0, 1, 0);
+        glTranslated(-x, -y, -z);
+    }
+
+    /**
+     * Rotates on the Z axis at the X, Y, and Z
+     * coordinates that are provided.
+     *
+     * @since 1.0
+     *
+     * @param angle The amount being rotated
+     * @param x The x position being rotated on
+     * @param y The y position being rotated on
+     * @param z The z position being rotated on
+     */
+    public static void rotateZ(float angle, double x, double y, double z) {
+        glTranslated(x, y, z);
+        glRotated(angle, 0, 0, 1);
+        glTranslated(-x, -y, -z);
     }
 
     /**
