@@ -82,12 +82,12 @@ public class GlUtils {
     }
 
     /**
-     * Parses the ARGB from a hex value
+     * Parses the RGBA values from a hex value
      *
      * @since 1.0
      *
-     * @param hex The Hex Color
-     * @return The parsed ARGB array
+     * @param hex The hex value
+     * @return The parsed RGBA array
      */
     public static float[] getColor(int hex) {
         return new float[] {
@@ -96,6 +96,25 @@ public class GlUtils {
                 (hex & 255) / 255F,
                 (hex >> 24 & 255) / 255F
         };
+    }
+
+    /**
+     * Parses the hex value from RGBA values
+     *
+     * @since 1.0
+     *
+     * @param color The RGBA array
+     * @return The parsed hex value
+     */
+    public static int getColor(float[] color) {
+        int r = (int) (color[0] * 255F);
+        int g = (int) (color[1] * 255F);
+        int b = (int) (color[2] * 255F);
+        int a = (int) (color[3] * 255F);
+        return ((a & 0xFF) << 24) |
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8)  |
+                (b & 0xFF);
     }
 
     /**

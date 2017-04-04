@@ -15,7 +15,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 2/23/2017.
  */
 @LoadTransformer
-public class WRenderManager extends ClassWrapper {
+public final class WRenderManager extends ClassWrapper {
 
     public WRenderManager() {
         super(RenderManager, IRenderManager.class);

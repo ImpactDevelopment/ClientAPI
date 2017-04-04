@@ -15,7 +15,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 2/24/2017.
  */
 @LoadTransformer
-public class WKeyBinding extends ClassWrapper {
+public final class WKeyBinding extends ClassWrapper {
 
     public WKeyBinding() {
         super(KeyBinding, IKeyBinding.class);

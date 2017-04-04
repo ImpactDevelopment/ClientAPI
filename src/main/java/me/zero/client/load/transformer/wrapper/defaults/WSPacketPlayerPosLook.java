@@ -15,7 +15,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 2/28/2017.
  */
 @LoadTransformer
-public class WSPacketPlayerPosLook extends ClassWrapper {
+public final class WSPacketPlayerPosLook extends ClassWrapper {
 
     public WSPacketPlayerPosLook() {
         super(SPacketPlayerPosLook, ISPacketPlayerPosLook.class);
