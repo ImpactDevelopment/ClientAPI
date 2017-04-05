@@ -85,8 +85,9 @@ public class Values {
         if (anno == BooleanValue.class && field.getType() == Boolean.class) {
             return TypeResolver.BOOLEAN.resolve(parent, field);
         } else if (anno == NumberValue.class) {
-            NumberType type = TypeResolver.NUMBER.resolve(parent, field);
+            NumberType<?> type = TypeResolver.NUMBER.resolve(parent, field);
             checkType(type, field);
+            return TypeResolver.NUMBER.resolve(parent, field);
         } else if (anno == StringValue.class && field.getType() == String.class) {
             return TypeResolver.STRING.resolve(parent, field);
         } else if (anno == MultiValue.class && field.getType() == String.class) {
@@ -108,7 +109,7 @@ public class Values {
             if (type.getValue().equals(0))
                 type.setValue(type.getMinimum());
         } else {
-            if (type.getValue().equals(null))
+            if (type.getValue() == null)
                 type.setValue(type.getMinimum());
         }
     }

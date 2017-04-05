@@ -71,17 +71,17 @@ public interface TypeResolver<T extends Value> {
 
         // Clean up
         if (field.getType() == Byte.class || field.getType() == Byte.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max());
+            return new NumberType<Byte>(label.name(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max()){ };
         } else if (field.getType() == Short.class || field.getType() == Short.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max());
+            return new NumberType<Short>(label.name(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max()){ };
         } else if (field.getType() == Integer.class || field.getType() == Integer.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max());
+            return new NumberType<Integer>(label.name(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max()){ };
         } else if (field.getType() == Long.class || field.getType() == Long.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max());
+            return new NumberType<Long>(label.name(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max()){ };
         } else if (field.getType() == Float.class || field.getType() == Float.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max());
+            return new NumberType<Float>(label.name(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max()){ };
         } else if (field.getType() == Double.class || field.getType() == Double.TYPE) {
-            return new NumberType<>(label.name(), label.id(), label.description(), parent, field, num.min(), num.max());
+            return new NumberType<Double>(label.name(), label.id(), label.description(), parent, field, num.min(), num.max()){ };
         }
 
         return null;
