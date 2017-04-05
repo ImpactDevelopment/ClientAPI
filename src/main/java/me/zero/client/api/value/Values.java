@@ -82,7 +82,7 @@ public class Values {
     private static Value getValue(Object parent, Field field) {
         Class<? extends Annotation> anno = getValueAnnotation(field);
 
-        if (anno == BooleanValue.class && field.getType() == Boolean.class) {
+        if (anno == BooleanValue.class && field.getType() == Boolean.class || field.getType() == Boolean.TYPE) {
             return TypeResolver.BOOLEAN.resolve(parent, field);
         } else if (anno == NumberValue.class) {
             NumberType<?> type = TypeResolver.NUMBER.resolve(parent, field);
@@ -93,6 +93,7 @@ public class Values {
         } else if (anno == MultiValue.class && field.getType() == String.class) {
             return TypeResolver.MULTI.resolve(parent, field);
         }
+
         return null;
     }
 
