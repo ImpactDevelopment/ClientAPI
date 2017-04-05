@@ -38,8 +38,9 @@ public class Property {
      *
      * @return The value of this property
      */
-    public Object getValue() {
-        return this.value;
+    @SuppressWarnings("unchecked")
+    public <T> T getValue() {
+        return (T) this.value;
     }
 
     /**
