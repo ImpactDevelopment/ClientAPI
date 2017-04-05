@@ -7,7 +7,6 @@ import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 import me.zero.client.wrapper.IGameType;
-import me.zero.client.wrapper.IShaderGroup;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
