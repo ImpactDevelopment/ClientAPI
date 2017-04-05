@@ -2,6 +2,7 @@ package me.zero.client.api.module;
 
 import com.google.common.collect.Sets;
 import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
@@ -130,6 +131,11 @@ public abstract class Module extends Node implements IModule {
     @Override
     public final void setState(boolean state) {
         if (state == this.state) return;
+
+        ModuleStateEvent event = new ModuleStateEvent(this, state);
+        EventManager.post(event);
+        if (event.isCancelled())
+            return;
 
         if (this.state = state) {
             onEnable();
