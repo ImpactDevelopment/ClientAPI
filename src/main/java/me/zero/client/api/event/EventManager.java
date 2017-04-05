@@ -6,6 +6,7 @@ import me.zero.client.api.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * EventManager, Used to handle all Event Flow
@@ -105,18 +106,15 @@ public final class EventManager {
      * @param object The object being unsubscribed
      */
     public static void unsubscribe(Object object) {
-        List<Listener> objectListeners = new ArrayList<>();
-
-        Arrays.stream(object.getClass().getDeclaredFields())
+        List<Listener> objectListeners = Arrays.stream(object.getClass().getDeclaredFields())
                 .filter(EventManager::isValidField)
-                .forEach(field -> objectListeners.add((Listener) ReflectionUtils.getField(object, field)));
+                .map(field -> (Listener) ReflectionUtils.getField(object, field)).collect(Collectors.toList());
 
-        SUBSCRIPTION_MAP.keySet().forEach(eventClass -> {
-            List<Listener> listeners = SUBSCRIPTION_MAP.get(eventClass);
-            eventBuffer.clear();
-            listeners.stream().filter(listener -> !objectListeners.contains(listener)).forEach(eventBuffer::add);
-            SUBSCRIPTION_MAP.put(eventClass, new ArrayList<>(eventBuffer));
-        });
+        SUBSCRIPTION_MAP.keySet().forEach(eventClass -> SUBSCRIPTION_MAP.put(eventClass,
+                SUBSCRIPTION_MAP.get(eventClass).stream()
+                        .filter(listener -> !objectListeners.contains(listener))
+                        .collect(Collectors.toList())
+        ));
     }
 
     /**
