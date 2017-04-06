@@ -11,6 +11,7 @@ import net.minecraft.launchwrapper.LaunchClassLoader;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,8 +36,11 @@ public final class ClientTweaker implements ITweaker {
         if (info == null)
             throw new UnexpectedOutcomeException("Unable to create LaunchClassLoader exclusions. ClientInfo not found.");
 
-        if (info.getTransformers().length() > 0)
+        if (info.getTransformers() != null)
             Launch.classLoader.addClassLoaderExclusion(info.getTransformers());
+
+        if (info.getExclusions() != null)
+            Arrays.stream(info.getExclusions()).forEach(Launch.classLoader::addClassLoaderExclusion);
     }
 
     @Override
