@@ -1,6 +1,6 @@
 package me.zero.client.api.module;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
@@ -9,7 +9,7 @@ import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 import static me.zero.client.api.util.keybind.Keybind.Action.*;
 
@@ -42,7 +42,7 @@ public abstract class Module extends Node implements IModule {
     /**
      * List of Modes
      */
-    private Set<ModuleMode> modes;
+    private List<ModuleMode> modes;
 
     /**
      * The Current Mode
@@ -80,8 +80,11 @@ public abstract class Module extends Node implements IModule {
      * @param modes Modes for this mod
      */
     protected final void setModes(ModuleMode... modes) {
-        this.modes = Sets.newLinkedHashSet();
-        Arrays.stream(modes).forEach(this.modes::add);
+        if (modes.length == 0) return;
+
+        this.modes = Lists.newArrayList();
+        this.modes.addAll(Arrays.asList(modes));
+        this.setMode(this.modes.get(0));
     }
 
     /**
