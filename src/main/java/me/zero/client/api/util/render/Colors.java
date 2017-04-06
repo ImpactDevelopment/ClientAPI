@@ -24,10 +24,10 @@ public class Colors implements Helper {
      */
     public static float[] getColor(int hex) {
         return new float[] {
-                (hex >> 16 & 255) / 255F,
-                (hex >> 8 & 255) / 255F,
-                (hex & 255) / 255F,
-                (hex >> 24 & 255) / 255F
+                (hex >> 16 & 0xFF) / 255F,
+                (hex >> 8 & 0xFF) / 255F,
+                (hex & 0xFF) / 255F,
+                (hex >> 24 & 0xFF) / 255F
         };
     }
 
@@ -40,7 +40,7 @@ public class Colors implements Helper {
      * @return Hex corresponding to color code
      */
     public static int getColor(char cc) {
-        return (0xFF << 24) | mc.fontRenderer.getColorCode(cc);
+        return 0xFF000000 | mc.fontRenderer.getColorCode(cc);
     }
 
     /**

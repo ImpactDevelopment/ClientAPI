@@ -44,15 +44,10 @@ public final class ClientInfo {
      */
     private String transformers;
 
-    public ClientInfo(String name, String[] authors, String id, double build, ReleaseType type, String main, String transformers) {
-        this.name = name;
-        this.authors = authors;
-        this.id = id;
-        this.build = build;
-        this.type = type;
-        this.main = main;
-        this.transformers = transformers;
-    }
+    /**
+     * The custom ClassLoader exclusions
+     */
+    private String[] exclusions;
 
     /**
      * @since 1.0
@@ -115,6 +110,15 @@ public final class ClientInfo {
      */
     public String getTransformers() {
         return this.transformers;
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return ClassLoader exclusions
+     */
+    public String[] getExclusions() {
+        return this.exclusions;
     }
 
     public enum ReleaseType {
