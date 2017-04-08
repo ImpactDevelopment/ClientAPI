@@ -82,7 +82,7 @@ public class ESP extends Module implements IRender {
         glColor4f(1, 1, 1, 1);
 
         renderGlint = true;
-    }, EventPriority.LOWEST);
+    }, EventPriority.LOW);
 
     @EventHandler
     private Listener<GlintEffectEvent> glintEffectListener = new Listener<>(event -> {
