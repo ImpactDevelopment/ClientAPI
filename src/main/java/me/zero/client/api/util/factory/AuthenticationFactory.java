@@ -19,7 +19,7 @@ import java.net.Proxy;
  *
  * Created by Brady on 2/10/2017.
  */
-public class AuthenticationFactory implements Helper {
+public final class AuthenticationFactory implements Helper {
 
     /**
      * Authentication object

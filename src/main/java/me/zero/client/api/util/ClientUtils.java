@@ -11,7 +11,9 @@ import java.util.Arrays;
  *
  * Created by Brady on 1/20/2017.
  */
-public class ClientUtils {
+public final class ClientUtils {
+
+    private ClientUtils() {}
 
     /**
      * Concatenates an array of generic arrays

@@ -9,7 +9,7 @@ import me.zero.client.api.value.type.NumberType;
  *
  * Created by Brady on 2/24/2017.
  */
-public class Timer {
+public final class Timer {
 
     private long prevMS;
 

@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
  *
  * Created by Brady on 2/16/2017.
  */
-public class UniformVariable {
+public final class UniformVariable {
 
     /**
      * The Uniform name

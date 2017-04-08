@@ -17,7 +17,9 @@ import java.util.List;
  *
  * Created by Brady on 2/23/2017.
  */
-public class FileManager {
+public final class FileManager {
+
+    private FileManager() {}
 
     /**
      * Reads from a file and then returns a List
@@ -34,10 +36,11 @@ public class FileManager {
             try {
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
+
                 String line;
-                while ((line = bufferedReader.readLine()) != null) {
+                while ((line = bufferedReader.readLine()) != null)
                     data.add(line);
-                }
+
                 bufferedReader.close();
             } catch (IOException ex) {
                 Logger.instance.log(Level.WARNING, "Unable to load " + file);

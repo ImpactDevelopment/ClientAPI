@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
  *
  * Created by Brady on 2/15/2017.
  */
-public class StreamReader {
+public final class StreamReader {
 
     /**
      * Stream being read

@@ -13,7 +13,9 @@ import java.util.Arrays;
  *
  * Created by Brady on 1/23/2017.
  */
-public class ReflectionUtils {
+public final class ReflectionUtils {
+
+    private ReflectionUtils() {}
 
     /**
      * Gets the value of a field from an Object

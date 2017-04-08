@@ -12,7 +12,7 @@ import java.util.Arrays;
  *
  * Created by Brady on 1/21/2017.
  */
-public class MethodDescriptorBuilder {
+public final class MethodDescriptorBuilder {
 
     /**
      * Return value of Method

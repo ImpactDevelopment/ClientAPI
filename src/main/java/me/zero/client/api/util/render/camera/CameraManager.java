@@ -9,7 +9,7 @@ import me.zero.client.api.manage.Manager;
  *
  * Created by Brady on 2/9/2017.
  */
-public class CameraManager extends Manager<Camera> {
+public final class CameraManager extends Manager<Camera> {
 
     /**
      * Instance of the CameraManager

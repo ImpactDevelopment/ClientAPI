@@ -1,4 +1,4 @@
-package me.zero.client.api.util;
+package me.zero.client.api.util.math;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,7 +11,9 @@ import java.util.Random;
  *
  * Created by Brady on 1/23/2017.
  */
-public class MathUtils {
+public final class MathUtils {
+
+    private MathUtils() {}
 
     /**
      * Clamps a Number
