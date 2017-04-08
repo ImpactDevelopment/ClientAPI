@@ -3,7 +3,6 @@ package me.zero.client.load.transformer.wrapper.defaults;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.wrapper.IEntity;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
@@ -28,7 +27,7 @@ public final class WEntity extends ClassWrapper {
             Vec3 = ClassPool.getDefault().get("me.zero.client.api.util.math.Vec3");
             Vec2 = ClassPool.getDefault().get("me.zero.client.api.util.math.Vec2");
         } catch (NotFoundException e) {
-            throw new UnexpectedOutcomeException("Unable to find Vec3 and Vec2 classes");
+            e.printStackTrace();
         }
     }
 

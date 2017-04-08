@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
  *
  * Created by Brady on 3/6/2017.
  */
-public class Bot implements Helper {
+public final class Bot implements Helper {
 
     /**
      * NetworkManager used by the Bot

@@ -84,7 +84,7 @@ public class ClientLoader {
      */
     private static Client getClient(ClientInfo info) {
         if (info == null)
-            throw new UnexpectedOutcomeException("Unable to create Client, ClientInfo not found!");
+            throw new UnexpectedOutcomeException("Unable to initialize Client, ClientInfo not found!");
 
         try {
             Class<?> clientClass = Class.forName(info.getMain());
@@ -110,7 +110,7 @@ public class ClientLoader {
         ClientInfo info = getInfo();
         Client client = getClient(info);
         if (client == null)
-            throw new UnexpectedOutcomeException("Client loaded is null");
+            throw new NullPointerException("Client loaded is null");
 
         client.onInit(info);
         EventManager.subscribe(new ClientHandler());

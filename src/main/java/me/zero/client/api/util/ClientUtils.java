@@ -1,6 +1,6 @@
 package me.zero.client.api.util;
 
-import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.exception.ArraySizeException;
 
 import java.util.Arrays;
 
@@ -26,7 +26,7 @@ public final class ClientUtils {
     @SafeVarargs
     public static <T> T[] concat(T[]... arrays){
         if (arrays.length < 2)
-            throw new ActionNotValidException("At least 2 arrays should be supplied");
+            throw new ArraySizeException("At least 2 arrays should be supplied");
 
         T[] result = arrays[0];
         for (int i = 1; i < arrays.length; i++) {

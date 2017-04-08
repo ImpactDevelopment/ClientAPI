@@ -3,7 +3,6 @@ package me.zero.client.load.transformer.wrapper.defaults;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 import me.zero.client.wrapper.IShaderGroup;
@@ -26,7 +25,7 @@ public class WShaderGroup extends ClassWrapper {
         try {
             List = ClassPool.getDefault().get("java.util.List");
         } catch (NotFoundException e) {
-            throw new UnexpectedOutcomeException("Unable to find List class");
+            e.printStackTrace();
         }
     }
 
