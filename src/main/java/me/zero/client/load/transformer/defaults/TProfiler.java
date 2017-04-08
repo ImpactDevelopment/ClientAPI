@@ -1,6 +1,5 @@
 package me.zero.client.load.transformer.defaults;
 
-import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
 import me.zero.client.load.transformer.hook.ClassHook;
@@ -22,12 +21,7 @@ public final class TProfiler extends Transformer {
 
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {
-        hooks.add(startSection.createHook(method -> method.insertBefore("if ($1 != null && $1.equalsIgnoreCase(\"hand\") && !Camera.isCapturing()) { EventManager.post(new Render3DEvent()); }")));
-    }
-
-    @Override
-    public void loadImports(Collection<String> imports) {
-        imports.add(Camera.class.getName());
+        hooks.add(startSection.createHook(method -> method.insertBefore("{ EventManager.post(new ProfilerEvent($1)); }")));
     }
 
     @Override

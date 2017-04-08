@@ -76,7 +76,7 @@ public class CommandContext {
             return null;
 
         try {
-            return argument.getParser().parse(args[arguments.indexOf(argument)]);
+            return argument.getParser().apply(args[arguments.indexOf(argument)]);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
