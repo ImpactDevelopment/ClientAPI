@@ -10,18 +10,35 @@ import java.security.NoSuchAlgorithmException;
  *
  * Created by Brady on 2/25/2017.
  */
-public class Hash {
+public final class Hash {
 
+    /**
+     * Algorithm of this Hash object
+     */
     private final String algorithm;
 
     private Hash(String algorithm) {
         this.algorithm = algorithm;
     }
 
+    /**
+     * Creates a new Hash object with the specified algorithm
+     *
+     * @since 1.0
+     *
+     * @param algorithm Algorithm name
+     * @return Hash object
+     */
     public static Hash of(String algorithm) {
         return new Hash(algorithm);
     }
 
+    /**
+     * Hashes a piece of data with the algorithm
+     *
+     * @param data Data being hashed
+     * @return Hashed data
+     */
     public final String hash(String data) {
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
@@ -32,8 +49,7 @@ public class Hash {
                 sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
             return sb.toString();
         } catch (NoSuchAlgorithmException e2) {
-            System.exit(0);
-            throw new RuntimeException("Error!");
+            return null;
         }
     }
 }

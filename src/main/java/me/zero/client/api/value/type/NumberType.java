@@ -1,6 +1,6 @@
 package me.zero.client.api.value.type;
 
-import me.zero.client.api.util.MathUtils;
+import me.zero.client.api.util.math.MathUtils;
 import me.zero.client.api.value.Value;
 
 import java.lang.reflect.Field;

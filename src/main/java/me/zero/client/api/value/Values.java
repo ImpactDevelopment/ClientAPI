@@ -20,7 +20,9 @@ import java.util.Arrays;
  *
  * Created by Brady on 2/21/2017.
  */
-public class Values {
+public final class Values {
+
+    private Values() {}
 
     /**
      * Discovers all of the Values in a node, then registers them

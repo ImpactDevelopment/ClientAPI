@@ -20,9 +20,13 @@ import static me.zero.client.api.util.PluginFinder.Result.FAILURE;
 import static me.zero.client.api.util.PluginFinder.Result.SUCCESS;
 
 /**
+ * Used to find possible plugins on servers
+ *
+ * @since 1.0
+ *
  * Created by Brady on 3/24/2017.
  */
-public class PluginFinder implements Helper {
+public final class PluginFinder implements Helper {
 
     /**
      * Called in response to finding plugins

@@ -17,7 +17,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/12/2017.
  */
-public class Vec3 {
+public final class Vec3 {
 
     private float x, y, z;
 

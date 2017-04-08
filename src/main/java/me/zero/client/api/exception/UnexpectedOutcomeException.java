@@ -9,7 +9,7 @@ package me.zero.client.api.exception;
  *
  * Created by Brady on 1/21/2017.
  */
-public class UnexpectedOutcomeException extends RuntimeException {
+public final class UnexpectedOutcomeException extends RuntimeException {
 
     public UnexpectedOutcomeException(String message) {
         super(message);

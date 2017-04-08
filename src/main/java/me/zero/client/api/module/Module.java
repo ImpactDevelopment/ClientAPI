@@ -8,6 +8,7 @@ import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.keybind.Keybind;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,7 +83,7 @@ public abstract class Module extends Node implements IModule {
     protected final void setModes(ModuleMode... modes) {
         if (modes.length == 0) return;
 
-        this.modes = Lists.newArrayList();
+        this.modes = new ArrayList<>();
         this.modes.addAll(Arrays.asList(modes));
         this.setMode(this.modes.get(0));
     }

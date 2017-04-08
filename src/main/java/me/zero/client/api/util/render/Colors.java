@@ -1,6 +1,6 @@
 package me.zero.client.api.util.render;
 
-import me.zero.client.api.util.MathUtils;
+import me.zero.client.api.util.math.MathUtils;
 import me.zero.client.api.util.interfaces.Helper;
 
 import java.awt.*;
@@ -12,7 +12,9 @@ import java.awt.*;
  *
  * Created by Brady on 4/4/2017.
  */
-public class Colors implements Helper {
+public final class Colors implements Helper {
+
+    private Colors() {}
 
     /**
      * Parses the RGBA values from a hex value

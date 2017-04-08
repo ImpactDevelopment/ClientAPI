@@ -12,7 +12,7 @@ import java.util.List;
  *
  * Created by Brady on 3/6/2017.
  */
-public class Protocol {
+public final class Protocol {
 
     private static ImmutableList<Protocol> protocols = new ImmutableList.Builder<Protocol>()
             .add(build(316, "1.11.x", "1.11", "1.11.2"))

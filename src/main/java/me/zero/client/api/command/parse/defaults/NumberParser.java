@@ -13,9 +13,9 @@ import me.zero.client.api.command.parse.ArgumentParser;
 public class NumberParser implements ArgumentParser<Double> {
 
     @Override
-    public Double parse(String num) {
+    public Double apply(String t) {
         try {
-            return Double.parseDouble(num);
+            return Double.parseDouble(t);
         } catch (NumberFormatException e) {
             return null;
         }

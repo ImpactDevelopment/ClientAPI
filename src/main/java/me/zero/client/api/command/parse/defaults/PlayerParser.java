@@ -13,9 +13,9 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 public class PlayerParser implements ArgumentParser<NetworkPlayerInfo> {
 
     @Override
-    public NetworkPlayerInfo parse(String name) {
+    public NetworkPlayerInfo apply(String t) {
         return mc.player.connection.getPlayerInfoMap().stream()
-                .filter(info -> info.getGameProfile().getName().equalsIgnoreCase(name))
+                .filter(info -> info.getGameProfile().getName().equalsIgnoreCase(t))
                 .findFirst().orElse(null);
     }
 }

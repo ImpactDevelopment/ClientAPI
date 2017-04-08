@@ -18,7 +18,9 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/4/2017.
  */
-public class RenderUtils {
+public final class RenderUtils {
+
+    private RenderUtils() {}
 
     /**
      * Instance of the Tessellator

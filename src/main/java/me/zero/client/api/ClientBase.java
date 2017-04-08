@@ -222,7 +222,7 @@ class ClientBase implements Helper {
      * @return The categories
      */
     public List<Class<?>> getCategories(boolean sort) {
-        List<Class<?>> categories = Lists.newArrayList();
+        List<Class<?>> categories = new ArrayList<>();
         getModuleManager().getData().forEach(module -> {
             Class<?> category = module.getType();
 
