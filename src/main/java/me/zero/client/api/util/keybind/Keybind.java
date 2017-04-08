@@ -13,7 +13,7 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  *
  * Created by Brady on 2/10/2017.
  */
-public class Keybind {
+public final class Keybind {
 
     /**
      * The List of all Keybind Objects

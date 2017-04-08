@@ -8,7 +8,7 @@ package me.zero.client.api.value;
  *
  * Created by Brady on 2/25/2017.
  */
-public class Property {
+public final class Property {
 
     /**
      * The label of this property

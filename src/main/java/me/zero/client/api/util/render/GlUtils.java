@@ -20,7 +20,9 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/20/2017.
  */
-public class GlUtils {
+public final class GlUtils {
+
+    private GlUtils() {}
 
     /**
      * Credits to Halalaboos

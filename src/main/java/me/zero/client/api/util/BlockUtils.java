@@ -18,6 +18,8 @@ import net.minecraft.util.math.BlockPos;
  */
 public final class BlockUtils implements Helper {
 
+    private BlockUtils() {}
+
     public static Block getBlock(int x, int y, int z) {
         return getBlock(new BlockPos(x, y, z));
     }

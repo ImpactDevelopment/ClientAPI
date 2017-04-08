@@ -9,7 +9,9 @@ package me.zero.client.api.util.logger;
  *
  * Created by Brady on 1/21/2017.
  */
-public class Logger implements ILogger {
+public final class Logger implements ILogger {
+
+    private Logger() {}
 
     /**
      * Instance of the Logger

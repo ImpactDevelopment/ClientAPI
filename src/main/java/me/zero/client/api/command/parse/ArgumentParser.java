@@ -1,6 +1,8 @@
 package me.zero.client.api.command.parse;
 
-import me.zero.client.api.util.interfaces.Parser;
+import me.zero.client.api.util.interfaces.Helper;
+
+import java.util.function.Function;
 
 /**
  * Parses a generic type from a string
@@ -9,15 +11,4 @@ import me.zero.client.api.util.interfaces.Parser;
  *
  * Created by Brady on 2/13/2017.
  */
-public interface ArgumentParser<T> extends Parser<String, T> {
-
-    /**
-     * Parses the generic type from a string
-     *
-     * @since 1.0
-     *
-     * @param t The type as a string
-     * @return The actual type
-     */
-    T parse(String t);
-}
+public interface ArgumentParser<T> extends Function<String, T>, Helper {}

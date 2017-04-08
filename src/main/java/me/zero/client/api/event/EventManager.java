@@ -143,6 +143,7 @@ public final class EventManager {
      *
      * @param event Event being called
      */
+    @SuppressWarnings("unchecked")
     public static void post(Object event) {
         List<Listener> listeners = SUBSCRIPTION_MAP.get(event.getClass());
         if (listeners != null)
