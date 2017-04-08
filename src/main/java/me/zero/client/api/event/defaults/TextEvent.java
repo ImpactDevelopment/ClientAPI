@@ -8,7 +8,7 @@ package me.zero.client.api.event.defaults;
  *
  * Created by Brady on 3/30/2017.
  */
-public class TextEvent {
+public final class TextEvent {
 
     /**
      * The text being rendered
