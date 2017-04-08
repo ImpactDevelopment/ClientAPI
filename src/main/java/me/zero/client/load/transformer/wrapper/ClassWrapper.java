@@ -2,7 +2,7 @@ package me.zero.client.load.transformer.wrapper;
 
 import com.google.common.collect.Sets;
 import javassist.*;
-import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.exception.ClassWrapperException;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
 import me.zero.client.load.transformer.Transformer;
@@ -149,7 +149,7 @@ public abstract class ClassWrapper extends Transformer {
      */
     private ClassHook createClassHook() {
         if (isImplComplete())
-            throw new ActionNotValidException("ClassHook cannot be created if implementation isn't complete!");
+            throw new ClassWrapperException("ClassHook cannot be created if implementation isn't complete!");
 
         return ctClass -> {
             ctClass.addInterface(ClassPool.getDefault().get(wrapper.getName()));

@@ -8,9 +8,9 @@ package me.zero.client.api.exception;
  *
  * Created by Brady on 1/19/2017.
  */
-public final class ActionNotValidException extends RuntimeException {
+public final class InvalidActionException extends RuntimeException {
 
-    public ActionNotValidException(String message) {
+    public InvalidActionException(String message) {
         super(message);
     }
 }

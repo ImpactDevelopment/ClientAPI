@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  *
  * Created by Brady on 3/6/2017.
  */
-public class BotPlay implements INetHandlerPlayClient, Helper {
+public final class BotPlay implements INetHandlerPlayClient, Helper {
 
     /**
      * Bot that represents this Play Network Handler
@@ -43,7 +43,7 @@ public class BotPlay implements INetHandlerPlayClient, Helper {
      */
     private final NetworkManager netManager;
 
-    public BotPlay(Bot bot) {
+    BotPlay(Bot bot) {
         this.bot = bot;
         this.netManager = bot.getNetworkManager();
     }

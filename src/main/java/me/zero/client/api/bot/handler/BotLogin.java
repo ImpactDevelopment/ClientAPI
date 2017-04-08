@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * Created by Brady on 3/6/2017.
  */
-public class BotLogin implements INetHandlerLoginClient, Helper {
+public final class BotLogin implements INetHandlerLoginClient, Helper {
 
     /**
      * Bot Minecraft Session Service, initialized in the static constructor

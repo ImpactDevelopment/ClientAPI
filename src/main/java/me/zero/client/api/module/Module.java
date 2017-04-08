@@ -1,6 +1,5 @@
 package me.zero.client.api.module;
 
-import com.google.common.collect.Lists;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
@@ -70,7 +69,7 @@ public abstract class Module extends Node implements IModule {
         }
 
         if (ClientUtils.containsNull(name, description, type))
-            throw new UnexpectedOutcomeException("One or more Mod members were null!");
+            throw new NullPointerException("One or more Mod members were null!");
     }
 
     /**
