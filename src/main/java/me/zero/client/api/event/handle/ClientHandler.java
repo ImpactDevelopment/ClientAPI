@@ -34,7 +34,8 @@ public final class ClientHandler implements Helper {
      */
     @EventHandler
     private Listener<Render2DEvent> render2DListener = new Listener<>(event ->
-        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
+        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())),
+            EventPriority.LOWEST);
 
     /**
      * Handles keybinds
@@ -42,6 +43,14 @@ public final class ClientHandler implements Helper {
     @EventHandler
     private Listener<KeyEvent> keyListener = new Listener<>(event ->
         Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
+
+    @EventHandler
+    private Listener<ProfilerEvent> profilerListener = new Listener<>(event -> {
+        String section = event.getSection();
+
+        if (section != null && section.equalsIgnoreCase("hand") && !Camera.isCapturing())
+            EventManager.post(new Render3DEvent());
+    });
 
     /**
      * Handles key states

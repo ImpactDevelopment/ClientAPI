@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
  *
  * Created by Brady on 3/2/2017.
  */
-public class EntityRenderEvent {
+public final class EntityRenderEvent {
 
     /**
      * The state of this Event
