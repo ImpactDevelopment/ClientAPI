@@ -4,6 +4,7 @@ import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.*;
+import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.camera.Camera;
@@ -33,7 +34,7 @@ public final class ClientHandler implements Helper {
      */
     @EventHandler
     private Listener<Render2DEvent> render2DListener = new Listener<>(event ->
-        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())));
+        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
 
     /**
      * Handles keybinds
