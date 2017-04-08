@@ -10,7 +10,7 @@ import me.zero.client.api.module.Module;
  *
  * Created by Brady on 4/5/2017.
  */
-public class ModuleStateEvent extends Cancellable {
+public final class ModuleStateEvent extends Cancellable {
 
     /**
      * Module having a change in state

@@ -1,8 +1,7 @@
 package me.zero.client.api;
 
-import com.google.common.collect.Lists;
 import me.zero.client.api.command.Command;
-import me.zero.client.api.exception.ActionNotValidException;
+import me.zero.client.api.exception.NotInitializedException;
 import me.zero.client.api.manage.Manager;
 import me.zero.client.api.module.Category;
 import me.zero.client.api.module.Module;
@@ -115,7 +114,7 @@ class ClientBase implements Helper {
     @SuppressWarnings("unchecked")
     public <T extends Manager<Module>> T getModuleManager() {
         if (this.moduleManager == null)
-            throw new ActionNotValidException("Module Manager has not yet been initialized");
+            throw new NotInitializedException("Module Manager has not yet been initialized");
 
         return (T) this.moduleManager;
     }
@@ -143,7 +142,7 @@ class ClientBase implements Helper {
     @SuppressWarnings("unchecked")
     public <T extends Manager<Command>> T getCommandManager() {
         if (this.commandManager == null)
-            throw new ActionNotValidException("Command Manager has not yet been initialized");
+            throw new NotInitializedException("Command Manager has not yet been initialized");
 
         return (T) this.commandManager;
     }

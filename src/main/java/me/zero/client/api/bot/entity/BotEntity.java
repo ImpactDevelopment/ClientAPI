@@ -15,7 +15,7 @@ import net.minecraft.world.World;
  *
  * Created by Brady on 3/8/2017.
  */
-public class BotEntity extends EntityPlayerSP {
+public final class BotEntity extends EntityPlayerSP {
 
     /**
      * The bot controlling this Entity

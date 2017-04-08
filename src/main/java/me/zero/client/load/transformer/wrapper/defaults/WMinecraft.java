@@ -3,13 +3,11 @@ package me.zero.client.load.transformer.wrapper.defaults;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.wrapper.IMinecraft;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.wrapper.ClassWrapper;
 
-import static javassist.CtClass.intType;
-import static javassist.CtClass.voidType;
+import static javassist.CtClass.*;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
@@ -28,7 +26,7 @@ public final class WMinecraft extends ClassWrapper {
         try {
             MouseButton = ClassPool.getDefault().get("me.zero.client.api.event.defaults.ClickEvent$MouseButton");
         } catch (NotFoundException e) {
-            throw new UnexpectedOutcomeException("Unable to find MouseButton class");
+            e.printStackTrace();
         }
     }
 
