@@ -17,11 +17,6 @@ import me.zero.client.wrapper.IEntity;
 public final class MotionUpdateEvent implements Helper {
 
     /**
-     * State of this event
-     */
-    private EventState type;
-
-    /**
      * Original and New positions
      */
     private static Vec3 oPos, nPos;
@@ -35,6 +30,11 @@ public final class MotionUpdateEvent implements Helper {
      * OnGround state
      */
     private static boolean oGround, nGround;
+
+    /**
+     * State of this event
+     */
+    private EventState type;
 
     public MotionUpdateEvent(EventState type) {
         this.type = type;

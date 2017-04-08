@@ -55,6 +55,8 @@ public interface MCMappings {
     ClassReference FontRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.gui.FontRenderer"), from(VANILLA, "bfg") });
     ClassReference ShaderGroup = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.shader.ShaderGroup"), from(VANILLA, "byh") });
     ClassReference GameType = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.world.GameType"), from(VANILLA, "ajq") });
+    ClassReference Block = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.block.Block"), from(VANILLA, "alu") });
+    ClassReference IBlockState = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.block.state.IBlockState"), from(VANILLA, "atl") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -83,6 +85,8 @@ public interface MCMappings {
     MethodReference doRender = new MethodReference(new ObfuscationName[] { from(MCP, "doRender"), from(VANILLA, "a") }, Void.TYPE, Entity, Double.TYPE, Double.TYPE, Double.TYPE, Float.TYPE, Float.TYPE);
     MethodReference renderString = new MethodReference(new ObfuscationName[] { from(MCP, "renderString"), from(VANILLA, "b") }, Integer.TYPE, String.class, Float.TYPE, Float.TYPE, Integer.TYPE, Boolean.TYPE);
     MethodReference getStringWidth = new MethodReference(new ObfuscationName[] { from(MCP, "getStringWidth"), from(VANILLA, "a") }, Integer.TYPE, String.class);
+    MethodReference applyEntityCollision = new MethodReference(new ObfuscationName[] { from(MCP, "applyEntityCollision"), from(VANILLA, "i") }, Void.TYPE, Entity);
+    MethodReference canCollideCheck = new MethodReference(new ObfuscationName[] { from(MCP, "canCollideCheck"), from(VANILLA, "a") }, Boolean.TYPE, IBlockState, Boolean.TYPE);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });

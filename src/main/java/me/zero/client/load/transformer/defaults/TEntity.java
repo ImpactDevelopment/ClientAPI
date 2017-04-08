@@ -10,22 +10,22 @@ import java.util.Collection;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*;
 
 /**
- * Calls the ProfilerEvent
+ * Used for the EntityCollisionEvent
  *
  * @since 1.0
  *
- * Created by Brady on 2/9/2017.
+ * Created by Brady on 4/8/2017.
  */
 @LoadTransformer
-public final class TProfiler extends Transformer {
+public final class TEntity extends Transformer {
 
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {
-        hooks.add(startSection.createHook(method -> method.insertBefore("{ EventManager.post(new ProfilerEvent($1)); }")));
+        hooks.add(applyEntityCollision.createHook(method -> method.insertBefore("{ EntityCollisionEvent event = new EntityCollisionEvent(this, $1); EventManager.post(event); if (event.isCancelled()) return; }")));
     }
 
     @Override
     public ClassReference getTargetClass() {
-        return Profiler;
+        return Entity;
     }
 }
