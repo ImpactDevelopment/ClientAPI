@@ -12,12 +12,12 @@ public class CommandUsage {
     /**
      * The Syntax of the usage
      */
-    public String syntax;
+    private String syntax;
 
     /**
      * The description of the usage
      */
-    public String description;
+    private String description;
 
     public CommandUsage(String syntax, String description) {
         this.syntax = syntax;
