@@ -34,6 +34,13 @@ public interface Command {
     CommandArg[] arguments();
 
     /**
+     * @since 1.0
+     *
+     * @return The usage of this command
+     */
+    CommandUsage[] usage();
+
+    /**
      * Executes this command with the given context
      *
      * @since 1.0
