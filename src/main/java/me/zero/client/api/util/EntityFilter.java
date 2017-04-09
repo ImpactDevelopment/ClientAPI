@@ -63,7 +63,7 @@ public final class EntityFilter implements Helper {
             if (this.walls != null && !this.walls.getState() && !mc.player.canEntityBeSeen(e))
                 return false;
 
-            if (this.sleep != null && !this.sleep.getState() && (!(e instanceof EntityPlayer) || ((EntityPlayer) e).isPlayerSleeping()))
+            if (this.sleep != null && !this.sleep.getState() && (e instanceof EntityPlayer && ((EntityPlayer) e).isPlayerSleeping()))
                 return false;
 
             if (this.invis != null && !this.invis.getState() && e.isInvisible())
