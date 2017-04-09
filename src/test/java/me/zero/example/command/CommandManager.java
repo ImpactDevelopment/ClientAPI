@@ -1,6 +1,7 @@
 package me.zero.example.command;
 
 import me.zero.client.api.command.Command;
+import me.zero.client.api.command.CommandUsage;
 import me.zero.client.api.command.parse.CommandArg;
 import me.zero.client.api.command.parse.CommandContext;
 import me.zero.client.api.command.parse.GenericArgs;
@@ -37,6 +38,13 @@ public class CommandManager extends Manager<Command> {
             public CommandArg[] arguments() {
                 return new CommandArg[] {
                         GenericArgs.string("text")
+                };
+            }
+
+            @Override
+            public CommandUsage[] usage() {
+                return new CommandUsage[] {
+                        new CommandUsage("test <text>", description())
                 };
             }
 
