@@ -17,7 +17,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 4/4/2017.
  */
 @LoadTransformer
-public class WShaderGroup extends ClassWrapper {
+public final class WShaderGroup extends ClassWrapper {
 
     private static CtClass List;
 

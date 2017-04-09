@@ -57,6 +57,11 @@ public interface MCMappings {
     ClassReference GameType = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.world.GameType"), from(VANILLA, "ajq") });
     ClassReference Block = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.block.Block"), from(VANILLA, "alu") });
     ClassReference IBlockState = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.block.state.IBlockState"), from(VANILLA, "atl") });
+    ClassReference ItemRenderer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.renderer.ItemRenderer"), from(VANILLA, "bqi") });
+    ClassReference AbstractClientPlayer = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.client.entity.AbstractClientPlayer"), from(VANILLA, "bpp") });
+    ClassReference EnumHand = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.EnumHand"), from(VANILLA, "ri") });
+    ClassReference ItemStack = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.item.ItemStack"), from(VANILLA, "afj") });
+    ClassReference EnumHandSide = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.EnumHandSide"), from(VANILLA, "sv") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -87,6 +92,9 @@ public interface MCMappings {
     MethodReference getStringWidth = new MethodReference(new ObfuscationName[] { from(MCP, "getStringWidth"), from(VANILLA, "a") }, Integer.TYPE, String.class);
     MethodReference applyEntityCollision = new MethodReference(new ObfuscationName[] { from(MCP, "applyEntityCollision"), from(VANILLA, "i") }, Void.TYPE, Entity);
     MethodReference canCollideCheck = new MethodReference(new ObfuscationName[] { from(MCP, "canCollideCheck"), from(VANILLA, "a") }, Boolean.TYPE, IBlockState, Boolean.TYPE);
+    MethodReference renderItemInFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "renderItemInFirstPerson"), from(VANILLA, "a") }, Void.TYPE, AbstractClientPlayer, Float.TYPE, Float.TYPE, EnumHand, Float.TYPE, ItemStack, Float.TYPE);
+    MethodReference transformSideFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformSideFirstPerson"), from(VANILLA, "b") }, Void.TYPE, EnumHandSide, Float.TYPE);
+    MethodReference transformFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformFirstPerson"), from(VANILLA, "a") }, Void.TYPE, EnumHandSide, Float.TYPE);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });

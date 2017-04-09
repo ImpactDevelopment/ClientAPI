@@ -17,7 +17,7 @@ import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.*
  * Created by Brady on 4/4/2017.
  */
 @LoadTransformer
-public class WGameType extends ClassWrapper {
+public final class WGameType extends ClassWrapper {
 
     private static CtClass String;
 
