@@ -30,9 +30,15 @@ public class CommandHandler {
      */
     private Manager<Command> manager;
 
+    /**
+     * The command prefix
+     */
+    private String prefix;
+
     public CommandHandler(Client client) {
         this.client = client;
         this.manager = client.getCommandManager();
+        this.prefix = ".";
     }
 
     @EventHandler
@@ -41,8 +47,8 @@ public class CommandHandler {
             return;
 
         String message = event.getMessage();
-        if (message.startsWith(".")) {
-            message = message.replaceFirst(".", "");
+        if (message.startsWith(prefix)) {
+            message = message.replaceFirst(prefix, "");
 
             event.setCancelled(run(message));
         }
@@ -109,5 +115,14 @@ public class CommandHandler {
      */
     private boolean labelMatch(String label, Command cmd) {
         return Arrays.stream(cmd.label()).filter(label::equalsIgnoreCase).findFirst().orElse(null) != null;
+    }
+
+    /**
+     * @since 1.0
+     *
+     * @return The command prefix
+     */
+    public String getPrefix() {
+        return this.prefix;
     }
 }
