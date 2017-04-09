@@ -31,7 +31,7 @@ public final class EventManager {
     private static final List<Listener> eventBuffer = new ArrayList<>();
 
     /**
-     * Discovers all valid methods from the Object
+     * Discovers all valid listeners from the Object
      * specified and then registers them in the
      * form of {@code Listeners}
      *
@@ -40,12 +40,40 @@ public final class EventManager {
      *
      * @since 1.0
      *
-     * @param object The object containing possible Event Methods
+     * @param object The object containing possible Event Listeners
      */
     public static void subscribe(Object object) {
         Arrays.stream(object.getClass().getDeclaredFields())
                 .filter(EventManager::isValidField)
                 .forEach(field -> subscribe(object, field));
+    }
+
+    /**
+     * Registers an array of Objects
+     *
+     * @see me.zero.client.api.event.Listener
+     * @see #subscribe(Object)
+     *
+     * @since 1.0
+     *
+     * @param objects The array of objects
+     */
+    public static void subscribe(Object... objects) {
+        Arrays.stream(objects).forEach(EventManager::subscribe);
+    }
+
+    /**
+     * Registers a list of Objects
+     *
+     * @see me.zero.client.api.event.Listener
+     * @see #subscribe(Object)
+     *
+     * @since 1.0
+     *
+     * @param objects The list of objects
+     */
+    public static void subscribe(List<Object> objects) {
+        objects.forEach(EventManager::subscribe);
     }
 
     /**
@@ -115,6 +143,34 @@ public final class EventManager {
                         .filter(listener -> !objectListeners.contains(listener))
                         .collect(Collectors.toList())
         ));
+    }
+
+    /**
+     * Unregisters an array of Objects
+     *
+     * @see me.zero.client.api.event.Listener
+     * @see #unsubscribe(Object)
+     *
+     * @since 1.0
+     *
+     * @param objects The array of objects
+     */
+    public static void unsubscribe(Object... objects) {
+        Arrays.stream(objects).forEach(EventManager::unsubscribe);
+    }
+
+    /**
+     * Unregisters a list of Objects
+     *
+     * @see me.zero.client.api.event.Listener
+     * @see #unsubscribe(Object)
+     *
+     * @since 1.0
+     *
+     * @param objects The list of objects
+     */
+    public static void unsubscribe(List<Object> objects) {
+        objects.forEach(EventManager::unsubscribe);
     }
 
     /**
