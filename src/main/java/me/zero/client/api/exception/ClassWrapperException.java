@@ -8,7 +8,7 @@ package me.zero.client.api.exception;
  *
  * Created by Brady on 4/8/2017.
  */
-public class ClassWrapperException extends RuntimeException {
+public final class ClassWrapperException extends RuntimeException {
 
     public ClassWrapperException(String message) {
         super(message);
