@@ -8,6 +8,7 @@ import me.zero.client.load.transformer.reference.ClassReference;
 import java.util.Collection;
 
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.Block;
+import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.addCollisionBoxToList;
 import static me.zero.client.load.transformer.reference.obfuscation.MCMappings.canCollideCheck;
 
 /**
@@ -23,6 +24,7 @@ public final class TBlock extends Transformer {
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(canCollideCheck.createHook(method -> method.insertBefore("{ BlockCollisionEvent event = new BlockCollisionEvent(this); EventManager.post(event); if (event.isCancelled()) return false; }")));
+        hooks.add(addCollisionBoxToList.createHook(method -> method.insertBefore("{ BoundingBoxEvent event = new BoundingBoxEvent(this, $1, $4); EventManager.post(event); if (event.isCancelled()) return; }")));
     }
 
     @Override

@@ -20,8 +20,7 @@ public enum Obfuscation {
     private static Obfuscation type = Obfuscation.UNKNOWN;
 
     static {
-        // Determine Obfuscation State
-        // Automatically MCP for testing purposes
+        // TODO: Determine Obfuscation State
         type = Obfuscation.MCP;
     }
 
