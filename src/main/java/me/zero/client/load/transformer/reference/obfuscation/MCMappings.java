@@ -99,7 +99,7 @@ public interface MCMappings {
     MethodReference renderItemInFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "renderItemInFirstPerson"), from(VANILLA, "a") }, Void.TYPE, AbstractClientPlayer, Float.TYPE, Float.TYPE, EnumHand, Float.TYPE, ItemStack, Float.TYPE);
     MethodReference transformSideFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformSideFirstPerson"), from(VANILLA, "b") }, Void.TYPE, EnumHandSide, Float.TYPE);
     MethodReference transformFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformFirstPerson"), from(VANILLA, "a") }, Void.TYPE, EnumHandSide, Float.TYPE);
-    MethodReference addCollisionBoxToList = new MethodReference(new ObfuscationName[] { from(MCP, "addCollisionBoxToList"), from(VANILLA, "") }, Void.TYPE, BlockPos, AxisAlignedBB, List.class, AxisAlignedBB);
+    MethodReference addCollisionBoxToList = new MethodReference(new ObfuscationName[] { from(MCP, "addCollisionBoxToList"), from(VANILLA, "a") }, Void.TYPE, BlockPos, AxisAlignedBB, List.class, AxisAlignedBB);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });

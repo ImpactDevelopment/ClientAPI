@@ -24,7 +24,12 @@ public final class TBlock extends Transformer {
     @Override
     public void loadHooks(Collection<ClassHook> hooks) {
         hooks.add(canCollideCheck.createHook(method -> method.insertBefore("{ BlockCollisionEvent event = new BlockCollisionEvent(this); EventManager.post(event); if (event.isCancelled()) return false; }")));
-        hooks.add(addCollisionBoxToList.createHook(method -> method.insertBefore("{ BoundingBoxEvent event = new BoundingBoxEvent(this, $1, $4); EventManager.post(event); if (event.isCancelled()) return; }")));
+        hooks.add(addCollisionBoxToList.createHook(method -> method.insertBefore("{ BoundingBoxEvent event = new BoundingBoxEvent(BlockUtils.getBlock($1), $1, $4); EventManager.post(event); if (event.isCancelled()) return; $4 = event.getBoundingBox(); }")));
+    }
+
+    @Override
+    public void loadImports(Collection<String> imports) {
+        imports.add("me.zero.client.api.util");
     }
 
     @Override
