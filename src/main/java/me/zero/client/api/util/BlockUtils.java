@@ -2,6 +2,7 @@ package me.zero.client.api.util;
 
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec3;
+import me.zero.client.wrapper.IEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
@@ -58,8 +59,6 @@ public final class BlockUtils implements Helper {
     }
 
     public static boolean isOnLiquid() {
-        Vec3 offset1 = new Vec3(0, -0.15, 0);
-        Vec3 offset2 = offset1.add(mc.player.motionX, 0, mc.player.motionZ);
-        return getBlock(offset1) instanceof BlockLiquid || getBlock(offset2) instanceof BlockLiquid;
+        return getBlock(((IEntity) mc.player).getPos().sub(0, 0.15, 0)) instanceof BlockLiquid;
     }
 }
