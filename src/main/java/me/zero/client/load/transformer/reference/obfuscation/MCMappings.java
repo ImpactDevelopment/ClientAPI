@@ -1,9 +1,7 @@
 package me.zero.client.load.transformer.reference.obfuscation;
 
 import io.netty.channel.ChannelHandlerContext;
-import me.zero.client.load.transformer.reference.ClassReference;
-import me.zero.client.load.transformer.reference.FieldReference;
-import me.zero.client.load.transformer.reference.MethodReference;
+import me.zero.client.load.transformer.reference.*;
 
 import java.util.List;
 
@@ -66,6 +64,7 @@ public interface MCMappings {
     ClassReference EnumHandSide = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.EnumHandSide"), from(VANILLA, "sv") });
     ClassReference BlockPos = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.math.BlockPos"), from(VANILLA, "co") });
     ClassReference AxisAlignedBB = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.util.math.AxisAlignedBB"), from(VANILLA, "bdt") });
+    ClassReference IBlockAccess = new ClassReference(new ObfuscationName[] { from(MCP, "net.minecraft.world.IBlockAccess"), from(VANILLA, "ajw") });
 
     // Methods
     MethodReference runTick = new MethodReference(new ObfuscationName[] { from(MCP, "runTick"), from(VANILLA, "t") }, Void.TYPE);
@@ -99,7 +98,8 @@ public interface MCMappings {
     MethodReference renderItemInFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "renderItemInFirstPerson"), from(VANILLA, "a") }, Void.TYPE, AbstractClientPlayer, Float.TYPE, Float.TYPE, EnumHand, Float.TYPE, ItemStack, Float.TYPE);
     MethodReference transformSideFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformSideFirstPerson"), from(VANILLA, "b") }, Void.TYPE, EnumHandSide, Float.TYPE);
     MethodReference transformFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformFirstPerson"), from(VANILLA, "a") }, Void.TYPE, EnumHandSide, Float.TYPE);
-    MethodReference addCollisionBoxToList = new MethodReference(new ObfuscationName[] { from(MCP, "addCollisionBoxToList"), from(VANILLA, "") }, Void.TYPE, BlockPos, AxisAlignedBB, List.class, AxisAlignedBB);
+    MethodReference addCollisionBoxToList = new MethodReference(new ObfuscationName[] { from(MCP, "addCollisionBoxToList"), from(VANILLA, "") }, Void.TYPE, IBlockState, World, BlockPos, AxisAlignedBB, List.class, Entity, Boolean.TYPE);
+    MethodReference getCollisionBoundingBox = new MethodReference(new ObfuscationName[] { from(MCP, "getCollisionBoundingBox"), from(VANILLA, "c") }, AxisAlignedBB, IBlockAccess, BlockPos);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });
