@@ -1,5 +1,9 @@
 package me.zero.client.api.util.render;
 
+import me.zero.client.api.event.EventHandler;
+import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.Listener;
+import me.zero.client.api.event.defaults.Render3DEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
 
@@ -23,6 +27,31 @@ import static org.lwjgl.opengl.GL11.*;
 public final class GlUtils {
 
     private GlUtils() {}
+
+    private static FloatBuffer MODELVIEW_MATRIX, PROJECTION_MATRIX;
+    private static IntBuffer VIEWPORT;
+
+    /**
+     * Calls clinit
+     */
+    public static void init() {}
+
+    static {
+        EventManager.subscribe(new Object() {
+
+            @EventHandler
+            private Listener<Render3DEvent> render3DListener = new Listener<>(event -> {
+                MODELVIEW_MATRIX = BufferUtils.createFloatBuffer(16);
+                glGetFloat(GL_MODELVIEW_MATRIX, MODELVIEW_MATRIX);
+
+                PROJECTION_MATRIX = BufferUtils.createFloatBuffer(16);
+                glGetFloat(GL_PROJECTION_MATRIX, PROJECTION_MATRIX);
+
+                VIEWPORT = BufferUtils.createIntBuffer(16);
+                glGetInteger(GL_VIEWPORT, VIEWPORT);
+            });
+        });
+    }
 
     /**
      * Credits to Halalaboos
@@ -142,9 +171,7 @@ public final class GlUtils {
      * @return The Model View Matrix
      */
     public static FloatBuffer getModelViewMatrix() {
-        FloatBuffer modelview = BufferUtils.createFloatBuffer(16);
-        glGetFloat(GL_MODELVIEW_MATRIX, modelview);
-        return modelview;
+        return MODELVIEW_MATRIX;
     }
 
     /**
@@ -155,9 +182,7 @@ public final class GlUtils {
      * @return The Projection Matrix
      */
     public static FloatBuffer getProjectionMatrix() {
-        FloatBuffer projection = BufferUtils.createFloatBuffer(16);
-        glGetFloat(GL_PROJECTION_MATRIX, projection);
-        return projection;
+        return PROJECTION_MATRIX;
     }
 
     /**
@@ -168,8 +193,6 @@ public final class GlUtils {
      * @return The Viewport
      */
     public static IntBuffer getViewport() {
-        IntBuffer viewport = BufferUtils.createIntBuffer(16);
-        glGetInteger(GL_VIEWPORT, viewport);
-        return viewport;
+        return VIEWPORT;
     }
 }

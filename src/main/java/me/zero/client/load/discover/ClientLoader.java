@@ -9,6 +9,7 @@ import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
+import me.zero.client.api.util.render.GlUtils;
 import me.zero.client.load.transformer.ITransformer;
 import me.zero.client.load.transformer.LoadTransformer;
 import me.zero.client.load.transformer.Transformer;
@@ -111,6 +112,8 @@ public class ClientLoader {
         Client client = getClient(info);
         if (client == null)
             throw new NullPointerException("Client loaded is null");
+
+        GlUtils.init();
 
         client.onInit(info);
         EventManager.subscribe(new ClientHandler());
