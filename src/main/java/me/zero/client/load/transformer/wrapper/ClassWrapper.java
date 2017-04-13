@@ -67,7 +67,7 @@ public abstract class ClassWrapper extends Transformer {
      * @param paramType The return type of the method as a CtClass
      */
     protected final void implementS(String methodName, CtClass paramType, FieldReference reference) {
-        this.implement(methodName, voidType, new CtClass[] { paramType }, reference.createReturn());
+        this.implement(methodName, voidType, new CtClass[] { paramType }, reference.createSetter());
     }
 
     /**
