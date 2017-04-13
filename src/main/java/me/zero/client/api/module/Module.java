@@ -139,6 +139,20 @@ public abstract class Module extends Node implements IModule {
     }
 
     /**
+     * Sets the module's mode from the mode's name.
+     * Null will be returned if there isn't a mode
+     * with the specified name
+     *
+     * @since 1.0
+     *
+     * @param name The mode name
+     * @return The new mode
+     */
+    public ModuleMode setMode(String name) {
+        return this.setMode(this.modes.stream().filter(mode -> mode.getName().equalsIgnoreCase(name)).findFirst().orElse(null));
+    }
+
+    /**
      * Returns the list of modes that this module has,
      * null will be returned if this module doesn't have
      * any modes.
