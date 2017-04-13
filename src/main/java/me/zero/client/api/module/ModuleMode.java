@@ -58,6 +58,15 @@ public class ModuleMode<T extends Module> implements IModule {
         return this.name;
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return The parent module
+     */
+    public Module getParent() {
+        return this.parent;
+    }
+
     @Override
     public boolean getState() {
         return state;

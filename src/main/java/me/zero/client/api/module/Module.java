@@ -99,20 +99,96 @@ public abstract class Module extends Node implements IModule {
     }
 
     /**
-     * Sets the module's mode to the specified mode
+     * Sets the module's mode to the specified mode.
+     * Null will be returned if the mode is unable to
+     * be set.
      *
      * @since 1.0
      *
      * @param mode Mode being set
+     * @return The new mode
      */
-    private void setMode(ModuleMode mode) {
+    public ModuleMode setMode(ModuleMode mode) {
+        if (mode == null || mode.getParent() != this)
+            return null;
+
         if (!this.hasModes())
-            return;
+            return null;
 
         if (this.mode != null)
             this.mode.setState(false);
 
         (this.mode = mode).setState(true);
+
+        return this.mode;
+    }
+
+    /**
+     * Sets the module's mode to the mode in the
+     * specified index. An IndexOutOfBoundsException
+     * will be thrown if the index is less than 0 or
+     * exceeds the maximum index of the mode array.
+     *
+     * @since 1.0
+     *
+     * @param index Index of the mode
+     * @return The new mode
+     */
+    public ModuleMode setMode(int index) {
+        return this.setMode(this.modes.get(index));
+    }
+
+    /**
+     * Returns the list of modes that this module has,
+     * null will be returned if this module doesn't have
+     * any modes.
+     *
+     * @since 1.0
+     *
+     * @return List of modes
+     */
+    public final List<ModuleMode> getModes() {
+        if (!hasModes())
+            return null;
+
+        return new ArrayList<>(this.modes);
+    }
+
+    /**
+     * Switches the mode to the mode following
+     * the current mode in the list of modes.
+     *
+     * @since 1.0
+     *
+     * @return The new mode
+     */
+    public final ModuleMode nextMode() {
+        if (!hasModes())
+            return null;
+
+        int index = this.modes.indexOf(this.getMode());
+        if (++index >= this.modes.size() - 1)
+            index = 0;
+
+        return setMode(index);
+    }
+
+    /**
+     * Switched the mode to the mode preceding
+     * the current mode in the list of modes.
+     * @since 1.0
+     *
+     * @return The new mode
+     */
+    public final ModuleMode lastMode() {
+        if (!hasModes())
+            return null;
+
+        int index = this.modes.indexOf(this.getMode());
+        if (--index < 0)
+            index = this.modes.size() - 1;
+
+        return setMode(index);
     }
 
     /**
