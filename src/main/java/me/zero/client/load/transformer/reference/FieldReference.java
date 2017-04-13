@@ -37,6 +37,6 @@ public final class FieldReference extends Reference {
      * @return Setter method code
      */
     public String createSetter() {
-        return String.format("this.%s = $1", this.getName());
+        return String.format("this.%s = $1;", this.getName());
     }
 }
