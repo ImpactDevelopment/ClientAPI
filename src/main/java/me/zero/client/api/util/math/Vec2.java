@@ -207,6 +207,4 @@ public final class Vec2 {
 
         return null;
     }
-
-
 }
