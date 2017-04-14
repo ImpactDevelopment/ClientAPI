@@ -19,13 +19,9 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public final class Vec3 {
 
-    private float x, y, z;
+    private double x, y, z;
 
     public Vec3(double x, double y, double z) {
-        this((float) x, (float) y, (float) z);
-    }
-
-    public Vec3(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -39,33 +35,8 @@ public final class Vec3 {
      * @param x The new X value
      * @return This Vector
      */
-    public Vec3 x(float x) {
-        this.x = x;
-        return this;
-    }
-
-    /**
-     * Sets the Vector X value
-     *
-     * @since 1.0
-     *
-     * @param x The new X value
-     * @return This Vector
-     */
     public Vec3 x(double x) {
-        return x((float) x);
-    }
-
-    /**
-     * Sets the Vector Y value
-     *
-     * @since 1.0
-     *
-     * @param y The new Y value
-     * @return This Vector
-     */
-    public Vec3 y(float y) {
-        this.y = y;
+        this.x = x;
         return this;
     }
 
@@ -78,19 +49,7 @@ public final class Vec3 {
      * @return This Vector
      */
     public Vec3 y(double y) {
-        return y((float) y);
-    }
-
-    /**
-     * Sets the Vector Z value
-     *
-     * @since 1.0
-     *
-     * @param z The new Z value
-     * @return This Vector
-     */
-    public Vec3 z(float z) {
-        this.z = z;
+        this.y = y;
         return this;
     }
 
@@ -103,7 +62,8 @@ public final class Vec3 {
      * @return This Vector
      */
     public Vec3 z(double z) {
-        return z((float) z);
+        this.z = z;
+        return this;
     }
 
     /**
@@ -111,7 +71,7 @@ public final class Vec3 {
      *
      * @return The vector x value
      */
-    public float getX() {
+    public double getX() {
         return this.x;
     }
 
@@ -120,7 +80,7 @@ public final class Vec3 {
      *
      * @return The vector y value
      */
-    public float getY() {
+    public double getY() {
         return this.y;
     }
 
@@ -129,7 +89,7 @@ public final class Vec3 {
      *
      * @return The vector z value
      */
-    public float getZ() {
+    public double getZ() {
         return this.z;
     }
 
@@ -160,20 +120,6 @@ public final class Vec3 {
     }
 
     /**
-     * Adds the specified X, Y and Z to this vector
-     *
-     * @since 1.0
-     *
-     * @param x X value being added
-     * @param y Y value being added
-     * @param z Z value being added
-     * @return The new vector
-     */
-    public Vec3 add(float x, float y, float z) {
-        return add(new Vec3(x, y, z));
-    }
-
-    /**
      * Subtracts the X, Y and Z of one vector from this vector
      *
      * @since 1.0
@@ -196,20 +142,6 @@ public final class Vec3 {
      * @return The new vector
      */
     public Vec3 sub(double x, double y, double z) {
-        return sub(new Vec3(x, y, z));
-    }
-
-    /**
-     * Subtracts the specified X, Y and Z from this vector
-     *
-     * @since 1.0
-     *
-     * @param x X value being subtracted
-     * @param y Y value being subtracted
-     * @param z Z value being subtracted
-     * @return The new vector
-     */
-    public Vec3 sub(float x, float y, float z) {
         return sub(new Vec3(x, y, z));
     }
 
@@ -267,7 +199,7 @@ public final class Vec3 {
         FloatBuffer projection = GlUtils.getProjectionMatrix();
         IntBuffer viewport = GlUtils.getViewport();
 
-        boolean result = GLU.gluProject(x, y, z, modelView, projection, viewport, screenCoords);
+        boolean result = GLU.gluProject((float) x, (float) y, (float) z, modelView, projection, viewport, screenCoords);
         if (result) {
             return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
         }
