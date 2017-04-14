@@ -95,17 +95,17 @@ public class NumberType<T extends Number> extends Value<T> {
     private T cast(Number val) {
         Class<?> clazz = getValue().getClass();
         if (clazz == Byte.class || clazz == Byte.TYPE) {
-            return (T) Byte.valueOf(String.valueOf((byte) val));
+            return (T) Byte.valueOf(val.byteValue());
         } else if (clazz == Short.class || clazz == Short.TYPE) {
-            return (T) Short.valueOf(String.valueOf((short) val));
+            return (T) Short.valueOf(val.shortValue());
         } else if (clazz == Integer.class || clazz == Integer.TYPE) {
-            return (T) Integer.valueOf(String.valueOf((int) val));
+            return (T) Integer.valueOf(val.intValue());
         } else if (clazz == Long.class || clazz == Long.TYPE) {
-            return (T) Long.valueOf(String.valueOf((long) val));
+            return (T) Long.valueOf(val.longValue());
         } else if (clazz == Float.class || clazz == Float.TYPE) {
-            return (T) Float.valueOf(String.valueOf((float) val));
+            return (T) Float.valueOf(val.floatValue());
         } else if (clazz == Double.class || clazz == Double.TYPE) {
-            return (T) Double.valueOf(String.valueOf((double) val));
+            return (T) Double.valueOf(val.doubleValue());
         }
         throw new RuntimeException("A number that isn't a number? Okay, Java.");
     }
