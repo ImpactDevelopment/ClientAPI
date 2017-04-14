@@ -81,7 +81,7 @@ public final class UniformVariable {
      * @param value New value
      */
     public void setVec(Vec3 value) {
-        glUniform3fARB(location, value.getX(), value.getY(), value.getZ());
+        glUniform3fARB(location, (float) value.getX(), (float) value.getY(), (float) value.getZ());
     }
 
     /**

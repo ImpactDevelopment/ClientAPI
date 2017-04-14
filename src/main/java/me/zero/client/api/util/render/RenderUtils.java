@@ -130,7 +130,7 @@ public final class RenderUtils {
      * @param y1 End Y
      * @param width Line width
      */
-    public static void drawLine(float x, float y, float x1, float y1, float width) {
+    public static void drawLine(double x, double y, double x1, double y1, float width) {
         drawLine(x, y, 0, x1, y1, 0, width);
     }
 
@@ -147,7 +147,7 @@ public final class RenderUtils {
      * @param z1 End Z
      * @param width Line width
      */
-    public static void drawLine(float x, float y, float z, float x1, float y1, float z1, float width) {
+    public static void drawLine(double x, double y, double z, double x1, double y1, double z1, float width) {
         preRender();
         glLineWidth(width);
         renderer.begin(GL_TRIANGLES, POSITION_TEX);
