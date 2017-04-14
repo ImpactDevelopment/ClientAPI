@@ -181,7 +181,7 @@ public abstract class Module extends Node implements IModule {
             return null;
 
         int index = this.modes.indexOf(this.getMode());
-        if (++index >= this.modes.size() - 1)
+        if (++index > this.modes.size() - 1)
             index = 0;
 
         return setMode(index);
