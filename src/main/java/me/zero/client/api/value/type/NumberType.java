@@ -40,7 +40,7 @@ public class NumberType<T extends Number> extends Value<T> {
     @Override
     @SuppressWarnings("unchecked")
     public void setValue(T value) {
-        super.setValue((T) MathUtils.clamp(value, minimum, maximum));
+        super.setValue(cast(MathUtils.clamp(value, minimum, maximum)));
     }
 
     /**
@@ -82,5 +82,31 @@ public class NumberType<T extends Number> extends Value<T> {
     @SuppressWarnings("unchecked")
     public void decrement(float multiplier) {
         this.increment(-multiplier);
+    }
+
+    /**
+     * Used to cast a random number type to a
+     * compatible type for this value, this method
+     * is a complete mess and should be fixed soon.
+     *
+     * @since 1.0
+     */
+    @SuppressWarnings("unchecked")
+    private T cast(Number val) {
+        Class<?> clazz = val.getClass();
+        if (clazz == Byte.class || clazz == Byte.TYPE) {
+            return (T) Byte.valueOf(String.valueOf((byte) val));
+        } else if (clazz == Short.class || clazz == Short.TYPE) {
+            return (T) Short.valueOf(String.valueOf((short) val));
+        } else if (clazz == Integer.class || clazz == Integer.TYPE) {
+            return (T) Integer.valueOf(String.valueOf((int) val));
+        } else if (clazz == Long.class || clazz == Long.TYPE) {
+            return (T) Long.valueOf(String.valueOf((long) val));
+        } else if (clazz == Float.class || clazz == Float.TYPE) {
+            return (T) Float.valueOf(String.valueOf((float) val));
+        } else if (clazz == Double.class || clazz == Double.TYPE) {
+            return (T) Double.valueOf(String.valueOf((double) val));
+        }
+        throw new RuntimeException("A number that isn't a number? Okay, Java.");
     }
 }
