@@ -93,7 +93,7 @@ public class NumberType<T extends Number> extends Value<T> {
      */
     @SuppressWarnings("unchecked")
     private T cast(Number val) {
-        Class<?> clazz = val.getClass();
+        Class<?> clazz = getValue().getClass();
         if (clazz == Byte.class || clazz == Byte.TYPE) {
             return (T) Byte.valueOf(String.valueOf((byte) val));
         } else if (clazz == Short.class || clazz == Short.TYPE) {
