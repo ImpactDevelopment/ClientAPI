@@ -27,7 +27,7 @@ public class PacketFilter implements Predicate<PacketEvent> {
     @Override
     public boolean test(PacketEvent packetEvent) {
         for (Class<? extends Packet<?>> packet : packets)
-            if (packet.isAssignableFrom(packetEvent.getClass()))
+            if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
                 return true;
 
         return false;
