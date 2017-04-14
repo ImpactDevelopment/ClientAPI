@@ -5,6 +5,7 @@ import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.wrapper.IEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 
 /**
  * Called before and after packets are sent to
@@ -41,10 +42,11 @@ public final class MotionUpdateEvent implements Helper {
         if (type == EventState.POST) return;
 
         IEntity util = (IEntity) mc.player;
-        oPos      = util.getPos();
+        oPos      = util.getPos().y(mc.player.getEntityBoundingBox().minY);
         oRotation = util.getRotations();
         oGround   = mc.player.onGround;
-        nPos      = util.getPos();
+
+        nPos      = util.getPos().y(mc.player.getEntityBoundingBox().minY);
         nRotation = util.getRotations();
         nGround   = mc.player.onGround;
     }
@@ -196,6 +198,10 @@ public final class MotionUpdateEvent implements Helper {
     public static void apply() {
         IEntity util = (IEntity) mc.player;
         util.setPos(nPos);
+
+        double diff = nPos.getY() - mc.player.getEntityBoundingBox().minY;
+        mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0, diff, 0));
+
         util.setRotations(nRotation);
         mc.player.onGround = nGround;
     }
@@ -206,6 +212,10 @@ public final class MotionUpdateEvent implements Helper {
     public static void reset() {
         IEntity util = (IEntity) mc.player;
         util.setPos(oPos);
+
+        double diff = oPos.getY() - mc.player.getEntityBoundingBox().minY;
+        mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0, diff, 0));
+
         util.setRotations(oRotation);
         mc.player.onGround = oGround;
     }
