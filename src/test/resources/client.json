@@ -1,9 +1,0 @@
-{
-  "name": "Example Client",
-  "authors": [ "Zero" ],
-  "id": "example",
-  "build": 1.0,
-  "type": "RELEASE",
-  "main": "me.zero.example.ExampleClient",
-  "transformers": "me.zero.example.core"
-}
