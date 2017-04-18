@@ -6,9 +6,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
-import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.POSITION_TEX;
+import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
@@ -85,7 +84,7 @@ public final class RenderUtils {
      * @param s Tex S
      */
     public static void drawTextureRect(float x, float y, float width, float height, float u, float v, float t, float s) {
-        renderer.begin(GL_TRIANGLES, POSITION_TEX);
+        renderer.begin(GL_QUADS, POSITION_TEX);
         renderer.pos(x + width, y, 0F).tex(t, v).endVertex();
         renderer.pos(x, y, 0F).tex(u, v).endVertex();
         renderer.pos(x, y + height, 0F).tex(u, s).endVertex();
@@ -150,7 +149,7 @@ public final class RenderUtils {
     public static void drawLine(double x, double y, double z, double x1, double y1, double z1, float width) {
         preRender();
         glLineWidth(width);
-        renderer.begin(GL_TRIANGLES, POSITION_TEX);
+        renderer.begin(GL_LINE, POSITION_COLOR);
         renderer.pos(x, y, z).endVertex();
         renderer.pos(x1, y1, z1).endVertex();
         tessellator.draw();
@@ -204,7 +203,7 @@ public final class RenderUtils {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        worldRenderer.begin(GL_QUADS, POSITION_COLOR);
         worldRenderer.pos(x1, y2, 0.0D).color(r, g, b, a).endVertex();
         worldRenderer.pos(x2, y2, 0.0D).color(r, g, b, a).endVertex();
         worldRenderer.pos(x2, y1, 0.0D).color(r, g, b, a).endVertex();
@@ -253,7 +252,7 @@ public final class RenderUtils {
         GlStateManager.shadeModel(GL_FLAT);
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer worldRenderer = tessellator.getBuffer();
-        worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+        worldRenderer.begin(GL_QUADS, POSITION_COLOR);
         // Clean this up
         if (color.length == 1) {
             worldRenderer.pos(x2, y1, 0.0D).color(r[0], g[0], b[0], a[0]).endVertex();
