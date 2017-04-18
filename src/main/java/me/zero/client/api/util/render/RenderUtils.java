@@ -149,7 +149,7 @@ public final class RenderUtils {
     public static void drawLine(double x, double y, double z, double x1, double y1, double z1, float width) {
         preRender();
         glLineWidth(width);
-        renderer.begin(GL_LINE, POSITION_COLOR);
+        renderer.begin(GL_LINE_STRIP, POSITION_COLOR);
         renderer.pos(x, y, z).endVertex();
         renderer.pos(x1, y1, z1).endVertex();
         tessellator.draw();
