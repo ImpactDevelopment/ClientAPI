@@ -21,4 +21,4 @@ To use the Client API, you must download [Development Kit](https://github.com/Ze
 * Minecraft will automatically open with the Client running
 
 ## Usage
-Refer to the [Example](https://github.com/ZeroMemes/ClientAPI/tree/master/src/test/) to view how clients using the ClientAPI are structured.
+Refer to the [Example](https://github.com/ZeroMemes/ClientAPI-Example) to view how clients using the ClientAPI are structured.
