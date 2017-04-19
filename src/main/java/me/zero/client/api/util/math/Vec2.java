@@ -183,8 +183,10 @@ public final class Vec2 {
      *
      * @return The distance
      */
-    public double distanceTo(Vec2 vec) {
-        return Math.sqrt(x * vec.x + y * vec.y);
+    public float distanceTo(Vec2 vec) {
+        double dx = x - vec.x;
+        double dy = y - vec.y;
+        return (float) Math.sqrt(dx * dx + dy * dy);
     }
 
     /**
