@@ -165,7 +165,10 @@ public final class Vec3 {
      * @return The distance
      */
     public double distanceTo(Vec3 vec) {
-        return Math.sqrt(x * vec.x + y * vec.y + z * vec.z);
+        double dx = x - vec.x;
+        double dy = y - vec.y;
+        double dz = z - vec.z;
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     /**
