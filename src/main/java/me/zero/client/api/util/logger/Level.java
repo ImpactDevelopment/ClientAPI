@@ -9,5 +9,5 @@ package me.zero.client.api.util.logger;
  */
 public enum Level {
 
-    INFO, WARNING, SEVERE, CONFIG
+    INFO, ERROR, WARNING, SEVERE, CONFIG
 }
