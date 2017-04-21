@@ -23,7 +23,7 @@ public final class ProfilerEvent {
      *
      * @return The current profiler section
      */
-    public String getSection() {
+    public final String getSection() {
         return this.section;
     }
 }

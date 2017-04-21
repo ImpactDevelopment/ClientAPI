@@ -35,7 +35,7 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * State of this event
      */
-    private EventState type;
+    private final EventState type;
 
     public MotionUpdateEvent(EventState type) {
         this.type = type;
@@ -59,7 +59,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param x The new X position
      * @return This event
      */
-    public MotionUpdateEvent x(double x) {
+    public final MotionUpdateEvent x(double x) {
         nPos.x(x);
         return this;
     }
@@ -72,7 +72,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param y The new Y position
      * @return This event
      */
-    public MotionUpdateEvent y(double y) {
+    public final MotionUpdateEvent y(double y) {
         nPos.y(y);
         return this;
     }
@@ -85,7 +85,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param z The new Z position
      * @return This event
      */
-    public MotionUpdateEvent z(double z) {
+    public final MotionUpdateEvent z(double z) {
         nPos.z(z);
         return this;
     }
@@ -98,7 +98,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param yaw The new yaw rotation
      * @return This event
      */
-    public MotionUpdateEvent yaw(float yaw) {
+    public final MotionUpdateEvent yaw(float yaw) {
         nRotation.x(yaw);
         return this;
     }
@@ -111,7 +111,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param pitch The new pitch rotation
      * @return This event
      */
-    public MotionUpdateEvent pitch(float pitch) {
+    public final MotionUpdateEvent pitch(float pitch) {
         nRotation.y(pitch);
         return this;
     }
@@ -124,7 +124,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param onGround The new onGround state
      * @return This event
      */
-    public MotionUpdateEvent onGround(boolean onGround) {
+    public final MotionUpdateEvent onGround(boolean onGround) {
         nGround = onGround;
         return this;
     }
@@ -134,7 +134,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The X position
      */
-    public double getX() {
+    public final double getX() {
         return nPos.getX();
     }
 
@@ -143,7 +143,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Y position
      */
-    public double getY() {
+    public final double getY() {
         return nPos.getY();
     }
 
@@ -152,7 +152,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Z position
      */
-    public double getZ() {
+    public final double getZ() {
         return nPos.getZ();
     }
 
@@ -161,7 +161,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Yaw rotation
      */
-    public float getYaw() {
+    public final float getYaw() {
         return nRotation.getX();
     }
 
@@ -170,7 +170,7 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The Pitch rotation
      */
-    public float getPitch() {
+    public final float getPitch() {
         return nRotation.getY();
     }
 
@@ -179,16 +179,16 @@ public final class MotionUpdateEvent implements Helper {
      *
      * @return The OnGround state
      */
-    public boolean isOnGround() {
+    public final boolean isOnGround() {
         return nGround;
     }
 
     /**
      * @since 1.0
      *
-     * @return The type of event
+     * @return The state of the event
      */
-    public EventState getType() {
+    public final EventState getState() {
         return this.type;
     }
 

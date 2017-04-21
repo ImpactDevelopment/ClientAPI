@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
  *
  * Created by Brady on 4/10/2017.
  */
-public class BoundingBoxEvent extends Cancellable {
+public final class BoundingBoxEvent extends Cancellable {
 
     /**
      * The block itself
@@ -44,7 +44,7 @@ public class BoundingBoxEvent extends Cancellable {
      * @param aabb New bounding box
      * @return This event
      */
-    public BoundingBoxEvent setBoundingBox(AxisAlignedBB aabb) {
+    public final BoundingBoxEvent setBoundingBox(AxisAlignedBB aabb) {
         this.aabb = aabb;
         return this;
     }
@@ -54,7 +54,7 @@ public class BoundingBoxEvent extends Cancellable {
      *
      * @return The block being collided with
      */
-    public Block getBlock() {
+    public final Block getBlock() {
         return this.block;
     }
 
@@ -63,7 +63,7 @@ public class BoundingBoxEvent extends Cancellable {
      *
      * @return The position of the block being collided with
      */
-    public BlockPos getPos() {
+    public final BlockPos getPos() {
         return this.pos;
     }
 
@@ -72,7 +72,7 @@ public class BoundingBoxEvent extends Cancellable {
      *
      * @return The bounding box of the Block
      */
-    public AxisAlignedBB getBoundingBox() {
+    public final AxisAlignedBB getBoundingBox() {
         return this.aabb;
     }
 }

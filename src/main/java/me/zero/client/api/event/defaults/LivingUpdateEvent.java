@@ -25,7 +25,7 @@ public final class LivingUpdateEvent {
      *
      * @return The event state
      */
-    public EventState getState() {
+    public final EventState getState() {
         return this.state;
     }
 }

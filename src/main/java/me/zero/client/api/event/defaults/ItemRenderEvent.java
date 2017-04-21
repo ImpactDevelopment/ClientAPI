@@ -16,7 +16,7 @@ import net.minecraft.util.EnumHandSide;
  *
  * Created by Brady on 4/8/2017.
  */
-public class ItemRenderEvent extends Cancellable implements Helper {
+public final class ItemRenderEvent extends Cancellable implements Helper {
 
     /**
      * Instance of the ItemRenderer
@@ -69,7 +69,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The instance of the ItemRenderer
      */
-    public ItemRenderer getItemRenderer() {
+    public final ItemRenderer getItemRenderer() {
         return itemRenderer;
     }
 
@@ -78,7 +78,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The current render partial ticks
      */
-    public float getPartialTicks() {
+    public final float getPartialTicks() {
         return partialTicks;
     }
 
@@ -87,7 +87,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The hand holding the item
      */
-    public EnumHand getHand() {
+    public final EnumHand getHand() {
         return hand;
     }
 
@@ -96,7 +96,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The side of the screen that the holding hand is represented by
      */
-    public EnumHandSide getHandSide() {
+    public final EnumHandSide getHandSide() {
         return handSide;
     }
 
@@ -105,7 +105,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The swing progress of the item being renderered
      */
-    public float getSwingProgress() {
+    public final float getSwingProgress() {
         return swingProgress;
     }
 
@@ -114,7 +114,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The itemstack being rendered
      */
-    public ItemStack getStack() {
+    public final ItemStack getStack() {
         return stack;
     }
 
@@ -123,7 +123,7 @@ public class ItemRenderEvent extends Cancellable implements Helper {
      *
      * @return The recharge progress of the item being rendered.
      */
-    public float getRechargeProgress() {
+    public final float getRechargeProgress() {
         return rechargeProgress;
     }
 }

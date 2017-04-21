@@ -17,12 +17,12 @@ public final class UniformVariable {
     /**
      * The Uniform name
      */
-    private String name;
+    private final String name;
 
     /**
      * The Uniform Object ID
      */
-    private int location;
+    private final int location;
 
     private UniformVariable(String name, int location) {
         this.name = name;
@@ -36,7 +36,7 @@ public final class UniformVariable {
      *
      * @param value New value
      */
-    public void setInt(int value) {
+    public final void setInt(int value) {
         glUniform1iARB(location, value);
     }
 
@@ -47,7 +47,7 @@ public final class UniformVariable {
      *
      * @param value New value
      */
-    public void setFloat(float value) {
+    public final void setFloat(float value) {
         glUniform1fARB(location, value);
     }
 
@@ -58,7 +58,7 @@ public final class UniformVariable {
      *
      * @param value New value
      */
-    public void setBoolean(boolean value) {
+    public final void setBoolean(boolean value) {
         glUniform1fARB(location, value ? 1 : 0);
     }
 
@@ -69,7 +69,7 @@ public final class UniformVariable {
      *
      * @param value New value
      */
-    public void setVec(Vec2 value) {
+    public final void setVec(Vec2 value) {
         glUniform2fARB(location, value.getX(), value.getY());
     }
 
@@ -80,7 +80,7 @@ public final class UniformVariable {
      *
      * @param value New value
      */
-    public void setVec(Vec3 value) {
+    public final void setVec(Vec3 value) {
         glUniform3fARB(location, (float) value.getX(), (float) value.getY(), (float) value.getZ());
     }
 
@@ -89,7 +89,7 @@ public final class UniformVariable {
      *
      * @return The name of this UniformVariable
      */
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
@@ -98,7 +98,7 @@ public final class UniformVariable {
      *
      * @return The Object ID of this UniformVariable
      */
-    public int getLocation() {
+    public final int getLocation() {
         return this.location;
     }
 

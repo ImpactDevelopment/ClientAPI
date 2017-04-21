@@ -32,7 +32,7 @@ public final class ModuleStateEvent extends Cancellable {
      *
      * @return The module having a change in state
      */
-    public Module getModule() {
+    public final Module getModule() {
         return this.module;
     }
 
@@ -41,7 +41,7 @@ public final class ModuleStateEvent extends Cancellable {
      *
      * @return The new state of the Module
      */
-    public boolean getNewState() {
+    public final boolean getNewState() {
         return this.newState;
     }
 }

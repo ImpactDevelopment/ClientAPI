@@ -7,17 +7,17 @@ package me.zero.client.api.command;
  *
  * Created by Brady on 4/9/2017.
  */
-public class CommandUsage {
+public final class CommandUsage {
 
     /**
      * The Syntax of the usage
      */
-    private String syntax;
+    private final String syntax;
 
     /**
      * The description of the usage
      */
-    private String description;
+    private final String description;
 
     public CommandUsage(String syntax, String description) {
         this.syntax = syntax;
@@ -29,7 +29,7 @@ public class CommandUsage {
      *
      * @return The syntax of the usage
      */
-    public String getSyntax() {
+    public final String getSyntax() {
         return this.syntax;
     }
 
@@ -38,7 +38,7 @@ public class CommandUsage {
      *
      * @return The description of the usage
      */
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 }

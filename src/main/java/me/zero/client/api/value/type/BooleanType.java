@@ -14,17 +14,17 @@ import java.lang.reflect.Field;
  *
  * Created by Brady on 1/23/2017.
  */
-public class BooleanType extends Value<Boolean> implements Toggleable {
+public final class BooleanType extends Value<Boolean> implements Toggleable {
 
     public BooleanType(String name, String id, String description, Object object, Field field) {
         super(name, id, description, object, field);
     }
 
     @Override
-    public void onEnable() {}
+    public final void onEnable() {}
 
     @Override
-    public void onDisable() {}
+    public final void onDisable() {}
 
     @Override
     public final void toggle() {

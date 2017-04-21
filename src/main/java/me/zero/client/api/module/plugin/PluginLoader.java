@@ -28,17 +28,17 @@ import java.util.jar.JarFile;
  *
  * Created by Brady on 1/26/2017.
  */
-public class PluginLoader {
+public final class PluginLoader {
 
     /**
      * The list of the Plugins discovered
      */
-    private List<Plugin> plugins = new ArrayList<>();
+    private final List<Plugin> plugins = new ArrayList<>();
 
     /**
      * Directory containing possible plugins
      */
-    private String pluginDir;
+    private final String pluginDir;
 
     public PluginLoader(String pluginDir) {
         this.pluginDir = pluginDir;
@@ -52,10 +52,11 @@ public class PluginLoader {
      */
     private void loadPlugins() {
         File dir = new File(this.pluginDir);
+        File[] files = dir.listFiles();
+        if (files == null)
+            return;
 
-        if (!dir.isDirectory()) return;
-
-        Arrays.stream(dir.listFiles()).forEach(file -> {
+        Arrays.stream(files).forEach(file -> {
             if (file.getAbsolutePath().endsWith(".jar")) {
                 loadPlugin(file);
                 Logger.instance.logf(Level.INFO, Messages.PLUGIN_LOAD, file.getAbsolutePath());
@@ -135,7 +136,7 @@ public class PluginLoader {
      *
      * @return The list of plugins that were discovered
      */
-    public List<Plugin> getPlugins() {
+    public final List<Plugin> getPlugins() {
         return this.plugins;
     }
 }

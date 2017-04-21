@@ -151,12 +151,16 @@ public final class RenderUtils {
      * @param y2 Bottom corner Y of the rectangle
      */
     public static void drawFlippedTexturedRect(float x1, float y1, float x2, float y2) {
+        setupClientState(GlClientState.TEXTURE, true);
+
         tessellator
                 .vertex(x1, y2, 0).texture(0, 0)
                 .vertex(x2, y2, 0).texture(1, 0)
                 .vertex(x2, y1, 0).texture(1, 1)
                 .vertex(x1, y1, 0).texture(0, 1)
                 .draw(GL_QUADS);
+
+        setupClientState(GlClientState.TEXTURE, false);
     }
 
     /**
@@ -170,12 +174,16 @@ public final class RenderUtils {
      * @param y2 Bottom corner Y of the rectangle
      */
     public static void drawReflectedTexturedRect(float x1, float y1, float x2, float y2) {
+        setupClientState(GlClientState.TEXTURE, true);
+
         tessellator
                 .vertex(x1, y2, 0).texture(1, 0)
                 .vertex(x2, y2, 0).texture(1, 0)
                 .vertex(x2, y1, 0).texture(0, 1)
                 .vertex(x1, y1, 0).texture(1, 1)
                 .draw(GL_QUADS);
+
+        setupClientState(GlClientState.TEXTURE, false);
     }
 
     /**

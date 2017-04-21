@@ -49,7 +49,7 @@ public final class Hash {
                 sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
             return sb.toString();
         } catch (NoSuchAlgorithmException e2) {
-            return null;
+            return data;
         }
     }
 }

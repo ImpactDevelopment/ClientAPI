@@ -12,26 +12,57 @@ import net.minecraft.network.Packet;
  */
 public final class PacketEvent extends Cancellable {
 
+    /**
+     * The packet being sent
+     */
     private Packet<?> packet;
-    private Type type;
+
+    /**
+     * The flow direction, send or receive
+     */
+    private final Type type;
 
     public PacketEvent(Packet<?> packet, Type type) {
         this.packet = packet;
         this.type = type;
     }
 
-    public Packet<?> getPacket() {
+    /**
+     * @since 1.0
+     *
+     * @return The packet being sent/received
+     */
+    public final Packet<?> getPacket() {
         return this.packet;
     }
 
-    public Packet<?> setPacket(Packet<?> packet) {
+    /**
+     * Sets the packet that is being either sent
+     * or received to the specified packet.
+     *
+     * @since 1.0
+     *
+     * @param packet The new packet
+     * @return This event
+     */
+    public final Packet<?> setPacket(Packet<?> packet) {
         return this.packet = packet;
     }
 
-    public Type getType() {
+    /**
+     * @since 1.0
+     *
+     * @return The packet direction, send or receive
+     */
+    public final Type getType() {
         return this.type;
     }
 
+    /**
+     * Indicates which direction the packet
+     * is coming from, either being sent or
+     * received.
+     */
     public enum Type {
         SEND, RECEIVE
     }

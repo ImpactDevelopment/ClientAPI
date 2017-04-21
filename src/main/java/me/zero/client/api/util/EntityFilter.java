@@ -29,7 +29,7 @@ public final class EntityFilter implements Helper {
     /**
      * Geneerated predicate
      */
-    private Predicate<Entity> predicate;
+    private final Predicate<Entity> predicate;
 
     /**
      * The various Boolean Types associated with filter checks

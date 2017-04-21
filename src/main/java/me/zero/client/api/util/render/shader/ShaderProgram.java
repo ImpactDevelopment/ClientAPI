@@ -28,17 +28,17 @@ public abstract class ShaderProgram implements Helper {
     /**
      * The uniform variables for this shader
      */
-    private List<UniformVariable> uniforms = new ArrayList<>();
+    private final List<UniformVariable> uniforms = new ArrayList<>();
 
     /**
      * Various Object IDs
      */
-    private int programID, fragmentID, vertexID;
+    private final int programID, fragmentID, vertexID;
 
     /**
      * EXTFramebuffer used to render shader
      */
-    protected EXTFramebuffer framebuffer;
+    private final EXTFramebuffer framebuffer;
 
     public ShaderProgram(String vertex, String fragment, Framebuffer fbo) {
         framebuffer = new EXTFramebuffer(fbo);
@@ -140,7 +140,7 @@ public abstract class ShaderProgram implements Helper {
      * @param name The Uniform Name
      * @return The Uniform Variable
      */
-    protected UniformVariable getUniform(String name) {
+    protected final UniformVariable getUniform(String name) {
         UniformVariable v = uniforms.stream().filter(uniform -> uniform.getName().equals(name)).findFirst().orElse(null);
         if (v == null)
             return loadUniform(name);
@@ -183,7 +183,7 @@ public abstract class ShaderProgram implements Helper {
      *
      * @return The Shader's Framebuffer
      */
-    EXTFramebuffer getFramebuffer() {
+    final EXTFramebuffer getFramebuffer() {
         return this.framebuffer;
     }
 }

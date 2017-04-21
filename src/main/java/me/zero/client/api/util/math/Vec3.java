@@ -35,7 +35,7 @@ public final class Vec3 {
      * @param x The new X value
      * @return This Vector
      */
-    public Vec3 x(double x) {
+    public final Vec3 x(double x) {
         this.x = x;
         return this;
     }
@@ -48,7 +48,7 @@ public final class Vec3 {
      * @param y The new Y value
      * @return This Vector
      */
-    public Vec3 y(double y) {
+    public final Vec3 y(double y) {
         this.y = y;
         return this;
     }
@@ -61,7 +61,7 @@ public final class Vec3 {
      * @param z The new Z value
      * @return This Vector
      */
-    public Vec3 z(double z) {
+    public final Vec3 z(double z) {
         this.z = z;
         return this;
     }
@@ -71,7 +71,7 @@ public final class Vec3 {
      *
      * @return The vector x value
      */
-    public double getX() {
+    public final double getX() {
         return this.x;
     }
 
@@ -80,7 +80,7 @@ public final class Vec3 {
      *
      * @return The vector y value
      */
-    public double getY() {
+    public final double getY() {
         return this.y;
     }
 
@@ -89,7 +89,7 @@ public final class Vec3 {
      *
      * @return The vector z value
      */
-    public double getZ() {
+    public final double getZ() {
         return this.z;
     }
 
@@ -101,7 +101,7 @@ public final class Vec3 {
      * @param vector Vector being added
      * @return The new vector
      */
-    public Vec3 add(Vec3 vector) {
+    public final Vec3 add(Vec3 vector) {
         return new Vec3(this.x + vector.x, this.y + vector.y, this.z + vector.z);
     }
 
@@ -115,7 +115,7 @@ public final class Vec3 {
      * @param z Z value being added
      * @return The new vector
      */
-    public Vec3 add(double x, double y, double z) {
+    public final Vec3 add(double x, double y, double z) {
         return add(new Vec3(x, y, z));
     }
 
@@ -127,7 +127,7 @@ public final class Vec3 {
      * @param vector Vector being added
      * @return The new vector
      */
-    public Vec3 sub(Vec3 vector) {
+    public final Vec3 sub(Vec3 vector) {
         return new Vec3(this.x - vector.x, this.y - vector.y, this.z - vector.z);
     }
 
@@ -141,7 +141,7 @@ public final class Vec3 {
      * @param z Z value being subtracted
      * @return The new vector
      */
-    public Vec3 sub(double x, double y, double z) {
+    public final Vec3 sub(double x, double y, double z) {
         return sub(new Vec3(x, y, z));
     }
 
@@ -153,7 +153,7 @@ public final class Vec3 {
      * @param scale The scale
      * @return The new vector
      */
-    public Vec3 scale(float scale) {
+    public final Vec3 scale(float scale) {
         return new Vec3(this.x * scale, this.y * scale, this.z * scale);
     }
 
@@ -164,7 +164,7 @@ public final class Vec3 {
      *
      * @return The distance
      */
-    public double distanceTo(Vec3 vec) {
+    public final double distanceTo(Vec3 vec) {
         double dx = x - vec.x;
         double dy = y - vec.y;
         double dz = z - vec.z;
@@ -179,7 +179,7 @@ public final class Vec3 {
      * @param vector The other vector
      * @return The rotations
      */
-    public Vec2 rotationsTo(Vec3 vector) {
+    public final Vec2 rotationsTo(Vec3 vector) {
         double diffX = vector.x - x;
         double diffY = vector.y - y;
         double diffZ = vector.z - z;
@@ -196,7 +196,7 @@ public final class Vec3 {
      *
      * @return Projected Coordinates as a Vec3
      */
-    public Vec3 toScreen() {
+    public final  Vec3 toScreen() {
         FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
         FloatBuffer modelView = GlUtils.getModelViewMatrix();
         FloatBuffer projection = GlUtils.getProjectionMatrix();

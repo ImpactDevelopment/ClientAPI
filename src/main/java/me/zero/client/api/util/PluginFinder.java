@@ -76,7 +76,7 @@ public final class PluginFinder implements Helper {
     }
 
     @EventHandler
-    private Listener<TickEvent> tickListener = new Listener<>(event -> {
+    private final Listener<TickEvent> tickListener = new Listener<>(event -> {
         if (!packetTimer.delay(timeout))
             return;
 
@@ -85,7 +85,7 @@ public final class PluginFinder implements Helper {
     });
 
     @EventHandler
-    private Listener<PacketEvent> packetListener = new Listener<>(event -> {
+    private final Listener<PacketEvent> packetListener = new Listener<>(event -> {
         if (event.getType() != RECEIVE)
             return;
 
@@ -108,25 +108,27 @@ public final class PluginFinder implements Helper {
         /**
          * The list of plugins found
          */
-        private Set<String> plugins;
+        private final Set<String> plugins;
 
         /**
          * The last error
          */
-        private String error;
+        private final String error;
 
         /**
          * The result status, either SUCCESS or FAILURE
          */
-        private Result result;
+        private final Result result;
 
         private PResponse(String error) {
+            this.plugins = null;
             this.error = error;
             this.result = FAILURE;
         }
 
         private PResponse(Set<String> plugins) {
             this.plugins = plugins;
+            this.error = null;
             this.result = SUCCESS;
         }
 
@@ -135,7 +137,7 @@ public final class PluginFinder implements Helper {
          *
          * @return The plugins found, if found
          */
-        public Set<String> getPlugins() {
+        public final Set<String> getPlugins() {
             return this.plugins;
         }
 
@@ -144,7 +146,7 @@ public final class PluginFinder implements Helper {
          *
          * @return The last error, if there is one
          */
-        public String getError() {
+        public final String getError() {
             return this.error;
         }
 
@@ -153,7 +155,7 @@ public final class PluginFinder implements Helper {
          *
          * @return The outcome of the request, SUCCESS or FAILURE
          */
-        public Result getResult() {
+        public final Result getResult() {
             return this.result;
         }
     }

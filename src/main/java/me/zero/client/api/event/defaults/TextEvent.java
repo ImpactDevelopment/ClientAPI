@@ -24,7 +24,7 @@ public final class TextEvent {
      *
      * @return The text being rendered
      */
-    public String getText() {
+    public final String getText() {
         return this.text;
     }
 
@@ -36,7 +36,7 @@ public final class TextEvent {
      * @param text New text
      * @return This event
      */
-    public TextEvent setText(String text) {
+    public final TextEvent setText(String text) {
         this.text = text;
         return this;
     }

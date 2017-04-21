@@ -22,17 +22,17 @@ public class Node implements Nameable {
     /**
      * Child nodes
      */
-    private Set<Node> children = Sets.newLinkedHashSet();
+    private final Set<Node> children = Sets.newLinkedHashSet();
 
     /**
      * Values
      */
-    private Set<Value> values = Sets.newLinkedHashSet();
+    private final Set<Value> values = Sets.newLinkedHashSet();
 
     /**
      * Properties
      */
-    private Set<Property> properties = Sets.newLinkedHashSet();
+    private final Set<Property> properties = Sets.newLinkedHashSet();
 
     /**
      * Name of the node
@@ -88,7 +88,7 @@ public class Node implements Nameable {
      * @param label Label of the property
      * @param value Value being set
      */
-    public void setProperty(String label, Object value) {
+    public final void setProperty(String label, Object value) {
         Property property = getProperty(label);
         if (property != null) {
             property.setValue(value);
@@ -107,7 +107,7 @@ public class Node implements Nameable {
      * @param label Target property label
      * @return Property found, null if not found
      */
-    public Property getProperty(String label) {
+    public final Property getProperty(String label) {
         return properties.stream().filter(property -> property.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
     }
 

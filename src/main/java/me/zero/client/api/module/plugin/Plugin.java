@@ -17,7 +17,7 @@ public abstract class Plugin {
     /**
      * The list of Modules associated with this Plugin
      */
-    private List<Module> modules = new ArrayList<>();
+    private final List<Module> modules = new ArrayList<>();
 
     /**
      * The info for this plugin
@@ -40,7 +40,7 @@ public abstract class Plugin {
      *
      * @param info The info being set
      */
-    void setInfo(PluginInfo info) {
+    final void setInfo(PluginInfo info) {
         if (this.info != null) return;
         this.info = info;
     }
@@ -50,7 +50,7 @@ public abstract class Plugin {
      *
      * @return The Info of this plugin
      */
-    public PluginInfo getInfo() {
+    public final PluginInfo getInfo() {
         return this.info;
     }
 
@@ -61,7 +61,7 @@ public abstract class Plugin {
      *
      * @param module Module being loaded
      */
-    void loadModule(Module module) {
+    final void loadModule(Module module) {
         this.modules.add(module);
     }
 
@@ -70,7 +70,7 @@ public abstract class Plugin {
      *
      * @return The module list associated with this plugin
      */
-    public List<Module> getModules() {
+    public final List<Module> getModules() {
         return new ArrayList<>(modules);
     }
 }
