@@ -12,13 +12,21 @@ import me.zero.client.wrapper.IMinecraft;
  */
 public final class Render3DEvent implements Helper {
 
+    /**
+     * The render partial ticks
+     */
     private final float partialTicks;
 
     public Render3DEvent() {
         this.partialTicks = ((IMinecraft) mc).getTimer().renderPartialTicks;
     }
 
-    public float getPartialTicks() {
+    /**
+     * @since 1.0
+     *
+     * @return The render partial ticks
+     */
+    public final float getPartialTicks() {
         return this.partialTicks;
     }
 }

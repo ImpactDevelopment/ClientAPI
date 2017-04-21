@@ -1,6 +1,5 @@
 package me.zero.client.api.gui.tab.impl;
 
-import me.zero.client.api.gui.tab.ITabGui;
 import me.zero.client.api.gui.tab.ITabGuiElement;
 import me.zero.client.api.gui.tab.ITabGuiMenu;
 import net.minecraft.client.gui.FontRenderer;

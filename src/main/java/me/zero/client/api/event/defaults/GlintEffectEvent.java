@@ -15,7 +15,7 @@ public final class GlintEffectEvent extends Cancellable {
     /**
      * The object getting a glint effect applied to it
      */
-    private GlintTarget target;
+    private final GlintTarget target;
 
     public GlintEffectEvent(GlintTarget target) {
         this.target = target;
@@ -26,7 +26,7 @@ public final class GlintEffectEvent extends Cancellable {
      *
      * @return The glint object
      */
-    public GlintTarget getTarget() {
+    public final GlintTarget getTarget() {
         return this.target;
     }
 

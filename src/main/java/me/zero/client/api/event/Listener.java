@@ -19,22 +19,22 @@ public final class Listener<T> implements EventHook<T> {
      * Class representation of the Event being
      * listened for.
      */
-    private Class<T> target;
+    private final Class<T> target;
 
     /**
      * The hook for this Listener
      */
-    private EventHook<T> hook;
+    private final EventHook<T> hook;
 
     /**
      * Event filters
      */
-    private Predicate<T>[] filters;
+    private final Predicate<T>[] filters;
 
     /**
      * Priority of Listener
      */
-    private byte priority;
+    private final byte priority;
 
     @SafeVarargs
     public Listener(EventHook<T> hook, Predicate<T>... filters) {
@@ -64,7 +64,7 @@ public final class Listener<T> implements EventHook<T> {
      *
      * @return Priority of Listener
      */
-    public final byte getPriority() {
+    final byte getPriority() {
         return priority;
     }
 
@@ -77,7 +77,6 @@ public final class Listener<T> implements EventHook<T> {
      * @param event Event being called
      */
     @Override
-    @SuppressWarnings("unchecked")
     public final void invoke(T event) {
         if (Arrays.stream(filters).filter(filter -> !filter.test(event)).count() > 0)
             return;

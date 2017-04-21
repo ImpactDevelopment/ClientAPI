@@ -27,7 +27,7 @@ public abstract class Module extends Node implements IModule {
     /**
      * The type/category of the module
      */
-    private Class<?> type;
+    private final Class<?> type;
 
     /**
      * The Keybind of this Module
@@ -108,7 +108,7 @@ public abstract class Module extends Node implements IModule {
      * @param mode Mode being set
      * @return The new mode
      */
-    public ModuleMode setMode(ModuleMode mode) {
+    public final ModuleMode setMode(ModuleMode mode) {
         if (mode == null || mode.getParent() != this)
             return null;
 
@@ -134,7 +134,7 @@ public abstract class Module extends Node implements IModule {
      * @param index Index of the mode
      * @return The new mode
      */
-    public ModuleMode setMode(int index) {
+    public final ModuleMode setMode(int index) {
         return this.setMode(this.modes.get(index));
     }
 
@@ -148,7 +148,7 @@ public abstract class Module extends Node implements IModule {
      * @param name The mode name
      * @return The new mode
      */
-    public ModuleMode setMode(String name) {
+    public final ModuleMode setMode(String name) {
         return this.setMode(this.modes.stream().filter(mode -> mode.getName().equalsIgnoreCase(name)).findFirst().orElse(null));
     }
 

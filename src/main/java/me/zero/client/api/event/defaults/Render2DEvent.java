@@ -10,7 +10,7 @@ package me.zero.client.api.event.defaults;
 public final class Render2DEvent {
 
     /**
-     * The partial ticks
+     * The render partial ticks
      */
     private final float partialTicks;
 
@@ -21,9 +21,9 @@ public final class Render2DEvent {
     /**
      * @since 1.0
      *
-     * @return The partial ticks
+     * @return The render partial ticks
      */
-    public float getPartialTicks() {
+    public final float getPartialTicks() {
         return this.partialTicks;
     }
 }

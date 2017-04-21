@@ -41,7 +41,7 @@ public final class Vec2 {
      * @param x The new X value
      * @return This Vector
      */
-    public Vec2 x(float x) {
+    public final Vec2 x(float x) {
         this.x = x;
         return this;
     }
@@ -54,7 +54,7 @@ public final class Vec2 {
      * @param y The new Y value
      * @return This Vector
      */
-    public Vec2 y(float y) {
+    public final Vec2 y(float y) {
         this.y = y;
         return this;
     }
@@ -64,7 +64,7 @@ public final class Vec2 {
      *
      * @return The vector x value
      */
-    public float getX() {
+    public final float getX() {
         return this.x;
     }
 
@@ -73,7 +73,7 @@ public final class Vec2 {
      *
      * @return The vector y value
      */
-    public float getY() {
+    public final float getY() {
         return this.y;
     }
 
@@ -85,7 +85,7 @@ public final class Vec2 {
      * @param vector Vector being added
      * @return The new vector
      */
-    public Vec2 add(Vec2 vector) {
+    public final Vec2 add(Vec2 vector) {
         return new Vec2(this.x + vector.x, this.y + vector.y);
     }
 
@@ -98,7 +98,7 @@ public final class Vec2 {
      * @param y Y value being added
      * @return The new vector
      */
-    public Vec2 add(double x, double y) {
+    public final Vec2 add(double x, double y) {
         return add(new Vec2(x, y));
     }
 
@@ -111,7 +111,7 @@ public final class Vec2 {
      * @param y Y value being added
      * @return The new vector
      */
-    public Vec2 add(float x, float y) {
+    public final Vec2 add(float x, float y) {
         return add(new Vec2(x, y));
     }
 
@@ -123,7 +123,7 @@ public final class Vec2 {
      * @param vector Vector being subtracted by
      * @return The new vector
      */
-    public Vec2 sub(Vec2 vector) {
+    public final Vec2 sub(Vec2 vector) {
         return new Vec2(this.x - vector.x, this.y - vector.y);
     }
 
@@ -136,7 +136,7 @@ public final class Vec2 {
      * @param y Y value being subtracted
      * @return The new vector
      */
-    public Vec2 sub(double x, double y) {
+    public final Vec2 sub(double x, double y) {
         return add(new Vec2(x, y));
     }
 
@@ -149,7 +149,7 @@ public final class Vec2 {
      * @param y Y value being subtracted
      * @return The new vector
      */
-    public Vec2 sub(float x, float y) {
+    public final Vec2 sub(float x, float y) {
         return add(new Vec2(x, y));
     }
 
@@ -161,7 +161,7 @@ public final class Vec2 {
      * @param scale The scale
      * @return The new vector
      */
-    public Vec2 scale(float scale) {
+    public final Vec2 scale(float scale) {
         return new Vec2(this.x * scale, this.y * scale);
     }
 
@@ -172,7 +172,7 @@ public final class Vec2 {
      *
      * @return This Vec2 as a Vec3
      */
-    public Vec3 toVec3() {
+    public final Vec3 toVec3() {
         return new Vec3(x, y, 0);
     }
 
@@ -183,7 +183,7 @@ public final class Vec2 {
      *
      * @return The distance
      */
-    public float distanceTo(Vec2 vec) {
+    public final float distanceTo(Vec2 vec) {
         double dx = x - vec.x;
         double dy = y - vec.y;
         return (float) Math.sqrt(dx * dx + dy * dy);
@@ -197,7 +197,7 @@ public final class Vec2 {
      *
      * @return World position of this vector
      */
-    public Vec3 toWorld() {
+    public final Vec3 toWorld() {
         FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
         FloatBuffer modelView = GlUtils.getModelViewMatrix();
         FloatBuffer projection = GlUtils.getProjectionMatrix();

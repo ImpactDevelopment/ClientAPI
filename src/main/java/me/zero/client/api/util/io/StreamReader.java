@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.StringJoiner;
 
 /**
  * Reads from an InputStream
@@ -17,7 +18,7 @@ public final class StreamReader {
     /**
      * Stream being read
      */
-    private InputStream stream;
+    private final InputStream stream;
 
     public StreamReader(InputStream stream) {
         this.stream = stream;
@@ -30,26 +31,18 @@ public final class StreamReader {
      *
      * @return The stream's output
      */
-    public String read() {
-        BufferedReader br = null;
-        String data = "";
+    public final String read() {
+        StringJoiner joiner = new StringJoiner("\n");
         try {
-            br = new BufferedReader(new InputStreamReader(stream));
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
             String line;
-            while ((line = br.readLine()) != null) {
-                data += line + "\n";
-            }
+            while ((line = br.readLine()) != null)
+                joiner.add(line);
+
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        return data;
+        return joiner.toString();
     }
 }

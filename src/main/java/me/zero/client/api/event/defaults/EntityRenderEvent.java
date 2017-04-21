@@ -16,17 +16,17 @@ public final class EntityRenderEvent {
     /**
      * The state of this Event
      */
-    private EventState state;
+    private final EventState state;
 
     /**
      * The renderer used
      */
-    private RenderLivingBase<?> renderer;
+    private final RenderLivingBase<?> renderer;
 
     /**
      * The entity being rendered
      */
-    private Entity entity;
+    private final Entity entity;
 
     public EntityRenderEvent(EventState state, RenderLivingBase<?> renderer, Entity entity) {
         this.state = state;
@@ -39,7 +39,7 @@ public final class EntityRenderEvent {
      *
      * @return The event state
      */
-    public EventState getState() {
+    public final EventState getState() {
         return this.state;
     }
 
@@ -49,7 +49,7 @@ public final class EntityRenderEvent {
      *
      * @return The renderer used
      */
-    public RenderLivingBase<?> getRenderer() {
+    public final RenderLivingBase<?> getRenderer() {
         return this.renderer;
     }
 
@@ -58,7 +58,7 @@ public final class EntityRenderEvent {
      *
      * @return The entity being rendered
      */
-    public Entity getEntity() {
+    public final Entity getEntity() {
         return this.entity;
     }
 }

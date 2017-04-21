@@ -32,7 +32,7 @@ public final class EntityDeathEvent {
      *
      * @return The entity that died
      */
-    public EntityLivingBase getEntity() {
+    public final EntityLivingBase getEntity() {
         return this.entity;
     }
 
@@ -41,7 +41,7 @@ public final class EntityDeathEvent {
      *
      * @return The DamageSource that caused the Death
      */
-    public DamageSource getSource() {
+    public final DamageSource getSource() {
         return this.source;
     }
 }

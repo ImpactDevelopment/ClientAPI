@@ -63,7 +63,7 @@ public final class MathUtils {
      * @param max The maximum value
      * @return The random vakue
      */
-    public static int randInt(int min, int max) {
+    public static int random(int min, int max) {
         if (min > max) {
             int temp = max;
             max = min;

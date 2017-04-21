@@ -19,27 +19,27 @@ public class Value<T> implements IValue<T>, Nameable {
     /**
      * Name of the Value
      */
-    private String name;
+    private final String name;
 
     /**
      * Description of the Value
      */
-    private String id;
+    private final String id;
 
     /**
      * Description of the Value
      */
-    private String description;
+    private final String description;
 
     /**
      * The Object that the field representing the Value is inside
      */
-    private Object object;
+    private final Object object;
 
     /**
      * The Field representing the Value
      */
-    private Field field;
+    private final Field field;
 
     public Value(String name, String id, String description, Object object, Field field) {
         this.name = name;
@@ -61,16 +61,16 @@ public class Value<T> implements IValue<T>, Nameable {
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
     @Override
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 
-    public String getId() {
+    public final String getId() {
         return this.id;
     }
 }

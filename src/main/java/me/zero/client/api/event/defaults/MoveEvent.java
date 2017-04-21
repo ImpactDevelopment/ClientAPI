@@ -35,7 +35,7 @@ public final class MoveEvent {
      *
      * @return The mover type
      */
-    public MoverType getType() {
+    public final MoverType getType() {
         return this.type;
     }
 
@@ -47,7 +47,7 @@ public final class MoveEvent {
      * @param x New X motion
      * @return This event
      */
-    public MoveEvent x(double x) {
+    public final MoveEvent x(double x) {
         this.x = x;
         return this;
     }
@@ -60,7 +60,7 @@ public final class MoveEvent {
      * @param y New Y motion
      * @return This event
      */
-    public MoveEvent y(double y) {
+    public final MoveEvent y(double y) {
         this.y = y;
         return this;
     }
@@ -74,7 +74,7 @@ public final class MoveEvent {
      * @param z New Z motion
      * @return This event
      */
-    public MoveEvent z(double z) {
+    public final MoveEvent z(double z) {
         this.z = z;
         return this;
     }
@@ -84,7 +84,7 @@ public final class MoveEvent {
      *
      * @return The X motion
      */
-    public double getX() {
+    public final double getX() {
         return this.x;
     }
 
@@ -93,7 +93,7 @@ public final class MoveEvent {
      *
      * @return The Y motion
      */
-    public double getY() {
+    public final double getY() {
         return this.y;
     }
 
@@ -102,7 +102,7 @@ public final class MoveEvent {
      *
      * @return The Z motion
      */
-    public double getZ() {
+    public final double getZ() {
         return this.z;
     }
 }

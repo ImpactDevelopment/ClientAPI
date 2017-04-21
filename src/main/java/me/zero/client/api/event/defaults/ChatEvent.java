@@ -37,7 +37,7 @@ public final class ChatEvent extends Cancellable {
      *
      * @return The message for this event
      */
-    public String getMessage() {
+    public final String getMessage() {
         return this.message;
     }
 
@@ -50,7 +50,7 @@ public final class ChatEvent extends Cancellable {
      * @param message Message being set
      * @return This Event
      */
-    public ChatEvent setMessage(String message) {
+    public final ChatEvent setMessage(String message) {
         if (type == Type.SEND)
             this.message = message;
         else
@@ -64,7 +64,7 @@ public final class ChatEvent extends Cancellable {
      *
      * @return The type of event
      */
-    public Type getType() {
+    public final Type getType() {
         return this.type;
     }
 

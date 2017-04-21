@@ -40,7 +40,7 @@ public final class GlUtils {
         EventManager.subscribe(new Object() {
 
             @EventHandler
-            private Listener<Render3DEvent> render3DListener = new Listener<>(event -> {
+            private final Listener<Render3DEvent> render3DListener = new Listener<>(event -> {
                 MODELVIEW_MATRIX = BufferUtils.createFloatBuffer(16);
                 glGetFloat(GL_MODELVIEW_MATRIX, MODELVIEW_MATRIX);
 

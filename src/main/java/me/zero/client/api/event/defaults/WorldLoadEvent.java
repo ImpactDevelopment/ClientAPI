@@ -25,7 +25,7 @@ public final class WorldLoadEvent {
      *
      * @return The world being loaded
      */
-    public WorldClient getWorld() {
+    public final WorldClient getWorld() {
         return this.world;
     }
 }

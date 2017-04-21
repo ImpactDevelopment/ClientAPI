@@ -13,7 +13,7 @@ public final class Property {
     /**
      * The label of this property
      */
-    private String label;
+    private final String label;
 
     /**
      * The value of this property
@@ -29,7 +29,7 @@ public final class Property {
      *
      * @return The label of this property
      */
-    public String getLabel() {
+    public final String getLabel() {
         return this.label;
     }
 
@@ -39,7 +39,7 @@ public final class Property {
      * @return The value of this property
      */
     @SuppressWarnings("unchecked")
-    public <T> T getValue() {
+    public final <T> T getValue() {
         return (T) this.value;
     }
 
@@ -48,7 +48,7 @@ public final class Property {
      *
      * @return The value of this property as a string
      */
-    public String getString() {
+    public final String getString() {
         return value.toString();
     }
 
@@ -59,7 +59,7 @@ public final class Property {
      *
      * @param value New value
      */
-    public void setValue(Object value) {
+    public final void setValue(Object value) {
         this.value = value;
     }
 }

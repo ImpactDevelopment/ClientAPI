@@ -29,7 +29,7 @@ public final class Logger implements ILogger {
      * @param message The message
      */
     @Override
-    public void log(Level level, String message) {
+    public final void log(Level level, String message) {
         System.out.printf("[ClientAPI][%s] %s \n", level.toString(), message);
     }
 
@@ -45,7 +45,7 @@ public final class Logger implements ILogger {
      * @param args The format arguments
      */
     @Override
-    public void logf(Level level, String message, Object... args) {
+    public final void logf(Level level, String message, Object... args) {
         this.log(level, String.format(message, args));
     }
 }
