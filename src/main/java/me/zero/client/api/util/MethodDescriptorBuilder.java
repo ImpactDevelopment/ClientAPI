@@ -40,7 +40,7 @@ public final class MethodDescriptorBuilder {
      *
      * @return Built Method Descriptor as a {@code String}
      */
-    public String build() {
+    public final String build() {
         StringBuilder paramDesc = new StringBuilder();
         Arrays.asList(this.parameters).forEach(param -> paramDesc.append(param.getDescriptor()));
         return "(" + paramDesc + ")" + returnValue.getDescriptor();

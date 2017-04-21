@@ -95,6 +95,15 @@ public final class ReflectionUtils {
         return false;
     }
 
+    /**
+     * Gets a method from the specified object with the
+     * specified name and parameters
+     *
+     * @param object Object containing method
+     * @param name Name of the method
+     * @param parameters Paramaters of the method, as classes
+     * @return The method, if found, null if not
+     */
     public static Method getMethod(Object object, String name, Class<?>... parameters) {
         for (Method method : object.getClass().getDeclaredMethods()) {
             if (method.getName().equals(name) && method.getParameterTypes().length == parameters.length) {
@@ -110,6 +119,16 @@ public final class ReflectionUtils {
         return null;
     }
 
+    /**
+     * Invokes the speicfied method with the specified parameters
+     *
+     * @since 1.0
+     *
+     * @param object Object containing method
+     * @param method Method itself
+     * @param parameters The parameters to pass to the method
+     * @return Whether or not the operation was successful
+     */
     public static boolean callMethod(Object object, Method method, Object... parameters) {
         try {
             boolean accessible = method.isAccessible();

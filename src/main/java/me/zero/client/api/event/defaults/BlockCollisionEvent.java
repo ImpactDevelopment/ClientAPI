@@ -28,7 +28,7 @@ public final class BlockCollisionEvent extends Cancellable {
      *
      * @return The block receiving a collision check
      */
-    public Block getBlock() {
+    public final Block getBlock() {
         return this.block;
     }
 }

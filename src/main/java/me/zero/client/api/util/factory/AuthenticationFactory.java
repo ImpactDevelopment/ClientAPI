@@ -24,7 +24,7 @@ public final class AuthenticationFactory implements Helper {
     /**
      * Authentication object
      */
-    private YggdrasilUserAuthentication auth;
+    private final YggdrasilUserAuthentication auth;
 
     private AuthenticationFactory() {
         this.auth = (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")
@@ -50,7 +50,7 @@ public final class AuthenticationFactory implements Helper {
      * @param username The username
      * @return The Factory
      */
-    public AuthenticationFactory username(String username) {
+    public final AuthenticationFactory username(String username) {
         auth.setUsername(username);
         return this;
     }
@@ -63,7 +63,7 @@ public final class AuthenticationFactory implements Helper {
      * @param password The username
      * @return The Factory
      */
-    public AuthenticationFactory password(String password) {
+    public final AuthenticationFactory password(String password) {
         auth.setPassword(password);
         return this;
     }
@@ -75,7 +75,7 @@ public final class AuthenticationFactory implements Helper {
      *
      * @return The session
      */
-    public Session session() {
+    public final Session session() {
         try {
             auth.logIn();
             GameProfile profile = auth.getSelectedProfile();
@@ -92,7 +92,7 @@ public final class AuthenticationFactory implements Helper {
      *
      * @return Whether or not the login was successful
      */
-    public boolean login() {
+    public final boolean login() {
         Session session = session();
         if (session == null)
             return false;

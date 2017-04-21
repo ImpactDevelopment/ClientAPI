@@ -21,7 +21,7 @@ public class TabGuiText implements ITabGuiElement {
     }
 
     @Override
-    public String getText() {
+    public final String getText() {
         return text;
     }
 
@@ -30,9 +30,9 @@ public class TabGuiText implements ITabGuiElement {
      *
      * @since 1.0
      *
-     * @param text
+     * @param text The text that will be displayed
      */
-    public void setText(String text) {
+    public final void setText(String text) {
         this.text = text;
     }
 
@@ -40,7 +40,7 @@ public class TabGuiText implements ITabGuiElement {
     public void keyPress(int key) {}
 
     @Override
-    public boolean isActive() {
+    public final boolean isActive() {
         return false;
     }
 

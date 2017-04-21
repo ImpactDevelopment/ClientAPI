@@ -14,7 +14,7 @@ public final class KeyEvent {
     /**
      * Key code that belongs to the pressed key
      */
-    private int key;
+    private final int key;
 
     /**
      * Creates a new instance of KeyEvent.
@@ -30,7 +30,7 @@ public final class KeyEvent {
      *
      * @return The key code that corresponds to the pressed key
      */
-    public int getKey() {
+    public final int getKey() {
         return this.key;
     }
 }

@@ -18,6 +18,11 @@ import java.util.stream.Collectors;
 public final class EventManager {
 
     /**
+     * Prevents invokation
+     */
+    private EventManager() {}
+
+    /**
      * HashMap containing all Listeners for various Events
      */
     private static final Map<Class<?>, List<Listener>> SUBSCRIPTION_MAP = new HashMap<>();

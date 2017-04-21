@@ -12,7 +12,7 @@ import java.util.function.Predicate;
  *
  * Created by Brady on 3/2/2017.
  */
-public class PacketFilter implements Predicate<PacketEvent> {
+public final class PacketFilter implements Predicate<PacketEvent> {
 
     /**
      * Packets allowed by this filter

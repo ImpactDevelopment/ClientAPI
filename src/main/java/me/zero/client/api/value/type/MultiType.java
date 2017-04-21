@@ -12,12 +12,12 @@ import java.lang.reflect.Field;
  *
  * Created by Brady on 2/24/2017.
  */
-public class MultiType extends Value<String> {
+public final class MultiType extends Value<String> {
 
     /**
      * Different values
      */
-    private String[] values;
+    private final String[] values;
 
     public MultiType(String name, String id, String description, Object object, Field field, String[] values) {
         super(name, id, description, object, field);
@@ -26,7 +26,7 @@ public class MultiType extends Value<String> {
     }
 
     @Override
-    public void setValue(String value) {
+    public final void setValue(String value) {
         super.setValue(ClientUtils.objectFrom(value, values));
     }
 
@@ -35,7 +35,7 @@ public class MultiType extends Value<String> {
      *
      * @since 1.0
      */
-    public void next() {
+    public final void next() {
         int index = ClientUtils.indexOf(getValue(), values);
         index++;
         if (index >= values.length) {
@@ -49,7 +49,7 @@ public class MultiType extends Value<String> {
      *
      * @since 1.0
      */
-    public void last() {
+    public final void last() {
         int index = ClientUtils.indexOf(getValue(), values);
         index--;
         if (index < 0) {
@@ -63,7 +63,7 @@ public class MultiType extends Value<String> {
      *
      * @return All possible values for this MultiType
      */
-    public String[] getValues() {
+    public final String[] getValues() {
         return this.values;
     }
 }

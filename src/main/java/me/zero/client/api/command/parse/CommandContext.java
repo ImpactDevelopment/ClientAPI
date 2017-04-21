@@ -13,17 +13,17 @@ import static me.zero.client.api.util.Messages.COMMAND_MISSING_ARGS;
  *
  * Created by Brady on 2/13/2017.
  */
-public class CommandContext {
+public final class CommandContext {
 
     /**
      * The list of arguments
      */
-    private List<CommandArg<?>> arguments = new ArrayList<>();
+    private final List<CommandArg> arguments = new ArrayList<>();
 
     /**
      * The error stack, updated when a command isn't executed properly
      */
-    private List<String> errorStack = new ArrayList<>();
+    private final List<String> errorStack = new ArrayList<>();
 
     /**
      * The raw args that were provided by the user
@@ -33,7 +33,7 @@ public class CommandContext {
     @SuppressWarnings("unchecked")
     public CommandContext(Command command, String[] args) {
         this.args = args;
-        this.arguments = Arrays.asList(command.arguments());
+        this.arguments.addAll(Arrays.asList(command.arguments()));
     }
 
     /**
@@ -45,7 +45,7 @@ public class CommandContext {
      * @param label The label
      * @return True if there is a value, false if not
      */
-    public boolean hasArg(String label) {
+    public final boolean hasArg(String label) {
         return get(label) != null;
     }
 
@@ -69,7 +69,7 @@ public class CommandContext {
      * @param label The Label
      * @return The object
      */
-    public Object get(String label) {
+    public final Object get(String label) {
         CommandArg<?> argument = getArg(label);
 
         if (argument == null)
@@ -89,7 +89,7 @@ public class CommandContext {
      *
      * @return True/False depending on argument satisfaction
      */
-    public boolean isComplete() {
+    public final boolean isComplete() {
         errorStack.clear();
         arguments.stream().filter(arg -> !hasArg(arg.getLabel()))
                 .forEach(arg -> errorStack.add(String.format(COMMAND_MISSING_ARGS, arg.getLabel(), arg.getType())));
@@ -102,7 +102,7 @@ public class CommandContext {
      *
      * @return The last error stack
      */
-    public List<String> getError() {
+    public final List<String> getError() {
         return this.errorStack;
     }
 }

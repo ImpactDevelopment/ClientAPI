@@ -24,12 +24,6 @@ class PluginInfo {
      */
     private String main;
 
-    public PluginInfo(String name, String description, String main) {
-        this.name = name;
-        this.description = description;
-        this.main = main;
-    }
-
     /**
      * @since 1.0
      *

@@ -19,12 +19,12 @@ public class NumberType<T extends Number> extends Value<T> {
     /**
      * Minimum value of the number
      */
-    private T minimum;
+    private final T minimum;
 
     /**
      * Maximum value of the number
      */
-    private T maximum;
+    private final T maximum;
 
     public NumberType(String name, String id, String description, Object object, Field field, T minimum, T maximum) {
         super(name, id, description, object, field);
@@ -33,13 +33,13 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     @Override
-    public T getValue() {
+    public final T getValue() {
         return super.getValue();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void setValue(T value) {
+    public final void setValue(T value) {
         super.setValue(cast(MathUtils.clamp(value, minimum, maximum)));
     }
 
@@ -48,7 +48,7 @@ public class NumberType<T extends Number> extends Value<T> {
      *
      * @return The minimum value of the number
      */
-    public T getMinimum() {
+    public final T getMinimum() {
         return this.minimum;
     }
 
@@ -57,7 +57,7 @@ public class NumberType<T extends Number> extends Value<T> {
      *
      * @return The maximum value of this number
      */
-    public T getMaximum() {
+    public final T getMaximum() {
         return this.maximum;
     }
 
@@ -68,7 +68,7 @@ public class NumberType<T extends Number> extends Value<T> {
      * @since 1.0
      */
     @SuppressWarnings("unchecked")
-    public void increment(float multiplier) {
+    public final void increment(float multiplier) {
         double range = maximum.doubleValue() - minimum.doubleValue();
         this.setValue((T) (Number) (this.getValue().doubleValue() + (range / 10.0 * multiplier)));
     }
@@ -80,7 +80,7 @@ public class NumberType<T extends Number> extends Value<T> {
      * @since 1.0
      */
     @SuppressWarnings("unchecked")
-    public void decrement(float multiplier) {
+    public final void decrement(float multiplier) {
         this.increment(-multiplier);
     }
 

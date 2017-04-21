@@ -27,9 +27,20 @@ public final class Protocol {
             .add(build(4, "1.7.2", "1.7.2", "1.7.4", "1.7.5"))
             .build();
 
-    private int protocol;
-    private String name;
-    private String[] versions;
+    /**
+     * Protocol ID
+     */
+    private final int protocol;
+
+    /**
+     * Protocol display name
+     */
+    private final String name;
+
+    /**
+     * Supported versions
+     */
+    private final String[] versions;
 
     private Protocol(int protocol, String name, String... versions) {
         this.protocol = protocol;
@@ -37,22 +48,52 @@ public final class Protocol {
         this.versions = versions;
     }
 
-    public int getProtocol() {
+    /**
+     * @since 1.0
+     *
+     * @return The protocol ID
+     */
+    public final int getProtocol() {
         return this.protocol;
     }
 
-    public String getName() {
+    /**
+     * @since 1.0
+     *
+     * @return The protocol display name
+     */
+    public final String getName() {
         return this.name;
     }
 
-    public String[] getVersions() {
+    /**
+     * @since 1.0
+     *
+     * @return The supported version IDs
+     */
+    public final String[] getVersions() {
         return this.versions;
     }
 
+    /**
+     * Creates a Protocol object from its required parameters
+     *
+     * @since 1.0
+     *
+     * @param protocol The protocol id
+     * @param name The name of the protocol
+     * @param versions An array of supported versions
+     * @return The built object
+     */
     private static Protocol build(int protocol, String name, String... versions) {
         return new Protocol(protocol, name, versions);
     }
 
+    /**
+     * @since 1.0
+     *
+     * @return All of the registered protocols
+     */
     public static List<Protocol> getProtocols() {
         return protocols;
     }

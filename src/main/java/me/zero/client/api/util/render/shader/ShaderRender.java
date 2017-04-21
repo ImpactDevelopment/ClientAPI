@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/17/2017.
  */
-public class ShaderRender implements Helper {
+public final class ShaderRender implements Helper {
 
     /**
      * Program handled by this renderer
@@ -68,7 +68,7 @@ public class ShaderRender implements Helper {
      *
      * @since 1.0
      */
-    public void draw() {
+    public final void draw() {
         glPushMatrix();
         glColor4f(1, 1, 1, 1);
         GlStateManager.bindTexture(program.getFramebuffer().getTextureID());

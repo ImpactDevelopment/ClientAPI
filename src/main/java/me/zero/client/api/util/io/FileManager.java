@@ -32,22 +32,25 @@ public final class FileManager {
      */
     public static List<String> read(String file) {
         List<String> data = new ArrayList<>();
-        if (isAlreadyMade(file)) {
-            try {
-                FileReader fileReader = new FileReader(file);
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-                String line;
-                while ((line = bufferedReader.readLine()) != null)
-                    data.add(line);
-
-                bufferedReader.close();
-            } catch (IOException ex) {
-                Logger.instance.log(Level.WARNING, "Unable to load " + file);
-            }
-        } else {
+        if (!exists(file)) {
             createFile(file);
+            return data;
         }
+
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                data.add(line);
+
+            bufferedReader.close();
+        } catch (IOException ex) {
+            Logger.instance.log(Level.WARNING, "Unable to read from " + file);
+        }
+
         return data;
     }
 
@@ -61,7 +64,7 @@ public final class FileManager {
      * @param file File being written to
      */
     public static void write(List<String> data, String file) {
-        if (!isAlreadyMade(file)) {
+        if (!exists(file)) {
             createFile(file);
         }
         try {
@@ -112,7 +115,7 @@ public final class FileManager {
      * @param file The file path
      * @return Whether or not the file exists
      */
-    private static boolean isAlreadyMade(String file) {
+    public static boolean exists(String file) {
         return Files.exists(Paths.get(file));
     }
 }

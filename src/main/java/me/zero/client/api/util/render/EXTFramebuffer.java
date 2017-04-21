@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * Created by Brady on 2/18/2017.
  */
-public class EXTFramebuffer implements Helper {
+public final class EXTFramebuffer implements Helper {
 
     /**
      * Object IDs

@@ -10,7 +10,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
  *
  * Created by Brady on 2/13/2017.
  */
-public class PlayerParser implements ArgumentParser<NetworkPlayerInfo> {
+public final class PlayerParser implements ArgumentParser<NetworkPlayerInfo> {
 
     @Override
     public NetworkPlayerInfo apply(String t) {

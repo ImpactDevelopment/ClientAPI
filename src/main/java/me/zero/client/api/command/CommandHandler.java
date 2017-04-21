@@ -42,7 +42,7 @@ public class CommandHandler {
     }
 
     @EventHandler
-    private Listener<ChatEvent> chatListener = new Listener<>(event -> {
+    private final Listener<ChatEvent> chatListener = new Listener<>(event -> {
         if (event.getType() != ChatEvent.Type.SEND)
             return;
 

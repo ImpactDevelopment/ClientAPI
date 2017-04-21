@@ -18,7 +18,7 @@ public final class Keybind {
     /**
      * The List of all Keybind Objects
      */
-    private static List<Keybind> keybinds = new ArrayList<>();
+    private static final List<Keybind> keybinds = new ArrayList<>();
 
     /**
      * The KeyCode for this Keybind
@@ -28,7 +28,7 @@ public final class Keybind {
     /**
      * The consumer that handles various key events
      */
-    private Consumer<Action> consumer;
+    private final Consumer<Action> consumer;
 
     public Keybind(int key, Consumer<Action> consumer) {
         this.key = key;
@@ -98,6 +98,9 @@ public final class Keybind {
         TOGGLE, HOLD
     }
 
+    /**
+     * Type of Key Action
+     */
     public enum Action {
         CLICK, PRESS, RELEASE
     }

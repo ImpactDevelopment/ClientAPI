@@ -12,27 +12,27 @@ public class Notification implements INotification {
 	/**
 	 * Header text
 	 */
-	private String header;
+	private final String header;
 
 	/**
 	 * Subtext
 	 */
-	private String subtext;
+	private final String subtext;
 
 	/**
 	 * Time when notification was created
 	 */
-	private long start;
+	private final long start;
 
 	/**
 	 * Fade in/out timer
 	 */
-	private long fade;
+	private final long fade;
 
 	/**
 	 * How long the notification will be displayed
 	 */
-	private long displayTime;
+	private final long displayTime;
 	
 	Notification(String header, String subtext, long fade, long displayTime) {
 		this.header = header;
@@ -43,27 +43,27 @@ public class Notification implements INotification {
 	}
 
 	@Override
-	public String getHeader() {
+	public final String getHeader() {
 		return this.header;
 	}
 
 	@Override
-	public String getSubtext() {
+	public final String getSubtext() {
 		return this.subtext;
 	}
 
 	@Override
-	public long getStart() {
+	public final long getStart() {
 		return this.start;
 	}
 
 	@Override
-	public long getFade() {
+	public final long getFade() {
 		return this.fade;
 	}
 
 	@Override
-	public long getDisplayTime() {
+	public final long getDisplayTime() {
 		return this.displayTime;
 	}
 }

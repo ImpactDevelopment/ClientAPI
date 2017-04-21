@@ -1,7 +1,6 @@
 package me.zero.client.api.gui.notification;
 
-import com.google.common.collect.Sets;
-
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -16,7 +15,7 @@ public class Notifications {
 	/**
 	 * The list of notifications for this notification handler
 	 */
-	private Set<INotification> notifications = Sets.newLinkedHashSet();
+	private final Set<INotification> notifications = new LinkedHashSet<>();
 
 	/**
 	 * The renderer for this notification handler

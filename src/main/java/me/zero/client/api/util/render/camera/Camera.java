@@ -105,7 +105,7 @@ public class Camera {
      *
      * @since 1.0
      */
-    public void draw(float x, float y, float x1, float y1) {
+    public final void draw(float x, float y, float x1, float y1) {
         GlStateManager.pushMatrix();
         GlStateManager.enableTexture2D();
         GlStateManager.disableLighting();

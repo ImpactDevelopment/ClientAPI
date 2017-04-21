@@ -15,7 +15,7 @@ public class ModuleMode<T extends Module> implements IModule {
     /**
      * Parent Module
      */
-    protected T parent;
+    protected final T parent;
 
     /**
      * Name for the mode
@@ -54,7 +54,7 @@ public class ModuleMode<T extends Module> implements IModule {
      *
      * @return The name of the mode
      */
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
@@ -63,26 +63,24 @@ public class ModuleMode<T extends Module> implements IModule {
      *
      * @return The parent module
      */
-    public Module getParent() {
+    public final Module getParent() {
         return this.parent;
     }
 
     @Override
-    public boolean getState() {
+    public final boolean getState() {
         return state;
     }
 
-    /*
-     * Methods below are irrelevant to Modes
-     */
+    /* Methods below are irrelevant to Modes */
 
     @Override
-    public Keybind getBind() {
+    public final Keybind getBind() {
         return null;
     }
 
     @Override
-    public Class<?> getType() {
+    public final Class<?> getType() {
         return null;
     }
 }

@@ -12,7 +12,7 @@ import me.zero.client.wrapper.IEntity;
  *
  * Created by Brady on 2/4/2017.
  */
-public class OverheadCamera extends Camera {
+public final class OverheadCamera extends Camera {
 
     public OverheadCamera(OverheadHandle handle) {
         super(handle);

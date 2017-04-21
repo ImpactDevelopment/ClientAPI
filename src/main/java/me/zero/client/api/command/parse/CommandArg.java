@@ -7,7 +7,7 @@ package me.zero.client.api.command.parse;
  *
  * Created by Brady on 2/13/2017.
  */
-public class CommandArg<T> {
+public final class CommandArg<T> {
 
     /**
      * The label used to refer to the argument
@@ -35,7 +35,7 @@ public class CommandArg<T> {
      *
      * @return The label
      */
-    public String getLabel() {
+    public final String getLabel() {
         return this.label;
     }
 
@@ -44,7 +44,7 @@ public class CommandArg<T> {
      *
      * @return The type
      */
-    public Class<T> getType() {
+    public final Class<T> getType() {
         return this.type;
     }
 
@@ -53,7 +53,7 @@ public class CommandArg<T> {
      *
      * @return The parser
      */
-    public ArgumentParser<T> getParser() {
+    public final ArgumentParser<T> getParser() {
         return this.parser;
     }
 }

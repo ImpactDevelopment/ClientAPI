@@ -33,7 +33,7 @@ public final class EntityCollisionEvent extends Cancellable {
      *
      * @return The entity being collided into
      */
-    public Entity getEntity() {
+    public final Entity getEntity() {
         return this.entity;
     }
 
@@ -42,7 +42,7 @@ public final class EntityCollisionEvent extends Cancellable {
      *
      * @return Entity colliding into other entity
      */
-    public Entity getCollidingEntity() {
+    public final Entity getCollidingEntity() {
         return this.collidingEntity;
     }
 }
