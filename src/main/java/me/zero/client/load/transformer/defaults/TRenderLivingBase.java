@@ -27,7 +27,7 @@ public final class TRenderLivingBase extends Transformer {
             method.insertBefore(String.format(code, "PRE"));
             method.insertAfter(String.format(code, "POST"));
         }));
-        hooks.add(renderLayers.createHook(method -> method.insertBefore("LayerRenderEvent event = new LayerRenderEvent($1); EventManager.pos(event); if (event.isCancelled) return;")));
+        hooks.add(renderLayers.createHook(method -> method.insertBefore("LayerRenderEvent event = new LayerRenderEvent($1); EventManager.post(event); if (event.isCancelled()) return;")));
     }
 
     @Override
