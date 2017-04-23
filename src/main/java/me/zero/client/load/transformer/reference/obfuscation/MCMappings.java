@@ -100,6 +100,7 @@ public interface MCMappings {
     MethodReference transformSideFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformSideFirstPerson"), from(VANILLA, "b") }, Void.TYPE, EnumHandSide, Float.TYPE);
     MethodReference transformFirstPerson = new MethodReference(new ObfuscationName[] { from(MCP, "transformFirstPerson"), from(VANILLA, "a") }, Void.TYPE, EnumHandSide, Float.TYPE);
     MethodReference addCollisionBoxToList = new MethodReference(new ObfuscationName[] { from(MCP, "addCollisionBoxToList"), from(VANILLA, "a") }, Void.TYPE, BlockPos, AxisAlignedBB, List.class, AxisAlignedBB);
+    MethodReference renderLayers = new MethodReference(new ObfuscationName[] { from(MCP, "renderLayers"), from(VANILLA, "a") }, Void.TYPE, EntityLivingBase, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE);
 
     // Fields
     FieldReference session = new FieldReference(new ObfuscationName[] { from(MCP, "session"), from(VANILLA, "ae") });
