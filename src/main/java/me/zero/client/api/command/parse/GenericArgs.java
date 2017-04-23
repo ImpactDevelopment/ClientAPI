@@ -11,7 +11,9 @@ import net.minecraft.client.network.NetworkPlayerInfo;
  *
  * Created by Brady on 2/16/2017.
  */
-public class GenericArgs {
+public final class GenericArgs {
+
+    private GenericArgs() {}
 
     /**
      * Creates a String argument
