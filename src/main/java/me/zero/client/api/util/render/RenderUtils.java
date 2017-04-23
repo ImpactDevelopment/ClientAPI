@@ -57,7 +57,7 @@ public final class RenderUtils {
             glDisable(GL_LINE_SMOOTH);
             GlStateManager.enableDepth();
         }
-        GlStateManager.depthMask(start);
+        GlStateManager.depthMask(!start);
     }
 
     /**
