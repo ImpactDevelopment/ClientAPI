@@ -209,6 +209,48 @@ public final class Colors implements Helper {
     }
 
     /**
+     * Returns a random color, that has an
+     * RGB color range of 0 to 255
+     *
+     * @since 1.0
+     *
+     * @return A random color
+     */
+    public static int random() {
+        return random(0, 255);
+    }
+
+    /**
+     * Returns a random color that has the specified
+     * RGB color range, as a float (0.0 to 1.0)
+     *
+     * @since 1.0
+     *
+     * @param min Minimum R/G/B
+     * @param max Maximum R/G/B
+     * @return A random color
+     */
+    public static int random(float min, float max) {
+        return random((int) (min * 255F), (int) (max) * 255F);
+    }
+
+    /**
+     * Returns a random color that has the specified
+     * RGB color range, as an integer (0 to 255)
+     *
+     * @since 1.0
+     *
+     * @param min Minimum R/G/B
+     * @param max Maximum R/G/B
+     * @return A random color
+     */
+    public static int random(int min, int max) {
+        min = clamp(min);
+        max = clamp(max);
+        return Colors.getColor(MathUtils.random(min, max), MathUtils.random(min, max), MathUtils.random(min, max));
+    }
+
+    /**
      * Clamps a float color channel value to be within
      * the 0.0 to 1.0 bounds.
      *
