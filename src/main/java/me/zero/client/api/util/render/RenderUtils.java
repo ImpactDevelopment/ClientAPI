@@ -26,7 +26,7 @@ public final class RenderUtils {
     /**
      * Instance of the Tessellator
      */
-    private static final OffsetTess tessellator = new OffsetTess(new GrowingTess(4));
+    public static final OffsetTess tessellator = new OffsetTess(new GrowingTess(4));
 
     /**
      * Stores ClientState Gl Caps when setting up
