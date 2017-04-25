@@ -28,7 +28,9 @@ public interface Toggleable {
      *
      * Toggles the state
      */
-    void toggle();
+    default void toggle() {
+        this.setState(!this.getState());
+    }
 
     /**
      * @since 1.0

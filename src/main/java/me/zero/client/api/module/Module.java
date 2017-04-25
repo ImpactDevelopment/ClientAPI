@@ -2,6 +2,7 @@ package me.zero.client.api.module;
 
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
+import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
@@ -109,10 +110,9 @@ public abstract class Module extends Node implements IModule {
      * @return The new mode
      */
     public final ModuleMode setMode(ModuleMode mode) {
-        if (mode == null || mode.getParent() != this)
-            return null;
+        checkModes();
 
-        if (!this.hasModes())
+        if (mode == null || mode.getParent() != this)
             return null;
 
         if (this.mode != null)
@@ -135,6 +135,7 @@ public abstract class Module extends Node implements IModule {
      * @return The new mode
      */
     public final ModuleMode setMode(int index) {
+        checkModes();
         return this.setMode(this.modes.get(index));
     }
 
@@ -149,6 +150,7 @@ public abstract class Module extends Node implements IModule {
      * @return The new mode
      */
     public final ModuleMode setMode(String name) {
+        checkModes();
         return this.setMode(this.modes.stream().filter(mode -> mode.getName().equalsIgnoreCase(name)).findFirst().orElse(null));
     }
 
@@ -162,9 +164,7 @@ public abstract class Module extends Node implements IModule {
      * @return List of modes
      */
     public final List<ModuleMode> getModes() {
-        if (!hasModes())
-            return null;
-
+        checkModes();
         return new ArrayList<>(this.modes);
     }
 
@@ -177,8 +177,7 @@ public abstract class Module extends Node implements IModule {
      * @return The new mode
      */
     public final ModuleMode nextMode() {
-        if (!hasModes())
-            return null;
+        checkModes();
 
         int index = this.modes.indexOf(this.getMode());
         if (++index > this.modes.size() - 1)
@@ -195,8 +194,7 @@ public abstract class Module extends Node implements IModule {
      * @return The new mode
      */
     public final ModuleMode lastMode() {
-        if (!hasModes())
-            return null;
+        checkModes();
 
         int index = this.modes.indexOf(this.getMode());
         if (--index < 0)
@@ -213,12 +211,20 @@ public abstract class Module extends Node implements IModule {
      * @return The current mode
      */
     public final ModuleMode getMode() {
+        checkModes();
         return this.mode;
     }
 
-    @Override
-    public final void toggle() {
-        this.setState(!this.getState());
+    /**
+     * Called when mode related actions are carried out,
+     * throws an {@code ActionNotSupportedException} if
+     * modes aren't supported by this module.
+     *
+     * @since 1.0
+     */
+    private void checkModes() {
+        if (!hasModes())
+            throw new ActionNotSupportedException("Cannot use mode required actions when modes aren't supported");
     }
 
     @Override
