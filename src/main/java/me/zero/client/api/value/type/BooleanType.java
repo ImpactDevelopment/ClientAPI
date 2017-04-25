@@ -27,11 +27,6 @@ public final class BooleanType extends Value<Boolean> implements Toggleable {
     public final void onDisable() {}
 
     @Override
-    public final void toggle() {
-        this.setState(!this.getState());
-    }
-
-    @Override
     public final void setState(boolean state) {
         this.setValue(state);
 
