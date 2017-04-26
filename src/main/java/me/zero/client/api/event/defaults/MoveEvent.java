@@ -1,5 +1,6 @@
 package me.zero.client.api.event.defaults;
 
+import me.zero.client.api.event.type.Cancellable;
 import net.minecraft.entity.MoverType;
 
 /**
@@ -11,7 +12,7 @@ import net.minecraft.entity.MoverType;
  *
  * Created by Brady on 2/9/2017.
  */
-public final class MoveEvent {
+public final class MoveEvent extends Cancellable {
 
     /**
      * The type of mover
