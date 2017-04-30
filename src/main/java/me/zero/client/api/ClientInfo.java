@@ -40,16 +40,6 @@ public final class ClientInfo {
     private String main;
 
     /**
-     * The transformer package
-     */
-    private String transformers;
-
-    /**
-     * The custom ClassLoader exclusions
-     */
-    private String[] exclusions;
-
-    /**
      * @since 1.0
      *
      * @return The Client Name
@@ -101,24 +91,6 @@ public final class ClientInfo {
      */
     public String getMain() {
         return main;
-    }
-
-    /**
-     * @since 1.0
-     *
-     * @return Package containing transformers
-     */
-    public String getTransformers() {
-        return this.transformers;
-    }
-
-    /**
-     * @since 1.0
-     *
-     * @return ClassLoader exclusions
-     */
-    public String[] getExclusions() {
-        return this.exclusions;
     }
 
     public enum ReleaseType {

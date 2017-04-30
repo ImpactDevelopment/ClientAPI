@@ -1,0 +1,30 @@
+{
+  "required": "true",
+  "package": "me.zero.client.load.mixin",
+  "refmap": "mixins.capi.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinBlock",
+    "MixinCPacketPlayer",
+    "MixinEntity",
+    "MixinEntityLivingBase",
+    "MixinEntityPlayer",
+    "MixinEntityPlayerSP",
+    "MixinEntityRenderer",
+    "MixinFontRenderer",
+    "MixinGameType",
+    "MixinGuiIngame",
+    "MixinItemRenderer",
+    "MixinKeyBinding",
+    "MixinLayerArmorBase",
+    "MixinMinecraft",
+    "MixinNetworkManager",
+    "MixinPlayerControllerMP",
+    "MixinProfiler",
+    "MixinRenderItem",
+    "MixinRenderLivingBase",
+    "MixinRenderManager",
+    "MixinShaderGroup",
+    "MixinSPacketPlayerPosLook"
+  ]
+}
