@@ -45,6 +45,8 @@ public abstract class MixinBlock {
         if (event.isCancelled())
             return;
 
+        axisalignedbb = event.getBoundingBox();
+
         addCollisionBoxToList(pos, entityBox, collidingBoxes, axisalignedbb);
     }
 }
