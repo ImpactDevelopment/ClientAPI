@@ -9,7 +9,7 @@ package me.zero.client.load;
  *
  * Created by Brady on 4/27/2017.
  */
-public class ClientInitException extends RuntimeException {
+public final class ClientInitException extends RuntimeException {
 
     public ClientInitException(String message) {
         super(message);

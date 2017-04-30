@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
  *
  * Created by Brady on 2/16/2017.
  */
-public final class UniformVariable {
+public final class Uniform {
 
     /**
      * The Uniform name
@@ -24,7 +24,7 @@ public final class UniformVariable {
      */
     private final int location;
 
-    private UniformVariable(String name, int location) {
+    private Uniform(String name, int location) {
         this.name = name;
         this.location = location;
     }
@@ -111,7 +111,7 @@ public final class UniformVariable {
      * @param uniformName Uniform Name
      * @return The UniformVariable representation
      */
-    public static UniformVariable get(int shaderID, String uniformName) {
-        return new UniformVariable(uniformName, glGetUniformLocationARB(shaderID, uniformName));
+    public static Uniform get(int shaderID, String uniformName) {
+        return new Uniform(uniformName, glGetUniformLocationARB(shaderID, uniformName));
     }
 }
