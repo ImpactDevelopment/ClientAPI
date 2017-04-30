@@ -1,20 +1,20 @@
 package me.zero.client.api.event.defaults;
 
 /**
- * Called after GuiIngame#renderGameOverlay(float) is called.
+ * Called at the gui section in EntityRenderer#updateCameraAndRender(float, long)
  *
  * @since 1.0
  *
- * Created by Brady on 2/6/2017.
+ * Created by Brady on 4/30/2017.
  */
-public final class Render2DEvent {
+public final class RenderScreenEvent {
 
     /**
      * The render partial ticks
      */
     private final float partialTicks;
 
-    public Render2DEvent(float partialTicks) {
+    public RenderScreenEvent(float partialTicks) {
         this.partialTicks = partialTicks;
     }
 
