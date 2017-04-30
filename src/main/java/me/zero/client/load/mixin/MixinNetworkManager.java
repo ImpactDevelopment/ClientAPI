@@ -39,6 +39,6 @@ public abstract class MixinNetworkManager {
         if (event.isCancelled())
             return;
 
-        this.dispatchPacket(packetIn, null);
+        this.dispatchPacket(event.getPacket(), null);
     }
 }
