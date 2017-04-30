@@ -1,8 +1,10 @@
 package me.zero.client.api.util.render.shader;
 
 import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.util.io.StreamReader;
 
 import static org.lwjgl.opengl.ARBShaderObjects.*;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 /**
  * Some utils for ARB Shaders
@@ -16,16 +18,38 @@ final class ShaderHelper {
     private ShaderHelper() {}
 
     /**
-     * Checks an arb object parameter
+     * Loads a shader program from its program ID
      *
      * @since 1.0
      *
-     * @param objID The object's ID
-     * @param name The name of the object
+     * @param programID The ARB Shader program ID
      */
-    static void checkObjecti(int objID, int name) {
-        if (glGetObjectParameteriARB(objID, name) == 0)
-            throw new UnexpectedOutcomeException(getLogInfo(objID));
+    static void createProgram(int programID) {
+        glLinkProgramARB(programID);
+        checkObjecti(programID, GL_OBJECT_LINK_STATUS_ARB);
+        glValidateProgramARB(programID);
+        checkObjecti(programID, GL_OBJECT_VALIDATE_STATUS_ARB);
+    }
+
+    /**
+     * Loads a shader of the specified type from the specified path
+     *
+     * @since 1.0
+     *
+     * @param path Shader path
+     * @param type Shader type
+     * @return The Shader's Object ID
+     */
+    static int loadShader(String path, int type) {
+        int shaderID = glCreateShaderObjectARB(type);
+        if (shaderID == 0)
+            return 0;
+
+        String src = new StreamReader(Shader.class.getResourceAsStream(path)).read();
+        glShaderSourceARB(shaderID, src);
+        glCompileShaderARB(shaderID);
+        checkObjecti(shaderID, GL_OBJECT_COMPILE_STATUS_ARB);
+        return shaderID;
     }
 
     /**
@@ -38,5 +62,18 @@ final class ShaderHelper {
      */
     private static String getLogInfo(int objID) {
         return glGetInfoLogARB(objID, glGetObjectParameteriARB(objID, GL_OBJECT_INFO_LOG_LENGTH_ARB));
+    }
+
+    /**
+     * Checks an arb object parameter
+     *
+     * @since 1.0
+     *
+     * @param objID The object's ID
+     * @param name The name of the object
+     */
+    private static void checkObjecti(int objID, int name) {
+        if (glGetObjectParameteriARB(objID, name) == GL_FALSE)
+            throw new UnexpectedOutcomeException(getLogInfo(objID));
     }
 }

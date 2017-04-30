@@ -1,7 +1,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.defaults.Render2DEvent;
+import me.zero.client.api.event.defaults.RenderHudEvent;
 import net.minecraft.client.gui.GuiIngame;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +16,6 @@ public class MixinGuiIngame {
 
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
     public void renderGameOverlay(float partialTicks, CallbackInfo ci) {
-        EventManager.post(new Render2DEvent(partialTicks));
+        EventManager.post(new RenderHudEvent(partialTicks));
     }
 }
