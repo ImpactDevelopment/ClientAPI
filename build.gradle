@@ -5,14 +5,21 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = "SpongePowered"
+            url = "http://repo.spongepowered.org/maven"
+        }
     }
 
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
+
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'org.spongepowered.mixin'
 
 version '1.0'
 group 'me.zero.api'
@@ -25,7 +32,7 @@ compileJava {
 minecraft {
     version = '1.11.2'
     runDir = 'run'
-    tweakClass = 'me.zero.client.load.tweak.ClientTweaker'
+    tweakClass = 'me.zero.client.load.ClientTweaker'
     mappings = 'snapshot_20170215'
 
     makeObfSourceJar = true
@@ -33,6 +40,11 @@ minecraft {
 
 repositories {
     mavenCentral()
+
+    maven {
+        name = 'spongepowered-repo'
+        url = 'http://repo.spongepowered.org/maven/'
+    }
 }
 
 dependencies {
@@ -40,9 +52,12 @@ dependencies {
     compile group: 'org.javassist', name: 'javassist', version: '3.22.0-CR1'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
     compile group: 'net.jodah', name: 'typetools', version: '0.4.9'
+    compile("org.spongepowered:mixin:0.6.8-SNAPSHOT") {
+        exclude module: "launchwrapper"
+    }
 }
 
-task "create-dirs" << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+mixin {
+    defaultObfuscationEnv notch
 }
+
