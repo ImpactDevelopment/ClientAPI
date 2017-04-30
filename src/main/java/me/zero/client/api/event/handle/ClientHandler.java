@@ -4,11 +4,14 @@ import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.*;
+import me.zero.client.api.event.defaults.filters.PacketFilter;
 import me.zero.client.api.event.type.EventPriority;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraManager;
+import net.minecraft.network.play.client.CPacketChatMessage;
+import net.minecraft.network.play.server.SPacketChat;
 import org.lwjgl.input.Keyboard;
 
 import java.util.stream.Stream;
@@ -76,4 +79,21 @@ public final class ClientHandler implements Helper {
             }
         }
     });
+
+    /**
+     * Handles chat messages
+     */
+    @EventHandler
+    private final Listener<PacketEvent> packetListener = new Listener<>(event -> {
+        if (event.getPacket() instanceof CPacketChatMessage) {
+            CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
+            ChatEvent chatEvent = new ChatEvent(packet.getMessage(), ChatEvent.Type.SEND);
+            EventManager.post(chatEvent);
+            if (chatEvent.isCancelled())
+                event.setCancelled(true);
+        } else if (event.getPacket() instanceof SPacketChat) {
+            SPacketChat packet = (SPacketChat) event.getPacket();
+            EventManager.post(new ChatEvent(packet.getChatComponent(), ChatEvent.Type.RECEIVE));
+        }
+    }, new PacketFilter(CPacketChatMessage.class, SPacketChat.class));
 }

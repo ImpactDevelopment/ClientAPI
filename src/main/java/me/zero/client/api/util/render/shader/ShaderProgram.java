@@ -38,7 +38,7 @@ public abstract class ShaderProgram implements Helper {
     /**
      * EXTFramebuffer used to render shader
      */
-    private final EXTFramebuffer framebuffer;
+    protected final EXTFramebuffer framebuffer;
 
     public ShaderProgram(String vertex, String fragment, Framebuffer fbo) {
         framebuffer = new EXTFramebuffer(fbo);
