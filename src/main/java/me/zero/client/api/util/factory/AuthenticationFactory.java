@@ -6,7 +6,6 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import me.zero.client.api.util.interfaces.Helper;
-import me.zero.client.wrapper.IMinecraft;
 import net.minecraft.util.Session;
 
 import java.net.Proxy;
@@ -97,7 +96,7 @@ public final class AuthenticationFactory implements Helper {
         if (session == null)
             return false;
 
-        ((IMinecraft) mc).setSession(session);
+        mca.setSession(session);
         return true;
     }
 }
