@@ -1,5 +1,6 @@
 package me.zero.client.api.util.interfaces;
 
+import me.zero.client.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
 
 /**
@@ -15,4 +16,9 @@ public interface Helper {
      * Instance of Minecraft
      */
     Minecraft mc = Minecraft.getMinecraft();
+
+    /**
+     * Instance of Minecraft, casted to the accessibility interface
+     */
+    IMinecraft mca = (IMinecraft) mc;
 }

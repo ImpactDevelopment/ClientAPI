@@ -1,7 +1,6 @@
 package me.zero.client.api.event.defaults;
 
 import me.zero.client.api.util.interfaces.Helper;
-import me.zero.client.wrapper.IMinecraft;
 
 /**
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
@@ -18,7 +17,7 @@ public final class Render3DEvent implements Helper {
     private final float partialTicks;
 
     public Render3DEvent() {
-        this.partialTicks = ((IMinecraft) mc).getTimer().renderPartialTicks;
+        this.partialTicks = mca.getTimer().renderPartialTicks;
     }
 
     /**
