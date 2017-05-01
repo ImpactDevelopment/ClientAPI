@@ -240,8 +240,8 @@ public abstract class Module extends Node implements IModule {
             onEnable();
             EventManager.subscribe(this);
         } else {
-            onDisable();
             EventManager.unsubscribe(this);
+            onDisable();
         }
 
         if (hasModes() && mode != null)
