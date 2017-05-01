@@ -44,8 +44,8 @@ public class ModuleMode<T extends Module> implements IModule {
                 EventManager.subscribe(this);
             }
         } else {
-            this.onDisable();
             EventManager.unsubscribe(this);
+            this.onDisable();
         }
     }
 
