@@ -151,7 +151,20 @@ public abstract class Module extends Node implements IModule {
      */
     public final ModuleMode setMode(String name) {
         checkModes();
-        return this.setMode(this.modes.stream().filter(mode -> mode.getName().equalsIgnoreCase(name)).findFirst().orElse(null));
+        return this.setMode(getMode(name));
+    }
+
+    /**
+     * Gets a mode that belongs to this
+     * module from the mode's name
+     *
+     * @since 1.0
+     *
+     * @return Mode from name
+     */
+    public final ModuleMode getMode(String name) {
+        checkModes();
+        return this.modes.stream().filter(mode -> mode.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 
     /**
