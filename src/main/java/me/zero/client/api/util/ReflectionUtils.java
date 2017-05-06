@@ -105,7 +105,7 @@ public final class ReflectionUtils {
      * @return The method, if found, null if not
      */
     public static Method getMethod(Class<?> clazz, String name, Class<?>... parameters) {
-        for (Method method : clazz.getClass().getDeclaredMethods()) {
+        for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().equals(name) && method.getParameterTypes().length == parameters.length) {
                 boolean match = true;
                 for (int i = 0; i < parameters.length; i++) {
