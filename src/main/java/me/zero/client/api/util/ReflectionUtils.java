@@ -99,13 +99,13 @@ public final class ReflectionUtils {
      * Gets a method from the specified object with the
      * specified name and parameters
      *
-     * @param object Object containing method
+     * @param clazz Class containing method
      * @param name Name of the method
      * @param parameters Paramaters of the method, as classes
      * @return The method, if found, null if not
      */
-    public static Method getMethod(Object object, String name, Class<?>... parameters) {
-        for (Method method : object.getClass().getDeclaredMethods()) {
+    public static Method getMethod(Class<?> clazz, String name, Class<?>... parameters) {
+        for (Method method : clazz.getClass().getDeclaredMethods()) {
             if (method.getName().equals(name) && method.getParameterTypes().length == parameters.length) {
                 boolean match = true;
                 for (int i = 0; i < parameters.length; i++) {
