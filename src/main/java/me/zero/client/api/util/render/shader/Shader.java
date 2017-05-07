@@ -47,6 +47,7 @@ public abstract class Shader implements Helper {
      */
     public final void attach() {
         glUseProgramObjectARB(programID);
+        update();
     }
 
     /**
@@ -57,6 +58,14 @@ public abstract class Shader implements Helper {
     public final void detach() {
         glUseProgramObjectARB(0);
     }
+
+    /**
+     * Called after the shader program is
+     * attached to update the uniform vars
+     *
+     * @since 1.0
+     */
+    public abstract void update();
 
     /**
      * Deletes this ShaderProgram
