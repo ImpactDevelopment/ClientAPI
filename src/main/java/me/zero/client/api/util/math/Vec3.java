@@ -102,7 +102,7 @@ public final class Vec3 {
      * @return The new vector
      */
     public final Vec3 add(Vec3 vector) {
-        return new Vec3(this.x + vector.x, this.y + vector.y, this.z + vector.z);
+        return this.add(vector.x, vector.y, vector.z);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class Vec3 {
      * @return The new vector
      */
     public final Vec3 add(double x, double y, double z) {
-        return add(new Vec3(x, y, z));
+        return new Vec3(this.x + x, this.y + y, this.z + z);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class Vec3 {
      * @return The new vector
      */
     public final Vec3 sub(double x, double y, double z) {
-        return sub(new Vec3(x, y, z));
+        return new Vec3(this.x - x, this.y - y, this.z - z);
     }
 
     /**
@@ -196,7 +196,7 @@ public final class Vec3 {
      *
      * @return Projected Coordinates as a Vec3
      */
-    public final  Vec3 toScreen() {
+    public final Vec3 toScreen() {
         FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
         FloatBuffer modelView = GlUtils.getModelViewMatrix();
         FloatBuffer projection = GlUtils.getProjectionMatrix();
