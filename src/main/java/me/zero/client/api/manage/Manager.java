@@ -1,11 +1,13 @@
 package me.zero.client.api.manage;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.api.util.interfaces.Saveable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Manager used to store arrays of information.
@@ -23,7 +25,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
     /**
      * The list of all of the entries that this Manager contains
      */
-    private final List<T> data = new ArrayList<>();
+    private final BiMap<Class<T>, T> data = HashBiMap.create();
 
     /**
      * The name of the Manager
@@ -51,7 +53,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SafeVarargs
     protected final void addData(T... data) {
-        this.data.addAll(Arrays.asList(data));
+        this.addData(Arrays.asList(data));
     }
 
     /**
@@ -62,7 +64,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @param data The entries
      */
     protected final void addData(List<T> data) {
-        this.data.addAll(data);
+        data.forEach(entry -> this.data.put((Class<T>) entry.getClass(), entry));
     }
 
     /**
@@ -73,7 +75,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @param data The entry
      */
     protected final void removeData(T data) {
-        this.data.remove(data);
+        this.data.inverse().remove(data);
     }
 
     /**
@@ -84,7 +86,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SuppressWarnings("unchecked")
     public final <I extends T> I get(Class<I> clazz) {
-        return (I) getData().stream().filter(data -> data.getClass().equals(clazz)).findFirst().orElse(null);
+        return (I) data.get(clazz);
     }
 
     /**
@@ -92,8 +94,8 @@ public abstract class Manager<T> implements Loadable, Saveable {
      *
      * @return All of the entries that this manager holds
      */
-    public final List<T> getData() {
-        return new ArrayList<>(this.data);
+    public final Set<T> getData() {
+        return this.data.values();
     }
 
     /**
