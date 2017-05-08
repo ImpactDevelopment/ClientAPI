@@ -90,7 +90,12 @@ public abstract class Manager<T> implements Loadable, Saveable {
         if (clazz == null)
             return null;
 
-        return (I) classCache.putIfAbsent((Class<T>) clazz, getData().stream().filter(data -> data.getClass().equals(clazz)).findFirst().orElse(null));
+        T entry = classCache.get(clazz);
+        if (entry == null)
+            entry = this.data.stream().filter(data -> data.getClass().equals(clazz)).findFirst().orElse(null);
+
+        classCache.putIfAbsent((Class<T>) clazz, entry);
+        return (I) entry;
     }
 
     /**
