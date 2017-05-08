@@ -1,13 +1,9 @@
 package me.zero.client.api.manage;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.api.util.interfaces.Saveable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Manager used to store arrays of information.
@@ -25,7 +21,12 @@ public abstract class Manager<T> implements Loadable, Saveable {
     /**
      * The list of all of the entries that this Manager contains
      */
-    private final BiMap<Class<T>, T> data = HashBiMap.create();
+    private final List<T> data = new ArrayList<>();
+
+    /**
+     * Cache of classes and their corresponding entries
+     */
+    private final Map<Class<T>, T> classCache = new HashMap<>();
 
     /**
      * The name of the Manager
@@ -53,7 +54,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SafeVarargs
     protected final void addData(T... data) {
-        this.addData(Arrays.asList(data));
+        this.data.addAll(Arrays.asList(data));
     }
 
     /**
@@ -64,7 +65,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @param data The entries
      */
     protected final void addData(List<T> data) {
-        data.forEach(entry -> this.data.put((Class<T>) entry.getClass(), entry));
+        this.data.addAll(data);
     }
 
     /**
@@ -75,7 +76,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @param data The entry
      */
     protected final void removeData(T data) {
-        this.data.inverse().remove(data);
+        this.data.remove(data);
     }
 
     /**
@@ -86,7 +87,10 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SuppressWarnings("unchecked")
     public final <I extends T> I get(Class<I> clazz) {
-        return (I) data.get(clazz);
+        if (clazz == null)
+            return null;
+
+        return (I) classCache.putIfAbsent((Class<T>) clazz, getData().stream().filter(data -> data.getClass().equals(clazz)).findFirst().orElse(null));
     }
 
     /**
@@ -95,7 +99,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @return All of the entries that this manager holds
      */
     public final List<T> getData() {
-        return new ArrayList<>(this.data.values());
+        return new ArrayList<>(this.data);
     }
 
     /**
