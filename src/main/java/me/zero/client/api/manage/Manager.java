@@ -5,9 +5,9 @@ import com.google.common.collect.HashBiMap;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.api.util.interfaces.Saveable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Manager used to store arrays of information.
@@ -94,8 +94,8 @@ public abstract class Manager<T> implements Loadable, Saveable {
      *
      * @return All of the entries that this manager holds
      */
-    public final Set<T> getData() {
-        return this.data.values();
+    public final List<T> getData() {
+        return new ArrayList<>(this.data.values());
     }
 
     /**
