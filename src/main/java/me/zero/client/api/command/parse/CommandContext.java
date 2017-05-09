@@ -4,7 +4,7 @@ import me.zero.client.api.command.Command;
 
 import java.util.*;
 
-import static me.zero.client.api.util.Messages.COMMAND_MISSING_ARGS;
+import static me.zero.client.api.util.Messages.*;
 
 /**
  * Used to handle command parsing

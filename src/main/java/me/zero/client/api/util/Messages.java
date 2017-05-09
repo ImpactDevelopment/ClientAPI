@@ -39,4 +39,5 @@ public interface Messages {
     String MODULE_INSTANTIATION                = "Unable to instantiate Module, %s";
 
     String COMMAND_MISSING_ARGS                = "Missing required argument: %s, with type %s";
+    String COMMAND_INVALID                     = "Invalid Command";
 }
