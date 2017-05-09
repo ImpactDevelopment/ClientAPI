@@ -15,14 +15,14 @@ public class Cancellable {
     private boolean cancelled;
 
     /**
-     * Sets the cancelled state
+     * Cancels the event, this is handled
+     * wherever the event is injected to
+     * prevent a task from occuring
      *
      * @since 1.0
-     *
-     * @param cancelled The new cancelled state
      */
-    public final void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public final void cancel() {
+        this.cancelled = true;
     }
 
     /**
