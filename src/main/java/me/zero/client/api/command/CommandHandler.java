@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static me.zero.client.api.util.Messages.*;
+
 /**
  * Handles and executes commands.
  *
@@ -50,7 +52,10 @@ public class CommandHandler {
         if (message.startsWith(prefix)) {
             message = message.replaceFirst(prefix, "");
 
-            event.setCancelled(run(message));
+            if (run(message)) {
+                client.printChatMessage(COMMAND_INVALID);
+            }
+            event.cancel();
         }
     });
 

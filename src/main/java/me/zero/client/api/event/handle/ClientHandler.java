@@ -90,7 +90,7 @@ public final class ClientHandler implements Helper {
             ChatEvent chatEvent = new ChatEvent(packet.getMessage(), ChatEvent.Type.SEND);
             EventManager.post(chatEvent);
             if (chatEvent.isCancelled())
-                event.setCancelled(true);
+                event.cancel();
         } else if (event.getPacket() instanceof SPacketChat) {
             SPacketChat packet = (SPacketChat) event.getPacket();
             EventManager.post(new ChatEvent(packet.getChatComponent(), ChatEvent.Type.RECEIVE));
