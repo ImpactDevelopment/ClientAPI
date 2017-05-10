@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00PM
+ * @since 4/27/2017 12:00 PM
  */
 @Mixin(GameType.class)
 public class MixinGameType implements IGameType {

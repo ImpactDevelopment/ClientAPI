@@ -9,7 +9,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
  * @since
  *
  * @author Brady
- * @since 2/13/2017 12:00PM
+ * @since 2/13/2017 12:00 PM
  */
 public final class PlayerParser implements ArgumentParser<NetworkPlayerInfo> {
 

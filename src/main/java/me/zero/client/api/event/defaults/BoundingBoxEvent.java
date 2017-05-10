@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
  * @since 1.0
  *
  * @author Brady
- * @since 4/10/2017 12:00PM
+ * @since 4/10/2017 12:00 PM
  */
 public final class BoundingBoxEvent extends Cancellable {
 

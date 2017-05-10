@@ -9,7 +9,7 @@ import me.zero.client.api.module.Module;
  * @since 1.0
  *
  * @author Brady
- * @since 4/5/2017 12:00PM
+ * @since 4/5/2017 12:00 PM
  */
 public final class ModuleStateEvent extends Cancellable {
 

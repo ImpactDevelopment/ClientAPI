@@ -10,6 +10,6 @@ import java.util.function.Function;
  * @since 1.0
  *
  * @author Brady
- * @since 2/13/2017 12:00PM
+ * @since 2/13/2017 12:00 PM
  */
 public interface ArgumentParser<T> extends Function<String, T>, Helper {}

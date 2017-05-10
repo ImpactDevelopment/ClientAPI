@@ -16,7 +16,7 @@ import java.util.List;
  * @since 1.0
  *
  * @author Brady
- * @since 2/23/2017 12:00PM
+ * @since 2/23/2017 12:00 PM
  */
 public final class FileManager {
 

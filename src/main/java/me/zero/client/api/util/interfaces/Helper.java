@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
  * @since 1.0
  *
  * @author Brady
- * @since 2/9/2017 12:00PM
+ * @since 2/9/2017 12:00 PM
  */
 public interface Helper {
 

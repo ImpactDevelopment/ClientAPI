@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  * @since 1.0
  *
  * @author Brady
- * @since 2/25/2017 12:00PM
+ * @since 2/25/2017 12:00 PM
  */
 public final class Hash {
 
