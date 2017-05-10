@@ -7,7 +7,7 @@ package me.zero.client.api.exception;
  * @since 1.0
  *
  * @author Brady
- * @since 1/19/2017 12:00PM
+ * @since 1/19/2017 12:00 PM
  */
 public final class InvalidActionException extends RuntimeException {
 

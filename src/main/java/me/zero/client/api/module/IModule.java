@@ -12,7 +12,7 @@ import me.zero.client.api.util.interfaces.Toggleable;
  * @since 1.0
  *
  * @author Brady
- * @since 1/21/2017 12:00PM
+ * @since 1/21/2017 12:00 PM
  */
 interface IModule extends Helper, Toggleable, Bindable {
 

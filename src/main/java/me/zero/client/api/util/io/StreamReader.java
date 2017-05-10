@@ -12,7 +12,7 @@ import java.util.StringJoiner;
  * @since 1.0
  *
  * @author Brady
- * @since 2/15/2017 12:00PM
+ * @since 2/15/2017 12:00 PM
  */
 public final class StreamReader {
 

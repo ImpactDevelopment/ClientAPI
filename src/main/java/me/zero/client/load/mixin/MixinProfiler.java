@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00PM
+ * @since 4/27/2017 12:00 PM
  */
 @Mixin(Profiler.class)
 public class MixinProfiler {

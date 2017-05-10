@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * @since 1.0
  *
  * @author Brady
- * @since 2/6/2017 12:00PM
+ * @since 2/6/2017 12:00 PM
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

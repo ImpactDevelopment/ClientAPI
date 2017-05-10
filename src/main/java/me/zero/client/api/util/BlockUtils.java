@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
  * @since 1.0
  *
  * @author Brady
- * @since 2/24/2017 12:00PM
+ * @since 2/24/2017 12:00 PM
  */
 public final class BlockUtils implements Helper {
 
