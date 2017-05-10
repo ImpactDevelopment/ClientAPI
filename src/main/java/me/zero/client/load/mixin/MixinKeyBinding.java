@@ -6,7 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(KeyBinding.class)
 public class MixinKeyBinding implements IKeyBinding {

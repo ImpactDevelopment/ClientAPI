@@ -9,7 +9,8 @@ import me.zero.client.api.util.math.Vec3;
  *
  * @since 1.0
  *
- * Created by Brady on 2/25/2017.
+ * @author Brady
+ * @since 2/25/2017 12:00PM
  */
 public interface IEntity {
 

@@ -24,7 +24,8 @@ import static me.zero.client.api.util.PluginFinder.Result.SUCCESS;
  *
  * @since 1.0
  *
- * Created by Brady on 3/24/2017.
+ * @author Brady
+ * @since 3/24/2017 12:00PM
  */
 public final class PluginFinder implements Helper {
 

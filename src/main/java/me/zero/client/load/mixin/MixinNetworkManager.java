@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.*;
 import javax.annotation.Nullable;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(NetworkManager.class)
 public abstract class MixinNetworkManager {

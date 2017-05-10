@@ -11,7 +11,8 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
  *
  * @since 1.0
  *
- * Created by Brady on 2/16/2017.
+ * @author Brady
+ * @since 2/16/2017 12:00PM
  */
 final class ShaderHelper {
 

@@ -3,7 +3,8 @@ package me.zero.client.wrapper;
 /**
  * Used to get the X, Y and Z render positions
  *
- * Created by Brady on 2/20/2017.
+ * @author Brady
+ * @since 2/20/2017 12:00PM
  */
 public interface IRenderManager {
 

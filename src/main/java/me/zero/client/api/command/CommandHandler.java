@@ -18,7 +18,8 @@ import static me.zero.client.api.util.Messages.*;
  *
  * @since 1.0
  *
- * Created by Brady on 2/13/2017.
+ * @author Brady
+ * @since 2/13/2017 12:00PM
  */
 public class CommandHandler {
 

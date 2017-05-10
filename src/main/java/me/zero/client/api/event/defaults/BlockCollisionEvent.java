@@ -10,7 +10,8 @@ import net.minecraft.block.Block;
  *
  * @since 1.0
  *
- * Created by Brady on 4/8/2017.
+ * @author Brady
+ * @since 4/8/2017 12:00PM
  */
 public final class BlockCollisionEvent extends Cancellable {
 
