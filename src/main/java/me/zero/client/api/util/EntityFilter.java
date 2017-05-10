@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 /**
  * Used to easily filter entities
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/1/2017 12:00 PM
  */
@@ -93,8 +91,6 @@ public final class EntityFilter implements Helper {
      * Tests an entity to see if it passes this
      * filter's checks
      *
-     * @since 1.0
-     *
      * @param entity The entity
      * @return Whether or not it passes the checks
      */
@@ -106,8 +102,6 @@ public final class EntityFilter implements Helper {
      * Checks a list of entities to see if it passes
      * this filter's checks, returns a filtered list
      *
-     * @since 1.0
-     *
      * @param entities List of entities
      * @return The filtered list
      */
@@ -118,8 +112,6 @@ public final class EntityFilter implements Helper {
     /**
      * Checks if the specified entity is a player
      *
-     * @since 1.0
-     *
      * @param e The entity
      * @return Whether or not the entity is a player
      */
@@ -129,8 +121,6 @@ public final class EntityFilter implements Helper {
 
     /**
      * Checks if the specified entity is a hostile
-     *
-     * @since 1.0
      *
      * @param e The entity
      * @return Whether or not the entity is a hostile
@@ -147,8 +137,6 @@ public final class EntityFilter implements Helper {
     /**
      * Checks if the specified entity is a passive
      *
-     * @since 1.0
-     *
      * @param e The entity
      * @return Whether or not the entity is a passive
      */
@@ -164,8 +152,6 @@ public final class EntityFilter implements Helper {
 
     /**
      * Checks if two entities are on the same team
-     *
-     * @since 1.0
      *
      * @param e1 First entity
      * @param e2 Second entity

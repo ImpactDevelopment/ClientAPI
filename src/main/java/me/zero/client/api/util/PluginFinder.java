@@ -22,8 +22,6 @@ import static me.zero.client.api.util.PluginFinder.Result.SUCCESS;
 /**
  * Used to find possible plugins on servers
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/24/2017 12:00 PM
  */
@@ -49,8 +47,6 @@ public final class PluginFinder implements Helper {
      * when the request times out or the list has been
      * found.
      *
-     * @since 1.0
-     *
      * @param callback Plugin Response callback
      */
     public final void find(Callback<PResponse> callback) {
@@ -61,8 +57,6 @@ public final class PluginFinder implements Helper {
      * Finds the plugin list, the callback is called
      * when the request times out or the list has been
      * found.
-     *
-     * @since 1.0
      *
      * @param callback Plugin Response callback
      * @param timeout Timeout in MS
@@ -134,8 +128,6 @@ public final class PluginFinder implements Helper {
         }
 
         /**
-         * @since 1.0
-         *
          * @return The plugins found, if found
          */
         public final Set<String> getPlugins() {
@@ -143,8 +135,6 @@ public final class PluginFinder implements Helper {
         }
 
         /**
-         * @since 1.0
-         *
          * @return The last error, if there is one
          */
         public final String getError() {
@@ -152,8 +142,6 @@ public final class PluginFinder implements Helper {
         }
 
         /**
-         * @since 1.0
-         *
          * @return The outcome of the request, SUCCESS or FAILURE
          */
         public final Result getResult() {

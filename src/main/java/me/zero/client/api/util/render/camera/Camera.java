@@ -14,8 +14,6 @@ import org.lwjgl.opengl.Display;
  *
  * All credits go to 10askinsw, he made the original Camera file.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/4/2017 12:00 PM
  */
@@ -42,8 +40,6 @@ public class Camera {
 
     /**
      * Updates the current Framebuffer
-     *
-     * @since 1.0
      *
      * @param partialTicks The Render 2D partial ticks
      */
@@ -103,8 +99,6 @@ public class Camera {
     /**
      * Draws the camera to the screen.
      * Stretches the Framebuffer over the specified area.
-     *
-     * @since 1.0
      */
     public final void draw(float x, float y, float x1, float y1) {
         GlStateManager.pushMatrix();
@@ -127,8 +121,6 @@ public class Camera {
     }
 
     /**
-     * @since 1.0
-     *
      * @return Whether or not the Framebuffer has been updated
      */
     public boolean isUpdated() {
@@ -137,8 +129,6 @@ public class Camera {
 
     /**
      * Checks if the framebuffer requires an update
-     *
-     * @since 1.0
      */
     private void checkUpdate() {
         if (lastWidth != Display.getWidth() || lastHeight != Display.getHeight())
@@ -151,8 +141,6 @@ public class Camera {
     /**
      * Resizes the Framebuffer to the current
      * handle width and height
-     *
-     * @since 1.0
      */
     private void createNewFramebuffer() {
         this.framebuffer.createFramebuffer(Display.getWidth(), Display.getHeight());
@@ -160,8 +148,6 @@ public class Camera {
 
     /**
      * Sets the capture state of the camera
-     *
-     * @since 1.0
      *
      * @param capture Whether or not to capture
      */
@@ -177,8 +163,6 @@ public class Camera {
     /**
      * Returns the visibility state of the Camera
      *
-     * @since 1.0
-     *
      * @return Whether or not the camera is visible
      */
     public boolean isVisible() {
@@ -186,8 +170,6 @@ public class Camera {
     }
 
     /**
-     * @since 1.0
-     *
      * @return Whether or not any of the cameras are currently capturing
      */
     public static boolean isCapturing() {

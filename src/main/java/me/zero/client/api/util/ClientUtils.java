@@ -7,8 +7,6 @@ import java.util.Arrays;
 /**
  * Utils that the Client API uses
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
@@ -18,8 +16,6 @@ public final class ClientUtils {
 
     /**
      * Concatenates an array of generic arrays
-     *
-     * @since 1.0
      *
      * @param arrays The arrays being concatenated
      * @return The concatenated array
@@ -42,8 +38,6 @@ public final class ClientUtils {
     /**
      * Checks if a generic list contains any null members.
      *
-     * @since 1.0
-     *
      * @param members The Members to be Checked
      */
     @SafeVarargs
@@ -56,8 +50,6 @@ public final class ClientUtils {
 
     /**
      * Gets and returns the class that called the method that is calling this method.
-     *
-     * @since 1.0
      *
      * @return The class found
      */
@@ -75,8 +67,6 @@ public final class ClientUtils {
      * Returns the Index of the specified Object in the Array, returns -1 if the
      * object is not found in the array
      *
-     * @since 1.0
-     *
      * @param object Object to be searched for
      * @param array Array to search for object in
      * @return Index of the Object in the Array
@@ -93,8 +83,6 @@ public final class ClientUtils {
     /**
      * Returns if the specified object is present in the specified array
      *
-     * @since 1.0
-     *
      * @param object Object to check if is present in Array
      * @param array Array that may/may not contain the Object
      * @return true if the specified object is in the specified array, false if not
@@ -108,8 +96,6 @@ public final class ClientUtils {
      * the array. If not, the first object present in the array will be
      * returned, if the size of the array is greater than 1, if not, the
      * specified Object will be returned.
-     *
-     * @since 1.0
      *
      * @param object The value trying to be set
      * @param array The array that may/may not contain the value

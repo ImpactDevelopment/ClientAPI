@@ -3,8 +3,6 @@ package me.zero.client.api;
 /**
  * Contains all information that is inside of the client.json
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/24/2017 12:00 PM
  */
@@ -41,8 +39,6 @@ public final class ClientInfo {
     private String main;
 
     /**
-     * @since 1.0
-     *
      * @return The Client Name
      */
     public String getName() {
@@ -50,8 +46,6 @@ public final class ClientInfo {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The authors of the Client
      */
     public String[] getAuthors() {
@@ -59,8 +53,6 @@ public final class ClientInfo {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Client Unique ID
      */
     public String getId() {
@@ -68,8 +60,6 @@ public final class ClientInfo {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Client Build
      */
     public double getBuild() {
@@ -77,8 +67,6 @@ public final class ClientInfo {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Release Type
      */
     public ReleaseType getType() {
@@ -86,8 +74,6 @@ public final class ClientInfo {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Main Class
      */
     public String getMain() {

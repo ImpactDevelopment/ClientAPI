@@ -5,8 +5,6 @@ import me.zero.client.api.util.interfaces.Helper;
 /**
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
@@ -22,8 +20,6 @@ public final class Render3DEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The render partial ticks
      */
     public final float getPartialTicks() {

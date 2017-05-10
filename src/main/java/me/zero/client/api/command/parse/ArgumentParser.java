@@ -7,8 +7,6 @@ import java.util.function.Function;
 /**
  * Parses a generic type from a string
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */

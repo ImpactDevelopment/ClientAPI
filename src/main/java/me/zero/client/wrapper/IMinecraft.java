@@ -7,24 +7,18 @@ import net.minecraft.util.Timer;
 /**
  * Used to retrieve the Timer instance.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
 public interface IMinecraft {
 
     /**
-     * @since 1.0
-     *
      * @return Returns the Game's Timer
      */
     Timer getTimer();
 
     /**
      * Sets the game's session
-     *
-     * @since 1.0
      *
      * @param session The new Session
      */
@@ -33,16 +27,12 @@ public interface IMinecraft {
     /**
      * Clicks a mouse button
      *
-     * @since 1.0
-     *
      * @param button The button
      */
     void clickMouse(ClickEvent.MouseButton button);
 
     /**
      * Sets the right click delay timer
-     *
-     * @since 1.0
      *
      * @param delay The new right click delay
      */

@@ -8,8 +8,6 @@ import java.lang.reflect.Field;
 /**
  * A value that can have a specific set of values
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
@@ -33,8 +31,6 @@ public final class MultiType extends Value<String> {
 
     /**
      * Sets value to the next one in the set
-     *
-     * @since 1.0
      */
     public final void next() {
         int index = ClientUtils.indexOf(getValue(), values);
@@ -47,8 +43,6 @@ public final class MultiType extends Value<String> {
 
     /**
      * Sets value to the last one in the set
-     *
-     * @since 1.0
      */
     public final void last() {
         int index = ClientUtils.indexOf(getValue(), values);
@@ -60,8 +54,6 @@ public final class MultiType extends Value<String> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return All possible values for this MultiType
      */
     public final String[] getValues() {

@@ -5,8 +5,6 @@ import me.zero.client.api.command.parse.ArgumentParser;
 /**
  * Parses a number (Represented by a Double)
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */

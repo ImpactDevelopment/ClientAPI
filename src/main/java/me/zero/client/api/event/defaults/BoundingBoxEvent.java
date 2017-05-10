@@ -9,8 +9,6 @@ import net.minecraft.util.math.BlockPos;
  * Called from Block#addCollisionBoxToList(BlockPos, AxisAlignedBB, List, AxisAlignedBB).
  * Used to hook into block collision, used to modify the bounding boxes of blocks.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/10/2017 12:00 PM
  */
@@ -40,8 +38,6 @@ public final class BoundingBoxEvent extends Cancellable {
     /**
      * Sets the block's bounding box
      *
-     * @since 1.0
-     *
      * @param aabb New bounding box
      * @return This event
      */
@@ -51,8 +47,6 @@ public final class BoundingBoxEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The block being collided with
      */
     public final Block getBlock() {
@@ -60,8 +54,6 @@ public final class BoundingBoxEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The position of the block being collided with
      */
     public final BlockPos getPos() {
@@ -69,8 +61,6 @@ public final class BoundingBoxEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The bounding box of the Block
      */
     public final AxisAlignedBB getBoundingBox() {

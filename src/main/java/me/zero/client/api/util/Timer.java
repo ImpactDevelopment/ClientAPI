@@ -5,8 +5,6 @@ import me.zero.client.api.value.type.NumberType;
 /**
  * Basic timer to keep track of tasks
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */

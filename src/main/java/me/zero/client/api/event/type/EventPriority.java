@@ -3,8 +3,6 @@ package me.zero.client.api.event.type;
 /**
  * Contains all of the Event Priorities.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */

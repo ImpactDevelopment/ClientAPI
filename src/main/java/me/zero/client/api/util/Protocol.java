@@ -8,8 +8,6 @@ import java.util.List;
 /**
  * List of protocols
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/6/2017 12:00 PM
  */
@@ -50,8 +48,6 @@ public final class Protocol {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The protocol ID
      */
     public final int getProtocol() {
@@ -59,8 +55,6 @@ public final class Protocol {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The protocol display name
      */
     public final String getName() {
@@ -68,8 +62,6 @@ public final class Protocol {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The supported version IDs
      */
     public final String[] getVersions() {
@@ -78,8 +70,6 @@ public final class Protocol {
 
     /**
      * Creates a Protocol object from its required parameters
-     *
-     * @since 1.0
      *
      * @param protocol The protocol id
      * @param name The name of the protocol
@@ -91,8 +81,6 @@ public final class Protocol {
     }
 
     /**
-     * @since 1.0
-     *
      * @return All of the registered protocols
      */
     public static List<Protocol> getProtocols() {

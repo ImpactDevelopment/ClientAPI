@@ -6,8 +6,6 @@ import me.zero.client.api.module.Module;
 /**
  * Called when a Module's state is changed
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/5/2017 12:00 PM
  */
@@ -29,8 +27,6 @@ public final class ModuleStateEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The module having a change in state
      */
     public final Module getModule() {
@@ -38,8 +34,6 @@ public final class ModuleStateEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The new state of the Module
      */
     public final boolean getNewState() {

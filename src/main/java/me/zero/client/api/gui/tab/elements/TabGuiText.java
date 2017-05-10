@@ -5,8 +5,6 @@ import me.zero.client.api.gui.tab.ITabGuiElement;
 /**
  * A simple tab gui element that is just text
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
@@ -28,8 +26,6 @@ public class TabGuiText implements ITabGuiElement {
 
     /**
      * Sets the text of this Text Element
-     *
-     * @since 1.0
      *
      * @param text The text that will be displayed
      */

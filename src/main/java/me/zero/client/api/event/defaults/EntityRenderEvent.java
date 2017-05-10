@@ -7,8 +7,6 @@ import net.minecraft.entity.Entity;
 /**
  * Called before and after an entity is rendered
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/2/2017 12:00 PM
  */
@@ -36,8 +34,6 @@ public final class EntityRenderEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The event state
      */
     public final EventState getState() {
@@ -46,8 +42,6 @@ public final class EntityRenderEvent {
 
 
     /**
-     * @since 1.0
-     *
      * @return The renderer used
      */
     public final RenderLivingBase<?> getRenderer() {
@@ -55,8 +49,6 @@ public final class EntityRenderEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The entity being rendered
      */
     public final Entity getEntity() {

@@ -11,8 +11,6 @@ import net.minecraft.util.math.AxisAlignedBB;
  * Called before and after packets are sent to
  * the server to update your location and position
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/12/2017 12:00 PM
  */
@@ -55,8 +53,6 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * Sets the X position
      *
-     * @since 1.0
-     *
      * @param x The new X position
      * @return This event
      */
@@ -67,8 +63,6 @@ public final class MotionUpdateEvent implements Helper {
 
     /**
      * Sets the Y position
-     *
-     * @since 1.0
      *
      * @param y The new Y position
      * @return This event
@@ -81,8 +75,6 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * Sets the Z position
      *
-     * @since 1.0
-     *
      * @param z The new Z position
      * @return This event
      */
@@ -93,8 +85,6 @@ public final class MotionUpdateEvent implements Helper {
 
     /**
      * Sets the Yaw rotation
-     *
-     * @since 1.0
      *
      * @param yaw The new yaw rotation
      * @return This event
@@ -107,8 +97,6 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * Sets the Pitch rotation
      *
-     * @since 1.0
-     *
      * @param pitch The new pitch rotation
      * @return This event
      */
@@ -120,8 +108,6 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * Sets the onGround state
      *
-     * @since 1.0
-     *
      * @param onGround The new onGround state
      * @return This event
      */
@@ -131,8 +117,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The X position
      */
     public final double getX() {
@@ -140,8 +124,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Y position
      */
     public final double getY() {
@@ -149,8 +131,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Z position
      */
     public final double getZ() {
@@ -158,8 +138,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Yaw rotation
      */
     public final float getYaw() {
@@ -167,8 +145,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Pitch rotation
      */
     public final float getPitch() {
@@ -176,8 +152,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The OnGround state
      */
     public final boolean isOnGround() {
@@ -185,8 +159,6 @@ public final class MotionUpdateEvent implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The state of the event
      */
     public final EventState getState() {

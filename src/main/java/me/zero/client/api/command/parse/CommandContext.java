@@ -9,8 +9,6 @@ import static me.zero.client.api.util.Messages.*;
 /**
  * Used to handle command parsing
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
@@ -41,8 +39,6 @@ public final class CommandContext {
      * Checks if there is a value corresponding with the argument
      * associated with the specified label.
      *
-     * @since 1.0
-     *
      * @param label The label
      * @return True if there is a value, false if not
      */
@@ -53,8 +49,6 @@ public final class CommandContext {
     /**
      * Returns the CommandArg that uses the specified label
      *
-     * @since 1.0
-     *
      * @param label The label
      * @return The CommandArg from the label
      */
@@ -64,8 +58,6 @@ public final class CommandContext {
 
     /**
      * Gets the object value from the specified label
-     *
-     * @since 1.0
      *
      * @param label The Label
      * @return The object
@@ -86,8 +78,6 @@ public final class CommandContext {
     /**
      * Checks whether or not all arguments have been satisfied.
      *
-     * @since 1.0
-     *
      * @return True/False depending on argument satisfaction
      */
     public final boolean isComplete() {
@@ -99,8 +89,6 @@ public final class CommandContext {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The last error stack
      */
     public final List<String> getError() {

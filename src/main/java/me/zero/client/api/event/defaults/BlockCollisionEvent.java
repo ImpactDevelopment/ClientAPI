@@ -8,8 +8,6 @@ import net.minecraft.block.Block;
  * When the event is cancelled, the collision check returns
  * false.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
@@ -25,8 +23,6 @@ public final class BlockCollisionEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The block receiving a collision check
      */
     public final Block getBlock() {

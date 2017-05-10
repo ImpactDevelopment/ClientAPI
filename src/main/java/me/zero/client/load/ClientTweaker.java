@@ -16,8 +16,6 @@ import java.util.List;
 /**
  * Calls the transformer and loads the target Client
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */

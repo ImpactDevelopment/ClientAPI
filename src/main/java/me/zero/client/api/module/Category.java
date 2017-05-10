@@ -11,8 +11,6 @@ import java.lang.annotation.Target;
  * anywhere in the API, only in Clients based
  * on it.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
@@ -21,8 +19,6 @@ import java.lang.annotation.Target;
 public @interface Category {
 
     /**
-     * @since 1.0
-     *
      * @return The name of the Category
      */
     String name();

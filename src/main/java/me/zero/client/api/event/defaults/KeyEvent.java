@@ -5,8 +5,6 @@ package me.zero.client.api.event.defaults;
  *
  * @see me.zero.client.api.event.defaults.ClickEvent
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
@@ -27,8 +25,6 @@ public final class KeyEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The key code that corresponds to the pressed key
      */
     public final int getKey() {

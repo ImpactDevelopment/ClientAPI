@@ -8,8 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
  * Called from {@code RenderLivingBase#renderLayers(EntityLivingBase, float, float, float, float, float, float, float)}.
  * When cancelled, the layer rendering won't execute.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/23/2017 12:00 PM
  */

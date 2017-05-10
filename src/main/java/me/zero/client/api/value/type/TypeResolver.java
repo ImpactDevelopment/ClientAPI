@@ -11,8 +11,6 @@ import java.lang.reflect.Field;
 /**
  * Converts a Field to a Value, if possible.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
@@ -20,8 +18,6 @@ public interface TypeResolver<T extends Value> {
 
     /**
      * Resolves a Value from it's respective Field
-     *
-     * @since 1.0
      *
      * @param parent The object containing the field
      * @param field The value field

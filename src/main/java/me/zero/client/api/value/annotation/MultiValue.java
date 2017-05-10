@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 /**
  * Annotation to mark fields as Multi Values
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
