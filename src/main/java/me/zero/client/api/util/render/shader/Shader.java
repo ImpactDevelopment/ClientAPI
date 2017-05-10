@@ -2,13 +2,13 @@ package me.zero.client.api.util.render.shader;
 
 import me.zero.client.api.util.interfaces.Helper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static me.zero.client.api.util.render.shader.ShaderHelper.*;
-import static org.lwjgl.opengl.ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
+import static org.lwjgl.opengl.ARBFragmentShader.*;
 import static org.lwjgl.opengl.ARBShaderObjects.*;
-import static org.lwjgl.opengl.ARBVertexShader.GL_VERTEX_SHADER_ARB;
+import static org.lwjgl.opengl.ARBVertexShader.*;
 
 /**
  * Used to create ARB Shader Programs with OpenGL
@@ -22,7 +22,7 @@ public abstract class Shader implements Helper {
     /**
      * The uniform variables for this shader
      */
-    private final List<Uniform> uniforms = new ArrayList<>();
+    private final Map<String, Uniform> uniforms = new HashMap<>();
 
     /**
      * Various Object IDs
@@ -90,23 +90,6 @@ public abstract class Shader implements Helper {
      * @return The Uniform Variable
      */
     protected final Uniform getUniform(String name) {
-        Uniform v = uniforms.stream().filter(uniform -> uniform.getName().equals(name)).findFirst().orElse(null);
-        if (v == null)
-            return loadUniform(name);
-        return v;
-    }
-
-    /**
-     * Loads a Uniform Variable from the specified name
-     *
-     * @since 1.0
-     *
-     * @param name The Uniform Name
-     * @return The Uniform Variable
-     */
-    private Uniform loadUniform(String name) {
-        Uniform v = Uniform.get(programID, name);
-        this.uniforms.add(v);
-        return v;
+        return uniforms.computeIfAbsent(name, n -> Uniform.get(programID, n));
     }
 }
