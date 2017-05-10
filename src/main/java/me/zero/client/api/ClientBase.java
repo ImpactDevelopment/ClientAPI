@@ -20,7 +20,8 @@ import java.util.List;
  *
  * @since 1.0
  *
- * Created by Brady on 1/25/2017.
+ * @author Brady
+ * @since 1/25/2017 12:00PM
  */
 class ClientBase implements Helper {
 

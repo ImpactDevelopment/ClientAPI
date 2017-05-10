@@ -11,7 +11,8 @@ import java.util.StringJoiner;
  *
  * @since 1.0
  *
- * Created by Brady on 2/15/2017.
+ * @author Brady
+ * @since 2/15/2017 12:00PM
  */
 public final class StreamReader {
 

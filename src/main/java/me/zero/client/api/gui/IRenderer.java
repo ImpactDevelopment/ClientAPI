@@ -8,7 +8,8 @@ import net.minecraft.client.gui.FontRenderer;
  *
  * @since 1.0
  *
- * Created by Brady on 2/6/2017.
+ * @author Brady
+ * @since 2/6/2017 12:00PM
  */
 public interface IRenderer {
 

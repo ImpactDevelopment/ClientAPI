@@ -14,7 +14,8 @@ import java.lang.annotation.Target;
  *
  * @since 1.0
  *
- * Created by Brady on 1/21/2017.
+ * @author Brady
+ * @since 1/21/2017 12:00PM
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

@@ -11,7 +11,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.List;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(ShaderGroup.class)
 public class MixinShaderGroup implements IShaderGroup {

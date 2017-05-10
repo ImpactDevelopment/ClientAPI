@@ -20,7 +20,8 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(Block.class)
 public abstract class MixinBlock {

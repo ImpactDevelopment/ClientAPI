@@ -29,7 +29,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {

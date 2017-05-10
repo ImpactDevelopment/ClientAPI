@@ -9,7 +9,8 @@ import me.zero.client.api.gui.IRenderer;
  *
  * @since 1.0
  *
- * Created by Brady on 1/20/2017.
+ * @author Brady
+ * @since 1/20/2017 12:00PM
  */
 public interface ITabGuiElement extends IRenderer {
 

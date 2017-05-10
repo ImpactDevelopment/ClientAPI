@@ -5,7 +5,8 @@ package me.zero.client.api.event;
  *
  * @since 1.0
  *
- * Created by Brady on 1/22/2017.
+ * @author Brady
+ * @since 1/22/2017 12:00PM
  */
 public interface EventHook<T> {
 
