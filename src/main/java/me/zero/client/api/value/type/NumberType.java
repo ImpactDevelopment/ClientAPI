@@ -10,8 +10,6 @@ import java.lang.reflect.Field;
  *
  * @see me.zero.client.api.value.annotation.NumberValue
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
@@ -45,8 +43,6 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The minimum value of the number
      */
     public final T getMinimum() {
@@ -54,8 +50,6 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The maximum value of this number
      */
     public final T getMaximum() {
@@ -65,8 +59,6 @@ public class NumberType<T extends Number> extends Value<T> {
     /**
      * Increments the value by the number specified
      * times the number range divided by 10
-     *
-     * @since 1.0
      */
     @SuppressWarnings("unchecked")
     public final void increment(float multiplier) {
@@ -77,8 +69,6 @@ public class NumberType<T extends Number> extends Value<T> {
     /**
      * Decrement the value by the number specified
      * times the number range divided by 10
-     *
-     * @since 1.0
      */
     @SuppressWarnings("unchecked")
     public final void decrement(float multiplier) {
@@ -89,8 +79,6 @@ public class NumberType<T extends Number> extends Value<T> {
      * Used to cast a random number type to a
      * compatible type for this value, this method
      * is a complete mess and should be fixed soon.
-     *
-     * @since 1.0
      */
     @SuppressWarnings("unchecked")
     private T cast(Number val) {

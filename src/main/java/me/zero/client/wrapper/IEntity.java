@@ -7,8 +7,6 @@ import me.zero.client.api.util.math.Vec3;
  * Used to convert entity position and rotation
  * to the Client API Vectors
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/25/2017 12:00 PM
  */
@@ -17,16 +15,12 @@ public interface IEntity {
     /**
      * Sets the entity position
      *
-     * @since 1.0
-     *
      * @param pos New position
      */
     void setPos(Vec3 pos);
 
     /**
      * Sets the previous entity position
-     *
-     * @since 1.0
      *
      * @param pos New position
      */
@@ -35,16 +29,12 @@ public interface IEntity {
     /**
      * Sets the last tick entity position
      *
-     * @since 1.0
-     *
      * @param pos New position
      */
     void setLastTickPos(Vec3 pos);
 
     /**
      * Sets the entity rotations
-     *
-     * @since 1.0
      *
      * @param rotations New position
      */
@@ -53,16 +43,12 @@ public interface IEntity {
     /**
      * Sets the previous entity rotations
      *
-     * @since 1.0
-     *
      * @param rotations New position
      */
     void setPrevRotations(Vec2 rotations);
 
     /**
      * Converts the entity position to a {@code Vec3}
-     *
-     * @since 1.0
      *
      * @return Position as a {@code Vec3}
      */
@@ -71,16 +57,12 @@ public interface IEntity {
     /**
      * Converts the previous entity position to a {@code Vec3}
      *
-     * @since 1.0
-     *
      * @return Previous position as a {@code Vec3}
      */
     Vec3 getPrevPos();
 
     /**
      * Converts the last tick entity position to a {@code Vec3}
-     *
-     * @since 1.0
      *
      * @return Last tick position as a {@code Vec3}
      */
@@ -90,8 +72,6 @@ public interface IEntity {
      * Calculates the predicted position that an entity will
      * be in the specified amount of ticks
      *
-     * @since 1.0
-     *
      * @param ticks Time in ticks predicted
      * @return The predicted position
      */
@@ -100,16 +80,12 @@ public interface IEntity {
     /**
      * Converts the entity rotation angles to a {@code Vec2}
      *
-     * @since 1.0
-     *
      * @return Rotations as a {@code Vec2}
      */
     Vec2 getRotations();
 
     /**
      * Converts the previous entity rotation angles to a {@code Vec2}
-     *
-     * @since 1.0
      *
      * @return Previous rotations as a {@code Vec2}
      */
@@ -118,8 +94,6 @@ public interface IEntity {
     /**
      * Sets all forms of position and rotation in
      * this entity to the specified position and rotation
-     *
-     * @since 1.0
      *
      * @param pos The position
      * @param angles The rotation
@@ -131,8 +105,6 @@ public interface IEntity {
     /**
      * Sets all forms of position of rotation to
      * their specified vectors
-     *
-     * @since 1.0
      *
      * @param pos The position
      * @param prev The previous position

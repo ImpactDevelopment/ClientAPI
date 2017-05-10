@@ -8,8 +8,6 @@ import me.zero.client.wrapper.IEntity;
 /**
  * An implementation of Camera that renders what is directly behind the player.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/4/2017 12:00 PM
  */

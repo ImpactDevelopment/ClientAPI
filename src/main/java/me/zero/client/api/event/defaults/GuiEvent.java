@@ -5,8 +5,6 @@ import net.minecraft.client.gui.GuiScreen;
 /**
  * Called when a Gui Screen is displayed.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/23/2017 12:00 PM
  */
@@ -25,8 +23,6 @@ public final class GuiEvent {
      * Sets the gui screen that will be displayed.
      * Replaces the screen that would've been displayed.
      *
-     * @since 1.0
-     *
      * @param screen The new gui screen that will be displayed
      * @return This event
      */
@@ -36,8 +32,6 @@ public final class GuiEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The screen being displayed
      */
     public final GuiScreen getScreen() {

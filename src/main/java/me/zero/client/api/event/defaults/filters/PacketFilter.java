@@ -8,8 +8,6 @@ import java.util.function.Predicate;
 /**
  * Basic filter for packets
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/2/2017 12:00 PM
  */

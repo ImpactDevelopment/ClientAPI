@@ -3,8 +3,6 @@ package me.zero.client.api.command;
 /**
  * Stores the usage of a command.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/9/2017 12:00 PM
  */
@@ -26,8 +24,6 @@ public final class CommandUsage {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The syntax of the usage
      */
     public final String getSyntax() {
@@ -35,8 +31,6 @@ public final class CommandUsage {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The description of the usage
      */
     public final String getDescription() {

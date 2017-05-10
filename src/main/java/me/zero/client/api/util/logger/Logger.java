@@ -5,8 +5,6 @@ package me.zero.client.api.util.logger;
  *
  * @see me.zero.client.api.util.logger.ILogger
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
@@ -22,8 +20,6 @@ public final class Logger implements ILogger {
     /**
      * Implementation of {@code #log(Level, String)}
      *
-     * @since 1.0
-     *
      * @see me.zero.client.api.util.logger.ILogger#log(Level, String)
      *
      * @param level The level
@@ -36,8 +32,6 @@ public final class Logger implements ILogger {
 
     /**
      * Implementation of {@code #logf(Level, String, Object...)}
-     *
-     * @since 1.0
      *
      * @see me.zero.client.api.util.logger.ILogger#logf(Level, String, Object...)
      *

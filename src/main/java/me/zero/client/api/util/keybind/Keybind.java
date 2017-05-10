@@ -9,8 +9,6 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
 /**
  * A keybind that is used to create key hooks
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
@@ -38,8 +36,6 @@ public final class Keybind {
     }
 
     /**
-     * @since 1.0
-     *
      * @param key The key code being set
      */
     public void setKey(int key) {
@@ -47,8 +43,6 @@ public final class Keybind {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The key code of this bind
      */
     public int getKey() {
@@ -58,8 +52,6 @@ public final class Keybind {
     /**
      * Called when a key's state has been
      * switched from released to pressed
-     *
-     * @since 1.0
      */
     public final void onClick() {
         consumer.accept(CLICK);
@@ -67,8 +59,6 @@ public final class Keybind {
 
     /**
      * Called when a key is pressed
-     *
-     * @since 1.0
      */
     public final void onPress() {
         consumer.accept(PRESS);
@@ -76,16 +66,12 @@ public final class Keybind {
 
     /**
      * Claled when a key is released
-     *
-     * @since 1.0
      */
     public final void onRelease() {
         consumer.accept(RELEASE);
     }
 
     /**
-     * @since 1.0
-     *
      * @return The list of all Keybind Objects
      */
     public static List<Keybind> getKeybinds() {

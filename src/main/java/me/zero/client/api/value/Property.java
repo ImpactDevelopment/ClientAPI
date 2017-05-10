@@ -4,8 +4,6 @@ package me.zero.client.api.value;
  * Properties are similar to values but are not limited to Fields.
  * Used in Nodes to handle unique properties of the Node.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/25/2017 12:00 PM
  */
@@ -26,8 +24,6 @@ public final class Property {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The label of this property
      */
     public final String getLabel() {
@@ -35,8 +31,6 @@ public final class Property {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The value of this property
      */
     @SuppressWarnings("unchecked")
@@ -45,8 +39,6 @@ public final class Property {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The value of this property as a string
      */
     public final String getString() {
@@ -55,8 +47,6 @@ public final class Property {
 
     /**
      * Sets the value of this property to the specified object
-     *
-     * @since 1.0
      *
      * @param value New value
      */

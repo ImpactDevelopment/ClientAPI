@@ -20,8 +20,6 @@ import static org.lwjgl.opengl.GL11.*;
 /**
  * OpenGL utils
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
@@ -57,8 +55,6 @@ public final class GlUtils {
     /**
      * Sets the color from a hex value
      *
-     * @since 1.0
-     *
      * @param hex The hex value
      */
     public static void glColor(int hex) {
@@ -69,8 +65,6 @@ public final class GlUtils {
     /**
      * Rotates on the X axis at the X, Y, and Z
      * coordinates that are provided.
-     *
-     * @since 1.0
      *
      * @param angle The amount being rotated
      * @param x The x position being rotated on
@@ -87,8 +81,6 @@ public final class GlUtils {
      * Rotates on the Y axis at the X, Y, and Z
      * coordinates that are provided.
      *
-     * @since 1.0
-     *
      * @param angle The amount being rotated
      * @param x The x position being rotated on
      * @param y The y position being rotated on
@@ -104,8 +96,6 @@ public final class GlUtils {
      * Rotates on the Z axis at the X, Y, and Z
      * coordinates that are provided.
      *
-     * @since 1.0
-     *
      * @param angle The amount being rotated
      * @param x The x position being rotated on
      * @param y The y position being rotated on
@@ -120,8 +110,6 @@ public final class GlUtils {
     /**
      * Gets the Model View Matrix as a FloatBuffer
      *
-     * @since 1.0
-     *
      * @return The Model View Matrix
      */
     public static FloatBuffer getModelViewMatrix() {
@@ -131,8 +119,6 @@ public final class GlUtils {
     /**
      * Gets the Projection Matrix as a FloatBuffer
      *
-     * @since 1.0
-     *
      * @return The Projection Matrix
      */
     public static FloatBuffer getProjectionMatrix() {
@@ -141,8 +127,6 @@ public final class GlUtils {
 
     /**
      * Gets the Render Viewport as an IntegerBuffer
-     *
-     * @since 1.0
      *
      * @return The Viewport
      */

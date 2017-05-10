@@ -5,8 +5,6 @@ package me.zero.client.api.util.logger;
  *
  * @see me.zero.client.api.util.logger.Logger
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
@@ -15,8 +13,6 @@ public interface ILogger {
     /**
      * Logs a message with a level
      *
-     * @since 1.0
-     *
      * @param level The level
      * @param message The message
      */
@@ -24,8 +20,6 @@ public interface ILogger {
 
     /**
      * Logs a formatted message with a level
-     *
-     * @since 1.0
      *
      * @param level The level
      * @param message The message

@@ -9,8 +9,6 @@ import java.util.function.Predicate;
 /**
  * Used to contain event method data
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
@@ -52,8 +50,6 @@ public final class Listener<T> implements EventHook<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The class of T
      */
     public final Class<T> getTarget() {
@@ -61,8 +57,6 @@ public final class Listener<T> implements EventHook<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return Priority of Listener
      */
     final byte getPriority() {
@@ -72,8 +66,6 @@ public final class Listener<T> implements EventHook<T> {
     /**
      * Invokes the method that corresponds
      * with this Listener.
-     *
-     * @since 1.0
      *
      * @param event Event being called
      */

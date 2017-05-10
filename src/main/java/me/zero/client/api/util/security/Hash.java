@@ -6,8 +6,6 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Used to hash data with a defined algorithm
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/25/2017 12:00 PM
  */
@@ -24,8 +22,6 @@ public final class Hash {
 
     /**
      * Creates a new Hash object with the specified algorithm
-     *
-     * @since 1.0
      *
      * @param algorithm Algorithm name
      * @return Hash object

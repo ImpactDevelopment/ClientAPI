@@ -14,8 +14,6 @@ import java.net.Proxy;
  * Used as a means for logging in to an
  * account with ease.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
@@ -34,8 +32,6 @@ public final class AuthenticationFactory implements Helper {
     /**
      * Creates an authentication factory
      *
-     * @since 1.0
-     *
      * @return The created factory
      */
     public static AuthenticationFactory create() {
@@ -44,8 +40,6 @@ public final class AuthenticationFactory implements Helper {
 
     /**
      * Sets the Username for Authentication
-     *
-     * @since 1.0
      *
      * @param username The username
      * @return The Factory
@@ -58,8 +52,6 @@ public final class AuthenticationFactory implements Helper {
     /**
      * Sets the Password for Authentication
      *
-     * @since 1.0
-     *
      * @param password The username
      * @return The Factory
      */
@@ -70,8 +62,6 @@ public final class AuthenticationFactory implements Helper {
 
     /**
      * Creates a Session from the Factory
-     *
-     * @since 1.0
      *
      * @return The session
      */
@@ -87,8 +77,6 @@ public final class AuthenticationFactory implements Helper {
 
     /**
      * Logs in using the credentials provided
-     *
-     * @since 1.0
      *
      * @return Whether or not the login was successful
      */

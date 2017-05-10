@@ -3,8 +3,6 @@ package me.zero.client.api.gui.notification;
 /**
  * Implementation of INotification.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/6/2017 12:00 PM
  */

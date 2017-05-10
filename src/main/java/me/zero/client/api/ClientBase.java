@@ -18,8 +18,6 @@ import java.util.List;
  * is separate is for the cleanlieness of the
  * code.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/25/2017 12:00 PM
  */
@@ -53,8 +51,6 @@ class ClientBase implements Helper {
     /**
      * Sets the info, only works if the current info is null
      *
-     * @since 1.0
-     *
      * @param info Info being set
      */
     public void setInfo(ClientInfo info) {
@@ -63,8 +59,6 @@ class ClientBase implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Client Info
      */
     public ClientInfo getInfo() {
@@ -74,8 +68,6 @@ class ClientBase implements Helper {
     /**
      * Sets the prefix, only set if it hasn't been set yet
      *
-     * @since 1.0
-     *
      * @param prefix The prefix being set
      */
     public void setPrefix(String prefix) {
@@ -84,8 +76,6 @@ class ClientBase implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The prefix
      */
     public String getPrefix() {
@@ -96,8 +86,6 @@ class ClientBase implements Helper {
      * Sets the Module Manager, it will
      * only be set if the moduleManager is null.
      *
-     * @since 1.0
-     *
      * @param moduleManager The Module Manager
      */
     protected void setModuleManager(Manager<Module> moduleManager) {
@@ -107,8 +95,6 @@ class ClientBase implements Helper {
 
     /**
      * Returns the module manager casted to the specified type
-     *
-     * @since 1.0
      *
      * @return The Module Manager casted to this Client's implementation
      */
@@ -124,8 +110,6 @@ class ClientBase implements Helper {
      * Sets the Command Manager, it will
      * only be set if the commandManager is null.
      *
-     * @since 1.0
-     *
      * @param commandManager The Module Manager
      */
     protected void setCommandManager(Manager<Command> commandManager) {
@@ -135,8 +119,6 @@ class ClientBase implements Helper {
 
     /**
      * Returns the command manager casted to the specified type
-     *
-     * @since 1.0
      *
      * @return The Command Manager casted to this Client's implementation
      */
@@ -151,8 +133,6 @@ class ClientBase implements Helper {
     /**
      * Creates and registers a PluginLoader from the specified directory
      *
-     * @since 1.0
-     *
      * @return The created PluginLoader
      */
     protected PluginLoader loadPlugins(String path) {
@@ -165,8 +145,6 @@ class ClientBase implements Helper {
      * Returns all of the PluginLoaders. Usually used
      * for loading the Modules from the Plugins
      *
-     * @since 1.0
-     *
      * @return The list of Plugin Loaders
      */
     public List<PluginLoader> getPluginLoaders() {
@@ -177,8 +155,6 @@ class ClientBase implements Helper {
      * Returns all of the Plugins from all of the
      * PluginLoaders. Cleaner way of getting a list
      * of all of the Plugins.
-     *
-     * @since 1.0
      *
      * @return The list of Plugins
      */
@@ -191,8 +167,6 @@ class ClientBase implements Helper {
     /**
      * Prints a chat message
      *
-     * @since 1.0
-     *
      * @param message The message
      */
     // TODO: Create a chat builder and change "message" to it
@@ -204,8 +178,6 @@ class ClientBase implements Helper {
      * Gets the list of module types/categories
      * that exist.
      *
-     * @since 1.0
-     *
      * @return The categories
      */
     public List<Class<?>> getCategories() {
@@ -215,8 +187,6 @@ class ClientBase implements Helper {
     /**
      * Gets the list of module types/categories
      * that exist.
-     *
-     * @since 1.0
      *
      * @param sort Whether or not to sort alphabetically
      * @return The categories

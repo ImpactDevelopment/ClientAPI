@@ -9,22 +9,16 @@ package me.zero.client.wrapper;
 public interface IRenderManager {
 
     /**
-     * @since 1.0
-     *
      * @return Render Pos X
      */
     double getRenderPosX();
 
     /**
-     * @since 1.0
-     *
      * @return Render Pos Y
      */
     double getRenderPosY();
 
     /**
-     * @since 1.0
-     *
      * @return Render Pos Z
      */
     double getRenderPosZ();

@@ -5,8 +5,6 @@ import me.zero.client.api.event.type.EventState;
 /**
  * Called before and after EntityPlayerSP#onLivingUpdate()
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
@@ -22,8 +20,6 @@ public final class LivingUpdateEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The event state
      */
     public final EventState getState() {

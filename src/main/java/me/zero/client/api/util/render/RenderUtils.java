@@ -15,8 +15,6 @@ import static org.lwjgl.opengl.GL11.*;
 /**
  * The basic render utils for any client,
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/4/2017 12:00 PM
  */
@@ -38,8 +36,6 @@ public final class RenderUtils {
      * Called before rendering. Enables blending,
      * line smoothing, disables 2D texturing,
      * depth and the depth mask.
-     *
-     * @since 1.0
      *
      * @param start true if we are starting to render, false if we are finishing
      */
@@ -80,8 +76,6 @@ public final class RenderUtils {
     /**
      * Draws a line from one Vec2 to another
      *
-     * @since 1.0
-     *
      * @param start Starting Vec2
      * @param end Ending Vec2
      * @param width Line width
@@ -93,8 +87,6 @@ public final class RenderUtils {
     /**
      * Draws a line from one Vec3 to another
      *
-     * @since 1.0
-     *
      * @param start Starting Vec3
      * @param end Ending Vec3
      * @param width Line width
@@ -105,8 +97,6 @@ public final class RenderUtils {
 
     /**
      * Draws a line from one position to another
-     *
-     * @since 1.0
      *
      * @param x Start X
      * @param y Start Y
@@ -120,8 +110,6 @@ public final class RenderUtils {
 
     /**
      * Draws a line from one position to another
-     *
-     * @since 1.0
      *
      * @param x Start X
      * @param y Start Y
@@ -144,8 +132,6 @@ public final class RenderUtils {
     /**
      * Draws a flipped textured rectangle
      *
-     * @since 1.0
-     *
      * @param x1 Top corner X of the rectangle
      * @param y1 Top corner Y of the rectangle
      * @param x2 Bottom corner X of the rectangle
@@ -167,8 +153,6 @@ public final class RenderUtils {
     /**
      * Draws a reflected textured rectangle
      *
-     * @since 1.0
-     *
      * @param x1 Top corner X of the rectangle
      * @param y1 Top corner Y of the rectangle
      * @param x2 Bottom corner X of the rectangle
@@ -189,8 +173,6 @@ public final class RenderUtils {
 
     /**
      * Renders a rectangle
-     *
-     * @since 1.0
      *
      * @param x1 Top corner X of the rectangle
      * @param y1 Top corner Y of the rectangle

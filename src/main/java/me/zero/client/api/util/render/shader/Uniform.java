@@ -8,8 +8,6 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
 /**
  * A representation of a GLSL Uniform Variable
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/16/2017 12:00 PM
  */
@@ -33,8 +31,6 @@ public final class Uniform {
     /**
      * Sets the value of this Uniform as an Int
      *
-     * @since 1.0
-     *
      * @param value New value
      */
     public final void setInt(int value) {
@@ -43,8 +39,6 @@ public final class Uniform {
 
     /**
      * Sets the value of this Uniform as a Float
-     *
-     * @since 1.0
      *
      * @param value New value
      */
@@ -55,8 +49,6 @@ public final class Uniform {
     /**
      * Sets the value of this Uniform as a Boolean
      *
-     * @since 1.0
-     *
      * @param value New value
      */
     public final void setBoolean(boolean value) {
@@ -65,8 +57,6 @@ public final class Uniform {
 
     /**
      * Sets the value of this Uniform as a Vec2
-     *
-     * @since 1.0
      *
      * @param value New value
      */
@@ -77,8 +67,6 @@ public final class Uniform {
     /**
      * Sets the value of this Uniform as a Vec3
      *
-     * @since 1.0
-     *
      * @param value New value
      */
     public final void setVec(Vec3 value) {
@@ -86,8 +74,6 @@ public final class Uniform {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The name of this UniformVariable
      */
     public final String getName() {
@@ -95,8 +81,6 @@ public final class Uniform {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Object ID of this UniformVariable
      */
     public final int getLocation() {
@@ -105,8 +89,6 @@ public final class Uniform {
 
     /**
      * Creates a uniform variable from the shader object id and the uniform's name
-     *
-     * @since 1.0
      *
      * @param shaderID Shader object ID
      * @param uniformName Uniform Name

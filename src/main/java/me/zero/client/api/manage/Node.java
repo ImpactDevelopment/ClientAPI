@@ -13,8 +13,6 @@ import java.util.Set;
 /**
  * Nodes can have children, values, properties, and can be saved/loaded.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
@@ -53,8 +51,6 @@ public class Node implements Nameable {
     /**
      * Adds children to the list of child nodes
      *
-     * @since 1.0
-     *
      * @param children The children
      */
     protected final void addChildren(Node... children) {
@@ -64,8 +60,6 @@ public class Node implements Nameable {
     /**
      * Adds children to the list of child nodes
      *
-     * @since 1.0
-     *
      * @param children The children
      */
     public final void addChildren(Collection<Node> children) {
@@ -73,8 +67,6 @@ public class Node implements Nameable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The set of all child nodes
      */
     public final Set<Node> getChildren() {
@@ -83,8 +75,6 @@ public class Node implements Nameable {
 
     /**
      * Sets the property with the specified label's value
-     *
-     * @since 1.0
      *
      * @param label Label of the property
      * @param value Value being set
@@ -103,8 +93,6 @@ public class Node implements Nameable {
     /**
      * Gets a property with the specified label from the properties set
      *
-     * @since 1.0
-     *
      * @param label Target property label
      * @return Property found, null if not found
      */
@@ -114,8 +102,6 @@ public class Node implements Nameable {
 
     /**
      * Adds a value to this node
-     *
-     * @since 1.0
      *
      * @param value The value
      */
@@ -127,8 +113,6 @@ public class Node implements Nameable {
     /**
      * Gets a value from its ID
      *
-     * @since 1.0
-     *
      * @param id The value's ID
      */
     public final Value getValue(String id) {
@@ -136,8 +120,6 @@ public class Node implements Nameable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The set of all values
      */
     public final Set<Value> getValues() {

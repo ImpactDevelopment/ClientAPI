@@ -6,8 +6,6 @@ import net.minecraft.network.Packet;
 /**
  * Called whenever a packet is either sent or received
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/7/2017 12:00 PM
  */
@@ -29,8 +27,6 @@ public final class PacketEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The packet being sent/received
      */
     public final Packet<?> getPacket() {
@@ -41,8 +37,6 @@ public final class PacketEvent extends Cancellable {
      * Sets the packet that is being either sent
      * or received to the specified packet.
      *
-     * @since 1.0
-     *
      * @param packet The new packet
      * @return This event
      */
@@ -51,8 +45,6 @@ public final class PacketEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The packet direction, send or receive
      */
     public final Type getType() {

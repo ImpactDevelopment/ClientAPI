@@ -9,8 +9,6 @@ import java.util.Arrays;
  * Util file used to clean up usages of the
  * reflection api throughout the client api
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
@@ -20,8 +18,6 @@ public final class ReflectionUtils {
 
     /**
      * Gets the value of a field from an Object
-     *
-     * @since 1.0
      *
      * @param object Object that field belongs to
      * @param fieldName Field that is being retrieved
@@ -36,8 +32,6 @@ public final class ReflectionUtils {
 
     /**
      * Gets the value of a field from an Object
-     *
-     * @since 1.0
      *
      * @param object Object that field belongs to
      * @param field Field that is being retrieved
@@ -59,8 +53,6 @@ public final class ReflectionUtils {
     /**
      * Sets the value of a field in an object
      *
-     * @since 1.0
-     *
      * @param object The object that the field belongs to
      * @param fieldName The name of the field being set
      * @param value The value that the field is being set to
@@ -75,8 +67,6 @@ public final class ReflectionUtils {
 
     /**
      * Sets the value of a field in an object
-     *
-     * @since 1.0
      *
      * @param object The object that the field belongs to
      * @param field The field being set
@@ -122,8 +112,6 @@ public final class ReflectionUtils {
 
     /**
      * Invokes the speicfied method with the specified parameters
-     *
-     * @since 1.0
      *
      * @param object Object containing method
      * @param method Method itself

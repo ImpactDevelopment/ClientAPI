@@ -12,8 +12,6 @@ import net.minecraft.util.EnumHandSide;
  * If cancelled, the item isn't
  *
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
@@ -66,8 +64,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The instance of the ItemRenderer
      */
     public final ItemRenderer getItemRenderer() {
@@ -75,8 +71,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The current render partial ticks
      */
     public final float getPartialTicks() {
@@ -84,8 +78,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The hand holding the item
      */
     public final EnumHand getHand() {
@@ -93,8 +85,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The side of the screen that the holding hand is represented by
      */
     public final EnumHandSide getHandSide() {
@@ -102,8 +92,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The swing progress of the item being renderered
      */
     public final float getSwingProgress() {
@@ -111,8 +99,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The itemstack being rendered
      */
     public final ItemStack getStack() {
@@ -120,8 +106,6 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The recharge progress of the item being rendered.
      */
     public final float getRechargeProgress() {

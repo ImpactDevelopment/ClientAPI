@@ -8,8 +8,6 @@ import java.util.List;
 /**
  * Base for Plugin Main classes
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/27/2017 12:00 PM
  */
@@ -29,8 +27,6 @@ public abstract class Plugin {
      * Plugin Init method, Not used for anything essential.
      * Just a way for plugin developers to know
      * when the Client {@code postInit()} has finished.
-     *
-     * @since 1.0
      */
     public abstract void onInit();
 
@@ -47,8 +43,6 @@ public abstract class Plugin {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Info of this plugin
      */
     public final PluginInfo getInfo() {
@@ -58,8 +52,6 @@ public abstract class Plugin {
     /**
      * Loads a Module into the Module list of this plugin
      *
-     * @since 1.0
-     *
      * @param module Module being loaded
      */
     final void loadModule(Module module) {
@@ -67,8 +59,6 @@ public abstract class Plugin {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The module list associated with this plugin
      */
     public final List<Module> getModules() {

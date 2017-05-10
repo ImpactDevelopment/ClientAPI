@@ -7,8 +7,6 @@ import java.util.Random;
 /**
  * Utils used for mathematical operations.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
@@ -18,8 +16,6 @@ public final class MathUtils {
 
     /**
      * Clamps a Number
-     *
-     * @since 1.0
      *
      * @param value The value being clamped
      * @param minimum The minimum possible value
@@ -40,8 +36,6 @@ public final class MathUtils {
     /**
      * Rounds a number to a specific place
      *
-     * @since 1.0
-     *
      * @param value Value being rounded
      * @param places Places being rounded
      * @return Rounded value
@@ -57,8 +51,6 @@ public final class MathUtils {
 
     /**
      * Gets a random int between a min value and max value
-     *
-     * @since 1.0
      *
      * @param min The minimum value
      * @param max The maximum value

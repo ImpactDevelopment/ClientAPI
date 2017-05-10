@@ -12,8 +12,6 @@ import java.lang.annotation.Target;
  * to store all of the information that would
  * otherwise be passed down through a contructor.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
@@ -23,22 +21,16 @@ public @interface Mod {
 
     /**
      * Name of Module
-     *
-     * @since 1.0
      */
     String name();
 
     /**
      * Description of Module
-     *
-     * @since 1.0
      */
     String description();
 
     /**
      * Keybind of Module, Key is {@code KEY_NONE} by default.
-     *
-     * @since 1.0
      */
     int bind() default Keyboard.KEY_NONE;
 }
