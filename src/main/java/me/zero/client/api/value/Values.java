@@ -1,7 +1,7 @@
 package me.zero.client.api.value;
 
 import me.zero.client.api.manage.Node;
-import me.zero.client.api.util.interfaces.annotation.Label;
+import me.zero.client.api.util.annotation.Label;
 import me.zero.client.api.value.annotation.BooleanValue;
 import me.zero.client.api.value.annotation.MultiValue;
 import me.zero.client.api.value.annotation.NumberValue;

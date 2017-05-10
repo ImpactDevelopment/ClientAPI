@@ -108,7 +108,7 @@ public final class PluginLoader {
                         try {
                             Class clazz = Class.forName(Descriptor.toJavaName(name.substring(0, name.length() - 6)), true, classLoader);
 
-                            if (clazz != null && clazz.getSuperclass().equals(Module.class) && clazz.isAnnotationPresent(Mod.class)) {
+                            if (clazz != null && clazz.getSuperclass().equals(Module.class)) {
                                 try {
                                     plugin.loadModule((Module) clazz.newInstance());
                                 } catch (InstantiationException | IllegalAccessException exception) {

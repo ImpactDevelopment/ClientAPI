@@ -1,4 +1,4 @@
-package me.zero.client.api.util.factory;
+package me.zero.client.api.util.builder;
 
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.GameProfile;
@@ -17,14 +17,14 @@ import java.net.Proxy;
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
-public final class AuthenticationFactory implements Helper {
+public final class AuthenticationBuilder implements Helper {
 
     /**
      * Authentication object
      */
     private final YggdrasilUserAuthentication auth;
 
-    private AuthenticationFactory() {
+    private AuthenticationBuilder() {
         this.auth = (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")
                 .createUserAuthentication(Agent.MINECRAFT);
     }
@@ -34,8 +34,8 @@ public final class AuthenticationFactory implements Helper {
      *
      * @return The created factory
      */
-    public static AuthenticationFactory create() {
-        return new AuthenticationFactory();
+    public static AuthenticationBuilder builder() {
+        return new AuthenticationBuilder();
     }
 
     /**
@@ -44,7 +44,7 @@ public final class AuthenticationFactory implements Helper {
      * @param username The username
      * @return The Factory
      */
-    public final AuthenticationFactory username(String username) {
+    public final AuthenticationBuilder username(String username) {
         auth.setUsername(username);
         return this;
     }
@@ -55,7 +55,7 @@ public final class AuthenticationFactory implements Helper {
      * @param password The username
      * @return The Factory
      */
-    public final AuthenticationFactory password(String password) {
+    public final AuthenticationBuilder password(String password) {
         auth.setPassword(password);
         return this;
     }

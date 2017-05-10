@@ -7,6 +7,7 @@ import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.PacketEvent;
 import me.zero.client.api.event.defaults.TickEvent;
 import me.zero.client.api.event.defaults.filters.PacketFilter;
+import me.zero.client.api.exception.InvalidActionException;
 import me.zero.client.api.util.interfaces.Helper;
 import net.minecraft.network.play.client.CPacketTabComplete;
 import net.minecraft.network.play.server.SPacketTabComplete;
@@ -15,9 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import java.util.Arrays;
 import java.util.Set;
 
-import static me.zero.client.api.event.defaults.PacketEvent.Type.RECEIVE;
-import static me.zero.client.api.util.PluginFinder.Result.FAILURE;
-import static me.zero.client.api.util.PluginFinder.Result.SUCCESS;
+import static me.zero.client.api.event.defaults.PacketEvent.Type.*;
+import static me.zero.client.api.util.PluginFinder.PResponse.Result.*;
 
 /**
  * Used to find possible plugins on servers
@@ -131,6 +131,9 @@ public final class PluginFinder implements Helper {
          * @return The plugins found, if found
          */
         public final Set<String> getPlugins() {
+            if (result != SUCCESS)
+                throw new InvalidActionException("Cannot get plugins that were retrieved unless response type is SUCCESS");
+
             return this.plugins;
         }
 
@@ -138,6 +141,9 @@ public final class PluginFinder implements Helper {
          * @return The last error, if there is one
          */
         public final String getError() {
+            if (result != FAILURE)
+                throw new InvalidActionException("Cannot get error that occured unless response type is FAILURE");
+
             return this.error;
         }
 
@@ -147,9 +153,9 @@ public final class PluginFinder implements Helper {
         public final Result getResult() {
             return this.result;
         }
-    }
 
-    public enum Result {
-        SUCCESS, FAILURE
+        public enum Result {
+            SUCCESS, FAILURE
+        }
     }
 }

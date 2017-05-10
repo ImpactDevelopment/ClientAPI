@@ -1,7 +1,7 @@
 package me.zero.client.api.value.type;
 
 import me.zero.client.api.util.ReflectionUtils;
-import me.zero.client.api.util.interfaces.annotation.Label;
+import me.zero.client.api.util.annotation.Label;
 import me.zero.client.api.value.Value;
 import me.zero.client.api.value.annotation.MultiValue;
 import me.zero.client.api.value.annotation.NumberValue;
