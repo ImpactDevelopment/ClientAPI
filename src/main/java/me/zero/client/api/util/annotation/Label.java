@@ -1,4 +1,4 @@
-package me.zero.client.api.util.interfaces.annotation;
+package me.zero.client.api.util.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

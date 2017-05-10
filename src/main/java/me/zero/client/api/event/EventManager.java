@@ -1,7 +1,7 @@
 package me.zero.client.api.event;
 
 import me.zero.client.api.event.type.EventPriority;
-import me.zero.client.api.exception.UnexpectedOutcomeException;
+import me.zero.client.api.exception.ValueOutOfBoundsException;
 import me.zero.client.api.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -97,7 +97,7 @@ public final class EventManager {
         Listener listener = (Listener) ReflectionUtils.getField(object, field);
 
         if (listener.getPriority() > EventPriority.LOWEST || listener.getPriority() < EventPriority.HIGHEST)
-            throw new UnexpectedOutcomeException("Event Priority out of bounds! %s");
+            throw new ValueOutOfBoundsException("Event Priority out of bounds! %s");
 
         return listener;
     }
