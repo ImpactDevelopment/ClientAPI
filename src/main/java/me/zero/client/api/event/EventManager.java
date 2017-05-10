@@ -23,7 +23,13 @@ public final class EventManager {
     private EventManager() {}
 
     /**
-     * HashMap containing all Listeners for various Events
+     * Map containing all Listeners for objects, this is used to prevent
+     * reflection calls when subscribing/unsubscribing
+     */
+    private static final Map<Object, List<Listener>> SUBSCRIPTION_CACHE = new HashMap<>();
+
+    /**
+     * Map containing all event classes and their corresponding listeners
      */
     private static final Map<Class<?>, List<Listener>> SUBSCRIPTION_MAP = new HashMap<>();
 
@@ -34,24 +40,6 @@ public final class EventManager {
      * @see #unsubscribe(Object)
      */
     private static final List<Listener> eventBuffer = new ArrayList<>();
-
-    /**
-     * Discovers all valid listeners from the Object
-     * specified and then registers them in the
-     * form of {@code Listeners}
-     *
-     * @see me.zero.client.api.event.Listener
-     * @see #subscribe(Object, Field)
-     *
-     * @since 1.0
-     *
-     * @param object The object containing possible Event Listeners
-     */
-    public static void subscribe(Object object) {
-        Arrays.stream(object.getClass().getDeclaredFields())
-                .filter(EventManager::isValidField)
-                .forEach(field -> subscribe(object, field));
-    }
 
     /**
      * Registers an array of Objects
@@ -82,6 +70,27 @@ public final class EventManager {
     }
 
     /**
+     * Discovers all valid listeners from the Object
+     * specified and then registers them in the
+     * form of {@code Listeners}
+     *
+     * @see me.zero.client.api.event.Listener
+     *
+     * @since 1.0
+     *
+     * @param object The object containing possible Event Listeners
+     */
+    public static void subscribe(Object object) {
+        List<Listener> listeners = SUBSCRIPTION_CACHE.computeIfAbsent(object, o ->
+                Arrays.stream(o.getClass().getDeclaredFields())
+                .filter(EventManager::isValidField)
+                .map(field -> asListener(o, field))
+                .collect(Collectors.toList()));
+
+        listeners.forEach(EventManager::subscribe);
+    }
+
+    /**
      * Creates a listener from the specified object and method.
      * After the listener is created, it is passed to the listener
      * subscription method.
@@ -93,13 +102,13 @@ public final class EventManager {
      * @param object Parent object
      * @param field Listener field
      */
-    private static void subscribe(Object object, Field field) {
+    private static Listener asListener(Object object, Field field) {
         Listener listener = (Listener) ReflectionUtils.getField(object, field);
 
         if (listener.getPriority() > EventPriority.LOWEST || listener.getPriority() < EventPriority.HIGHEST)
             throw new UnexpectedOutcomeException("Event Priority out of bounds! %s");
 
-        subscribe(listener);
+        return listener;
     }
 
     /**
@@ -117,20 +126,19 @@ public final class EventManager {
             eventBuffer.addAll(listeners);
 
         int index = 0;
-        if (!eventBuffer.isEmpty()) {
-            for (; index < eventBuffer.size(); index++) {
-                if (listener.getPriority() < eventBuffer.get(index).getPriority()) {
-                    break;
-                }
+        for (; index < eventBuffer.size(); index++) {
+            if (listener.getPriority() < eventBuffer.get(index).getPriority()) {
+                break;
             }
         }
+
         eventBuffer.add(index, listener);
         SUBSCRIPTION_MAP.put(listener.getTarget(), new ArrayList<>(eventBuffer));
     }
 
     /**
-     * Unregisters the Event Listeners from
-     * the specified object
+     * Unregisters the Event Listeners
+     * from the specified object
      *
      * @see #subscribe(Object)
      *
@@ -139,13 +147,13 @@ public final class EventManager {
      * @param object The object being unsubscribed
      */
     public static void unsubscribe(Object object) {
-        List<Listener> objectListeners = Arrays.stream(object.getClass().getDeclaredFields())
-                .filter(EventManager::isValidField)
-                .map(field -> (Listener) ReflectionUtils.getField(object, field)).collect(Collectors.toList());
+        List<Listener> listeners = SUBSCRIPTION_CACHE.get(object);
+        if (listeners == null)
+            return;
 
         SUBSCRIPTION_MAP.keySet().forEach(eventClass -> SUBSCRIPTION_MAP.put(eventClass,
                 SUBSCRIPTION_MAP.get(eventClass).stream()
-                        .filter(listener -> !objectListeners.contains(listener))
+                        .filter(listener -> !listeners.contains(listener))
                         .collect(Collectors.toList())
         ));
     }
@@ -191,7 +199,7 @@ public final class EventManager {
      * @return Whether or not the Field is valid
      */
     private static boolean isValidField(Field field) {
-        return field.isAnnotationPresent(EventHandler.class) && field.getType() == Listener.class;
+        return field.isAnnotationPresent(EventHandler.class) && Listener.class.isAssignableFrom(field.getType());
     }
 
     /**
