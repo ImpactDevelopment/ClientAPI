@@ -60,7 +60,7 @@ public abstract class Module extends Node implements IModule {
             this.name = data.name();
             this.description = data.description();
 
-            this.bind = new Keybind(Keybind.Type.HOLD, data.bind(), type -> {
+            this.bind = new Keybind(Keybind.Type.TOGGLE, data.bind(), type -> {
                 if (type == CLICK)
                     Module.this.toggle();
             });
