@@ -78,8 +78,9 @@ public final class Listener<T> implements EventHook<T> {
      */
     @Override
     public final void invoke(T event) {
-        if (Arrays.stream(filters).filter(filter -> !filter.test(event)).count() > 0)
-            return;
+        for (Predicate<T> filter : filters)
+            if (!filter.test(event))
+                return;
 
         this.hook.invoke(event);
     }

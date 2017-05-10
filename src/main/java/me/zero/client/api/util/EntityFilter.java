@@ -57,8 +57,9 @@ public final class EntityFilter implements Helper {
         this.passive = (BooleanType) node.getValue(passive);
 
         this.predicate = e -> {
-            if (Arrays.stream(checks).filter(filter -> !filter.test(e)).count() > 0)
-                return false;
+            for (Predicate<Entity> check : checks)
+                if (!check.test(e))
+                    return false;
 
             if (this.walls != null && !this.walls.getState() && !mc.player.canEntityBeSeen(e))
                 return false;
