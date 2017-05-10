@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 /**
  * Annotation to mark fields as Number Values
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */

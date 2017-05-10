@@ -13,8 +13,6 @@ import static org.lwjgl.opengl.GL11.*;
 /**
  * A vector with a X, Y, and Z position
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/12/2017 12:00 PM
  */
@@ -31,8 +29,6 @@ public final class Vec3 {
     /**
      * Sets the Vector X value
      *
-     * @since 1.0
-     *
      * @param x The new X value
      * @return This Vector
      */
@@ -43,8 +39,6 @@ public final class Vec3 {
 
     /**
      * Sets the Vector Y value
-     *
-     * @since 1.0
      *
      * @param y The new Y value
      * @return This Vector
@@ -57,8 +51,6 @@ public final class Vec3 {
     /**
      * Sets the Vector Z value
      *
-     * @since 1.0
-     *
      * @param z The new Z value
      * @return This Vector
      */
@@ -68,8 +60,6 @@ public final class Vec3 {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The vector x value
      */
     public final double getX() {
@@ -77,8 +67,6 @@ public final class Vec3 {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The vector y value
      */
     public final double getY() {
@@ -86,8 +74,6 @@ public final class Vec3 {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The vector z value
      */
     public final double getZ() {
@@ -96,8 +82,6 @@ public final class Vec3 {
 
     /**
      * Adds the X, Y and Z of one vector to this vector
-     *
-     * @since 1.0
      *
      * @param vector Vector being added
      * @return The new vector
@@ -108,8 +92,6 @@ public final class Vec3 {
 
     /**
      * Adds the specified X, Y and Z to this vector
-     *
-     * @since 1.0
      *
      * @param x X value being added
      * @param y Y value being added
@@ -123,8 +105,6 @@ public final class Vec3 {
     /**
      * Subtracts the X, Y and Z of one vector from this vector
      *
-     * @since 1.0
-     *
      * @param vector Vector being added
      * @return The new vector
      */
@@ -134,8 +114,6 @@ public final class Vec3 {
 
     /**
      * Subtracts the specified X, Y and Z from this vector
-     *
-     * @since 1.0
      *
      * @param x X value being subtracted
      * @param y Y value being subtracted
@@ -149,8 +127,6 @@ public final class Vec3 {
     /**
      * Multiplies the X, Y and Z of this vector by a scale
      *
-     * @since 1.0
-     *
      * @param scale The scale
      * @return The new vector
      */
@@ -160,8 +136,6 @@ public final class Vec3 {
 
     /**
      * Calculates the distance to another Vec3
-     *
-     * @since 1.0
      *
      * @return The distance
      */
@@ -174,8 +148,6 @@ public final class Vec3 {
 
     /**
      * Determines the rotations from this vector to another vector
-     *
-     * @since 1.0
      *
      * @param vector The other vector
      * @return The rotations
@@ -192,8 +164,6 @@ public final class Vec3 {
 
     /**
      * Returns the projected coordinates of this Vector
-     *
-     * @since 1.0
      *
      * @return Projected Coordinates as a Vec3
      */

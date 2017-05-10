@@ -8,8 +8,6 @@ import net.minecraft.entity.MoverType;
  *
  * @see net.minecraft.entity.Entity#move(net.minecraft.entity.MoverType, double, double, double)
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
@@ -33,8 +31,6 @@ public final class MoveEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The mover type
      */
     public final MoverType getType() {
@@ -43,8 +39,6 @@ public final class MoveEvent extends Cancellable {
 
     /**
      * Sets the X motion value
-     *
-     * @since 1.0
      *
      * @param x New X motion
      * @return This event
@@ -56,8 +50,6 @@ public final class MoveEvent extends Cancellable {
 
     /**
      * Sets the Y motion value
-     *
-     * @since 1.0
      *
      * @param y New Y motion
      * @return This event
@@ -71,8 +63,6 @@ public final class MoveEvent extends Cancellable {
     /**
      * Sets the Z motion value
      *
-     * @since 1.0
-     *
      * @param z New Z motion
      * @return This event
      */
@@ -82,8 +72,6 @@ public final class MoveEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The X motion
      */
     public final double getX() {
@@ -91,8 +79,6 @@ public final class MoveEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Y motion
      */
     public final double getY() {
@@ -100,8 +86,6 @@ public final class MoveEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The Z motion
      */
     public final double getZ() {

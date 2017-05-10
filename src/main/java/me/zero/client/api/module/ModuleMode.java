@@ -6,8 +6,6 @@ import me.zero.client.api.util.keybind.Keybind;
 /**
  * A type of module intended for use as a sub-module
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
@@ -51,8 +49,6 @@ public class ModuleMode<T extends Module> implements IModule {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The name of the mode
      */
     public final String getName() {
@@ -60,8 +56,6 @@ public class ModuleMode<T extends Module> implements IModule {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The parent module
      */
     public final Module getParent() {

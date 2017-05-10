@@ -7,8 +7,6 @@ import net.minecraft.entity.Entity;
  * Called when 2 entities collide with one another.
  * If cancelled, the collision doesn't occur.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
@@ -30,8 +28,6 @@ public final class EntityCollisionEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The entity being collided into
      */
     public final Entity getEntity() {
@@ -39,8 +35,6 @@ public final class EntityCollisionEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return Entity colliding into other entity
      */
     public final Entity getCollidingEntity() {

@@ -9,8 +9,6 @@ import java.util.StringJoiner;
 /**
  * Reads from an InputStream
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/15/2017 12:00 PM
  */
@@ -27,8 +25,6 @@ public final class StreamReader {
 
     /**
      * Reads the stream and returns the output
-     *
-     * @since 1.0
      *
      * @return The stream's output
      */

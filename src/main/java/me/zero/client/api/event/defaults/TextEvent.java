@@ -4,8 +4,6 @@ package me.zero.client.api.event.defaults;
  * Called in FontRenderer when text is rendered
  * and string width is checked
  *
- * @since 1.0
- *
  * @author Brady
  * @since 3/30/2017 12:00 PM
  */
@@ -21,8 +19,6 @@ public final class TextEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The text being rendered
      */
     public final String getText() {
@@ -31,8 +27,6 @@ public final class TextEvent {
 
     /**
      * Sets the text being rendered
-     *
-     * @since 1.0
      *
      * @param text New text
      * @return This event

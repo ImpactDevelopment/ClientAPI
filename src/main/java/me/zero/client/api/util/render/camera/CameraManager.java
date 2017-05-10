@@ -5,8 +5,6 @@ import me.zero.client.api.manage.Manager;
 /**
  * Used to store all of the
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
@@ -30,8 +28,6 @@ public final class CameraManager extends Manager<Camera> {
     /**
      * Registers a camera to the Manager
      *
-     * @since 1.0
-     *
      * @param camera Camera being registered
      */
     final void register(Camera camera) {
@@ -40,8 +36,6 @@ public final class CameraManager extends Manager<Camera> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The instance of the CameraManager
      */
     public static CameraManager getInstance() {

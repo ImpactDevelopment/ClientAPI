@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 /**
  * EventManager, Used to handle all Event Flow
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
@@ -48,8 +46,6 @@ public final class EventManager {
      * @see me.zero.client.api.event.Listener
      * @see #subscribe(Object)
      *
-     * @since 1.0
-     *
      * @param objects The array of objects
      */
     public static void subscribe(Object... objects) {
@@ -61,8 +57,6 @@ public final class EventManager {
      *
      * @see me.zero.client.api.event.Listener
      * @see #subscribe(Object)
-     *
-     * @since 1.0
      *
      * @param objects The list of objects
      */
@@ -76,8 +70,6 @@ public final class EventManager {
      * form of {@code Listeners}
      *
      * @see me.zero.client.api.event.Listener
-     *
-     * @since 1.0
      *
      * @param object The object containing possible Event Listeners
      */
@@ -98,8 +90,6 @@ public final class EventManager {
      *
      * @see #subscribe(Listener)
      *
-     * @since 1.0
-     *
      * @param object Parent object
      * @param field Listener field
      */
@@ -114,8 +104,6 @@ public final class EventManager {
 
     /**
      * Subscribes a Listener to the Subscription Map
-     *
-     * @since 1.0
      *
      * @param listener The listener being registered
      */
@@ -143,8 +131,6 @@ public final class EventManager {
      *
      * @see #subscribe(Object)
      *
-     * @since 1.0
-     *
      * @param object The object being unsubscribed
      */
     public static void unsubscribe(Object object) {
@@ -165,8 +151,6 @@ public final class EventManager {
      * @see me.zero.client.api.event.Listener
      * @see #unsubscribe(Object)
      *
-     * @since 1.0
-     *
      * @param objects The array of objects
      */
     public static void unsubscribe(Object... objects) {
@@ -178,8 +162,6 @@ public final class EventManager {
      *
      * @see me.zero.client.api.event.Listener
      * @see #unsubscribe(Object)
-     *
-     * @since 1.0
      *
      * @param objects The list of objects
      */
@@ -194,8 +176,6 @@ public final class EventManager {
      *
      * @see me.zero.client.api.event.EventHandler
      *
-     * @since 1.0
-     *
      * @param field Field being checked
      * @return Whether or not the Field is valid
      */
@@ -208,8 +188,6 @@ public final class EventManager {
      * Done via Reflection Method Invokation
      *
      * @see me.zero.client.api.event.Listener#invoke(Object)
-     *
-     * @since 1.0
      *
      * @param event Event being called
      */

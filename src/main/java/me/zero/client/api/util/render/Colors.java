@@ -8,8 +8,6 @@ import java.awt.*;
 /**
  * A collection of methods to help with color values
  *
- * @since 1.0
- *
  * @author Brady
  * @since 4/4/2017 12:00 PM
  */
@@ -19,8 +17,6 @@ public final class Colors implements Helper {
 
     /**
      * Parses the RGBA values from a hex value
-     *
-     * @since 1.0
      *
      * @param hex The hex value
      * @return The parsed RGBA array
@@ -37,8 +33,6 @@ public final class Colors implements Helper {
     /**
      * Gets the hex value from a color code
      *
-     * @since 1.0
-     *
      * @param cc The color code
      * @return Hex corresponding to color code
      */
@@ -48,8 +42,6 @@ public final class Colors implements Helper {
 
     /**
      * Blends two colors with the specified blend amount (percentage)
-     *
-     * @since 1.0
      *
      * @param c1 First color
      * @param c2 Second color
@@ -74,8 +66,6 @@ public final class Colors implements Helper {
     /**
      * Parses the hex value from RGB/RGBA values
      *
-     * @since 1.0
-     *
      * @param color The RGB/RGBA array
      * @return The parsed hex value
      */
@@ -89,8 +79,6 @@ public final class Colors implements Helper {
     /**
      * Parses the hex value from RGB
      *
-     * @since 1.0
-     *
      * @param r Red value
      * @param g Green value
      * @param b Blue value
@@ -102,8 +90,6 @@ public final class Colors implements Helper {
 
     /**
      * Parses the hex value from RGB
-     *
-     * @since 1.0
      *
      * @param r Red value
      * @param g Green value
@@ -117,8 +103,6 @@ public final class Colors implements Helper {
     /**
      * Parses the hex value from RGBA
      *
-     * @since 1.0
-     *
      * @param r Red value
      * @param g Green value
      * @param b Blue value
@@ -131,8 +115,6 @@ public final class Colors implements Helper {
 
     /**
      * Parses the hex value from RGBA
-     *
-     * @since 1.0
      *
      * @param r Red value
      * @param g Green value
@@ -155,8 +137,6 @@ public final class Colors implements Helper {
     /**
      * Returns the current rainbow hex
      *
-     * @since 1.0
-     *
      * @return Rainbow hex
      */
     public static int rainbow() {
@@ -166,8 +146,6 @@ public final class Colors implements Helper {
     /**
      * Returns the current rainbow hex with custom
      * saturation and brightness.
-     *
-     * @since 1.0
      *
      * @param saturation The color saturation applied (0.0 -> 1.0)
      * @param brightness The color brightness applied (0.0 -> 1.0)
@@ -182,8 +160,6 @@ public final class Colors implements Helper {
      * parameter, offset is used to offset the
      * System current millisecond time
      *
-     * @since 1.0
-     *
      * @param offset The offset added onto the current millisecond time
      * @return Rainbow hex
      */
@@ -196,8 +172,6 @@ public final class Colors implements Helper {
      * saturation and brightness. An extra parameter,
      * offset is used to offset the System current
      * millisecond time
-     *
-     * @since 1.0
      *
      * @param saturation The color saturation applied (0.0 -> 1.0)
      * @param brightness The color brightness applied (0.0 -> 1.0)
@@ -213,8 +187,6 @@ public final class Colors implements Helper {
      * Returns a random color, that has an
      * RGB color range of 0 to 255
      *
-     * @since 1.0
-     *
      * @return A random color
      */
     public static int random() {
@@ -224,8 +196,6 @@ public final class Colors implements Helper {
     /**
      * Returns a random color that has the specified
      * RGB color range, as a float (0.0 to 1.0)
-     *
-     * @since 1.0
      *
      * @param min Minimum R/G/B
      * @param max Maximum R/G/B
@@ -238,8 +208,6 @@ public final class Colors implements Helper {
     /**
      * Returns a random color that has the specified
      * RGB color range, as an integer (0 to 255)
-     *
-     * @since 1.0
      *
      * @param min Minimum R/G/B
      * @param max Maximum R/G/B
@@ -255,8 +223,6 @@ public final class Colors implements Helper {
      * Clamps a float color channel value to be within
      * the 0.0 to 1.0 bounds.
      *
-     * @since 1.0
-     *
      * @param val Color value
      * @return Clamped value
      */
@@ -267,8 +233,6 @@ public final class Colors implements Helper {
     /**
      * Clamps a integer color channel value to be within
      * the 0 to 255 bounds.
-     *
-     * @since 1.0
      *
      * @param val Color value
      * @return Clamped value

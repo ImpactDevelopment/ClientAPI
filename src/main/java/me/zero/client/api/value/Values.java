@@ -16,8 +16,6 @@ import java.util.Arrays;
 /**
  * Class used to discover values from various holders
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
@@ -27,8 +25,6 @@ public final class Values {
 
     /**
      * Discovers all of the Values in a node, then registers them
-     *
-     * @since 1.0
      *
      * @param node Node being scanned
      */
@@ -42,8 +38,6 @@ public final class Values {
      * Returns whether or not the specified field
      * has a value annotation or not.
      *
-     * @since 1.0
-     *
      * @param field Field being checked
      * @return If the field has a value annotation
      */
@@ -54,8 +48,6 @@ public final class Values {
     /**
      * Gets the class of the value annotation belonging
      * to a field, null if there is none.
-     *
-     * @since 1.0
      *
      * @param field Field being checked
      * @return The value annotation of the field
@@ -75,8 +67,6 @@ public final class Values {
     /**
      * Executes checks before using the TypeResolver to
      * get the Value from the Field.
-     *
-     * @since 1.0
      *
      * @param parent Object containing value field
      * @param field Field representing value
@@ -102,8 +92,6 @@ public final class Values {
 
     /**
      * Sets up the NumberType value
-     *
-     * @since 1.0
      *
      * @param type The type
      * @param field The field that has the type

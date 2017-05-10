@@ -13,8 +13,6 @@ import static org.lwjgl.opengl.ARBVertexShader.*;
 /**
  * Used to create ARB Shader Programs with OpenGL
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/16/2017 12:00 PM
  */
@@ -43,8 +41,6 @@ public abstract class Shader implements Helper {
 
     /**
      * Attaches the shader program
-     *
-     * @since 1.0
      */
     public final void attach() {
         glUseProgramObjectARB(programID);
@@ -53,8 +49,6 @@ public abstract class Shader implements Helper {
 
     /**
      * Detaches the shader program
-     *
-     * @since 1.0
      */
     public final void detach() {
         glUseProgramObjectARB(0);
@@ -63,15 +57,11 @@ public abstract class Shader implements Helper {
     /**
      * Called after the shader program is
      * attached to update the uniform vars
-     *
-     * @since 1.0
      */
     public abstract void update();
 
     /**
      * Deletes this ShaderProgram
-     *
-     * @since 1.0
      */
     public final void delete() {
         glUseProgramObjectARB(0);
@@ -84,8 +74,6 @@ public abstract class Shader implements Helper {
 
     /**
      * Gets a uniform variable from the specified name
-     *
-     * @since 1.0
      *
      * @param name The Uniform Name
      * @return The Uniform Variable

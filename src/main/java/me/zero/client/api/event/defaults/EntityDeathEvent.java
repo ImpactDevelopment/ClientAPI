@@ -6,8 +6,6 @@ import net.minecraft.util.DamageSource;
 /**
  * Called from EntityLivingBase#onDeath
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/28/2017 12:00 PM
  */
@@ -29,8 +27,6 @@ public final class EntityDeathEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The entity that died
      */
     public final EntityLivingBase getEntity() {
@@ -38,8 +34,6 @@ public final class EntityDeathEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The DamageSource that caused the Death
      */
     public final DamageSource getSource() {

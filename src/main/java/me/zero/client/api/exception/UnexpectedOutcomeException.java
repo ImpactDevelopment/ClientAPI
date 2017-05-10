@@ -5,8 +5,6 @@ package me.zero.client.api.exception;
  * Essentially, the process cannot proceed because of the outcome.
  * Suspends the Java Virtual Machine.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */

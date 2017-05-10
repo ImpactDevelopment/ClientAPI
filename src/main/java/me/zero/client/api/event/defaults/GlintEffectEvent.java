@@ -6,8 +6,6 @@ import me.zero.client.api.event.type.Cancellable;
  * Called when the enchanted effect of a
  * layer or an item is being rendered.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/19/2017 12:00 PM
  */
@@ -23,8 +21,6 @@ public final class GlintEffectEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The glint object
      */
     public final GlintTarget getTarget() {

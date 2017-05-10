@@ -5,8 +5,6 @@ import net.minecraft.client.multiplayer.WorldClient;
 /**
  * Called when a world is loaded.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
@@ -22,8 +20,6 @@ public final class WorldLoadEvent {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The world being loaded
      */
     public final WorldClient getWorld() {

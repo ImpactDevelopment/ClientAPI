@@ -7,8 +7,6 @@ import net.minecraft.util.text.ITextComponent;
 /**
  * Called whenever a chat message is sent or received.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
@@ -34,8 +32,6 @@ public final class ChatEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The message for this event
      */
     public final String getMessage() {
@@ -45,8 +41,6 @@ public final class ChatEvent extends Cancellable {
     /**
      * Sets this event's chat message, only works if the
      * message is being sent.
-     *
-     * @since 1.0
      *
      * @param message Message being set
      * @return This Event
@@ -61,8 +55,6 @@ public final class ChatEvent extends Cancellable {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The type of event
      */
     public final Type getType() {

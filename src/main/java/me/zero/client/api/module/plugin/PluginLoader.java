@@ -24,8 +24,6 @@ import java.util.jar.JarFile;
 /**
  * Used to Load plugins
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/26/2017 12:00 PM
  */
@@ -48,8 +46,6 @@ public final class PluginLoader {
 
     /**
      * Loads plugins
-     *
-     * @since 1.0
      */
     private void loadPlugins() {
         File dir = new File(this.pluginDir);
@@ -67,8 +63,6 @@ public final class PluginLoader {
 
     /**
      * Loads a single plugin from the file
-     *
-     * @since 1.0
      *
      * @param file The file of the plugin
      */
@@ -133,8 +127,6 @@ public final class PluginLoader {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The list of plugins that were discovered
      */
     public final List<Plugin> getPlugins() {

@@ -14,8 +14,6 @@ import static org.lwjgl.input.Keyboard.*;
  *
  * @see me.zero.client.api.gui.tab.ITabGuiMenu
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */

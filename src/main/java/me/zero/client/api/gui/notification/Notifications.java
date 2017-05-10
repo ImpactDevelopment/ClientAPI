@@ -6,8 +6,6 @@ import java.util.Set;
 /**
  * Essentially a Notification Manager, only takes in a renderer
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/6/2017 12:00 PM
  */
@@ -30,8 +28,6 @@ public class Notifications {
 	/**
 	 * Creates a notification
 	 *
-	 * @since 1.0
-	 *
 	 * @param header The header text
 	 * @param subtext The subtext
 	 */
@@ -41,8 +37,6 @@ public class Notifications {
 
 	/**
 	 * Creates a notification
-	 *
-	 * @since 1.0
 	 *
 	 * @param header The header text
 	 * @param subtext The subtext
@@ -55,8 +49,6 @@ public class Notifications {
 	/**
 	 * Creates a notification
 	 *
-	 * @since 1.0
-	 *
 	 * @param header The header text
 	 * @param subtext The subtext
 	 * @param fade The fade time
@@ -68,8 +60,6 @@ public class Notifications {
 
 	/**
 	 * Renders the nofications
-	 *
-	 * @since 1.0
 	 */
 	public void render() {
 		renderer.draw(notifications);

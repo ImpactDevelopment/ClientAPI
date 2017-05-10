@@ -16,8 +16,6 @@ import static me.zero.client.api.util.Messages.*;
 /**
  * Handles and executes commands.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
@@ -64,8 +62,6 @@ public class CommandHandler {
      * Parses the message and then forwards the
      * data to #run(String, List<String>)
      *
-     * @since 1.0
-     *
      * @param message The message
      * @return Whether or not parsing was successful
      */
@@ -86,8 +82,6 @@ public class CommandHandler {
 
     /**
      * Attempts to run a command from the given chat message
-     *
-     * @since 1.0
      *
      * @param label The command label
      * @param args The arguments for the command
@@ -113,8 +107,6 @@ public class CommandHandler {
      * Loops through a Command's labels and sees if the specified
      * header matches one of them.
      *
-     * @since 1.0
-     *
      * @param label The label being checked
      * @param cmd The command being checked
      * @return Whether or not the label matches
@@ -124,8 +116,6 @@ public class CommandHandler {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The command prefix
      */
     public String getPrefix() {

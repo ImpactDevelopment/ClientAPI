@@ -21,8 +21,6 @@ import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
 /**
  * Some basic events that the client uses
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */

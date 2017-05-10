@@ -3,8 +3,6 @@ package me.zero.client.api.command.parse;
 /**
  * Represents an argument
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
@@ -32,8 +30,6 @@ public final class CommandArg<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The label
      */
     public final String getLabel() {
@@ -41,8 +37,6 @@ public final class CommandArg<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The type
      */
     public final Class<T> getType() {
@@ -50,8 +44,6 @@ public final class CommandArg<T> {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The parser
      */
     public final ArgumentParser<T> getParser() {

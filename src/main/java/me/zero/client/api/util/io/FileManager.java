@@ -13,8 +13,6 @@ import java.util.List;
 /**
  * Used for File I/O
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/23/2017 12:00 PM
  */
@@ -25,8 +23,6 @@ public final class FileManager {
     /**
      * Reads from a file and then returns a List
      * containing all of the data from the file.
-     *
-     * @since 1.0
      *
      * @param file File being read from
      * @return The list of data
@@ -59,8 +55,6 @@ public final class FileManager {
      * Writes data to a file, completely overriding the
      * contents of the file.
      *
-     * @since 1.0
-     *
      * @param data Data being written
      * @param file File being written to
      */
@@ -83,8 +77,6 @@ public final class FileManager {
 
     /**
      * Creates a file from the specified file path
-     *
-     * @since 1.0
      *
      * @param file The file path
      */
@@ -110,8 +102,6 @@ public final class FileManager {
     /**
      * Checks if the specified file path belongs
      * to a file.
-     *
-     * @since 1.0
      *
      * @param file The file path
      * @return Whether or not the file exists

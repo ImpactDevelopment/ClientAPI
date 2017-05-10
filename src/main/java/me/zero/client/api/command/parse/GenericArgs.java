@@ -7,8 +7,6 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 /**
  * Class for making CommandArgs.
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/16/2017 12:00 PM
  */
@@ -18,8 +16,6 @@ public final class GenericArgs {
 
     /**
      * Creates a String argument
-     *
-     * @since 1.0
      *
      * @param label The argument label
      * @return The created argument
@@ -31,8 +27,6 @@ public final class GenericArgs {
     /**
      * Creates a player argument, defined by NetworkPlayerInfo
      *
-     * @since 1.0
-     *
      * @param label The argument label
      * @return The created argument
      */
@@ -43,8 +37,6 @@ public final class GenericArgs {
     /**
      * Creates a number argument, defaults to a double
      *
-     * @since 1.0
-     *
      * @param label The argument label
      * @return The created argument
      */
@@ -54,8 +46,6 @@ public final class GenericArgs {
 
     /**
      * Creates a CommandArg
-     *
-     * @since 1.0
      *
      * @param label Argument label
      * @param tClass Argument type

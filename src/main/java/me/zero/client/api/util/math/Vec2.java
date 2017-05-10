@@ -13,8 +13,6 @@ import static org.lwjgl.opengl.GL11.*;
 /**
  * Vector with an X and Y position
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/12/2017 12:00 PM
  */
@@ -37,8 +35,6 @@ public final class Vec2 {
     /**
      * Sets the Vector X value
      *
-     * @since 1.0
-     *
      * @param x The new X value
      * @return This Vector
      */
@@ -50,8 +46,6 @@ public final class Vec2 {
     /**
      * Sets the Vector Y value
      *
-     * @since 1.0
-     *
      * @param y The new Y value
      * @return This Vector
      */
@@ -61,8 +55,6 @@ public final class Vec2 {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The vector x value
      */
     public final float getX() {
@@ -70,8 +62,6 @@ public final class Vec2 {
     }
 
     /**
-     * @since 1.0
-     *
      * @return The vector y value
      */
     public final float getY() {
@@ -80,8 +70,6 @@ public final class Vec2 {
 
     /**
      * Adds the X and Y of one vector to this vector
-     *
-     * @since 1.0
      *
      * @param vector Vector being added
      * @return The new vector
@@ -92,8 +80,6 @@ public final class Vec2 {
 
     /**
      * Adds the specified X and Y to this vector
-     *
-     * @since 1.0
      *
      * @param x X value being added
      * @param y Y value being added
@@ -106,8 +92,6 @@ public final class Vec2 {
     /**
      * Adds the specified X and Y to this vector
      *
-     * @since 1.0
-     *
      * @param x X value being added
      * @param y Y value being added
      * @return The new vector
@@ -119,8 +103,6 @@ public final class Vec2 {
     /**
      * Subtracts the X and Y of one vector from this vector
      *
-     * @since 1.0
-     *
      * @param vector Vector being subtracted by
      * @return The new vector
      */
@@ -130,8 +112,6 @@ public final class Vec2 {
 
     /**
      * Subtracts the specified X and Y from this vector
-     *
-     * @since 1.0
      *
      * @param x X value being subtracted
      * @param y Y value being subtracted
@@ -144,8 +124,6 @@ public final class Vec2 {
     /**
      * Subtracts the specified X and Y from this vector
      *
-     * @since 1.0
-     *
      * @param x X value being subtracted
      * @param y Y value being subtracted
      * @return The new vector
@@ -157,8 +135,6 @@ public final class Vec2 {
     /**
      * Multiplies the X and Y of this vector by a scale
      *
-     * @since 1.0
-     *
      * @param scale The scale
      * @return The new vector
      */
@@ -169,8 +145,6 @@ public final class Vec2 {
     /**
      * Creates a Vec3 from this Vec2
      *
-     * @since 1.0
-     *
      * @return This Vec2 as a Vec3
      */
     public final Vec3 toVec3() {
@@ -179,8 +153,6 @@ public final class Vec2 {
 
     /**
      * Calculates the distance to another Vec2
-     *
-     * @since 1.0
      *
      * @return The distance
      */
@@ -193,8 +165,6 @@ public final class Vec2 {
     /**
      * Uses GLU#gluUnproject to project the 2D position
      * of this vector to a 3D position in the world.
-     *
-     * @since 1.0
      *
      * @return World position of this vector
      */

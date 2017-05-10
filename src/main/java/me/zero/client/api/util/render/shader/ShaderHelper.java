@@ -9,8 +9,6 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 /**
  * Some utils for ARB Shaders
  *
- * @since 1.0
- *
  * @author Brady
  * @since 2/16/2017 12:00 PM
  */
@@ -20,8 +18,6 @@ final class ShaderHelper {
 
     /**
      * Loads a shader program from its program ID
-     *
-     * @since 1.0
      *
      * @param programID The ARB Shader program ID
      */
@@ -34,8 +30,6 @@ final class ShaderHelper {
 
     /**
      * Loads a shader of the specified type from the specified path
-     *
-     * @since 1.0
      *
      * @param path Shader path
      * @param type Shader type
@@ -56,8 +50,6 @@ final class ShaderHelper {
     /**
      * Gets the error that an object produced
      *
-     * @since 1.0
-     *
      * @param objID The object's ID
      * @return The error
      */
@@ -67,8 +59,6 @@ final class ShaderHelper {
 
     /**
      * Checks an arb object parameter
-     *
-     * @since 1.0
      *
      * @param objID The object's ID
      * @param name The name of the object

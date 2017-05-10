@@ -19,8 +19,6 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  *
  * @see me.zero.client.api.module.Category
  *
- * @since 1.0
- *
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
@@ -77,8 +75,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Sets the modes of this module
      *
-     * @since 1.0
-     *
      * @param modes Modes for this mod
      */
     protected final void setModes(ModuleMode... modes) {
@@ -92,8 +88,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Returns whether or not the module has modes
      *
-     * @since 1.0
-     *
      * @return True if this module has modes, false if not
      */
     public final boolean hasModes() {
@@ -104,8 +98,6 @@ public abstract class Module extends Node implements IModule {
      * Sets the module's mode to the specified mode.
      * Null will be returned if the mode is unable to
      * be set.
-     *
-     * @since 1.0
      *
      * @param mode Mode being set
      * @return The new mode
@@ -130,8 +122,6 @@ public abstract class Module extends Node implements IModule {
      * will be thrown if the index is less than 0 or
      * exceeds the maximum index of the mode array.
      *
-     * @since 1.0
-     *
      * @param index Index of the mode
      * @return The new mode
      */
@@ -145,8 +135,6 @@ public abstract class Module extends Node implements IModule {
      * Null will be returned if there isn't a mode
      * with the specified name
      *
-     * @since 1.0
-     *
      * @param name The mode name
      * @return The new mode
      */
@@ -158,8 +146,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Gets a mode that belongs to this
      * module from the mode's name
-     *
-     * @since 1.0
      *
      * @return Mode from name
      */
@@ -173,8 +159,6 @@ public abstract class Module extends Node implements IModule {
      * null will be returned if this module doesn't have
      * any modes.
      *
-     * @since 1.0
-     *
      * @return List of modes
      */
     public final List<ModuleMode> getModes() {
@@ -185,8 +169,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Switches the mode to the mode following
      * the current mode in the list of modes.
-     *
-     * @since 1.0
      *
      * @return The new mode
      */
@@ -203,8 +185,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Switched the mode to the mode preceding
      * the current mode in the list of modes.
-     * @since 1.0
-     *
      * @return The new mode
      */
     public final ModuleMode lastMode() {
@@ -220,8 +200,6 @@ public abstract class Module extends Node implements IModule {
     /**
      * Returns this Module's mode, if it has modes
      *
-     * @since 1.0
-     *
      * @return The current mode
      */
     public final ModuleMode getMode() {
@@ -233,8 +211,6 @@ public abstract class Module extends Node implements IModule {
      * Called when mode related actions are carried out,
      * throws an {@code ActionNotSupportedException} if
      * modes aren't supported by this module.
-     *
-     * @since 1.0
      */
     private void checkModes() {
         if (!hasModes())
