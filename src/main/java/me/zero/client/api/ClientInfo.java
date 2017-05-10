@@ -6,7 +6,7 @@ package me.zero.client.api;
  * @since 1.0
  *
  * @author Brady
- * @since 1/24/2017 12:00PM
+ * @since 1/24/2017 12:00 PM
  */
 public final class ClientInfo {
 

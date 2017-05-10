@@ -7,7 +7,7 @@ package me.zero.client.api.exception;
  * @since 1.0
  *
  * @author Brady
- * @since 4/25/2017 12:00PM
+ * @since 4/25/2017 12:00 PM
  */
 public final class ActionNotSupportedException extends RuntimeException {
 

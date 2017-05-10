@@ -8,7 +8,7 @@ import java.util.Collection;
  * @since 1.0
  *
  * @author Brady
- * @since 1/6/2017 12:00PM
+ * @since 1/6/2017 12:00 PM
  */
 public interface INotificationRenderer {
 

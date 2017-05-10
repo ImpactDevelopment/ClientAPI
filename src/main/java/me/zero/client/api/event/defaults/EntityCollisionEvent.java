@@ -10,7 +10,7 @@ import net.minecraft.entity.Entity;
  * @since 1.0
  *
  * @author Brady
- * @since 4/8/2017 12:00PM
+ * @since 4/8/2017 12:00 PM
  */
 public final class EntityCollisionEvent extends Cancellable {
 

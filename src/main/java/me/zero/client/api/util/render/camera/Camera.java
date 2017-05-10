@@ -17,7 +17,7 @@ import org.lwjgl.opengl.Display;
  * @since 1.0
  *
  * @author Brady
- * @since 2/4/2017 12:00PM
+ * @since 2/4/2017 12:00 PM
  */
 public class Camera {
 

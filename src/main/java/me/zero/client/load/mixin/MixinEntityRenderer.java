@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00PM
+ * @since 4/27/2017 12:00 PM
  */
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {

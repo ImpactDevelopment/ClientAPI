@@ -6,7 +6,7 @@ package me.zero.client.api.command;
  * @since 1.0
  *
  * @author Brady
- * @since 4/9/2017 12:00PM
+ * @since 4/9/2017 12:00 PM
  */
 public final class CommandUsage {
 

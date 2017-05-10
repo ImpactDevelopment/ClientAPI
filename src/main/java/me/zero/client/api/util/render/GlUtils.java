@@ -23,7 +23,7 @@ import static org.lwjgl.opengl.GL11.*;
  * @since 1.0
  *
  * @author Brady
- * @since 2/20/2017 12:00PM
+ * @since 2/20/2017 12:00 PM
  */
 public final class GlUtils {
 
