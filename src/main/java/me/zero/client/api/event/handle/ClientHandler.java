@@ -44,10 +44,10 @@ public final class ClientHandler implements Helper {
      */
     @EventHandler
     private final Listener<KeyEvent> keyListener = new Listener<>(event ->
-        Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
+            Keybind.getKeybinds().stream().filter(keybind -> keybind.getType() == Keybind.Type.TOGGLE && keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
 
     /**
-     *
+     * Handles profiling events
      */
     @EventHandler
     private final Listener<ProfilerEvent> profilerListener = new Listener<>(event -> {
@@ -70,6 +70,7 @@ public final class ClientHandler implements Helper {
             if (currentState != keyMap[i]) {
                 if (keyMap[i] = !keyMap[i])
                     EventManager.post(new KeyEvent(i));
+
                 Stream<Keybind> keybinds = Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == key);
                 if (currentState)
                     keybinds.forEach(Keybind::onPress);

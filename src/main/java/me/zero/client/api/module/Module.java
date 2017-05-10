@@ -6,6 +6,7 @@ import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.annotation.NoAnnotation;
 import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.ArrayList;
@@ -50,25 +51,28 @@ public abstract class Module extends Node implements IModule {
     private ModuleMode mode;
 
     public Module() {
-        if (this.getClass().isAnnotationPresent(Mod.class)) {
-            Mod data = this.getClass().getAnnotation(Mod.class);
+        Class<? extends Module> c = this.getClass();
+        boolean na = c.isAnnotationPresent(NoAnnotation.class);
+
+        if (c.isAnnotationPresent(Mod.class)) {
+            Mod data = c.getAnnotation(Mod.class);
 
             this.name = data.name();
             this.description = data.description();
 
-            this.bind = new Keybind(data.bind(), type -> {
+            this.bind = new Keybind(Keybind.Type.HOLD, data.bind(), type -> {
                 if (type == CLICK)
                     Module.this.toggle();
             });
-
-            this.type = Arrays.stream(this.getClass().getInterfaces())
-                    .filter(c -> c.isAnnotationPresent(Category.class))
-                    .findFirst().orElse(Category.Default.class);
-        } else {
-            throw new UnexpectedOutcomeException("Modules must have a Mod annotation!");
+        } else if (!na){
+            throw new UnexpectedOutcomeException("Modules are required to have a @Mod annotation if @NoAnnotation isn't present");
         }
 
-        if (ClientUtils.containsNull(name, description, type))
+        this.type = Arrays.stream(c.getInterfaces())
+                .filter(clazz -> clazz.isAnnotationPresent(Category.class))
+                .findFirst().orElse(Category.Default.class);
+
+        if (!na && ClientUtils.containsNull(name, description, type))
             throw new NullPointerException("One or more Mod members were null!");
     }
 

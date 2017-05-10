@@ -20,6 +20,11 @@ public final class Keybind {
     private static final List<Keybind> keybinds = new ArrayList<>();
 
     /**
+     * The type of keybind
+     */
+    private Type type;
+
+    /**
      * The KeyCode for this Keybind
      */
     private int key;
@@ -29,7 +34,8 @@ public final class Keybind {
      */
     private final Consumer<Action> consumer;
 
-    public Keybind(int key, Consumer<Action> consumer) {
+    public Keybind(Type type, int key, Consumer<Action> consumer) {
+        this.type = type;
         this.key = key;
         this.consumer = consumer;
         Keybind.keybinds.add(this);
@@ -50,8 +56,22 @@ public final class Keybind {
     }
 
     /**
-     * Called when a key's state has been
-     * switched from released to pressed
+     * @param type The new type
+     */
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    /**
+     * @return The type of keybind
+     */
+    public Type getType() {
+        return this.type;
+    }
+
+    /**
+     * Called when the key's state has been changed,
+     * indicating that an action should take place
      */
     public final void onClick() {
         consumer.accept(CLICK);
@@ -62,13 +82,17 @@ public final class Keybind {
      */
     public final void onPress() {
         consumer.accept(PRESS);
+        if (type == Type.HOLD)
+            onClick();
     }
 
     /**
-     * Claled when a key is released
+     * Called when a key is released
      */
     public final void onRelease() {
         consumer.accept(RELEASE);
+        if (type == Type.HOLD)
+            onClick();
     }
 
     /**
@@ -82,7 +106,19 @@ public final class Keybind {
      * Keybind type
      */
     public enum Type {
-        TOGGLE, HOLD
+        /**
+         * Calls onClick whenever the defined keycode's
+         * state is changed from false to true, indicating
+         * that the key was pressed.
+         */
+        TOGGLE,
+
+        /**
+         * Call onClick whenever the defined keycode's
+         * state is changed, indicating that the key was
+         * being held/released, and that changed.
+         */
+        HOLD
     }
 
     /**

@@ -76,6 +76,6 @@ public class ModuleMode<T extends Module> implements IModule {
 
     @Override
     public final Class<?> getType() {
-        return null;
+        return parent.getClass();
     }
 }
