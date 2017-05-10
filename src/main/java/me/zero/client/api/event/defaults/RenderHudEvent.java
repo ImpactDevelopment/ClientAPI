@@ -5,7 +5,8 @@ package me.zero.client.api.event.defaults;
  *
  * @since 1.0
  *
- * Created by Brady on 2/6/2017.
+ * @author Brady
+ * @since 2/6/2017 12:00PM
  */
 public final class RenderHudEvent {
 

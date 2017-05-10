@@ -8,7 +8,8 @@ import me.zero.client.api.event.type.Cancellable;
  *
  * @since 1.0
  *
- * Created by Brady on 2/19/2017.
+ * @author Brady
+ * @since 2/19/2017 12:00PM
  */
 public final class GlintEffectEvent extends Cancellable {
 

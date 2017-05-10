@@ -9,7 +9,8 @@ import net.minecraft.util.Timer;
  *
  * @since 1.0
  *
- * Created by Brady on 2/20/2017.
+ * @author Brady
+ * @since 2/20/2017 12:00PM
  */
 public interface IMinecraft {
 

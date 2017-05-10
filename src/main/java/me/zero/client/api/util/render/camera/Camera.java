@@ -16,7 +16,8 @@ import org.lwjgl.opengl.Display;
  *
  * @since 1.0
  *
- * Created by Brady on 2/4/2017.
+ * @author Brady
+ * @since 2/4/2017 12:00PM
  */
 public class Camera {
 

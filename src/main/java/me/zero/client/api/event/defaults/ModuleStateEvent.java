@@ -8,7 +8,8 @@ import me.zero.client.api.module.Module;
  *
  * @since 1.0
  *
- * Created by Brady on 4/5/2017.
+ * @author Brady
+ * @since 4/5/2017 12:00PM
  */
 public final class ModuleStateEvent extends Cancellable {
 

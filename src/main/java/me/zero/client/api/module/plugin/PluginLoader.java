@@ -26,7 +26,8 @@ import java.util.jar.JarFile;
  *
  * @since 1.0
  *
- * Created by Brady on 1/26/2017.
+ * @author Brady
+ * @since 1/26/2017 12:00PM
  */
 public final class PluginLoader {
 

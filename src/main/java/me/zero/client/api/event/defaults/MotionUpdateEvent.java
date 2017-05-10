@@ -13,7 +13,8 @@ import net.minecraft.util.math.AxisAlignedBB;
  *
  * @since 1.0
  *
- * Created by Brady on 2/12/2017.
+ * @author Brady
+ * @since 2/12/2017 12:00PM
  */
 public final class MotionUpdateEvent implements Helper {
 

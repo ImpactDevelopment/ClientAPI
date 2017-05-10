@@ -11,7 +11,8 @@ import java.util.Arrays;
  *
  * @since 1.0
  *
- * Created by Brady on 1/23/2017.
+ * @author Brady
+ * @since 1/23/2017 12:00PM
  */
 public final class ReflectionUtils {
 

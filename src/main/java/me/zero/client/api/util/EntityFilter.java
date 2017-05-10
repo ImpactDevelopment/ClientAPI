@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
  *
  * @since 1.0
  *
- * Created by Brady on 3/1/2017.
+ * @author Brady
+ * @since 3/1/2017 12:00PM
  */
 public final class EntityFilter implements Helper {
 

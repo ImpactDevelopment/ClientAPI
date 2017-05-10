@@ -7,7 +7,8 @@ import me.zero.client.api.event.type.EventState;
  *
  * @since 1.0
  *
- * Created by Brady on 2/10/2017.
+ * @author Brady
+ * @since 2/10/2017 12:00PM
  */
 public final class LivingUpdateEvent {
 

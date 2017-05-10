@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Created by Brady on 4/27/2017.
+ * @author Brady
+ * @since 4/27/2017 12:00PM
  */
 @Mixin(ItemRenderer.class)
 public abstract class MixinItemRenderer implements IItemRenderer {

@@ -5,7 +5,8 @@ package me.zero.client.wrapper;
  *
  * @since 1.0
  *
- * Created by Brady on 4/4/2017.
+ * @author Brady
+ * @since 4/4/2017 12:00PM
  */
 public interface IGameType {
 
