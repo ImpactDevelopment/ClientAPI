@@ -38,7 +38,7 @@ public final class Benchmark {
             for (int pass = 0; pass < passes; pass++) {
                 long time = System.nanoTime();
                 for (int i = 0; i < invokations; i++)
-                    EventManager.post(new BenchEvent("I like memes"));
+                    EventManager.post(new BenchEvent("Benchmark Event Invoked"));
 
                 long diff = System.nanoTime() - time;
                 results[pass] = diff;
