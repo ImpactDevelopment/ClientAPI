@@ -4,7 +4,7 @@ import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.Listener;
 
 /**
- * Instantiated and subcribed to the event manager
+ * Instantiated and subscribed to the event manager
  * to listen to the benchmarks events that are posted
  *
  * @author Brady
