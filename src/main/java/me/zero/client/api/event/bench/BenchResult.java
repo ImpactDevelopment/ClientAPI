@@ -23,7 +23,7 @@ public final class BenchResult {
      */
     private final long[] results;
 
-    public BenchResult(int passes, int invokations, long[] results) {
+    BenchResult(int passes, int invokations, long[] results) {
         this.passes = passes;
         this.invokations = invokations;
         this.results = results;
