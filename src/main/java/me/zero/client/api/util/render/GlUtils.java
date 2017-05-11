@@ -7,11 +7,6 @@ import me.zero.client.api.event.defaults.Render3DEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -33,9 +28,7 @@ public final class GlUtils {
     /**
      * Calls clinit
      */
-    public static void init() {}
-
-    static {
+    public static void init() {
         EventManager.subscribe(new Object() {
 
             @EventHandler
