@@ -69,15 +69,6 @@ public interface IEntity {
     Vec3 getLastTickPos();
 
     /**
-     * Calculates the predicted position that an entity will
-     * be in the specified amount of ticks
-     *
-     * @param ticks Time in ticks predicted
-     * @return The predicted position
-     */
-    Vec3 interpolate(float ticks);
-
-    /**
      * Converts the entity rotation angles to a {@code Vec2}
      *
      * @return Rotations as a {@code Vec2}
@@ -90,6 +81,15 @@ public interface IEntity {
      * @return Previous rotations as a {@code Vec2}
      */
     Vec2 getPrevRotations();
+
+    /**
+     * Calculates the predicted position that an entity will
+     * be in the specified amount of ticks
+     *
+     * @param ticks Time in ticks predicted
+     * @return The predicted position
+     */
+    Vec3 interpolate(float ticks);
 
     /**
      * Sets all forms of position and rotation in

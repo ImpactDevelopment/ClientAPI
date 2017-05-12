@@ -23,6 +23,10 @@ public final class Vec2 {
      */
     private float x, y;
 
+    public Vec2() {
+        this(0, 0);
+    }
+
     public Vec2(double x, double y) {
         this((float) x, (float) y);
     }
