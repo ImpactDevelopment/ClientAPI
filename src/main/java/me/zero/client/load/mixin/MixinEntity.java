@@ -33,11 +33,9 @@ public class MixinEntity implements IEntity {
     @Shadow public float rotationPitch;
     @Shadow public float prevRotationYaw;
     @Shadow public float prevRotationPitch;
-    @Shadow public int ticksExisted;
 
     private Vec3 pos, prevPos, lastTickPos;
     private Vec2 rotation, prevRotation;
-    private int lastTicksExisted;
 
     @Shadow public void move(MoverType type, double x, double y, double z) {}
 
@@ -87,10 +85,7 @@ public class MixinEntity implements IEntity {
         if (pos == null)
             pos = new Vec3();
 
-        if (needsUpdate())
-            pos.x(posX).y(posY).z(posZ);
-
-        return pos;
+        return pos.x(posX).y(posY).z(posZ);
     }
 
     @Override
@@ -98,10 +93,7 @@ public class MixinEntity implements IEntity {
         if (prevPos == null)
             prevPos = new Vec3();
 
-        if (needsUpdate())
-            prevPos.x(prevPosX).y(prevPosY).z(prevPosZ);
-
-        return prevPos;
+        return prevPos.x(prevPosX).y(prevPosY).z(prevPosZ);
     }
 
     @Override
@@ -109,10 +101,7 @@ public class MixinEntity implements IEntity {
         if (lastTickPos == null)
             lastTickPos = new Vec3();
 
-        if (needsUpdate())
-            lastTickPos.x(lastTickPosX).y(lastTickPosY).z(lastTickPosZ);
-
-        return lastTickPos;
+        return lastTickPos.x(lastTickPosX).y(lastTickPosY).z(lastTickPosZ);
     }
 
     @Override
@@ -120,10 +109,7 @@ public class MixinEntity implements IEntity {
         if (rotation == null)
             rotation = new Vec2();
 
-        if (needsUpdate())
-            rotation.x(rotationYaw).y(rotationPitch);
-
-        return rotation;
+        return rotation.x(rotationYaw).y(rotationPitch);
     }
 
     @Override
@@ -131,20 +117,11 @@ public class MixinEntity implements IEntity {
         if (prevRotation == null)
             prevRotation = new Vec2();
 
-        if (needsUpdate())
-            prevRotation.x(prevRotationYaw).y(prevRotationPitch);
-
-        return prevRotation;
+        return prevRotation.x(prevRotationYaw).y(prevRotationPitch);
     }
 
     @Override
     public Vec3 interpolate(float ticks) {
         return this.getLastTickPos().add(this.getPos().sub(this.getLastTickPos()).scale(ticks));
-    }
-
-    private boolean needsUpdate() {
-        boolean update = ticksExisted != lastTicksExisted;
-        lastTicksExisted = ticksExisted;
-        return update;
     }
 }
