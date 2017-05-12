@@ -27,6 +27,10 @@ public final class Vec2 {
         this(0, 0);
     }
 
+    public Vec2(Vec2 vector) {
+        this(vector.x, vector.y);
+    }
+
     public Vec2(double x, double y) {
         this((float) x, (float) y);
     }
@@ -153,6 +157,27 @@ public final class Vec2 {
      */
     public final Vec3 toVec3() {
         return new Vec3(x, y, 0);
+    }
+
+    /**
+     * Creates a new Vec2 with the same X/Y as this Vec2
+     *
+     * @return the new Vec2
+     */
+    public final Vec2 copy() {
+        return new Vec2(this);
+    }
+
+    /**
+     * Transfers the X/Y from another Vec2 and sets this
+     * Vec2's X/Y to it
+     *
+     * @return This Vec2
+     */
+    public final Vec2 transfer(Vec2 vector) {
+        this.x = vector.x;
+        this.y = vector.y;
+        return this;
     }
 
     /**

@@ -5,7 +5,6 @@ import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.wrapper.IEntity;
-import net.minecraft.util.math.AxisAlignedBB;
 
 /**
  * Called before and after packets are sent to
@@ -38,16 +37,22 @@ public final class MotionUpdateEvent implements Helper {
 
     public MotionUpdateEvent(EventState type) {
         this.type = type;
-        if (type == EventState.POST) return;
+        if (type == EventState.POST)
+            return;
 
-        IEntity util = (IEntity) mc.player;
-        oPos      = util.getPos().y(mc.player.getEntityBoundingBox().minY);
-        oRotation = util.getRotations();
+        if (oPos == null) oPos = new Vec3();
+        if (nPos == null) nPos = new Vec3();
+        if (oRotation == null) oRotation = new Vec2();
+        if (nRotation == null) nRotation = new Vec2();
+
+        IEntity me = (IEntity) mc.player;
+        oPos.transfer(me.getPos()).y(mc.player.getEntityBoundingBox().minY);
+        oRotation.transfer(me.getRotations());
         oGround   = mc.player.onGround;
 
-        nPos      = util.getPos().y(mc.player.getEntityBoundingBox().minY);
-        nRotation = util.getRotations();
-        nGround   = mc.player.onGround;
+        nPos.transfer(oPos);
+        nRotation.transfer(oRotation);
+        nGround   = oGround;
     }
 
     /**
@@ -169,27 +174,31 @@ public final class MotionUpdateEvent implements Helper {
      * Applies the new position/rotations
      */
     public static void apply() {
-        IEntity util = (IEntity) mc.player;
-        util.setPos(nPos);
-
-        double diff = nPos.getY() - mc.player.getEntityBoundingBox().minY;
-        mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0, diff, 0));
-
-        util.setRotations(nRotation);
-        mc.player.onGround = nGround;
+        set(nPos, nRotation, nGround);
     }
 
     /**
      * Resets the original position/rotations
      */
     public static void reset() {
-        IEntity util = (IEntity) mc.player;
-        util.setPos(oPos);
+        set(oPos, oRotation, oGround);
+    }
 
-        double diff = oPos.getY() - mc.player.getEntityBoundingBox().minY;
+    /**
+     * Sets the player's pos, angles, and their onground state
+     *
+     * @param pos Position
+     * @param rotation Angles
+     * @param onGround OnGround state
+     */
+    private static void set(Vec3 pos, Vec2 rotation, boolean onGround) {
+        IEntity me = (IEntity) mc.player;
+        me.setPos(pos);
+
+        double diff = pos.getY() - mc.player.getEntityBoundingBox().minY;
         mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0, diff, 0));
 
-        util.setRotations(oRotation);
-        mc.player.onGround = oGround;
+        me.setRotations(rotation);
+        mc.player.onGround = onGround;
     }
 }
