@@ -24,6 +24,10 @@ public final class Vec3 {
         this(0, 0, 0);
     }
 
+    public Vec3(Vec3 vector) {
+        this(vector.x, vector.y, vector.z);
+    }
+
     public Vec3(double x, double y, double z) {
         this.x = x;
         this.y = y;
@@ -137,6 +141,29 @@ public final class Vec3 {
     public final Vec3 scale(float scale) {
         return new Vec3(this.x * scale, this.y * scale, this.z * scale);
     }
+
+    /**
+     * Creates a new Vec3 with the same X/Y/Z as this Vec3
+     *
+     * @return the new Vec3
+     */
+    public final Vec3 copy() {
+        return new Vec3(this);
+    }
+
+    /**
+     * Transfers the X/Y/Z from another Vec3 and sets this
+     * Vec3's X/Y/Z to it
+     *
+     * @return This Vec3
+     */
+    public final Vec3 transfer(Vec3 vector) {
+        this.x = vector.x;
+        this.y = vector.y;
+        this.z = vector.z;
+        return this;
+    }
+
 
     /**
      * Calculates the distance to another Vec3
