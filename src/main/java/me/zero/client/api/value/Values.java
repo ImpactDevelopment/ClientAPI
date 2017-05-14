@@ -1,11 +1,8 @@
 package me.zero.client.api.value;
 
-import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.annotation.Label;
-import me.zero.client.api.value.annotation.BooleanValue;
-import me.zero.client.api.value.annotation.MultiValue;
-import me.zero.client.api.value.annotation.NumberValue;
-import me.zero.client.api.value.annotation.StringValue;
+import me.zero.client.api.value.annotation.*;
+import me.zero.client.api.value.holder.IValueHolder;
 import me.zero.client.api.value.type.NumberType;
 import me.zero.client.api.value.type.TypeResolver;
 
@@ -24,14 +21,14 @@ public final class Values {
     private Values() {}
 
     /**
-     * Discovers all of the Values in a node, then registers them
+     * Discovers all of the Values in a ValueHolder, then registers them
      *
-     * @param node Node being scanned
+     * @param holder Holder being scanned
      */
-    public static void discover(Node node) {
-        Arrays.stream(node.getClass().getDeclaredFields())
+    public static void discover(IValueHolder holder) {
+        Arrays.stream(holder.getClass().getDeclaredFields())
                 .filter(Values::hasValueAnnotation)
-                .forEach(field -> node.addValue(getValue(node, field)));
+                .forEach(field -> holder.addValue(getValue(holder, field)));
     }
 
     /**
