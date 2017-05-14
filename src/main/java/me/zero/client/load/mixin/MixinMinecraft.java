@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -28,20 +27,22 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static me.zero.client.api.event.defaults.ClickEvent.MouseButton.*;
+
 /**
  * @author Brady
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(Minecraft.class)
-public abstract class MixinMinecraft implements IMinecraft {
+public class MixinMinecraft implements IMinecraft {
 
     @Shadow @Final private Timer timer;
     @Shadow @Final private Session session;
     @Shadow private int rightClickDelayTimer;
 
-    @Shadow public abstract void clickMouse();
-    @Shadow public abstract void rightClickMouse();
-    @Shadow public abstract void middleClickMouse();
+    @Shadow private void clickMouse() {}
+    @Shadow private void rightClickMouse() {}
+    @Shadow private void middleClickMouse() {}
 
     @Inject(method = "runTick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
@@ -100,7 +101,7 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "middleClickMouse", at = @At("HEAD"))
     public void middleClickMouse(CallbackInfo ci) {
-        EventManager.post(new ClickEvent(ClickEvent.MouseButton.MIDDLE));
+        EventManager.post(new ClickEvent(MIDDLE));
     }
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
@@ -128,17 +129,12 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     @Override
     public void clickMouse(ClickEvent.MouseButton button) {
-        switch (button) {
-            case LEFT:
-                this.clickMouse();
-                break;
-            case RIGHT:
-                this.rightClickMouse();
-                break;
-            case MIDDLE:
-                this.middleClickMouse();
-                break;
-        }
+        if (button == LEFT)
+            clickMouse();
+        if (button == RIGHT)
+            rightClickMouse();
+        if (button == MIDDLE)
+            middleClickMouse();
     }
 
     @Override
