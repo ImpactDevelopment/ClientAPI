@@ -3,30 +3,24 @@ package me.zero.client.api.manage;
 import com.google.common.collect.Sets;
 import me.zero.client.api.value.Property;
 import me.zero.client.api.util.interfaces.Nameable;
-import me.zero.client.api.value.Value;
-import me.zero.client.api.value.Values;
+import me.zero.client.api.value.holder.ValueHolder;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
 /**
- * Nodes can have children, values, properties, and can be saved/loaded.
+ * Nodes can have children, values, properties
  *
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
-public class Node implements Nameable {
+public class Node extends ValueHolder implements Nameable {
 
     /**
      * Child nodes
      */
     private final Set<Node> children = Sets.newLinkedHashSet();
-
-    /**
-     * Values
-     */
-    private final Set<Value> values = Sets.newLinkedHashSet();
 
     /**
      * Properties
@@ -42,11 +36,6 @@ public class Node implements Nameable {
      * Description of the node
      */
     protected String description;
-
-
-    protected Node() {
-        Values.discover(this);
-    }
 
     /**
      * Adds children to the list of child nodes
@@ -69,7 +58,7 @@ public class Node implements Nameable {
     /**
      * @return The set of all child nodes
      */
-    public final Set<Node> getChildren() {
+    public final Collection<Node> getChildren() {
         return Sets.newLinkedHashSet(this.children);
     }
 
@@ -98,32 +87,6 @@ public class Node implements Nameable {
      */
     public final Property getProperty(String label) {
         return properties.stream().filter(property -> property.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
-    }
-
-    /**
-     * Adds a value to this node
-     *
-     * @param value The value
-     */
-    public final void addValue(Value value) {
-        if (!this.values.contains(value))
-            this.values.add(value);
-    }
-
-    /**
-     * Gets a value from its ID
-     *
-     * @param id The value's ID
-     */
-    public final Value getValue(String id) {
-        return values.stream().filter(value -> value.getId().equals(id)).findFirst().orElse(null);
-    }
-
-    /**
-     * @return The set of all values
-     */
-    public final Set<Value> getValues() {
-        return Sets.newLinkedHashSet(this.values);
     }
 
     @Override

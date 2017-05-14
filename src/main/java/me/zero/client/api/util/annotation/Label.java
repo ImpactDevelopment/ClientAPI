@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Basic label for fields. Gives them a name,
- * description, id and a list of aliases.
+ * description, id and an array of aliases.
  *
  * @author Brady
  * @since 2/11/2017 12:00 PM
