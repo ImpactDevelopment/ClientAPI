@@ -3,7 +3,6 @@ package me.zero.client.api.event;
 import me.zero.client.api.event.type.EventPriority;
 import net.jodah.typetools.TypeResolver;
 
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
