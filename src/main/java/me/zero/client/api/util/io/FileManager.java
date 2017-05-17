@@ -25,14 +25,14 @@ public final class FileManager {
      * containing all of the data from the file.
      *
      * @param file File being read from
-     * @return The list of data
+     * @return The data contents of the file
      */
-    public static List<String> read(String file) {
+    public static FileContents read(String file) {
         List<String> data = new ArrayList<>();
 
         if (!exists(file)) {
             createFile(file);
-            return data;
+            return new FileContents(data);
         }
 
         try {
@@ -48,7 +48,7 @@ public final class FileManager {
             Logger.instance.log(Level.WARNING, "Unable to read from " + file);
         }
 
-        return data;
+        return new FileContents(data);
     }
 
     /**
@@ -81,21 +81,20 @@ public final class FileManager {
      * @param file The file path
      */
     public static void createFile(String file) {
-        File theFile = new File(file);
         Path path = Paths.get(file);
-        Path parent = Paths.get(theFile.getParent());
-        if (!Files.exists(parent)) {
-            try {
-                Files.createDirectory(parent);
-            } catch (IOException e) {
-                Logger.instance.log(Level.WARNING, "Unable to create " + theFile.getParent());
-            }
+        Path parent = Paths.get(new File(file).getParent());
+
+        try {
+            Files.createDirectories(parent);
+        } catch (IOException e) {
+            Logger.instance.logf(Level.WARNING, "Unable to create parent directories %s", e);
+            return;
         }
+
         try {
             Files.createFile(path);
         } catch (IOException e) {
-            e.printStackTrace();
-            Logger.instance.log(Level.WARNING, "Unable to create " + file);
+            Logger.instance.logf(Level.WARNING, "Unable to create file", e);
         }
     }
 
