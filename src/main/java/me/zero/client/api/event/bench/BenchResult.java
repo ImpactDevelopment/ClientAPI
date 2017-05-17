@@ -1,5 +1,7 @@
 package me.zero.client.api.event.bench;
 
+import java.util.stream.LongStream;
+
 /**
  * Holds data from a benchmark
  *
@@ -54,10 +56,7 @@ public final class BenchResult {
      * @return The total amount of nanoseconds that all passes took
      */
     public final long getTotal() {
-        long total = 0;
-        for (long result : results)
-            total += result;
-        return total;
+        return LongStream.of(results).sum();
     }
 
     /**

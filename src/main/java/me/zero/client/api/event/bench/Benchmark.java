@@ -1,17 +1,18 @@
 package me.zero.client.api.event.bench;
 
 import me.zero.client.api.event.EventManager;
-import me.zero.client.api.util.Callback;
+
+import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
- * Used to benchmark the event system, serves
- * the purpose for testing the event system to
- * improve performance.
+ * Used to benchmark the execution of code,
+ * can be used for anything
  *
  * @author Brady
  * @since 5/11/2017 6:11 PM
  */
-public final class Benchmark {
+public abstract class Benchmark {
 
     /**
      * Number of times that "passes" are made where the defined
@@ -20,7 +21,7 @@ public final class Benchmark {
     private final int passes;
 
     /**
-     * Number of times that the {@code BenchEvent} is invoked per pass
+     * Number of times that the {@code run} is executed per pass
      */
     private final int invokations;
 
@@ -29,24 +30,46 @@ public final class Benchmark {
         this.invokations = invokations;
     }
 
-    public final void run(Callback<BenchResult> callback) {
+    /**
+     * Runs the benchmark, BenchResult is passed
+     * to the specified consumer
+     *
+     * @param callback Consumer that the BenchResult is passed to
+     */
+    public final void run(Consumer<BenchResult> callback) {
+        Objects.requireNonNull(callback);
+
         new Thread(() -> {
-            BenchListener listener = new BenchListener();
-            EventManager.subscribe(listener);
+            pre();
 
             long[] results = new long[passes];
             for (int pass = 0; pass < passes; pass++) {
                 long time = System.nanoTime();
                 for (int i = 0; i < invokations; i++)
-                    EventManager.post(new BenchEvent("Benchmark Event Invoked"));
+                    run();
 
                 long diff = System.nanoTime() - time;
                 results[pass] = diff;
             }
 
-            EventManager.unsubscribe(listener);
+            post();
 
-            callback.call(new BenchResult(passes, invokations, results));
-        }, "Event Benchmark").start();
+            callback.accept(new BenchResult(passes, invokations, results));
+        }, "Benchmark").start();
     }
+
+    /**
+     * Called before all passes are made
+     */
+    protected void pre() {}
+
+    /**
+     * Called for each invokation pass
+     */
+    protected abstract void run();
+
+    /**
+     * Called after all passes are made
+     */
+    protected void post() {}
 }

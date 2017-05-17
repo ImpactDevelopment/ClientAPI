@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import static me.zero.client.api.event.defaults.PacketEvent.Type.*;
 import static me.zero.client.api.util.PluginFinder.PResponse.Result.*;
@@ -30,7 +31,7 @@ public final class PluginFinder implements Helper {
     /**
      * Called in response to finding plugins
      */
-    private Callback<PResponse> callback;
+    private Consumer<PResponse> callback;
 
     /**
      * Used to keep track of the timeout
@@ -49,7 +50,7 @@ public final class PluginFinder implements Helper {
      *
      * @param callback Plugin Response callback
      */
-    public final void find(Callback<PResponse> callback) {
+    public final void find(Consumer<PResponse> callback) {
         this.find(callback, 10000);
     }
 
@@ -61,7 +62,7 @@ public final class PluginFinder implements Helper {
      * @param callback Plugin Response callback
      * @param timeout Timeout in MS
      */
-    public final void find(Callback<PResponse> callback, long timeout) {
+    public final void find(Consumer<PResponse> callback, long timeout) {
         packetTimer.reset();
         this.timeout = timeout;
 
@@ -76,7 +77,7 @@ public final class PluginFinder implements Helper {
             return;
 
         EventManager.unsubscribe(this);
-        callback.call(new PResponse("Request timed out after " + timeout + "ms"));
+        callback.accept(new PResponse("Request timed out after " + timeout + "ms"));
     });
 
     @EventHandler
@@ -93,7 +94,7 @@ public final class PluginFinder implements Helper {
                 plugins.add(plugin);
         });
 
-        callback.call(new PResponse(plugins));
+        callback.accept(new PResponse(plugins));
         callback = null;
         EventManager.unsubscribe(this);
     }, new PacketFilter(SPacketTabComplete.class));
