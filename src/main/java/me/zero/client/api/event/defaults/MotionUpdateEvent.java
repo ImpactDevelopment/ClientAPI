@@ -169,36 +169,4 @@ public final class MotionUpdateEvent implements Helper {
     public final EventState getState() {
         return this.type;
     }
-
-    /**
-     * Applies the new position/rotations
-     */
-    public static void apply() {
-        set(nPos, nRotation, nGround);
-    }
-
-    /**
-     * Resets the original position/rotations
-     */
-    public static void reset() {
-        set(oPos, oRotation, oGround);
-    }
-
-    /**
-     * Sets the player's pos, angles, and their onground state
-     *
-     * @param pos Position
-     * @param rotation Angles
-     * @param onGround OnGround state
-     */
-    private static void set(Vec3 pos, Vec2 rotation, boolean onGround) {
-        IEntity me = (IEntity) mc.player;
-        me.setPos(pos);
-
-        double diff = pos.getY() - mc.player.getEntityBoundingBox().minY;
-        mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0, diff, 0));
-
-        me.setRotations(rotation);
-        mc.player.onGround = onGround;
-    }
 }

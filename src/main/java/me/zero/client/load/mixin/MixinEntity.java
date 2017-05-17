@@ -7,6 +7,7 @@ import me.zero.client.api.util.math.Vec3;
 import me.zero.client.wrapper.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.util.math.AxisAlignedBB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,11 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(Entity.class)
-public class MixinEntity implements IEntity {
+public abstract class MixinEntity implements IEntity {
 
     @Shadow public double posX;
     @Shadow public double posY;
     @Shadow public double posZ;
+    @Shadow public double motionX;
+    @Shadow public double motionY;
+    @Shadow public double motionZ;
     @Shadow public double prevPosX;
     @Shadow public double prevPosY;
     @Shadow public double prevPosZ;
@@ -33,11 +37,15 @@ public class MixinEntity implements IEntity {
     @Shadow public float rotationPitch;
     @Shadow public float prevRotationYaw;
     @Shadow public float prevRotationPitch;
+    @Shadow public boolean onGround;
 
     private Vec3 pos, prevPos, lastTickPos;
     private Vec2 rotation, prevRotation;
 
     @Shadow public void move(MoverType type, double x, double y, double z) {}
+    @Shadow public abstract boolean isSprinting();
+    @Shadow public abstract boolean isRiding();
+    @Shadow public abstract AxisAlignedBB getEntityBoundingBox();
 
     @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
     public void applyEntityCollision(Entity entityIn, CallbackInfo ci) {
