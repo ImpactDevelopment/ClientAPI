@@ -33,7 +33,7 @@ minecraft {
     version = '1.11.2'
     runDir = 'run'
     tweakClass = 'me.zero.client.load.ClientTweaker'
-    mappings = 'snapshot_20170215'
+    mappings = 'snapshot_20170521'
 
     makeObfSourceJar = true
 }
@@ -51,7 +51,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.javassist', name: 'javassist', version: '3.22.0-CR1'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
-    compile group: 'net.jodah', name: 'typetools', version: '0.4.9'
+    compile group: 'net.jodah', name: 'typetools', version: '0.5.0'
     compile("org.spongepowered:mixin:0.6.8-SNAPSHOT") {
         exclude module: "launchwrapper"
     }
