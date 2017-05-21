@@ -21,6 +21,7 @@
     "MixinNetworkManager",
     "MixinPlayerControllerMP",
     "MixinProfiler",
+    "MixinRender",
     "MixinRenderItem",
     "MixinRenderLivingBase",
     "MixinRenderManager",
