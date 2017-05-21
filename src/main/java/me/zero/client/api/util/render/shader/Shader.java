@@ -1,14 +1,15 @@
 package me.zero.client.api.util.render.shader;
 
 import me.zero.client.api.util.interfaces.Helper;
+import me.zero.client.api.util.render.shader.adapter.ShaderAdapter;
+import me.zero.client.api.util.render.shader.adapter.ShaderAdapters;
+import me.zero.client.api.util.render.shader.glenum.GlShaderStatus;
+import me.zero.client.api.util.render.shader.glenum.GlShaderType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static me.zero.client.api.util.render.shader.ShaderHelper.*;
-import static org.lwjgl.opengl.ARBFragmentShader.*;
-import static org.lwjgl.opengl.ARBShaderObjects.*;
-import static org.lwjgl.opengl.ARBVertexShader.*;
 
 /**
  * Used to create ARB Shader Programs with OpenGL
@@ -17,6 +18,11 @@ import static org.lwjgl.opengl.ARBVertexShader.*;
  * @since 2/16/2017 12:00 PM
  */
 public abstract class Shader implements Helper {
+
+    /**
+     * Instance of the system supported shader adapter
+     */
+    private final ShaderAdapter adapter = ShaderAdapters.getSystemDefault();
 
     /**
      * The uniform variables for this shader
@@ -29,21 +35,25 @@ public abstract class Shader implements Helper {
     private final int programID, fragmentID, vertexID;
 
     public Shader(String vertex, String fragment) {
-        programID = glCreateProgramObjectARB();
-        vertexID = loadShader(vertex, GL_VERTEX_SHADER_ARB);
-        fragmentID = loadShader(fragment, GL_FRAGMENT_SHADER_ARB);
+        programID = adapter.createProgram();
+        vertexID = loadShader(adapter, vertex, GlShaderType.VERTEX);
+        fragmentID = loadShader(adapter, fragment, GlShaderType.FRAGMENT);
 
-        glAttachObjectARB(programID, vertexID);
-        glAttachObjectARB(programID, fragmentID);
+        adapter.attachObject(programID, vertexID);
+        adapter.attachObject(programID, fragmentID);
 
-        createProgram(programID);
+        adapter.linkProgram(programID);
+        adapter.checkStatus(programID, GlShaderStatus.LINK);
+
+        adapter.validateProgram(programID);
+        adapter.checkStatus(programID, GlShaderStatus.VALIDATE);
     }
 
     /**
      * Attaches the shader program
      */
     public final void attach() {
-        glUseProgramObjectARB(programID);
+        adapter.useProgram(programID);
         update();
     }
 
@@ -51,7 +61,7 @@ public abstract class Shader implements Helper {
      * Detaches the shader program
      */
     public final void detach() {
-        glUseProgramObjectARB(0);
+        adapter.useProgram(0);
     }
 
     /**
@@ -64,12 +74,12 @@ public abstract class Shader implements Helper {
      * Deletes this ShaderProgram
      */
     public final void delete() {
-        glUseProgramObjectARB(0);
-        glDetachObjectARB(programID, vertexID);
-        glDetachObjectARB(programID, fragmentID);
-        glDeleteObjectARB(vertexID);
-        glDeleteObjectARB(fragmentID);
-        glDeleteObjectARB(programID);
+        detach();
+        adapter.detachObject(programID, vertexID);
+        adapter.detachObject(programID, fragmentID);
+        adapter.deleteShader(vertexID);
+        adapter.deleteShader(fragmentID);
+        adapter.deleteProgram(programID);
     }
 
     /**
