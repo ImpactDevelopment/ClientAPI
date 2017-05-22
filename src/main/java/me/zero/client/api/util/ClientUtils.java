@@ -1,6 +1,7 @@
 package me.zero.client.api.util;
 
 import me.zero.client.api.exception.ArraySizeException;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Arrays;
 
@@ -64,37 +65,9 @@ public final class ClientUtils {
     }
 
     /**
-     * Returns the Index of the specified Object in the Array, returns -1 if the
-     * object is not found in the array
-     *
-     * @param object Object to be searched for
-     * @param array Array to search for object in
-     * @return Index of the Object in the Array
-     */
-    public static <T> int indexOf(T object, T[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(object)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Returns if the specified object is present in the specified array
-     *
-     * @param object Object to check if is present in Array
-     * @param array Array that may/may not contain the Object
-     * @return true if the specified object is in the specified array, false if not
-     */
-    public static <T> boolean arrayContains(T object, T[] array) {
-        return indexOf(object, array) != -1;
-    }
-
-    /**
-     * Returns the specified Object from the Array, if the object is present in
+     * Returns the specified Object from the Array if the object is present in
      * the array. If not, the first object present in the array will be
-     * returned, if the size of the array is greater than 1, if not, the
+     * returned if the size of the array is greater than 1, if not, the
      * specified Object will be returned.
      *
      * @param object The value trying to be set
@@ -102,7 +75,7 @@ public final class ClientUtils {
      * @return The value found from the array
      */
     public static <T> T objectFrom(T object, T[] array) {
-        int index = indexOf(object, array);
+        int index = ArrayUtils.indexOf(array, object);
         if (index != -1) {
             return array[index];
         } else {
