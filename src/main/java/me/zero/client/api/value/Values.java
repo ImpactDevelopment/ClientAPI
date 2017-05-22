@@ -1,14 +1,18 @@
 package me.zero.client.api.value;
 
+import me.zero.client.api.exception.ValueException;
+import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.annotation.Label;
 import me.zero.client.api.value.annotation.*;
 import me.zero.client.api.value.holder.IValueHolder;
-import me.zero.client.api.value.type.NumberType;
-import me.zero.client.api.value.type.TypeResolver;
+import me.zero.client.api.value.type.resolve.DefaultResolvers;
+import me.zero.client.api.value.type.resolve.ResolverData;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class used to discover values from various holders
@@ -17,6 +21,19 @@ import java.util.Arrays;
  * @since 2/21/2017 12:00 PM
  */
 public final class Values {
+
+    /**
+     * Holds the various resolvers for resolving values from fields
+     */
+    private static final Map<Class<?>, ResolverData> RESOLVERS = new HashMap<>();
+
+    static {
+        // Default Resolvers
+        define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN, Boolean.class, Boolean.TYPE));
+        define(NumberValue.class, ResolverData.create(DefaultResolvers.NUMBER));
+        define(MultiValue.class, ResolverData.create(DefaultResolvers.MULTI, String.class));
+        define(StringValue.class, ResolverData.create(DefaultResolvers.STRING, String.class));
+    }
 
     private Values() {}
 
@@ -52,7 +69,7 @@ public final class Values {
     private static Class<? extends Annotation> getValueAnnotation(Field field) {
         if (field.isAnnotationPresent(Label.class)) {
             Annotation a = Arrays.stream(field.getDeclaredAnnotations())
-                    .filter(annotation -> annotation.annotationType().getCanonicalName().startsWith("me.zero.client.api.value.annotation"))
+                    .filter(annotation -> annotation.annotationType().isAnnotationPresent(ValueDefinition.class))
                     .findFirst()
                     .orElse(null);
             if (a != null)
@@ -69,37 +86,41 @@ public final class Values {
      * @param field Field representing value
      * @return The resolved field
      */
+    @SuppressWarnings("unchecked")
     private static Value getValue(Object parent, Field field) {
         Class<? extends Annotation> anno = getValueAnnotation(field);
+        if (anno == null)
+            throw new ValueException("Value annotation not found for field");
 
-        if (anno == BooleanValue.class && field.getType() == Boolean.class || field.getType() == Boolean.TYPE) {
-            return TypeResolver.BOOLEAN.resolve(parent, field);
-        } else if (anno == NumberValue.class) {
-            NumberType<?> type = TypeResolver.NUMBER.resolve(parent, field);
-            checkType(type, field);
-            return TypeResolver.NUMBER.resolve(parent, field);
-        } else if (anno == StringValue.class && field.getType() == String.class) {
-            return TypeResolver.STRING.resolve(parent, field);
-        } else if (anno == MultiValue.class && field.getType() == String.class) {
-            return TypeResolver.MULTI.resolve(parent, field);
-        }
+        ResolverData data = RESOLVERS.get(anno);
+        if (data == null)
+            throw new ValueException("Undefined Resolver for Value Definition");
 
-        return null;
+        if (!data.isResolvable(field.getType()))
+            throw new ValueException("Unable to resolve field if type is not supported");
+
+        Object resolved = data.getResolver().apply(parent, field);
+        if (resolved == null || !(resolved instanceof Value))
+            throw new ValueException("Outcome of resolver was either null or not a value type");
+
+        return (Value) resolved;
     }
 
     /**
-     * Sets up the NumberType value
+     * Defines a resolver data object. This method should
+     * be called before module instantiation, to ensure
+     * that all custom defined value types will be resolved
      *
-     * @param type The type
-     * @param field The field that has the type
+     * @param type The target type annotation
+     * @param data The resolver data for the annotation
      */
-    private static <T extends Number> void checkType(NumberType<T> type, Field field) {
-        if (field.getType().isPrimitive()) {
-            if (type.getValue().equals(0))
-                type.setValue(type.getMinimum());
-        } else {
-            if (type.getValue() == null)
-                type.setValue(type.getMinimum());
-        }
+    public static void define(Class<?> type, ResolverData data) {
+        if (ClientUtils.containsNull(type, data))
+            throw new NullPointerException("One or more parameters were null");
+
+        if (RESOLVERS.get(type) != null)
+            throw new ValueException("Resolver for type annotation already exists");
+
+        RESOLVERS.put(type, data);
     }
 }

@@ -85,6 +85,7 @@ public class MixinMinecraft implements IMinecraft {
         }
 
         GlUtils.init();
+        client.setInfo(clientInfo);
         client.onInit(clientInfo);
         EventManager.subscribe(new ClientHandler());
     }

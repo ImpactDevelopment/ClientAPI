@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Base for Plugin Main classes
+ * Base for Plugin Main classes. Plugins are loaded with
+ * the {@code PluginLoader}
  *
  * @author Brady
  * @since 1/27/2017 12:00 PM
@@ -26,7 +27,7 @@ public abstract class Plugin {
     /**
      * Plugin Init method, Not used for anything essential.
      * Just a way for plugin developers to know
-     * when the Client {@code postInit()} has finished.
+     * when the Client {@code onInit(ClientInfo)} has finished.
      */
     public abstract void onInit();
 

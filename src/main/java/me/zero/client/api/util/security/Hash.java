@@ -2,6 +2,8 @@ package me.zero.client.api.util.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Used to hash data with a defined algorithm
@@ -10,6 +12,11 @@ import java.security.NoSuchAlgorithmException;
  * @since 2/25/2017 12:00 PM
  */
 public final class Hash {
+
+    /**
+     * Cache of all Hash instances
+     */
+    private static final Map<String, Hash> HASH_CACHE = new HashMap<>();
 
     /**
      * Algorithm of this Hash object
@@ -27,7 +34,7 @@ public final class Hash {
      * @return Hash object
      */
     public static Hash of(String algorithm) {
-        return new Hash(algorithm);
+        return HASH_CACHE.computeIfAbsent(algorithm, Hash::new);
     }
 
     /**

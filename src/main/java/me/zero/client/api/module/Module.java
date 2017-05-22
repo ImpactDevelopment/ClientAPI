@@ -3,10 +3,8 @@ package me.zero.client.api.module;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.ActionNotSupportedException;
-import me.zero.client.api.exception.UnexpectedOutcomeException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.ClientUtils;
-import me.zero.client.api.util.annotation.NoAnnotation;
 import me.zero.client.api.util.keybind.Keybind;
 
 import java.util.ArrayList;
@@ -16,9 +14,11 @@ import java.util.List;
 import static me.zero.client.api.util.keybind.Keybind.Action.*;
 
 /**
- * The base for all cheats
+ * The base for all modules. Contains the data
+ * for values, properties, type, keybind, name
+ * and description.
  *
- * @see me.zero.client.api.module.Category
+ * @see Category
  *
  * @author Brady
  * @since 1/19/2017 12:00 PM
@@ -52,8 +52,6 @@ public abstract class Module extends Node implements IModule {
 
     public Module() {
         Class<? extends Module> c = this.getClass();
-        boolean na = c.isAnnotationPresent(NoAnnotation.class);
-
         if (c.isAnnotationPresent(Mod.class)) {
             Mod data = c.getAnnotation(Mod.class);
 
@@ -64,15 +62,13 @@ public abstract class Module extends Node implements IModule {
                 if (type == CLICK)
                     Module.this.toggle();
             });
-        } else if (!na){
-            throw new UnexpectedOutcomeException("Modules are required to have a @Mod annotation if @NoAnnotation isn't present");
         }
 
         this.type = Arrays.stream(c.getInterfaces())
                 .filter(clazz -> clazz.isAnnotationPresent(Category.class))
                 .findFirst().orElse(Category.Default.class);
 
-        if (!na && ClientUtils.containsNull(name, description, type))
+        if (ClientUtils.containsNull(name, description, type))
             throw new NullPointerException("One or more Mod members were null!");
     }
 

@@ -22,7 +22,7 @@ public abstract class Shader implements Helper {
     /**
      * Instance of the system supported shader adapter
      */
-    private final ShaderAdapter adapter = ShaderAdapters.getSystemDefault();
+    private final ShaderAdapter adapter = ShaderAdapters.getSystemAdapter();
 
     /**
      * The uniform variables for this shader

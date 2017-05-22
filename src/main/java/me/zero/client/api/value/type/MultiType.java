@@ -2,6 +2,7 @@ package me.zero.client.api.value.type;
 
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.value.Value;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 
@@ -33,7 +34,7 @@ public final class MultiType extends Value<String> {
      * Sets value to the next one in the set
      */
     public final void next() {
-        int index = ClientUtils.indexOf(getValue(), values);
+        int index = ArrayUtils.indexOf(values, getValues());
         index++;
         if (index >= values.length) {
             index = 0;
@@ -45,7 +46,7 @@ public final class MultiType extends Value<String> {
      * Sets value to the last one in the set
      */
     public final void last() {
-        int index = ClientUtils.indexOf(getValue(), values);
+        int index = ArrayUtils.indexOf(values, getValues());
         index--;
         if (index < 0) {
             index = values.length - 1;

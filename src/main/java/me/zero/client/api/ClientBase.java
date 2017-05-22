@@ -46,7 +46,12 @@ class ClientBase implements Helper {
     /**
      * The list of plugin loaders that have been used by this client
      */
-    private List<PluginLoader> pluginLoaders = new ArrayList<>();
+    private final List<PluginLoader> pluginLoaders = new ArrayList<>();
+
+    /**
+     * List of module categories
+     */
+    private final List<Class<?>> categories = new ArrayList<>();
 
     /**
      * Sets the info, only works if the current info is null
