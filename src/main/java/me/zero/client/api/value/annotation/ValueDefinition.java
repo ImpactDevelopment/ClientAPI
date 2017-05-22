@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to mark fields as Boolean Values
+ * Marks any annotations that are used to mark
+ * fields as values as valid value annotations.
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 5/22/2017 5:06 PM
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@ValueDefinition
-public @interface BooleanValue {}
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface ValueDefinition {}
