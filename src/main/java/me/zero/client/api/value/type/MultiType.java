@@ -34,11 +34,9 @@ public final class MultiType extends Value<String> {
      * Sets value to the next one in the set
      */
     public final void next() {
-        int index = ArrayUtils.indexOf(values, getValues());
-        index++;
-        if (index >= values.length) {
+        int index = ArrayUtils.indexOf(values, getValue());
+        if (++index >= values.length)
             index = 0;
-        }
         this.setValue(values[index]);
     }
 
@@ -46,11 +44,9 @@ public final class MultiType extends Value<String> {
      * Sets value to the last one in the set
      */
     public final void last() {
-        int index = ArrayUtils.indexOf(values, getValues());
-        index--;
-        if (index < 0) {
+        int index = ArrayUtils.indexOf(values, getValue());
+        if (--index < 0)
             index = values.length - 1;
-        }
         this.setValue(values[index]);
     }
 
