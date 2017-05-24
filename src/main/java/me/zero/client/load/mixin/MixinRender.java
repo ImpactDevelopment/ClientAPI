@@ -1,12 +1,14 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.event.EventManager;
+import me.zero.client.api.event.defaults.RenderEntityLabelEvent;
 import me.zero.client.api.event.defaults.TeamColorEvent;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -22,5 +24,13 @@ public class MixinRender {
         EventManager.post(event);
         if (event.isCancelled())
             ci.setReturnValue(event.getColor());
+    }
+
+    @Inject(method = "renderLivingLabel", at = @At("HEAD"), cancellable = true)
+    public void renderLivingLabel(Entity entityIn, String str, double x, double y, double z, int maxDistance, CallbackInfo ci) {
+        RenderEntityLabelEvent event = new RenderEntityLabelEvent(entityIn, str);
+        EventManager.post(event);
+        if (event.isCancelled())
+            ci.cancel();
     }
 }
