@@ -78,7 +78,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @return The retrieved entry
      */
     @SuppressWarnings("unchecked")
-    protected final <I extends T> I get(Class<I> clazz) {
+    protected <I extends T> I get(Class<I> clazz) {
         if (!(this instanceof AbstractManager))
             throw new ActionNotSupportedException("Access via class is not supported by this Manager, does not implement AbstractManager.");
 
