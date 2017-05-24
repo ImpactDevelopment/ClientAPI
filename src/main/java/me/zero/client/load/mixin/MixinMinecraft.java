@@ -118,6 +118,14 @@ public class MixinMinecraft implements IMinecraft {
             EventManager.post(new WorldLoadEvent(worldClientIn));
     }
 
+    @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
+    public void shutdown(CallbackInfo ci) {
+        GameShutdownEvent event = new GameShutdownEvent();
+        EventManager.post(event);
+        if (event.isCancelled())
+            ci.cancel();
+    }
+
     @Override
     public Timer getTimer() {
         return this.timer;
