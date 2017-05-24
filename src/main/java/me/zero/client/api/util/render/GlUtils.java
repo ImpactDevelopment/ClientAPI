@@ -4,9 +4,13 @@ import me.zero.client.api.event.EventHandler;
 import me.zero.client.api.event.EventManager;
 import me.zero.client.api.event.Listener;
 import me.zero.client.api.event.defaults.Render3DEvent;
+import me.zero.client.api.util.math.Vec3;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.glu.GLU;
 
+import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -22,25 +26,22 @@ public final class GlUtils {
 
     private GlUtils() {}
 
-    private static FloatBuffer MODELVIEW_MATRIX, PROJECTION_MATRIX;
-    private static IntBuffer VIEWPORT;
+    private static final FloatBuffer MODELVIEW;
+    private static final FloatBuffer PROJECTION;
+    private static final IntBuffer VIEWPORT;
 
-    /**
-     * Calls clinit
-     */
-    public static void init() {
+    static {
+        MODELVIEW = BufferUtils.createFloatBuffer(16);
+        PROJECTION = BufferUtils.createFloatBuffer(16);
+        VIEWPORT = BufferUtils.createIntBuffer(16);
+
         EventManager.subscribe(new Object() {
 
             @EventHandler
             private final Listener<Render3DEvent> render3DListener = new Listener<>(event -> {
-                MODELVIEW_MATRIX = BufferUtils.createFloatBuffer(16);
-                glGetFloat(GL_MODELVIEW_MATRIX, MODELVIEW_MATRIX);
-
-                PROJECTION_MATRIX = BufferUtils.createFloatBuffer(16);
-                glGetFloat(GL_PROJECTION_MATRIX, PROJECTION_MATRIX);
-
-                VIEWPORT = BufferUtils.createIntBuffer(16);
-                glGetInteger(GL_VIEWPORT, VIEWPORT);
+                glGetFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
+                glGetFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
+                glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
             });
         });
     }
@@ -101,12 +102,70 @@ public final class GlUtils {
     }
 
     /**
+     * Converts a Vec3 to its screen projection
+     *
+     * @see GlUtils#toScreen(double, double, double)
+     *
+     * @return Screen projected coordinates
+     */
+    public static Vec3 toScreen(Vec3 pos) {
+        return GlUtils.toScreen(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    /**
+     * Converts the specified X, Y, and Z position to
+     * the 2D projected position. The returned result
+     * is a Vec3 containing the X and Y position, to
+     * represent the position on-screen, and a Z position
+     * that can be used to indicate whether or not the
+     * projected position
+     *
+     * @return Screen projected coordinates
+     */
+    public static Vec3 toScreen(double x, double y, double z) {
+        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
+        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, screenCoords);
+        if (result) {
+            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+        }
+        return null;
+    }
+
+    /**
+     * Converts a Vec3 to its world projection
+     *
+     * @see GlUtils#toWorld(double, double, double)
+     *
+     * @return World projected coordinates
+     */
+    public static Vec3 toWorld(Vec3 pos) {
+        return GlUtils.toWorld(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    /**
+     * Converts the specified X, Y, and Z screen positions
+     * to a position in the world, that through some fancy
+     * maths (raytracing) can be used get the actual block
+     * position of the conversion
+     *
+     * @return World projected coordinates
+     */
+    public static Vec3 toWorld(double x, double y, double z) {
+        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
+        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, screenCoords);
+        if (result) {
+            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+        }
+        return null;
+    }
+
+    /**
      * Gets the Model View Matrix as a FloatBuffer
      *
      * @return The Model View Matrix
      */
-    public static FloatBuffer getModelViewMatrix() {
-        return MODELVIEW_MATRIX;
+    public static FloatBuffer getModelview() {
+        return MODELVIEW;
     }
 
     /**
@@ -114,8 +173,8 @@ public final class GlUtils {
      *
      * @return The Projection Matrix
      */
-    public static FloatBuffer getProjectionMatrix() {
-        return PROJECTION_MATRIX;
+    public static FloatBuffer getProjection() {
+        return PROJECTION;
     }
 
     /**
