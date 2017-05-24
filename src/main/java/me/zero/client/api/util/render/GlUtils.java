@@ -30,6 +30,9 @@ public final class GlUtils {
     private static final FloatBuffer PROJECTION;
     private static final IntBuffer VIEWPORT;
 
+    // Calls clinit
+    public static void init() {}
+
     static {
         MODELVIEW = BufferUtils.createFloatBuffer(16);
         PROJECTION = BufferUtils.createFloatBuffer(16);
