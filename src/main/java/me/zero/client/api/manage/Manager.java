@@ -1,5 +1,6 @@
 package me.zero.client.api.manage;
 
+import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.util.interfaces.Loadable;
 import me.zero.client.api.util.interfaces.Saveable;
 
@@ -77,7 +78,10 @@ public abstract class Manager<T> implements Loadable, Saveable {
      * @return The retrieved entry
      */
     @SuppressWarnings("unchecked")
-    public final <I extends T> I get(Class<I> clazz) {
+    protected final <I extends T> I get(Class<I> clazz) {
+        if (!(this instanceof AbstractManager))
+            throw new ActionNotSupportedException("Access via class is not supported by this Manager, does not implement AbstractManager.");
+
         if (clazz == null)
             return null;
 
