@@ -1,7 +1,7 @@
 package me.zero.client.api;
 
-import me.zero.event.EventBus;
-import me.zero.event.EventManager;
+import me.zero.alpine.EventBus;
+import me.zero.alpine.EventManager;
 
 /**
  * Contains some constants that are used throughout the API.

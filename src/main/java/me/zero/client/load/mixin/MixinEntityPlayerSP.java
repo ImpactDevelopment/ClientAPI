@@ -5,7 +5,7 @@ import me.zero.client.api.event.defaults.LivingUpdateEvent;
 import me.zero.client.api.event.defaults.MotionUpdateEvent;
 import me.zero.client.api.event.defaults.MoveEvent;
 import me.zero.client.api.event.defaults.UpdateEvent;
-import me.zero.event.type.EventState;
+import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

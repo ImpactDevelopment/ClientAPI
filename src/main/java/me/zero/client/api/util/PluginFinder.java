@@ -2,8 +2,8 @@ package me.zero.client.api.util;
 
 import com.google.common.collect.Sets;
 import me.zero.client.api.ClientAPI;
-import me.zero.event.listener.EventHandler;
-import me.zero.event.listener.Listener;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import me.zero.client.api.event.defaults.PacketEvent;
 import me.zero.client.api.event.defaults.TickEvent;
 import me.zero.client.api.event.defaults.filters.PacketFilter;
