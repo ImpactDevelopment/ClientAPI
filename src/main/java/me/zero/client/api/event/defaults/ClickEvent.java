@@ -1,9 +1,18 @@
 package me.zero.client.api.event.defaults;
 
+import net.minecraft.client.Minecraft;
+
 /**
- * Event called when a Mouse button is pressed outside of a GUI while in-game
+ * Event called when a Mouse button is pressed
+ * outside of a gui screen while in-game. The
+ * only mouse buttons that are supported are the
+ * present in the {@code MouseButton} enum.
+ * (Left, Right, Middle)
  *
- * @see me.zero.client.api.event.defaults.ClickEvent
+ * @see KeyEvent
+ * @see Minecraft#clickMouse()
+ * @see Minecraft#rightClickMouse()
+ * @see Minecraft#middleClickMouse()
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM

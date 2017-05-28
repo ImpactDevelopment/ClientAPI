@@ -3,7 +3,7 @@ package me.zero.client.load.mixin;
 import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.*;
 import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.util.render.GlUtils;
@@ -46,12 +46,12 @@ public class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "runTick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
-        EventManager.post(new TickEvent());
+        ClientAPI.EVENT_BUS.post(new TickEvent());
     }
 
     @Inject(method = "runGameLoop", at = @At("HEAD"))
     public void onLoop(CallbackInfo ci) {
-        EventManager.post(new LoopEvent());
+        ClientAPI.EVENT_BUS.post(new LoopEvent());
     }
 
     @Inject(method = "init", at = @At("RETURN"))
@@ -87,41 +87,43 @@ public class MixinMinecraft implements IMinecraft {
         GlUtils.init();
         client.setInfo(clientInfo);
         client.onInit(clientInfo);
-        EventManager.subscribe(new ClientHandler());
+        ClientAPI.EVENT_BUS.subscribe(new ClientHandler());
     }
 
     @Inject(method = "clickMouse", at = @At("HEAD"))
     public void clickMouse(CallbackInfo ci) {
-        EventManager.post(new ClickEvent(ClickEvent.MouseButton.LEFT));
+        ClientAPI.EVENT_BUS.post(new ClickEvent(LEFT));
     }
 
     @Inject(method = "rightClickMouse", at = @At("HEAD"))
     public void rightClickMouse(CallbackInfo ci) {
-        EventManager.post(new ClickEvent(ClickEvent.MouseButton.RIGHT));
+        ClientAPI.EVENT_BUS.post(new ClickEvent(RIGHT));
     }
 
     @Inject(method = "middleClickMouse", at = @At("HEAD"))
     public void middleClickMouse(CallbackInfo ci) {
-        EventManager.post(new ClickEvent(MIDDLE));
+        ClientAPI.EVENT_BUS.post(new ClickEvent(MIDDLE));
     }
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
     public GuiScreen displayGuiScreen(GuiScreen screen) {
         GuiEvent event = new GuiEvent(screen);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         return event.getScreen();
     }
 
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
     public void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
         if (worldClientIn != null)
-            EventManager.post(new WorldLoadEvent(worldClientIn));
+            ClientAPI.EVENT_BUS.post(new WorldEvent.Load(worldClientIn));
+        else
+            ClientAPI.EVENT_BUS.post(new WorldEvent.Unload());
     }
 
     @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
     public void shutdown(CallbackInfo ci) {
         GameShutdownEvent event = new GameShutdownEvent();
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
     }

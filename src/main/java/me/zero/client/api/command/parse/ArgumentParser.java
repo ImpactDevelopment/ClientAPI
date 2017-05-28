@@ -10,4 +10,5 @@ import java.util.function.Function;
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
+@Deprecated
 public interface ArgumentParser<T> extends Function<String, T>, Helper {}

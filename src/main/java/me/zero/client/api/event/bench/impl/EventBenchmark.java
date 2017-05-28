@@ -1,8 +1,8 @@
 package me.zero.client.api.event.bench.impl;
 
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.Listener;
+import me.zero.client.api.ClientAPI;
+import me.zero.event.listener.EventHandler;
+import me.zero.event.listener.Listener;
 import me.zero.client.api.event.bench.Benchmark;
 
 /**
@@ -12,7 +12,7 @@ import me.zero.client.api.event.bench.Benchmark;
  * @author Brady
  * @since 5/17/2017 2:34 PM
  */
-public class EventBenchmark extends Benchmark {
+public final class EventBenchmark extends Benchmark {
 
     public EventBenchmark(int passes, int invokations) {
         super(passes, invokations);
@@ -20,17 +20,17 @@ public class EventBenchmark extends Benchmark {
 
     @Override
     protected void pre() {
-        EventManager.subscribe(this);
+        ClientAPI.EVENT_BUS.subscribe(this);
     }
 
     @Override
     protected void run() {
-        EventManager.post(new Object());
+        ClientAPI.EVENT_BUS.post(new Object());
     }
 
     @Override
     protected void post() {
-        EventManager.unsubscribe(this);
+        ClientAPI.EVENT_BUS.unsubscribe(this);
     }
 
     @EventHandler

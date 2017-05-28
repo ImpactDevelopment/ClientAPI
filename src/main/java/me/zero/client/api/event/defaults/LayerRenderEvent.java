@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.Cancellable;
+import me.zero.event.type.Cancellable;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 

@@ -1,9 +1,9 @@
 package me.zero.client.api.util;
 
 import com.google.common.collect.Sets;
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.Listener;
+import me.zero.client.api.ClientAPI;
+import me.zero.event.listener.EventHandler;
+import me.zero.event.listener.Listener;
 import me.zero.client.api.event.defaults.PacketEvent;
 import me.zero.client.api.event.defaults.TickEvent;
 import me.zero.client.api.event.defaults.filters.PacketFilter;
@@ -66,7 +66,7 @@ public final class PluginFinder implements Helper {
         packetTimer.reset();
         this.timeout = timeout;
 
-        EventManager.subscribe(this);
+        ClientAPI.EVENT_BUS.subscribe(this);
         this.callback = callback;
         mc.player.connection.sendPacket(new CPacketTabComplete("/", BlockPos.ORIGIN, false));
     }
@@ -76,7 +76,7 @@ public final class PluginFinder implements Helper {
         if (!packetTimer.delay(timeout))
             return;
 
-        EventManager.unsubscribe(this);
+        ClientAPI.EVENT_BUS.unsubscribe(this);
         callback.accept(new PResponse("Request timed out after " + timeout + "ms"));
     });
 
@@ -96,7 +96,7 @@ public final class PluginFinder implements Helper {
 
         callback.accept(new PResponse(plugins));
         callback = null;
-        EventManager.unsubscribe(this);
+        ClientAPI.EVENT_BUS.unsubscribe(this);
     }, new PacketFilter(SPacketTabComplete.class));
 
     public static class PResponse {

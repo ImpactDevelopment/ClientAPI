@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.LayerRenderEvent;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -20,7 +20,7 @@ public class MixinRenderLivingBase {
     @SuppressWarnings("unchecked")
     public void doRenderLayer(LayerRenderer renderer, EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scaleIn) {
         LayerRenderEvent event = new LayerRenderEvent(entitylivingbaseIn, renderer);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (!event.isCancelled())
             renderer.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scaleIn);
     }

@@ -1,4 +1,4 @@
-package me.zero.client.api.event;
+package me.zero.event.listener;
 
 /**
  * The body of a listener, called when an event is invoked.

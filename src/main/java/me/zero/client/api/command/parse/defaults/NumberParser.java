@@ -8,6 +8,7 @@ import me.zero.client.api.command.parse.ArgumentParser;
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
+@Deprecated
 public final class NumberParser implements ArgumentParser<Double> {
 
     @Override

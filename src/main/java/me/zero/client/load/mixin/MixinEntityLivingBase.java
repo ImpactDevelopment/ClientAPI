@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.EntityDeathEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
@@ -18,6 +18,6 @@ public class MixinEntityLivingBase {
 
     @Inject(method = "onDeath", at = @At("HEAD"))
     public void onDeath(DamageSource cause, CallbackInfo ci) {
-        EventManager.post(new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
+        ClientAPI.EVENT_BUS.post(new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
     }
 }
