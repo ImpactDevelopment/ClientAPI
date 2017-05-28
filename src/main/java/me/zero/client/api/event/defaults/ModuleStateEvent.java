@@ -1,10 +1,13 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.Cancellable;
+import me.zero.event.type.Cancellable;
 import me.zero.client.api.module.Module;
 
 /**
- * Called when a Module's state is changed
+ * Called when a Module's state is changed. If the
+ * event is cancelled, the state is not changed.
+ *
+ * @see Module#setState(boolean)
  *
  * @author Brady
  * @since 4/5/2017 12:00 PM

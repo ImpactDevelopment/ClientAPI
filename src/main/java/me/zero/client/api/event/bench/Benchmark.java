@@ -1,7 +1,5 @@
 package me.zero.client.api.event.bench;
 
-import me.zero.client.api.event.EventManager;
-
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -13,6 +11,11 @@ import java.util.function.Consumer;
  * @since 5/11/2017 6:11 PM
  */
 public abstract class Benchmark {
+
+    /**
+     * Current number of benchmark threads running
+     */
+    private static int threads;
 
     /**
      * Number of times that "passes" are made where the defined
@@ -55,7 +58,8 @@ public abstract class Benchmark {
             post();
 
             callback.accept(new BenchResult(passes, invokations, results));
-        }, "Benchmark").start();
+            threads--;
+        }, String.format("Benchmark #%s", ++threads)).start();
     }
 
     /**

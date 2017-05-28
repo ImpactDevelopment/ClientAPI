@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.EventState;
+import me.zero.event.type.EventState;
 
 /**
  * Called before and after EntityPlayerSP#onLivingUpdate()

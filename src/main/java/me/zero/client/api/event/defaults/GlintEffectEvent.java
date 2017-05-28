@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.Cancellable;
+import me.zero.event.type.Cancellable;
 
 /**
  * Called when the enchanted effect of a

@@ -1,8 +1,8 @@
 package me.zero.client.api.util.render;
 
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.Listener;
+import me.zero.client.api.ClientAPI;
+import me.zero.event.listener.EventHandler;
+import me.zero.event.listener.Listener;
 import me.zero.client.api.event.defaults.Render3DEvent;
 import me.zero.client.api.util.math.Vec3;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,7 +10,6 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.glu.GLU;
 
-import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -38,7 +37,7 @@ public final class GlUtils {
         PROJECTION = BufferUtils.createFloatBuffer(16);
         VIEWPORT = BufferUtils.createIntBuffer(16);
 
-        EventManager.subscribe(new Object() {
+        ClientAPI.EVENT_BUS.subscribe(new Object() {
 
             @EventHandler
             private final Listener<Render3DEvent> render3DListener = new Listener<>(event -> {

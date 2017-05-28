@@ -1,11 +1,11 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.LivingUpdateEvent;
 import me.zero.client.api.event.defaults.MotionUpdateEvent;
 import me.zero.client.api.event.defaults.MoveEvent;
 import me.zero.client.api.event.defaults.UpdateEvent;
-import me.zero.client.api.event.type.EventState;
+import me.zero.event.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -47,23 +47,23 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
     public void onUpdate(CallbackInfo ci) {
-        EventManager.post(new UpdateEvent());
+        ClientAPI.EVENT_BUS.post(new UpdateEvent());
     }
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
     public void onLivingUpdatePre(CallbackInfo ci) {
-        EventManager.post(new LivingUpdateEvent(EventState.PRE));
+        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
     }
 
     @Inject(method = "onLivingUpdate", at = @At("RETURN"))
     public void onLivingUpdatePost(CallbackInfo ci) {
-        EventManager.post(new LivingUpdateEvent(EventState.POST));
+        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
     }
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
     public void move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
         MoveEvent event = new MoveEvent(type, x, y, z);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
 
@@ -73,7 +73,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
     @Overwrite
     public void onUpdateWalkingPlayer() {
         MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
-        EventManager.post(pre);
+        ClientAPI.EVENT_BUS.post(pre);
 
         boolean flag = this.isSprinting();
 
@@ -147,6 +147,6 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
             this.autoJumpEnabled = this.mc.gameSettings.autoJump;
         }
 
-        EventManager.post(new MotionUpdateEvent(EventState.POST));
+        ClientAPI.EVENT_BUS.post(new MotionUpdateEvent(EventState.POST));
     }
 }

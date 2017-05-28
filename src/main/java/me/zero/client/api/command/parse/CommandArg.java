@@ -6,6 +6,7 @@ package me.zero.client.api.command.parse;
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
+@Deprecated
 public final class CommandArg<T> {
 
     /**

@@ -1,6 +1,6 @@
-package me.zero.client.api.event;
+package me.zero.event.listener;
 
-import me.zero.client.api.event.type.EventPriority;
+import me.zero.event.type.EventPriority;
 import net.jodah.typetools.TypeResolver;
 
 import java.util.function.Predicate;
@@ -58,7 +58,7 @@ public final class Listener<T> implements EventHook<T> {
     /**
      * @return Priority of Listener
      */
-    final byte getPriority() {
+    public final byte getPriority() {
         return priority;
     }
 

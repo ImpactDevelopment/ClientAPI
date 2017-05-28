@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.ProfilerEvent;
 import net.minecraft.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +17,6 @@ public class MixinProfiler {
 
     @Inject(method = "startSection", at = @At("HEAD"))
     public void startSection(String name, CallbackInfo ci) {
-        EventManager.post(new ProfilerEvent(name));
+        ClientAPI.EVENT_BUS.post(new ProfilerEvent(name));
     }
 }

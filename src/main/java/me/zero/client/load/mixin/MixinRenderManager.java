@@ -1,8 +1,8 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.EntityRenderEvent;
-import me.zero.client.api.event.type.EventState;
+import me.zero.event.type.EventState;
 import me.zero.client.wrapper.IRenderManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -27,11 +27,11 @@ public class MixinRenderManager implements IRenderManager {
     @SuppressWarnings("unchecked")
     public void doRender(Render render, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
         EntityRenderEvent event = new EntityRenderEvent(EventState.PRE, render, entity, x, y, z, entityYaw, partialTicks);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (!event.isCancelled())
             render.doRender(entity, x, y, z, entityYaw, partialTicks);
 
-        EventManager.post(new EntityRenderEvent(EventState.POST, render, entity, x, y, x, entityYaw, partialTicks));
+        ClientAPI.EVENT_BUS.post(new EntityRenderEvent(EventState.POST, render, entity, x, y, x, entityYaw, partialTicks));
     }
 
     @Override

@@ -29,11 +29,6 @@ class ClientBase implements Helper {
     private ClientInfo info;
 
     /**
-     * The Message Prefix
-     */
-    private String prefix;
-
-    /**
      * The Module Manager
      */
     private Manager<Module> moduleManager;
@@ -68,23 +63,6 @@ class ClientBase implements Helper {
      */
     public ClientInfo getInfo() {
         return this.info;
-    }
-
-    /**
-     * Sets the prefix, only set if it hasn't been set yet
-     *
-     * @param prefix The prefix being set
-     */
-    public void setPrefix(String prefix) {
-        if (this.prefix != null) return;
-        this.prefix = prefix;
-    }
-
-    /**
-     * @return The prefix
-     */
-    public String getPrefix() {
-        return this.prefix;
     }
 
     /**
@@ -167,16 +145,6 @@ class ClientBase implements Helper {
         List<Plugin> plugins = new ArrayList<>();
         this.pluginLoaders.forEach(loader -> plugins.addAll(loader.getPlugins()));
         return plugins;
-    }
-
-    /**
-     * Prints a chat message
-     *
-     * @param message The message
-     */
-    // TODO: Create a chat builder and change "message" to it
-    public void printChatMessage(String message) {
-        mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(prefix + " " + message));
     }
 
     /**

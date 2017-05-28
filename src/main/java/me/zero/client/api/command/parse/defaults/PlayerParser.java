@@ -11,6 +11,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
+@Deprecated
 public final class PlayerParser implements ArgumentParser<NetworkPlayerInfo> {
 
     @Override

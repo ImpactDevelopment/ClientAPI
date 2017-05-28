@@ -6,6 +6,7 @@ package me.zero.client.api.command;
  * @author Brady
  * @since 4/9/2017 12:00 PM
  */
+@Deprecated
 public final class CommandUsage {
 
     /**
