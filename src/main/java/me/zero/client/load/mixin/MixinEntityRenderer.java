@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.RenderScreenEvent;
 import me.zero.client.api.util.render.camera.Camera;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -26,6 +26,6 @@ public class MixinEntityRenderer {
 
     @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V"))
     public void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
-        EventManager.post(new RenderScreenEvent(partialTicks));
+        ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
     }
 }

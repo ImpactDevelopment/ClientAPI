@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.RenderEntityLabelEvent;
 import me.zero.client.api.event.defaults.TeamColorEvent;
 import net.minecraft.client.renderer.entity.Render;
@@ -21,7 +21,7 @@ public class MixinRender {
     @Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
     public void getTeamColor(Entity entityIn, CallbackInfoReturnable<Integer> ci) {
         TeamColorEvent event = new TeamColorEvent(entityIn);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.setReturnValue(event.getColor());
     }
@@ -29,7 +29,7 @@ public class MixinRender {
     @Inject(method = "renderLivingLabel", at = @At("HEAD"), cancellable = true)
     public void renderLivingLabel(Entity entityIn, String str, double x, double y, double z, int maxDistance, CallbackInfo ci) {
         RenderEntityLabelEvent event = new RenderEntityLabelEvent(entityIn, str);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
     }

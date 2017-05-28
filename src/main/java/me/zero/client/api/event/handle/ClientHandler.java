@@ -1,11 +1,11 @@
 package me.zero.client.api.event.handle;
 
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.EventManager;
-import me.zero.client.api.event.Listener;
+import me.zero.client.api.ClientAPI;
+import me.zero.event.listener.EventHandler;
+import me.zero.event.listener.Listener;
 import me.zero.client.api.event.defaults.*;
 import me.zero.client.api.event.defaults.filters.PacketFilter;
-import me.zero.client.api.event.type.EventPriority;
+import me.zero.event.type.EventPriority;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.camera.Camera;
@@ -54,7 +54,7 @@ public final class ClientHandler implements Helper {
         String section = event.getSection();
 
         if (section != null && section.equalsIgnoreCase("hand") && !Camera.isCapturing())
-            EventManager.post(new Render3DEvent());
+            ClientAPI.EVENT_BUS.post(new Render3DEvent());
     });
 
     /**
@@ -69,7 +69,7 @@ public final class ClientHandler implements Helper {
             boolean currentState = Keyboard.isKeyDown(i);
             if (currentState != keyMap[i]) {
                 if (keyMap[i] = !keyMap[i])
-                    EventManager.post(new KeyEvent(i));
+                    ClientAPI.EVENT_BUS.post(new KeyEvent(i));
 
                 Stream<Keybind> keybinds = Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == key);
                 if (currentState)
@@ -88,12 +88,12 @@ public final class ClientHandler implements Helper {
         if (event.getPacket() instanceof CPacketChatMessage) {
             CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
             ChatEvent chatEvent = new ChatEvent(packet.getMessage(), ChatEvent.Type.SEND);
-            EventManager.post(chatEvent);
+            ClientAPI.EVENT_BUS.post(chatEvent);
             if (chatEvent.isCancelled())
                 event.cancel();
         } else if (event.getPacket() instanceof SPacketChat) {
             SPacketChat packet = (SPacketChat) event.getPacket();
-            EventManager.post(new ChatEvent(packet.getChatComponent(), ChatEvent.Type.RECEIVE));
+            ClientAPI.EVENT_BUS.post(new ChatEvent(packet.getChatComponent(), ChatEvent.Type.RECEIVE));
         }
     }, new PacketFilter(CPacketChatMessage.class, SPacketChat.class));
 }

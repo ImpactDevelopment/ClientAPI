@@ -2,14 +2,16 @@ package me.zero.client.api.command;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.command.parse.CommandContext;
-import me.zero.client.api.event.EventHandler;
-import me.zero.client.api.event.Listener;
+import me.zero.event.listener.EventHandler;
+import me.zero.event.listener.Listener;
 import me.zero.client.api.event.defaults.ChatEvent;
 import me.zero.client.api.manage.Manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static me.zero.client.api.util.Messages.*;
 
@@ -19,6 +21,7 @@ import static me.zero.client.api.util.Messages.*;
  * @author Brady
  * @since 2/13/2017 12:00 PM
  */
+@Deprecated
 public class CommandHandler {
 
     /**
@@ -52,7 +55,7 @@ public class CommandHandler {
             message = message.replaceFirst(prefix, "");
 
             if (run(message)) {
-                client.printChatMessage(COMMAND_INVALID);
+//                client.printChatMessage(COMMAND_INVALID);
             }
             event.cancel();
         }
@@ -77,6 +80,7 @@ public class CommandHandler {
                 args.add(arg);
             }
         }
+
         return run(split[0], args);
     }
 
@@ -95,7 +99,7 @@ public class CommandHandler {
         CommandContext context = new CommandContext(command, args.toArray(new String[0]));
 
         if (!context.isComplete()) {
-            context.getError().forEach(client::printChatMessage);
+//            context.getError().forEach(client::printChatMessage);
             return true;
         }
 

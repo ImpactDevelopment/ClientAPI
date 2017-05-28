@@ -3,7 +3,11 @@ package me.zero.client.api.event.defaults;
 import net.minecraft.client.gui.GuiScreen;
 
 /**
- * Called when a Gui Screen is displayed.
+ * Called when a Gui Screen is displayed. The
+ * screen can be overriden by using the
+ * {@code setScreen(GuiScreen)} method, which
+ * will completely override the screen that would've
+ * been displayed.
  *
  * @author Brady
  * @since 2/23/2017 12:00 PM

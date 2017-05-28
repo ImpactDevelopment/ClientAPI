@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.BlockCollisionEvent;
 import me.zero.client.api.event.defaults.BoundingBoxEvent;
 import net.minecraft.block.Block;
@@ -31,7 +31,7 @@ public abstract class MixinBlock {
     @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
     public void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> ci) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.setReturnValue(false);
     }
@@ -42,7 +42,7 @@ public abstract class MixinBlock {
         AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(state, worldIn, pos);
 
         BoundingBoxEvent event = new BoundingBoxEvent(block, pos, axisalignedbb);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
 

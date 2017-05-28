@@ -172,19 +172,20 @@ public final class Vec3 {
     }
 
     /**
-     * Determines the rotations from this Vec3 to another Vec3
+     * Calculates the angles that an entity at this
+     * position would have to look at to look at the
+     * specified Vec3.
      *
      * @param vec The other Vec3
      * @return The rotations
      */
     public final Vec2 rotationsTo(Vec3 vec) {
-        double diffX = vec.x - x;
-        double diffY = vec.y - y;
-        double diffZ = vec.z - z;
-        double hDist = Math.sqrt(diffX * diffX + diffZ * diffZ);
-        float yaw = (float) Math.toDegrees(Math.atan2(diffZ, diffX)) - 90.0F;
-        float pitch = (float) -Math.toDegrees(Math.atan2(diffY, hDist));
-        return new Vec2(yaw, pitch);
+        double[] diff = { vec.x - x, vec.y - y, vec.z - z };
+        double hDist = Math.sqrt(diff[0] * diff[0] + diff[2] * diff[2]);
+        return new Vec2(
+                Math.toDegrees(Math.atan2(diff[2], diff[0])) - 90.0F,
+                -Math.toDegrees(Math.atan2(diff[1], hDist))
+        );
     }
 
     /**

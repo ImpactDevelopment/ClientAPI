@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.Cancellable;
+import me.zero.event.type.Cancellable;
 import me.zero.client.api.exception.InvalidActionException;
 import net.minecraft.util.text.ITextComponent;
 
@@ -49,7 +49,7 @@ public final class ChatEvent extends Cancellable {
         if (type == Type.SEND)
             this.message = message;
         else
-            throw new InvalidActionException("You cannot set a message unless it is being sent.");
+            throw new InvalidActionException("Message cannot be set if type is not SEND");
 
         return this;
     }

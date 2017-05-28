@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.EntityCollisionEvent;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
@@ -50,7 +50,7 @@ public abstract class MixinEntity implements IEntity {
     @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
     public void applyEntityCollision(Entity entityIn, CallbackInfo ci) {
         EntityCollisionEvent event = new EntityCollisionEvent((Entity) (Object) this, entityIn);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
     }

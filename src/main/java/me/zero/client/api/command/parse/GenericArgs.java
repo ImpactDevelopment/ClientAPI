@@ -10,6 +10,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
  * @author Brady
  * @since 2/16/2017 12:00 PM
  */
+@Deprecated
 public final class GenericArgs {
 
     private GenericArgs() {}

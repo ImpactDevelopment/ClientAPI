@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.Cancellable;
+import me.zero.event.type.Cancellable;
 import me.zero.client.api.util.interfaces.Helper;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;

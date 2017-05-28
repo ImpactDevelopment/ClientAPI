@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.client.api.event.type.EventState;
+import me.zero.event.type.EventState;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;

@@ -1,6 +1,6 @@
 package me.zero.client.api.module;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.manage.Node;
@@ -222,15 +222,15 @@ public abstract class Module extends Node implements IModule {
         if (state == this.state) return;
 
         ModuleStateEvent event = new ModuleStateEvent(this, state);
-        EventManager.post(event);
+        ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
 
         if (this.state = state) {
             onEnable();
-            EventManager.subscribe(this);
+            ClientAPI.EVENT_BUS.subscribe(this);
         } else {
-            EventManager.unsubscribe(this);
+            ClientAPI.EVENT_BUS.unsubscribe(this);
             onDisable();
         }
 

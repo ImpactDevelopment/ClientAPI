@@ -1,6 +1,6 @@
 package me.zero.client.api.module;
 
-import me.zero.client.api.event.EventManager;
+import me.zero.client.api.ClientAPI;
 import me.zero.client.api.util.keybind.Keybind;
 
 /**
@@ -40,10 +40,10 @@ public class ModuleMode<T extends Module> implements IModule {
         if (state) {
             if (parent.getState()) {
                 this.onEnable();
-                EventManager.subscribe(this);
+                ClientAPI.EVENT_BUS.subscribe(this);
             }
         } else {
-            EventManager.unsubscribe(this);
+            ClientAPI.EVENT_BUS.unsubscribe(this);
             this.onDisable();
         }
     }
