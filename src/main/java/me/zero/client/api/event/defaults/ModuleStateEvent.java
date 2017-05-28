@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.event.type.Cancellable;
+import me.zero.alpine.type.Cancellable;
 import me.zero.client.api.module.Module;
 
 /**
