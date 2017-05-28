@@ -1,11 +1,7 @@
 package me.zero.client.api.module.plugin;
 
 import com.google.gson.GsonBuilder;
-import javassist.bytecode.Descriptor;
-import me.zero.client.api.exception.InvalidActionException;
-import me.zero.client.api.module.Mod;
 import me.zero.client.api.module.Module;
-import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.Messages;
 import me.zero.client.api.util.logger.Level;
 import me.zero.client.api.util.logger.Logger;
@@ -108,7 +104,7 @@ public final class PluginLoader {
 
                     if (name.endsWith(".class")) {
                         try {
-                            Class clazz = Class.forName(Descriptor.toJavaName(name.substring(0, name.length() - 6)), true, classLoader);
+                            Class clazz = Class.forName(name.substring(0, name.length() - 6).replace('/', '.'), true, classLoader);
 
                             if (clazz != null && clazz.getSuperclass().equals(Module.class)) {
                                 try {

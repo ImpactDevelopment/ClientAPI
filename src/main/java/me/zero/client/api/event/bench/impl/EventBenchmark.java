@@ -1,8 +1,8 @@
 package me.zero.client.api.event.bench.impl;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.event.listener.EventHandler;
-import me.zero.event.listener.Listener;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import me.zero.client.api.event.bench.Benchmark;
 
 /**

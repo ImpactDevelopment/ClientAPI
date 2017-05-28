@@ -2,18 +2,14 @@ package me.zero.client.api.command;
 
 import me.zero.client.api.Client;
 import me.zero.client.api.command.parse.CommandContext;
-import me.zero.event.listener.EventHandler;
-import me.zero.event.listener.Listener;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import me.zero.client.api.event.defaults.ChatEvent;
 import me.zero.client.api.manage.Manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static me.zero.client.api.util.Messages.*;
 
 /**
  * Handles and executes commands.

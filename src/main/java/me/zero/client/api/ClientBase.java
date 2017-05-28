@@ -77,9 +77,11 @@ class ClientBase implements Helper {
     }
 
     /**
-     * Returns the module manager casted to the specified type
+     * Returns the module manager for this client, can
+     * be casted to the parameterized generic type for
+     * compatibility purposes.
      *
-     * @return The Module Manager casted to this Client's implementation
+     * @return This Client's Module Manager
      */
     @SuppressWarnings("unchecked")
     public <T extends Manager<Module>> T getModuleManager() {
@@ -101,9 +103,11 @@ class ClientBase implements Helper {
     }
 
     /**
-     * Returns the command manager casted to the specified type
+     * Returns the command manager for this client, can
+     * be casted to the parameterized generic type for
+     * compatibility purposes.
      *
-     * @return The Command Manager casted to this Client's implementation
+     * @return This Client's Command Manager
      */
     @SuppressWarnings("unchecked")
     public <T extends Manager<Command>> T getCommandManager() {

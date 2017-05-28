@@ -1,6 +1,6 @@
 package me.zero.client.api.event.defaults;
 
-import me.zero.event.type.Cancellable;
+import me.zero.alpine.type.Cancellable;
 
 /**
  * Called when the game is requested to be shutdown.
