@@ -1,4 +1,4 @@
-package me.zero.client.wrapper;
+package me.zero.client.load.mixin.wrapper;
 
 /**
  * Used to set sleeping

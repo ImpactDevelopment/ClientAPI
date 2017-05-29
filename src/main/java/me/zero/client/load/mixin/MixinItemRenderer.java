@@ -2,7 +2,7 @@ package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.ItemRenderEvent;
-import me.zero.client.wrapper.IItemRenderer;
+import me.zero.client.load.mixin.wrapper.IItemRenderer;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
