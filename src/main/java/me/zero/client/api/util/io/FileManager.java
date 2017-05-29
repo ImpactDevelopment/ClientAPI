@@ -81,18 +81,15 @@ public final class FileManager {
      * @param file The file path
      */
     public static void createFile(String file) {
-        Path path = Paths.get(file);
-        Path parent = Paths.get(new File(file).getParent());
-
         try {
-            Files.createDirectories(parent);
+            Files.createDirectories(Paths.get(new File(file).getParent()));
         } catch (IOException e) {
             Logger.instance.logf(Level.WARNING, "Unable to create parent directories %s", e);
             return;
         }
 
         try {
-            Files.createFile(path);
+            Files.createFile(Paths.get(file));
         } catch (IOException e) {
             Logger.instance.logf(Level.WARNING, "Unable to create file", e);
         }

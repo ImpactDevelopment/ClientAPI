@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.IShaderGroup;
+import me.zero.client.load.mixin.wrapper.IShaderGroup;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.Shader;
 import net.minecraft.client.shader.ShaderGroup;

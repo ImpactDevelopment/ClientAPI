@@ -1,6 +1,6 @@
 package me.zero.client.api.util.interfaces;
 
-import me.zero.client.wrapper.IMinecraft;
+import me.zero.client.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
 
 /**

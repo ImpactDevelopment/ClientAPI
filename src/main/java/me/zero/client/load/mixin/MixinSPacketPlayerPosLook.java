@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.ISPacketPlayerPosLook;
+import me.zero.client.load.mixin.wrapper.ISPacketPlayerPosLook;
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

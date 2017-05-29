@@ -1,4 +1,4 @@
-package me.zero.client.wrapper;
+package me.zero.client.load.mixin.wrapper;
 
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;

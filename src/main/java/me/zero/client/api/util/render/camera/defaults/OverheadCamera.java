@@ -3,7 +3,7 @@ package me.zero.client.api.util.render.camera.defaults;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraHandle;
-import me.zero.client.wrapper.IEntity;
+import me.zero.client.load.mixin.wrapper.IEntity;
 
 /**
  * An implementation of Camera that renders what is directly behind the player.

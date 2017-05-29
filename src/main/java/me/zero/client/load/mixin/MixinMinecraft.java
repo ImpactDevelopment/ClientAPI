@@ -8,7 +8,7 @@ import me.zero.client.api.event.defaults.*;
 import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.util.render.GlUtils;
 import me.zero.client.load.ClientInitException;
-import me.zero.client.wrapper.IMinecraft;
+import me.zero.client.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -65,7 +65,7 @@ public class MixinMinecraft implements IMinecraft {
         ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(reader, ClientInfo.class);
 
         if (clientInfo == null)
-            throw new ClientInitException("");
+            throw new ClientInitException("Unable to create ClientInfo from Client.json");
 
         Client client;
 
