@@ -1,4 +1,4 @@
-package me.zero.client.wrapper;
+package me.zero.client.load.mixin.wrapper;
 
 import me.zero.client.api.event.defaults.ClickEvent;
 import net.minecraft.util.Session;

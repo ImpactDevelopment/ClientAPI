@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.IEntityPlayer;
+import me.zero.client.load.mixin.wrapper.IEntityPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

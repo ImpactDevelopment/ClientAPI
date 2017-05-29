@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.ICPacketPlayer;
+import me.zero.client.load.mixin.wrapper.ICPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

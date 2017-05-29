@@ -64,11 +64,4 @@ public class Notifications {
 	public void render() {
 		renderer.draw(notifications);
 	}
-
-	/**
-	 * Various Notification Types
-	 */
-	public enum Type {
-		URGENT, WARNING, INFO
-	}
 }

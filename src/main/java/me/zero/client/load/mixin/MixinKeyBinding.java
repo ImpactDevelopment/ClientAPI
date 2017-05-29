@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.IKeyBinding;
+import me.zero.client.load.mixin.wrapper.IKeyBinding;
 import net.minecraft.client.settings.KeyBinding;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

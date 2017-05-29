@@ -4,7 +4,7 @@ import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.EntityCollisionEvent;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
-import me.zero.client.wrapper.IEntity;
+import me.zero.client.load.mixin.wrapper.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.util.math.AxisAlignedBB;

@@ -1,6 +1,6 @@
 package me.zero.client.load.mixin;
 
-import me.zero.client.wrapper.IGameType;
+import me.zero.client.load.mixin.wrapper.IGameType;
 import net.minecraft.world.GameType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
