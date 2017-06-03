@@ -1,41 +1,39 @@
 package me.zero.client.api.command;
 
-import me.zero.client.api.command.parse.CommandArg;
-import me.zero.client.api.command.parse.CommandContext;
+import me.zero.client.api.command.exception.CommandInitException;
 
 /**
- * A command
- *
  * @author Brady
- * @since 2/13/2017 12:00 PM
+ * @since 5/31/2017 8:55 AM
  */
-@Deprecated
-public interface Command {
+public abstract class Command implements ICommand {
 
-    /**
-     * @return The list of command headers
-     */
-    String[] label();
+    private final String[] headers;
+    private final String description;
+    private final String[] syntax;
 
-    /**
-     * @return The usage explaination
-     */
-    String description();
+    public Command() {
+        if (!this.getClass().isAnnotationPresent(Cmd.class))
+            throw new RuntimeException(new CommandInitException("@Cmd annotation not found!"));
 
-    /**
-     * @return The arguments that the command needs to execute
-     */
-    CommandArg[] arguments();
+        Cmd cmd = this.getClass().getAnnotation(Cmd.class);
+        this.headers = cmd.headers();
+        this.description = cmd.description();
+        this.syntax = cmd.syntax();
+    }
 
-    /**
-     * @return The usage of this command
-     */
-    CommandUsage[] usage();
+    @Override
+    public String[] headers() {
+        return this.headers;
+    }
 
-    /**
-     * Executes this command with the given context
-     *
-     * @param context The command context
-     */
-    void execute(CommandContext context);
+    @Override
+    public String description() {
+        return this.description;
+    }
+
+    @Override
+    public String[] syntax() {
+        return this.syntax;
+    }
 }

@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * @author Brady
  * @since 3/2/2017 12:00 PM
  */
-public final class PacketFilter implements Predicate<PacketEvent> {
+public final class PacketFilter<T extends PacketEvent> implements Predicate<T> {
 
     /**
      * Packets allowed by this filter
@@ -24,7 +24,7 @@ public final class PacketFilter implements Predicate<PacketEvent> {
     }
 
     @Override
-    public boolean test(PacketEvent packetEvent) {
+    public boolean test(T packetEvent) {
         for (Class<? extends Packet<?>> packet : packets)
             if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
                 return true;
