@@ -8,7 +8,6 @@ import me.zero.client.api.module.Module;
 import me.zero.client.api.module.plugin.Plugin;
 import me.zero.client.api.module.plugin.PluginLoader;
 import me.zero.client.api.util.interfaces.Helper;
-import net.minecraft.util.text.TextComponentString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,20 +168,25 @@ class ClientBase implements Helper {
      * @return The categories
      */
     public List<Class<?>> getCategories(boolean sort) {
-        List<Class<?>> categories = new ArrayList<>();
-        getModuleManager().getData().forEach(module -> {
-            Class<?> category = module.getType();
+        if (categories.isEmpty()) {
+            getModuleManager().getData().forEach(module -> {
+                Class<?> category = module.getType();
 
-            if (!categories.contains(category))
-                categories.add(category);
-        });
-        if (sort) {
-            categories.sort((c1, c2) -> {
-                String n1 = c1.getAnnotation(Category.class).name();
-                String n2 = c2.getAnnotation(Category.class).name();
-                return String.CASE_INSENSITIVE_ORDER.compare(n1, n2);
+                if (!categories.contains(category))
+                    categories.add(category);
             });
         }
-        return categories;
+
+        if (!sort)
+            return categories;
+
+        List<Class<?>> sorted = new ArrayList<>(categories);
+        sorted.sort((c1, c2) -> {
+            String n1 = c1.getAnnotation(Category.class).name();
+            String n2 = c2.getAnnotation(Category.class).name();
+            return String.CASE_INSENSITIVE_ORDER.compare(n1, n2);
+        });
+
+        return sorted;
     }
 }

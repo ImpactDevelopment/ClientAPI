@@ -81,19 +81,26 @@ public final class ClientHandler implements Helper {
     });
 
     /**
-     * Handles chat messages
+     * Handles packet out-flow
      */
     @EventHandler
-    private final Listener<PacketEvent> packetListener = new Listener<>(event -> {
-        if (event.getPacket() instanceof CPacketChatMessage) {
-            CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
-            ChatEvent chatEvent = new ChatEvent(packet.getMessage(), ChatEvent.Type.SEND);
-            ClientAPI.EVENT_BUS.post(chatEvent);
-            if (chatEvent.isCancelled())
-                event.cancel();
-        } else if (event.getPacket() instanceof SPacketChat) {
-            SPacketChat packet = (SPacketChat) event.getPacket();
-            ClientAPI.EVENT_BUS.post(new ChatEvent(packet.getChatComponent(), ChatEvent.Type.RECEIVE));
-        }
-    }, new PacketFilter(CPacketChatMessage.class, SPacketChat.class));
+    private final Listener<PacketEvent.Send> packetSendListener = new Listener<>(event -> {
+        CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
+        ChatEvent chatEvent = new ChatEvent.Send(packet.getMessage());
+        ClientAPI.EVENT_BUS.post(chatEvent);
+        if (chatEvent.isCancelled())
+            event.cancel();
+    }, new PacketFilter<>(CPacketChatMessage.class));
+
+    /**
+     * Handles packet in-flow
+     */
+    @EventHandler
+    private final Listener<PacketEvent.Receive> packetReceiveListener = new Listener<>(event -> {
+        SPacketChat packet = (SPacketChat) event.getPacket();
+        ChatEvent chatEvent = new ChatEvent.Receive(packet.getChatComponent());
+        ClientAPI.EVENT_BUS.post(chatEvent);
+        if (chatEvent.isCancelled())
+            event.cancel();
+    }, new PacketFilter<>(SPacketChat.class));
 }

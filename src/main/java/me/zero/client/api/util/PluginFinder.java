@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import static me.zero.client.api.event.defaults.PacketEvent.Type.*;
 import static me.zero.client.api.util.PluginFinder.PResponse.Result.*;
 
 /**
@@ -81,10 +80,7 @@ public final class PluginFinder implements Helper {
     });
 
     @EventHandler
-    private final Listener<PacketEvent> packetListener = new Listener<>(event -> {
-        if (event.getType() != RECEIVE)
-            return;
-
+    private final Listener<PacketEvent.Receive> packetListener = new Listener<>(event -> {
         SPacketTabComplete packet = (SPacketTabComplete) event.getPacket();
         Set<String> plugins = Sets.newLinkedHashSet();
 
@@ -97,7 +93,7 @@ public final class PluginFinder implements Helper {
         callback.accept(new PResponse(plugins));
         callback = null;
         ClientAPI.EVENT_BUS.unsubscribe(this);
-    }, new PacketFilter(SPacketTabComplete.class));
+    }, new PacketFilter<>(SPacketTabComplete.class));
 
     public static class PResponse {
 
