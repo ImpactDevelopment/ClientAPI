@@ -1,5 +1,5 @@
 {
-  "required": "true",
+  "required": true,
   "package": "me.zero.client.load.mixin",
   "refmap": "mixins.capi.refmap.json",
   "compatibilityLevel": "JAVA_8",
