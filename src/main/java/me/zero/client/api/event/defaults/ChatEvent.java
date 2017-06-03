@@ -1,70 +1,69 @@
 package me.zero.client.api.event.defaults;
 
 import me.zero.alpine.type.Cancellable;
-import me.zero.client.api.exception.InvalidActionException;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 
 /**
  * Called whenever a chat message is sent or received.
  *
+ * @see Send
+ * @see Receive
+ *
  * @author Brady
  * @since 2/10/2017 12:00 PM
  */
-public final class ChatEvent extends Cancellable {
+public class ChatEvent extends Cancellable {
 
     /**
      * The ChatEvent's message
      */
-    private String message;
+    protected ITextComponent message;
 
-    /**
-     * The Type of event (SEND/RECEIVE)
-     */
-    private final Type type;
-
-    public ChatEvent(String message, Type type) {
+    private ChatEvent(ITextComponent message) {
         this.message = message;
-        this.type = type;
-    }
-
-    public ChatEvent(ITextComponent message, Type type) {
-        this(message.getFormattedText(), type);
     }
 
     /**
-     * @return The message for this event
+     * Sets the message being sent/received
+     *
+     * @param message The new message
      */
-    public final String getMessage() {
+    public void setMessage(ITextComponent message) {
+        this.message = message;
+    }
+
+    /**
+     * @return The message
+     */
+    public final ITextComponent getMessage() {
         return this.message;
     }
 
     /**
-     * Sets this event's chat message, only works if the
-     * message is being sent.
-     *
-     * @param message Message being set
-     * @return This Event
+     * @return The raw message, unformatted text component
      */
-    public final ChatEvent setMessage(String message) {
-        if (type == Type.SEND)
-            this.message = message;
-        else
-            throw new InvalidActionException("Message cannot be set if type is not SEND");
-
-        return this;
+    public final String getRawMessage() {
+        return this.message.getUnformattedText();
     }
 
     /**
-     * @return The type of event
+     * Called when a chat message is sent
      */
-    public final Type getType() {
-        return this.type;
+    public static final class Send extends ChatEvent {
+
+        public Send(String message) {
+            super(new TextComponentString(message));
+        }
     }
 
     /**
-     * ChatEvent Type
+     * Called when a chat message is received
      */
-    public enum Type {
-        SEND, RECEIVE
+    public static final class Receive extends ChatEvent {
+
+        public Receive(ITextComponent message) {
+            super(message);
+        }
     }
 }

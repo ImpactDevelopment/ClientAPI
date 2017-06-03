@@ -6,24 +6,21 @@ import net.minecraft.network.Packet;
 /**
  * Called whenever a packet is either sent or received
  *
+ * @see Send
+ * @see Receive
+ *
  * @author Brady
  * @since 2/7/2017 12:00 PM
  */
-public final class PacketEvent extends Cancellable {
+public class PacketEvent extends Cancellable {
 
     /**
      * The packet being sent
      */
     private Packet<?> packet;
 
-    /**
-     * The flow direction, send or receive
-     */
-    private final Type type;
-
-    public PacketEvent(Packet<?> packet, Type type) {
+    private PacketEvent(Packet<?> packet) {
         this.packet = packet;
-        this.type = type;
     }
 
     /**
@@ -45,18 +42,22 @@ public final class PacketEvent extends Cancellable {
     }
 
     /**
-     * @return The packet direction, send or receive
+     * Called when a packet is being sent from the client to server
      */
-    public final Type getType() {
-        return this.type;
+    public static final class Send extends PacketEvent {
+
+        public Send(Packet<?> packet) {
+            super(packet);
+        }
     }
 
     /**
-     * Indicates which direction the packet
-     * is coming from, either being sent or
-     * received.
+     * Called when a packet is being received from the server to the client
      */
-    public enum Type {
-        SEND, RECEIVE
+    public static final class Receive extends PacketEvent {
+
+        public Receive(Packet<?> packet) {
+            super(packet);
+        }
     }
 }
