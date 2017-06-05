@@ -22,7 +22,7 @@ To use the Client API, you must download [Development Kit](https://github.com/Ze
 * The client will inherit from a vanilla minecraft version
   * This means the client doesn't need to include actual minecraft code
 * The client will list ClientAPI as a maven dependancy
-  * The minecraft launcher will autmatically download the ClientAPI lib to the `.minecraft/libraries` folder
+  * The minecraft launcher will automatically download the ClientAPI lib to the `.minecraft/libraries` folder
 
 ## Usage
 Refer to the [Example](https://github.com/ZeroMemes/ClientAPI-Example) to view how clients using the ClientAPI are structured.
