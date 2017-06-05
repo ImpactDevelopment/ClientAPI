@@ -16,9 +16,13 @@ API designed to make Clients have Universal Support
 To use the Client API, you must download [Development Kit](https://github.com/ZeroMemes/ClientAPI-CDK). Instructions on how to set it up will be posted in the README.
 
 ## Concept
-* Clients will be stored in a "Clients" folder inside of ".minecraft"
-* To launch a client, you run the "ClientAPI Launcher" and choose the desired Client
-* Minecraft will automatically open with the Client running
+* Clients will install into `.minecraft/versions`
+  * An installer could be used to configure stacking on top of other tweakers (e.g. Forge)
+  * If an installer is used, it could also add a profile to the launcher
+* The client will inherit from a vanilla minecraft version
+  * This means the client doesn't need to include actual minecraft code
+* The client will list ClientAPI as a maven dependancy
+  * The minecraft launcher will autmatically download the ClientAPI lib to the `.minecraft/libraries` folder
 
 ## Usage
 Refer to the [Example](https://github.com/ZeroMemes/ClientAPI-Example) to view how clients using the ClientAPI are structured.
