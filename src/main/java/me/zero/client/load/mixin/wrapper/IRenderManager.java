@@ -1,25 +1,28 @@
 package me.zero.client.load.mixin.wrapper;
 
+import net.minecraft.client.renderer.entity.RenderManager;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
 /**
- * Used to get the X, Y and Z render positions
- *
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
+@Mixin(RenderManager.class)
 public interface IRenderManager {
 
     /**
      * @return Render Pos X
      */
-    double getRenderPosX();
+    @Accessor double getRenderPosX();
 
     /**
      * @return Render Pos Y
      */
-    double getRenderPosY();
+    @Accessor double getRenderPosY();
 
     /**
      * @return Render Pos Z
      */
-    double getRenderPosZ();
+    @Accessor double getRenderPosZ();
 }

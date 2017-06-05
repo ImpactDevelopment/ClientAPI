@@ -4,6 +4,14 @@
   "refmap": "mixins.capi.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ICPacketPlayer"
+    "ICPacketPlayer",
+    "IEntityPlayer",
+    "IGameType",
+    "IItemRenderer",
+    "IKeyBinding",
+    "IPlayerControllerMP",
+    "IRenderManager",
+    "IShaderGroup",
+    "ISPacketPlayerPosLook"
   ]
 }

@@ -43,7 +43,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
     @Shadow private boolean autoJumpEnabled;
 
     @Shadow public abstract boolean isSneaking();
-    @Shadow public abstract boolean isCurrentViewEntity();
+    @Shadow protected abstract boolean isCurrentViewEntity();
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
     public void onUpdate(CallbackInfo ci) {
@@ -70,33 +70,26 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
         super.move(type, event.getX(), event.getY(), event.getZ());
     }
 
+    /**
+     * @author Brady
+     */
     @Overwrite
     public void onUpdateWalkingPlayer() {
+        EntityPlayerSP _this = (EntityPlayerSP) (Object) this;
+
         MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
         ClientAPI.EVENT_BUS.post(pre);
 
-        boolean flag = this.isSprinting();
-
-        if (flag != this.serverSprintState) {
-            if (flag) {
-                this.connection.sendPacket(new CPacketEntityAction((EntityPlayerSP) (Object) this, CPacketEntityAction.Action.START_SPRINTING));
-            } else {
-                this.connection.sendPacket(new CPacketEntityAction((EntityPlayerSP) (Object) this, CPacketEntityAction.Action.STOP_SPRINTING));
-            }
-
-            this.serverSprintState = flag;
+        boolean clientSprintState = this.isSprinting();
+        if (clientSprintState != this.serverSprintState) {
+            this.connection.sendPacket(new CPacketEntityAction(_this, clientSprintState ? CPacketEntityAction.Action.START_SPRINTING : CPacketEntityAction.Action.STOP_SPRINTING));
+            this.serverSprintState = clientSprintState;
         }
 
-        boolean flag1 = this.isSneaking();
-
-        if (flag1 != this.serverSneakState) {
-            if (flag1) {
-                this.connection.sendPacket(new CPacketEntityAction((EntityPlayerSP) (Object) this, CPacketEntityAction.Action.START_SNEAKING));
-            } else {
-                this.connection.sendPacket(new CPacketEntityAction((EntityPlayerSP) (Object) this, CPacketEntityAction.Action.STOP_SNEAKING));
-            }
-
-            this.serverSneakState = flag1;
+        boolean clientSneakState = this.isSneaking();
+        if (clientSneakState != this.serverSneakState) {
+            this.connection.sendPacket(new CPacketEntityAction(_this, clientSneakState ? CPacketEntityAction.Action.START_SNEAKING : CPacketEntityAction.Action.STOP_SNEAKING));
+            this.serverSneakState = clientSneakState;
         }
 
         if (this.isCurrentViewEntity()) {
@@ -111,34 +104,33 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
             double d0 = pX - this.lastReportedPosX;
             double d1 = pY - this.lastReportedPosY;
             double d2 = pZ - this.lastReportedPosZ;
-            double d3 = (double) (pYaw - this.lastReportedYaw);
-            double d4 = (double) (pPitch - this.lastReportedPitch);
+            double d3 = pYaw - this.lastReportedYaw;
+            double d4 = pPitch - this.lastReportedPitch;
 
-            ++this.positionUpdateTicks;
-            boolean pUpdate = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || this.positionUpdateTicks >= 20;
-            boolean rUpdate = d3 != 0.0D || d4 != 0.0D;
+            boolean position = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || ++this.positionUpdateTicks >= 20;
+            boolean rotation = d3 != 0.0D || d4 != 0.0D;
 
             if (this.isRiding()) {
                 this.connection.sendPacket(new CPacketPlayer.PositionRotation(this.motionX, -999.0D, this.motionZ, this.rotationYaw, this.rotationPitch, this.onGround));
-                pUpdate = false;
-            } else if (pUpdate && rUpdate) {
+                position = false;
+            } else if (position && rotation) {
                 this.connection.sendPacket(new CPacketPlayer.PositionRotation(pX, pY, pZ, pYaw, pPitch, pGround));
-            } else if (pUpdate) {
+            } else if (position) {
                 this.connection.sendPacket(new CPacketPlayer.Position(pX, pY, pZ, pGround));
-            } else if (rUpdate) {
+            } else if (rotation) {
                 this.connection.sendPacket(new CPacketPlayer.Rotation(pYaw, pPitch, pGround));
             } else if (this.prevOnGround != pGround) {
                 this.connection.sendPacket(new CPacketPlayer(pGround));
             }
 
-            if (pUpdate) {
+            if (position) {
                 this.lastReportedPosX = pX;
                 this.lastReportedPosY = pY;
                 this.lastReportedPosZ = pZ;
                 this.positionUpdateTicks = 0;
             }
 
-            if (rUpdate) {
+            if (rotation) {
                 this.lastReportedYaw = pYaw;
                 this.lastReportedPitch = pPitch;
             }
