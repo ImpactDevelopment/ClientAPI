@@ -1,45 +1,23 @@
 package me.zero.client.load.mixin.wrapper;
 
+import net.minecraft.network.play.server.SPacketPlayerPosLook;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
 /**
- * Used to set the Server Player Packet fields
- *
  * @author Brady
  * @since 2/28/2017 12:00 PM
  */
+@Mixin(SPacketPlayerPosLook.class)
 public interface ISPacketPlayerPosLook {
 
-    /**
-     * Sets the packet X coordinate
-     *
-     * @param x X coordinate
-     */
-    void setX(double x);
+    @Accessor void setX(double x);
 
-    /**
-     * Sets the packet Y coordinate
-     *
-     * @param y Y coordinate
-     */
-    void setY(double y);
+    @Accessor void setY(double y);
 
-    /**
-     * Sets the packet Z coordinate
-     *
-     * @param z Z coordinate
-     */
-    void setZ(double z);
+    @Accessor void setZ(double z);
 
-    /**
-     * Sets the packet yaw rotation
-     *
-     * @param yaw Yaw rotation
-     */
-    void setYaw(float yaw);
+    @Accessor void setYaw(float yaw);
 
-    /**
-     * Sets the packet pitch rotation
-     *
-     * @param pitch Pitch rotation
-     */
-    void setPitch(float pitch);
+    @Accessor void setPitch(float pitch);
 }

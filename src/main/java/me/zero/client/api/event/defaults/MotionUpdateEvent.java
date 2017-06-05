@@ -16,19 +16,19 @@ import me.zero.client.load.mixin.wrapper.IEntity;
 public final class MotionUpdateEvent implements Helper {
 
     /**
-     * Original and New positions
+     * Position
      */
-    private static Vec3 oPos, nPos;
+    private static Vec3 pos = new Vec3();
 
     /**
-     * Original and New rotations
+     * Rotations
      */
-    private static Vec2 oRotation, nRotation;
+    private static Vec2 rotations = new Vec2();
 
     /**
      * OnGround state
      */
-    private static boolean oGround, nGround;
+    private static boolean onGround;
 
     /**
      * State of this event
@@ -40,19 +40,10 @@ public final class MotionUpdateEvent implements Helper {
         if (type == EventState.POST)
             return;
 
-        if (oPos == null) oPos = new Vec3();
-        if (nPos == null) nPos = new Vec3();
-        if (oRotation == null) oRotation = new Vec2();
-        if (nRotation == null) nRotation = new Vec2();
-
         IEntity me = (IEntity) mc.player;
-        oPos.transfer(me.getPos()).y(mc.player.getEntityBoundingBox().minY);
-        oRotation.transfer(me.getRotations());
-        oGround   = mc.player.onGround;
-
-        nPos.transfer(oPos);
-        nRotation.transfer(oRotation);
-        nGround   = oGround;
+        pos.transfer(me.getPos()).y(mc.player.getEntityBoundingBox().minY);
+        rotations.transfer(me.getRotations());
+        onGround = mc.player.onGround;
     }
 
     /**
@@ -62,7 +53,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent x(double x) {
-        nPos.x(x);
+        pos.x(x);
         return this;
     }
 
@@ -73,7 +64,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent y(double y) {
-        nPos.y(y);
+        pos.y(y);
         return this;
     }
 
@@ -84,7 +75,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent z(double z) {
-        nPos.z(z);
+        pos.z(z);
         return this;
     }
 
@@ -95,7 +86,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent yaw(float yaw) {
-        nRotation.x(yaw);
+        rotations.x(yaw);
         return this;
     }
 
@@ -106,7 +97,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent pitch(float pitch) {
-        nRotation.y(pitch);
+        rotations.y(pitch);
         return this;
     }
 
@@ -117,7 +108,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent onGround(boolean onGround) {
-        nGround = onGround;
+        MotionUpdateEvent.onGround = onGround;
         return this;
     }
 
@@ -125,42 +116,42 @@ public final class MotionUpdateEvent implements Helper {
      * @return The X position
      */
     public final double getX() {
-        return nPos.getX();
+        return pos.getX();
     }
 
     /**
      * @return The Y position
      */
     public final double getY() {
-        return nPos.getY();
+        return pos.getY();
     }
 
     /**
      * @return The Z position
      */
     public final double getZ() {
-        return nPos.getZ();
+        return pos.getZ();
     }
 
     /**
      * @return The Yaw rotation
      */
     public final float getYaw() {
-        return nRotation.getX();
+        return rotations.getX();
     }
 
     /**
      * @return The Pitch rotation
      */
     public final float getPitch() {
-        return nRotation.getY();
+        return rotations.getY();
     }
 
     /**
      * @return The OnGround state
      */
     public final boolean isOnGround() {
-        return nGround;
+        return onGround;
     }
 
     /**

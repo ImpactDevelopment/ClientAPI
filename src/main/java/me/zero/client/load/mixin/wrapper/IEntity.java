@@ -4,9 +4,6 @@ import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 
 /**
- * Used to convert entity position and rotation
- * to the Client API Vectors
- *
  * @author Brady
  * @since 2/25/2017 12:00 PM
  */

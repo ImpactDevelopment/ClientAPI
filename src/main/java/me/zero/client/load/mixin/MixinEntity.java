@@ -39,13 +39,13 @@ public abstract class MixinEntity implements IEntity {
     @Shadow public float prevRotationPitch;
     @Shadow public boolean onGround;
 
-    private Vec3 pos, prevPos, lastTickPos;
-    private Vec2 rotation, prevRotation;
-
     @Shadow public void move(MoverType type, double x, double y, double z) {}
     @Shadow public abstract boolean isSprinting();
     @Shadow public abstract boolean isRiding();
     @Shadow public abstract AxisAlignedBB getEntityBoundingBox();
+
+    private Vec3 pos, prevPos, lastTickPos;
+    private Vec2 rotation, prevRotation;
 
     @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
     public void applyEntityCollision(Entity entityIn, CallbackInfo ci) {

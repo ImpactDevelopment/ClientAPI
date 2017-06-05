@@ -16,6 +16,7 @@ import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,7 +38,7 @@ import static me.zero.client.api.event.defaults.ClickEvent.MouseButton.*;
 public class MixinMinecraft implements IMinecraft {
 
     @Shadow @Final private Timer timer;
-    @Shadow @Final private Session session;
+    @Shadow @Final @Mutable private Session session;
     @Shadow private int rightClickDelayTimer;
 
     @Shadow private void clickMouse() {}
