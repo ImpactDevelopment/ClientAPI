@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +39,7 @@ public final class ClientTweaker implements ITweaker {
         Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.capi.json");
+        Mixins.addConfiguration("mixins.wrapper.capi.json");
 
         // Optional mixin configuration, added by client developers
         String mixin = "mixins.client.json";
