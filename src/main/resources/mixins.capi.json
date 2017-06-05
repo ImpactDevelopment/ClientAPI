@@ -7,24 +7,18 @@
     "MixinBlock",
     "MixinEntity",
     "MixinEntityLivingBase",
-    "MixinEntityPlayer",
     "MixinEntityPlayerSP",
     "MixinEntityRenderer",
     "MixinFontRenderer",
-    "MixinGameType",
     "MixinGuiIngame",
     "MixinItemRenderer",
-    "MixinKeyBinding",
     "MixinLayerArmorBase",
     "MixinMinecraft",
     "MixinNetworkManager",
-    "MixinPlayerControllerMP",
     "MixinProfiler",
     "MixinRender",
     "MixinRenderItem",
     "MixinRenderLivingBase",
-    "MixinRenderManager",
-    "MixinShaderGroup",
-    "MixinSPacketPlayerPosLook"
+    "MixinRenderManager"
   ]
 }

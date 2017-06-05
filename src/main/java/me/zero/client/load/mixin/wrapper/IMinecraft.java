@@ -5,8 +5,6 @@ import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 
 /**
- * Used to retrieve the Timer instance.
- *
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */

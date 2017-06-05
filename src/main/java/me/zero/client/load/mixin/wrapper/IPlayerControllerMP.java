@@ -1,27 +1,30 @@
 package me.zero.client.load.mixin.wrapper;
 
+import net.minecraft.client.multiplayer.PlayerControllerMP;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
 /**
- * Used for various PlayerControllerMP fields
- *
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
+@Mixin(PlayerControllerMP.class)
 public interface IPlayerControllerMP {
 
     /**
      * @return PlayerControllerMP#isHittingBlock
      */
-    boolean isHittingBlock();
+    @Accessor boolean getIsHittingBlock();
 
     /**
      * @return PlayerControllerMP#curBlockDamageMP
      */
-    float getCurBlockDamage();
+    @Accessor float getCurBlockDamageMP();
 
     /**
      * Sets PlayerControllerMP#curBlockDamageMP
      *
      * @param damage New damage value
      */
-    void setCurBlockDamage(float damage);
+    @Accessor void setCurBlockDamageMP(float damage);
 }

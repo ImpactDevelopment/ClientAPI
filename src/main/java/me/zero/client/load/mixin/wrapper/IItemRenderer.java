@@ -1,29 +1,18 @@
 package me.zero.client.load.mixin.wrapper;
 
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.util.EnumHandSide;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 /**
- * Gives access to first person item
- * transformation methods.
- *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
+@Mixin(ItemRenderer.class)
 public interface IItemRenderer {
 
-    /**
-     * Calls ItemRenderer#transformSideFirstPerson(EnumHandSide, float)
-     *
-     * @param side The side being transformed for
-     * @param rechargeProgress The item recharge progress
-     */
-    void setupSideFirstPerson(EnumHandSide side, float rechargeProgress);
+    @Invoker void transformSideFirstPerson(EnumHandSide side, float rechargeProgress);
 
-    /**
-     * Calls ItemRenderer#transformFirstPerson(EnumHandSide, float)
-     *
-     * @param side The side being transformed for
-     * @param swingProgress The item swing progress
-     */
-    void setupFirstPerson(EnumHandSide side, float swingProgress);
+    @Invoker void transformFirstPerson(EnumHandSide side, float swingProgress);
 }

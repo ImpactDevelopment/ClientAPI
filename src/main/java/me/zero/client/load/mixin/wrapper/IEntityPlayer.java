@@ -1,24 +1,17 @@
 package me.zero.client.load.mixin.wrapper;
 
+import net.minecraft.entity.player.EntityPlayer;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
 /**
- * Used to set sleeping
- *
  * @author Brady
  * @since 2/25/2017 12:00 PM
  */
+@Mixin(EntityPlayer.class)
 public interface IEntityPlayer {
 
-    /**
-     * Sets the player sleeping state
-     *
-     * @param sleeping Sleep state
-     */
-    void setSleeping(boolean sleeping);
+    @Accessor void setSleeping(boolean sleeping);
 
-    /**
-     * Sets the player sleeping timer
-     *
-     * @param sleepTimer Sleep timer
-     */
-    void setSleepTimer(int sleepTimer);
+    @Accessor void setSleepTimer(int sleepTimer);
 }
