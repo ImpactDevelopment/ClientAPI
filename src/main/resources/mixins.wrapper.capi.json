@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "me.zero.client.load.mixin.wrapper",
+  "refmap": "mixins.capi.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ICPacketPlayer"
+  ]
+}
