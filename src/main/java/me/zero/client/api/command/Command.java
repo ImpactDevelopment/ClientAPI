@@ -14,7 +14,7 @@ public abstract class Command implements ICommand {
 
     public Command() {
         if (!this.getClass().isAnnotationPresent(Cmd.class))
-            throw new RuntimeException(new CommandInitException("@Cmd annotation not found!"));
+            throw new RuntimeException(new CommandInitException(this, "@Cmd annotation not found!"));
 
         Cmd cmd = this.getClass().getAnnotation(Cmd.class);
         this.headers = cmd.headers();
