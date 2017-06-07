@@ -1,5 +1,7 @@
 package me.zero.client.api.command.exception;
 
+import me.zero.client.api.command.Command;
+
 /**
  * Called when the initialization of a {@code Command}
  * fails.c
@@ -9,7 +11,7 @@ package me.zero.client.api.command.exception;
  */
 public final class CommandInitException extends CommandException {
 
-    public CommandInitException(String message) {
-        super(message);
+    public CommandInitException(Command command, String message) {
+        super(command, message);
     }
 }
