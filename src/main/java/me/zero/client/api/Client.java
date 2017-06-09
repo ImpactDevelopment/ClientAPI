@@ -16,6 +16,8 @@
 
 package me.zero.client.api;
 
+import me.zero.client.api.event.handle.ClientHandler;
+
 /**
  * The base for all Clients
  *
@@ -30,7 +32,7 @@ public abstract class Client extends ClientBase {
      * @see me.zero.client.api.module.Module
      * @see me.zero.client.api.module.plugin.Plugin
      *
-     * @param info The ClientInfo object from the client.json
+     * @param handler The handler that's being used to handle Client API events
      */
-    public abstract void onInit(ClientInfo info);
+    public abstract void onInit(ClientHandler handler);
 }
