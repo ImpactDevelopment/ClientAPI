@@ -52,8 +52,7 @@ public final class ClientHandler implements Helper {
      */
     @EventHandler
     private final Listener<RenderHudEvent> render2DListener = new Listener<>(event ->
-        CameraManager.getInstance().getData().stream().filter(Camera::isVisible).forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())),
-            EventPriority.LOWEST);
+            CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
 
     /**
      * Handles keybinds
