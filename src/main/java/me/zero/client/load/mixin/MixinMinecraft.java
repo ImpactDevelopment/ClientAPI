@@ -103,8 +103,9 @@ public class MixinMinecraft implements IMinecraft {
 
         GlUtils.init();
         client.setInfo(clientInfo);
-        client.onInit(clientInfo);
-        ClientAPI.EVENT_BUS.subscribe(new ClientHandler());
+        ClientHandler handler = new ClientHandler();
+        client.onInit(handler);
+        ClientAPI.EVENT_BUS.subscribe(handler);
     }
 
     @Inject(method = "clickMouse", at = @At("HEAD"))
