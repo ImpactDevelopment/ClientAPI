@@ -14,7 +14,7 @@ public final class CAPIEventManager extends EventManager {
 
     @Override
     public final void post(Object event) {
-        if (!enabled)
+        if (enabled)
             super.post(event);
     }
 
