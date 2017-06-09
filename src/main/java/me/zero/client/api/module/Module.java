@@ -34,6 +34,7 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
  * for values, properties, type, keybind, name
  * and description.
  *
+ * @see IModule
  * @see Category
  *
  * @author Brady
@@ -75,8 +76,7 @@ public abstract class Module extends Node implements IModule {
             this.description = data.description();
 
             this.bind = new Keybind(Keybind.Type.TOGGLE, data.bind(), type -> {
-                if (type == CLICK)
-                    Module.this.toggle();
+                if (type == CLICK) Module.this.toggle();
             });
         }
 

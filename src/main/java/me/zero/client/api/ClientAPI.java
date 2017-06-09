@@ -17,7 +17,7 @@
 package me.zero.client.api;
 
 import me.zero.alpine.EventBus;
-import me.zero.alpine.EventManager;
+import me.zero.client.api.event.CAPIEventManager;
 
 /**
  * Contains some constants that are used throughout the API.
@@ -36,5 +36,5 @@ public final class ClientAPI {
      * Instance of the API event bus. All default game event are
      * passed through this event bus.
      */
-    public static final EventBus EVENT_BUS = new EventManager();
+    public static final EventBus EVENT_BUS = new CAPIEventManager();
 }
