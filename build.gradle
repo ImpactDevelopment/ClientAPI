@@ -2,12 +2,12 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
         }
         maven {
-            name = "SpongePowered"
-            url = "http://repo.spongepowered.org/maven"
+            name = 'SpongePowered'
+            url = 'http://repo.spongepowered.org/maven'
         }
     }
 
@@ -53,10 +53,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'junit:junit:4.12'
     compile 'com.github.ZeroMemes:Alpine:1.4'
-    compile("org.spongepowered:mixin:0.6.10-SNAPSHOT") {
-        exclude module: "launchwrapper"
+    compile('org.spongepowered:mixin:0.6.10-SNAPSHOT') {
+        exclude module: 'launchwrapper'
     }
 }
 
