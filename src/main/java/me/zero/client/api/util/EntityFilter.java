@@ -20,6 +20,8 @@ import me.zero.client.api.manage.Node;
 import me.zero.client.api.util.interfaces.Helper;
 import me.zero.client.api.value.type.BooleanType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -27,8 +29,8 @@ import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.village.Village;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -142,12 +144,22 @@ public final class EntityFilter implements Helper {
      * @return Whether or not the entity is a hostile
      */
     public static boolean isHostile(Entity e) {
-        boolean c1 = e instanceof EntityMob;
-        boolean c2 = e instanceof EntitySlime;
-        boolean c3 = e instanceof EntityShulker;
-        boolean c4 = e instanceof EntityGhast;
-        boolean c5 = e instanceof EntityDragon;
-        return c1 || c2 || c3 || c4 || c5;
+        if (e instanceof EntityPigZombie)
+            return isAngry((EntityPigZombie) e);
+
+        if (e instanceof EntityIronGolem)
+            return isAngry((EntityIronGolem) e);
+
+        if (e instanceof EntityPolarBear)
+            return isAngry((EntityPolarBear) e);
+
+        if (e instanceof EntityMob) return true;
+        if (e instanceof EntitySlime) return true;
+        if (e instanceof EntityShulker) return true;
+        if (e instanceof EntityGhast) return true;
+        if (e instanceof EntityDragon) return true;
+
+        return false;
     }
 
     /**
@@ -157,13 +169,22 @@ public final class EntityFilter implements Helper {
      * @return Whether or not the entity is a passive
      */
     public static boolean isPassive(Entity e) {
-        boolean c1 = e instanceof EntityAnimal;
-        boolean c2 = e instanceof EntitySquid;
-        boolean c3 = e instanceof EntityBat;
-        boolean c4 = e instanceof EntityVillager;
-        boolean c5 = e instanceof EntitySnowman;
-        boolean c6 = e instanceof EntityIronGolem;
-        return c1 || c2 || c3 || c4 || c5 || c6;
+        if (e instanceof EntityPigZombie)
+            return !isAngry((EntityPigZombie) e);
+
+        if (e instanceof EntityIronGolem)
+            return !isAngry((EntityIronGolem) e);
+
+        if (e instanceof EntityPolarBear)
+            return !isAngry((EntityPolarBear) e);
+
+        if (e instanceof EntityAnimal) return true;
+        if (e instanceof EntitySquid) return true;
+        if (e instanceof EntityBat) return true;
+        if (e instanceof EntityVillager) return true;
+        if (e instanceof EntitySnowman) return true;
+
+        return false;
     }
 
     /**
@@ -178,5 +199,46 @@ public final class EntityFilter implements Helper {
             return false;
 
         return e1.isOnSameTeam(e2);
+    }
+
+    private static boolean isAngry(EntityPigZombie e) {
+        // Zombie Pigmen are nice and easy to check
+        return e.isAngry();
+    }
+
+    private static boolean isAngry(EntityIronGolem e) {
+        // Manually spawned golems will not turn hostile
+        if (e.isPlayerCreated()) return false;
+
+        // Check if the village dislike the player
+        {
+            Village village = e.getVillage();
+            if (village != null && village.isPlayerReputationTooLow(mc.player.getName())) return true;
+        }
+
+        // Check if the player is being targeted
+        if (isTargeting(e, mc.player)) return true;
+
+        return false;
+    }
+
+    private static boolean isAngry(EntityPolarBear e) {
+        // Polar Bear Cubs can't be angry
+        if (e.isChild()) return false;
+
+        // Check if the bear is targeting the player
+        if (isTargeting(e, mc.player)) return true;
+
+        return false;
+    }
+
+    private static boolean isTargeting(EntityLiving entity, EntityLivingBase target) {
+        EntityLivingBase attackTarget = entity.getAttackTarget();
+        EntityLivingBase revengeTarget = entity.getRevengeTarget();
+
+        if (attackTarget != null && attackTarget.equals(target)) return true;
+        if (revengeTarget != null && revengeTarget.equals(target)) return true;
+
+        return false;
     }
 }
