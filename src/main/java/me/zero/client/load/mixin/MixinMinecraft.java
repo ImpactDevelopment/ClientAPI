@@ -28,7 +28,11 @@ import me.zero.client.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.util.Session;
+import net.minecraft.util.Timer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -47,6 +51,25 @@ import static me.zero.client.api.event.defaults.ClickEvent.MouseButton.*;
  */
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {
+
+    @Accessor @Override public abstract Timer getTimer();
+    @Accessor @Override public abstract void setSession(Session session);
+    @Accessor @Override public abstract void setRightClickDelayTimer(int delay);
+
+    @Invoker("clickMouse") @Override public abstract void leftClickMouse();
+    @Invoker("rightClickMouse") @Override public abstract void rightClickMouse();
+    @Invoker("middleClickMouse") @Override public abstract void middleClickMouse();
+
+    @Override
+    public void clickMouse(ClickEvent.MouseButton button) {
+        // IF statements are required because Mixin doesn't support SWITCH
+        if (button == LEFT)
+            leftClickMouse();
+        if (button == RIGHT)
+            rightClickMouse();
+        if (button == MIDDLE)
+            middleClickMouse();
+    }
 
     @Inject(method = "runTick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
@@ -138,16 +161,5 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
-    }
-
-    @Override
-    public void clickMouse(ClickEvent.MouseButton button) {
-        // IF statements are required because Mixin doesn't support SWITCH
-        if (button == LEFT)
-            leftClickMouse();
-        if (button == RIGHT)
-            rightClickMouse();
-        if (button == MIDDLE)
-            middleClickMouse();
     }
 }
