@@ -15,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
     }
@@ -29,7 +29,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 version '1.0'
 group 'me.zero.api'
 
-sourceCompatibility = targetCompatibility = "1.8"
+sourceCompatibility = targetCompatibility = '1.8' // Needed so Eclipse task generates correctly
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
