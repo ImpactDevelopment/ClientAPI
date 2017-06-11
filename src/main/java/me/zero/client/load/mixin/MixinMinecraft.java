@@ -73,19 +73,20 @@ public class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "init", at = @At("RETURN"))
     public void init(CallbackInfo ci) {
+        // Try and find the "client.json" config
         InputStream stream = this.getClass().getResourceAsStream("/client.json");
 
         if (stream == null)
             throw new ClientInitException("Unable to locate the Client.json");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(reader, ClientInfo.class);
+        // Construct a ClientInfo object from the client json using GSON
+        ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(new BufferedReader(new InputStreamReader(stream)), ClientInfo.class);
 
         if (clientInfo == null)
             throw new ClientInitException("Unable to create ClientInfo from Client.json");
 
+        // Attempt to instantiate the specified class from the ClientInfo
         Client client;
-
         try {
             Class<?> clientClass = Class.forName(clientInfo.getMain());
             if (clientClass != null && clientClass.getSuperclass().equals(Client.class)) {
@@ -101,10 +102,15 @@ public class MixinMinecraft implements IMinecraft {
             throw new ClientInitException("Unable to find client class");
         }
 
+        // Init GLUtils
         GlUtils.init();
-        client.setInfo(clientInfo);
+
         ClientHandler handler = new ClientHandler();
+
+        // Init client
+        client.setInfo(clientInfo);
         client.onInit(handler);
+
         ClientAPI.EVENT_BUS.subscribe(handler);
     }
 
@@ -132,6 +138,7 @@ public class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
     public void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
+        // If the world is null, then it must be unloading
         if (worldClientIn != null)
             ClientAPI.EVENT_BUS.post(new WorldEvent.Load(worldClientIn));
         else
@@ -158,6 +165,7 @@ public class MixinMinecraft implements IMinecraft {
 
     @Override
     public void clickMouse(ClickEvent.MouseButton button) {
+        // IF statements are required because Mixin doesn't support SWITCH
         if (button == LEFT)
             clickMouse();
         if (button == RIGHT)

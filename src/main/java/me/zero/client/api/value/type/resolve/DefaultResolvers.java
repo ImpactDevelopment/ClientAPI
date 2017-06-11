@@ -63,9 +63,11 @@ public final class DefaultResolvers {
     public static final TypeResolver<MultiType> MULTI = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
         MultiValue multi = field.getAnnotation(MultiValue.class);
+
         MultiType type = new MultiType(label.name(), label.id(), label.description(), parent, field, multi.value());
         if (type.getValue() == null)
             type.setValue(multi.value()[0]);
+
         return type;
     };
 
@@ -77,9 +79,8 @@ public final class DefaultResolvers {
         Label label = field.getAnnotation(Label.class);
         NumberValue num = field.getAnnotation(NumberValue.class);
 
-        NumberType type = null;
-
         // This is an absolute mess, still finding some other solution
+        NumberType type = null;
         if (field.getType() == Byte.class || field.getType() == Byte.TYPE) {
             type = new NumberType<Byte>(label.name(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max()) { };
         } else if (field.getType() == Short.class || field.getType() == Short.TYPE) {
