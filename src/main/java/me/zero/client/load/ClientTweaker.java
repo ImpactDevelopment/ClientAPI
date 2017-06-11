@@ -53,7 +53,11 @@ public final class ClientTweaker implements ITweaker {
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
+
+        // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
+
+        // Load the ClientAPI and Wrapper mixins
         Mixins.addConfiguration("mixins.capi.json");
         Mixins.addConfiguration("mixins.wrapper.capi.json");
 
@@ -62,6 +66,7 @@ public final class ClientTweaker implements ITweaker {
         if (this.getClass().getResourceAsStream("/" + mixin) != null)
             Mixins.addConfiguration(mixin);
 
+        // Ensure that the mixins are only run on client side
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
     }
 
