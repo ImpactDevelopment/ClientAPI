@@ -17,47 +17,54 @@
 package me.zero.client.load.mixin.wrapper;
 
 import me.zero.client.api.event.defaults.ClickEvent;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.gen.Invoker;
 
 /**
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
-@Mixin(Minecraft.class)
 public interface IMinecraft {
 
     /**
      * @return Returns the Game's Timer
      */
-    @Accessor Timer getTimer();
+    Timer getTimer();
 
     /**
      * Sets the game's session
      *
      * @param session The new Session
      */
-    @Accessor void setSession(Session session);
+    void setSession(Session session);
 
     /**
      * Sets the right click delay timer
      *
      * @param delay The new right click delay
      */
-    @Accessor void setRightClickDelayTimer(int delay);
-
-    @Invoker("clickMouse") void leftClickMouse();
-    @Invoker("rightClickMouse") void rightClickMouse();
-    @Invoker("middleClickMouse") void middleClickMouse();
+    void setRightClickDelayTimer(int delay);
 
     /**
      * Clicks a mouse button
      *
-     * @param button The button
+     * @param button The button to click (LEFT, MIDDLE, RIGHT)
      */
     void clickMouse(ClickEvent.MouseButton button);
+
+    /**
+     * Click the left mouse button
+     */
+    void leftClickMouse();
+
+    /**
+     * Click the right mouse button
+     */
+    void rightClickMouse();
+
+    /**
+     * Click the middle mouse button
+     */
+    void middleClickMouse();
+
 }
