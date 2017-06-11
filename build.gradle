@@ -15,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
     }
@@ -35,10 +35,10 @@ compileJava {
 }
 
 minecraft {
-    version = '1.11.2'
+    version = '1.12'
     runDir = 'run'
     tweakClass = 'me.zero.client.load.ClientTweaker'
-    mappings = 'stable_32'
+    mappings = 'snapshot_20170615'
 
     makeObfSourceJar = true
 }
