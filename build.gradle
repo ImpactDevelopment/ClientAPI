@@ -29,6 +29,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 version '1.0'
 group 'me.zero.api'
 
+sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
