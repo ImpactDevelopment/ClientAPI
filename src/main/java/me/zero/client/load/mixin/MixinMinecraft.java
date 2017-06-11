@@ -28,12 +28,7 @@ import me.zero.client.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.util.Session;
-import net.minecraft.util.Timer;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -51,15 +46,7 @@ import static me.zero.client.api.event.defaults.ClickEvent.MouseButton.*;
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(Minecraft.class)
-public class MixinMinecraft implements IMinecraft {
-
-    @Shadow @Final private Timer timer;
-    @Shadow @Final @Mutable private Session session;
-    @Shadow private int rightClickDelayTimer;
-
-    @Shadow private void clickMouse() {}
-    @Shadow private void rightClickMouse() {}
-    @Shadow private void middleClickMouse() {}
+public abstract class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "runTick", at = @At("HEAD"))
     public void onTick(CallbackInfo ci) {
@@ -154,28 +141,13 @@ public class MixinMinecraft implements IMinecraft {
     }
 
     @Override
-    public Timer getTimer() {
-        return this.timer;
-    }
-
-    @Override
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    @Override
     public void clickMouse(ClickEvent.MouseButton button) {
         // IF statements are required because Mixin doesn't support SWITCH
         if (button == LEFT)
-            clickMouse();
+            leftClickMouse();
         if (button == RIGHT)
             rightClickMouse();
         if (button == MIDDLE)
             middleClickMouse();
-    }
-
-    @Override
-    public void setRightClickDelayTimer(int delay) {
-        this.rightClickDelayTimer = delay;
     }
 }

@@ -9,6 +9,7 @@
     "IGameType",
     "IItemRenderer",
     "IKeyBinding",
+    "IMinecraft",
     "IPlayerControllerMP",
     "IRenderManager",
     "IShaderGroup",
