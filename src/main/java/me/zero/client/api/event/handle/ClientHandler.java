@@ -105,6 +105,8 @@ public final class ClientHandler implements Helper {
         ClientAPI.EVENT_BUS.post(chatEvent);
         if (chatEvent.isCancelled())
             event.cancel();
+
+        event.setPacket(new CPacketChatMessage(chatEvent.getRawMessage()));
     }, new PacketFilter<>(CPacketChatMessage.class));
 
     /**
