@@ -19,8 +19,7 @@ package me.zero.client.api.command.exception;
 import me.zero.client.api.command.Command;
 
 /**
- * Called when the initialization of a {@code Command}
- * fails.c
+ * Called when the initialization of a {@code Command} fails.
  *
  * @author Brady
  * @since 5/31/2017 9:08 AM
