@@ -17,6 +17,7 @@
 package me.zero.client.api.command;
 
 import me.zero.client.api.command.exception.CommandException;
+import me.zero.client.api.command.executor.sender.CommandSender;
 import me.zero.client.api.util.interfaces.Helper;
 import net.minecraft.client.network.NetworkPlayerInfo;
 
@@ -31,14 +32,13 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 interface ICommand extends Helper {
 
     /**
-     * Executes this command from the specified player
-     * represented by its {@code NetworkPlayerInfo}. This
-     * can be used to allow other players to execute commands.
+     * Executes this command from the specified sender with
+     * the specified arguments, represented as a {@code String} array
      *
-     * @param sender The NetworkPlayerInfo that executed this command
+     * @param sender The Sender that executed this command
      * @param arguments The arguments that
      */
-    void execute(NetworkPlayerInfo sender, String[] arguments) throws CommandException;
+    void execute(CommandSender sender, String[] arguments) throws CommandException;
 
     /**
      * Returns the array of possible command "headers"
