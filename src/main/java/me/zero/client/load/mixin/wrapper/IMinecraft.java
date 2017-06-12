@@ -52,19 +52,4 @@ public interface IMinecraft {
      */
     void clickMouse(ClickEvent.MouseButton button);
 
-    /**
-     * Click the left mouse button
-     */
-    void leftClickMouse();
-
-    /**
-     * Click the right mouse button
-     */
-    void rightClickMouse();
-
-    /**
-     * Click the middle mouse button
-     */
-    void middleClickMouse();
-
 }
