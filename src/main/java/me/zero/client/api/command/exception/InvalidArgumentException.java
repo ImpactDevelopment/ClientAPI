@@ -19,6 +19,10 @@ package me.zero.client.api.command.exception;
 import me.zero.client.api.command.Command;
 
 /**
+ * Thrown when an argument that was passed to the command
+ * was not the expected type. For example, a number was expected
+ * but the number was unable to be parsed.
+ *
  * @author Brady
  * @since 6/7/2017 9:34 AM
  */
