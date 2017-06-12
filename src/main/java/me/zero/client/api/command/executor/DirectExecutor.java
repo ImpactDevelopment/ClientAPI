@@ -21,6 +21,8 @@ import me.zero.client.api.command.exception.CommandException;
 import me.zero.client.api.command.executor.sender.CommandSender;
 
 /**
+ * Directly executes commands that are passed to this executor
+ *
  * @author Brady
  * @since 6/11/2017 9:27 AM
  */

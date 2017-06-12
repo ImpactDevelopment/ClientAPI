@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Handles and processes command execution events
+ *
  * @author Brady
  * @since 6/1/2017 3:03 PM
  */
@@ -71,7 +73,10 @@ public final class CommandHandler {
                 throw new UnknownCommandException();
         } catch (CommandException e) {
             List<ExceptionHandler> handlers = findHandlers(e);
-            handlers.forEach(handler -> handler.accept(e));
+            if (handlers.isEmpty())
+                e.printStackTrace();
+            else
+                handlers.forEach(handler -> handler.accept(e));
         }
     });
 
