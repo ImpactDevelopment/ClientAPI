@@ -38,7 +38,7 @@ minecraft {
     version = '1.11.2'
     runDir = 'run'
     tweakClass = 'me.zero.client.load.ClientTweaker'
-    mappings = 'snapshot_20170521'
+    mappings = 'stable_32'
 
     makeObfSourceJar = true
 }
