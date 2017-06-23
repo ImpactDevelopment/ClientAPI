@@ -41,7 +41,7 @@ public abstract class MixinNetworkManager {
     @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
     @SuppressWarnings("unchecked")
     public void processPacket(Packet<?> packetIn, INetHandler handler) {
-        PacketEvent event = new PacketEvent.Send(packetIn);
+        PacketEvent event = new PacketEvent.Receive(packetIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
@@ -51,7 +51,7 @@ public abstract class MixinNetworkManager {
 
     @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;[Lio/netty/util/concurrent/GenericFutureListener;)V"))
     public void sendPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
-        PacketEvent event = new PacketEvent.Receive(packetIn);
+        PacketEvent event = new PacketEvent.Send(packetIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
