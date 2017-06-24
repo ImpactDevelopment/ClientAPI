@@ -94,6 +94,7 @@ public final class ChatCommandListener extends CommandListener implements Helper
                         args[i - 1] = matches.get(i).replace("\"", "").replace("\'", "");
 
                     ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(command, CommandSender.from(mc.player), args));
+                    return;
                 }
             }
 
