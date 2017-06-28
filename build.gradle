@@ -26,7 +26,7 @@ apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version '1.0'
+version '2.0'
 group 'me.zero.api'
 
 sourceCompatibility = targetCompatibility = '1.8' // Needed so Eclipse task generates correctly
@@ -38,7 +38,7 @@ minecraft {
     version = '1.12'
     runDir = 'run'
     tweakClass = 'me.zero.client.load.ClientTweaker'
-    mappings = 'snapshot_20170615'
+    mappings = 'snapshot_20170628'
 
     makeObfSourceJar = true
 }
