@@ -19,6 +19,15 @@
     "MixinRender",
     "MixinRenderItem",
     "MixinRenderLivingBase",
-    "MixinRenderManager"
+    "MixinRenderManager",
+    "wrapper.ICPacketPlayer",
+    "wrapper.IEntityPlayer",
+    "wrapper.IGameType",
+    "wrapper.IItemRenderer",
+    "wrapper.IKeyBinding",
+    "wrapper.IPlayerControllerMP",
+    "wrapper.IRenderManager",
+    "wrapper.IShaderGroup",
+    "wrapper.ISPacketPlayerPosLook"
   ]
 }
