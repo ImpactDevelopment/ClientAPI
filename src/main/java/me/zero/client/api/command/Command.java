@@ -17,6 +17,7 @@
 package me.zero.client.api.command;
 
 import me.zero.client.api.command.exception.CommandInitException;
+import me.zero.client.api.util.ClientUtils;
 
 /**
  * @author Brady
@@ -24,18 +25,29 @@ import me.zero.client.api.command.exception.CommandInitException;
  */
 public abstract class Command implements ICommand {
 
-    private final String[] headers;
-    private final String description;
-    private final String[] syntax;
+    private String[] headers;
+    private String description;
+    private String[] syntax;
 
     public Command() {
         if (!this.getClass().isAnnotationPresent(Cmd.class))
-            throw new RuntimeException(new CommandInitException(this, "@Cmd annotation not found!"));
+            throw new RuntimeException(new CommandInitException(this, "@Cmd annotation must be present if required parameters aren't passed through constructor"));
 
-        Cmd cmd = this.getClass().getAnnotation(Cmd.class);
-        this.headers = cmd.headers();
-        this.description = cmd.description();
-        this.syntax = cmd.syntax();
+        Cmd data = this.getClass().getAnnotation(Cmd.class);
+        setup(data.headers(), data.description(), data.syntax());
+    }
+
+    public Command(String[] headers, String description, String[] syntax) {
+        setup(headers, description, syntax);
+    }
+
+    private void setup(String[] headers, String description, String[] syntax) {
+        this.headers = headers;
+        this.description = description;
+        this.syntax = syntax;
+
+        if (ClientUtils.containsNull(headers, description, syntax))
+            throw new NullPointerException("One or more Command members were null!");
     }
 
     @Override
