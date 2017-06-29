@@ -20,8 +20,10 @@ import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.ModuleStateEvent;
 import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.manage.Node;
+import me.zero.client.api.module.exception.ModuleInitException;
 import me.zero.client.api.util.ClientUtils;
 import me.zero.client.api.util.keybind.Keybind;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,9 +45,14 @@ import static me.zero.client.api.util.keybind.Keybind.Action.*;
 public abstract class Module extends Node implements IModule {
 
     /**
+     * Reference to self-class
+     */
+    private final Class<? extends Module> self = this.getClass();
+
+    /**
      * The type/category of the module
      */
-    private final Class<?> type;
+    private Class<?> type;
 
     /**
      * The Keybind of this Module
@@ -68,19 +75,30 @@ public abstract class Module extends Node implements IModule {
     private ModuleMode mode;
 
     public Module() {
-        Class<? extends Module> c = this.getClass();
-        if (c.isAnnotationPresent(Mod.class)) {
-            Mod data = c.getAnnotation(Mod.class);
+        if (!self.isAnnotationPresent(Mod.class))
+            throw new ModuleInitException("@Mod annotation must be present if required parameters aren't passed through constructor");
 
-            this.name = data.name();
-            this.description = data.description();
+        Mod data = self.getAnnotation(Mod.class);
+        setup(data.name(), data.description(), data.bind());
+    }
 
-            this.bind = new Keybind(Keybind.Type.TOGGLE, data.bind(), type -> {
-                if (type == CLICK) Module.this.toggle();
-            });
-        }
+    public Module(String name, String description) {
+        this(name, description, Keyboard.KEY_NONE);
+    }
 
-        this.type = Arrays.stream(c.getInterfaces())
+    public Module(String name, String description, int bind) {
+        setup(name, description, bind);
+    }
+
+    private void setup(String name, String description, int bind) {
+        this.name = name;
+        this.description = description;
+
+        this.bind = new Keybind(Keybind.Type.TOGGLE, bind, type -> {
+            if (type == CLICK) Module.this.toggle();
+        });
+
+        this.type = Arrays.stream(self.getInterfaces())
                 .filter(clazz -> clazz.isAnnotationPresent(Category.class))
                 .findFirst().orElse(Category.Default.class);
 
