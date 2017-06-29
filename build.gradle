@@ -67,5 +67,6 @@ dependencies {
 
 mixin {
     defaultObfuscationEnv notch
+    add sourceSets.main, 'mixins.capi.refmap.json'
 }
 
