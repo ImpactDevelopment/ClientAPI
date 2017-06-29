@@ -42,7 +42,7 @@ import java.util.List;
 @Mixin(Block.class)
 public abstract class MixinBlock {
 
-    @Shadow public static void addCollisionBoxToList(BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable AxisAlignedBB blockBox) {}
+    @Shadow protected static void addCollisionBoxToList(BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable AxisAlignedBB blockBox) {}
 
     @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
     public void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> ci) {
@@ -52,7 +52,11 @@ public abstract class MixinBlock {
             ci.setReturnValue(false);
     }
 
+    /**
+     * @author Brady
+     */
     @Overwrite
+    @Deprecated
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         Block block = (Block) (Object) (this);
         AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(state, worldIn, pos);
