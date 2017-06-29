@@ -57,9 +57,8 @@ public final class ClientTweaker implements ITweaker {
         // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
 
-        // Load the ClientAPI and Wrapper mixins
+        // Load the ClientAPI mixin config
         Mixins.addConfiguration("mixins.capi.json");
-        Mixins.addConfiguration("mixins.wrapper.capi.json");
 
         // Optional mixin configuration, added by client developers
         String mixin = "mixins.client.json";
