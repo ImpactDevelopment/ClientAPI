@@ -90,7 +90,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
      * @author Brady
      */
     @Overwrite
-    public void onUpdateWalkingPlayer() {
+    private void onUpdateWalkingPlayer() {
         EntityPlayerSP _this = (EntityPlayerSP) (Object) this;
 
         MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
