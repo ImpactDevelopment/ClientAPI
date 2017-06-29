@@ -35,7 +35,7 @@ minecraft {
     tweakClass = 'me.zero.client.load.ClientTweaker'
     mappings = 'stable_32'
 
-    makeObfSourceJar = true
+    makeObfSourceJar = false
 }
 
 repositories {
