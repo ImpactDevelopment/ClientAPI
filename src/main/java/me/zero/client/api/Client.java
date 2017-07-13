@@ -19,7 +19,7 @@ package me.zero.client.api;
 import me.zero.client.api.event.handle.ClientHandler;
 
 /**
- * The base for all Clients
+ * The base for all ClientAPI Clients
  *
  * @author Brady
  * @since 1/19/2017 12:00 PM
