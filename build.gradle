@@ -22,7 +22,7 @@ apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
 
 version '2.0'
-group 'me.zero.api'
+group 'com.github.ZeroMemes'
 
 sourceCompatibility = targetCompatibility = '1.8' // Needed so Eclipse task generates correctly
 compileJava {
