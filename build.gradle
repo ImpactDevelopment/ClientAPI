@@ -53,8 +53,8 @@ repositories {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.12'
     compile 'com.github.ZeroMemes:Alpine:1.4'
+    compile 'net.jodah:typetools:0.5.0'
     compile('org.spongepowered:mixin:0.6.10-SNAPSHOT') {
         exclude module: 'launchwrapper'
     }
