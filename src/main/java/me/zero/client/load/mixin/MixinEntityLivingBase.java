@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.EntityDeathEvent;
+import me.zero.client.api.event.defaults.game.EntityDeathEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;

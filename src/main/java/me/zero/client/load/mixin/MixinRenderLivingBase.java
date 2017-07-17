@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.LayerRenderEvent;
+import me.zero.client.api.event.defaults.game.LayerRenderEvent;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;

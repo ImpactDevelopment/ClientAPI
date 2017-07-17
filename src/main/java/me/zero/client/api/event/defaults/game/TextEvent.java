@@ -14,36 +14,41 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
 /**
- * Event called when a Key is pressed outside of a GUI while in-game
- *
- * @see me.zero.client.api.event.defaults.ClickEvent
+ * Called in FontRenderer when text is rendered
+ * and string width is checked
  *
  * @author Brady
- * @since 1/20/2017 12:00 PM
+ * @since 3/30/2017 12:00 PM
  */
-public final class KeyEvent {
+public final class TextEvent {
 
     /**
-     * Key code that belongs to the pressed key
+     * The text being rendered
      */
-    private final int key;
+    private String text;
 
-    /**
-     * Creates a new instance of KeyEvent.
-     *
-     * @param key - The key code for the key that was pressed
-     */
-    public KeyEvent(int key) {
-        this.key = key;
+    public TextEvent(String text) {
+        this.text = text;
     }
 
     /**
-     * @return The key code that corresponds to the pressed key
+     * @return The text being rendered
      */
-    public final int getKey() {
-        return this.key;
+    public final String getText() {
+        return this.text;
+    }
+
+    /**
+     * Sets the text being rendered
+     *
+     * @param text New text
+     * @return This event
+     */
+    public final TextEvent setText(String text) {
+        this.text = text;
+        return this;
     }
 }

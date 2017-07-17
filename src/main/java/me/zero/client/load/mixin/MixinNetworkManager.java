@@ -19,7 +19,7 @@ package me.zero.client.load.mixin;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.PacketEvent;
+import me.zero.client.api.event.defaults.game.PacketEvent;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;

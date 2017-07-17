@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.ProfilerEvent;
+import me.zero.client.api.event.defaults.game.ProfilerEvent;
 import net.minecraft.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

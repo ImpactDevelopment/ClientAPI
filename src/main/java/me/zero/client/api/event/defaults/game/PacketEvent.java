@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.network.EnumConnectionState;
+import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.Packet;
 
 /**
@@ -74,6 +76,40 @@ public class PacketEvent extends Cancellable {
 
         public Receive(Packet<?> packet) {
             super(packet);
+        }
+    }
+
+    /**
+     * Called when outgoing packets are encoded
+     */
+    public static final class Encode extends PacketEvent {
+
+        private final EnumConnectionState state;
+
+        public Encode(Packet<?> packet, EnumConnectionState state) {
+            super(packet);
+            this.state = state;
+        }
+
+        public final EnumConnectionState getDirection() {
+            return this.state;
+        }
+    }
+
+    /**
+     * Called when incoming packets are decoded
+     */
+    public static final class Decode extends PacketEvent {
+
+        private final EnumConnectionState state;
+
+        public Decode(Packet<?> packet, EnumConnectionState state) {
+            super(packet);
+            this.state = state;
+        }
+
+        public final EnumConnectionState getDirection() {
+            return this.state;
         }
     }
 }

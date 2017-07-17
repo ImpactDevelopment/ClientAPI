@@ -17,7 +17,7 @@
 package me.zero.client.api.module;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.ModuleStateEvent;
+import me.zero.client.api.event.defaults.internal.ModuleStateEvent;
 import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.module.exception.ModuleInitException;
