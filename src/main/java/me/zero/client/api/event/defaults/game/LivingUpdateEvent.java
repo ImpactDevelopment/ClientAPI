@@ -14,39 +14,31 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.type.EventState;
 
 /**
- * Called when the enchanted effect of a
- * layer or an item is being rendered.
+ * Called before and after EntityPlayerSP#onLivingUpdate()
  *
  * @author Brady
- * @since 2/19/2017 12:00 PM
+ * @since 2/10/2017 12:00 PM
  */
-public final class GlintEffectEvent extends Cancellable {
+public final class LivingUpdateEvent {
 
     /**
-     * The object getting a glint effect applied to it
+     * The state of this event
      */
-    private final GlintTarget target;
+    private final EventState state;
 
-    public GlintEffectEvent(GlintTarget target) {
-        this.target = target;
+    public LivingUpdateEvent(EventState state) {
+        this.state = state;
     }
 
     /**
-     * @return The glint object
+     * @return The event state
      */
-    public final GlintTarget getTarget() {
-        return this.target;
-    }
-
-    /**
-     * Glint Object
-     */
-    public enum GlintTarget {
-        ARMOR, ITEM
+    public final EventState getState() {
+        return this.state;
     }
 }

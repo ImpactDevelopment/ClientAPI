@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
-import net.minecraft.client.Minecraft;
+import me.zero.alpine.type.Cancellable;
 
 /**
- * Event called when the game tick runs.
- *
- * @see Minecraft#runTick()
+ * Called when the game is requested to be shutdown.
+ * This event is invoked at the head of Minecraft#shutdown().
+ * Cancelling this event will result in the shutdown
+ * process cancelling. The only reason a developer should
+ * cancel shutdown is to complete a cleanup process,
+ * if it is unable to be done directly before the shutdown.
  *
  * @author Brady
- * @since 1/24/2017 12:00 PM
+ * @since 5/24/2017 12:26 PM
  */
-public final class TickEvent {}
+public final class GameShutdownEvent extends Cancellable {}

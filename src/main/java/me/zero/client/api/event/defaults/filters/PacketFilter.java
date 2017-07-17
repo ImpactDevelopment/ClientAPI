@@ -16,7 +16,7 @@
 
 package me.zero.client.api.event.defaults.filters;
 
-import me.zero.client.api.event.defaults.PacketEvent;
+import me.zero.client.api.event.defaults.game.PacketEvent;
 import net.minecraft.network.Packet;
 
 import java.util.function.Predicate;

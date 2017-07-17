@@ -14,47 +14,46 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.entity.Entity;
 
 /**
- * Called before Render#renderLivingLabel(Entity, String, double, double. double, int).
- * The event is cancellable, if cancelled then the
- * rendering of the label will be cancelled.
+ * Called when 2 entities collide with one another.
+ * If cancelled, the collision doesn't occur.
  *
  * @author Brady
- * @since 5/23/2017 5:40 PM
+ * @since 4/8/2017 12:00 PM
  */
-public final class RenderEntityLabelEvent extends Cancellable {
+public final class EntityCollisionEvent extends Cancellable {
 
     /**
-     * The entity that is having their label rendered
+     * Entity being collided into
      */
     private final Entity entity;
 
     /**
-     * The text being rendered on the label
+     * Entity colliding into other entity
      */
-    private final String text;
+    private final Entity collidingEntity;
 
-    public RenderEntityLabelEvent(Entity entity, String text) {
+    public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
         this.entity = entity;
-        this.text = text;
+        this.collidingEntity = collidingEntity;
     }
 
     /**
-     * The entity having their name rendered
+     * @return The entity being collided into
      */
     public final Entity getEntity() {
         return this.entity;
     }
 
     /**
-     * @return The text being rendered on the label
+     * @return Entity colliding into other entity
      */
-    public final String getText() {
-        return this.text;
+    public final Entity getCollidingEntity() {
+        return this.collidingEntity;
     }
 }

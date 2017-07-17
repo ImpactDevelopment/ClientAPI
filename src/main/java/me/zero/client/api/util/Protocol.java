@@ -16,89 +16,53 @@
 
 package me.zero.client.api.util;
 
-import com.google.common.collect.ImmutableList;
-
-import java.util.List;
-
 /**
- * List of protocols
+ * List of official release version protocols
+ * after the netty rewrite in 1.7
  *
  * @author Brady
  * @since 3/6/2017 12:00 PM
  */
-public final class Protocol {
+public enum Protocol {
 
-    private static ImmutableList<Protocol> protocols = new ImmutableList.Builder<Protocol>()
-            .add(build(316, "1.11.x", "1.11", "1.11.2"))
-            .add(build(315, "1.11"))
-            .add(build(210, "1.10.x", "1.10", "1.10.1", "1.10.2"))
-            .add(build(110, "1.9.3", "1.9.3", "1.9.4"))
-            .add(build(109, "1.9.2", "1.9.2"))
-            .add(build(108, "1.9.1"))
-            .add(build(107, "1.9"))
-            .add(build(47, "1.8.x", "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5", "1.8.6", "1.8.7", "1.8.8", "1.8.9"))
-            .add(build(5, "1.7.10", "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10"))
-            .add(build(4, "1.7.2", "1.7.2", "1.7.4", "1.7.5"))
-            .build();
+    ProtocolVersion4(4, "1.7.2", "1.7.4", "1.7.5"),
+    ProtocolVersion5(5, "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10"),
+    ProtocolVersion47(47, "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5", "1.8.6", "1.8.7", "1.8.8", "1.8.9"),
+    ProtocolVersion107(107, "1.9"),
+    ProtocolVersion108(108, "1.9.1"),
+    ProtocolVersion109(109, "1.9.2"),
+    ProtocolVersion110(110, "1.9.3", "1.9.4"),
+    ProtocolVersion210(210, "1.10", "1.10.1", "1.10.2"),
+    ProtocolVersion315(315, "1.11"),
+    ProtocolVersion316(316, "1.11.1", "1.11.2"),
+    ProtocolVersion335(335, "1.12");
 
     /**
-     * Protocol ID
+     * The Protocol ID
      */
-    private final int protocol;
+    private final int id;
 
     /**
-     * Protocol display name
-     */
-    private final String name;
-
-    /**
-     * Supported versions
+     * Array of supported game versions for this protocol version
      */
     private final String[] versions;
 
-    private Protocol(int protocol, String name, String... versions) {
-        this.protocol = protocol;
-        this.name = name;
+    Protocol(int id, String... versions) {
+        this.id = id;
         this.versions = versions;
     }
 
     /**
-     * @return The protocol ID
+     * @return The Protocol ID
      */
-    public final int getProtocol() {
-        return this.protocol;
+    public final int getId() {
+        return this.id;
     }
 
     /**
-     * @return The protocol display name
-     */
-    public final String getName() {
-        return this.name;
-    }
-
-    /**
-     * @return The supported version IDs
+     * @return Array of supported game versions for this protocol version
      */
     public final String[] getVersions() {
         return this.versions;
-    }
-
-    /**
-     * Creates a Protocol object from its required parameters
-     *
-     * @param protocol The protocol id
-     * @param name The name of the protocol
-     * @param versions An array of supported versions
-     * @return The built object
-     */
-    private static Protocol build(int protocol, String name, String... versions) {
-        return new Protocol(protocol, name, versions);
-    }
-
-    /**
-     * @return All of the registered protocols
-     */
-    public static List<Protocol> getProtocols() {
-        return protocols;
     }
 }
