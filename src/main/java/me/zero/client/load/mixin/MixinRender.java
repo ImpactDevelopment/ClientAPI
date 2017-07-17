@@ -17,8 +17,8 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.RenderEntityLabelEvent;
-import me.zero.client.api.event.defaults.TeamColorEvent;
+import me.zero.client.api.event.defaults.game.RenderEntityLabelEvent;
+import me.zero.client.api.event.defaults.game.TeamColorEvent;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

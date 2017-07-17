@@ -14,34 +14,36 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
-
-import net.minecraft.client.renderer.EntityRenderer;
+package me.zero.client.api.event.defaults.game;
 
 /**
- * Called before the overlay rendering is setup, will call
- * regardless of the {@code GameSettings#hideGUI} value.
+ * Event called when a Key is pressed outside of a GUI while in-game
  *
- * @see EntityRenderer#updateCameraAndRender(float, long)
+ * @see ClickEvent
  *
  * @author Brady
- * @since 4/30/2017 12:00 PM
+ * @since 1/20/2017 12:00 PM
  */
-public final class RenderScreenEvent {
+public final class KeyEvent {
 
     /**
-     * The render partial ticks
+     * Key code that belongs to the pressed key
      */
-    private final float partialTicks;
+    private final int key;
 
-    public RenderScreenEvent(float partialTicks) {
-        this.partialTicks = partialTicks;
+    /**
+     * Creates a new instance of KeyEvent.
+     *
+     * @param key - The key code for the key that was pressed
+     */
+    public KeyEvent(int key) {
+        this.key = key;
     }
 
     /**
-     * @return The render partial ticks
+     * @return The key code that corresponds to the pressed key
      */
-    public final float getPartialTicks() {
-        return this.partialTicks;
+    public final int getKey() {
+        return this.key;
     }
 }

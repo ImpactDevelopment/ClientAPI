@@ -19,7 +19,7 @@ package me.zero.client.api.util.render;
 import me.zero.client.api.ClientAPI;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zero.client.api.event.defaults.Render3DEvent;
+import me.zero.client.api.event.defaults.game.Render3DEvent;
 import me.zero.client.api.util.math.Vec3;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;

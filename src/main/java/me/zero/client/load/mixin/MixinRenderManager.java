@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.EntityRenderEvent;
+import me.zero.client.api.event.defaults.game.EntityRenderEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;

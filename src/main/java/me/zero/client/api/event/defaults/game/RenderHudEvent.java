@@ -14,34 +14,33 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
-import me.zero.alpine.type.Cancellable;
-import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiIngame;
 
 /**
- * Called when the collision state of a block is checked.
- * When the event is cancelled, the collision check returns
- * false.
+ * Called after the in-game overlay is finished rendering.
+ *
+ * @see GuiIngame#renderGameOverlay(float)
  *
  * @author Brady
- * @since 4/8/2017 12:00 PM
+ * @since 2/6/2017 12:00 PM
  */
-public final class BlockCollisionEvent extends Cancellable {
+public final class RenderHudEvent {
 
     /**
-     * Block receiving collision check
+     * The render partial ticks
      */
-    private final Block block;
+    private final float partialTicks;
 
-    public BlockCollisionEvent(Block block) {
-        this.block = block;
+    public RenderHudEvent(float partialTicks) {
+        this.partialTicks = partialTicks;
     }
 
     /**
-     * @return The block receiving a collision check
+     * @return The render partial ticks
      */
-    public final Block getBlock() {
-        return this.block;
+    public final float getPartialTicks() {
+        return this.partialTicks;
     }
 }

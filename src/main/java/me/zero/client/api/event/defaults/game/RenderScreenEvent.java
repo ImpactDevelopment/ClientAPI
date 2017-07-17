@@ -14,29 +14,34 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
+
+import net.minecraft.client.renderer.EntityRenderer;
 
 /**
- * Called when a section is started in the profiler
+ * Called before the overlay rendering is setup, will call
+ * regardless of the {@code GameSettings#hideGUI} value.
+ *
+ * @see EntityRenderer#updateCameraAndRender(float, long)
  *
  * @author Brady
- * @since 4/8/2017 12:00 PM
+ * @since 4/30/2017 12:00 PM
  */
-public final class ProfilerEvent {
+public final class RenderScreenEvent {
 
     /**
-     * Current profiler section
+     * The render partial ticks
      */
-    private final String section;
+    private final float partialTicks;
 
-    public ProfilerEvent(String section) {
-        this.section = section;
+    public RenderScreenEvent(float partialTicks) {
+        this.partialTicks = partialTicks;
     }
 
     /**
-     * @return The current profiler section
+     * @return The render partial ticks
      */
-    public final String getSection() {
-        return this.section;
+    public final float getPartialTicks() {
+        return this.partialTicks;
     }
 }

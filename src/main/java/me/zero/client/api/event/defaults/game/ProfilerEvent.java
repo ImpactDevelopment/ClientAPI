@@ -14,33 +14,29 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
-
-import net.minecraft.client.gui.GuiIngame;
+package me.zero.client.api.event.defaults.game;
 
 /**
- * Called after the in-game overlay is finished rendering.
- *
- * @see GuiIngame#renderGameOverlay(float)
+ * Called when a section is started in the profiler
  *
  * @author Brady
- * @since 2/6/2017 12:00 PM
+ * @since 4/8/2017 12:00 PM
  */
-public final class RenderHudEvent {
+public final class ProfilerEvent {
 
     /**
-     * The render partial ticks
+     * Current profiler section
      */
-    private final float partialTicks;
+    private final String section;
 
-    public RenderHudEvent(float partialTicks) {
-        this.partialTicks = partialTicks;
+    public ProfilerEvent(String section) {
+        this.section = section;
     }
 
     /**
-     * @return The render partial ticks
+     * @return The current profiler section
      */
-    public final float getPartialTicks() {
-        return this.partialTicks;
+    public final String getSection() {
+        return this.section;
     }
 }

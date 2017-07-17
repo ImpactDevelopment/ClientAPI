@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
 
 import me.zero.alpine.type.Cancellable;
 import me.zero.alpine.type.EventState;

@@ -14,41 +14,39 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults;
+package me.zero.client.api.event.defaults.game;
+
+import me.zero.alpine.type.Cancellable;
 
 /**
- * Called in FontRenderer when text is rendered
- * and string width is checked
+ * Called when the enchanted effect of a
+ * layer or an item is being rendered.
  *
  * @author Brady
- * @since 3/30/2017 12:00 PM
+ * @since 2/19/2017 12:00 PM
  */
-public final class TextEvent {
+public final class GlintEffectEvent extends Cancellable {
 
     /**
-     * The text being rendered
+     * The object getting a glint effect applied to it
      */
-    private String text;
+    private final GlintTarget target;
 
-    public TextEvent(String text) {
-        this.text = text;
+    public GlintEffectEvent(GlintTarget target) {
+        this.target = target;
     }
 
     /**
-     * @return The text being rendered
+     * @return The glint object
      */
-    public final String getText() {
-        return this.text;
+    public final GlintTarget getTarget() {
+        return this.target;
     }
 
     /**
-     * Sets the text being rendered
-     *
-     * @param text New text
-     * @return This event
+     * Glint Object
      */
-    public final TextEvent setText(String text) {
-        this.text = text;
-        return this;
+    public enum GlintTarget {
+        ARMOR, ITEM
     }
 }
