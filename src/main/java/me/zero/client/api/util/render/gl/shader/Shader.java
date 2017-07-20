@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.shader;
+package me.zero.client.api.util.render.gl.shader;
 
 import me.zero.client.api.util.interfaces.Helper;
-import me.zero.client.api.util.render.shader.adapter.ShaderAdapter;
-import me.zero.client.api.util.render.shader.adapter.ShaderAdapters;
-import me.zero.client.api.util.render.shader.glenum.GlShaderStatus;
-import me.zero.client.api.util.render.shader.glenum.GlShaderType;
+import me.zero.client.api.util.render.gl.shader.adapter.ShaderAdapter;
+import me.zero.client.api.util.render.gl.shader.adapter.ShaderAdapters;
+import me.zero.client.api.util.render.gl.glenum.GlShaderStatus;
+import me.zero.client.api.util.render.gl.glenum.GlShaderType;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static me.zero.client.api.util.render.shader.ShaderHelper.*;
+import static me.zero.client.api.util.render.gl.shader.ShaderHelper.*;
 
 /**
  * Used to create ARB Shader Programs with OpenGL

@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.shader.glenum;
+package me.zero.client.api.util.render.gl.glenum;
 
 /**
- * Enum to represent different shader types.
- * Geometry shaders are excluded, because the
- * usage of them is not needed.
- *
  * @author Brady
- * @since 5/21/2017 12:02 PM
+ * @since 5/21/2017 1:05 PM
  */
-public enum GlShaderType {
+public enum GlShaderStatus {
 
-    VERTEX, FRAGMENT
+    COMPILE, LINK, VALIDATE
 }
