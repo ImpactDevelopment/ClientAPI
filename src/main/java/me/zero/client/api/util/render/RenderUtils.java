@@ -18,6 +18,8 @@ package me.zero.client.api.util.render;
 
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
+import me.zero.client.api.util.render.gl.glenum.GlClientState;
+import me.zero.client.api.util.render.gl.GlUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import pw.knx.feather.tessellate.GrowingTess;
