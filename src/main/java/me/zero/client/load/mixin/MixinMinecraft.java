@@ -22,7 +22,7 @@ import me.zero.client.api.ClientInfo;
 import me.zero.client.api.ClientAPI;
 import me.zero.client.api.event.defaults.game.*;
 import me.zero.client.api.event.handle.ClientHandler;
-import me.zero.client.api.util.render.GlUtils;
+import me.zero.client.api.util.render.gl.GlUtils;
 import me.zero.client.load.ClientInitException;
 import me.zero.client.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.shader.adapter;
+package me.zero.client.api.util.render.gl.shader.adapter;
 
 import org.lwjgl.opengl.GLContext;
 

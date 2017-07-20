@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.shader.glenum;
+package me.zero.client.api.util.render.gl.glenum;
 
-/**
- * @author Brady
- * @since 5/21/2017 1:05 PM
- */
-public enum GlShaderStatus {
+import static org.lwjgl.opengl.GL11.*;
 
-    COMPILE, LINK, VALIDATE
+public enum GlClientState {
+
+    VERTEX(GL_VERTEX_ARRAY),
+    COLOR(GL_COLOR_ARRAY),
+    TEXTURE(GL_TEXTURE_COORD_ARRAY);
+
+    public final int cap;
+
+    GlClientState(int cap) {
+        this.cap = cap;
+    }
 }

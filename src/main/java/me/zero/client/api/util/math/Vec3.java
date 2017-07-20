@@ -16,7 +16,7 @@
 
 package me.zero.client.api.util.math;
 
-import me.zero.client.api.util.render.GlUtils;
+import me.zero.client.api.util.render.gl.GlUtils;
 
 /**
  * A Vec with a X, Y, and Z position

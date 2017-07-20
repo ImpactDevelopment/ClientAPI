@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.shader;
+package me.zero.client.api.util.render.gl.shader;
 
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
