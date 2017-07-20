@@ -16,7 +16,6 @@
 
 package me.zero.client.api.util.render.gl.shader;
 
-import me.zero.client.api.util.io.StreamReader;
 import me.zero.client.api.util.render.gl.shader.adapter.ShaderAdapter;
 import me.zero.client.api.util.render.gl.glenum.GlShaderStatus;
 import me.zero.client.api.util.render.gl.glenum.GlShaderType;
@@ -34,16 +33,16 @@ final class ShaderHelper {
     /**
      * Loads a shader of the specified type from the specified path
      *
-     * @param path Shader path
+     * @param adapter The shader adapter used by the system
+     * @param src Shader source code
      * @param type Shader type
      * @return The Shader's Object ID
      */
-    static int loadShader(ShaderAdapter adapter, String path, GlShaderType type) {
+    static int loadShader(ShaderAdapter adapter, String src, GlShaderType type) {
         int shaderID = adapter.createShader(type);
         if (shaderID == 0)
             return 0;
 
-        String src = new StreamReader(Shader.class.getResourceAsStream(path)).read();
         adapter.shaderSource(shaderID, src);
         adapter.compileShader(shaderID);
         adapter.checkStatus(shaderID, GlShaderStatus.COMPILE);

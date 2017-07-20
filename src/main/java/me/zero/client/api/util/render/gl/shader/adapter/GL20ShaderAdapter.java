@@ -22,7 +22,7 @@ import me.zero.client.api.util.render.gl.glenum.GlShaderType;
 
 import java.util.Objects;
 
-import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
 /**
