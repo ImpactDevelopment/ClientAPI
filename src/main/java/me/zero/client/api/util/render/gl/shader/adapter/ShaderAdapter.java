@@ -16,8 +16,8 @@
 
 package me.zero.client.api.util.render.gl.shader.adapter;
 
-import me.zero.client.api.util.render.gl.glenum.GlShaderStatus;
-import me.zero.client.api.util.render.gl.glenum.GlShaderType;
+import me.zero.client.api.util.render.gl.glenum.GLShaderStatus;
+import me.zero.client.api.util.render.gl.glenum.GLShaderType;
 
 /**
  * The shell for a Shader Adapter. Used as
@@ -58,7 +58,7 @@ public interface ShaderAdapter {
      * @param type The type of shader
      * @return The shader's object id
      */
-    int createShader(GlShaderType type);
+    int createShader(GLShaderType type);
 
     /**
      * Attaches the shader's source with the shader object.
@@ -121,7 +121,7 @@ public interface ShaderAdapter {
      * @param program The shader program id
      * @param status The status flag being checked
      */
-    void checkStatus(int program, GlShaderStatus status);
+    void checkStatus(int program, GLShaderStatus status);
 
     /**
      * Gets a shader program's log info

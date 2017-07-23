@@ -19,8 +19,7 @@ package me.zero.client.api.gui.widget;
 import me.zero.client.api.gui.widget.data.WidgetPos;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.render.RenderUtils;
-import me.zero.client.api.util.render.gl.glenum.GlListMode;
-import me.zero.client.api.util.render.gl.object.DisplayList;
+import me.zero.client.api.util.render.gl.DisplayList;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -100,7 +99,7 @@ public final class WidgetHandler {
             // We write to a list so that the height can
             // be updated and the required vertical adjustment
             // can be made before we actually render the widgets
-            list.start(GlListMode.COMPILE);
+            list.start(GL_COMPILE);
             widgets.forEach(widget -> {
                 float mP = (widget.getAlignment().getValue() + 0.5F != 0.0F) ? 1.0F : 0.0F;
                 float xP = pos.getPadding().getX() * padding * mP;

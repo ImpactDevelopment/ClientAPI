@@ -18,7 +18,7 @@ package me.zero.client.api.util.render;
 
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
-import me.zero.client.api.util.render.gl.glenum.GlClientState;
+import me.zero.client.api.util.render.gl.glenum.GLClientState;
 import me.zero.client.api.util.render.gl.GlUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -80,7 +80,7 @@ public final class RenderUtils {
      *
      * @param enabled The new enabled state of {@code GL_VERTEX_ARRAY}
      */
-    public static void setupClientState(GlClientState state, boolean enabled) {
+    public static void setupClientState(GLClientState state, boolean enabled) {
         csBuffer.clear();
         if (state.ordinal() > 0)
             csBuffer.add(state.cap);
@@ -141,9 +141,9 @@ public final class RenderUtils {
         glLineWidth(width);
 
         setupRender(true);
-        setupClientState(GlClientState.VERTEX, true);
+        setupClientState(GLClientState.VERTEX, true);
         tessellator.vertex(x, y, z).vertex(x1, y1, z1).draw(GL_LINE_STRIP);
-        setupClientState(GlClientState.VERTEX, false);
+        setupClientState(GLClientState.VERTEX, false);
         setupRender(false);
     }
 
@@ -156,7 +156,7 @@ public final class RenderUtils {
      * @param y2 Bottom corner Y of the rectangle
      */
     public static void drawFlippedTexturedRect(float x1, float y1, float x2, float y2) {
-        setupClientState(GlClientState.TEXTURE, true);
+        setupClientState(GLClientState.TEXTURE, true);
 
         tessellator
                 .vertex(x1, y2, 0).texture(0, 0)
@@ -165,7 +165,7 @@ public final class RenderUtils {
                 .vertex(x1, y1, 0).texture(0, 1)
                 .draw(GL_QUADS);
 
-        setupClientState(GlClientState.TEXTURE, false);
+        setupClientState(GLClientState.TEXTURE, false);
     }
 
     /**
@@ -177,7 +177,7 @@ public final class RenderUtils {
      * @param y2 Bottom corner Y of the rectangle
      */
     public static void drawReflectedTexturedRect(float x1, float y1, float x2, float y2) {
-        setupClientState(GlClientState.TEXTURE, true);
+        setupClientState(GLClientState.TEXTURE, true);
 
         tessellator
                 .vertex(x1, y2, 0).texture(1, 0)
@@ -186,7 +186,7 @@ public final class RenderUtils {
                 .vertex(x1, y1, 0).texture(1, 1)
                 .draw(GL_QUADS);
 
-        setupClientState(GlClientState.TEXTURE, false);
+        setupClientState(GLClientState.TEXTURE, false);
     }
 
     /**
@@ -202,9 +202,9 @@ public final class RenderUtils {
         GlUtils.glColor(color);
 
         setupRender(true);
-        setupClientState(GlClientState.VERTEX, true);
+        setupClientState(GLClientState.VERTEX, true);
         tessellator.vertex(x1, y2, 0).vertex(x2, y2, 0).vertex(x2, y1, 0).vertex(x1, y1, 0).draw(GL_QUADS);
-        setupClientState(GlClientState.VERTEX, false);
+        setupClientState(GLClientState.VERTEX, false);
         setupRender(false);
     }
 
@@ -261,7 +261,7 @@ public final class RenderUtils {
         setupRender(true);
         OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1, 0);
         GlStateManager.shadeModel(GL_FLAT);
-        setupClientState(GlClientState.COLOR, true);
+        setupClientState(GLClientState.COLOR, true);
 
         tessellator
                 .color(r[0], g[0], b[0], a[0]).vertex(x1, y2, 0)
@@ -270,7 +270,7 @@ public final class RenderUtils {
                 .color(r[3], g[3], b[3], a[3]).vertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
-        setupClientState(GlClientState.COLOR, false);
+        setupClientState(GLClientState.COLOR, false);
         GlStateManager.shadeModel(GL_FLAT);
         setupRender(false);
     }
