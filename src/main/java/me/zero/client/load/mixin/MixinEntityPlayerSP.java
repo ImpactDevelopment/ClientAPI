@@ -17,10 +17,10 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.LivingUpdateEvent;
-import me.zero.client.api.event.defaults.game.MotionUpdateEvent;
-import me.zero.client.api.event.defaults.game.MoveEvent;
-import me.zero.client.api.event.defaults.game.UpdateEvent;
+import me.zero.client.api.event.defaults.game.entity.LivingUpdateEvent;
+import me.zero.client.api.event.defaults.game.entity.MotionUpdateEvent;
+import me.zero.client.api.event.defaults.game.entity.MoveEvent;
+import me.zero.client.api.event.defaults.game.core.UpdateEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;

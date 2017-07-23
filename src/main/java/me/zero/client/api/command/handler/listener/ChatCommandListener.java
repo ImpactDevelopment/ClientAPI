@@ -22,7 +22,7 @@ import me.zero.client.api.ClientAPI;
 import me.zero.client.api.command.Command;
 import me.zero.client.api.command.handler.CommandHandler;
 import me.zero.client.api.command.executor.sender.CommandSender;
-import me.zero.client.api.event.defaults.game.ChatEvent;
+import me.zero.client.api.event.defaults.game.misc.ChatEvent;
 import me.zero.client.api.event.defaults.internal.CommandExecutionEvent;
 import me.zero.client.api.util.interfaces.Helper;
 import net.minecraft.util.text.TextComponentString;

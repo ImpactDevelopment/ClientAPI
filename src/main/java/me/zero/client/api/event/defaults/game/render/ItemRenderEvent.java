@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.render;
 
 import me.zero.alpine.type.Cancellable;
 import me.zero.client.api.util.interfaces.Helper;
@@ -25,8 +25,7 @@ import net.minecraft.util.EnumHandSide;
 
 /**
  * Called when ItemRenderer#renderItemInFirstPerson is called.
- * If cancelled, the item isn't
- *
+ * If cancelled, the item isn't rendered.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM

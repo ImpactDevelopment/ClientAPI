@@ -3,7 +3,7 @@ package me.zero.client.load.mixin;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.PacketEvent;
+import me.zero.client.api.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.io.IOException;
 import java.util.List;

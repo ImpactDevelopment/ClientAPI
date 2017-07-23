@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.network;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.network.EnumConnectionState;
-import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.Packet;
 
 /**
@@ -26,6 +25,8 @@ import net.minecraft.network.Packet;
  *
  * @see Send
  * @see Receive
+ * @see Encode
+ * @see Decode
  *
  * @author Brady
  * @since 2/7/2017 12:00 PM

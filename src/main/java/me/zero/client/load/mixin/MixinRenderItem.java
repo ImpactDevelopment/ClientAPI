@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.GlintEffectEvent;
+import me.zero.client.api.event.defaults.game.render.GlintEffectEvent;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import org.spongepowered.asm.mixin.Mixin;

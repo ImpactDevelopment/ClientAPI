@@ -14,59 +14,46 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.entity;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.entity.Entity;
 
 /**
- * Called when the team color is retrieved when
- * rendering outlines. This is particularly useful
- * when making a Spectral ESP or Shader ESP and
- * there is reliability on the renderOutlines flag.
- *
- * To apply the color set by this event, the event
- * must be cancelled. {@code Cancellable#cancel}
+ * Called when 2 entities collide with one another.
+ * If cancelled, the collision doesn't occur.
  *
  * @author Brady
- * @since 5/21/2017 11:37 AM
+ * @since 4/8/2017 12:00 PM
  */
-public final class TeamColorEvent extends Cancellable {
+public final class EntityCollisionEvent extends Cancellable {
 
     /**
-     * Entity being colored
+     * Entity being collided into
      */
     private final Entity entity;
 
     /**
-     * The color of the entity.
+     * Entity colliding into other entity
      */
-    private int color = 0xFFFFFFFF;
+    private final Entity collidingEntity;
 
-    public TeamColorEvent(Entity entity) {
+    public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
         this.entity = entity;
+        this.collidingEntity = collidingEntity;
     }
 
     /**
-     * @return The entity being colored
+     * @return The entity being collided into
      */
     public final Entity getEntity() {
         return this.entity;
     }
 
     /**
-     * @return The new color for the entity
+     * @return Entity colliding into other entity
      */
-    public final int getColor() {
-        return this.color;
-    }
-
-    /**
-     * Sets the color of the entity
-     *
-     * @param color New color
-     */
-    public final void setColor(int color) {
-        this.color = color;
+    public final Entity getCollidingEntity() {
+        return this.collidingEntity;
     }
 }

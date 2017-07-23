@@ -17,8 +17,8 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.BlockCollisionEvent;
-import me.zero.client.api.event.defaults.game.BoundingBoxEvent;
+import me.zero.client.api.event.defaults.game.world.BlockCollisionEvent;
+import me.zero.client.api.event.defaults.game.world.BoundingBoxEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

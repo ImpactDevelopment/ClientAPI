@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.core;
 
-import me.zero.alpine.type.Cancellable;
+import net.minecraft.client.Minecraft;
 
 /**
- * Called when the game is requested to be shutdown.
- * This event is invoked at the head of Minecraft#shutdown().
- * Cancelling this event will result in the shutdown
- * process cancelling. The only reason a developer should
- * cancel shutdown is to complete a cleanup process,
- * if it is unable to be done directly before the shutdown.
+ * Event called when the game loop runs.
+ *
+ * @see Minecraft#runGameLoop()
  *
  * @author Brady
- * @since 5/24/2017 12:26 PM
+ * @since 1/24/2017 12:00 PM
  */
-public final class GameShutdownEvent extends Cancellable {}
+public final class LoopEvent {}

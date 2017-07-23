@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.entity;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.entity.MoverType;
