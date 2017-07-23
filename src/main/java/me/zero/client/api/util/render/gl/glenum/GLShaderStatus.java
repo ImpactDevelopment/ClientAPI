@@ -16,27 +16,11 @@
 
 package me.zero.client.api.util.render.gl.glenum;
 
-import static org.lwjgl.opengl.GL11.*;
-
 /**
  * @author Brady
- * @since 7/22/2017 4:32 PM
+ * @since 5/21/2017 1:05 PM
  */
-public enum GlListMode {
+public enum GLShaderStatus {
 
-    /**
-     * Commands are merely compiled.
-     */
-    COMPILE(GL_COMPILE),
-
-    /**
-     * Commands are executed as they are compiled into the display list.
-     */
-    COMPILE_AND_EXECUTE(GL_COMPILE_AND_EXECUTE);
-
-    public final int id;
-
-    GlListMode(int id) {
-        this.id = id;
-    }
+    COMPILE, LINK, VALIDATE
 }

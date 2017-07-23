@@ -17,13 +17,14 @@
 package me.zero.client.api.util.render.gl.shader.adapter;
 
 import me.zero.client.api.exception.ShaderException;
-import me.zero.client.api.util.render.gl.glenum.GlShaderStatus;
-import me.zero.client.api.util.render.gl.glenum.GlShaderType;
+import me.zero.client.api.util.render.gl.glenum.GLShaderStatus;
+import me.zero.client.api.util.render.gl.glenum.GLShaderType;
 
 import java.util.Objects;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL32.*;
 
 /**
  * @author Brady
@@ -49,7 +50,7 @@ final class GL20ShaderAdapter implements ShaderAdapter {
     }
 
     @Override
-    public int createShader(GlShaderType type) {
+    public int createShader(GLShaderType type) {
         Objects.requireNonNull(type);
 
         switch (type) {
@@ -57,6 +58,8 @@ final class GL20ShaderAdapter implements ShaderAdapter {
                 return glCreateShader(GL_VERTEX_SHADER);
             case FRAGMENT:
                 return glCreateShader(GL_FRAGMENT_SHADER);
+            case GEOMETRY:
+                return glCreateShader(GL_GEOMETRY_SHADER);
         }
 
         return 0;
@@ -98,7 +101,7 @@ final class GL20ShaderAdapter implements ShaderAdapter {
     }
 
     @Override
-    public void checkStatus(int program, GlShaderStatus status) {
+    public void checkStatus(int program, GLShaderStatus status) {
         Objects.requireNonNull(status);
 
         int pname = 0;

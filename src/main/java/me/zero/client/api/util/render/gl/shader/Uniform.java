@@ -106,11 +106,11 @@ public final class Uniform {
     /**
      * Creates a uniform variable from the shader object id and the uniform's name
      *
-     * @param shaderID Shader object ID
+     * @param programID Shader program ID
      * @param uniformName Uniform Name
      * @return The UniformVariable representation
      */
-    public static Uniform get(int shaderID, String uniformName) {
-        return new Uniform(uniformName, glGetUniformLocationARB(shaderID, uniformName));
+    public static Uniform get(int programID, String uniformName) {
+        return new Uniform(uniformName, glGetUniformLocationARB(programID, uniformName));
     }
 }

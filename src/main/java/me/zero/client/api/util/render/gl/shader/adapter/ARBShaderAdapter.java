@@ -17,15 +17,16 @@
 package me.zero.client.api.util.render.gl.shader.adapter;
 
 import me.zero.client.api.exception.ShaderException;
-import me.zero.client.api.util.render.gl.glenum.GlShaderStatus;
-import me.zero.client.api.util.render.gl.glenum.GlShaderType;
+import me.zero.client.api.util.render.gl.glenum.GLShaderStatus;
+import me.zero.client.api.util.render.gl.glenum.GLShaderType;
 
 import java.util.Objects;
 
 import static org.lwjgl.opengl.ARBFragmentShader.*;
+import static org.lwjgl.opengl.ARBGeometryShader4.*;
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 import static org.lwjgl.opengl.ARBVertexShader.*;
-import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * @author Brady
@@ -51,7 +52,7 @@ final class ARBShaderAdapter implements ShaderAdapter {
     }
 
     @Override
-    public int createShader(GlShaderType type) {
+    public int createShader(GLShaderType type) {
         Objects.requireNonNull(type);
 
         switch (type) {
@@ -59,6 +60,8 @@ final class ARBShaderAdapter implements ShaderAdapter {
                 return glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
             case FRAGMENT:
                 return glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
+            case GEOMETRY:
+                return glCreateShaderObjectARB(GL_GEOMETRY_SHADER_ARB);
         }
 
         return 0;
@@ -100,7 +103,7 @@ final class ARBShaderAdapter implements ShaderAdapter {
     }
 
     @Override
-    public void checkStatus(int program, GlShaderStatus status) {
+    public void checkStatus(int program, GLShaderStatus status) {
         Objects.requireNonNull(status);
 
         int pname = 0;

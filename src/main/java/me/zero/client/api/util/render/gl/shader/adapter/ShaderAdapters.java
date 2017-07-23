@@ -34,8 +34,10 @@ public final class ShaderAdapters {
     private ShaderAdapters() {}
 
     static {
-        // Check if OpenGL 2.0 is supported by the machine
-        if (GLContext.getCapabilities().OpenGL20)
+        // Check if OpenGL 2.0 and OpenGL 3.2 are supported by the machine
+        // If 3.2 is supported, 2.0 should be too, but we have 2 checks here
+        // just to be safe.
+        if (GLContext.getCapabilities().OpenGL20 && GLContext.getCapabilities().OpenGL32)
             systemDefault = new GL20ShaderAdapter();
         else
             systemDefault = new ARBShaderAdapter();

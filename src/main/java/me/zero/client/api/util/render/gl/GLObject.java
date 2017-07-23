@@ -22,7 +22,7 @@ package me.zero.client.api.util.render.gl;
  * @author Brady
  * @since 7/22/2017 4:18 PM
  */
-public abstract class GlObject {
+public abstract class GLObject {
 
     public static final int UNABLE_TO_GENERATE = 0;
     public static final int NOT_GENERATED = -1;
@@ -48,7 +48,9 @@ public abstract class GlObject {
     protected abstract int nativeGen();
 
     /**
-     * Deletes this object from memory.
+     * Deletes this object from memory. This should be called
+     * when the application is shutting down to efficiently
+     * garbage collect memory.
      *
      * @return Whether or not the operation was a success
      */
