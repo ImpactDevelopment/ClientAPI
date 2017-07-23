@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
-
-import net.minecraft.client.Minecraft;
+package me.zero.client.api.event.defaults.game.core;
 
 /**
- * Event called when the game tick runs.
- *
- * @see Minecraft#runTick()
+ * Called from EntityPlayerSP#onUpdate
  *
  * @author Brady
- * @since 1/24/2017 12:00 PM
+ * @since 2/8/2017 12:00 PM
  */
-public final class TickEvent {}
+public final class UpdateEvent {}

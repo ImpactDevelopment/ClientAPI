@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.EntityCollisionEvent;
+import me.zero.client.api.event.defaults.game.entity.EntityCollisionEvent;
 import me.zero.client.api.util.math.Vec2;
 import me.zero.client.api.util.math.Vec3;
 import me.zero.client.load.mixin.wrapper.IEntity;

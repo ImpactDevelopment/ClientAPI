@@ -17,7 +17,7 @@
 package me.zero.client.load.mixin;
 
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.RenderScreenEvent;
+import me.zero.client.api.event.defaults.game.render.RenderScreenEvent;
 import me.zero.client.api.util.render.camera.Camera;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;

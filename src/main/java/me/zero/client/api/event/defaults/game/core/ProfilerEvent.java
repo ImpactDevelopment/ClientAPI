@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.core;
 
 /**
- * Called when a section is started in the profiler
+ * Called when a section is started in the profiler.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM
@@ -25,12 +25,29 @@ package me.zero.client.api.event.defaults.game;
 public final class ProfilerEvent {
 
     /**
-     * Current profiler section
+     * Complete current profiler section.
+     *
+     * ex) 'root.tick.render'
+     */
+    private final String sectionPath;
+
+    /**
+     * Current profiler section.
+     *
+     * ex) 'render'
      */
     private final String section;
 
-    public ProfilerEvent(String section) {
+    public ProfilerEvent(String sectionPath, String section) {
+        this.sectionPath = sectionPath;
         this.section = section;
+    }
+
+    /**
+     * @return The full profiler section
+     */
+    public final String getSectionPath() {
+        return this.sectionPath;
     }
 
     /**
