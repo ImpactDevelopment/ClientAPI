@@ -18,7 +18,7 @@ package me.zero.client.api.util.render.gl.glenum;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public enum GlClientState {
+public enum GLClientState {
 
     VERTEX(GL_VERTEX_ARRAY),
     COLOR(GL_COLOR_ARRAY),
@@ -26,7 +26,7 @@ public enum GlClientState {
 
     public final int cap;
 
-    GlClientState(int cap) {
+    GLClientState(int cap) {
         this.cap = cap;
     }
 }

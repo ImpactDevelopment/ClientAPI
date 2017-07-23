@@ -14,19 +14,27 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.util.render.gl.object;
+package me.zero.client.api.util.render.gl;
 
-import me.zero.client.api.util.render.gl.GlObject;
-import me.zero.client.api.util.render.gl.glenum.GlListMode;
+import me.zero.client.api.util.render.gl.GLObject;
 
 import static org.lwjgl.opengl.GL11.*;
 
 /**
+ * Display lists are used to capture OpenGL instructions.
+ * These instructions can then later be called upon. This
+ * is generally more efficient then repeating the
+ * instructions multiple times in the code directly.
+ *
  * @author Brady
  * @since 7/22/2017 4:27 PM
  */
-public final class DisplayList extends GlObject {
+public final class DisplayList extends GLObject {
 
+    /**
+     * The number of contiguous empty display lists to be generated.
+     * In most cases, '1' will suffice.
+     */
     private final int range;
 
     public DisplayList(int range) {
@@ -43,14 +51,29 @@ public final class DisplayList extends GlObject {
         glDeleteLists(id(), range);
     }
 
-    public final void start(GlListMode mode) {
-        glNewList(id(), mode.id);
+    /**
+     * Begins capturing all subsequent instructions
+     *
+     * @see #stop()
+     *
+     * @param mode Instruction capture mode
+     */
+    public final void start(int mode) {
+        glNewList(id(), mode);
     }
 
+    /**
+     * Stops capturing all instructions since start
+     *
+     * @see #start(int)
+     */
     public final void stop() {
         glEndList();
     }
 
+    /**
+     * Calls all instructions that have been captured by this list
+     */
     public final void call() {
         glCallList(id());
     }

@@ -18,13 +18,11 @@ package me.zero.client.api.util.render.gl.glenum;
 
 /**
  * Enum to represent different shader types.
- * Geometry shaders are excluded, because the
- * usage of them is not needed.
  *
  * @author Brady
  * @since 5/21/2017 12:02 PM
  */
-public enum GlShaderType {
+public enum GLShaderType {
 
-    VERTEX, FRAGMENT
+    VERTEX, FRAGMENT, GEOMETRY
 }
