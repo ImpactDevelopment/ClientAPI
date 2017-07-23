@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.entity;
 
 import me.zero.alpine.type.EventState;
 import me.zero.client.api.util.interfaces.Helper;

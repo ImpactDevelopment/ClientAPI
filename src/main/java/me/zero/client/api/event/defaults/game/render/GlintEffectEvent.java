@@ -14,32 +14,39 @@
  * limitations under the License.
  */
 
-package me.zero.client.api;
+package me.zero.client.api.event.defaults.game.render;
 
-import me.zero.alpine.EventBus;
-import me.zero.client.api.event.CAPIEventManager;
+import me.zero.alpine.type.Cancellable;
 
 /**
- * Contains some constants that are used throughout the API.
+ * Called when the enchanted effect of a
+ * layer or an item is being rendered.
  *
  * @author Brady
- * @since 5/27/2017 9:52 AM
+ * @since 2/19/2017 12:00 PM
  */
-public final class ClientAPI {
+public final class GlintEffectEvent extends Cancellable {
 
     /**
-     * Prevent instantiation
+     * The object getting a glint effect applied to it
      */
-    private ClientAPI() {}
+    private final GlintTarget target;
+
+    public GlintEffectEvent(GlintTarget target) {
+        this.target = target;
+    }
 
     /**
-     * Current version of the API
+     * @return The glint object
      */
-    public static final double VERSION = 2.1;
+    public final GlintTarget getTarget() {
+        return this.target;
+    }
 
     /**
-     * Instance of the API event bus. All default game event are
-     * passed through this event bus.
+     * Glint Object
      */
-    public static final EventBus EVENT_BUS = new CAPIEventManager();
+    public enum GlintTarget {
+        ARMOR, ITEM
+    }
 }

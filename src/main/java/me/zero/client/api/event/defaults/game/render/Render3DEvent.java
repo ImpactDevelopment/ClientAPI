@@ -14,41 +14,31 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.render;
+
+import me.zero.client.api.util.interfaces.Helper;
 
 /**
- * Called in FontRenderer when text is rendered
- * and string width is checked
+ * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
  * @author Brady
- * @since 3/30/2017 12:00 PM
+ * @since 2/9/2017 12:00 PM
  */
-public final class TextEvent {
+public final class Render3DEvent implements Helper {
 
     /**
-     * The text being rendered
+     * The render partial ticks
      */
-    private String text;
+    private final float partialTicks;
 
-    public TextEvent(String text) {
-        this.text = text;
+    public Render3DEvent() {
+        this.partialTicks = mca.getTimer().renderPartialTicks;
     }
 
     /**
-     * @return The text being rendered
+     * @return The render partial ticks
      */
-    public final String getText() {
-        return this.text;
-    }
-
-    /**
-     * Sets the text being rendered
-     *
-     * @param text New text
-     * @return This event
-     */
-    public final TextEvent setText(String text) {
-        this.text = text;
-        return this;
+    public final float getPartialTicks() {
+        return this.partialTicks;
     }
 }

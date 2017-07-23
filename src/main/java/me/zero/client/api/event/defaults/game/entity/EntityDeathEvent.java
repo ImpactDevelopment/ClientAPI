@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;

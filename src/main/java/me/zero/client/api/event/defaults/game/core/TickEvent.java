@@ -14,33 +14,16 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.core;
 
-import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.Minecraft;
 
 /**
- * Called after the in-game overlay is finished rendering.
+ * Event called when the game tick runs.
  *
- * @see GuiIngame#renderGameOverlay(float)
+ * @see Minecraft#runTick()
  *
  * @author Brady
- * @since 2/6/2017 12:00 PM
+ * @since 1/24/2017 12:00 PM
  */
-public final class RenderHudEvent {
-
-    /**
-     * The render partial ticks
-     */
-    private final float partialTicks;
-
-    public RenderHudEvent(float partialTicks) {
-        this.partialTicks = partialTicks;
-    }
-
-    /**
-     * @return The render partial ticks
-     */
-    public final float getPartialTicks() {
-        return this.partialTicks;
-    }
-}
+public final class TickEvent {}

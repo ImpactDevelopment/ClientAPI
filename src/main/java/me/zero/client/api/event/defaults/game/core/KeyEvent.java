@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.core;
 
 /**
  * Event called when a Key is pressed outside of a GUI while in-game

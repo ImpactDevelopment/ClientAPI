@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.render;
 
 import net.minecraft.client.renderer.EntityRenderer;
 

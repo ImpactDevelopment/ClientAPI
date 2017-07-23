@@ -20,7 +20,12 @@ import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.*;
+import me.zero.client.api.event.defaults.game.core.ClickEvent;
+import me.zero.client.api.event.defaults.game.core.GameShutdownEvent;
+import me.zero.client.api.event.defaults.game.core.LoopEvent;
+import me.zero.client.api.event.defaults.game.core.TickEvent;
+import me.zero.client.api.event.defaults.game.render.GuiEvent;
+import me.zero.client.api.event.defaults.game.world.WorldEvent;
 import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.util.render.gl.GlUtils;
 import me.zero.client.load.ClientInitException;
@@ -43,7 +48,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static me.zero.client.api.event.defaults.game.ClickEvent.MouseButton.*;
+import static me.zero.client.api.event.defaults.game.core.ClickEvent.MouseButton.*;
 
 /**
  * @author Brady

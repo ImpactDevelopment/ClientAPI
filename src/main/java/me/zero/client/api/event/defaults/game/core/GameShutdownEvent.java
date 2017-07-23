@@ -14,31 +14,19 @@
  * limitations under the License.
  */
 
-package me.zero.client.api.event.defaults.game;
+package me.zero.client.api.event.defaults.game.core;
 
-import me.zero.client.api.util.interfaces.Helper;
+import me.zero.alpine.type.Cancellable;
 
 /**
- * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
+ * Called when the game is requested to be shutdown.
+ * This event is invoked at the head of Minecraft#shutdown().
+ * Cancelling this event will result in the shutdown
+ * process cancelling. The only reason a developer should
+ * cancel shutdown is to complete a cleanup process,
+ * if it is unable to be done directly before the shutdown.
  *
  * @author Brady
- * @since 2/9/2017 12:00 PM
+ * @since 5/24/2017 12:26 PM
  */
-public final class Render3DEvent implements Helper {
-
-    /**
-     * The render partial ticks
-     */
-    private final float partialTicks;
-
-    public Render3DEvent() {
-        this.partialTicks = mca.getTimer().renderPartialTicks;
-    }
-
-    /**
-     * @return The render partial ticks
-     */
-    public final float getPartialTicks() {
-        return this.partialTicks;
-    }
-}
+public final class GameShutdownEvent extends Cancellable {}
