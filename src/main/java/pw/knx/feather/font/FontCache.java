@@ -1,9 +1,8 @@
-package pw.knx.feather.render;
+package pw.knx.feather.font;
 
 import org.lwjgl.opengl.GL11;
-import pw.knx.feather.tessellate.GrowingTess;
-import pw.knx.feather.tessellate.base.Tessellator;
-import pw.knx.feather.texture.base.Texture;
+import pw.knx.feather.tessellate.Tessellator;
+import pw.knx.feather.texture.Texture;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -18,7 +17,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * FontRend is a simple, one-class library for the rendering of all Unicode Strings using OpenType fonts.
+ * FontCache is a simple, one-class library for the rendering of all Unicode Strings using OpenType fonts.
  * It is adapted from thvortex's BetterFonts, found here: https://github.com/user/thvortex/BetterFonts
  * <p>
  * There are is one key way in which this implementation differs from thvortex's:
@@ -28,7 +27,7 @@ import java.util.List;
  * Regardless of these changes, as much of the model remains the same, plenty of documentation will
  * be copied directly from thvortex's original repository.
  * <p>
- * This aforementioned processing model is as follows: FontRend caches the glyph layout of individual strings,
+ * This aforementioned processing model is as follows: FontCache caches the glyph layout of individual strings,
  * and it also caches the pre-rendered images for individual glyphs. Once a string and its glyph images are cached,
  * the critical path in renderString() will draw the glyphs as fast as if using a bitmap font. Strings are cached
  * using weak references through a two layer string cache. Strings that are no longer in use by LWJGL will be
@@ -41,7 +40,7 @@ import java.util.List;
  * @author KNOXDEV, thvortex
  * @since 1/23/2017 14:40
  */
-public class FontRend {
+public class FontCache {
 
 	/*
 	 * Constants
@@ -72,7 +71,7 @@ public class FontRend {
 	 * All font glyphs are packed inside this image and are then loaded from here into an OpenGL texture.
 	 */
 	private final BufferedImage glyphImage = new BufferedImage(TEXTURE_WIDTH, TEXTURE_HEIGHT,
-															   BufferedImage.TYPE_INT_ARGB);
+			BufferedImage.TYPE_INT_ARGB);
 
 	/**
 	 * The Graphics2D associated with stringImage and used for string drawing to extract the individual glyph shapes.
@@ -88,10 +87,14 @@ public class FontRend {
 	 * String Graphics
 	 */
 
-	/** Temporary image for rendering a string to and then extracting the glyph images from. */
+	/**
+	 * Temporary image for rendering a string to and then extracting the glyph images from.
+	 */
 	private BufferedImage stringImage;
 
-	/** The Graphics2D associated with stringImage and used for string drawing to extract the individual glyph shapes. */
+	/**
+	 * The Graphics2D associated with stringImage and used for string drawing to extract the individual glyph shapes.
+	 */
 	private Graphics2D stringGraphics;
 
 	/**
@@ -108,7 +111,9 @@ public class FontRend {
 	 */
 	private int cacheLineHeight = 0;
 
-	/** ID of current OpenGL cache texture being used by cacheGlyphs() to store pre-rendered glyph images. */
+	/**
+	 * ID of current OpenGL cache texture being used by cacheGlyphs() to store pre-rendered glyph images.
+	 */
 	private int texture;
 
 	/*
@@ -118,7 +123,7 @@ public class FontRend {
 	/**
 	 * List of all available physical fonts on the system. Used by lookupFont() to find alternate fonts.
 	 */
-	private Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+	private final Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
 
 	/**
 	 * A list of all fonts that have been returned so far by lookupFont(), and that will always be searched first for a usable font before
@@ -126,7 +131,7 @@ public class FontRend {
 	 * have multiple entries for the various styles (i.e. bold, italic, etc.) of a font. This list starts with Java's "SansSerif" logical
 	 * font.
 	 */
-	private List<Font> usedFonts = new ArrayList<>();
+	private final List<Font> usedFonts = new ArrayList<>();
 
 	/*
 	 *  Internal Caches
@@ -137,7 +142,7 @@ public class FontRend {
 	 * continues to hold a strong reference to the String object (i.e. from TileEntitySign and ChatLine) passed here, the
 	 * weakRefCache map will continue to hold a strong reference to the Entry object that said strings all map to.
 	 */
-	private final Map<String, Entry> stringCache = new WeakHashMap<>();
+	private final Map<String, GlyphLayout> stringCache = new WeakHashMap<>();
 
 	/**
 	 * A cache of all fonts that have at least one glyph pre-rendered in a texture. Each font maps to an integer (monotonically
@@ -157,7 +162,9 @@ public class FontRend {
 	 * Working Data
 	 */
 
-	/** Intermediate data array for use with textureImage.getRgb(). */
+	/**
+	 * Intermediate data array for use with textureImage.getRgb().
+	 */
 	private final int[] imageData = new int[TEXTURE_WIDTH * TEXTURE_HEIGHT];
 
 	/**
@@ -166,15 +173,14 @@ public class FontRend {
 	 * that the integers holding packed RGBA colors are stored into memory in a predictable order.
 	 */
 	private final IntBuffer imageBuffer = ByteBuffer.allocateDirect(4 * TEXTURE_WIDTH * TEXTURE_HEIGHT)
-													.order(ByteOrder.BIG_ENDIAN).asIntBuffer();
+			.order(ByteOrder.BIG_ENDIAN).asIntBuffer();
 
-	/** The simple Feather Tessellator we've designated to render our glyphs. */
-	private final Tessellator tess = new GrowingTess(4 * 4);
+	/**
+	 * A simple list of glyphs we're currently working with
+	 */
+	private final List<FontGlyph> glyphs = new ArrayList<>();
 
-	/** A simple list of glyphs we're currently working with */
-	private final List<Glyph> glyphs = new ArrayList<>();
-
-	public FontRend(Font font) {
+	FontCache() {
 
 		/* Set background color for use with clearRect() */
 		glyphGraphics.setBackground(CLEAR);
@@ -187,88 +193,15 @@ public class FontRend {
 
 		/* Use Java's logical font as the default initial font if user does not override it in some configuration file */
 		GraphicsEnvironment.getLocalGraphicsEnvironment().preferLocaleFonts();
-		setFont(font);
-	}
-
-	/**
-	 * Change the preferred font used to pre-render glyph images. If this method is called at runtime, the existing glyph images will remain cached
-	 * in their respective textures and will remain accessible.
-	 *
-	 * @param font the new font
-	 */
-	public void setFont(Font font) {
-		stringCache.clear();
-		usedFonts.clear();
-		usedFonts.add(font);
 	}
 
 	public Font getFont() {
 		return usedFonts.get(0);
 	}
 
-	/*
-	 * String Methods
-	 */
-
-	/**
-	 * Render a single-line string to the screen using the current OpenGL color. The (x,y) coordinates are of the uppet-left
-	 * corner of the string's bounding box, rather than the baseline position as is typical with fonts. This function will also
-	 * add the string to the cache so the next renderString() call with the same string is faster.
-	 *
-	 * @param str the string being rendered
-	 * @param x   the x coordinate to draw at
-	 * @param y   the y coordinate to draw at
-	 */
-	public void renderString(String str, float x, float y) {
-		/* Make sure the entire string is cached before rendering and return its glyph representation */
-		final Entry entry = this.cacheString(str);
-
-		/* Track which texture is currently bound to minimize the number of glBindTexture() and Tessellator.draw() calls needed */
-		int boundTex = 0;
-
-		/* Cycle through the Glyphs to be rendered */
-		for (Glyph glyph : entry.glyphs) {
-			final Texture texture = glyph.texture;
-
-			/*
-			* Make sure the OpenGL texture storing this glyph's image is bound (if not already bound). All pending glyphs in the
-			* Tessellator's vertex array must be drawn before switching textures, otherwise they would erroneously use the new
-			* texture as well.
-			*/
-			if (boundTex != texture.getID()) {
-				if (boundTex != 0) {
-					tess.draw(GL11.GL_QUADS);
-				}
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getID());
-				boundTex = texture.getID();
-			}
-			final float x1 = x + glyph.x;
-			final float x2 = x1 + texture.getWidth();
-			final float y1 = y + glyph.y;
-			final float y2 = y1 + texture.getHeight();
-			tess.texture(texture.getU(), texture.getV()).vertex(x1, y1, 0);
-			tess.texture(texture.getU(), texture.getV1()).vertex(x1, y2, 0);
-			tess.texture(texture.getU1(), texture.getV1()).vertex(x2, y2, 0);
-			tess.texture(texture.getU1(), texture.getV()).vertex(x2, y1, 0);
-		}
-
-		/* Draw any remaining glyphs in the Tessellator's vertex array (there should be at least one glyph pending) */
-		tess.draw(GL11.GL_QUADS);
-	}
-
-	/**
-	 * Return the width of a string in pixels.
-	 *
-	 * @param str compute the width of this string
-	 *
-	 * @return the width in pixels
-	 */
-	public int getStringWidth(String str) {
-		return this.cacheString(str).width;
-	}
 
 	/*
-	 * Caching Methods
+	 * Caching Routines
 	 */
 
 	/**
@@ -277,19 +210,18 @@ public class FontRend {
 	 * existing Entry from the cache.
 	 *
 	 * @param str this String will be laid out and added to the cache (or looked up, if already cached)
-	 *
 	 * @return the string's cache entry containing all the glyph positions
 	 */
-	private Entry cacheString(String str) {
+	public GlyphLayout cacheString(String str) {
 
 		/* If this string is already in the cache, simply return the cached Entry object */
-		Entry entry = stringCache.get(str);
+		GlyphLayout entry = stringCache.get(str);
 
 		/* If string is not cached then layout the string */
 		if (entry == null) {
 			final int width = layoutBidi(str);
 
-			entry = new Entry(glyphs.toArray(new Glyph[glyphs.size()]), width);
+			entry = new GlyphLayout(glyphs.toArray(new FontGlyph[glyphs.size()]), width);
 			glyphs.clear();
 
 			/* Sorts these glyphs by associated TextureID to minimize OpenGL bind calls */
@@ -307,16 +239,14 @@ public class FontRend {
 	 * in the fontCache (based on the request style). Failing that, it searches the usedFonts list followed by the allFonts[] array.
 	 *
 	 * @param ch the character to check against the font
-	 *
 	 * @return an OpenType font capable of displaying this character
 	 */
 	private Font cacheFont(char ch) {
 		/* Try using an already known base font; the first font in usedFonts list is the one set with setFont() */
 		for (Font font : usedFonts) {
 			 /* Only use the font if it can layout the character */
-			if (font.canDisplay(ch)) {
+			if (font.canDisplay(ch))
 				return font;
-			}
 		}
 
 		for (Font font : allFonts) {
@@ -344,7 +274,6 @@ public class FontRend {
 	 * @param limit         the limit (offset + length) which to stop performing the layout
 	 * @param directionFlag either Font.LAYOUT_RIGHT_TO_LEFT or Font.LAYOUT_LEFT_TO_RIGHT
 	 * @param font          the font to use to layout a GlyphVector
-	 *
 	 * @return width of the glyphs cached
 	 */
 	private int cacheGlyphs(char[] text, int start, int limit, int directionFlag, Font font) {
@@ -388,12 +317,11 @@ public class FontRend {
              	* array of glyphcodes (and therefore render only a few glyphs at a time), this produces corrupted
              	* Davengari glyphs under Windows 7. This will draw the string at most one time.
              	*/
-				if (vectorBounds == null) {
+				if (vectorBounds == null)
 					vectorBounds = cacheVector(vector);
-				}
 
 				/*
-             	* Get the glyph's pixel-aligned bounding box. The JavaDoc claims that the "The outline returned
+			 	* Get the glyph's pixel-aligned bounding box. The JavaDoc claims that the "The outline returned
              	* by this method is positioned around the origin of each individual glyph." However, the actual
              	* bounds are all relative to the start of the entire GlyphVector, which is actually more useful
              	* for extracting the glyph's image from the rendered string.
@@ -431,7 +359,7 @@ public class FontRend {
              	* first because the composite method in the Graphics object is always set to AlphaComposite.Src.
              	*/
 				glyphGraphics.drawImage(stringImage, cacheX, cacheY, cacheX + rect.width, cacheY + rect.height, rect.x,
-										rect.y, rect.x + rect.width, rect.y + rect.height, null);
+						rect.y, rect.x + rect.width, rect.y + rect.height, null);
 
 				/*
              	* Store this glyph's position in texture and its origin offset. Note that "rect" will not be modified after
@@ -443,7 +371,7 @@ public class FontRend {
              	* Create new cache entry to record both the texture used by the glyph and its position within that texture.
              	* Texture coordinates are normalized to 0.0-1.0 by dividing with TEXTURE_WIDTH and TEXTURE_HEIGHT.
              	*/
-				tex = Texture.tex.createTexture(texture, rect.x, rect.y, rect.width, rect.height, TEXTURE_WIDTH);
+				tex = Texture.from(rect.x, rect.y, rect.width, rect.height, TEXTURE_WIDTH).setID(texture);
 
 				/*
              	 * The lower 32 bits of the glyphCache key are the glyph codepoint. The upper 64 bits are the font number
@@ -457,18 +385,17 @@ public class FontRend {
              	* region than using the add(x, y) method to extend by a single point. Also note that creating the first
              	* dirty rectangle here avoids having to deal with the special rules for empty/non-existent rectangles.
              	*/
-				if (dirty == null) {
+				if (dirty == null)
 					dirty = new Rectangle(cacheX, cacheY, rect.width, rect.height);
-				} else {
+				else
 					dirty.add(rect);
-				}
 
 				/* Advance cachePosX so the next glyph can be stored immediately to the right of this one */
 				cacheX += rect.width + 1;
 			}
 
 			final Point point = vector.getGlyphPixelBounds(index, null, 0, 0).getLocation();
-			glyphs.add(new Glyph(tex, point.x - 2 * index, point.y));
+			glyphs.add(new FontGlyph(tex, point.x - 2 * index, point.y));
 		}
 
 		/* Update OpenGL texture if any part of the glyphCacheImage has changed */
@@ -488,10 +415,9 @@ public class FontRend {
 		final Rectangle vectorBounds = vector.getPixelBounds(fontContext, 0, 0);
 
 		/* Enlage the stringImage if it is too small to store the entire rendered string */
-		if (vectorBounds.width > stringImage.getWidth() || vectorBounds.height > stringImage.getHeight()) {
+		if (vectorBounds.width > stringImage.getWidth() || vectorBounds.height > stringImage.getHeight())
 			allocateStringImage(Math.max(vectorBounds.width, stringImage.getWidth()),
-								Math.max(vectorBounds.height, stringImage.getHeight()));
-		}
+					Math.max(vectorBounds.height, stringImage.getHeight()));
 
 		/* Erase the upper-left corner where the string will get drawn*/
 		stringGraphics.clearRect(0, 0, vectorBounds.width, vectorBounds.height);
@@ -502,24 +428,23 @@ public class FontRend {
 		return vectorBounds;
 	}
 
+
 	/*
-	 * Layout Methods
+	 * Layout Routines
 	 */
 
 	private int layoutBidi(String str) {
 		final char[] text = str.toCharArray();
 
 		/* Avoid performing full bidirectional analysis if text has no "strong" right-to-left characters */
-		if (!Bidi.requiresBidi(text, 0, text.length)) {
+		if (!Bidi.requiresBidi(text, 0, text.length))
 			return layoutFont(text, 0, text.length, Font.LAYOUT_LEFT_TO_RIGHT);
-		}
 
 		final Bidi bidi = new Bidi(text, 0, null, 0, text.length, Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT);
 
 		/* If text is entirely right-to-left, then just lay it out */
-		if (bidi.isRightToLeft()) {
+		if (bidi.isRightToLeft())
 			return layoutFont(text, 0, text.length, Font.LAYOUT_RIGHT_TO_LEFT);
-		}
 
 		/* Otherwise text has a mixture of LTR and RLT, and it requires full bidirectional analysis */
 		final int runCount = bidi.getRunCount();
@@ -554,11 +479,10 @@ public class FontRend {
 			 * one unsupported character (which will use the font's "missing glyph code"), then retry the lookup again at the
 			 * next character after that.
 			 */
-			if (next == start) {
+			if (next == start)
 				next++;
-			} else if (next == -1) /* canDisplayUpTo returns -1 if the entire string range is supported by this font */ {
+			else if (next == -1) /* canDisplayUpTo returns -1 if the entire string range is supported by this font */
 				next = limit;
-			}
 
 			width += cacheGlyphs(text, start, next, directionFlag, font);
 			start = next;
@@ -574,19 +498,18 @@ public class FontRend {
 	 * @param start       the offset into text at which to start the layout
 	 * @param limit       the (offset + length) at which to stop performing the layout
 	 * @param layoutFlags either Font.LAYOUT_RIGHT_TO_LEFT or Font.LAYOUT_LEFT_TO_RIGHT
-	 *
 	 * @return the newly created GlyphVector
 	 */
 	private GlyphVector layoutVector(Font font, char text[], int start, int limit, int layoutFlags) {
         /* Ensure this font is already in fontCache so it can be referenced by cacheGlyphs() later on */
-		if (!fontCache.containsKey(font)) {
+		if (!fontCache.containsKey(font))
 			fontCache.put(font, fontCache.size());
-		}
 		return font.layoutGlyphVector(fontContext, text, start, limit, layoutFlags);
 	}
 
+
 	/*
-	 * OpenGL Methods
+	 * OpenGL Routines
 	 */
 
 	/**
@@ -599,7 +522,7 @@ public class FontRend {
 			updateBuffer(dirty.x, dirty.y, dirty.width, dirty.height);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
 			GL11.glTexSubImage2D(GL11.GL_TEXTURE_2D, 0, dirty.x, dirty.y, dirty.width, dirty.height, GL11.GL_RGBA,
-								 GL11.GL_UNSIGNED_BYTE, imageBuffer);
+					GL11.GL_UNSIGNED_BYTE, imageBuffer);
 		}
 	}
 
@@ -624,7 +547,7 @@ public class FontRend {
          */
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
 		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_ALPHA8, TEXTURE_WIDTH, TEXTURE_HEIGHT, 0, GL11.GL_RGBA,
-						  GL11.GL_UNSIGNED_BYTE, imageBuffer);
+				GL11.GL_UNSIGNED_BYTE, imageBuffer);
 
 		/* Explicitly disable mipmap support because updateTexture() will only update the base level 0 */
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
@@ -685,71 +608,19 @@ public class FontRend {
 				.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
 	}
 
+
 	/*
-	 * Inner Classes
+	 * Static Construction Methods
 	 */
 
 	/**
-	 * This entry holds the laid-out glyph positions for the cached string along with some relevant metadata.
+	 * Creates a FontCache of the requested Font object
+	 * @param font The Font to cache
+	 * @return the Cache of the font passed
 	 */
-	private class Entry {
-
-		/**
-		 * Array of fully laid-out glyphs for the string. Sorted by logical order of characters (i.e. glyph.stringIndex)
-		 */
-		final Glyph[] glyphs;
-
-		/**
-		 * The total horizontal advance (i.e. width) for this string in pixels.
-		 */
-		final int width;
-
-		Entry(Glyph[] glyphs, int width) {
-			this.glyphs = glyphs;
-			this.width = width;
-		}
-	}
-
-	/**
-	 * Identifies a single glyph in the laid-out string. Includes a reference to a Texture Object with the OpenGL texture ID
-	 * and position of the pre-rendered glyph image, and includes the x/y pixel coordinates of where this glyph occurs within
-	 * the string to which this Glyph object belongs.
-	 */
-	private class Glyph implements Comparable<Glyph> {
-
-		/**
-		 * Glyph's horizontal/vertical position (in pixels) relative to the entire string's baseline
-		 */
-		final int x, y;
-
-		/**
-		 * Texture ID and position/size of the glyph's pre-rendered image within the cache texture.
-		 */
-		final Texture texture;
-
-		/**
-		 * Your standard constructor. See class documentation for details.
-		 *
-		 * @param texture Texture ID and position/size of the glyph's pre-rendered image within the cache texture
-		 * @param x       Glyph's horizontal position (in pixels) relative to the entire string's baseline
-		 * @param y       Glyph's vertical position (in pixels) relative to the entire string's baseline
-		 */
-		Glyph(Texture texture, int x, int y) {
-			this.texture = texture;
-			this.x = x;
-			this.y = y;
-		}
-
-		/**
-		 * Allows arrays of Glyph objects to be sorted. Performs numeric comparison on texture ID.
-		 *
-		 * @param o the other Glyph object being compared with this one
-		 *
-		 * @return either -1, 0, or 1 if this < other, this == other, or this > other
-		 */
-		@Override
-		public int compareTo(Glyph o) {
-			return (this.texture.getID() == o.texture.getID()) ? 0 : 1;
-		}
+	public static FontCache from(Font font) {
+		FontCache cache = new FontCache();
+		cache.usedFonts.add(font);
+		return cache;
 	}
 }

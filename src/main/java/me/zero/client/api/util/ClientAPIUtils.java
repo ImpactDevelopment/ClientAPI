@@ -22,14 +22,14 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.util.Arrays;
 
 /**
- * Utils that the Client API uses
+ * Contains methods that ClientAPI uses throughout its code.
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class ClientUtils {
+public final class ClientAPIUtils {
 
-    private ClientUtils() {}
+    private ClientAPIUtils() {}
 
     /**
      * Concatenates an array of generic arrays
@@ -101,5 +101,26 @@ public final class ClientUtils {
                 return object;
             }
         }
+    }
+
+    /**
+     * Determines if the specified array of generics contains
+     * matching members.
+     *
+     * @param objects Objects being checked
+     * @return Whether or not all members match
+     */
+    @SafeVarargs
+    public static <T> boolean matchingMembers(T... objects) {
+        T baseline = null;
+        boolean set = false;
+        for (T object : objects) {
+            if (!set)
+                baseline = object;
+            if (object != baseline)
+                return false;
+            set = true;
+        }
+        return true;
     }
 }

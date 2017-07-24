@@ -21,7 +21,7 @@ import me.zero.client.api.event.defaults.internal.ModuleStateEvent;
 import me.zero.client.api.exception.ActionNotSupportedException;
 import me.zero.client.api.manage.Node;
 import me.zero.client.api.module.exception.ModuleInitException;
-import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.ClientAPIUtils;
 import me.zero.client.api.util.keybind.Keybind;
 import org.lwjgl.input.Keyboard;
 
@@ -102,7 +102,7 @@ public abstract class Module extends Node implements IModule {
                 .filter(clazz -> clazz.isAnnotationPresent(Category.class))
                 .findFirst().orElse(Category.Default.class);
 
-        if (ClientUtils.containsNull(name, description, type))
+        if (ClientAPIUtils.containsNull(name, description, type))
             throw new NullPointerException("One or more Mod members were null!");
     }
 

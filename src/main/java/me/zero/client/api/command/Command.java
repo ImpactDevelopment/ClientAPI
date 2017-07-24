@@ -17,7 +17,7 @@
 package me.zero.client.api.command;
 
 import me.zero.client.api.command.exception.CommandInitException;
-import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.ClientAPIUtils;
 
 /**
  * @author Brady
@@ -46,7 +46,7 @@ public abstract class Command implements ICommand {
         this.description = description;
         this.syntax = syntax;
 
-        if (ClientUtils.containsNull(headers, description, syntax))
+        if (ClientAPIUtils.containsNull(headers, description, syntax))
             throw new NullPointerException("One or more Command members were null!");
     }
 
