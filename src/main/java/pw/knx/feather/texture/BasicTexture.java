@@ -1,8 +1,9 @@
 package pw.knx.feather.texture;
 
 import org.lwjgl.opengl.GL11;
-import pw.knx.feather.tessellate.base.Tessellator;
-import pw.knx.feather.texture.base.Texture;
+import pw.knx.feather.tessellate.Tessellator;
+
+import static pw.knx.feather.Feather.feather;
 
 /**
  * A simple implementation of our OpenGL Texture interface
@@ -30,7 +31,7 @@ public class BasicTexture implements Texture {
 	 */
 	@Override
 	public Texture bind() {
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texID);
+		feather.bindTexture(texID);
 		return this;
 	}
 
@@ -45,8 +46,8 @@ public class BasicTexture implements Texture {
 	 */
 	@Override
 	public Texture draw(Tessellator tess, int mode, float x, float y) {
-		tess.texture(u1, v).vertex(x + width, y, 0).texture(u, v).vertex(x, y, 0);
-		tess.texture(u, v1).vertex(x, y + height, 0).texture(u1, v1).vertex(x + width, y + height, 0);
+		tess.setTexture(u1, v).addVertex(x + width, y, 0).setTexture(u, v).addVertex(x, y, 0);
+		tess.setTexture(u, v1).addVertex(x, y + height, 0).setTexture(u1, v1).addVertex(x + width, y + height, 0);
 		tess.draw(mode);
 		return this;
 	}
@@ -55,7 +56,7 @@ public class BasicTexture implements Texture {
 	 * @return the OpenGL Texture ID
 	 */
 	@Override
-	public int getID() {
+	public int id() {
 		return this.texID;
 	}
 
@@ -63,7 +64,7 @@ public class BasicTexture implements Texture {
 	 * @return the x coordinate of the top-left texture point, on a float scale from 0 to 1.0
 	 */
 	@Override
-	public float getU() {
+	public float u() {
 		return this.u;
 	}
 
@@ -71,7 +72,7 @@ public class BasicTexture implements Texture {
 	 * @return the y coordinate of the top-left texture point, on a float scale from 0 to 1.0
 	 */
 	@Override
-	public float getV() {
+	public float v() {
 		return this.v;
 	}
 
@@ -79,7 +80,7 @@ public class BasicTexture implements Texture {
 	 * @return the x coordinate of the bottom-right texture point, on a float scale from 0 to 1.0
 	 */
 	@Override
-	public float getU1() {
+	public float u1() {
 		return this.u1;
 	}
 
@@ -87,7 +88,7 @@ public class BasicTexture implements Texture {
 	 * @return the y coordinate of the bottom-right texture point, on a float scale from 0 to 1.0
 	 */
 	@Override
-	public float getV1() {
+	public float v1() {
 		return this.v1;
 	}
 
@@ -95,7 +96,7 @@ public class BasicTexture implements Texture {
 	 * @return the width of the texture rendering in pixels
 	 */
 	@Override
-	public float getWidth() {
+	public float width() {
 		return this.width;
 	}
 
@@ -103,7 +104,7 @@ public class BasicTexture implements Texture {
 	 * @return the height of the texture rendering in pixels
 	 */
 	@Override
-	public float getHeight() {
+	public float height() {
 		return this.height;
 	}
 

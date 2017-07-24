@@ -1,10 +1,12 @@
-package pw.knx.feather.util;
+package pw.knx.feather.structures;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+
+import static pw.knx.feather.Feather.feather;
 
 /**
  * A simple OpenGL VertexBufferObject implementation for rendering shapes that will stay
@@ -13,15 +15,15 @@ import java.nio.FloatBuffer;
  * with older builds of OpenGL. Please also note that this class is only compatible with
  * vertices and not factors like textures or colors.
  * <p>
- * I seem to recall Halalalaboos creating something like this,
+ * I seem to recall Halalaboos creating something like this,
  * so credit is given accordingly.
  * <p>
  * The voids in this interface return the VBO object for easy method chaining.
  *
- * @author KNOXDEV, Halalalaboos
+ * @author KNOXDEV, Halalaboos
  * @since 8/9/2016 05:58
  */
-public class VBO implements BufferUtils {
+public class VBO {
 
 	/**
 	 * The VBO's buffer ID, for binding this object to.
@@ -30,7 +32,7 @@ public class VBO implements BufferUtils {
 
 	/**
 	 * Quite literally, this object's dimensions.
-	 * No seriously, if you want to render 1-dimensional objects feel free.
+	 * No seriously, if you want to render 1-dimensional objects feel free. That's weird though.
 	 */
 	protected final int dimensions;
 
@@ -75,7 +77,7 @@ public class VBO implements BufferUtils {
 	 */
 	public VBO compile(float... points) {
 		if (points != null && points.length > 0) {
-			final FloatBuffer buffer = buff.createDirectBuffer(points.length * 4).asFloatBuffer();
+			final FloatBuffer buffer = feather.allocateBuffer(points.length * 4).asFloatBuffer();
 			buffer.put(points).flip();
 			return this.compile(buffer);
 		}
@@ -90,9 +92,9 @@ public class VBO implements BufferUtils {
 	 */
 	public VBO compile(FloatBuffer buffer) {
 		this.size = buffer.capacity();
-		buff.bindBuffer(this.id);
+		feather.bindBuffer(this.id);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-		buff.bindBuffer(0);
+		feather.bindBuffer(0);
 		return this;
 	}
 
@@ -102,7 +104,7 @@ public class VBO implements BufferUtils {
 	 * @return The original VBO
 	 */
 	public VBO bind() {
-		buff.bindBuffer(this.id);
+		feather.bindBuffer(this.id);
 		GL11.glVertexPointer(this.dimensions, GL11.GL_FLOAT, 0, 0L);
 		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
 		return this;
