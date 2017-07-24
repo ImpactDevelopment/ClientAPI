@@ -1,6 +1,6 @@
-package pw.knx.feather.tessellate.base;
+package pw.knx.feather.tessellate;
 
-import pw.knx.feather.util.Color;
+import pw.knx.feather.structures.Color;
 
 /**
  * A standard abstract interface for an OpenGL Tessellator.
@@ -12,41 +12,24 @@ import pw.knx.feather.util.Color;
  */
 public interface Tessellator {
 
+
+	/*
+	 * Setters - Setting and adding values to this tessellator
+	 */
+
 	/**
 	 * @param color The color to associate the upcoming vertex data with
 	 *              NOTE: Must be in ABGR format
 	 * @return The original Tessellator Object
 	 */
-	Tessellator color(int color);
+	Tessellator setColor(int color);
 
 	/**
 	 * @param color The color to associate the upcoming vertex data with
 	 * @return The original Tessellator Object
 	 */
-	default Tessellator color(Color color) {
-		return color(color.getHex(Color.HexFormat.ABGR));
-	}
-
-	/**
-	 * @param red   The red component of the color to bind
-	 * @param green The green component of the color to bind
-	 * @param blue  The blue component of the color to bind
-	 * @param alpha The alpha component of the color to bind
-	 * @return The original Tessellator Object
-	 */
-	default Tessellator color(int red, int green, int blue, int alpha) {
-		return color(Color.HexFormat.ABGR.getHex(red, green, blue, alpha));
-	}
-
-	/**
-	 * @param red   The red component of the color to bind
-	 * @param green The green component of the color to bind
-	 * @param blue  The blue component of the color to bind
-	 * @param alpha The alpha component of the color to bind
-	 * @return The original Tessellator Object
-	 */
-	default Tessellator color(float red, float green, float blue, float alpha) {
-		return color((int) (red * 255), (int) (green * 255), (int) (blue * 255), (int) (alpha * 255));
+	default Tessellator setColor(Color color) {
+		return setColor(color.getHex(Color.HexFormat.ABGR));
 	}
 
 	/**
@@ -56,11 +39,11 @@ public interface Tessellator {
 	 * @param v The y starting coordinate
 	 * @return The original Tessellator Object
 	 */
-	Tessellator texture(float u, float v);
+	Tessellator setTexture(float u, float v);
 
 	/**
 	 * Enters a vertex of the shape to be rendered.
-	 * All data fed to the Tessellator revolves around the vertex data,
+	 * All data fed to the Tessellator relies on the vertex data,
 	 * as it is the only information absolutely necessary to render a shape.
 	 *
 	 * @param x The x coordinate of this vertex
@@ -68,7 +51,13 @@ public interface Tessellator {
 	 * @param z The z coordinate of this vertex
 	 * @return The original Tessellator Object
 	 */
-	Tessellator vertex(float x, float y, float z);
+	Tessellator addVertex(float x, float y, float z);
+
+
+	/*
+	 * Render Commands - These provide fine-tuned control over the
+	 * three-stage render process, if needed
+	 */
 
 	/**
 	 * The first stage of rendering.
@@ -116,12 +105,40 @@ public interface Tessellator {
 
 	/**
 	 * Performs all three rendering stages in one method.
-	 * This method cannot be run more than once without entering new data.
+	 * This method cannot be run more than once without entering new data,
+	 * due to the fact it resets the buffer.
 	 *
 	 * @param mode The OpenGL mode to render the data with
 	 * @return The original Tessellator Object
 	 */
 	default Tessellator draw(int mode) {
 		return this.bind().pass(mode).reset();
+	}
+
+
+	/*
+	 * Static Constructors - allows intuitive initialization of a Tessellator to fit any purpose
+	 */
+
+	/**
+	 * Creates an <i>immutable</i> Tessellator that will not grow past its initial capacity
+	 *
+	 * @param size the initial (and final) capacity of this Tessellator
+	 * @return the requested Basic Tessellator
+	 */
+	static Tessellator createBasic(int size) {
+		return new BasicTess(size);
+	}
+
+	/**
+	 * Creates a growing Tessellator that will increase in capacity as its limit is reached
+	 *
+	 * @param size the initial capacity of this Tessellator
+	 * @param ratio   The target ratio, between 0 and 1.0, that this Tessellator must hit before it grows.
+	 * @param factor  The factor of which this Tessellator will grow when it hits the ratio.
+	 * @return the requested Basic Tessellator
+	 */
+	static Tessellator createExpanding(int size, float ratio, float factor) {
+		return new ExpandingTess(size, ratio, factor);
 	}
 }

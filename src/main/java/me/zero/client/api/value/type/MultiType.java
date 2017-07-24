@@ -16,7 +16,7 @@
 
 package me.zero.client.api.value.type;
 
-import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.ClientAPIUtils;
 import me.zero.client.api.value.Value;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -43,7 +43,7 @@ public final class MultiType extends Value<String> {
 
     @Override
     public final void setValue(String value) {
-        super.setValue(ClientUtils.objectFrom(value, values));
+        super.setValue(ClientAPIUtils.objectFrom(value, values));
     }
 
     /**

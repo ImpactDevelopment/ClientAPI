@@ -1,4 +1,4 @@
-package pw.knx.feather.util;
+package pw.knx.feather.structures;
 
 /**
  * A simple objectual representation of a Color.
@@ -22,7 +22,7 @@ package pw.knx.feather.util;
  * @author KNOXDEV
  * @since 9/8/2016 21:41
  */
-public class Color implements BufferUtils {
+public class Color {
 
 	/**
 	 * In this class, we store alpha separately and persistently,
@@ -412,9 +412,8 @@ public class Color implements BufferUtils {
 	 */
 	public Color hex(int hex, HexFormat format) {
 		int alpha = format.getAlphaInt(hex);
-		if (alpha != 0) {
+		if (alpha != 0)
 			alpha(alpha);
-		}
 		return red(format.getRedInt(hex)).green(format.getGreenInt(hex)).blue(format.getBlueInt(hex));
 	}
 

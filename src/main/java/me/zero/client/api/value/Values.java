@@ -17,7 +17,7 @@
 package me.zero.client.api.value;
 
 import me.zero.client.api.exception.ValueException;
-import me.zero.client.api.util.ClientUtils;
+import me.zero.client.api.util.ClientAPIUtils;
 import me.zero.client.api.util.annotation.Label;
 import me.zero.client.api.value.annotation.*;
 import me.zero.client.api.value.holder.IValueHolder;
@@ -131,7 +131,7 @@ public final class Values {
      * @param data The resolver data for the annotation
      */
     public static void define(Class<?> type, ResolverData data) {
-        if (ClientUtils.containsNull(type, data))
+        if (ClientAPIUtils.containsNull(type, data))
             throw new NullPointerException("One or more parameters were null");
 
         if (RESOLVERS.get(type) != null)
