@@ -57,6 +57,9 @@ dependencies {
     compile 'net.jodah:typetools:0.5.0'
     compile('org.spongepowered:mixin:0.6.10-SNAPSHOT') {
         exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
     }
 }
 
