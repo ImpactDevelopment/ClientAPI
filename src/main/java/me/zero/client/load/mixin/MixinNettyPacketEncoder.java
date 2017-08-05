@@ -29,7 +29,7 @@ public class MixinNettyPacketEncoder {
      * @author Brady
      */
     @Overwrite
-    protected void encode(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out) throws IOException {
+    protected void encode(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out) throws Exception {
         EnumConnectionState state = ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
         Integer packetId = state.getPacketId(this.direction, msg);
 
