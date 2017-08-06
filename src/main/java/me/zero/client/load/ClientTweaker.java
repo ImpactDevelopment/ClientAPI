@@ -85,7 +85,7 @@ public final class ClientTweaker implements ITweaker {
     }
 
     private void addArg(String label, String value) {
-        if (value != null) {
+        if (!args.contains("--" + label) && value != null) {
             this.args.add("--" + label);
             this.args.add(value);
         }
