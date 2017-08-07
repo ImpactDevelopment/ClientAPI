@@ -200,6 +200,18 @@ public final class RenderUtils {
     public static void rectangle(float x1, float y1, float x2, float y2, int color) {
         GlUtils.glColor(color);
 
+        if (x1 > x2) {
+            float temp = x1;
+            x1 = x2;
+            x2 = temp;
+        }
+
+        if (y1 > y2) {
+            float temp = y1;
+            y1 = y2;
+            y2 = temp;
+        }
+
         setupRender(true);
         setupClientState(GLClientState.VERTEX, true);
         tessellator.addVertex(x1, y2, 0).addVertex(x2, y2, 0).addVertex(x2, y1, 0).addVertex(x1, y1, 0).draw(GL_QUADS);
@@ -235,10 +247,10 @@ public final class RenderUtils {
 
         if (color.length == 1) {
             c1 = color[0];
-            c2 = color[1];
-            c3 = color[2];
-            c4 = color[3];
-        } else if (color.length > 1 && color.length < 4) {
+            c2 = color[0];
+            c3 = color[0];
+            c4 = color[0];
+        } else if (color.length < 4) {
             c1 = color[0];
             c2 = color[0];
             c3 = color[1];
@@ -248,6 +260,18 @@ public final class RenderUtils {
             c2 = color[1];
             c3 = color[2];
             c4 = color[3];
+        }
+
+        if (x1 > x2) {
+            float temp = x1;
+            x1 = x2;
+            x2 = temp;
+        }
+
+        if (y1 > y2) {
+            float temp = y1;
+            y1 = y2;
+            y2 = temp;
         }
 
         setupRender(true);
