@@ -78,12 +78,12 @@ final class ARBShaderAdapter implements ShaderAdapter {
     }
 
     @Override
-    public void attachObject(int program, int shader) {
+    public void attachShader(int program, int shader) {
         glAttachObjectARB(program, shader);
     }
 
     @Override
-    public void detachObject(int program, int shader) {
+    public void detachShader(int program, int shader) {
         glDetachObjectARB(program, shader);
     }
 

@@ -82,7 +82,7 @@ public interface ShaderAdapter {
      * @param program The shader program id
      * @param shader The shader object id
      */
-    void attachObject(int program, int shader);
+    void attachShader(int program, int shader);
 
     /**
      * Detaches a shader object from a shader program
@@ -90,7 +90,7 @@ public interface ShaderAdapter {
      * @param program The shader program id
      * @param shader The shader object id
      */
-    void detachObject(int program, int shader);
+    void detachShader(int program, int shader);
 
     /**
      * Prepares the specified shader program for usage

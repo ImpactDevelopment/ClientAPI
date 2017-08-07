@@ -52,7 +52,7 @@ public final class ShaderProgram extends GLObject {
     @Override
     protected final int nativeGen() {
         int id = adapter.createProgram();
-        shaders.forEach(shader -> adapter.attachObject(id, shader.id()));
+        shaders.forEach(shader -> adapter.attachShader(id, shader.id()));
 
         try {
             adapter.linkProgram(id);
@@ -68,9 +68,17 @@ public final class ShaderProgram extends GLObject {
     }
 
     @Override
+    public boolean delete() {
+        shaders.forEach(shader -> {
+            adapter.detachShader(this.id(), shader.id());
+            shader.delete();
+        });
+        return super.delete();
+    }
+
+    @Override
     protected final void nativeDelete() {
         adapter.deleteProgram(id());
-        shaders.forEach(GLObject::delete);
     }
 
     /**

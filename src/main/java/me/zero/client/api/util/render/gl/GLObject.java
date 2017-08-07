@@ -54,7 +54,7 @@ public abstract class GLObject {
      *
      * @return Whether or not the operation was a success
      */
-    public final boolean delete() {
+    public boolean delete() {
         if (!isGen())
             return false;
 
