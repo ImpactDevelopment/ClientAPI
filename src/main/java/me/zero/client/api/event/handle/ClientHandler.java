@@ -25,7 +25,6 @@ import me.zero.client.api.event.defaults.game.misc.ChatEvent;
 import me.zero.client.api.event.defaults.game.network.PacketEvent;
 import me.zero.client.api.event.defaults.game.core.KeyEvent;
 import me.zero.client.api.event.defaults.game.core.ProfilerEvent;
-import me.zero.client.api.event.defaults.game.core.TickEvent;
 import me.zero.client.api.event.defaults.game.render.Render3DEvent;
 import me.zero.client.api.event.defaults.game.render.RenderHudEvent;
 import me.zero.client.api.util.interfaces.Helper;
@@ -34,11 +33,8 @@ import me.zero.client.api.util.render.camera.Camera;
 import me.zero.client.api.util.render.camera.CameraManager;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.server.SPacketChat;
-import org.lwjgl.input.Keyboard;
 
 import java.util.stream.Stream;
-
-import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
 
 /**
  * Some basic events that the client uses
@@ -47,11 +43,6 @@ import static org.lwjgl.input.Keyboard.KEYBOARD_SIZE;
  * @since 2/9/2017 12:00 PM
  */
 public final class ClientHandler implements Helper {
-
-    /**
-     * A map of all key states
-     */
-    private final boolean[] keyMap = new boolean[KEYBOARD_SIZE];
 
     /**
      * Handles camera updates
@@ -64,8 +55,18 @@ public final class ClientHandler implements Helper {
      * Handles keybinds
      */
     @EventHandler
-    private final Listener<KeyEvent> keyListener = new Listener<>(event ->
-            Keybind.getKeybinds().stream().filter(keybind -> keybind.getType() == Keybind.Type.TOGGLE && keybind.getKey() == event.getKey()).forEach(Keybind::onClick));
+    private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
+        // Get all matching keybinds
+        Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
+                .filter(bind -> bind.getKey() == event.getKey());
+
+        // Run onClick for the toggle keybinds
+        keybinds.filter(bind -> bind.getType() == Keybind.Type.TOGGLE)
+                .forEach(Keybind::onClick);
+
+        // Run onPres for all matching keybinds
+        keybinds.forEach(Keybind::onPress);
+    });
 
     /**
      * Handles profiling events
@@ -76,29 +77,6 @@ public final class ClientHandler implements Helper {
 
         if (section != null && section.equalsIgnoreCase("hand") && !Camera.isCapturing())
             ClientAPI.EVENT_BUS.post(new Render3DEvent());
-    });
-
-    /**
-     * Handles key states
-     */
-    @EventHandler
-    private final Listener<TickEvent> tickListener = new Listener<>(event -> {
-        if (mc.currentScreen != null) return;
-
-        for (int i = 1; i < KEYBOARD_SIZE; i++) {
-            final int key = i;
-            boolean currentState = Keyboard.isKeyDown(i);
-            if (currentState != keyMap[i]) {
-                if (keyMap[i] = !keyMap[i])
-                    ClientAPI.EVENT_BUS.post(new KeyEvent(i));
-
-                Stream<Keybind> keybinds = Keybind.getKeybinds().stream().filter(keybind -> keybind.getKey() == key);
-                if (currentState)
-                    keybinds.forEach(Keybind::onPress);
-                else
-                    keybinds.forEach(Keybind::onRelease);
-            }
-        }
     });
 
     /**
