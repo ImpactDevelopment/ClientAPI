@@ -55,6 +55,8 @@ import static me.zero.client.api.event.defaults.game.core.ClickEvent.MouseButton
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {
 
+    @Shadow public GuiScreen currentScreen;
+
     @Accessor @Override public abstract Timer getTimer();
     @Accessor @Override public abstract void setSession(Session session);
     @Accessor @Override public abstract void setRightClickDelayTimer(int delay);
@@ -86,6 +88,9 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
     public void onKeyEvent(CallbackInfo ci) {
+        if (currentScreen != null)
+            return;
+
         boolean down = Keyboard.getEventKeyState();
         int key = Keyboard.getEventKey();
 
