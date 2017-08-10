@@ -20,13 +20,11 @@ import com.google.gson.GsonBuilder;
 import me.zero.client.api.Client;
 import me.zero.client.api.ClientInfo;
 import me.zero.client.api.ClientAPI;
-import me.zero.client.api.event.defaults.game.core.ClickEvent;
-import me.zero.client.api.event.defaults.game.core.GameShutdownEvent;
-import me.zero.client.api.event.defaults.game.core.LoopEvent;
-import me.zero.client.api.event.defaults.game.core.TickEvent;
+import me.zero.client.api.event.defaults.game.core.*;
 import me.zero.client.api.event.defaults.game.render.GuiEvent;
 import me.zero.client.api.event.defaults.game.world.WorldEvent;
 import me.zero.client.api.event.handle.ClientHandler;
+import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.gl.GlUtils;
 import me.zero.client.load.ClientInitException;
 import me.zero.client.load.mixin.wrapper.IMinecraft;
@@ -35,6 +33,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
+import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -84,6 +83,20 @@ public abstract class MixinMinecraft implements IMinecraft {
     @Inject(method = "runGameLoop", at = @At("HEAD"))
     public void onLoop(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent());
+    }
+
+    @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
+    public void onKeyEvent(CallbackInfo ci) {
+        boolean down = Keyboard.getEventKeyState();
+        int key = Keyboard.getEventKey();
+
+        if (down)
+            ClientAPI.EVENT_BUS.post(new KeyEvent(key));
+        else
+            // TODO: split into new KeyUp event
+            Keybind.getKeybinds().stream()
+                    .filter(bind -> bind.getKey() == key)
+                    .forEach(Keybind::onRelease);
     }
 
     @Inject(method = "init", at = @At("RETURN"))
