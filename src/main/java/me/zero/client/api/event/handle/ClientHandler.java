@@ -21,10 +21,9 @@ import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.client.api.event.defaults.filters.PacketFilter;
 import me.zero.alpine.type.EventPriority;
+import me.zero.client.api.event.defaults.game.core.*;
 import me.zero.client.api.event.defaults.game.misc.ChatEvent;
 import me.zero.client.api.event.defaults.game.network.PacketEvent;
-import me.zero.client.api.event.defaults.game.core.KeyEvent;
-import me.zero.client.api.event.defaults.game.core.ProfilerEvent;
 import me.zero.client.api.event.defaults.game.render.Render3DEvent;
 import me.zero.client.api.event.defaults.game.render.RenderHudEvent;
 import me.zero.client.api.util.interfaces.Helper;
@@ -67,6 +66,12 @@ public final class ClientHandler implements Helper {
         // Run onPres for all matching keybinds
         keybinds.forEach(Keybind::onPress);
     });
+
+    @EventHandler
+    private final Listener<KeyUpEvent> keyUpListener = new Listener<>(event ->
+            Keybind.getKeybinds().stream()
+                    .filter(bind -> bind.getKey() == event.getKey())
+                    .forEach(Keybind::onRelease));
 
     /**
      * Handles profiling events

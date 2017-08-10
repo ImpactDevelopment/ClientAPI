@@ -24,7 +24,6 @@ import me.zero.client.api.event.defaults.game.core.*;
 import me.zero.client.api.event.defaults.game.render.GuiEvent;
 import me.zero.client.api.event.defaults.game.world.WorldEvent;
 import me.zero.client.api.event.handle.ClientHandler;
-import me.zero.client.api.util.keybind.Keybind;
 import me.zero.client.api.util.render.gl.GlUtils;
 import me.zero.client.load.ClientInitException;
 import me.zero.client.load.mixin.wrapper.IMinecraft;
@@ -90,13 +89,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         boolean down = Keyboard.getEventKeyState();
         int key = Keyboard.getEventKey();
 
-        if (down)
-            ClientAPI.EVENT_BUS.post(new KeyEvent(key));
-        else
-            // TODO: split into new KeyUp event
-            Keybind.getKeybinds().stream()
-                    .filter(bind -> bind.getKey() == key)
-                    .forEach(Keybind::onRelease);
+        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key) : new KeyUpEvent(key));
     }
 
     @Inject(method = "init", at = @At("RETURN"))
