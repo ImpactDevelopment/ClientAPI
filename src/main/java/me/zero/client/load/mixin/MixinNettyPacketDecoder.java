@@ -27,6 +27,7 @@ public class MixinNettyPacketDecoder {
     @Shadow @Final private EnumPacketDirection direction;
 
     /**
+     * @reason we need to wait until the packet is built and then pass it (and the connection state) to the event constructor
      * @author Brady
      */
     @Overwrite
@@ -39,6 +40,7 @@ public class MixinNettyPacketDecoder {
         EnumConnectionState state = ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
         Packet<?> packet = state.getPacket(this.direction, packetId);
 
+        // We need the packet to create our Event, so we have to overwrite the method body
         PacketEvent event = new PacketEvent.Decode(packet, state);
         ClientAPI.EVENT_BUS.post(event);
         packet = event.getPacket();
