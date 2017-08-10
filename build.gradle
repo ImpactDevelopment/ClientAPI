@@ -37,16 +37,13 @@ apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
 
-version '2.1'
-group 'com.github.ZeroMemes'
-
 sourceCompatibility = targetCompatibility = '1.8' // Needed so Eclipse task generates correctly
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = project.gameVersion
+    version = project.minecraftVersion
     mappings = project.mappings
     tweakClass = 'me.zero.client.load.ClientTweaker'
     runDir = 'run'
