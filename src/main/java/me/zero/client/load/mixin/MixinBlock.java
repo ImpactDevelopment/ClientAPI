@@ -53,6 +53,7 @@ public abstract class MixinBlock {
     }
 
     /**
+     * @reason the overwritten method is only one line, we need to overwrite to mutate the AABB and pass params into the event constructor
      * @author Brady
      */
     @Overwrite

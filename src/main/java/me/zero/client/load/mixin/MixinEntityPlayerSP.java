@@ -87,10 +87,11 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
     }
 
     /**
+     * @reason In addition to firing pre and post events, we also want to override some position values (prefixed with p).
      * @author Brady
      */
     @Overwrite
-    public void onUpdateWalkingPlayer() {
+    private void onUpdateWalkingPlayer() {
         EntityPlayerSP _this = (EntityPlayerSP) (Object) this;
 
         MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
@@ -110,6 +111,8 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
 
         if (this.isCurrentViewEntity()) {
 
+            // Override vanilla defaults of _tis.posX, etc
+            // This is why we need to overwrite the method body.
             double pX = pre.getX();
             double pY = pre.getY();
             double pZ = pre.getZ();
