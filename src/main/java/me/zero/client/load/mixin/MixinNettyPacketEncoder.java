@@ -26,6 +26,7 @@ public class MixinNettyPacketEncoder {
     @Shadow @Final private EnumPacketDirection direction;
 
     /**
+     * @reason mostly because we need to mutate msg, but also so that we can pass the connection state to the event constructor
      * @author Brady
      */
     @Overwrite
@@ -37,6 +38,7 @@ public class MixinNettyPacketEncoder {
             LOGGER.debug(RECEIVED_PACKET_MARKER, "OUT: [{}:{}] {}", state, packetId, msg.getClass().getName());
         }
 
+        // We need the state and we plan to mutate the msg, hence the overwrite
         PacketEvent event = new PacketEvent.Encode(msg, state);
         ClientAPI.EVENT_BUS.post(event);
         msg = event.getPacket();
