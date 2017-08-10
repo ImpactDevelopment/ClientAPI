@@ -77,17 +77,17 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @Inject(method = "runTick", at = @At("HEAD"))
-    public void onTick(CallbackInfo ci) {
+    private void onTick(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new TickEvent());
     }
 
     @Inject(method = "runGameLoop", at = @At("HEAD"))
-    public void onLoop(CallbackInfo ci) {
+    private void onLoop(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent());
     }
 
     @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
-    public void onKeyEvent(CallbackInfo ci) {
+    private void onKeyEvent(CallbackInfo ci) {
         if (currentScreen != null)
             return;
 
@@ -98,7 +98,7 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @Inject(method = "init", at = @At("RETURN"))
-    public void init(CallbackInfo ci) {
+    private void init(CallbackInfo ci) {
         // Try and find the "client.json" config
         InputStream stream = this.getClass().getResourceAsStream("/client.json");
 
@@ -141,29 +141,29 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @Inject(method = "clickMouse", at = @At("HEAD"))
-    public void clickMouse(CallbackInfo ci) {
+    private void clickMouse(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ClickEvent(LEFT));
     }
 
     @Inject(method = "rightClickMouse", at = @At("HEAD"))
-    public void rightClickMouse(CallbackInfo ci) {
+    private void rightClickMouse(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ClickEvent(RIGHT));
     }
 
     @Inject(method = "middleClickMouse", at = @At("HEAD"))
-    public void middleClickMouse(CallbackInfo ci) {
+    private void middleClickMouse(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ClickEvent(MIDDLE));
     }
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
-    public GuiScreen displayGuiScreen(GuiScreen screen) {
+    private GuiScreen displayGuiScreen(GuiScreen screen) {
         GuiEvent event = new GuiEvent(screen);
         ClientAPI.EVENT_BUS.post(event);
         return event.getScreen();
     }
 
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
-    public void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
+    private void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
         // If the world is null, then it must be unloading
         if (worldClientIn != null)
             ClientAPI.EVENT_BUS.post(new WorldEvent.Load(worldClientIn));
@@ -172,7 +172,7 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
-    public void shutdown(CallbackInfo ci) {
+    private void shutdown(CallbackInfo ci) {
         GameShutdownEvent event = new GameShutdownEvent();
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

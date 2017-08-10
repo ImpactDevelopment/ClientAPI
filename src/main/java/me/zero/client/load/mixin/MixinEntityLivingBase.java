@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinEntityLivingBase {
 
     @Inject(method = "onDeath", at = @At("HEAD"))
-    public void onDeath(DamageSource cause, CallbackInfo ci) {
+    private void onDeath(DamageSource cause, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
     }
 }
