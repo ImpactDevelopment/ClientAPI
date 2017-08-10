@@ -35,7 +35,7 @@ public class MixinProfiler {
     @Shadow private String profilingSection;
 
     @Inject(method = "startSection", at = @At("HEAD"))
-    public void startSection(String name, CallbackInfo ci) {
+    private void startSection(String name, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ProfilerEvent(profilingSection, name));
     }
 }

@@ -45,7 +45,7 @@ public abstract class MixinBlock {
     @Shadow protected static void addCollisionBoxToList(BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable AxisAlignedBB blockBox) {}
 
     @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
-    public void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> ci) {
+    private void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> ci) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

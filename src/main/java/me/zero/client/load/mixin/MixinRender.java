@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinRender {
 
     @Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
-    public void getTeamColor(Entity entityIn, CallbackInfoReturnable<Integer> ci) {
+    private void getTeamColor(Entity entityIn, CallbackInfoReturnable<Integer> ci) {
         TeamColorEvent event = new TeamColorEvent(entityIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
@@ -43,7 +43,7 @@ public class MixinRender {
     }
 
     @Inject(method = "renderLivingLabel", at = @At("HEAD"), cancellable = true)
-    public void renderLivingLabel(Entity entityIn, String str, double x, double y, double z, int maxDistance, CallbackInfo ci) {
+    private void renderLivingLabel(Entity entityIn, String str, double x, double y, double z, int maxDistance, CallbackInfo ci) {
         RenderEntityLabelEvent event = new RenderEntityLabelEvent(entityIn, str);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

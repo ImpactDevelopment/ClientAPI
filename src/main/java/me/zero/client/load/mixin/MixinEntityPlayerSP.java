@@ -62,22 +62,22 @@ public abstract class MixinEntityPlayerSP extends MixinEntity {
     @Shadow protected abstract boolean isCurrentViewEntity();
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
-    public void onUpdate(CallbackInfo ci) {
+    private void onUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new UpdateEvent());
     }
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
-    public void onLivingUpdatePre(CallbackInfo ci) {
+    private void onLivingUpdatePre(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
     }
 
     @Inject(method = "onLivingUpdate", at = @At("RETURN"))
-    public void onLivingUpdatePost(CallbackInfo ci) {
+    private void onLivingUpdatePost(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
     }
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
-    public void move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
+    private void move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
         MoveEvent event = new MoveEvent(type, x, y, z);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
