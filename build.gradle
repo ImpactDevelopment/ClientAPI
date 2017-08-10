@@ -30,10 +30,10 @@ compileJava {
 }
 
 minecraft {
-    version = '1.12.1'
-    runDir = 'run'
+    version = project.gameVersion
+    mappings = project.mappings
     tweakClass = 'me.zero.client.load.ClientTweaker'
-    mappings = 'snapshot_20170805'
+    runDir = 'run'
 
     makeObfSourceJar = false
 }
@@ -55,7 +55,7 @@ repositories {
 dependencies {
     compile 'com.github.ZeroMemes:Alpine:1.4'
     compile 'net.jodah:typetools:0.5.0'
-    compile('org.spongepowered:mixin:0.6.10-SNAPSHOT') {
+    compile('org.spongepowered:mixin:0.7.1-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
