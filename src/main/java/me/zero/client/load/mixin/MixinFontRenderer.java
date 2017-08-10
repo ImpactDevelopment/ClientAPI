@@ -31,14 +31,14 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class MixinFontRenderer {
 
     @ModifyVariable(method = "renderStringAtPos", at = @At("HEAD"))
-    public String renderStringAtPos(String text) {
+    private String renderStringAtPos(String text) {
         TextEvent event = new TextEvent(text);
         ClientAPI.EVENT_BUS.post(event);
         return event.getText();
     }
 
     @ModifyVariable(method = "getStringWidth", at = @At("HEAD"))
-    public String getStringWidth(String text) {
+    private String getStringWidth(String text) {
         TextEvent event = new TextEvent(text);
         ClientAPI.EVENT_BUS.post(event);
         return event.getText();
