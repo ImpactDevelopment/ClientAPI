@@ -38,7 +38,7 @@ public enum Feather {
 	/**
 	 * The simple Feather Tessellator we've designated to render our glyphs.
 	 */
-	private final Tessellator tess = Tessellator.createExpanding(4 * 4, 1, 2);
+	private static final Tessellator tess = Tessellator.createExpanding(4 * 4, 1, 2);
 
 	private final Map<Font, FontCache> fonts = new HashMap<>();
 	private FontCache currentFont;
