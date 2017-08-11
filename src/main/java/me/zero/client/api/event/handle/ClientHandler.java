@@ -59,12 +59,13 @@ public final class ClientHandler implements Helper {
         Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
                 .filter(bind -> bind.getKey() == event.getKey());
 
-        // Run onClick for the toggle keybinds
-        keybinds.filter(bind -> bind.getType() == Keybind.Type.TOGGLE)
-                .forEach(Keybind::onClick);
-
-        // Run onPres for all matching keybinds
-        keybinds.forEach(Keybind::onPress);
+        // Run onPress for all matching keybinds
+        // and onClick for the toggle keybinds
+        keybinds.forEach(keybind -> {
+            keybind.onPress();
+            if (keybind.getType() == Keybind.Type.TOGGLE)
+                keybind.onClick();
+        });
     });
 
     @EventHandler
