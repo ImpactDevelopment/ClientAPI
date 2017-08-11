@@ -254,7 +254,7 @@ public final class RenderUtils {
             c1 = color[0];
             c2 = color[0];
             c3 = color[1];
-            c4 = color[2];
+            c4 = color[1];
         } else {
             c1 = color[0];
             c2 = color[1];
