@@ -32,7 +32,7 @@ import java.util.Map;
  * @author Brady
  * @since 7/23/2017 3:31 PM
  */
-public final class ShaderProgram extends GLObject {
+public class ShaderProgram extends GLObject {
 
     /**
      * Instance of the system supported shader adapter
