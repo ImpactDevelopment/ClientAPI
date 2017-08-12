@@ -17,9 +17,12 @@
 package me.zero.client.api.util;
 
 import me.zero.client.api.exception.ArraySizeException;
+import me.zero.client.api.manage.Manager;
+import me.zero.client.api.module.Category;
+import me.zero.client.api.module.Module;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Contains methods that ClientAPI uses throughout its code.
@@ -75,7 +78,7 @@ public final class ClientAPIUtils {
         if (elements.length > 3) {
             try {
                 return Class.forName(elements[3].getClassName());
-            } catch (ClassNotFoundException e) {}
+            } catch (ClassNotFoundException ignored) {}
         }
         return null;
     }
@@ -122,5 +125,36 @@ public final class ClientAPIUtils {
             set = true;
         }
         return true;
+    }
+
+    /**
+     * Gets the categories that are represented by a manager containing modules.
+     *
+     * @return The categories
+     */
+    public static Collection<Class<?>> getCategories(Manager<Module> moduleManager) {
+        return ClientAPIUtils.getCategories(moduleManager, false);
+    }
+
+    /**
+     * Gets the categories that are represented by a manager containing modules.
+     *
+     * @param sort Whether or not to sort alphabetically
+     * @return The categories
+     */
+    public static Collection<Class<?>> getCategories(Manager<Module> moduleManager, boolean sort) {
+        LinkedHashSet<Class<?>> categories = new LinkedHashSet<>();
+        moduleManager.getData().stream().map(Module::getType).forEach(categories::add);
+
+        if (sort) {
+            List<Class<?>> sorted = new ArrayList<>(categories);
+            sorted.sort((c1, c2) -> String.CASE_INSENSITIVE_ORDER.compare(
+                    c1.getAnnotation(Category.class).name(),
+                    c2.getAnnotation(Category.class).name()
+            ));
+            return sorted;
+        }
+
+        return categories;
     }
 }
