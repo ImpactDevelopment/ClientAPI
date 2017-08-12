@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 /**
  * The implementation of IValue
  *
- * @see me.zero.client.api.value.IValue
+ * @see IValue
  *
  * @author Brady
  * @since 1/23/2017 12:00 PM

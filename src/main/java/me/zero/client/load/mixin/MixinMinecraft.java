@@ -45,6 +45,8 @@ import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import static me.zero.client.api.event.defaults.game.core.ClickEvent.MouseButton.*;
 
@@ -115,10 +117,11 @@ public abstract class MixinMinecraft implements IMinecraft {
         Client client;
         try {
             Class<?> clientClass = Class.forName(clientInfo.getMain());
-            if (clientClass != null && clientClass.getSuperclass().equals(Client.class)) {
+            Constructor<?> constructor;
+            if (clientClass != null && clientClass.getSuperclass().equals(Client.class) && (constructor = clientClass.getConstructor(ClientInfo.class)) != null) {
                 try {
-                    client = (Client) clientClass.newInstance();
-                } catch (InstantiationException | IllegalAccessException e) {
+                    client = (Client) constructor.newInstance(clientInfo);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                     throw new ClientInitException("Unable to instantiate Client");
                 }
             } else {
@@ -126,6 +129,8 @@ public abstract class MixinMinecraft implements IMinecraft {
             }
         } catch (ClassNotFoundException e) {
             throw new ClientInitException("Unable to find client class");
+        } catch (NoSuchMethodException e) {
+            throw new ClientInitException("Unable to find constructor with valid parameters");
         }
 
         // Init GLUtils
@@ -134,7 +139,6 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientHandler handler = new ClientHandler();
 
         // Init client
-        client.setInfo(clientInfo);
         client.onInit(handler);
 
         ClientAPI.EVENT_BUS.subscribe(handler);

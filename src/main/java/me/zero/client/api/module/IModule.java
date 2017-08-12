@@ -23,7 +23,7 @@ import me.zero.client.api.util.interfaces.Toggleable;
 /**
  * Base for Module
  *
- * @see me.zero.client.api.module.Module
+ * @see Module
  *
  * @author Brady
  * @since 1/21/2017 12:00 PM

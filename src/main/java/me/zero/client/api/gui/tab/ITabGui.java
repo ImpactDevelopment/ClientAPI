@@ -22,7 +22,7 @@ import me.zero.client.api.util.interfaces.Loadable;
 /**
  * Base for Tab Gui Handlers
  *
- * @see me.zero.client.api.gui.tab.ITabGuiElement
+ * @see ITabGuiElement
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM
