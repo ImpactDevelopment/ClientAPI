@@ -21,7 +21,7 @@ import me.zero.client.api.gui.IRenderer;
 /**
  * Base for Tab Gui Elements
  *
- * @see me.zero.client.api.gui.tab.ITabGui
+ * @see ITabGui
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM

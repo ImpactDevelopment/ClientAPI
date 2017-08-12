@@ -28,7 +28,7 @@ import static org.lwjgl.input.Keyboard.*;
 /**
  * Implementationm of ITabGuiMenu
  *
- * @see me.zero.client.api.gui.tab.ITabGuiMenu
+ * @see ITabGuiMenu
  *
  * @author Brady
  * @since 2/6/2017 12:00 PM

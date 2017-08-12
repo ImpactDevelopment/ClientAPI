@@ -60,9 +60,7 @@ public final class ReflectionUtils {
             field.setAccessible(true);
             value = field.get(object);
             field.setAccessible(accessible);
-        } catch (NullPointerException | IllegalAccessException e) {
-            // Should only throw nullpointer, access is being set
-        }
+        } catch (NullPointerException | IllegalAccessException ignored) {}
         return value;
     }
 
@@ -96,9 +94,7 @@ public final class ReflectionUtils {
             field.set(object, value);
             field.setAccessible(accessible);
             return true;
-        } catch (NullPointerException | IllegalAccessException e) {
-            // Should only throw nullpointer, access is being set
-        }
+        } catch (NullPointerException | IllegalAccessException ignored) {}
         return false;
     }
 

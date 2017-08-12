@@ -19,7 +19,7 @@ package me.zero.client.api.util.logger;
 /**
  * Implementation of ILogger
  *
- * @see me.zero.client.api.util.logger.ILogger
+ * @see ILogger
  *
  * @author Brady
  * @since 1/21/2017 12:00 PM
@@ -36,7 +36,7 @@ public final class Logger implements ILogger {
     /**
      * Implementation of {@code #log(Level, String)}
      *
-     * @see me.zero.client.api.util.logger.ILogger#log(Level, String)
+     * @see ILogger#log(Level, String)
      *
      * @param level The level
      * @param message The message
@@ -49,7 +49,7 @@ public final class Logger implements ILogger {
     /**
      * Implementation of {@code #logf(Level, String, Object...)}
      *
-     * @see me.zero.client.api.util.logger.ILogger#logf(Level, String, Object...)
+     * @see ILogger#logf(Level, String, Object...)
      *
      * @param level The level
      * @param message The message

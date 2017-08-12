@@ -18,13 +18,14 @@ package me.zero.client.api.command.handler;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zero.client.api.Client;
+import me.zero.client.api.command.Command;
 import me.zero.client.api.command.exception.CommandException;
 import me.zero.client.api.command.exception.UnknownCommandException;
 import me.zero.client.api.command.exception.handler.ExceptionHandler;
 import me.zero.client.api.command.executor.CommandExecutor;
 import me.zero.client.api.command.executor.DirectExecutor;
 import me.zero.client.api.event.defaults.internal.CommandExecutionEvent;
+import me.zero.client.api.manage.Manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,9 @@ public final class CommandHandler {
     private CommandExecutor executor = new DirectExecutor();
 
     /**
-     * Client that is using this command handler
+     * Command manager using this handler
      */
-    private final Client client;
+    private final Manager<Command> commandManager;
 
     /**
      * Prefix used to indicate command input. The default
@@ -60,8 +61,8 @@ public final class CommandHandler {
      */
     private String prefix = ".";
 
-    public CommandHandler(Client client) {
-        this.client = client;
+    public CommandHandler(Manager<Command> commandManager) {
+        this.commandManager = commandManager;
     }
 
     @EventHandler
@@ -101,8 +102,8 @@ public final class CommandHandler {
     /**
      * @return The client that is using this handler
      */
-    public final Client getClient() {
-        return this.client;
+    public final Manager<Command> getCommandManager() {
+        return this.commandManager;
     }
 
     /**

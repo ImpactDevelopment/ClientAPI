@@ -17,7 +17,9 @@
 package me.zero.client.api;
 
 /**
- * Contains all information that is inside of the client.json
+ * Representation of the {@code client.json} format.
+ *
+ * @see Client
  *
  * @author Brady
  * @since 1/24/2017 12:00 PM
