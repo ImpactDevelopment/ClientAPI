@@ -24,8 +24,12 @@ import me.zero.client.api.command.exception.UnknownCommandException;
 import me.zero.client.api.command.exception.handler.ExceptionHandler;
 import me.zero.client.api.command.executor.CommandExecutor;
 import me.zero.client.api.command.executor.DirectExecutor;
+import me.zero.client.api.event.defaults.game.core.KeyEvent;
 import me.zero.client.api.event.defaults.internal.CommandExecutionEvent;
 import me.zero.client.api.manage.Manager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiChat;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +61,9 @@ public final class CommandHandler {
 
     /**
      * Prefix used to indicate command input. The default
-     * prefix is "."
+     * prefix is .
      */
-    private String prefix = ".";
+    private char prefix = '.';
 
     public CommandHandler(Manager<Command> commandManager) {
         this.commandManager = commandManager;
@@ -78,6 +82,20 @@ public final class CommandHandler {
                 e.printStackTrace();
             else
                 handlers.forEach(handler -> handler.accept(e));
+        }
+    });
+
+    /**
+     * Handle key events
+     *
+     * Opens chat if the prefix is typed
+     *
+     * @since 2.2
+     */
+    @EventHandler
+    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
+        if (Keyboard.getEventCharacter() == this.getPrefix()) {
+            Minecraft.getMinecraft().displayGuiScreen(new GuiChat(String.valueOf(this.getPrefix())));
         }
     });
 
@@ -122,15 +140,33 @@ public final class CommandHandler {
 
     /**
      * Sets the chat command prefix
+     *
+     * @param prefix
+     *
+     * @since 2.2
      */
-    public final void setPrefix(String prefix) {
+    public final void setPrefix(char prefix) {
         this.prefix = prefix;
     }
 
     /**
-     * @return The chat command prefix
+     * Set the chat command prefix by using the first char of a string
+     *
+     * @param prefix
+     *
+     * @deprecated 2.2
      */
-    public final String getPrefix() {
-        return this.prefix;
+    @Deprecated
+    public final void setPrefix(String prefix) {
+        this.prefix = prefix.charAt(0);
+    }
+
+    /**
+     * @return The chat command prefix as a char
+     *
+     * @since 2.2
+     */
+    public final char getPrefix() {
+        return prefix;
     }
 }
