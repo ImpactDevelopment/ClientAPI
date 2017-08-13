@@ -51,6 +51,12 @@ minecraft {
     makeObfSourceJar = false
 }
 
+mixin {
+    defaultObfuscationEnv notch
+    add sourceSets.main, 'mixins.capi.refmap.json'
+    add sourceSets.test, 'mixins.client.refmap.json'
+}
+
 repositories {
     mavenCentral()
 
@@ -74,11 +80,5 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
-}
-
-mixin {
-    defaultObfuscationEnv notch
-    add sourceSets.main, 'mixins.capi.refmap.json'
-    add sourceSets.test, 'mixins.client.refmap.json'
 }
 
