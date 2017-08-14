@@ -15,7 +15,7 @@ Unlike most other modding APIs it is designed to be used by a single "client" mo
 | Nerxit              | Tab GUI System       |
 
 ## Development Kit
-To use the Client API, you must download [Development Kit](https://github.com/ZeroMemes/ClientAPI-CDK). Instructions on how to set it up are posted in the README.
+To use the Client API, you must download the CDK from the Releases page. Instructions on how to set it up are included in the README.
 
 ## Concept
 * Clients will install into `.minecraft/versions` and `.minecraft/libraries` if they are published to a maven repo
@@ -27,4 +27,5 @@ To use the Client API, you must download [Development Kit](https://github.com/Ze
   * The minecraft launcher will automatically download the ClientAPI lib to the `.minecraft/libraries` folder
 
 ## Usage
-Refer to the [Example](https://github.com/ZeroMemes/ClientAPI-Example) to view how clients using the ClientAPI are structured.
+Refer to the [Example](src/test) to view how clients using the ClientAPI are structured.
+
