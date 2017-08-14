@@ -19,6 +19,7 @@ package me.zero.client.api;
 import me.zero.client.api.event.handle.ClientHandler;
 import me.zero.client.api.module.plugin.Plugin;
 import me.zero.client.api.module.plugin.PluginLoader;
+import me.zero.client.api.util.interfaces.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +33,12 @@ import java.util.List;
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public abstract class Client {
+public abstract class Client implements Helper {
 
     /**
      * The ClientInfo created from the discovered {@code client.json}
      */
-    private final ClientInfo info;
+    protected final ClientInfo info;
 
     /**
      * The list of plugin loaders that have been used by this client
