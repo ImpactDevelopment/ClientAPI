@@ -5,9 +5,10 @@ Like other modding APIs it is a tweaker and has the potential to be stacked with
 
 Unlike most other modding APIs it is designed to be used by a single "client" mod. It is this "client" that is installed, not the ClientAPI, so the "client" mod has full control over all modifications to the vanilla code, unless of course the installation is stacked on top of other modding APIs.
 
-[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
-[![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
-[![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg?style=flat-square)](https://github.com/ZeroMemes/ClientAPI/releases)
+[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
+[![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/releases)
+[![Build Status](https://travis-ci.org/ZeroMemes/ClientAPI.svg?branch=master)](https://travis-ci.org/ZeroMemes/ClientAPI)
 
 ## Credits
 | Name                | Contribution         |
