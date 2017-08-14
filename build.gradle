@@ -77,7 +77,7 @@ task makeCDK(type: Zip) {
     into('gradle') { from 'gradle' }
 
     // Include the example code
-    into('src/main') { from('src/test') { exclude 'README.md' } }
+    into('src/main') { from 'src/test' }
 
         // Include everything in cdk, and replace any @TOKEN@s
     from('cdk') {
