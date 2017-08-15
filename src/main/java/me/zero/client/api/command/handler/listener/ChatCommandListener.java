@@ -60,12 +60,12 @@ public final class ChatCommandListener extends CommandListener implements Helper
         }
 
         // If the message is a command
-        if (raw.startsWith(handler.getPrefix())) {
+        if (raw.charAt(0) == handler.getPrefix()) {
             // No matter what, always cancel the message if it starts with the command prefix
             event.cancel();
 
             // Removed the prefix from the message
-            raw = raw.substring(handler.getPrefix().length());
+            raw = raw.substring(1);
 
             // Create a matcher to parse the message
             Matcher matcher = REGEX.matcher(raw);
