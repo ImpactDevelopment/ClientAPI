@@ -24,8 +24,12 @@ import me.zero.client.api.command.exception.UnknownCommandException;
 import me.zero.client.api.command.exception.handler.ExceptionHandler;
 import me.zero.client.api.command.executor.CommandExecutor;
 import me.zero.client.api.command.executor.DirectExecutor;
+import me.zero.client.api.event.defaults.game.core.KeyEvent;
 import me.zero.client.api.event.defaults.internal.CommandExecutionEvent;
 import me.zero.client.api.manage.Manager;
+import me.zero.client.api.util.interfaces.Helper;
+import net.minecraft.client.gui.GuiChat;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,7 @@ import java.util.stream.Collectors;
  * @author Brady
  * @since 6/1/2017 3:03 PM
  */
-public final class CommandHandler {
+public final class CommandHandler implements Helper {
 
     /**
      * Handlers to process command exceptions
@@ -61,9 +65,43 @@ public final class CommandHandler {
      */
     private String prefix = ".";
 
+    /**
+     * If true, CommandHandler will open chat whenever the first char
+     * of the prefix is typed.
+     */
+    private boolean openChat = false;
+
+    /**
+     * Construct a CommandHandler with some default options
+     *
+     * @param commandManager The command manager using this handler
+     * @param prefix The command prefix to use, or null to use the default
+     * @param openChat Whether or not the handler should open chat when
+     *                 prefix is typed
+     * @since 2.2
+     */
+    public CommandHandler(Manager<Command> commandManager, String prefix, boolean openChat) {
+        this(commandManager);
+
+        this.openChat = openChat;
+
+        if (prefix != null)
+            this.prefix = prefix;
+    }
+
     public CommandHandler(Manager<Command> commandManager) {
         this.commandManager = commandManager;
     }
+
+    @EventHandler
+    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
+        if (this.openChat) {
+            char typed = Keyboard.getEventCharacter();
+
+            if (this.prefix.charAt(0) == typed)
+                mc.displayGuiScreen(new GuiChat(String.valueOf(typed)));
+        }
+    });
 
     @EventHandler
     private final Listener<CommandExecutionEvent> commandExecutionListener = new Listener<>(event -> {
@@ -132,5 +170,27 @@ public final class CommandHandler {
      */
     public final String getPrefix() {
         return this.prefix;
+    }
+
+    /**
+     * If true, the handler will open chat whenever the first
+     * char of the prefix is typed.
+     *
+     * @param open Whether or not handler will open chat
+     * @since 2.2
+     */
+    public void openChatOnPrefix(boolean open) {
+        this.openChat = open;
+    }
+
+    /**
+     * If true, the handler will open chat whenever the first
+     * char of the prefix is typed.
+     *
+     * @return Whether or not handler will open chat
+     * @since 2.2
+     */
+    public boolean openChatOnPrefix() {
+        return this.openChat;
     }
 }
