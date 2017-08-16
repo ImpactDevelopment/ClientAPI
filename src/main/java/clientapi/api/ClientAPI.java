@@ -35,7 +35,7 @@ public final class ClientAPI {
     /**
      * Current version of the API
      */
-    public static final double VERSION = 2.1;
+    public static final double VERSION = 2.2;
 
     /**
      * Instance of the API event bus. All default game event are
