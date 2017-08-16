@@ -1,10 +1,10 @@
 package me.zero.example.command;
 
-import me.zero.client.api.ClientAPI;
-import me.zero.client.api.command.Command;
-import me.zero.client.api.command.handler.CommandHandler;
-import me.zero.client.api.command.handler.listener.ChatCommandListener;
-import me.zero.client.api.manage.Manager;
+import clientapi.api.ClientAPI;
+import clientapi.api.command.Command;
+import clientapi.api.command.handler.CommandHandler;
+import clientapi.api.command.handler.listener.ChatCommandListener;
+import clientapi.api.manage.Manager;
 import me.zero.example.command.commands.TestCommand;
 
 /**

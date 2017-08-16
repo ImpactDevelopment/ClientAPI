@@ -1,10 +1,9 @@
 package me.zero.example.mod;
 
-import me.zero.client.api.manage.Manager;
-import me.zero.client.api.module.Mod;
-import me.zero.client.api.module.Module;
-import me.zero.client.api.util.logger.Level;
-import me.zero.client.api.util.logger.Logger;
+import clientapi.api.manage.Manager;
+import clientapi.api.module.Module;
+import clientapi.api.util.logger.Level;
+import clientapi.api.util.logger.Logger;
 import me.zero.example.ExampleClient;
 import me.zero.example.mod.mods.*;
 
