@@ -1,10 +1,9 @@
 package me.zero.example.command.commands;
 
-import me.zero.client.api.command.Cmd;
-import me.zero.client.api.command.Command;
-import me.zero.client.api.command.exception.CommandException;
-import me.zero.client.api.command.exception.InvalidSyntaxException;
-import me.zero.client.api.command.executor.sender.CommandSender;
+import clientapi.api.command.Cmd;
+import clientapi.api.command.Command;
+import clientapi.api.command.exception.CommandException;
+import clientapi.api.command.executor.sender.CommandSender;
 import net.minecraft.util.text.TextComponentString;
 
 import java.util.Arrays;

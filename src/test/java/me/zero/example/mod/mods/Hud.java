@@ -2,9 +2,9 @@ package me.zero.example.mod.mods;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zero.client.api.event.defaults.game.render.RenderHudEvent;
-import me.zero.client.api.module.Mod;
-import me.zero.client.api.module.Module;
+import clientapi.api.event.defaults.game.render.RenderHudEvent;
+import clientapi.api.module.Mod;
+import clientapi.api.module.Module;
 import me.zero.example.ExampleClient;
 import me.zero.example.mod.category.IRender;
 import net.minecraft.client.gui.FontRenderer;
