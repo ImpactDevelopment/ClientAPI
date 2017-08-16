@@ -47,7 +47,7 @@ compileJava {
 minecraft {
     version = project.minecraftVersion
     mappings = project.mappings
-    tweakClass = 'me.zero.client.load.ClientTweaker'
+    tweakClass = 'clientapi.load.ClientTweaker'
     runDir = 'run'
 
     makeObfSourceJar = false
