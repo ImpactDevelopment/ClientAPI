@@ -43,7 +43,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(EntityPlayerSP.class)
-public abstract class MixinEntityPlayerSP extends MixinEntity {
+public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
     @Shadow @Final public NetHandlerPlayClient connection;
     @Shadow private double lastReportedPosX;
