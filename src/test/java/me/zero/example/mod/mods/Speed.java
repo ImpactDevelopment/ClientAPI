@@ -2,11 +2,11 @@ package me.zero.example.mod.mods;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zero.client.api.event.defaults.game.entity.MoveEvent;
-import me.zero.client.api.module.Mod;
-import me.zero.client.api.module.Module;
-import me.zero.client.api.util.annotation.Label;
-import me.zero.client.api.value.annotation.NumberValue;
+import clientapi.api.event.defaults.game.entity.MoveEvent;
+import clientapi.api.module.Mod;
+import clientapi.api.module.Module;
+import clientapi.api.util.annotation.Label;
+import clientapi.api.value.annotation.NumberValue;
 import me.zero.example.mod.category.IMovement;
 import org.lwjgl.input.Keyboard;
 
