@@ -1,14 +1,14 @@
+[![Build Status](https://travis-ci.org/ZeroMemes/ClientAPI.svg?branch=master)](https://travis-ci.org/ZeroMemes/ClientAPI)
+[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
+[![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/releases)
+
 # ClientAPI
 ClientAPI is a modding API/Framework just like Forge, Sponge and Liteloader, it is designed to provide a shared base for large client-rewrite style mods.
 
 Like other modding APIs it is a tweaker and has the potential to be stacked with other tweakers, so long as they do not both entirely overwrite the same methods.
 
 Unlike most other modding APIs it is designed to be used by a single "client" mod. It is this "client" that is installed, not the ClientAPI, so the "client" mod has full control over all modifications to the vanilla code, unless of course the installation is stacked on top of other modding APIs.
-
-[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
-[![License](https://img.shields.io/github/license/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/blob/master/LICENSE)
-[![Release](https://img.shields.io/github/release/ZeroMemes/ClientAPI.svg)](https://github.com/ZeroMemes/ClientAPI/releases)
-[![Build Status](https://travis-ci.org/ZeroMemes/ClientAPI.svg?branch=master)](https://travis-ci.org/ZeroMemes/ClientAPI)
 
 ## Credits
 | Name                | Contribution         |
