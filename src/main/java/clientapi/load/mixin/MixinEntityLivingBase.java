@@ -18,11 +18,14 @@ package clientapi.load.mixin;
 
 import clientapi.api.ClientAPI;
 import clientapi.api.event.defaults.game.entity.EntityDeathEvent;
+import clientapi.api.event.defaults.game.entity.EntityTravelEvent;
+import me.zero.alpine.type.EventState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
@@ -30,10 +33,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(EntityLivingBase.class)
-public class MixinEntityLivingBase {
+public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void onDeath(DamageSource cause, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
+    }
+
+    @Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
+    private void travel(EntityLivingBase entity, float strafe, float vertical, float forward) {
+        EntityTravelEvent preEvent = new EntityTravelEvent(EventState.PRE, entity, strafe, vertical, forward);
+        ClientAPI.EVENT_BUS.post(preEvent);
+        if (!preEvent.isCancelled())
+            entity.travel(preEvent.getStrafe(), preEvent.getVertical(), preEvent.getForward());
+
+        ClientAPI.EVENT_BUS.post(new EntityTravelEvent(EventState.POST, entity, strafe, vertical, forward));
     }
 }
