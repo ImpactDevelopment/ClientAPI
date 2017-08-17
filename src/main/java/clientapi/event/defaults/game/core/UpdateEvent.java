@@ -16,6 +16,7 @@
 
 package clientapi.event.defaults.game.core;
 
+import me.zero.alpine.type.EventState;
 import net.minecraft.client.entity.EntityPlayerSP;
 
 /**
@@ -26,4 +27,15 @@ import net.minecraft.client.entity.EntityPlayerSP;
  * @author Brady
  * @since 2/8/2017 12:00 PM
  */
-public final class UpdateEvent {}
+public final class UpdateEvent {
+
+    private final EventState state;
+
+    public UpdateEvent(EventState state) {
+        this.state = state;
+    }
+
+    public EventState getState() {
+        return this.state;
+    }
+}

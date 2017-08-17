@@ -62,17 +62,22 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
     @Shadow protected abstract boolean isCurrentViewEntity();
 
     @Inject(method = "onUpdate", at = @At("HEAD"))
-    private void onUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new UpdateEvent());
+    private void onPreUpdate(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.PRE));
+    }
+
+    @Inject(method = "onUpdate", at = @At("RETURN"))
+    private void onPostUpdate(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.POST));
     }
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
-    private void onLivingUpdatePre(CallbackInfo ci) {
+    private void onPreLivingUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
     }
 
     @Inject(method = "onLivingUpdate", at = @At("RETURN"))
-    private void onLivingUpdatePost(CallbackInfo ci) {
+    private void onPostLivingUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
     }
 
