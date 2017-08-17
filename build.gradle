@@ -79,7 +79,7 @@ task makeCDK(type: Zip) {
     // Include the example code
     into('src/main') { from 'src/test' }
 
-        // Include everything in cdk, and replace any @TOKEN@s
+    // Include everything in cdk, and replace any @TOKEN@s
     from('cdk') {
         filter(ReplaceTokens, tokens: [
                 VERSION : project.version,
