@@ -33,11 +33,6 @@ public final class ClientAPI {
     private ClientAPI() {}
 
     /**
-     * Current version of the API
-     */
-    public static final double VERSION = 2.2;
-
-    /**
      * Instance of the API event bus. All default game event are
      * passed through this event bus.
      */
