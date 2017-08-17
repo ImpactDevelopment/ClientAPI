@@ -1,0 +1,30 @@
+
+/**
+ * Gets a version string by parsing the Version class
+ */
+ext.getVersionFromJava = { ->
+    def major=0, minor=0, patch=0
+
+    // The regex looks for 'int' type definitions and captures their name and value
+    def regex = ~/int\s+([_a-zA-Z$][_a-zA-Z0-9$]*)\s+=\s+([0-9]+)/
+    def versionClass = file("src/main/java/clientapi/Version.java").text
+
+    // Iterate over each match, check if the key is one we care about
+    (versionClass =~ regex).each {
+        def key = it[1], value = it[2]
+
+        switch (key) {
+            case "MAJOR":
+                major = value
+                break
+            case "MINOR":
+                minor = value
+                break
+            case "PATCH":
+                patch = value
+                break
+        }
+    }
+
+    return "${major}.${minor}.${patch}"
+}
