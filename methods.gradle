@@ -41,5 +41,5 @@ ext.getVersionFromJava = { ->
         }
     }
 
-    return "${major}.${minor}.${patch}"
+    return "${major}.${minor}.${patch}".toString()
 }
