@@ -38,6 +38,9 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
+apply from: 'methods.gradle'
+
+version = getVersionFromJava()
 
 sourceCompatibility = targetCompatibility = '1.8' // Needed so Eclipse task generates correctly
 compileJava {
