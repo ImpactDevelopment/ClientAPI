@@ -2,9 +2,9 @@ package me.zero.example.mod.mods;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import clientapi.api.event.defaults.game.core.UpdateEvent;
-import clientapi.api.module.Mod;
-import clientapi.api.module.Module;
+import clientapi.event.defaults.game.core.UpdateEvent;
+import clientapi.module.Mod;
+import clientapi.module.Module;
 import me.zero.example.mod.category.IMovement;
 import org.lwjgl.input.Keyboard;
 

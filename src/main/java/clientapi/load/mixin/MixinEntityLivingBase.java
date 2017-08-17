@@ -16,9 +16,9 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.entity.EntityDeathEvent;
-import clientapi.api.event.defaults.game.entity.EntityTravelEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.entity.EntityDeathEvent;
+import clientapi.event.defaults.game.entity.EntityTravelEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;

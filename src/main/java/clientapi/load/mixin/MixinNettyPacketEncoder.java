@@ -18,8 +18,8 @@ package clientapi.load.mixin;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.network.PacketEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;

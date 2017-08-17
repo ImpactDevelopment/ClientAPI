@@ -16,10 +16,10 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
+import clientapi.ClientAPI;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import clientapi.api.event.defaults.game.network.PacketEvent;
+import clientapi.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;

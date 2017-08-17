@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.render.GlintEffectEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.GlintEffectEvent;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;

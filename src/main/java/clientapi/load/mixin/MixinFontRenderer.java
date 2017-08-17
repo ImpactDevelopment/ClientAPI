@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.render.TextEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.TextEvent;
 import net.minecraft.client.gui.FontRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -16,7 +16,7 @@
 
 package clientapi.load.mixin.wrapper;
 
-import clientapi.api.event.defaults.game.core.ClickEvent;
+import clientapi.event.defaults.game.core.ClickEvent;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 

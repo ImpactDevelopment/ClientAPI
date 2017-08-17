@@ -1,9 +1,9 @@
 package me.zero.example.command.commands;
 
-import clientapi.api.command.Cmd;
-import clientapi.api.command.Command;
-import clientapi.api.command.exception.CommandException;
-import clientapi.api.command.executor.sender.CommandSender;
+import clientapi.command.Cmd;
+import clientapi.command.Command;
+import clientapi.command.exception.CommandException;
+import clientapi.command.executor.sender.CommandSender;
 import net.minecraft.util.text.TextComponentString;
 
 import java.util.Arrays;

@@ -2,11 +2,11 @@ package me.zero.example.mod.mods;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import clientapi.api.event.defaults.game.core.ClickEvent;
-import clientapi.api.event.defaults.game.entity.MotionUpdateEvent;
-import clientapi.api.module.Mod;
-import clientapi.api.module.Module;
-import clientapi.api.util.math.Vec2;
+import clientapi.event.defaults.game.core.ClickEvent;
+import clientapi.event.defaults.game.entity.MotionUpdateEvent;
+import clientapi.module.Mod;
+import clientapi.module.Module;
+import clientapi.util.math.Vec2;
 import clientapi.load.mixin.wrapper.IEntity;
 import clientapi.load.mixin.wrapper.IMinecraft;
 import me.zero.example.mod.category.ICombat;
