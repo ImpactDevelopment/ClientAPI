@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import org.apache.tools.ant.filters.ReplaceTokens
-
 buildscript {
     repositories {
         mavenCentral()
@@ -62,40 +60,7 @@ mixin {
     add sourceSets.test, 'mixins.client.refmap.json'
 }
 
-/**
- * Builds a CDK zip in builds/distributions using the cdk directory and variables from the gradle config
- */
-task makeCDK(type: Zip) {
-    baseName = project.name
-    classifier = 'CDK'
-    version = project.version
-    destinationDir = file('build/distributions')
-
-    // License
-    from 'LICENSE'
-    rename 'LICENSE', 'LICENSE.txt'
-
-    // Include the gradle stuff
-    from 'gradlew', 'gradlew.bat'
-    into('gradle') { from 'gradle' }
-
-    // Include the example code
-    into('src/main') { from 'src/test' }
-
-    // Include everything in cdk, and replace any @TOKEN@s
-    from('cdk') {
-        filter(ReplaceTokens, tokens: [
-                VERSION : project.version,
-                MCVERSION : minecraft.version,
-                MAPPINGS: minecraft.mappings,
-                TWEAKER: minecraft.tweakClass
-        ])
-
-        rename 'gitignore\\.txt', '.gitignore'
-    }
-}
-
-tasks.build.dependsOn makeCDK
+apply from: 'tasks.gradle'
 
 artifacts {
     archives makeCDK
@@ -125,4 +90,3 @@ dependencies {
         exclude module: 'commons-io'
     }
 }
-
