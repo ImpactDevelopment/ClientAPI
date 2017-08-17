@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.network.PacketEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.network.PacketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.*;

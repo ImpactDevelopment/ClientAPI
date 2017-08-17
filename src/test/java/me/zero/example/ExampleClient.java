@@ -2,14 +2,14 @@ package me.zero.example;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import clientapi.api.Client;
-import clientapi.api.ClientAPI;
-import clientapi.api.ClientInfo;
-import clientapi.api.command.Command;
-import clientapi.api.event.defaults.game.render.TextEvent;
-import clientapi.api.event.handle.ClientHandler;
-import clientapi.api.manage.Manager;
-import clientapi.api.module.Module;
+import clientapi.Client;
+import clientapi.ClientAPI;
+import clientapi.ClientInfo;
+import clientapi.command.Command;
+import clientapi.event.defaults.game.render.TextEvent;
+import clientapi.event.handle.ClientHandler;
+import clientapi.manage.Manager;
+import clientapi.module.Module;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
 

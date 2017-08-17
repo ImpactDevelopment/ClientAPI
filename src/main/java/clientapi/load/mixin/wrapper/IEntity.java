@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin.wrapper;
 
-import clientapi.api.util.math.Vec2;
-import clientapi.api.util.math.Vec3;
+import clientapi.util.math.Vec2;
+import clientapi.util.math.Vec3;
 
 /**
  * @author Brady

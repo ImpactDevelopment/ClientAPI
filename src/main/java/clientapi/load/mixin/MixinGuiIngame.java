@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.event.defaults.game.render.RenderHudEvent;
-import clientapi.api.ClientAPI;
+import clientapi.event.defaults.game.render.RenderHudEvent;
+import clientapi.ClientAPI;
 import net.minecraft.client.gui.GuiIngame;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

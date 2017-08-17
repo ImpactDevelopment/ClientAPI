@@ -16,9 +16,9 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.render.RenderScreenEvent;
-import clientapi.api.util.render.camera.Camera;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.RenderScreenEvent;
+import clientapi.util.render.camera.Camera;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

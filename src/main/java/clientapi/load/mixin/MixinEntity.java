@@ -16,10 +16,10 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.util.math.Vec3;
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.entity.EntityCollisionEvent;
-import clientapi.api.util.math.Vec2;
+import clientapi.util.math.Vec3;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.entity.EntityCollisionEvent;
+import clientapi.util.math.Vec2;
 import clientapi.load.mixin.wrapper.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
