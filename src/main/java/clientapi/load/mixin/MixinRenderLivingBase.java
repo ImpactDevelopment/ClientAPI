@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.render.LayerRenderEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.LayerRenderEvent;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;

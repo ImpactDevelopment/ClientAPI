@@ -16,15 +16,15 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.event.defaults.game.core.*;
+import clientapi.event.defaults.game.core.*;
 import com.google.gson.GsonBuilder;
-import clientapi.api.Client;
-import clientapi.api.ClientInfo;
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.render.GuiEvent;
-import clientapi.api.event.defaults.game.world.WorldEvent;
-import clientapi.api.event.handle.ClientHandler;
-import clientapi.api.util.render.gl.GlUtils;
+import clientapi.Client;
+import clientapi.ClientInfo;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.GuiEvent;
+import clientapi.event.defaults.game.world.WorldEvent;
+import clientapi.event.handle.ClientHandler;
+import clientapi.util.render.gl.GlUtils;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.wrapper.IMinecraft;
 import net.minecraft.client.Minecraft;
@@ -48,7 +48,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static clientapi.api.event.defaults.game.core.ClickEvent.MouseButton.*;
+import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
 
 /**
  * @author Brady

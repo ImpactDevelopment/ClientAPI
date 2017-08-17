@@ -16,11 +16,11 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.ClientAPI;
-import clientapi.api.event.defaults.game.entity.LivingUpdateEvent;
-import clientapi.api.event.defaults.game.entity.MotionUpdateEvent;
-import clientapi.api.event.defaults.game.entity.MoveEvent;
-import clientapi.api.event.defaults.game.core.UpdateEvent;
+import clientapi.ClientAPI;
+import clientapi.event.defaults.game.entity.LivingUpdateEvent;
+import clientapi.event.defaults.game.entity.MotionUpdateEvent;
+import clientapi.event.defaults.game.entity.MoveEvent;
+import clientapi.event.defaults.game.core.UpdateEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;

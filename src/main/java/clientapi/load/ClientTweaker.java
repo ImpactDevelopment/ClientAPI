@@ -16,8 +16,8 @@
 
 package clientapi.load;
 
-import clientapi.api.util.logger.Level;
-import clientapi.api.util.logger.Logger;
+import clientapi.util.logger.Level;
+import clientapi.util.logger.Logger;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.spongepowered.asm.launch.MixinBootstrap;

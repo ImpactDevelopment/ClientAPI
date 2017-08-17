@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.api.event.defaults.game.core.ProfilerEvent;
-import clientapi.api.ClientAPI;
+import clientapi.event.defaults.game.core.ProfilerEvent;
+import clientapi.ClientAPI;
 import net.minecraft.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
