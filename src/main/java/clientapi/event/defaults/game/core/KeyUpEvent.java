@@ -24,23 +24,9 @@ package clientapi.event.defaults.game.core;
  * @author Leaf
  * @since 2.1
  */
-public final class KeyUpEvent {
+public final class KeyUpEvent extends KeyEvent {
 
-    private final int key;
-
-    /**
-     * Creates a new instance of KeyUpEvent.
-     *
-     * @param key - The key code for the key that was released
-     */
-    public KeyUpEvent(int key) {
-        this.key = key;
-    }
-
-    /**
-     * @return The key code that corresponds to the released key
-     */
-    public final int getKey() {
-        return this.key;
+    public KeyUpEvent(int key, char character) {
+        super(key, character);
     }
 }

@@ -95,8 +95,9 @@ public abstract class MixinMinecraft implements IMinecraft {
 
         boolean down = Keyboard.getEventKeyState();
         int key = Keyboard.getEventKey();
+        char ch = Keyboard.getEventCharacter();
 
-        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key) : new KeyUpEvent(key));
+        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
     }
 
     @Inject(method = "init", at = @At("RETURN"))

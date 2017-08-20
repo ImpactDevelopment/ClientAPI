@@ -24,7 +24,7 @@ package clientapi.event.defaults.game.core;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class KeyEvent {
+public class KeyEvent {
 
     /**
      * Key code that belongs to the pressed key
@@ -32,12 +32,18 @@ public final class KeyEvent {
     private final int key;
 
     /**
+     * Char representation of the pressed key
+     */
+    private final char character;
+
+    /**
      * Creates a new instance of KeyEvent.
      *
      * @param key - The key code for the key that was pressed
      */
-    public KeyEvent(int key) {
+    public KeyEvent(int key, char character) {
         this.key = key;
+        this.character = character;
     }
 
     /**
@@ -45,5 +51,12 @@ public final class KeyEvent {
      */
     public final int getKey() {
         return this.key;
+    }
+
+    /**
+     * @return The char that corresponds to the pressed key
+     */
+    public final char getCharacter() {
+        return this.character;
     }
 }
