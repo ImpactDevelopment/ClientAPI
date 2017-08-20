@@ -98,9 +98,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         int key = Keyboard.getEventKey();
         char ch = Keyboard.getEventCharacter();
 
-        // Only call the event if the key isn't invalid
-        if (key != KEY_NONE)
-            ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
+        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
     }
 
     @Inject(method = "init", at = @At("RETURN"))
