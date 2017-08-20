@@ -37,6 +37,8 @@ import net.minecraft.network.play.server.SPacketChat;
 
 import java.util.stream.Stream;
 
+import static org.lwjgl.input.Keyboard.*;
+
 /**
  * Some basic events that the client uses
  *
@@ -59,7 +61,7 @@ public final class ClientHandler implements Helper {
     private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
         // Get all matching keybinds
         Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
-                .filter(bind -> bind.getKey() == event.getKey());
+                .filter(bind -> bind.getKey() != KEY_NONE && bind.getKey() == event.getKey());
 
         // Run onPress for all matching keybinds
         // and onClick for the toggle keybinds
