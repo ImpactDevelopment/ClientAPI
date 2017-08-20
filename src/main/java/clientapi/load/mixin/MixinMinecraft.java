@@ -49,6 +49,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
+import static org.lwjgl.input.Keyboard.*;
 
 /**
  * @author Brady
@@ -97,7 +98,9 @@ public abstract class MixinMinecraft implements IMinecraft {
         int key = Keyboard.getEventKey();
         char ch = Keyboard.getEventCharacter();
 
-        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
+        // Only call the event if the key isn't invalid
+        if (key != KEY_NONE)
+            ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
     }
 
     @Inject(method = "init", at = @At("RETURN"))
