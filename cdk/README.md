@@ -1,5 +1,5 @@
 # ClientAPI CDK (Client Development Kit)
-Development Kit for [ClientAPI](https://github.com/ZeroMemes/ClientAPI)
+Development Kit for [ClientAPI](https://github.com/ImpactDevelopment/ClientAPI)
 
 ## Setup
 
