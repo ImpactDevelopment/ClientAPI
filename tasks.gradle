@@ -39,8 +39,13 @@ task('makeCDK', type: Zip) {
     // Include everything in cdk, and replace any @TOKEN@s
     from('cdk') {
         filter(ReplaceTokens, tokens: [
-                VERSION : project.version,
-                MCVERSION : minecraft.version,
+                CAPI_VERSION : project.version,
+                MC_VERSION : minecraft.version,
+                FORGEGRADLE_VERSION: project.forgeGradleVersion,
+                MIXINGRADLE_VERSION: project.mixinGradleVersion,
+                ALPINE_VERSION: project.alpineVersion,
+                MIXIN_VERSION: project.mixinVersion,
+                TT_VERSION: project.typetoolsVersion,
                 MAPPINGS: minecraft.mappings,
                 TWEAKER: minecraft.tweakClass
         ])
