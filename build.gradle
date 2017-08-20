@@ -45,27 +45,6 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
-minecraft {
-    version = project.minecraftVersion
-    mappings = project.mappings
-    tweakClass = 'clientapi.load.ClientTweaker'
-    runDir = 'run'
-
-    makeObfSourceJar = false
-}
-
-mixin {
-    defaultObfuscationEnv notch
-    add sourceSets.main, 'mixins.capi.refmap.json'
-    add sourceSets.test, 'mixins.client.refmap.json'
-}
-
-apply from: 'tasks.gradle'
-
-artifacts {
-    archives makeCDK
-}
-
 repositories {
     mavenCentral()
 
@@ -89,4 +68,25 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
+}
+
+minecraft {
+    version = project.minecraftVersion
+    mappings = project.mappings
+    tweakClass = 'clientapi.load.ClientTweaker'
+    runDir = 'run'
+
+    makeObfSourceJar = false
+}
+
+apply from: 'tasks.gradle'
+
+artifacts {
+    archives makeCDK
+}
+
+mixin {
+    defaultObfuscationEnv notch
+    add sourceSets.main, 'mixins.capi.refmap.json'
+    add sourceSets.test, 'mixins.client.refmap.json'
 }
