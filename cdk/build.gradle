@@ -31,7 +31,7 @@ minecraft {
     runDir = project.runDir
 
     tweakClass = '@TWEAKER@'
-    makeObfSourceJar = true
+    makeObfSourceJar = false
 }
 
 repositories {
