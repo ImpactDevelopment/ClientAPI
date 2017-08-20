@@ -10,10 +10,9 @@ buildscript {
             url = 'http://repo.spongepowered.org/maven'
         }
     }
-
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.5-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:@FORGEGRADLE_VERSION@'
+        classpath 'org.spongepowered:mixingradle:@MIXINGRADLE_VERSION@'
     }
 }
 apply plugin: 'java'
@@ -47,10 +46,10 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.ZeroMemes:ClientAPI:@VERSION@-dev'
-    compile 'com.github.ZeroMemes:Alpine:1.4'
-    compile 'net.jodah:typetools:0.5.0'
-    compile("org.spongepowered:mixin:0.7.1-SNAPSHOT") {
+    compile 'com.github.ZeroMemes:ClientAPI:@CAPI_VERSION@-dev'
+    compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
+    compile 'net.jodah:typetools:@TT_VERSION@'
+    compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
