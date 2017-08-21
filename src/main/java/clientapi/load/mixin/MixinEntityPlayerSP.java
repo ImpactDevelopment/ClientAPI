@@ -17,11 +17,13 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.core.UpdateEvent;
 import clientapi.event.defaults.game.entity.LivingUpdateEvent;
 import clientapi.event.defaults.game.entity.MotionUpdateEvent;
 import clientapi.event.defaults.game.entity.MoveEvent;
-import clientapi.event.defaults.game.core.UpdateEvent;
+
 import me.zero.alpine.type.EventState;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -29,6 +31,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.MoverType;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayer;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -45,124 +48,154 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityPlayerSP.class)
 public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
-    @Shadow @Final public NetHandlerPlayClient connection;
-    @Shadow private double lastReportedPosX;
-    @Shadow private double lastReportedPosY;
-    @Shadow private double lastReportedPosZ;
-    @Shadow private float lastReportedYaw;
-    @Shadow private float lastReportedPitch;
-    @Shadow private boolean serverSprintState;
-    @Shadow private boolean serverSneakState;
-    @Shadow private boolean prevOnGround;
-    @Shadow private int positionUpdateTicks;
-    @Shadow protected Minecraft mc;
-    @Shadow private boolean autoJumpEnabled;
+	@Shadow
+	@Final
+	public NetHandlerPlayClient connection;
+	@Shadow
+	private double lastReportedPosX;
+	@Shadow
+	private double lastReportedPosY;
+	@Shadow
+	private double lastReportedPosZ;
+	@Shadow
+	private float lastReportedYaw;
+	@Shadow
+	private float lastReportedPitch;
+	@Shadow
+	private boolean serverSprintState;
+	@Shadow
+	private boolean serverSneakState;
+	@Shadow
+	private boolean prevOnGround;
+	@Shadow
+	private int positionUpdateTicks;
+	@Shadow
+	protected Minecraft mc;
+	@Shadow
+	private boolean autoJumpEnabled;
 
-    @Shadow public abstract boolean isSneaking();
-    @Shadow protected abstract boolean isCurrentViewEntity();
+	@Shadow
+	public abstract boolean isSneaking();
 
-    @Inject(method = "onUpdate", at = @At("HEAD"))
-    private void onPreUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.PRE));
-    }
+	@Shadow
+	protected abstract boolean isCurrentViewEntity();
 
-    @Inject(method = "onUpdate", at = @At("RETURN"))
-    private void onPostUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.POST));
-    }
+	@Inject(method = "onUpdate", at = @At("HEAD"))
+	private void onPreUpdate(CallbackInfo ci) {
+		ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.PRE));
+	}
 
-    @Inject(method = "onLivingUpdate", at = @At("HEAD"))
-    private void onPreLivingUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
-    }
+	@Inject(method = "onUpdate", at = @At("RETURN"))
+	private void onPostUpdate(CallbackInfo ci) {
+		ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.POST));
+	}
 
-    @Inject(method = "onLivingUpdate", at = @At("RETURN"))
-    private void onPostLivingUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
-    }
+	@Inject(method = "onLivingUpdate", at = @At("HEAD"))
+	private void onPreLivingUpdate(CallbackInfo ci) {
+		ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
+	}
 
-    @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
-    private void move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
-        MoveEvent event = new MoveEvent(type, x, y, z);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            return;
+	@Inject(method = "onLivingUpdate", at = @At("RETURN"))
+	private void onPostLivingUpdate(CallbackInfo ci) {
+		ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
+	}
 
-        super.move(type, event.getX(), event.getY(), event.getZ());
-    }
+	@Redirect(method = "move", at = @At(value = "INVOKE",
+	    target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
+	private void move(AbstractClientPlayer player, MoverType type, double x,
+	    double y, double z) {
+		MoveEvent event = new MoveEvent(type, x, y, z);
+		ClientAPI.EVENT_BUS.post(event);
+		if (event.isCancelled()) return;
 
-    /**
-     * @reason In addition to firing pre and post events, we also want to override some position values (prefixed with p).
-     * @author Brady
-     */
-    @Overwrite
-    private void onUpdateWalkingPlayer() {
-        EntityPlayerSP _this = (EntityPlayerSP) (Object) this;
+		super.move(type, event.getX(), event.getY(), event.getZ());
+	}
 
-        MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
-        ClientAPI.EVENT_BUS.post(pre);
+	/**
+	 * @reason In addition to firing pre and post events, we also want to
+	 *         override some position values (prefixed with p).
+	 * @author Brady
+	 */
+	@Overwrite
+	private void onUpdateWalkingPlayer() {
+		EntityPlayerSP _this = (EntityPlayerSP) (Object) this;
 
-        boolean clientSprintState = this.isSprinting();
-        if (clientSprintState != this.serverSprintState) {
-            this.connection.sendPacket(new CPacketEntityAction(_this, clientSprintState ? CPacketEntityAction.Action.START_SPRINTING : CPacketEntityAction.Action.STOP_SPRINTING));
-            this.serverSprintState = clientSprintState;
-        }
+		MotionUpdateEvent pre = new MotionUpdateEvent(EventState.PRE);
+		ClientAPI.EVENT_BUS.post(pre);
 
-        boolean clientSneakState = this.isSneaking();
-        if (clientSneakState != this.serverSneakState) {
-            this.connection.sendPacket(new CPacketEntityAction(_this, clientSneakState ? CPacketEntityAction.Action.START_SNEAKING : CPacketEntityAction.Action.STOP_SNEAKING));
-            this.serverSneakState = clientSneakState;
-        }
+		boolean clientSprintState = this.isSprinting();
+		if (clientSprintState != this.serverSprintState) {
+			this.connection.sendPacket(new CPacketEntityAction(_this,
+			    clientSprintState
+			        ? CPacketEntityAction.Action.START_SPRINTING
+			        : CPacketEntityAction.Action.STOP_SPRINTING));
+			this.serverSprintState = clientSprintState;
+		}
 
-        if (this.isCurrentViewEntity()) {
+		boolean clientSneakState = this.isSneaking();
+		if (clientSneakState != this.serverSneakState) {
+			this.connection.sendPacket(new CPacketEntityAction(_this,
+			    clientSneakState
+			        ? CPacketEntityAction.Action.START_SNEAKING
+			        : CPacketEntityAction.Action.STOP_SNEAKING));
+			this.serverSneakState = clientSneakState;
+		}
 
-            // Override vanilla defaults of _tis.posX, etc
-            // This is why we need to overwrite the method body.
-            double pX = pre.getX();
-            double pY = pre.getY();
-            double pZ = pre.getZ();
-            float pYaw = pre.getYaw();
-            float pPitch = pre.getPitch();
-            boolean pGround = pre.isOnGround();
+		if (this.isCurrentViewEntity()) {
 
-            double d0 = pX - this.lastReportedPosX;
-            double d1 = pY - this.lastReportedPosY;
-            double d2 = pZ - this.lastReportedPosZ;
-            double d3 = pYaw - this.lastReportedYaw;
-            double d4 = pPitch - this.lastReportedPitch;
+			// Override vanilla defaults of _tis.posX, etc
+			// This is why we need to overwrite the method body.
+			double pX = pre.getX();
+			double pY = pre.getY();
+			double pZ = pre.getZ();
+			float pYaw = pre.getYaw();
+			float pPitch = pre.getPitch();
+			boolean pGround = pre.isOnGround();
 
-            boolean position = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || ++this.positionUpdateTicks >= 20;
-            boolean rotation = d3 != 0.0D || d4 != 0.0D;
+			double d0 = pX - this.lastReportedPosX;
+			double d1 = pY - this.lastReportedPosY;
+			double d2 = pZ - this.lastReportedPosZ;
+			double d3 = pYaw - this.lastReportedYaw;
+			double d4 = pPitch - this.lastReportedPitch;
 
-            if (this.isRiding()) {
-                this.connection.sendPacket(new CPacketPlayer.PositionRotation(this.motionX, -999.0D, this.motionZ, this.rotationYaw, this.rotationPitch, this.onGround));
-                position = false;
-            } else if (position && rotation) {
-                this.connection.sendPacket(new CPacketPlayer.PositionRotation(pX, pY, pZ, pYaw, pPitch, pGround));
-            } else if (position) {
-                this.connection.sendPacket(new CPacketPlayer.Position(pX, pY, pZ, pGround));
-            } else if (rotation) {
-                this.connection.sendPacket(new CPacketPlayer.Rotation(pYaw, pPitch, pGround));
-            } else if (this.prevOnGround != pGround) {
-                this.connection.sendPacket(new CPacketPlayer(pGround));
-            }
+			boolean position = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D
+			    || ++this.positionUpdateTicks >= 20;
+			boolean rotation = d3 != 0.0D || d4 != 0.0D;
 
-            if (position) {
-                this.lastReportedPosX = pX;
-                this.lastReportedPosY = pY;
-                this.lastReportedPosZ = pZ;
-                this.positionUpdateTicks = 0;
-            }
+			if (this.isRiding()) {
+				this.connection.sendPacket(new CPacketPlayer.PositionRotation(
+				    this.motionX, -999.0D, this.motionZ, this.rotationYaw,
+				    this.rotationPitch, this.onGround));
+				position = false;
+			} else if (position && rotation) {
+				this.connection.sendPacket(new CPacketPlayer.PositionRotation(
+				    pX, pY, pZ, pYaw, pPitch, pGround));
+			} else if (position) {
+				this.connection.sendPacket(
+				    new CPacketPlayer.Position(pX, pY, pZ, pGround));
+			} else if (rotation) {
+				this.connection.sendPacket(
+				    new CPacketPlayer.Rotation(pYaw, pPitch, pGround));
+			} else if (this.prevOnGround != pGround) {
+				this.connection.sendPacket(new CPacketPlayer(pGround));
+			}
 
-            if (rotation) {
-                this.lastReportedYaw = pYaw;
-                this.lastReportedPitch = pPitch;
-            }
+			if (position) {
+				this.lastReportedPosX = pX;
+				this.lastReportedPosY = pY;
+				this.lastReportedPosZ = pZ;
+				this.positionUpdateTicks = 0;
+			}
 
-            this.prevOnGround = pGround;
-            this.autoJumpEnabled = this.mc.gameSettings.autoJump;
-        }
+			if (rotation) {
+				this.lastReportedYaw = pYaw;
+				this.lastReportedPitch = pPitch;
+			}
 
-        ClientAPI.EVENT_BUS.post(new MotionUpdateEvent(EventState.POST));
-    }
+			this.prevOnGround = pGround;
+			this.autoJumpEnabled = this.mc.gameSettings.autoJump;
+		}
+
+		ClientAPI.EVENT_BUS.post(new MotionUpdateEvent(EventState.POST));
+	}
 }

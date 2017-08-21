@@ -28,27 +28,25 @@ import java.util.Collection;
  */
 public interface IValueHolder {
 
-    /**
-     * Adds a value to this holder, should
-     * only be added if there isn't already
-     * a value with the same id.
-     *
-     * @param value Value being added
-     * @return true if the value was able to be added
-     */
-    boolean addValue(Value value);
+	/**
+	 * Adds a value to this holder, should only be added if there isn't already
+	 * a value with the same id.
+	 *
+	 * @param value Value being added
+	 * @return true if the value was able to be added
+	 */
+	boolean addValue(Value value);
 
-    /**
-     * Gets the value that this holder may
-     * or may not hold, from an id.
-     *
-     * @param id The id of the target value
-     * @return The value, if it is found, otherwise null
-     */
-    Value getValue(String id);
+	/**
+	 * Gets the value that this holder may or may not hold, from an id.
+	 *
+	 * @param id The id of the target value
+	 * @return The value, if it is found, otherwise null
+	 */
+	Value getValue(String id);
 
-    /**
-     * @return All of the values that this holder "holds"
-     */
-    Collection<Value> getValues();
+	/**
+	 * @return All of the values that this holder "holds"
+	 */
+	Collection<Value> getValues();
 }

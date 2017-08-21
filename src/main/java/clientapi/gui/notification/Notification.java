@@ -48,7 +48,7 @@ public class Notification implements INotification {
 	 * How long the notification will be displayed
 	 */
 	private final long displayTime;
-	
+
 	Notification(String header, String subtext, long fade, long displayTime) {
 		this.header = header;
 		this.subtext = subtext;

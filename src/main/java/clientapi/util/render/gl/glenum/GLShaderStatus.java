@@ -22,5 +22,5 @@ package clientapi.util.render.gl.glenum;
  */
 public enum GLShaderStatus {
 
-    COMPILE, LINK, VALIDATE
+	COMPILE, LINK, VALIDATE
 }

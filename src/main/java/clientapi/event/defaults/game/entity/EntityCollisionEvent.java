@@ -17,43 +17,44 @@
 package clientapi.event.defaults.game.entity;
 
 import me.zero.alpine.type.Cancellable;
+
 import net.minecraft.entity.Entity;
 
 /**
- * Called when 2 entities collide with one another.
- * If cancelled, the collision doesn't occur.
+ * Called when 2 entities collide with one another. If cancelled, the collision
+ * doesn't occur.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
 public final class EntityCollisionEvent extends Cancellable {
 
-    /**
-     * Entity being collided into
-     */
-    private final Entity entity;
+	/**
+	 * Entity being collided into
+	 */
+	private final Entity entity;
 
-    /**
-     * Entity colliding into other entity
-     */
-    private final Entity collidingEntity;
+	/**
+	 * Entity colliding into other entity
+	 */
+	private final Entity collidingEntity;
 
-    public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
-        this.entity = entity;
-        this.collidingEntity = collidingEntity;
-    }
+	public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
+		this.entity = entity;
+		this.collidingEntity = collidingEntity;
+	}
 
-    /**
-     * @return The entity being collided into
-     */
-    public final Entity getEntity() {
-        return this.entity;
-    }
+	/**
+	 * @return The entity being collided into
+	 */
+	public final Entity getEntity() {
+		return this.entity;
+	}
 
-    /**
-     * @return Entity colliding into other entity
-     */
-    public final Entity getCollidingEntity() {
-        return this.collidingEntity;
-    }
+	/**
+	 * @return Entity colliding into other entity
+	 */
+	public final Entity getCollidingEntity() {
+		return this.collidingEntity;
+	}
 }

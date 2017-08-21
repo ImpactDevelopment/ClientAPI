@@ -24,14 +24,13 @@ import clientapi.util.interfaces.Toggleable;
  * Base for Module
  *
  * @see Module
- *
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
 interface IModule extends Helper, Toggleable, Bindable {
 
-    /**
-     * @return The type of the Module
-     */
-    Class<?> getType();
+	/**
+	 * @return The type of the Module
+	 */
+	Class<?> getType();
 }

@@ -23,14 +23,13 @@ import clientapi.util.interfaces.Loadable;
  * Base for Tab Gui Handlers
  *
  * @see ITabGuiElement
- *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
 public interface ITabGui extends Loadable, IRenderer {
 
-    /**
-     * @return The main menu of this Tab GUI
-     */
-    ITabGuiMenu getMenu();
+	/**
+	 * @return The main menu of this Tab GUI
+	 */
+	ITabGuiMenu getMenu();
 }

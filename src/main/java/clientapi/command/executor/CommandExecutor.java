@@ -21,15 +21,14 @@ import clientapi.command.exception.CommandException;
 import clientapi.command.executor.sender.CommandSender;
 
 /**
- * Takes in a command, and executes it from the specified
- * sender and arguments.
+ * Takes in a command, and executes it from the specified sender and arguments.
  *
  * @see DirectExecutor
- *
  * @author Brady
  * @since 6/11/2017 9:26 AM
  */
 public interface CommandExecutor {
 
-    void execute(Command command, CommandSender sender, String[] arguments) throws CommandException;
+	void execute(Command command, CommandSender sender, String[] arguments)
+	    throws CommandException;
 }

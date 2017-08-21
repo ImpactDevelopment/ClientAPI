@@ -24,13 +24,13 @@ package clientapi.util.render.camera;
  */
 public interface CameraHandle {
 
-    /**
-     * @return The visibility of this camera
-     */
-    boolean visible();
+	/**
+	 * @return The visibility of this camera
+	 */
+	boolean visible();
 
-    /**
-     * @return Whether or not this camera is reflected
-     */
-    boolean reflected();
+	/**
+	 * @return Whether or not this camera is reflected
+	 */
+	boolean reflected();
 }

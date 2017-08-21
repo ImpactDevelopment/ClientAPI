@@ -17,6 +17,7 @@
 package clientapi.load.mixin.wrapper;
 
 import net.minecraft.network.play.server.SPacketPlayerPosLook;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -27,13 +28,18 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SPacketPlayerPosLook.class)
 public interface ISPacketPlayerPosLook {
 
-    @Accessor void setX(double x);
+	@Accessor
+	void setX(double x);
 
-    @Accessor void setY(double y);
+	@Accessor
+	void setY(double y);
 
-    @Accessor void setZ(double z);
+	@Accessor
+	void setZ(double z);
 
-    @Accessor void setYaw(float yaw);
+	@Accessor
+	void setYaw(float yaw);
 
-    @Accessor void setPitch(float pitch);
+	@Accessor
+	void setPitch(float pitch);
 }

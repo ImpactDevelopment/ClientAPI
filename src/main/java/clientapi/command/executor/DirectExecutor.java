@@ -28,8 +28,9 @@ import clientapi.command.executor.sender.CommandSender;
  */
 public final class DirectExecutor implements CommandExecutor {
 
-    @Override
-    public void execute(Command command, CommandSender sender, String[] arguments) throws CommandException {
-        command.execute(sender, arguments);
-    }
+	@Override
+	public void execute(Command command, CommandSender sender,
+	    String[] arguments) throws CommandException {
+		command.execute(sender, arguments);
+	}
 }

@@ -16,10 +16,10 @@
 
 package clientapi.util.render.camera.defaults;
 
-import clientapi.util.render.camera.Camera;
-import clientapi.util.math.Vec2;
-import clientapi.util.render.camera.CameraHandle;
 import clientapi.load.mixin.wrapper.IEntity;
+import clientapi.util.math.Vec2;
+import clientapi.util.render.camera.Camera;
+import clientapi.util.render.camera.CameraHandle;
 
 /**
  * An implementation of Camera that renders what is directly behind the player.
@@ -29,16 +29,16 @@ import clientapi.load.mixin.wrapper.IEntity;
  */
 public final class RearViewCamera extends Camera {
 
-    public RearViewCamera(CameraHandle handle) {
-        super(handle);
-    }
+	public RearViewCamera(CameraHandle handle) {
+		super(handle);
+	}
 
-    @Override
-    public void updateFramebuffer(float partialTicks) {
-        IEntity entity = (IEntity) mc.player;
-        Vec2 rotations = entity.getRotations();
-        this.position = entity.getPos();
-        this.rotation = new Vec2(rotations.getX() + 180, rotations.getY() * -1);
-        super.updateFramebuffer(partialTicks);
-    }
+	@Override
+	public void updateFramebuffer(float partialTicks) {
+		IEntity entity = (IEntity) mc.player;
+		Vec2 rotations = entity.getRotations();
+		this.position = entity.getPos();
+		this.rotation = new Vec2(rotations.getX() + 180, rotations.getY() * -1);
+		super.updateFramebuffer(partialTicks);
+	}
 }

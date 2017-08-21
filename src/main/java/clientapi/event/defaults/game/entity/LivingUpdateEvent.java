@@ -26,19 +26,19 @@ import me.zero.alpine.type.EventState;
  */
 public final class LivingUpdateEvent {
 
-    /**
-     * The state of this event
-     */
-    private final EventState state;
+	/**
+	 * The state of this event
+	 */
+	private final EventState state;
 
-    public LivingUpdateEvent(EventState state) {
-        this.state = state;
-    }
+	public LivingUpdateEvent(EventState state) {
+		this.state = state;
+	}
 
-    /**
-     * @return The event state
-     */
-    public final EventState getState() {
-        return this.state;
-    }
+	/**
+	 * @return The event state
+	 */
+	public final EventState getState() {
+		return this.state;
+	}
 }

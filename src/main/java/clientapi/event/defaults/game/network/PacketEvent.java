@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.network;
 
 import me.zero.alpine.type.Cancellable;
+
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.Packet;
 
@@ -27,90 +28,89 @@ import net.minecraft.network.Packet;
  * @see Receive
  * @see Encode
  * @see Decode
- *
  * @author Brady
  * @since 2/7/2017 12:00 PM
  */
 public class PacketEvent extends Cancellable {
 
-    /**
-     * The packet being sent
-     */
-    private Packet<?> packet;
+	/**
+	 * The packet being sent
+	 */
+	private Packet<?> packet;
 
-    private PacketEvent(Packet<?> packet) {
-        this.packet = packet;
-    }
+	private PacketEvent(Packet<?> packet) {
+		this.packet = packet;
+	}
 
-    /**
-     * @return The packet being sent/received
-     */
-    public final Packet<?> getPacket() {
-        return this.packet;
-    }
+	/**
+	 * @return The packet being sent/received
+	 */
+	public final Packet<?> getPacket() {
+		return this.packet;
+	}
 
-    /**
-     * Sets the packet that is being either sent
-     * or received to the specified packet.
-     *
-     * @param packet The new packet
-     * @return This event
-     */
-    public final Packet<?> setPacket(Packet<?> packet) {
-        return this.packet = packet;
-    }
+	/**
+	 * Sets the packet that is being either sent or received to the specified
+	 * packet.
+	 *
+	 * @param packet The new packet
+	 * @return This event
+	 */
+	public final Packet<?> setPacket(Packet<?> packet) {
+		return this.packet = packet;
+	}
 
-    /**
-     * Called when a packet is being sent from the client to server
-     */
-    public static final class Send extends PacketEvent {
+	/**
+	 * Called when a packet is being sent from the client to server
+	 */
+	public static final class Send extends PacketEvent {
 
-        public Send(Packet<?> packet) {
-            super(packet);
-        }
-    }
+		public Send(Packet<?> packet) {
+			super(packet);
+		}
+	}
 
-    /**
-     * Called when a packet is being received from the server to the client
-     */
-    public static final class Receive extends PacketEvent {
+	/**
+	 * Called when a packet is being received from the server to the client
+	 */
+	public static final class Receive extends PacketEvent {
 
-        public Receive(Packet<?> packet) {
-            super(packet);
-        }
-    }
+		public Receive(Packet<?> packet) {
+			super(packet);
+		}
+	}
 
-    /**
-     * Called when outgoing packets are encoded
-     */
-    public static final class Encode extends PacketEvent {
+	/**
+	 * Called when outgoing packets are encoded
+	 */
+	public static final class Encode extends PacketEvent {
 
-        private final EnumConnectionState state;
+		private final EnumConnectionState state;
 
-        public Encode(Packet<?> packet, EnumConnectionState state) {
-            super(packet);
-            this.state = state;
-        }
+		public Encode(Packet<?> packet, EnumConnectionState state) {
+			super(packet);
+			this.state = state;
+		}
 
-        public final EnumConnectionState getDirection() {
-            return this.state;
-        }
-    }
+		public final EnumConnectionState getDirection() {
+			return this.state;
+		}
+	}
 
-    /**
-     * Called when incoming packets are decoded
-     */
-    public static final class Decode extends PacketEvent {
+	/**
+	 * Called when incoming packets are decoded
+	 */
+	public static final class Decode extends PacketEvent {
 
-        private final EnumConnectionState state;
+		private final EnumConnectionState state;
 
-        public Decode(Packet<?> packet, EnumConnectionState state) {
-            super(packet);
-            this.state = state;
-        }
+		public Decode(Packet<?> packet, EnumConnectionState state) {
+			super(packet);
+			this.state = state;
+		}
 
-        public final EnumConnectionState getDirection() {
-            return this.state;
-        }
-    }
+		public final EnumConnectionState getDirection() {
+			return this.state;
+		}
+	}
 }

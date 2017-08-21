@@ -29,30 +29,27 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Cmd {
 
-    /**
-     * Provides the command class with the headers
-     *
-     * @see ICommand#headers()
-     *
-     * @return Command headers
-     */
-    String[] headers();
+	/**
+	 * Provides the command class with the headers
+	 *
+	 * @see ICommand#headers()
+	 * @return Command headers
+	 */
+	String[] headers();
 
-    /**
-     * Provides the command class with the description
-     *
-     * @see ICommand#description()
-     *
-     * @return Command description
-     */
-    String description();
+	/**
+	 * Provides the command class with the description
+	 *
+	 * @see ICommand#description()
+	 * @return Command description
+	 */
+	String description();
 
-    /**
-     * Provides the command class with the syntax
-     *
-     * @see ICommand#syntax()
-     *
-     * @return Command syntax
-     */
-    String[] syntax() default {};
+	/**
+	 * Provides the command class with the syntax
+	 *
+	 * @see ICommand#syntax()
+	 * @return Command syntax
+	 */
+	String[] syntax() default {};
 }

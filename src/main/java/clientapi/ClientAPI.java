@@ -17,6 +17,7 @@
 package clientapi;
 
 import clientapi.event.CAPIEventManager;
+
 import me.zero.alpine.EventBus;
 
 /**
@@ -27,14 +28,14 @@ import me.zero.alpine.EventBus;
  */
 public final class ClientAPI {
 
-    /**
-     * Prevent instantiation
-     */
-    private ClientAPI() {}
+	/**
+	 * Prevent instantiation
+	 */
+	private ClientAPI() {}
 
-    /**
-     * Instance of the API event bus. All default game event are
-     * passed through this event bus.
-     */
-    public static final EventBus EVENT_BUS = new CAPIEventManager();
+	/**
+	 * Instance of the API event bus. All default game event are passed through
+	 * this event bus.
+	 */
+	public static final EventBus EVENT_BUS = new CAPIEventManager();
 }

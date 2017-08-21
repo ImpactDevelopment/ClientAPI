@@ -1,0 +1,19 @@
+# EditorConfig allows you to configure your text editor to display and format
+# files nicely.
+
+# Set some defaults to apply to all files
+[*]
+indent_style=space
+indent_size=4
+charset=utf-8
+end_of_line=lf
+insert_final_newline=false
+
+# Java and groovy files should use tabs for configurable indents
+[*.{java,groovy,gradle}]
+indent_style=tab
+indent_size=4
+
+# JSON and YAMAL should use spaces and have a smaller indent width
+[*.{yml,yaml,json}]
+indent_size=2

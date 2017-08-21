@@ -17,11 +17,13 @@
 package clientapi.event.defaults.game.render;
 
 import me.zero.alpine.type.Cancellable;
+
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 
 /**
- * Called from {@code RenderLivingBase#renderLayers(EntityLivingBase, float, float, float, float, float, float, float)}.
+ * Called from
+ * {@code RenderLivingBase#renderLayers(EntityLivingBase, float, float, float, float, float, float, float)}.
  * When cancelled, the layer rendering won't execute.
  *
  * @author Brady
@@ -29,19 +31,20 @@ import net.minecraft.entity.EntityLivingBase;
  */
 public final class LayerRenderEvent extends Cancellable {
 
-    private final EntityLivingBase entity;
-    private final LayerRenderer layerRenderer;
+	private final EntityLivingBase entity;
+	private final LayerRenderer layerRenderer;
 
-    public LayerRenderEvent(EntityLivingBase entity, LayerRenderer layerRenderer) {
-        this.entity = entity;
-        this.layerRenderer = layerRenderer;
-    }
+	public LayerRenderEvent(EntityLivingBase entity,
+	    LayerRenderer layerRenderer) {
+		this.entity = entity;
+		this.layerRenderer = layerRenderer;
+	}
 
-    public final EntityLivingBase getEntity() {
-        return this.entity;
-    }
+	public final EntityLivingBase getEntity() {
+		return this.entity;
+	}
 
-    public final LayerRenderer getLayerRenderer() {
-        return this.layerRenderer;
-    }
+	public final LayerRenderer getLayerRenderer() {
+		return this.layerRenderer;
+	}
 }

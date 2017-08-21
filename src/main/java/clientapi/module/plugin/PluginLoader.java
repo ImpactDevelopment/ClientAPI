@@ -20,6 +20,7 @@ import clientapi.module.Module;
 import clientapi.util.Messages;
 import clientapi.util.logger.Level;
 import clientapi.util.logger.Logger;
+
 import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
@@ -43,107 +44,124 @@ import java.util.jar.JarFile;
  */
 public final class PluginLoader {
 
-    /**
-     * The list of the Plugins discovered
-     */
-    private final List<Plugin> plugins = new ArrayList<>();
+	/**
+	 * The list of the Plugins discovered
+	 */
+	private final List<Plugin> plugins = new ArrayList<>();
 
-    /**
-     * Directory containing possible plugins
-     */
-    private final String pluginDir;
+	/**
+	 * Directory containing possible plugins
+	 */
+	private final String pluginDir;
 
-    public PluginLoader(String pluginDir) {
-        this.pluginDir = pluginDir;
-        this.loadPlugins();
-    }
+	public PluginLoader(String pluginDir) {
+		this.pluginDir = pluginDir;
+		this.loadPlugins();
+	}
 
-    /**
-     * Loads plugins
-     */
-    private void loadPlugins() {
-        File dir = new File(this.pluginDir);
-        File[] files = dir.listFiles();
-        if (files == null)
-            return;
+	/**
+	 * Loads plugins
+	 */
+	private void loadPlugins() {
+		File dir = new File(this.pluginDir);
+		File[] files = dir.listFiles();
+		if (files == null) return;
 
-        Arrays.stream(files).forEach(file -> {
-            if (file.getAbsolutePath().endsWith(".jar")) {
-                loadPlugin(file);
-                Logger.instance.logf(Level.INFO, Messages.PLUGIN_LOAD, file.getAbsolutePath());
-            }
-        });
-    }
+		Arrays.stream(files).forEach(file -> {
+			if (file.getAbsolutePath().endsWith(".jar")) {
+				loadPlugin(file);
+				Logger.instance.logf(Level.INFO, Messages.PLUGIN_LOAD,
+				    file.getAbsolutePath());
+			}
+		});
+	}
 
-    /**
-     * Loads a single plugin from the file
-     *
-     * @param file The file of the plugin
-     */
-    private void loadPlugin(File file) {
-        JarFile jarFile;
+	/**
+	 * Loads a single plugin from the file
+	 *
+	 * @param file The file of the plugin
+	 */
+	private void loadPlugin(File file) {
+		JarFile jarFile;
 
-        try {
-            jarFile = new JarFile(file);
-        } catch (IOException e) {
-            Logger.instance.logf(Level.WARNING, Messages.PLUGIN_JARFILE_CREATE, e);
-            return;
-        }
+		try {
+			jarFile = new JarFile(file);
+		} catch (IOException e) {
+			Logger.instance.logf(Level.WARNING, Messages.PLUGIN_JARFILE_CREATE,
+			    e);
+			return;
+		}
 
-        JarEntry pJson = jarFile.getJarEntry("plugin.json");
+		JarEntry pJson = jarFile.getJarEntry("plugin.json");
 
-        if (pJson == null)
-            return;
+		if (pJson == null) return;
 
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(jarFile.getInputStream(pJson)));
-            PluginInfo info = new GsonBuilder().setPrettyPrinting().create().fromJson(reader, PluginInfo.class);
+		try {
+			BufferedReader reader = new BufferedReader(
+			    new InputStreamReader(jarFile.getInputStream(pJson)));
+			PluginInfo info = new GsonBuilder().setPrettyPrinting().create()
+			    .fromJson(reader, PluginInfo.class);
 
-            if (info != null) {
-                ClassLoader classLoader = new URLClassLoader(new URL[] { file.toURI().toURL() }, this.getClass().getClassLoader());
+			if (info != null) {
+				ClassLoader classLoader =
+				    new URLClassLoader(new URL[] {file.toURI().toURL()},
+				        this.getClass().getClassLoader());
 
-                Plugin plugin;
+				Plugin plugin;
 
-                try {
-                    plugin = (Plugin) classLoader.loadClass(info.getMain()).newInstance();
-                    plugin.setInfo(info);
-                    plugins.add(plugin);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                    Logger.instance.logf(Level.WARNING, Messages.PLUGIN_INSTANTIATION, e);
-                    return;
-                }
+				try {
+					plugin = (Plugin) classLoader.loadClass(info.getMain())
+					    .newInstance();
+					plugin.setInfo(info);
+					plugins.add(plugin);
+				} catch (ClassNotFoundException | InstantiationException
+				    | IllegalAccessException e) {
+					Logger.instance.logf(Level.WARNING,
+					    Messages.PLUGIN_INSTANTIATION, e);
+					return;
+				}
 
-                Enumeration<JarEntry> entries = jarFile.entries();
-                while (entries.hasMoreElements()) {
-                    JarEntry e = entries.nextElement();
-                    String name = e.getName();
+				Enumeration<JarEntry> entries = jarFile.entries();
+				while (entries.hasMoreElements()) {
+					JarEntry e = entries.nextElement();
+					String name = e.getName();
 
-                    if (name.endsWith(".class")) {
-                        try {
-                            Class clazz = Class.forName(name.substring(0, name.length() - 6).replace('/', '.'), true, classLoader);
+					if (name.endsWith(".class")) {
+						try {
+							Class clazz = Class
+							    .forName(name.substring(0, name.length() - 6)
+							        .replace('/', '.'), true, classLoader);
 
-                            if (clazz != null && clazz.getSuperclass().equals(Module.class)) {
-                                try {
-                                    plugin.loadModule((Module) clazz.newInstance());
-                                } catch (InstantiationException | IllegalAccessException exception) {
-                                    Logger.instance.logf(Level.WARNING, Messages.PLUGIN_CANT_CREATE_MODULE, exception);
-                                }
-                            }
-                        } catch (ClassNotFoundException exception) {
-                            Logger.instance.logf(Level.WARNING, Messages.PLUGIN_CANT_LOAD_CLASS, name);
-                        }
-                    }
-                }
-            }
-        } catch (IOException e) {
-            Logger.instance.logf(Level.WARNING, Messages.PLUGIN_CANT_CREATE_INPUTSTREAM, file.getAbsolutePath());
-        }
-    }
+							if (clazz != null
+							    && clazz.getSuperclass().equals(Module.class)) {
+								try {
+									plugin.loadModule(
+									    (Module) clazz.newInstance());
+								} catch (InstantiationException
+								    | IllegalAccessException exception) {
+									Logger.instance.logf(Level.WARNING,
+									    Messages.PLUGIN_CANT_CREATE_MODULE,
+									    exception);
+								}
+							}
+						} catch (ClassNotFoundException exception) {
+							Logger.instance.logf(Level.WARNING,
+							    Messages.PLUGIN_CANT_LOAD_CLASS, name);
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			Logger.instance.logf(Level.WARNING,
+			    Messages.PLUGIN_CANT_CREATE_INPUTSTREAM,
+			    file.getAbsolutePath());
+		}
+	}
 
-    /**
-     * @return The list of plugins that were discovered
-     */
-    public final List<Plugin> getPlugins() {
-        return this.plugins;
-    }
+	/**
+	 * @return The list of plugins that were discovered
+	 */
+	public final List<Plugin> getPlugins() {
+		return this.plugins;
+	}
 }

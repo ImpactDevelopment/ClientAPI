@@ -24,39 +24,39 @@ package clientapi.module.plugin;
  */
 class PluginInfo {
 
-    /**
-     * Name of the Plugin
-     */
-    private String name;
+	/**
+	 * Name of the Plugin
+	 */
+	private String name;
 
-    /**
-     * Description of the Plugin
-     */
-    private String description;
+	/**
+	 * Description of the Plugin
+	 */
+	private String description;
 
-    /**
-     * Main class of the Plugin
-     */
-    private String main;
+	/**
+	 * Main class of the Plugin
+	 */
+	private String main;
 
-    /**
-     * @return The name of this plugin
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * @return The name of this plugin
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @return The description of this plugin
-     */
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * @return The description of this plugin
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * @return The main class of this plugin
-     */
-    public String getMain() {
-        return main;
-    }
+	/**
+	 * @return The main class of this plugin
+	 */
+	public String getMain() {
+		return main;
+	}
 }

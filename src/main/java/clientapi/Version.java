@@ -17,26 +17,27 @@
 package clientapi;
 
 /**
- * Used to track the version of the API. An API version
- * consists of a Major, Minor, and Patch version.
+ * Used to track the version of the API. An API version consists of a Major,
+ * Minor, and Patch version.
  *
  * @author Brady
  * @since 8/16/2017 7:11 PM
  */
 public final class Version {
 
-    private Version() {}
+	private Version() {}
 
-    // Incremented when a new version of Minecraft is released, never reset
-    public static final int MAJOR = 3;
+	// Incremented when a new version of Minecraft is released, never reset
+	public static final int MAJOR = 3;
 
-    // Incremented when API-breaking changes are made, reset when major version is modified
-    public static final int MINOR = 0;
+	// Incremented when API-breaking changes are made, reset when major version
+	// is modified
+	public static final int MINOR = 0;
 
-    // Incremented every release, reset when the minor version is modified
-    public static final int PATCH = 0;
+	// Incremented every release, reset when the minor version is modified
+	public static final int PATCH = 0;
 
-    public static String getVersion() {
-        return String.format("%d.%d.%d", MAJOR, MINOR, PATCH);
-    }
+	public static String getVersion() {
+		return String.format("%d.%d.%d", MAJOR, MINOR, PATCH);
+	}
 }

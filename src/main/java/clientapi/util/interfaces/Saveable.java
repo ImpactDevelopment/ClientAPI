@@ -23,14 +23,13 @@ import clientapi.manage.Manager;
  *
  * @see Manager
  * @see Loadable
- *
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
 public interface Saveable {
 
-    /**
-     * Save function
-     */
-    void save();
+	/**
+	 * Save function
+	 */
+	void save();
 }

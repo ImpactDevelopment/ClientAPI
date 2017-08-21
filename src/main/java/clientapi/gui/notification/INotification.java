@@ -35,7 +35,8 @@ interface INotification {
 	String getSubtext();
 
 	/**
-	 * @return Returns the time in milliseconds when this Notification was created
+	 * @return Returns the time in milliseconds when this Notification was
+	 *         created
 	 */
 	long getStart();
 
@@ -45,7 +46,8 @@ interface INotification {
 	long getFade();
 
 	/**
-	 * @return Returns the time in milliseconds that this notification should be displayed for
+	 * @return Returns the time in milliseconds that this notification should be
+	 *         displayed for
 	 */
 	long getDisplayTime();
 }

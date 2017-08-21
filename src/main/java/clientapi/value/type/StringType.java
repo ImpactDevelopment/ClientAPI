@@ -25,13 +25,13 @@ import java.lang.reflect.Field;
  * Basic type for String values
  *
  * @see StringValue
- *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
 public final class StringType extends Value<String> {
 
-    public StringType(String name, String id, String description, Object object, Field field) {
-        super(name, id, description, object, field);
-    }
+	public StringType(String name, String id, String description, Object object,
+	    Field field) {
+		super(name, id, description, object, field);
+	}
 }

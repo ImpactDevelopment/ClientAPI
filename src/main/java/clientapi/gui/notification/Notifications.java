@@ -36,7 +36,7 @@ public class Notifications {
 	 * The renderer for this notification handler
 	 */
 	private final INotificationRenderer renderer;
-	
+
 	public Notifications(INotificationRenderer renderer) {
 		this.renderer = renderer;
 	}
@@ -70,8 +70,10 @@ public class Notifications {
 	 * @param fade The fade time
 	 * @param displayTime The display time
 	 */
-	public void post(String header, String subtext, long fade, long displayTime) {
-		this.notifications.add(new Notification(header, subtext, fade, displayTime));
+	public void post(String header, String subtext, long fade,
+	    long displayTime) {
+		this.notifications
+		    .add(new Notification(header, subtext, fade, displayTime));
 	}
 
 	/**

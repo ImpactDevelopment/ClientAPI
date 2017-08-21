@@ -17,15 +17,15 @@
 package clientapi.exception;
 
 /**
- * Called when a field is accessed, but the field
- * has not yet been initialized and has a null value.
+ * Called when a field is accessed, but the field has not yet been initialized
+ * and has a null value.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
 public final class NotInitializedException extends RuntimeException {
 
-    public NotInitializedException(String message) {
-        super(message);
-    }
+	public NotInitializedException(String message) {
+		super(message);
+	}
 }

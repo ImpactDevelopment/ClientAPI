@@ -18,9 +18,11 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.LayerRenderEvent;
+
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -32,12 +34,18 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RenderLivingBase.class)
 public class MixinRenderLivingBase {
 
-    @Redirect(method = "renderLayers", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/entity/layers/LayerRenderer.doRenderLayer(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V"))
-    @SuppressWarnings("unchecked")
-    private void doRenderLayer(LayerRenderer renderer, EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scaleIn) {
-        LayerRenderEvent event = new LayerRenderEvent(entitylivingbaseIn, renderer);
-        ClientAPI.EVENT_BUS.post(event);
-        if (!event.isCancelled())
-            renderer.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scaleIn);
-    }
+	@Redirect(method = "renderLayers", at = @At(value = "INVOKE",
+	    target = "net/minecraft/client/renderer/entity/layers/LayerRenderer.doRenderLayer(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V"))
+	@SuppressWarnings("unchecked")
+	private void doRenderLayer(LayerRenderer renderer,
+	    EntityLivingBase entitylivingbaseIn, float limbSwing,
+	    float limbSwingAmount, float partialTicks, float ageInTicks,
+	    float netHeadYaw, float headPitch, float scaleIn) {
+		LayerRenderEvent event =
+		    new LayerRenderEvent(entitylivingbaseIn, renderer);
+		ClientAPI.EVENT_BUS.post(event);
+		if (!event.isCancelled()) renderer.doRenderLayer(entitylivingbaseIn,
+		    limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw,
+		    headPitch, scaleIn);
+	}
 }

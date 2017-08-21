@@ -26,35 +26,34 @@ import clientapi.manage.Manager;
  */
 public final class CameraManager extends Manager<Camera> {
 
-    /**
-     * Instance of the CameraManager
-     */
-    private static final CameraManager instance = new CameraManager();
+	/**
+	 * Instance of the CameraManager
+	 */
+	private static final CameraManager instance = new CameraManager();
 
-    private CameraManager() {
-        super("Camera");
-    }
+	private CameraManager() {
+		super("Camera");
+	}
 
-    @Override
-    public void load() {}
+	@Override
+	public void load() {}
 
-    @Override
-    public void save() {}
+	@Override
+	public void save() {}
 
-    /**
-     * Registers a camera to the Manager
-     *
-     * @param camera Camera being registered
-     */
-    final void register(Camera camera) {
-        if (!this.getData().contains(camera))
-            this.addData(camera);
-    }
+	/**
+	 * Registers a camera to the Manager
+	 *
+	 * @param camera Camera being registered
+	 */
+	final void register(Camera camera) {
+		if (!this.getData().contains(camera)) this.addData(camera);
+	}
 
-    /**
-     * @return The instance of the CameraManager
-     */
-    public static CameraManager getInstance() {
-        return CameraManager.instance;
-    }
+	/**
+	 * @return The instance of the CameraManager
+	 */
+	public static CameraManager getInstance() {
+		return CameraManager.instance;
+	}
 }

@@ -20,13 +20,12 @@ package clientapi.event.defaults.game.core;
  * Event called when a Key is released outside of a GUI while in-game
  *
  * @see ClickEvent
- *
  * @author Leaf
  * @since 2.1
  */
 public final class KeyUpEvent extends KeyEvent {
 
-    public KeyUpEvent(int key, char character) {
-        super(key, character);
-    }
+	public KeyUpEvent(int key, char character) {
+		super(key, character);
+	}
 }

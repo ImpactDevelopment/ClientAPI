@@ -26,19 +26,19 @@ import clientapi.util.interfaces.Helper;
  */
 public final class Render3DEvent implements Helper {
 
-    /**
-     * The render partial ticks
-     */
-    private final float partialTicks;
+	/**
+	 * The render partial ticks
+	 */
+	private final float partialTicks;
 
-    public Render3DEvent() {
-        this.partialTicks = mca.getTimer().renderPartialTicks;
-    }
+	public Render3DEvent() {
+		this.partialTicks = mca.getTimer().renderPartialTicks;
+	}
 
-    /**
-     * @return The render partial ticks
-     */
-    public final float getPartialTicks() {
-        return this.partialTicks;
-    }
+	/**
+	 * @return The render partial ticks
+	 */
+	public final float getPartialTicks() {
+		return this.partialTicks;
+	}
 }

@@ -24,36 +24,32 @@ package clientapi.event.defaults.game.core;
  */
 public final class ProfilerEvent {
 
-    /**
-     * Complete current profiler section.
-     *
-     * ex) 'root.tick.render'
-     */
-    private final String sectionPath;
+	/**
+	 * Complete current profiler section. ex) 'root.tick.render'
+	 */
+	private final String sectionPath;
 
-    /**
-     * Current profiler section.
-     *
-     * ex) 'render'
-     */
-    private final String section;
+	/**
+	 * Current profiler section. ex) 'render'
+	 */
+	private final String section;
 
-    public ProfilerEvent(String sectionPath, String section) {
-        this.sectionPath = sectionPath;
-        this.section = section;
-    }
+	public ProfilerEvent(String sectionPath, String section) {
+		this.sectionPath = sectionPath;
+		this.section = section;
+	}
 
-    /**
-     * @return The full profiler section
-     */
-    public final String getSectionPath() {
-        return this.sectionPath;
-    }
+	/**
+	 * @return The full profiler section
+	 */
+	public final String getSectionPath() {
+		return this.sectionPath;
+	}
 
-    /**
-     * @return The current profiler section
-     */
-    public final String getSection() {
-        return this.section;
-    }
+	/**
+	 * @return The current profiler section
+	 */
+	public final String getSection() {
+		return this.section;
+	}
 }

@@ -17,6 +17,7 @@
 package clientapi.load.mixin.wrapper;
 
 import net.minecraft.world.GameType;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -27,5 +28,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(GameType.class)
 public interface IGameType {
 
-    @Accessor String getShortName();
+	@Accessor
+	String getShortName();
 }

@@ -18,7 +18,9 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.TextEvent;
+
 import net.minecraft.client.gui.FontRenderer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -30,17 +32,17 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(FontRenderer.class)
 public abstract class MixinFontRenderer {
 
-    @ModifyVariable(method = "renderStringAtPos", at = @At("HEAD"))
-    private String renderStringAtPos(String text) {
-        TextEvent event = new TextEvent(text);
-        ClientAPI.EVENT_BUS.post(event);
-        return event.getText();
-    }
+	@ModifyVariable(method = "renderStringAtPos", at = @At("HEAD"))
+	private String renderStringAtPos(String text) {
+		TextEvent event = new TextEvent(text);
+		ClientAPI.EVENT_BUS.post(event);
+		return event.getText();
+	}
 
-    @ModifyVariable(method = "getStringWidth", at = @At("HEAD"))
-    private String getStringWidth(String text) {
-        TextEvent event = new TextEvent(text);
-        ClientAPI.EVENT_BUS.post(event);
-        return event.getText();
-    }
+	@ModifyVariable(method = "getStringWidth", at = @At("HEAD"))
+	private String getStringWidth(String text) {
+		TextEvent event = new TextEvent(text);
+		ClientAPI.EVENT_BUS.post(event);
+		return event.getText();
+	}
 }

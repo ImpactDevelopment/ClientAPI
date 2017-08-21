@@ -29,4 +29,3 @@ To use the Client API, you must download the CDK from the Releases page. Instruc
 
 ## Usage
 Refer to the [Example](src/test) to view how clients using the ClientAPI are structured.
-

@@ -20,13 +20,12 @@ import static org.lwjgl.opengl.GL11.*;
 
 public enum GLClientState {
 
-    VERTEX(GL_VERTEX_ARRAY),
-    COLOR(GL_COLOR_ARRAY),
-    TEXTURE(GL_TEXTURE_COORD_ARRAY);
+	VERTEX(GL_VERTEX_ARRAY), COLOR(GL_COLOR_ARRAY),
+	TEXTURE(GL_TEXTURE_COORD_ARRAY);
 
-    public final int cap;
+	public final int cap;
 
-    GLClientState(int cap) {
-        this.cap = cap;
-    }
+	GLClientState(int cap) {
+		this.cap = cap;
+	}
 }

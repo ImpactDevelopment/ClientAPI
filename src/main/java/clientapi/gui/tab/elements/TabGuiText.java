@@ -26,37 +26,37 @@ import clientapi.gui.tab.ITabGuiElement;
  */
 public class TabGuiText implements ITabGuiElement {
 
-    /**
-     * The text of this element
-     */
-    private String text;
+	/**
+	 * The text of this element
+	 */
+	private String text;
 
-    public TabGuiText(String text) {
-        this.text = text;
-    }
+	public TabGuiText(String text) {
+		this.text = text;
+	}
 
-    @Override
-    public final String getText() {
-        return text;
-    }
+	@Override
+	public final String getText() {
+		return text;
+	}
 
-    /**
-     * Sets the text of this Text Element
-     *
-     * @param text The text that will be displayed
-     */
-    public final void setText(String text) {
-        this.text = text;
-    }
+	/**
+	 * Sets the text of this Text Element
+	 *
+	 * @param text The text that will be displayed
+	 */
+	public final void setText(String text) {
+		this.text = text;
+	}
 
-    @Override
-    public void keyPress(int key) {}
+	@Override
+	public void keyPress(int key) {}
 
-    @Override
-    public final boolean isActive() {
-        return false;
-    }
+	@Override
+	public final boolean isActive() {
+		return false;
+	}
 
-    @Override
-    public void toggle() {}
+	@Override
+	public void toggle() {}
 }

@@ -32,5 +32,5 @@ import java.lang.annotation.Target;
 @ValueDefinition
 public @interface MultiValue {
 
-    String[] value();
+	String[] value();
 }

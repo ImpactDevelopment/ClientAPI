@@ -17,25 +17,25 @@
 package clientapi.event.defaults.game.core;
 
 import me.zero.alpine.type.EventState;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 
 /**
  * Called at the head of {@code EntityPlayerSP#onUpdate}
  *
  * @see EntityPlayerSP#onUpdate()
- *
  * @author Brady
  * @since 2/8/2017 12:00 PM
  */
 public final class UpdateEvent {
 
-    private final EventState state;
+	private final EventState state;
 
-    public UpdateEvent(EventState state) {
-        this.state = state;
-    }
+	public UpdateEvent(EventState state) {
+		this.state = state;
+	}
 
-    public EventState getState() {
-        return this.state;
-    }
+	public EventState getState() {
+		return this.state;
+	}
 }

@@ -22,7 +22,7 @@ package clientapi.module.exception;
  */
 public final class ModuleInitException extends RuntimeException {
 
-    public ModuleInitException(String message) {
-        super(message);
-    }
+	public ModuleInitException(String message) {
+		super(message);
+	}
 }

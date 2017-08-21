@@ -22,10 +22,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Category annotation to mark interfaces as
- * categories. This annotation isn't placed
- * anywhere in the API, only in Clients based
- * on it.
+ * Category annotation to mark interfaces as categories. This annotation isn't
+ * placed anywhere in the API, only in Clients based on it.
  *
  * @author Brady
  * @since 2/6/2017 12:00 PM
@@ -34,13 +32,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Category {
 
-    /**
-     * @return The name of the Category
-     */
-    String name();
+	/**
+	 * @return The name of the Category
+	 */
+	String name();
 
-    /**
-     * Default Category
-     */
-    @Category(name = "Default") class Default {}
+	/**
+	 * Default Category
+	 */
+	@Category(name = "Default")
+	class Default {}
 }

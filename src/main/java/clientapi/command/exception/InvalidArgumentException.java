@@ -19,57 +19,58 @@ package clientapi.command.exception;
 import clientapi.command.Command;
 
 /**
- * Thrown when an argument that was passed to the command
- * was not the expected type. For example, a number was expected
- * but the number was unable to be parsed.
+ * Thrown when an argument that was passed to the command was not the expected
+ * type. For example, a number was expected but the number was unable to be
+ * parsed.
  *
  * @author Brady
  * @since 6/7/2017 9:34 AM
  */
 public final class InvalidArgumentException extends CommandException {
 
-    /**
-     * Array of inputted arguments
-     */
-    private final String[] args;
+	/**
+	 * Array of inputted arguments
+	 */
+	private final String[] args;
 
-    /**
-     * Index of the bag argument
-     */
-    private final int badArg;
+	/**
+	 * Index of the bag argument
+	 */
+	private final int badArg;
 
-    /**
-     * Expected type
-     */
-    private final Class<?> expected;
+	/**
+	 * Expected type
+	 */
+	private final Class<?> expected;
 
-    public InvalidArgumentException(Command command, String[] args, int badArg, Class<?> expected) {
-        super(command);
-        this.args = args;
-        this.badArg = badArg;
-        this.expected = expected;
-    }
+	public InvalidArgumentException(Command command, String[] args, int badArg,
+	    Class<?> expected) {
+		super(command);
+		this.args = args;
+		this.badArg = badArg;
+		this.expected = expected;
+	}
 
-    /**
-     * @return Array of inputted arguments
-     */
-    public final String[] getArgs() {
-        return this.args;
-    }
+	/**
+	 * @return Array of inputted arguments
+	 */
+	public final String[] getArgs() {
+		return this.args;
+	}
 
-    /**
-     * @return Index of the bad argument
-     */
-    public final int getBadArg() {
-        return this.badArg;
-    }
+	/**
+	 * @return Index of the bad argument
+	 */
+	public final int getBadArg() {
+		return this.badArg;
+	}
 
-    /**
-     * Returns the expected class type of the given argument.
-     *
-     * @return The expected type
-     */
-    public Class<?> getExpectedType() {
-        return this.expected;
-    }
+	/**
+	 * Returns the expected class type of the given argument.
+	 *
+	 * @return The expected type
+	 */
+	public Class<?> getExpectedType() {
+		return this.expected;
+	}
 }

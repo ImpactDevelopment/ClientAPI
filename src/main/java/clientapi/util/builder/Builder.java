@@ -17,9 +17,9 @@
 package clientapi.util.builder;
 
 /**
- * Simple functional interface for object builders. Creates
- * an instance of the generic type. Note that other implementations
- * already exist of this, this one is to be used in ClientAPI.
+ * Simple functional interface for object builders. Creates an instance of the
+ * generic type. Note that other implementations already exist of this, this one
+ * is to be used in ClientAPI.
  *
  * @author Brady
  * @since 8/13/2017 8:45 PM
@@ -27,11 +27,11 @@ package clientapi.util.builder;
 @FunctionalInterface
 public interface Builder<T> {
 
-    /**
-     * Creates an instance of the target object for this builder.
-     * Will return {@code null} if the object was unable to be created.
-     *
-     * @return The object created, null if unable to create.
-     */
-    T build();
+	/**
+	 * Creates an instance of the target object for this builder. Will return
+	 * {@code null} if the object was unable to be created.
+	 *
+	 * @return The object created, null if unable to create.
+	 */
+	T build();
 }

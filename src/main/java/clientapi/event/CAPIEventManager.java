@@ -26,19 +26,18 @@ import me.zero.alpine.EventManager;
  */
 public final class CAPIEventManager extends EventManager {
 
-    private boolean enabled = true;
+	private boolean enabled = true;
 
-    @Override
-    public final void post(Object event) {
-        if (enabled)
-            super.post(event);
-    }
+	@Override
+	public final void post(Object event) {
+		if (enabled) super.post(event);
+	}
 
-    public final void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public final void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
-    public final boolean isEnabled() {
-        return this.enabled;
-    }
+	public final boolean isEnabled() {
+		return this.enabled;
+	}
 }

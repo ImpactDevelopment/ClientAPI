@@ -17,15 +17,14 @@
 package clientapi.exception;
 
 /**
- * Called when an array size is not sufficient
- * or exceeds a certain amount.
+ * Called when an array size is not sufficient or exceeds a certain amount.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
 public final class ArraySizeException extends RuntimeException {
 
-    public ArraySizeException(String message) {
-        super(message);
-    }
+	public ArraySizeException(String message) {
+		super(message);
+	}
 }
