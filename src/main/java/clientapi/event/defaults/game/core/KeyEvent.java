@@ -24,7 +24,7 @@ package clientapi.event.defaults.game.core;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public class KeyEvent {
+public final class KeyEvent {
 
     /**
      * Key code that belongs to the pressed key
