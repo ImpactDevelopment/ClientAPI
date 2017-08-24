@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.wrapper;
+package clientapi.load.mixin.packet.server;
 
-import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.network.play.server.SPacketPlayerPosLook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+import java.util.Set;
+
 /**
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/28/2017 12:00 PM
  */
-@Mixin(CPacketPlayer.class)
-public interface ICPacketPlayer {
+@Mixin(SPacketPlayerPosLook.class)
+public interface ISPacketPlayerPosLook {
 
     @Accessor void setX(double x);
 
@@ -47,15 +49,11 @@ public interface ICPacketPlayer {
 
     @Accessor float getPitch();
 
-    @Accessor void setOnGround(boolean onGround);
+    @Accessor void setFlags(Set<SPacketPlayerPosLook.EnumFlags> flags);
 
-    @Accessor boolean getOnGround();
+    @Accessor Set<SPacketPlayerPosLook.EnumFlags> getFlags();
 
-    @Accessor void setMoving(boolean moving);
+    @Accessor void setTeleportId(int teleportId);
 
-    @Accessor boolean getMoving();
-
-    @Accessor void setRotating(boolean rotating);
-
-    @Accessor boolean getRotating();
+    @Accessor int getTeleportId();
 }
