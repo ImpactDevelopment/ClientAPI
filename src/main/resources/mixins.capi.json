@@ -31,6 +31,8 @@
     "wrapper.IRenderManager",
     "wrapper.IShaderGroup",
 
+    "packet.handshake.client.IC00Handshake",
+
     "packet.login.client.ICPacketEncryptionResponse",
     "packet.login.client.ICPacketLoginStart",
 
