@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(CPacketAnimation.class)
 public interface ICPacketAnimation {
 
-    @Accessor void setHand(EnumHand hand);
-
     @Accessor EnumHand getHand();
+
+    @Accessor void setHand(EnumHand hand);
 }

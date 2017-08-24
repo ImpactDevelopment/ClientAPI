@@ -15,7 +15,7 @@ public interface ICPacketEncryptionResponse {
 
     @Accessor void setSecretKeyEncrypted(byte[] secretKeyEncrypted);
 
-    @Accessor byte[] verifyTokenEncrypted();
+    @Accessor byte[] getVerifyTokenEncrypted();
 
     @Accessor void setVerifyTokenEncrypted(byte[] verifyTokenEncrypted);
 }

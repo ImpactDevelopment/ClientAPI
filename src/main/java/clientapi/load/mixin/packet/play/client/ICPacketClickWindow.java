@@ -23,7 +23,7 @@ public interface ICPacketClickWindow {
 
     @Accessor int getPackedClickData();
 
-    @Accessor void setPacketClickData(int packetClickData);
+    @Accessor void setPackedClickData(int packetClickData);
 
     @Accessor short getActionNumber();
 

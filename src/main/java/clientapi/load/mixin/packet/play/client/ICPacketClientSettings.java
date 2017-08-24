@@ -25,9 +25,9 @@ public interface ICPacketClientSettings {
 
     @Accessor void setChatVisibility(EntityPlayer.EnumChatVisibility chatVisibility);
 
-    @Accessor boolean isEnabledColors();
+    @Accessor boolean isEnableColors();
 
-    @Accessor void setEnabledColors(boolean enabledColors);
+    @Accessor void setEnableColors(boolean enabledColors);
 
     @Accessor int getModelPartFlags();
 
