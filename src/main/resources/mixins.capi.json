@@ -22,7 +22,7 @@
     "MixinRenderItem",
     "MixinRenderLivingBase",
     "MixinRenderManager",
-    "wrapper.ICPacketPlayer",
+
     "wrapper.IEntityPlayer",
     "wrapper.IGameType",
     "wrapper.IItemRenderer",
@@ -30,6 +30,38 @@
     "wrapper.IPlayerControllerMP",
     "wrapper.IRenderManager",
     "wrapper.IShaderGroup",
-    "wrapper.ISPacketPlayerPosLook"
+
+    "packet.client.ICPacketAnimation",
+    "packet.client.ICPacketChatMessage",
+    "packet.client.ICPacketClickWindow",
+    "packet.client.ICPacketClientSettings",
+    "packet.client.ICPacketClientStatus",
+    "packet.client.ICPacketCloseWindow",
+    "packet.client.ICPacketConfirmTeleport",
+    "packet.client.ICPacketConfirmTransaction",
+    "packet.client.ICPacketCreativeInventoryAction",
+    "packet.client.ICPacketCustomPayload",
+    "packet.client.ICPacketEnchantItem",
+    "packet.client.ICPacketEntityAction",
+    "packet.client.ICPacketHeldItemChange",
+    "packet.client.ICPacketInput",
+    "packet.client.ICPacketKeepAlive",
+    "packet.client.ICPacketPlaceRecipe",
+    "packet.client.ICPacketPlayer",
+    "packet.client.ICPacketPlayerAbilities",
+    "packet.client.ICPacketPlayerDigging",
+    "packet.client.ICPacketPlayerTryUseItem",
+    "packet.client.ICPacketPlayerTryUseItemOnBlock",
+    "packet.client.ICPacketRecipeInfo",
+    "packet.client.ICPacketResourcePackStatus",
+    "packet.client.ICPacketSeenAdvancements",
+    "packet.client.ICPacketSpectate",
+    "packet.client.ICPacketSteerBoat",
+    "packet.client.ICPacketTabComplete",
+    "packet.client.ICPacketUpdateSign",
+    "packet.client.ICPacketUseEntity",
+    "packet.client.ICPacketVehicleMove",
+
+    "packet.server.ISPacketPlayerPosLook"
   ]
 }
