@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(CPacketConfirmTeleport.class)
 public interface ICPacketConfirmTeleport {
 
-    @Accessor int getTeleportId();
+    @Accessor("telportId") int getTeleportId();
 
-    @Accessor void setTeleportId(int teleportId);
+    @Accessor("telportId") void setTeleportId(int teleportId);
 }
