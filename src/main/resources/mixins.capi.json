@@ -36,6 +36,11 @@
     "packet.login.client.ICPacketEncryptionResponse",
     "packet.login.client.ICPacketLoginStart",
 
+    "packet.login.server.ISPacketDisconnect",
+    "packet.login.server.ISPacketEnableCompression",
+    "packet.login.server.ISPacketEncryptionRequest",
+    "packet.login.server.ISPacketLoginSuccess",
+
     "packet.play.client.ICPacketAnimation",
     "packet.play.client.ICPacketChatMessage",
     "packet.play.client.ICPacketClickWindow",
