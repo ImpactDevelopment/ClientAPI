@@ -28,14 +28,14 @@ import net.minecraft.client.gui.GuiScreen;
  * @author Brady
  * @since 2/23/2017 12:00 PM
  */
-public final class GuiEvent {
+public final class GuiDisplayEvent {
 
     /**
      * The GuiScreen being displayed
      */
     private GuiScreen screen;
 
-    public GuiEvent(GuiScreen screen) {
+    public GuiDisplayEvent(GuiScreen screen) {
         this.screen = screen;
     }
 
@@ -46,7 +46,7 @@ public final class GuiEvent {
      * @param screen The new gui screen that will be displayed
      * @return This event
      */
-    public GuiEvent setScreen(GuiScreen screen) {
+    public GuiDisplayEvent setScreen(GuiScreen screen) {
         this.screen = screen;
         return this;
     }
