@@ -22,7 +22,7 @@ public interface ICPacketRecipeInfo {
 
     @Accessor("isGuiOpen") boolean isGuiOpen();
 
-    @Accessor("isGuiOpen") void setGuiOpen();
+    @Accessor("isGuiOpen") void setGuiOpen(boolean isGuiOpen);
 
     @Accessor boolean isFilteringCraftable();
 
