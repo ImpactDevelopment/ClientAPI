@@ -36,5 +36,5 @@ public interface ICPacketPlayerTryUseItemOnBlock {
 
     @Accessor float getFacingZ();
 
-    @Accessor void setFacingZ();
+    @Accessor void setFacingZ(float facingZ);
 }
