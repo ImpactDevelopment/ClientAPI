@@ -22,8 +22,9 @@ import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.game.core.KeyUpEvent;
 import clientapi.event.defaults.game.core.ProfilerEvent;
 import clientapi.event.defaults.game.misc.ChatEvent;
-import clientapi.event.defaults.game.render.Render3DEvent;
+import clientapi.event.defaults.game.network.PacketEvent;
 import clientapi.event.defaults.game.render.RenderHudEvent;
+import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.keybind.Keybind;
 import clientapi.util.render.camera.Camera;
@@ -31,13 +32,12 @@ import clientapi.util.render.camera.CameraManager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.type.EventPriority;
-import clientapi.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.server.SPacketChat;
 
 import java.util.stream.Stream;
 
-import static org.lwjgl.input.Keyboard.*;
+import static org.lwjgl.input.Keyboard.KEY_NONE;
 
 /**
  * Some basic events that the client uses
@@ -86,7 +86,7 @@ public final class ClientHandler implements Helper {
         String section = event.getSection();
 
         if (section != null && section.equalsIgnoreCase("hand") && !Camera.isCapturing())
-            ClientAPI.EVENT_BUS.post(new Render3DEvent());
+            ClientAPI.EVENT_BUS.post(new RenderWorldEvent());
     });
 
     /**
