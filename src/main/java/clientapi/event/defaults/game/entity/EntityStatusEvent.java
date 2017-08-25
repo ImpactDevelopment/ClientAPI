@@ -44,6 +44,10 @@ public final class EntityStatusEvent extends Cancellable {
 
     public interface StatusOpcodes {
 
+        // None
+        int GUARDIAN_SOUND = 21;
+        int TOTEM_USE = 35;
+
         // AbstractHorse
         int SPAWN_HORSE_PARTICLES_SUCCESS = 7;
         int SPAWN_HORSE_PARTICLES_FAILURE = 6;

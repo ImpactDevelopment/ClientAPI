@@ -4,9 +4,13 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityStatusEvent;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.play.server.SPacketEntityStatus;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static clientapi.util.interfaces.Helper.*;
 
 /**
  * @author Brady
@@ -15,11 +19,19 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {
 
-    @Redirect(method = "handleEntityStatus", at = @At(value = "INVOKE", target = "net/minecraft/entity/Entity.handleStatusUpdate(B)V"))
-    private void handleStatusUpdate(Entity entity, byte opcode) {
-        EntityStatusEvent event = new EntityStatusEvent(entity, opcode);
+    @Inject(method = "handleEntityStatus", at = @At("HEAD"), cancellable = true)
+    private void handleEntityStatus(SPacketEntityStatus packet, CallbackInfo ci) {
+        if (mc.world == null)
+            return;
+
+        Entity entity = packet.getEntity(mc.world);
+        // noinspection ConstantConditions
+        if (entity == null)
+            return;
+
+        EntityStatusEvent event = new EntityStatusEvent(entity, packet.getOpCode());
         ClientAPI.EVENT_BUS.post(event);
-        if (!event.isCancelled())
-            entity.handleStatusUpdate(opcode);
+        if (event.isCancelled())
+            ci.cancel();
     }
 }
