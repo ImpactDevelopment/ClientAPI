@@ -24,14 +24,14 @@ import clientapi.util.interfaces.Helper;
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
-public final class Render3DEvent implements Helper {
+public final class RenderWorldEvent implements Helper {
 
     /**
      * The render partial ticks
      */
     private final float partialTicks;
 
-    public Render3DEvent() {
+    public RenderWorldEvent() {
         this.partialTicks = mca.getTimer().renderPartialTicks;
     }
 

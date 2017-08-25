@@ -17,7 +17,7 @@
 package clientapi.util.render.gl;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.Render3DEvent;
+import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.Colors;
 import me.zero.alpine.listener.EventHandler;
@@ -57,7 +57,7 @@ public final class GlUtils {
         ClientAPI.EVENT_BUS.subscribe(new Object() {
 
             @EventHandler
-            private final Listener<Render3DEvent> render3DListener = new Listener<>(event -> {
+            private final Listener<RenderWorldEvent> render3DListener = new Listener<>(event -> {
                 glGetFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
                 glGetFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
                 glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
