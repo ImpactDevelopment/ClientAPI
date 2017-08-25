@@ -44,3 +44,12 @@ ext.getVersionFromJava = {
 
 	return "${major}.${minor}.${patch}".toString()
 }
+
+/**
+ * Create an executable text file and set its content
+ */
+ext.makeScriptFile = { String filename, String content ->
+	File out = file(filename)
+	out.text = content
+	out.setExecutable(true, false)
+}

@@ -55,3 +55,41 @@ task('makeCDK', type: Zip) {
 }
 
 tasks.build.dependsOn makeCDK
+
+task('setupGitHooks') {
+	makeScriptFile '.git/hooks/pre-commit', '''#/bin/sh
+# Store the current commit, staged changes and dirty tree as
+# seperate commits, then checkout only the staged changes
+parent_hash=`git rev-parse -q --verify HEAD`
+
+# Commit the current staged changes
+git commit -q --no-verify --allow-empty --allow-empty-message -m ""
+stage_hash=`git rev-parse -q --verify HEAD`
+
+# Commit all the unstaged changes
+git add -A
+git commit -q --no-verify --allow-empty --allow-empty-message -m ""
+dirty_hash=`git rev-parse -q --verify HEAD`
+
+# Reset back to the parent commit and checkout the staged changes
+git reset -q --hard ${parent_hash}
+git read-tree --reset -u ${stage_hash}
+
+# Run gradle and save it's return code
+./gradlew check
+rtn=$?
+
+# Restore the unstaged changes and return test results to git
+git read-tree --reset ${dirty_hash}
+exit ${rtn}
+'''
+
+	makeScriptFile '.git/hooks/commit-msg', '''#/bin/sh
+# Validate commit message
+
+# TODO 50/72 rule
+'''
+}
+
+// Run on every gradle import, making it basically automatic
+build.dependsOn setupGitHooks
