@@ -15,6 +15,7 @@
     "MixinLayerArmorBase",
     "MixinMinecraft",
     "MixinNetHandlerPlayClient",
+    "MixinNetHandlerLoginClient",
     "MixinNettyPacketDecoder",
     "MixinNettyPacketEncoder",
     "MixinNetworkManager",
