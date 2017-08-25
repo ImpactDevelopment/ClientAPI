@@ -17,42 +17,42 @@
 package clientapi.event.defaults.game.entity;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * Called from EntityLivingBase#onDeath
+ * Called when {@code SPacketCombatEvent} reports a player death
  *
  * @author Brady
  * @since 2/28/2017 12:00 PM
  */
-public final class EntityDeathEvent {
+public final class PlayerDeathEvent {
 
     /**
      * The Entity that died
      */
-    private final EntityLivingBase entity;
+    private final EntityPlayer player;
 
     /**
      * Type of Damage that caused the Death
      */
-    private final DamageSource source;
+    private final EntityLivingBase source;
 
-    public EntityDeathEvent(EntityLivingBase entity, DamageSource source) {
-        this.entity = entity;
+    public PlayerDeathEvent(EntityPlayer player, EntityLivingBase source) {
+        this.player = player;
         this.source = source;
     }
 
     /**
      * @return The entity that died
      */
-    public final EntityLivingBase getEntity() {
-        return this.entity;
+    public final EntityPlayer getPlayer() {
+        return this.player;
     }
 
     /**
-     * @return The DamageSource that caused the Death
+     * @return The Entity that killed the player
      */
-    public final DamageSource getSource() {
+    public final EntityLivingBase getSource() {
         return this.source;
     }
 }
