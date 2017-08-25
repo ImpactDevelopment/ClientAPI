@@ -57,13 +57,23 @@ public final class ClientTweaker implements ITweaker {
         // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
 
+        Logger.instance.log(Level.INFO, "Initialized Mixin bootstrap");
+
         // Load the ClientAPI mixin config
+        String capi = "mixins.capi.json";
+        if (this.getClass().getResourceAsStream("/" + capi) == null) {
+            throw new ClientInitException("Unable to locate ClientAPI mixin configuration");
+        }
         Mixins.addConfiguration("mixins.capi.json");
+
+        Logger.instance.log(Level.INFO, "Loaded ClientAPI mixin configuration");
 
         // Optional mixin configuration, added by client developers
         String mixin = "mixins.client.json";
-        if (this.getClass().getResourceAsStream("/" + mixin) != null)
+        if (this.getClass().getResourceAsStream("/" + mixin) != null) {
             Mixins.addConfiguration(mixin);
+            Logger.instance.log(Level.INFO, "Loaded Client mixin configuration");
+        }
 
         // Ensure that the mixins are only run on client side
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
