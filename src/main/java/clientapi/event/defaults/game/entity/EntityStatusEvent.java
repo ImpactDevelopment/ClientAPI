@@ -1,6 +1,7 @@
 package clientapi.event.defaults.game.entity;
 
 import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.type.EventState;
 import net.minecraft.entity.Entity;
 
 /**
@@ -14,6 +15,11 @@ import net.minecraft.entity.Entity;
 public final class EntityStatusEvent extends Cancellable {
 
     /**
+     * The state of the event.
+     */
+    private final EventState state;
+
+    /**
      * Entity receiving a status update
      */
     private final Entity entity;
@@ -21,11 +27,19 @@ public final class EntityStatusEvent extends Cancellable {
     /**
      * The entity status update opcode
      */
-    private int opcode;
+    private final int opcode;
 
-    public EntityStatusEvent(Entity entity, int opcode) {
+    public EntityStatusEvent(EventState state, Entity entity, int opcode) {
+        this.state = state;
         this.entity = entity;
         this.opcode = opcode;
+    }
+
+    /**
+     * @return The state of this event
+     */
+    public final EventState getState() {
+        return this.state;
     }
 
     /**
