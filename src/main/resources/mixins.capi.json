@@ -74,6 +74,8 @@
 
     "packet.play.server.ISPacketPlayerPosLook",
 
-    "packet.status.client.ICPacketPing"
+    "packet.status.client.ICPacketPing",
+    "packet.status.server.ISPacketPong",
+    "packet.status.server.ISPacketServerInfo"
   ]
 }
