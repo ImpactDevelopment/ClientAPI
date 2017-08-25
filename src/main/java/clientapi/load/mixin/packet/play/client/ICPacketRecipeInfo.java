@@ -26,5 +26,5 @@ public interface ICPacketRecipeInfo {
 
     @Accessor boolean isFilteringCraftable();
 
-    @Accessor void setIsFilteringCraftable(boolean isFilteringCraftable);
+    @Accessor void setFilteringCraftable(boolean filteringCraftable);
 }
