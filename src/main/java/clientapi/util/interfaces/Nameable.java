@@ -24,13 +24,13 @@ package clientapi.util.interfaces;
  */
 public interface Nameable {
 
-	/**
-	 * @return Name of this object
-	 */
-	String getName();
+    /**
+     * @return Name of this object
+     */
+    String getName();
 
-	/**
-	 * @return Description of this object
-	 */
-	String getDescription();
+    /**
+     * @return Description of this object
+     */
+    String getDescription();
 }

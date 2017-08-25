@@ -32,13 +32,13 @@ import java.util.Arrays;
 @Cmd(headers = {"test", "example"}, description = "Test Command")
 public final class TestCommand extends Command {
 
-	@Override
-	public void execute(CommandSender sender, String[] arguments)
-	    throws CommandException {
-		// Print a chat message indicating the success of the
-		mc.ingameGUI.getChatGUI()
-		    .printChatMessage(new TextComponentString(String.format(
-		        "%s executed the \"Test\" command with arguments %s",
-		        sender.getName(), Arrays.toString(arguments))));
-	}
+    @Override
+    public void execute(CommandSender sender, String[] arguments)
+        throws CommandException {
+        // Print a chat message indicating the success of the
+        mc.ingameGUI.getChatGUI()
+            .printChatMessage(new TextComponentString(String.format(
+                "%s executed the \"Test\" command with arguments %s",
+                sender.getName(), Arrays.toString(arguments))));
+    }
 }

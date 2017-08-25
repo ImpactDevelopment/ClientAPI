@@ -28,31 +28,31 @@ import net.minecraft.client.gui.GuiScreen;
  */
 public final class GuiEvent {
 
-	/**
-	 * The GuiScreen being displayed
-	 */
-	private GuiScreen screen;
+    /**
+     * The GuiScreen being displayed
+     */
+    private GuiScreen screen;
 
-	public GuiEvent(GuiScreen screen) {
-		this.screen = screen;
-	}
+    public GuiEvent(GuiScreen screen) {
+        this.screen = screen;
+    }
 
-	/**
-	 * Sets the gui screen that will be displayed. Replaces the screen that
-	 * would've been displayed.
-	 *
-	 * @param screen The new gui screen that will be displayed
-	 * @return This event
-	 */
-	public GuiEvent setScreen(GuiScreen screen) {
-		this.screen = screen;
-		return this;
-	}
+    /**
+     * Sets the gui screen that will be displayed. Replaces the screen that
+     * would've been displayed.
+     *
+     * @param screen The new gui screen that will be displayed
+     * @return This event
+     */
+    public GuiEvent setScreen(GuiScreen screen) {
+        this.screen = screen;
+        return this;
+    }
 
-	/**
-	 * @return The screen being displayed
-	 */
-	public final GuiScreen getScreen() {
-		return this.screen;
-	}
+    /**
+     * @return The screen being displayed
+     */
+    public final GuiScreen getScreen() {
+        return this.screen;
+    }
 }

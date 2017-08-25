@@ -44,42 +44,42 @@ import javax.annotation.Nullable;
 @Mixin(Block.class)
 public abstract class MixinBlock {
 
-	@Shadow
-	protected static void addCollisionBoxToList(BlockPos pos,
-	    AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
-	    @Nullable AxisAlignedBB blockBox) {}
+    @Shadow
+    protected static void addCollisionBoxToList(BlockPos pos,
+        AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes,
+        @Nullable AxisAlignedBB blockBox) {}
 
-	@Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
-	private void canCollideCheck(IBlockState state, boolean hitIfLiquid,
-	    CallbackInfoReturnable<Boolean> ci) {
-		BlockCollisionEvent event =
-		    new BlockCollisionEvent((Block) (Object) this);
-		ClientAPI.EVENT_BUS.post(event);
-		if (event.isCancelled()) ci.setReturnValue(false);
-	}
+    @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
+    private void canCollideCheck(IBlockState state, boolean hitIfLiquid,
+        CallbackInfoReturnable<Boolean> ci) {
+        BlockCollisionEvent event =
+            new BlockCollisionEvent((Block) (Object) this);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled()) ci.setReturnValue(false);
+    }
 
-	/**
-	 * @reason the overwritten method is only one line, we need to overwrite to
-	 *         mutate the AABB and pass params into the event constructor
-	 * @author Brady
-	 */
-	@Overwrite
-	@Deprecated
-	public void addCollisionBoxToList(IBlockState state, World worldIn,
-	    BlockPos pos, AxisAlignedBB entityBox,
-	    List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
-	    boolean p_185477_7_) {
-		Block block = (Block) (Object) (this);
-		AxisAlignedBB axisalignedbb =
-		    block.getCollisionBoundingBox(state, worldIn, pos);
+    /**
+     * @reason the overwritten method is only one line, we need to overwrite to
+     *         mutate the AABB and pass params into the event constructor
+     * @author Brady
+     */
+    @Overwrite
+    @Deprecated
+    public void addCollisionBoxToList(IBlockState state, World worldIn,
+        BlockPos pos, AxisAlignedBB entityBox,
+        List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn,
+        boolean p_185477_7_) {
+        Block block = (Block) (Object) (this);
+        AxisAlignedBB axisalignedbb =
+            block.getCollisionBoundingBox(state, worldIn, pos);
 
-		BoundingBoxEvent event =
-		    new BoundingBoxEvent(block, pos, axisalignedbb);
-		ClientAPI.EVENT_BUS.post(event);
-		if (event.isCancelled()) return;
+        BoundingBoxEvent event =
+            new BoundingBoxEvent(block, pos, axisalignedbb);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled()) return;
 
-		axisalignedbb = event.getBoundingBox();
+        axisalignedbb = event.getBoundingBox();
 
-		addCollisionBoxToList(pos, entityBox, collidingBoxes, axisalignedbb);
-	}
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, axisalignedbb);
+    }
 }

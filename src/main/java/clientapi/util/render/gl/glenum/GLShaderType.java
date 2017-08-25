@@ -24,5 +24,5 @@ package clientapi.util.render.gl.glenum;
  */
 public enum GLShaderType {
 
-	VERTEX, FRAGMENT, GEOMETRY
+    VERTEX, FRAGMENT, GEOMETRY
 }

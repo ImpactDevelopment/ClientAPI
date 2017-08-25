@@ -24,30 +24,30 @@ package clientapi.event.defaults.game.render;
  */
 public final class TextEvent {
 
-	/**
-	 * The text being rendered
-	 */
-	private String text;
+    /**
+     * The text being rendered
+     */
+    private String text;
 
-	public TextEvent(String text) {
-		this.text = text;
-	}
+    public TextEvent(String text) {
+        this.text = text;
+    }
 
-	/**
-	 * @return The text being rendered
-	 */
-	public final String getText() {
-		return this.text;
-	}
+    /**
+     * @return The text being rendered
+     */
+    public final String getText() {
+        return this.text;
+    }
 
-	/**
-	 * Sets the text being rendered
-	 *
-	 * @param text New text
-	 * @return This event
-	 */
-	public final TextEvent setText(String text) {
-		this.text = text;
-		return this;
-	}
+    /**
+     * Sets the text being rendered
+     *
+     * @param text New text
+     * @return This event
+     */
+    public final TextEvent setText(String text) {
+        this.text = text;
+        return this;
+    }
 }

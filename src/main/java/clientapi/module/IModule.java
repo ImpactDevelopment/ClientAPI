@@ -29,8 +29,8 @@ import clientapi.util.interfaces.Toggleable;
  */
 interface IModule extends Helper, Toggleable, Bindable {
 
-	/**
-	 * @return The type of the Module
-	 */
-	Class<?> getType();
+    /**
+     * @return The type of the Module
+     */
+    Class<?> getType();
 }

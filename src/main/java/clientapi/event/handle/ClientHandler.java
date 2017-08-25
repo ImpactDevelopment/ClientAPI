@@ -49,89 +49,89 @@ import java.util.stream.Stream;
  */
 public final class ClientHandler implements Helper {
 
-	/**
-	 * Handles camera updates
-	 */
-	@EventHandler
-	private final Listener<RenderHudEvent> render2DListener = new Listener<>(
-	    event -> CameraManager.getInstance().getData().forEach(
-	        camera -> camera.updateFramebuffer(event.getPartialTicks())),
-	    EventPriority.LOWEST);
+    /**
+     * Handles camera updates
+     */
+    @EventHandler
+    private final Listener<RenderHudEvent> render2DListener = new Listener<>(
+        event -> CameraManager.getInstance().getData().forEach(
+            camera -> camera.updateFramebuffer(event.getPartialTicks())),
+        EventPriority.LOWEST);
 
-	/**
-	 * Handles keybinds
-	 */
-	@EventHandler
-	private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
-		// Get
-		// all
-		// matching
-		// keybinds
-		Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
-		    .filter(bind -> bind.getKey() != KEY_NONE
-		        && bind.getKey() == event.getKey());
+    /**
+     * Handles keybinds
+     */
+    @EventHandler
+    private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
+        // Get
+        // all
+        // matching
+        // keybinds
+        Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
+            .filter(bind -> bind.getKey() != KEY_NONE
+                && bind.getKey() == event.getKey());
 
-		// Run
-		// onPress
-		// for
-		// all
-		// matching
-		// keybinds
-		// and
-		// onClick
-		// for
-		// the
-		// toggle
-		// keybinds
-		keybinds.forEach(keybind -> {
-			keybind.onPress();
-			if (keybind.getType() == Keybind.Type.TOGGLE) keybind.onClick();
-		});
-	});
+        // Run
+        // onPress
+        // for
+        // all
+        // matching
+        // keybinds
+        // and
+        // onClick
+        // for
+        // the
+        // toggle
+        // keybinds
+        keybinds.forEach(keybind -> {
+            keybind.onPress();
+            if (keybind.getType() == Keybind.Type.TOGGLE) keybind.onClick();
+        });
+    });
 
-	@EventHandler
-	private final Listener<KeyUpEvent> keyUpListener =
-	    new Listener<>(event -> Keybind.getKeybinds().stream()
-	        .filter(bind -> bind.getKey() == event.getKey())
-	        .forEach(Keybind::onRelease));
+    @EventHandler
+    private final Listener<KeyUpEvent> keyUpListener =
+        new Listener<>(event -> Keybind.getKeybinds().stream()
+            .filter(bind -> bind.getKey() == event.getKey())
+            .forEach(Keybind::onRelease));
 
-	/**
-	 * Handles profiling events
-	 */
-	@EventHandler
-	private final Listener<ProfilerEvent> profilerListener =
-	    new Listener<>(event -> {
-		    String section = event.getSection();
+    /**
+     * Handles profiling events
+     */
+    @EventHandler
+    private final Listener<ProfilerEvent> profilerListener =
+        new Listener<>(event -> {
+            String section = event.getSection();
 
-		    if (section != null && section.equalsIgnoreCase("hand")
-		        && !Camera.isCapturing())
-		        ClientAPI.EVENT_BUS.post(new Render3DEvent());
-	    });
+            if (section != null && section.equalsIgnoreCase("hand")
+                && !Camera.isCapturing())
+                ClientAPI.EVENT_BUS.post(new Render3DEvent());
+        });
 
-	/**
-	 * Handles packet out-flow
-	 */
-	@EventHandler
-	private final Listener<PacketEvent.Send> packetSendListener =
-	    new Listener<>(event -> {
-		    CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
-		    ChatEvent chatEvent = new ChatEvent.Send(packet.getMessage());
-		    ClientAPI.EVENT_BUS.post(chatEvent);
-		    if (chatEvent.isCancelled()) event.cancel();
+    /**
+     * Handles packet out-flow
+     */
+    @EventHandler
+    private final Listener<PacketEvent.Send> packetSendListener =
+        new Listener<>(event -> {
+            CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
+            ChatEvent chatEvent = new ChatEvent.Send(packet.getMessage());
+            ClientAPI.EVENT_BUS.post(chatEvent);
+            if (chatEvent.isCancelled()) event.cancel();
 
-		    event.setPacket(new CPacketChatMessage(chatEvent.getRawMessage()));
-	    }, new PacketFilter<>(CPacketChatMessage.class));
+            event.setPacket(new CPacketChatMessage(chatEvent.getRawMessage()));
+        }, new PacketFilter<>(CPacketChatMessage.class));
 
-	/**
-	 * Handles packet in-flow
-	 */
-	@EventHandler
-	private final Listener<PacketEvent.Receive> packetReceiveListener =
-	    new Listener<>(event -> {
-		    SPacketChat packet = (SPacketChat) event.getPacket();
-		    ChatEvent chatEvent =
-		        new ChatEvent.Receive(packet.getChatComponent());
-		    ClientAPI.EVENT_BUS.post(chatEvent);
-		    if (chatEvent.isCancelled()) event.cancel();
-	    }, new PacketFilter<>(SPacketChat.class));
+    /**
+     * Handles packet in-flow
+     */
+    @EventHandler
+    private final Listener<PacketEvent.Receive> packetReceiveListener =
+        new Listener<>(event -> {
+            SPacketChat packet = (SPacketChat) event.getPacket();
+            ChatEvent chatEvent =
+                new ChatEvent.Receive(packet.getChatComponent());
+            ClientAPI.EVENT_BUS.post(chatEvent);
+            if (chatEvent.isCancelled()) event.cancel();
+        }, new PacketFilter<>(SPacketChat.class));
 }

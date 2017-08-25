@@ -34,11 +34,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Profiler.class)
 public class MixinProfiler {
 
-	@Shadow
-	private String profilingSection;
+    @Shadow
+    private String profilingSection;
 
-	@Inject(method = "startSection", at = @At("HEAD"))
-	private void startSection(String name, CallbackInfo ci) {
-		ClientAPI.EVENT_BUS.post(new ProfilerEvent(profilingSection, name));
-	}
+    @Inject(method = "startSection", at = @At("HEAD"))
+    private void startSection(String name, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new ProfilerEvent(profilingSection, name));
+    }
 }

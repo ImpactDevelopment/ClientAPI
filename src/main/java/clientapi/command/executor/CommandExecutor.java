@@ -29,6 +29,6 @@ import clientapi.command.executor.sender.CommandSender;
  */
 public interface CommandExecutor {
 
-	void execute(Command command, CommandSender sender, String[] arguments)
-	    throws CommandException;
+    void execute(Command command, CommandSender sender, String[] arguments)
+        throws CommandException;
 }

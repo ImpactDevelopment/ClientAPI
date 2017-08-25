@@ -34,18 +34,18 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Mod {
 
-	/**
-	 * Name of Module
-	 */
-	String name();
+    /**
+     * Name of Module
+     */
+    String name();
 
-	/**
-	 * Description of Module
-	 */
-	String description();
+    /**
+     * Description of Module
+     */
+    String description();
 
-	/**
-	 * Keybind of Module, Key is {@code KEY_NONE} by default.
-	 */
-	int bind() default Keyboard.KEY_NONE;
+    /**
+     * Keybind of Module, Key is {@code KEY_NONE} by default.
+     */
+    int bind() default Keyboard.KEY_NONE;
 }

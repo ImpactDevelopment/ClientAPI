@@ -29,32 +29,32 @@ import net.minecraft.entity.Entity;
  */
 public final class EntityCollisionEvent extends Cancellable {
 
-	/**
-	 * Entity being collided into
-	 */
-	private final Entity entity;
+    /**
+     * Entity being collided into
+     */
+    private final Entity entity;
 
-	/**
-	 * Entity colliding into other entity
-	 */
-	private final Entity collidingEntity;
+    /**
+     * Entity colliding into other entity
+     */
+    private final Entity collidingEntity;
 
-	public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
-		this.entity = entity;
-		this.collidingEntity = collidingEntity;
-	}
+    public EntityCollisionEvent(Entity entity, Entity collidingEntity) {
+        this.entity = entity;
+        this.collidingEntity = collidingEntity;
+    }
 
-	/**
-	 * @return The entity being collided into
-	 */
-	public final Entity getEntity() {
-		return this.entity;
-	}
+    /**
+     * @return The entity being collided into
+     */
+    public final Entity getEntity() {
+        return this.entity;
+    }
 
-	/**
-	 * @return Entity colliding into other entity
-	 */
-	public final Entity getCollidingEntity() {
-		return this.collidingEntity;
-	}
+    /**
+     * @return Entity colliding into other entity
+     */
+    public final Entity getCollidingEntity() {
+        return this.collidingEntity;
+    }
 }

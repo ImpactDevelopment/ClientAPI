@@ -26,9 +26,9 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public interface CommandSender {
 
-	String getName();
+    String getName();
 
-	static CommandSender from(EntityPlayer player) {
-		return player::getName;
-	}
+    static CommandSender from(EntityPlayer player) {
+        return player::getName;
+    }
 }

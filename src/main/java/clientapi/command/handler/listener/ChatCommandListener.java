@@ -44,77 +44,77 @@ import java.util.regex.Pattern;
 public final class ChatCommandListener extends CommandListener
     implements Helper {
 
-	private static final Pattern REGEX =
-	    Pattern.compile("\"([^\"]+)\"|'([^']+)'|([^\\s]+)");
+    private static final Pattern REGEX =
+        Pattern.compile("\"([^\"]+)\"|'([^']+)'|([^\\s]+)");
 
-	public ChatCommandListener(CommandHandler handler) {
-		super(handler);
-	}
+    public ChatCommandListener(CommandHandler handler) {
+        super(handler);
+    }
 
-	@EventHandler
-	private final Listener<ChatEvent.Send> chatListener =
-	    new Listener<>(event -> {
-		    String raw = event.getRawMessage();
+    @EventHandler
+    private final Listener<ChatEvent.Send> chatListener =
+        new Listener<>(event -> {
+            String raw = event.getRawMessage();
 
-		    // If the user sends a message starting with a backslash, then we'll
-		    // send whatever follows it.
-		    // So if our command prefix was "." then sending "\.bind" would send
-		    // ".bind" in chat.
-		    // This replaces the need for the standard ".say" command that is
-		    // present in most clients.
-		    if (raw.startsWith("\\") && raw.length() > 1) {
-			    event.setMessage(new TextComponentString(raw.substring(1)));
-			    return;
-		    }
+            // If the user sends a message starting with a backslash, then we'll
+            // send whatever follows it.
+            // So if our command prefix was "." then sending "\.bind" would send
+            // ".bind" in chat.
+            // This replaces the need for the standard ".say" command that is
+            // present in most clients.
+            if (raw.startsWith("\\") && raw.length() > 1) {
+                event.setMessage(new TextComponentString(raw.substring(1)));
+                return;
+            }
 
-		    // If the message is a command
-		    if (raw.startsWith(handler.getPrefix())) {
-			    // No matter what, always cancel the message if it starts with
-			    // the
-			    // command prefix
-			    event.cancel();
+            // If the message is a command
+            if (raw.startsWith(handler.getPrefix())) {
+                // No matter what, always cancel the message if it starts with
+                // the
+                // command prefix
+                event.cancel();
 
-			    // Removed the prefix from the message
-			    raw = raw.substring(handler.getPrefix().length());
+                // Removed the prefix from the message
+                raw = raw.substring(handler.getPrefix().length());
 
-			    // Create a matcher to parse the message
-			    Matcher matcher = REGEX.matcher(raw);
+                // Create a matcher to parse the message
+                Matcher matcher = REGEX.matcher(raw);
 
-			    List<String> matches = new ArrayList<>();
-			    while (matcher.find()) {
-				    matches.add(matcher.group());
-			    }
+                List<String> matches = new ArrayList<>();
+                while (matcher.find()) {
+                    matches.add(matcher.group());
+                }
 
-			    // Only handle the command if there is at least 1 argument group
-			    if (matches.size() > 0) {
-				    Command command = handler.getCommandManager().getData()
-				        .stream().filter(cmd -> {
-					        for (String header : cmd.headers()) {
-						        if (header.equalsIgnoreCase(
-						            matches.get(0))) { return true; }
-					        }
-					        return false;
-				        }).findFirst().orElse(null);
+                // Only handle the command if there is at least 1 argument group
+                if (matches.size() > 0) {
+                    Command command = handler.getCommandManager().getData()
+                        .stream().filter(cmd -> {
+                            for (String header : cmd.headers()) {
+                                if (header.equalsIgnoreCase(
+                                    matches.get(0))) { return true; }
+                            }
+                            return false;
+                        }).findFirst().orElse(null);
 
-				    // Only handle the command if it's found
-				    if (command != null) {
-					    // Get all matches after the first one, these are
-					    // treated as
-					    // arguments
-					    String[] args = new String[matches.size() - 1];
-					    for (int i = 1; i < matches.size(); i++)
-						    args[i - 1] = matches.get(i).replace("\"", "")
-						        .replace("\'", "");
+                    // Only handle the command if it's found
+                    if (command != null) {
+                        // Get all matches after the first one, these are
+                        // treated as
+                        // arguments
+                        String[] args = new String[matches.size() - 1];
+                        for (int i = 1; i < matches.size(); i++)
+                            args[i - 1] = matches.get(i).replace("\"", "")
+                                .replace("\'", "");
 
-					    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(
-					        command, CommandSender.from(mc.player), args));
-					    return;
-				    }
-			    }
+                        ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(
+                            command, CommandSender.from(mc.player), args));
+                        return;
+                    }
+                }
 
-			    // This will be interpreted as an unknown command
-			    ClientAPI.EVENT_BUS
-			        .post(new CommandExecutionEvent(null, null, null));
-		    }
-	    });
+                // This will be interpreted as an unknown command
+                ClientAPI.EVENT_BUS
+                    .post(new CommandExecutionEvent(null, null, null));
+            }
+        });
 }

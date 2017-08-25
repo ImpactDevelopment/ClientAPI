@@ -26,59 +26,59 @@ import java.util.stream.LongStream;
  */
 public final class BenchResult {
 
-	/**
-	 * Number of passes made on the benchmark
-	 */
-	private final int passes;
+    /**
+     * Number of passes made on the benchmark
+     */
+    private final int passes;
 
-	/**
-	 * Number of invokations per pass
-	 */
-	private final int invokations;
+    /**
+     * Number of invokations per pass
+     */
+    private final int invokations;
 
-	/**
-	 * The time in nanoseconds for each pass
-	 */
-	private final long[] results;
+    /**
+     * The time in nanoseconds for each pass
+     */
+    private final long[] results;
 
-	BenchResult(int passes, int invokations, long[] results) {
-		this.passes = passes;
-		this.invokations = invokations;
-		this.results = results;
-	}
+    BenchResult(int passes, int invokations, long[] results) {
+        this.passes = passes;
+        this.invokations = invokations;
+        this.results = results;
+    }
 
-	/**
-	 * @return The amount of passes
-	 */
-	public final int getPasses() {
-		return this.passes;
-	}
+    /**
+     * @return The amount of passes
+     */
+    public final int getPasses() {
+        return this.passes;
+    }
 
-	/**
-	 * @return The amount of invokations per pass
-	 */
-	public final int getInvokations() {
-		return this.invokations;
-	}
+    /**
+     * @return The amount of invokations per pass
+     */
+    public final int getInvokations() {
+        return this.invokations;
+    }
 
-	/**
-	 * @return An array containing the time that each pass took in nanoseconds
-	 */
-	public final long[] getResults() {
-		return results;
-	}
+    /**
+     * @return An array containing the time that each pass took in nanoseconds
+     */
+    public final long[] getResults() {
+        return results;
+    }
 
-	/**
-	 * @return The total amount of nanoseconds that all passes took
-	 */
-	public final long getTotal() {
-		return LongStream.of(results).sum();
-	}
+    /**
+     * @return The total amount of nanoseconds that all passes took
+     */
+    public final long getTotal() {
+        return LongStream.of(results).sum();
+    }
 
-	/**
-	 * @return The average time that each pass took
-	 */
-	public final long getAverage() {
-		return this.getTotal() / this.passes;
-	}
+    /**
+     * @return The average time that each pass took
+     */
+    public final long getAverage() {
+        return this.getTotal() / this.passes;
+    }
 }

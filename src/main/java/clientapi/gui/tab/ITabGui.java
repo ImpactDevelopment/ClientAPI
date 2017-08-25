@@ -28,8 +28,8 @@ import clientapi.util.interfaces.Loadable;
  */
 public interface ITabGui extends Loadable, IRenderer {
 
-	/**
-	 * @return The main menu of this Tab GUI
-	 */
-	ITabGuiMenu getMenu();
+    /**
+     * @return The main menu of this Tab GUI
+     */
+    ITabGuiMenu getMenu();
 }

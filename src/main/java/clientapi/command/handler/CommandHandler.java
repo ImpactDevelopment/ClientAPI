@@ -40,97 +40,97 @@ import java.util.stream.Collectors;
  */
 public final class CommandHandler {
 
-	/**
-	 * Handlers to process command exceptions
-	 */
-	private final List<ExceptionHandler> handlers = new ArrayList<>();
+    /**
+     * Handlers to process command exceptions
+     */
+    private final List<ExceptionHandler> handlers = new ArrayList<>();
 
-	/**
-	 * Executor that is called to execute commands. The default executor is set
-	 * to a {@code DirectExecutor}
-	 */
-	private CommandExecutor executor = new DirectExecutor();
+    /**
+     * Executor that is called to execute commands. The default executor is set
+     * to a {@code DirectExecutor}
+     */
+    private CommandExecutor executor = new DirectExecutor();
 
-	/**
-	 * Command manager using this handler
-	 */
-	private final Manager<Command> commandManager;
+    /**
+     * Command manager using this handler
+     */
+    private final Manager<Command> commandManager;
 
-	/**
-	 * Prefix used to indicate command input. The default prefix is "."
-	 */
-	private String prefix = ".";
+    /**
+     * Prefix used to indicate command input. The default prefix is "."
+     */
+    private String prefix = ".";
 
-	public CommandHandler(Manager<Command> commandManager) {
-		this.commandManager = commandManager;
-	}
+    public CommandHandler(Manager<Command> commandManager) {
+        this.commandManager = commandManager;
+    }
 
-	@EventHandler
-	private final Listener<CommandExecutionEvent> commandExecutionListener =
-	    new Listener<>(event -> {
-		    try {
-			    if (event.getCommand() != null)
-			        executor.execute(event.getCommand(), event.getSender(),
-			            event.getArguments());
-			    else throw new UnknownCommandException();
-		    } catch (CommandException e) {
-			    List<ExceptionHandler> handlers = findHandlers(e);
-			    if (handlers.isEmpty()) e.printStackTrace();
-			    else handlers.forEach(handler -> handler.accept(e));
-		    }
-	    });
+    @EventHandler
+    private final Listener<CommandExecutionEvent> commandExecutionListener =
+        new Listener<>(event -> {
+            try {
+                if (event.getCommand() != null)
+                    executor.execute(event.getCommand(), event.getSender(),
+                        event.getArguments());
+                else throw new UnknownCommandException();
+            } catch (CommandException e) {
+                List<ExceptionHandler> handlers = findHandlers(e);
+                if (handlers.isEmpty()) e.printStackTrace();
+                else handlers.forEach(handler -> handler.accept(e));
+            }
+        });
 
-	/**
-	 * Finds handlers that target the specified CommandException
-	 *
-	 * @param exception The command exception
-	 * @return The list of handlers, empty if none
-	 */
-	private List<ExceptionHandler> findHandlers(CommandException exception) {
-		return handlers.stream()
-		    .filter(handler -> handler.getType() == exception.getClass())
-		    .collect(Collectors.toList());
-	}
+    /**
+     * Finds handlers that target the specified CommandException
+     *
+     * @param exception The command exception
+     * @return The list of handlers, empty if none
+     */
+    private List<ExceptionHandler> findHandlers(CommandException exception) {
+        return handlers.stream()
+            .filter(handler -> handler.getType() == exception.getClass())
+            .collect(Collectors.toList());
+    }
 
-	/**
-	 * Registers an {@code ExceptionHandler} to the handlers list.
-	 */
-	public final void registerHandler(ExceptionHandler handler) {
-		if (!handlers.contains(handler)) handlers.add(handler);
-	}
+    /**
+     * Registers an {@code ExceptionHandler} to the handlers list.
+     */
+    public final void registerHandler(ExceptionHandler handler) {
+        if (!handlers.contains(handler)) handlers.add(handler);
+    }
 
-	/**
-	 * @return The client that is using this handler
-	 */
-	public final Manager<Command> getCommandManager() {
-		return this.commandManager;
-	}
+    /**
+     * @return The client that is using this handler
+     */
+    public final Manager<Command> getCommandManager() {
+        return this.commandManager;
+    }
 
-	/**
-	 * Sets the command executor
-	 */
-	public final void setExecutor(CommandExecutor executor) {
-		this.executor = executor;
-	}
+    /**
+     * Sets the command executor
+     */
+    public final void setExecutor(CommandExecutor executor) {
+        this.executor = executor;
+    }
 
-	/**
-	 * @return The command executor in use
-	 */
-	public final CommandExecutor getExecutor() {
-		return this.executor;
-	}
+    /**
+     * @return The command executor in use
+     */
+    public final CommandExecutor getExecutor() {
+        return this.executor;
+    }
 
-	/**
-	 * Sets the chat command prefix
-	 */
-	public final void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    /**
+     * Sets the chat command prefix
+     */
+    public final void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	/**
-	 * @return The chat command prefix
-	 */
-	public final String getPrefix() {
-		return this.prefix;
-	}
+    /**
+     * @return The chat command prefix
+     */
+    public final String getPrefix() {
+        return this.prefix;
+    }
 }

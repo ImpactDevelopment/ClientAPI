@@ -34,98 +34,98 @@ import java.util.Objects;
  */
 final class ARBShaderAdapter implements ShaderAdapter {
 
-	ARBShaderAdapter() {}
+    ARBShaderAdapter() {}
 
-	@Override
-	public int createProgram() {
-		return glCreateProgramObjectARB();
-	}
+    @Override
+    public int createProgram() {
+        return glCreateProgramObjectARB();
+    }
 
-	@Override
-	public void linkProgram(int programObj) {
-		glLinkProgramARB(programObj);
-	}
+    @Override
+    public void linkProgram(int programObj) {
+        glLinkProgramARB(programObj);
+    }
 
-	@Override
-	public void validateProgram(int programObj) {
-		glValidateProgramARB(programObj);
-	}
+    @Override
+    public void validateProgram(int programObj) {
+        glValidateProgramARB(programObj);
+    }
 
-	@Override
-	public int createShader(GLShaderType type) {
-		Objects.requireNonNull(type);
+    @Override
+    public int createShader(GLShaderType type) {
+        Objects.requireNonNull(type);
 
-		switch (type) {
-			case VERTEX:
-				return glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
-			case FRAGMENT:
-				return glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
-			case GEOMETRY:
-				return glCreateShaderObjectARB(GL_GEOMETRY_SHADER_ARB);
-		}
+        switch (type) {
+            case VERTEX:
+                return glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
+            case FRAGMENT:
+                return glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
+            case GEOMETRY:
+                return glCreateShaderObjectARB(GL_GEOMETRY_SHADER_ARB);
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
-	public void shaderSource(int shader, CharSequence source) {
-		glShaderSourceARB(shader, source);
-	}
+    @Override
+    public void shaderSource(int shader, CharSequence source) {
+        glShaderSourceARB(shader, source);
+    }
 
-	@Override
-	public void compileShader(int shader) {
-		glCompileShaderARB(shader);
-	}
+    @Override
+    public void compileShader(int shader) {
+        glCompileShaderARB(shader);
+    }
 
-	@Override
-	public void attachShader(int program, int shader) {
-		glAttachObjectARB(program, shader);
-	}
+    @Override
+    public void attachShader(int program, int shader) {
+        glAttachObjectARB(program, shader);
+    }
 
-	@Override
-	public void detachShader(int program, int shader) {
-		glDetachObjectARB(program, shader);
-	}
+    @Override
+    public void detachShader(int program, int shader) {
+        glDetachObjectARB(program, shader);
+    }
 
-	@Override
-	public void useProgram(int program) {
-		glUseProgramObjectARB(program);
-	}
+    @Override
+    public void useProgram(int program) {
+        glUseProgramObjectARB(program);
+    }
 
-	@Override
-	public void deleteProgram(int program) {
-		glDeleteObjectARB(program);
-	}
+    @Override
+    public void deleteProgram(int program) {
+        glDeleteObjectARB(program);
+    }
 
-	@Override
-	public void deleteShader(int shader) {
-		glDeleteObjectARB(shader);
-	}
+    @Override
+    public void deleteShader(int shader) {
+        glDeleteObjectARB(shader);
+    }
 
-	@Override
-	public void checkStatus(int program, GLShaderStatus status) {
-		Objects.requireNonNull(status);
+    @Override
+    public void checkStatus(int program, GLShaderStatus status) {
+        Objects.requireNonNull(status);
 
-		int pname = 0;
-		switch (status) {
-			case COMPILE:
-				pname = GL_OBJECT_COMPILE_STATUS_ARB;
-				break;
-			case LINK:
-				pname = GL_OBJECT_LINK_STATUS_ARB;
-				break;
-			case VALIDATE:
-				pname = GL_OBJECT_VALIDATE_STATUS_ARB;
-				break;
-		}
+        int pname = 0;
+        switch (status) {
+            case COMPILE:
+                pname = GL_OBJECT_COMPILE_STATUS_ARB;
+                break;
+            case LINK:
+                pname = GL_OBJECT_LINK_STATUS_ARB;
+                break;
+            case VALIDATE:
+                pname = GL_OBJECT_VALIDATE_STATUS_ARB;
+                break;
+        }
 
-		if (glGetObjectParameteriARB(program, pname) == GL_FALSE)
-		    throw new ShaderException(getProgramLogInfo(program));
-	}
+        if (glGetObjectParameteriARB(program, pname) == GL_FALSE)
+            throw new ShaderException(getProgramLogInfo(program));
+    }
 
-	@Override
-	public String getProgramLogInfo(int program) {
-		return glGetInfoLogARB(program,
-		    glGetObjectParameteriARB(program, GL_OBJECT_INFO_LOG_LENGTH_ARB));
-	}
+    @Override
+    public String getProgramLogInfo(int program) {
+        return glGetInfoLogARB(program,
+            glGetObjectParameteriARB(program, GL_OBJECT_INFO_LOG_LENGTH_ARB));
+    }
 }

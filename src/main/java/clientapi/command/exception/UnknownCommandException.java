@@ -25,7 +25,7 @@ package clientapi.command.exception;
  */
 public final class UnknownCommandException extends CommandException {
 
-	public UnknownCommandException() {
-		super(null);
-	}
+    public UnknownCommandException() {
+        super(null);
+    }
 }

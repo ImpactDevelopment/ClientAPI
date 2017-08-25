@@ -29,21 +29,21 @@ import me.zero.example.command.commands.TestCommand;
  */
 public final class ExampleCommandManager extends Manager<Command> {
 
-	private final CommandHandler handler = new CommandHandler(this);
+    private final CommandHandler handler = new CommandHandler(this);
 
-	public ExampleCommandManager() {
-		super("Command");
-	}
+    public ExampleCommandManager() {
+        super("Command");
+    }
 
-	@Override
-	public void load() {
-		this.addData(new TestCommand());
+    @Override
+    public void load() {
+        this.addData(new TestCommand());
 
-		// Setup the handler and a chat command listener
-		ClientAPI.EVENT_BUS.subscribe(handler,
-		    new ChatCommandListener(handler));
-	}
+        // Setup the handler and a chat command listener
+        ClientAPI.EVENT_BUS.subscribe(handler,
+            new ChatCommandListener(handler));
+    }
 
-	@Override
-	public void save() {}
+    @Override
+    public void save() {}
 }

@@ -30,8 +30,8 @@ import java.lang.reflect.Field;
  */
 public final class StringType extends Value<String> {
 
-	public StringType(String name, String id, String description, Object object,
-	    Field field) {
-		super(name, id, description, object, field);
-	}
+    public StringType(String name, String id, String description, Object object,
+        Field field) {
+        super(name, id, description, object, field);
+    }
 }

@@ -30,32 +30,32 @@ import me.zero.alpine.type.Cancellable;
  */
 public final class ModuleStateEvent extends Cancellable {
 
-	/**
-	 * Module having a change in state
-	 */
-	private final Module module;
+    /**
+     * Module having a change in state
+     */
+    private final Module module;
 
-	/**
-	 * New state of the module
-	 */
-	private final boolean newState;
+    /**
+     * New state of the module
+     */
+    private final boolean newState;
 
-	public ModuleStateEvent(Module module, boolean newState) {
-		this.module = module;
-		this.newState = newState;
-	}
+    public ModuleStateEvent(Module module, boolean newState) {
+        this.module = module;
+        this.newState = newState;
+    }
 
-	/**
-	 * @return The module having a change in state
-	 */
-	public final Module getModule() {
-		return this.module;
-	}
+    /**
+     * @return The module having a change in state
+     */
+    public final Module getModule() {
+        return this.module;
+    }
 
-	/**
-	 * @return The new state of the Module
-	 */
-	public final boolean getNewState() {
-		return this.newState;
-	}
+    /**
+     * @return The new state of the Module
+     */
+    public final boolean getNewState() {
+        return this.newState;
+    }
 }

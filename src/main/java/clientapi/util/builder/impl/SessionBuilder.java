@@ -36,75 +36,75 @@ import java.net.Proxy;
  */
 public final class SessionBuilder implements Builder<Session> {
 
-	/**
-	 * Session username
-	 */
-	private String username;
+    /**
+     * Session username
+     */
+    private String username;
 
-	/**
-	 * Session password
-	 */
-	private String password;
+    /**
+     * Session password
+     */
+    private String password;
 
-	/**
-	 * Optional authentication proxy
-	 */
-	private Proxy proxy = Proxy.NO_PROXY;
+    /**
+     * Optional authentication proxy
+     */
+    private Proxy proxy = Proxy.NO_PROXY;
 
-	/**
-	 * Sets the User Authentication username
-	 *
-	 * @param username The username of the account
-	 * @return This builder
-	 */
-	public final SessionBuilder username(String username) {
-		this.username = username;
-		return this;
-	}
+    /**
+     * Sets the User Authentication username
+     *
+     * @param username The username of the account
+     * @return This builder
+     */
+    public final SessionBuilder username(String username) {
+        this.username = username;
+        return this;
+    }
 
-	/**
-	 * Sets the User Authentication password
-	 *
-	 * @param password The password of the account
-	 * @return This builder
-	 */
-	public final SessionBuilder password(String password) {
-		this.password = password;
-		return this;
-	}
+    /**
+     * Sets the User Authentication password
+     *
+     * @param password The password of the account
+     * @return This builder
+     */
+    public final SessionBuilder password(String password) {
+        this.password = password;
+        return this;
+    }
 
-	/**
-	 * Defines a proxy to authenticate with. Defaults to {@code Proxy.NO_PROXY}
-	 * if not specified.
-	 */
-	public final SessionBuilder proxy(Proxy proxy) {
-		this.proxy = proxy;
-		return this;
-	}
+    /**
+     * Defines a proxy to authenticate with. Defaults to {@code Proxy.NO_PROXY}
+     * if not specified.
+     */
+    public final SessionBuilder proxy(Proxy proxy) {
+        this.proxy = proxy;
+        return this;
+    }
 
-	/**
-	 * Attempts to login with the specified username and password. If the login
-	 * is successful then a session will be created. If not, {@code null} will
-	 * be returned
-	 *
-	 * @return A valid session, if able to login, otherwise {@code null}
-	 */
-	@Override
-	public Session build() {
-		UserAuthentication auth =
-		    new YggdrasilAuthenticationService(this.proxy, "")
-		        .createUserAuthentication(Agent.MINECRAFT);
-		auth.setUsername(this.username);
-		auth.setPassword(this.password);
+    /**
+     * Attempts to login with the specified username and password. If the login
+     * is successful then a session will be created. If not, {@code null} will
+     * be returned
+     *
+     * @return A valid session, if able to login, otherwise {@code null}
+     */
+    @Override
+    public Session build() {
+        UserAuthentication auth =
+            new YggdrasilAuthenticationService(this.proxy, "")
+                .createUserAuthentication(Agent.MINECRAFT);
+        auth.setUsername(this.username);
+        auth.setPassword(this.password);
 
-		try {
-			auth.logIn();
-		} catch (AuthenticationException e) {
-			return null;
-		}
+        try {
+            auth.logIn();
+        } catch (AuthenticationException e) {
+            return null;
+        }
 
-		GameProfile profile = auth.getSelectedProfile();
-		return new Session(profile.getName(), profile.getId().toString(),
-		    auth.getAuthenticatedToken(), "MOJANG");
-	}
+        GameProfile profile = auth.getSelectedProfile();
+        return new Session(profile.getName(), profile.getId().toString(),
+            auth.getAuthenticatedToken(), "MOJANG");
+    }
 }

@@ -28,52 +28,52 @@ import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
  */
 public final class Shader extends GLObject {
 
-	/**
-	 * Instance of the system supported shader adapter
-	 */
-	private static final ShaderAdapter adapter =
-	    ShaderAdapters.getSystemAdapter();
+    /**
+     * Instance of the system supported shader adapter
+     */
+    private static final ShaderAdapter adapter =
+        ShaderAdapters.getSystemAdapter();
 
-	/**
-	 * Source code of the shader
-	 */
-	private final String src;
+    /**
+     * Source code of the shader
+     */
+    private final String src;
 
-	/**
-	 * Type of shader
-	 */
-	private final GLShaderType type;
+    /**
+     * Type of shader
+     */
+    private final GLShaderType type;
 
-	public Shader(GLShaderType type, String src) {
-		this.type = type;
-		this.src = src;
-	}
+    public Shader(GLShaderType type, String src) {
+        this.type = type;
+        this.src = src;
+    }
 
-	@Override
-	protected int nativeGen() {
-		int shaderID = adapter.createShader(type);
-		if (shaderID == 0) return 0;
+    @Override
+    protected int nativeGen() {
+        int shaderID = adapter.createShader(type);
+        if (shaderID == 0) return 0;
 
-		try {
-			adapter.shaderSource(shaderID, src);
-			adapter.compileShader(shaderID);
-			adapter.checkStatus(shaderID, GLShaderStatus.COMPILE);
-		} catch (ShaderException e) {
-			return 0;
-		}
+        try {
+            adapter.shaderSource(shaderID, src);
+            adapter.compileShader(shaderID);
+            adapter.checkStatus(shaderID, GLShaderStatus.COMPILE);
+        } catch (ShaderException e) {
+            return 0;
+        }
 
-		return shaderID;
-	}
+        return shaderID;
+    }
 
-	@Override
-	protected void nativeDelete() {
-		adapter.deleteShader(id());
-	}
+    @Override
+    protected void nativeDelete() {
+        adapter.deleteShader(id());
+    }
 
-	/**
-	 * @return The type of shader this object represents
-	 */
-	public final GLShaderType getType() {
-		return this.type;
-	}
+    /**
+     * @return The type of shader this object represents
+     */
+    public final GLShaderType getType() {
+        return this.type;
+    }
 }

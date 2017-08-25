@@ -29,8 +29,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class ExampleMixin {
 
-	@Inject(method = "runTick", at = @At("HEAD"))
-	public void runTickHook(CallbackInfo ci) {
-		// System.out.println("Running game tick");
-	}
+    @Inject(method = "runTick", at = @At("HEAD"))
+    public void runTickHook(CallbackInfo ci) {
+        // System.out.println("Running game tick");
+    }
 }

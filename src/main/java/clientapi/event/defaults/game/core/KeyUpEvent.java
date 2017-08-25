@@ -25,7 +25,7 @@ package clientapi.event.defaults.game.core;
  */
 public final class KeyUpEvent extends KeyEvent {
 
-	public KeyUpEvent(int key, char character) {
-		super(key, character);
-	}
+    public KeyUpEvent(int key, char character) {
+        super(key, character);
+    }
 }

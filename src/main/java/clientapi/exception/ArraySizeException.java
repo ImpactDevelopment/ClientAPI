@@ -24,7 +24,7 @@ package clientapi.exception;
  */
 public final class ArraySizeException extends RuntimeException {
 
-	public ArraySizeException(String message) {
-		super(message);
-	}
+    public ArraySizeException(String message) {
+        super(message);
+    }
 }

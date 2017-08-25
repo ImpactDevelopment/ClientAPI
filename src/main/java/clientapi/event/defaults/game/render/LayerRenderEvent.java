@@ -31,20 +31,20 @@ import net.minecraft.entity.EntityLivingBase;
  */
 public final class LayerRenderEvent extends Cancellable {
 
-	private final EntityLivingBase entity;
-	private final LayerRenderer layerRenderer;
+    private final EntityLivingBase entity;
+    private final LayerRenderer layerRenderer;
 
-	public LayerRenderEvent(EntityLivingBase entity,
-	    LayerRenderer layerRenderer) {
-		this.entity = entity;
-		this.layerRenderer = layerRenderer;
-	}
+    public LayerRenderEvent(EntityLivingBase entity,
+        LayerRenderer layerRenderer) {
+        this.entity = entity;
+        this.layerRenderer = layerRenderer;
+    }
 
-	public final EntityLivingBase getEntity() {
-		return this.entity;
-	}
+    public final EntityLivingBase getEntity() {
+        return this.entity;
+    }
 
-	public final LayerRenderer getLayerRenderer() {
-		return this.layerRenderer;
-	}
+    public final LayerRenderer getLayerRenderer() {
+        return this.layerRenderer;
+    }
 }

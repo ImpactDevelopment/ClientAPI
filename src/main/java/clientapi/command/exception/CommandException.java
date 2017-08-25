@@ -27,29 +27,29 @@ import clientapi.command.Command;
  */
 public class CommandException extends Exception {
 
-	/**
-	 * Command that encountered an exception
-	 */
-	private final Command command;
+    /**
+     * Command that encountered an exception
+     */
+    private final Command command;
 
-	public CommandException(Command command) {
-		this.command = command;
-	}
+    public CommandException(Command command) {
+        this.command = command;
+    }
 
-	public CommandException(Command command, String message) {
-		super(message);
-		this.command = command;
-	}
+    public CommandException(Command command, String message) {
+        super(message);
+        this.command = command;
+    }
 
-	public CommandException(Command command, String message, Object... args) {
-		super(String.format(message, args));
-		this.command = command;
-	}
+    public CommandException(Command command, String message, Object... args) {
+        super(String.format(message, args));
+        this.command = command;
+    }
 
-	/**
-	 * @return The command that encountered an exception
-	 */
-	public final Command getCommand() {
-		return this.command;
-	}
+    /**
+     * @return The command that encountered an exception
+     */
+    public final Command getCommand() {
+        return this.command;
+    }
 }

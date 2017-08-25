@@ -28,51 +28,51 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(CPacketPlayer.class)
 public interface ICPacketPlayer {
 
-	@Accessor
-	void setX(double x);
+    @Accessor
+    void setX(double x);
 
-	@Accessor
-	double getX();
+    @Accessor
+    double getX();
 
-	@Accessor
-	void setY(double y);
+    @Accessor
+    void setY(double y);
 
-	@Accessor
-	double getY();
+    @Accessor
+    double getY();
 
-	@Accessor
-	void setZ(double z);
+    @Accessor
+    void setZ(double z);
 
-	@Accessor
-	double getZ();
+    @Accessor
+    double getZ();
 
-	@Accessor
-	void setYaw(float yaw);
+    @Accessor
+    void setYaw(float yaw);
 
-	@Accessor
-	float getYaw();
+    @Accessor
+    float getYaw();
 
-	@Accessor
-	void setPitch(float pitch);
+    @Accessor
+    void setPitch(float pitch);
 
-	@Accessor
-	float getPitch();
+    @Accessor
+    float getPitch();
 
-	@Accessor
-	void setOnGround(boolean onGround);
+    @Accessor
+    void setOnGround(boolean onGround);
 
-	@Accessor
-	boolean getOnGround();
+    @Accessor
+    boolean getOnGround();
 
-	@Accessor
-	void setMoving(boolean moving);
+    @Accessor
+    void setMoving(boolean moving);
 
-	@Accessor
-	boolean getMoving();
+    @Accessor
+    boolean getMoving();
 
-	@Accessor
-	void setRotating(boolean rotating);
+    @Accessor
+    void setRotating(boolean rotating);
 
-	@Accessor
-	boolean getRotating();
+    @Accessor
+    boolean getRotating();
 }

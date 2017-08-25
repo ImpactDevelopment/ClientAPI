@@ -31,25 +31,25 @@ import me.zero.alpine.listener.Listener;
  */
 public final class EventBenchmark extends Benchmark {
 
-	public EventBenchmark(int passes, int invokations) {
-		super(passes, invokations);
-	}
+    public EventBenchmark(int passes, int invokations) {
+        super(passes, invokations);
+    }
 
-	@Override
-	protected void pre() {
-		ClientAPI.EVENT_BUS.subscribe(this);
-	}
+    @Override
+    protected void pre() {
+        ClientAPI.EVENT_BUS.subscribe(this);
+    }
 
-	@Override
-	protected void run() {
-		ClientAPI.EVENT_BUS.post(new Object());
-	}
+    @Override
+    protected void run() {
+        ClientAPI.EVENT_BUS.post(new Object());
+    }
 
-	@Override
-	protected void post() {
-		ClientAPI.EVENT_BUS.unsubscribe(this);
-	}
+    @Override
+    protected void post() {
+        ClientAPI.EVENT_BUS.unsubscribe(this);
+    }
 
-	@EventHandler
-	private final Listener<Object> benchListener = new Listener<>(event -> {});
+    @EventHandler
+    private final Listener<Object> benchListener = new Listener<>(event -> {});
 }

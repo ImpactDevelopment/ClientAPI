@@ -1,19 +1,19 @@
 buildscript {
-	repositories {
-		mavenCentral()
-		maven {
-			name = 'forge'
-			url = 'http://files.minecraftforge.net/maven'
-		}
-		maven {
-			name = 'SpongePowered'
-			url = 'http://repo.spongepowered.org/maven'
-		}
-	}
-	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:@FORGEGRADLE_VERSION@'
-		classpath 'org.spongepowered:mixingradle:@MIXINGRADLE_VERSION@'
-	}
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+        maven {
+            name = 'SpongePowered'
+            url = 'http://repo.spongepowered.org/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:@FORGEGRADLE_VERSION@'
+        classpath 'org.spongepowered:mixingradle:@MIXINGRADLE_VERSION@'
+    }
 }
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
@@ -23,39 +23,39 @@ sourceCompatibility = targetCompatibility = '1.8'
 compileJava { sourceCompatibility = targetCompatibility = '1.8' }
 
 minecraft {
-	version = project.minecraftVersion
-	mappings = project.mappings
-	runDir = project.runDir
+    version = project.minecraftVersion
+    mappings = project.mappings
+    runDir = project.runDir
 
-	tweakClass = '@TWEAKER@'
-	makeObfSourceJar = false
+    tweakClass = '@TWEAKER@'
+    makeObfSourceJar = false
 }
 
 repositories {
-	mavenCentral()
-	maven {
-		name = 'impactdevelopment-repo'
-		url = 'https://impactdevelopment.github.io/maven/'
-	}
-	maven {
-		name = 'spongepowered-repo'
-		url = 'http://repo.spongepowered.org/maven/'
-	}
+    mavenCentral()
+    maven {
+        name = 'impactdevelopment-repo'
+        url = 'https://impactdevelopment.github.io/maven/'
+    }
+    maven {
+        name = 'spongepowered-repo'
+        url = 'http://repo.spongepowered.org/maven/'
+    }
 }
 
 dependencies {
-	compile 'com.github.ZeroMemes:ClientAPI:@CAPI_VERSION@-dev'
-	compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
-	compile 'net.jodah:typetools:@TT_VERSION@'
-	compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
-		exclude module: 'launchwrapper'
-		exclude module: 'guava'
-		exclude module: 'gson'
-		exclude module: 'commons-io'
-	}
+    compile 'com.github.ZeroMemes:ClientAPI:@CAPI_VERSION@-dev'
+    compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
+    compile 'net.jodah:typetools:@TT_VERSION@'
+    compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+    }
 }
 
 mixin {
-	defaultObfuscationEnv notch
-	add sourceSets.main, 'mixins.client.refmap.json'
+    defaultObfuscationEnv notch
+    add sourceSets.main, 'mixins.client.refmap.json'
 }

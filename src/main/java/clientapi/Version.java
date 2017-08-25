@@ -25,19 +25,19 @@ package clientapi;
  */
 public final class Version {
 
-	private Version() {}
+    private Version() {}
 
-	// Incremented when a new version of Minecraft is released, never reset
-	public static final int MAJOR = 3;
+    // Incremented when a new version of Minecraft is released, never reset
+    public static final int MAJOR = 3;
 
-	// Incremented when API-breaking changes are made, reset when major version
-	// is modified
-	public static final int MINOR = 0;
+    // Incremented when API-breaking changes are made, reset when major version
+    // is modified
+    public static final int MINOR = 0;
 
-	// Incremented every release, reset when the minor version is modified
-	public static final int PATCH = 0;
+    // Incremented every release, reset when the minor version is modified
+    public static final int PATCH = 0;
 
-	public static String getVersion() {
-		return String.format("%d.%d.%d", MAJOR, MINOR, PATCH);
-	}
+    public static String getVersion() {
+        return String.format("%d.%d.%d", MAJOR, MINOR, PATCH);
+    }
 }

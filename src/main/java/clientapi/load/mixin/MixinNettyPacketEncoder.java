@@ -41,50 +41,50 @@ import io.netty.channel.ChannelHandlerContext;
 @Mixin(NettyPacketEncoder.class)
 public class MixinNettyPacketEncoder {
 
-	@Shadow
-	@Final
-	private static Logger LOGGER;
-	@Shadow
-	@Final
-	private static Marker RECEIVED_PACKET_MARKER;
-	@Shadow
-	@Final
-	private EnumPacketDirection direction;
+    @Shadow
+    @Final
+    private static Logger LOGGER;
+    @Shadow
+    @Final
+    private static Marker RECEIVED_PACKET_MARKER;
+    @Shadow
+    @Final
+    private EnumPacketDirection direction;
 
-	/**
-	 * @reason mostly because we need to mutate msg, but also so that we can
-	 *         pass the connection state to the event constructor
-	 * @author Brady
-	 */
-	@Overwrite
-	protected void encode(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out)
-	    throws Exception {
-		EnumConnectionState state =
-		    ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
-		Integer packetId = state.getPacketId(this.direction, msg);
+    /**
+     * @reason mostly because we need to mutate msg, but also so that we can
+     *         pass the connection state to the event constructor
+     * @author Brady
+     */
+    @Overwrite
+    protected void encode(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out)
+        throws Exception {
+        EnumConnectionState state =
+            ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
+        Integer packetId = state.getPacketId(this.direction, msg);
 
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug(RECEIVED_PACKET_MARKER, "OUT: [{}:{}] {}", state,
-			    packetId, msg.getClass().getName());
-		}
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(RECEIVED_PACKET_MARKER, "OUT: [{}:{}] {}", state,
+                packetId, msg.getClass().getName());
+        }
 
-		// We need the state and we plan to mutate the msg, hence the overwrite
-		PacketEvent event = new PacketEvent.Encode(msg, state);
-		ClientAPI.EVENT_BUS.post(event);
-		msg = event.getPacket();
-		if (event.isCancelled() || msg == null) return;
+        // We need the state and we plan to mutate the msg, hence the overwrite
+        PacketEvent event = new PacketEvent.Encode(msg, state);
+        ClientAPI.EVENT_BUS.post(event);
+        msg = event.getPacket();
+        if (event.isCancelled() || msg == null) return;
 
-		if (packetId == null) {
-			throw new IOException("Can\'t serialize unregistered packet");
-		} else {
-			PacketBuffer buffer = new PacketBuffer(out);
-			buffer.writeVarInt(packetId);
+        if (packetId == null) {
+            throw new IOException("Can\'t serialize unregistered packet");
+        } else {
+            PacketBuffer buffer = new PacketBuffer(out);
+            buffer.writeVarInt(packetId);
 
-			try {
-				msg.writePacketData(buffer);
-			} catch (Throwable throwable) {
-				LOGGER.error(throwable);
-			}
-		}
-	}
+            try {
+                msg.writePacketData(buffer);
+            } catch (Throwable throwable) {
+                LOGGER.error(throwable);
+            }
+        }
+    }
 }

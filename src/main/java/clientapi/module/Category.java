@@ -32,14 +32,14 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Category {
 
-	/**
-	 * @return The name of the Category
-	 */
-	String name();
+    /**
+     * @return The name of the Category
+     */
+    String name();
 
-	/**
-	 * Default Category
-	 */
-	@Category(name = "Default")
-	class Default {}
+    /**
+     * Default Category
+     */
+    @Category(name = "Default")
+    class Default {}
 }

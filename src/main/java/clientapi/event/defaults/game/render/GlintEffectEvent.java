@@ -26,26 +26,26 @@ import me.zero.alpine.type.Cancellable;
  */
 public final class GlintEffectEvent extends Cancellable {
 
-	/**
-	 * The object getting a glint effect applied to it
-	 */
-	private final GlintTarget target;
+    /**
+     * The object getting a glint effect applied to it
+     */
+    private final GlintTarget target;
 
-	public GlintEffectEvent(GlintTarget target) {
-		this.target = target;
-	}
+    public GlintEffectEvent(GlintTarget target) {
+        this.target = target;
+    }
 
-	/**
-	 * @return The glint object
-	 */
-	public final GlintTarget getTarget() {
-		return this.target;
-	}
+    /**
+     * @return The glint object
+     */
+    public final GlintTarget getTarget() {
+        return this.target;
+    }
 
-	/**
-	 * Glint Object
-	 */
-	public enum GlintTarget {
-		ARMOR, ITEM
-	}
+    /**
+     * Glint Object
+     */
+    public enum GlintTarget {
+        ARMOR, ITEM
+    }
 }

@@ -27,37 +27,37 @@ import clientapi.gui.IRenderer;
  */
 public interface ITabGuiElement extends IRenderer {
 
-	/**
-	 * @see #getTextColor()
-	 * @return The text that will be displayed by the renderer
-	 */
-	String getText();
+    /**
+     * @see #getTextColor()
+     * @return The text that will be displayed by the renderer
+     */
+    String getText();
 
-	/**
-	 * @see #getText()
-	 * @return The color of the Text that is rendered
-	 */
-	default int getTextColor() {
-		return 0xFFFFFFFF;
-	}
+    /**
+     * @see #getText()
+     * @return The color of the Text that is rendered
+     */
+    default int getTextColor() {
+        return 0xFFFFFFFF;
+    }
 
-	/**
-	 * Called whenever a key is pressed
-	 *
-	 * @param key - The key that iis pressed
-	 */
-	void keyPress(int key);
+    /**
+     * Called whenever a key is pressed
+     *
+     * @param key - The key that iis pressed
+     */
+    void keyPress(int key);
 
-	/**
-	 * @see #toggle()
-	 * @return The state of the Element
-	 */
-	boolean isActive();
+    /**
+     * @see #toggle()
+     * @return The state of the Element
+     */
+    boolean isActive();
 
-	/**
-	 * Toggles the Active state
-	 *
-	 * @see #isActive()
-	 */
-	void toggle();
+    /**
+     * Toggles the Active state
+     *
+     * @see #isActive()
+     */
+    void toggle();
 }

@@ -24,5 +24,5 @@ package clientapi.util.logger;
  */
 public enum Level {
 
-	INFO, ERROR, WARNING, SEVERE, CONFIG
+    INFO, ERROR, WARNING, SEVERE, CONFIG
 }

@@ -25,7 +25,7 @@ package clientapi.exception;
  */
 public final class ActionNotSupportedException extends RuntimeException {
 
-	public ActionNotSupportedException(String message) {
-		super(message);
-	}
+    public ActionNotSupportedException(String message) {
+        super(message);
+    }
 }

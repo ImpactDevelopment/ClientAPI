@@ -25,50 +25,50 @@ import static org.lwjgl.opengl.GL15.*;
  */
 public final class Query extends GLObject {
 
-	private final int target;
+    private final int target;
 
-	public Query(int target) {
-		this.target = target;
-	}
+    public Query(int target) {
+        this.target = target;
+    }
 
-	@Override
-	protected int nativeGen() {
-		return glGenQueries();
-	}
+    @Override
+    protected int nativeGen() {
+        return glGenQueries();
+    }
 
-	@Override
-	protected void nativeDelete() {
-		glDeleteQueries(id());
-	}
+    @Override
+    protected void nativeDelete() {
+        glDeleteQueries(id());
+    }
 
-	/**
-	 * Marks the starting bounds of the query scope
-	 */
-	public final void start() {
-		glBeginQuery(target, id());
-	}
+    /**
+     * Marks the starting bounds of the query scope
+     */
+    public final void start() {
+        glBeginQuery(target, id());
+    }
 
-	/**
-	 * Marks the stopping bounds of the query scope
-	 */
-	public final void stop() {
-		glEndQuery(target);
-	}
+    /**
+     * Marks the stopping bounds of the query scope
+     */
+    public final void stop() {
+        glEndQuery(target);
+    }
 
-	/**
-	 * Returns the result of the query, the result will vary based on the query
-	 * target.
-	 *
-	 * @return The result of the query.
-	 */
-	public final int getResult() {
-		return glGetQueryObjecti(target, GL_QUERY_RESULT);
-	}
+    /**
+     * Returns the result of the query, the result will vary based on the query
+     * target.
+     *
+     * @return The result of the query.
+     */
+    public final int getResult() {
+        return glGetQueryObjecti(target, GL_QUERY_RESULT);
+    }
 
-	/**
-	 * @return Whether or not the result of the query is available yet
-	 */
-	public final boolean isResultAvailable() {
-		return glGetQueryObjecti(target, GL_QUERY_RESULT_AVAILABLE) == GL_TRUE;
-	}
+    /**
+     * @return Whether or not the result of the query is available yet
+     */
+    public final boolean isResultAvailable() {
+        return glGetQueryObjecti(target, GL_QUERY_RESULT_AVAILABLE) == GL_TRUE;
+    }
 }

@@ -33,8 +33,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiIngame.class)
 public class MixinGuiIngame {
 
-	@Inject(method = "renderGameOverlay", at = @At("RETURN"))
-	private void renderGameOverlay(float partialTicks, CallbackInfo ci) {
-		ClientAPI.EVENT_BUS.post(new RenderHudEvent(partialTicks));
-	}
+    @Inject(method = "renderGameOverlay", at = @At("RETURN"))
+    private void renderGameOverlay(float partialTicks, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new RenderHudEvent(partialTicks));
+    }
 }

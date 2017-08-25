@@ -29,25 +29,25 @@ import me.zero.example.mod.mods.*;
  */
 public final class ExampleModManager extends Manager<Module> {
 
-	public ExampleModManager() {
-		super("Module");
-	}
+    public ExampleModManager() {
+        super("Module");
+    }
 
-	@Override
-	public void load() {
-		Logger.instance.log(Level.INFO, "Loading Modules");
+    @Override
+    public void load() {
+        Logger.instance.log(Level.INFO, "Loading Modules");
 
-		// Load Modules
-		this.addData(new Aura(), new Camera(), new Fly(), new Hud(),
-		    new Speed());
+        // Load Modules
+        this.addData(new Aura(), new Camera(), new Fly(), new Hud(),
+            new Speed());
 
-		// Loads Modules from the discovered Plugins by the Plugin loaders
-		ExampleClient.getInstance().getPlugins()
-		    .forEach(plugin -> this.addData(plugin.getModules()));
-	}
+        // Loads Modules from the discovered Plugins by the Plugin loaders
+        ExampleClient.getInstance().getPlugins()
+            .forEach(plugin -> this.addData(plugin.getModules()));
+    }
 
-	@Override
-	public void save() {
-		// Save Modules
-	}
+    @Override
+    public void save() {
+        // Save Modules
+    }
 }

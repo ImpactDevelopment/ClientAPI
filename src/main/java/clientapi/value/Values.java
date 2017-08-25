@@ -38,108 +38,108 @@ import java.util.Map;
  */
 public final class Values {
 
-	/**
-	 * Holds the various resolvers for resolving values from fields
-	 */
-	private static final Map<Class<?>, ResolverData> RESOLVERS =
-	    new HashMap<>();
+    /**
+     * Holds the various resolvers for resolving values from fields
+     */
+    private static final Map<Class<?>, ResolverData> RESOLVERS =
+        new HashMap<>();
 
-	static {
-		// Default Resolvers
-		define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN,
-		    Boolean.class, Boolean.TYPE));
-		define(NumberValue.class, ResolverData.create(DefaultResolvers.NUMBER));
-		define(MultiValue.class,
-		    ResolverData.create(DefaultResolvers.MULTI, String.class));
-		define(StringValue.class,
-		    ResolverData.create(DefaultResolvers.STRING, String.class));
-	}
+    static {
+        // Default Resolvers
+        define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN,
+            Boolean.class, Boolean.TYPE));
+        define(NumberValue.class, ResolverData.create(DefaultResolvers.NUMBER));
+        define(MultiValue.class,
+            ResolverData.create(DefaultResolvers.MULTI, String.class));
+        define(StringValue.class,
+            ResolverData.create(DefaultResolvers.STRING, String.class));
+    }
 
-	private Values() {}
+    private Values() {}
 
-	/**
-	 * Discovers all of the Values in a ValueHolder, then registers them
-	 *
-	 * @param holder Holder being scanned
-	 */
-	public static void discover(IValueHolder holder) {
-		Arrays.stream(holder.getClass().getDeclaredFields())
-		    .filter(Values::hasValueAnnotation)
-		    .forEach(field -> holder.addValue(getValue(holder, field)));
-	}
+    /**
+     * Discovers all of the Values in a ValueHolder, then registers them
+     *
+     * @param holder Holder being scanned
+     */
+    public static void discover(IValueHolder holder) {
+        Arrays.stream(holder.getClass().getDeclaredFields())
+            .filter(Values::hasValueAnnotation)
+            .forEach(field -> holder.addValue(getValue(holder, field)));
+    }
 
-	/**
-	 * Returns whether or not the specified field has a value annotation or not.
-	 *
-	 * @param field Field being checked
-	 * @return If the field has a value annotation
-	 */
-	private static boolean hasValueAnnotation(Field field) {
-		return getValueAnnotation(field) != null;
-	}
+    /**
+     * Returns whether or not the specified field has a value annotation or not.
+     *
+     * @param field Field being checked
+     * @return If the field has a value annotation
+     */
+    private static boolean hasValueAnnotation(Field field) {
+        return getValueAnnotation(field) != null;
+    }
 
-	/**
-	 * Gets the class of the value annotation belonging to a field, null if
-	 * there is none.
-	 *
-	 * @param field Field being checked
-	 * @return The value annotation of the field
-	 */
-	private static Class<? extends Annotation> getValueAnnotation(Field field) {
-		if (field.isAnnotationPresent(Label.class)) {
-			Annotation a = Arrays.stream(field.getDeclaredAnnotations())
-			    .filter(annotation -> annotation.annotationType()
-			        .isAnnotationPresent(ValueDefinition.class))
-			    .findFirst().orElse(null);
-			if (a != null) return a.annotationType();
-		}
-		return null;
-	}
+    /**
+     * Gets the class of the value annotation belonging to a field, null if
+     * there is none.
+     *
+     * @param field Field being checked
+     * @return The value annotation of the field
+     */
+    private static Class<? extends Annotation> getValueAnnotation(Field field) {
+        if (field.isAnnotationPresent(Label.class)) {
+            Annotation a = Arrays.stream(field.getDeclaredAnnotations())
+                .filter(annotation -> annotation.annotationType()
+                    .isAnnotationPresent(ValueDefinition.class))
+                .findFirst().orElse(null);
+            if (a != null) return a.annotationType();
+        }
+        return null;
+    }
 
-	/**
-	 * Executes checks before using the TypeResolver to get the Value from the
-	 * Field.
-	 *
-	 * @param parent Object containing value field
-	 * @param field Field representing value
-	 * @return The resolved field
-	 */
-	@SuppressWarnings("unchecked")
-	private static Value getValue(Object parent, Field field) {
-		Class<? extends Annotation> anno = getValueAnnotation(field);
-		if (anno == null)
-		    throw new ValueException("Value annotation not found for field");
+    /**
+     * Executes checks before using the TypeResolver to get the Value from the
+     * Field.
+     *
+     * @param parent Object containing value field
+     * @param field Field representing value
+     * @return The resolved field
+     */
+    @SuppressWarnings("unchecked")
+    private static Value getValue(Object parent, Field field) {
+        Class<? extends Annotation> anno = getValueAnnotation(field);
+        if (anno == null)
+            throw new ValueException("Value annotation not found for field");
 
-		ResolverData data = RESOLVERS.get(anno);
-		if (data == null)
-		    throw new ValueException("Undefined Resolver for Value Definition");
+        ResolverData data = RESOLVERS.get(anno);
+        if (data == null)
+            throw new ValueException("Undefined Resolver for Value Definition");
 
-		if (!data.isResolvable(field.getType())) throw new ValueException(
-		    "Unable to resolve field if type is not supported");
+        if (!data.isResolvable(field.getType())) throw new ValueException(
+            "Unable to resolve field if type is not supported");
 
-		Object resolved = data.getResolver().apply(parent, field);
-		if (resolved == null || !(resolved instanceof Value))
-		    throw new ValueException(
-		        "Outcome of resolver was either null or not a value type");
+        Object resolved = data.getResolver().apply(parent, field);
+        if (resolved == null || !(resolved instanceof Value))
+            throw new ValueException(
+                "Outcome of resolver was either null or not a value type");
 
-		return (Value) resolved;
-	}
+        return (Value) resolved;
+    }
 
-	/**
-	 * Defines a resolver data object. This method should be called before
-	 * module instantiation, to ensure that all custom defined value types will
-	 * be resolved
-	 *
-	 * @param type The target type annotation
-	 * @param data The resolver data for the annotation
-	 */
-	public static void define(Class<?> type, ResolverData data) {
-		if (ClientAPIUtils.containsNull(type, data))
-		    throw new NullPointerException("One or more parameters were null");
+    /**
+     * Defines a resolver data object. This method should be called before
+     * module instantiation, to ensure that all custom defined value types will
+     * be resolved
+     *
+     * @param type The target type annotation
+     * @param data The resolver data for the annotation
+     */
+    public static void define(Class<?> type, ResolverData data) {
+        if (ClientAPIUtils.containsNull(type, data))
+            throw new NullPointerException("One or more parameters were null");
 
-		if (RESOLVERS.get(type) != null) throw new ValueException(
-		    "Resolver for type annotation already exists");
+        if (RESOLVERS.get(type) != null) throw new ValueException(
+            "Resolver for type annotation already exists");
 
-		RESOLVERS.put(type, data);
-	}
+        RESOLVERS.put(type, data);
+    }
 }

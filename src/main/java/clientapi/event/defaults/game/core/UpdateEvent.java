@@ -29,13 +29,13 @@ import net.minecraft.client.entity.EntityPlayerSP;
  */
 public final class UpdateEvent {
 
-	private final EventState state;
+    private final EventState state;
 
-	public UpdateEvent(EventState state) {
-		this.state = state;
-	}
+    public UpdateEvent(EventState state) {
+        this.state = state;
+    }
 
-	public EventState getState() {
-		return this.state;
-	}
+    public EventState getState() {
+        return this.state;
+    }
 }

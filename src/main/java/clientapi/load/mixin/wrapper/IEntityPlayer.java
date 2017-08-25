@@ -28,9 +28,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(EntityPlayer.class)
 public interface IEntityPlayer {
 
-	@Accessor
-	void setSleeping(boolean sleeping);
+    @Accessor
+    void setSleeping(boolean sleeping);
 
-	@Accessor
-	void setSleepTimer(int sleepTimer);
+    @Accessor
+    void setSleepTimer(int sleepTimer);
 }

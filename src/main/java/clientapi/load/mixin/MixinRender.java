@@ -36,20 +36,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Render.class)
 public class MixinRender {
 
-	@Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
-	private void getTeamColor(Entity entityIn,
-	    CallbackInfoReturnable<Integer> ci) {
-		TeamColorEvent event = new TeamColorEvent(entityIn);
-		ClientAPI.EVENT_BUS.post(event);
-		if (event.isCancelled()) ci.setReturnValue(event.getColor());
-	}
+    @Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
+    private void getTeamColor(Entity entityIn,
+        CallbackInfoReturnable<Integer> ci) {
+        TeamColorEvent event = new TeamColorEvent(entityIn);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled()) ci.setReturnValue(event.getColor());
+    }
 
-	@Inject(method = "renderLivingLabel", at = @At("HEAD"), cancellable = true)
-	private void renderLivingLabel(Entity entityIn, String str, double x,
-	    double y, double z, int maxDistance, CallbackInfo ci) {
-		RenderEntityLabelEvent event =
-		    new RenderEntityLabelEvent(entityIn, str);
-		ClientAPI.EVENT_BUS.post(event);
-		if (event.isCancelled()) ci.cancel();
-	}
+    @Inject(method = "renderLivingLabel", at = @At("HEAD"), cancellable = true)
+    private void renderLivingLabel(Entity entityIn, String str, double x,
+        double y, double z, int maxDistance, CallbackInfo ci) {
+        RenderEntityLabelEvent event =
+            new RenderEntityLabelEvent(entityIn, str);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled()) ci.cancel();
+    }
 }

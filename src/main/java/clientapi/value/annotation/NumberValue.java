@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
 @ValueDefinition
 public @interface NumberValue {
 
-	double min();
+    double min();
 
-	double max();
+    double max();
 }

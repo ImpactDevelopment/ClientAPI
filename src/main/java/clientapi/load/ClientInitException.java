@@ -25,7 +25,7 @@ package clientapi.load;
  */
 public final class ClientInitException extends RuntimeException {
 
-	public ClientInitException(String message) {
-		super(message);
-	}
+    public ClientInitException(String message) {
+        super(message);
+    }
 }

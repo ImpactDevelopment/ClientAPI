@@ -26,10 +26,10 @@ import java.util.Collection;
  */
 public interface INotificationRenderer {
 
-	/**
-	 * Draws a list of notifications
-	 *
-	 * @param notifications The notifications getting rendered
-	 */
-	void draw(Collection<INotification> notifications);
+    /**
+     * Draws a list of notifications
+     *
+     * @param notifications The notifications getting rendered
+     */
+    void draw(Collection<INotification> notifications);
 }

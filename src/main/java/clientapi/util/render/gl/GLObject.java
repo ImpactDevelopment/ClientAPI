@@ -24,58 +24,58 @@ package clientapi.util.render.gl;
  */
 public abstract class GLObject {
 
-	public static final int UNABLE_TO_GENERATE = 0;
-	public static final int NOT_GENERATED = -1;
+    public static final int UNABLE_TO_GENERATE = 0;
+    public static final int NOT_GENERATED = -1;
 
-	private int id = NOT_GENERATED;
+    private int id = NOT_GENERATED;
 
-	/**
-	 * Generates this OpenGL Object. Return value reflects whether or not the
-	 * operation was a success or not.
-	 *
-	 * @return Whether or not the operation was a success. May return 'false' if
-	 */
-	public final boolean gen() {
-		return !isGen() && (id = nativeGen()) != UNABLE_TO_GENERATE;
-	}
+    /**
+     * Generates this OpenGL Object. Return value reflects whether or not the
+     * operation was a success or not.
+     *
+     * @return Whether or not the operation was a success. May return 'false' if
+     */
+    public final boolean gen() {
+        return !isGen() && (id = nativeGen()) != UNABLE_TO_GENERATE;
+    }
 
-	/**
-	 * Called by GlObject#gen() to generate this object.
-	 *
-	 * @return The ID of the (possibly) created object
-	 */
-	protected abstract int nativeGen();
+    /**
+     * Called by GlObject#gen() to generate this object.
+     *
+     * @return The ID of the (possibly) created object
+     */
+    protected abstract int nativeGen();
 
-	/**
-	 * Deletes this object from memory. This should be called when the
-	 * application is shutting down to efficiently garbage collect memory.
-	 *
-	 * @return Whether or not the operation was a success
-	 */
-	public boolean delete() {
-		if (!isGen()) return false;
+    /**
+     * Deletes this object from memory. This should be called when the
+     * application is shutting down to efficiently garbage collect memory.
+     *
+     * @return Whether or not the operation was a success
+     */
+    public boolean delete() {
+        if (!isGen()) return false;
 
-		id = NOT_GENERATED;
-		nativeDelete();
-		return true;
-	}
+        id = NOT_GENERATED;
+        nativeDelete();
+        return true;
+    }
 
-	/**
-	 * Called by GlObject#delete() to delete this object from memory.
-	 */
-	protected abstract void nativeDelete();
+    /**
+     * Called by GlObject#delete() to delete this object from memory.
+     */
+    protected abstract void nativeDelete();
 
-	/**
-	 * @return The ID of this object
-	 */
-	public final int id() {
-		return this.id;
-	}
+    /**
+     * @return The ID of this object
+     */
+    public final int id() {
+        return this.id;
+    }
 
-	/**
-	 * @return Whether or not the object has been successfully generated
-	 */
-	public final boolean isGen() {
-		return id > 0;
-	}
+    /**
+     * @return Whether or not the object has been successfully generated
+     */
+    public final boolean isGen() {
+        return id > 0;
+    }
 }

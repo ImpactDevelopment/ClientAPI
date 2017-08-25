@@ -31,55 +31,55 @@ import net.minecraft.util.text.TextComponentString;
  */
 public class ChatEvent extends Cancellable {
 
-	/**
-	 * The ChatEvent's message
-	 */
-	protected ITextComponent message;
+    /**
+     * The ChatEvent's message
+     */
+    protected ITextComponent message;
 
-	private ChatEvent(ITextComponent message) {
-		this.message = message;
-	}
+    private ChatEvent(ITextComponent message) {
+        this.message = message;
+    }
 
-	/**
-	 * Sets the message being sent/received
-	 *
-	 * @param message The new message
-	 */
-	public void setMessage(ITextComponent message) {
-		this.message = message;
-	}
+    /**
+     * Sets the message being sent/received
+     *
+     * @param message The new message
+     */
+    public void setMessage(ITextComponent message) {
+        this.message = message;
+    }
 
-	/**
-	 * @return The message
-	 */
-	public final ITextComponent getMessage() {
-		return this.message;
-	}
+    /**
+     * @return The message
+     */
+    public final ITextComponent getMessage() {
+        return this.message;
+    }
 
-	/**
-	 * @return The raw message, unformatted text component
-	 */
-	public final String getRawMessage() {
-		return this.message.getUnformattedText();
-	}
+    /**
+     * @return The raw message, unformatted text component
+     */
+    public final String getRawMessage() {
+        return this.message.getUnformattedText();
+    }
 
-	/**
-	 * Called when a chat message is sent
-	 */
-	public static final class Send extends ChatEvent {
+    /**
+     * Called when a chat message is sent
+     */
+    public static final class Send extends ChatEvent {
 
-		public Send(String message) {
-			super(new TextComponentString(message));
-		}
-	}
+        public Send(String message) {
+            super(new TextComponentString(message));
+        }
+    }
 
-	/**
-	 * Called when a chat message is received
-	 */
-	public static final class Receive extends ChatEvent {
+    /**
+     * Called when a chat message is received
+     */
+    public static final class Receive extends ChatEvent {
 
-		public Receive(ITextComponent message) {
-			super(message);
-		}
-	}
+        public Receive(ITextComponent message) {
+            super(message);
+        }
+    }
 }

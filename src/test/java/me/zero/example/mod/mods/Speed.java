@@ -35,13 +35,13 @@ import org.lwjgl.input.Keyboard;
     bind = Keyboard.KEY_Z)
 public final class Speed extends Module implements IMovement {
 
-	@Label(name = "Speed", id = "speed",
-	    description = "The multiplier for your speed")
-	@NumberValue(min = 1, max = 10)
-	private double speed = 3;
+    @Label(name = "Speed", id = "speed",
+        description = "The multiplier for your speed")
+    @NumberValue(min = 1, max = 10)
+    private double speed = 3;
 
-	@EventHandler
-	private Listener<MoveEvent> moveListener = new Listener<>(event -> {
-		event.x(event.getX() * speed).z(event.getZ() * speed);
-	});
+    @EventHandler
+    private Listener<MoveEvent> moveListener = new Listener<>(event -> {
+        event.x(event.getX() * speed).z(event.getZ() * speed);
+    });
 }

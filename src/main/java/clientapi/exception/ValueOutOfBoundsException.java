@@ -25,7 +25,7 @@ package clientapi.exception;
  */
 public final class ValueOutOfBoundsException extends RuntimeException {
 
-	public ValueOutOfBoundsException(String message) {
-		super(message);
-	}
+    public ValueOutOfBoundsException(String message) {
+        super(message);
+    }
 }

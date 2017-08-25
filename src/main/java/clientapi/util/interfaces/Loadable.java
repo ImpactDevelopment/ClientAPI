@@ -28,8 +28,8 @@ import clientapi.manage.Manager;
  */
 public interface Loadable {
 
-	/**
-	 * Load function
-	 */
-	void load();
+    /**
+     * Load function
+     */
+    void load();
 }

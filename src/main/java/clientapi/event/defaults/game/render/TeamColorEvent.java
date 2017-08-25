@@ -31,40 +31,40 @@ import net.minecraft.entity.Entity;
  */
 public final class TeamColorEvent extends Cancellable {
 
-	/**
-	 * Entity being colored
-	 */
-	private final Entity entity;
+    /**
+     * Entity being colored
+     */
+    private final Entity entity;
 
-	/**
-	 * The color of the entity.
-	 */
-	private int color = 0xFFFFFFFF;
+    /**
+     * The color of the entity.
+     */
+    private int color = 0xFFFFFFFF;
 
-	public TeamColorEvent(Entity entity) {
-		this.entity = entity;
-	}
+    public TeamColorEvent(Entity entity) {
+        this.entity = entity;
+    }
 
-	/**
-	 * @return The entity being colored
-	 */
-	public final Entity getEntity() {
-		return this.entity;
-	}
+    /**
+     * @return The entity being colored
+     */
+    public final Entity getEntity() {
+        return this.entity;
+    }
 
-	/**
-	 * @return The new color for the entity
-	 */
-	public final int getColor() {
-		return this.color;
-	}
+    /**
+     * @return The new color for the entity
+     */
+    public final int getColor() {
+        return this.color;
+    }
 
-	/**
-	 * Sets the color of the entity
-	 *
-	 * @param color New color
-	 */
-	public final void setColor(int color) {
-		this.color = color;
-	}
+    /**
+     * Sets the color of the entity
+     *
+     * @param color New color
+     */
+    public final void setColor(int color) {
+        this.color = color;
+    }
 }

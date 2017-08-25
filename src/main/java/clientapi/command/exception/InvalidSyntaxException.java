@@ -27,7 +27,7 @@ import clientapi.command.Command;
  */
 public final class InvalidSyntaxException extends CommandException {
 
-	public InvalidSyntaxException(Command command) {
-		super(command, "Invalid Command Syntax");
-	}
+    public InvalidSyntaxException(Command command) {
+        super(command, "Invalid Command Syntax");
+    }
 }

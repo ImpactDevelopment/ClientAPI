@@ -30,22 +30,22 @@ import java.util.function.Predicate;
  */
 public final class PacketFilter<T extends PacketEvent> implements Predicate<T> {
 
-	/**
-	 * Packets allowed by this filter
-	 */
-	private final Class<? extends Packet<?>>[] packets;
+    /**
+     * Packets allowed by this filter
+     */
+    private final Class<? extends Packet<?>>[] packets;
 
-	@SafeVarargs
-	public PacketFilter(Class<? extends Packet<?>>... packets) {
-		this.packets = packets;
-	}
+    @SafeVarargs
+    public PacketFilter(Class<? extends Packet<?>>... packets) {
+        this.packets = packets;
+    }
 
-	@Override
-	public boolean test(T packetEvent) {
-		for (Class<? extends Packet<?>> packet : packets)
-			if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
-			    return true;
+    @Override
+    public boolean test(T packetEvent) {
+        for (Class<? extends Packet<?>> packet : packets)
+            if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
+                return true;
 
-		return false;
-	}
+        return false;
+    }
 }

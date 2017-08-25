@@ -24,15 +24,15 @@ package clientapi.value;
  */
 interface IValue<T> {
 
-	/**
-	 * @return The Value of this Object
-	 */
-	T getValue();
+    /**
+     * @return The Value of this Object
+     */
+    T getValue();
 
-	/**
-	 * Sets the Value of this Object
-	 *
-	 * @param value The new value
-	 */
-	void setValue(T value);
+    /**
+     * Sets the Value of this Object
+     *
+     * @param value The new value
+     */
+    void setValue(T value);
 }

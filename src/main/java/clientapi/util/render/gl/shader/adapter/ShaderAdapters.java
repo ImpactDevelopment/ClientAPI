@@ -26,30 +26,30 @@ import org.lwjgl.opengl.GLContext;
  */
 public final class ShaderAdapters {
 
-	/**
-	 * System supported shader adapter
-	 */
-	private static final ShaderAdapter systemDefault;
+    /**
+     * System supported shader adapter
+     */
+    private static final ShaderAdapter systemDefault;
 
-	private ShaderAdapters() {}
+    private ShaderAdapters() {}
 
-	static {
-		// Check if OpenGL 2.0 and OpenGL 3.2 are supported by the machine
-		// If 3.2 is supported, 2.0 should be too, but we have 2 checks here
-		// just to be safe.
-		if (GLContext.getCapabilities().OpenGL20
-		    && GLContext.getCapabilities().OpenGL32)
-		    systemDefault = new GL20ShaderAdapter();
-		else systemDefault = new ARBShaderAdapter();
-	}
+    static {
+        // Check if OpenGL 2.0 and OpenGL 3.2 are supported by the machine
+        // If 3.2 is supported, 2.0 should be too, but we have 2 checks here
+        // just to be safe.
+        if (GLContext.getCapabilities().OpenGL20
+            && GLContext.getCapabilities().OpenGL32)
+            systemDefault = new GL20ShaderAdapter();
+        else systemDefault = new ARBShaderAdapter();
+    }
 
-	/**
-	 * Returns the discovered system compatible shader adapter. The adapter is
-	 * determined by checking OpenGL version compatibility.
-	 *
-	 * @return System supported shader adapter
-	 */
-	public static ShaderAdapter getSystemAdapter() {
-		return systemDefault;
-	}
+    /**
+     * Returns the discovered system compatible shader adapter. The adapter is
+     * determined by checking OpenGL version compatibility.
+     *
+     * @return System supported shader adapter
+     */
+    public static ShaderAdapter getSystemAdapter() {
+        return systemDefault;
+    }
 }

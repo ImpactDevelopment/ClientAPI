@@ -28,23 +28,23 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(PlayerControllerMP.class)
 public interface IPlayerControllerMP {
 
-	/**
-	 * @return PlayerControllerMP#isHittingBlock
-	 */
-	@Accessor
-	boolean getIsHittingBlock();
+    /**
+     * @return PlayerControllerMP#isHittingBlock
+     */
+    @Accessor
+    boolean getIsHittingBlock();
 
-	/**
-	 * @return PlayerControllerMP#curBlockDamageMP
-	 */
-	@Accessor
-	float getCurBlockDamageMP();
+    /**
+     * @return PlayerControllerMP#curBlockDamageMP
+     */
+    @Accessor
+    float getCurBlockDamageMP();
 
-	/**
-	 * Sets PlayerControllerMP#curBlockDamageMP
-	 *
-	 * @param damage New damage value
-	 */
-	@Accessor
-	void setCurBlockDamageMP(float damage);
+    /**
+     * Sets PlayerControllerMP#curBlockDamageMP
+     *
+     * @param damage New damage value
+     */
+    @Accessor
+    void setCurBlockDamageMP(float damage);
 }

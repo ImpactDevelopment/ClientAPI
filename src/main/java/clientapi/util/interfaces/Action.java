@@ -24,13 +24,13 @@ package clientapi.util.interfaces;
  */
 public interface Action {
 
-	/**
-	 * Starts the action
-	 */
-	void start();
+    /**
+     * Starts the action
+     */
+    void start();
 
-	/**
-	 * Stops the action
-	 */
-	void stop();
+    /**
+     * Stops the action
+     */
+    void stop();
 }

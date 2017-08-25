@@ -34,109 +34,109 @@ import net.minecraft.entity.EntityLivingBase;
  */
 public final class EntityTravelEvent extends Cancellable {
 
-	/**
-	 * State of when the event was called relative to the invokation of
-	 * {@code EntityLivingBase#travel(float, float, float)}
-	 */
-	private final EventState state;
+    /**
+     * State of when the event was called relative to the invokation of
+     * {@code EntityLivingBase#travel(float, float, float)}
+     */
+    private final EventState state;
 
-	/**
-	 * The {@code Entity} that is "travelling"
-	 */
-	private final EntityLivingBase entity;
+    /**
+     * The {@code Entity} that is "travelling"
+     */
+    private final EntityLivingBase entity;
 
-	/**
-	 * Strafe travel amount
-	 */
-	private float strafe;
+    /**
+     * Strafe travel amount
+     */
+    private float strafe;
 
-	/**
-	 * Vertical travel amount
-	 */
-	private float vertical;
+    /**
+     * Vertical travel amount
+     */
+    private float vertical;
 
-	/**
-	 * Forward travel amount
-	 */
-	private float forward;
+    /**
+     * Forward travel amount
+     */
+    private float forward;
 
-	public EntityTravelEvent(EventState state, EntityLivingBase entity,
-	    float strafe, float vertical, float forward) {
-		this.entity = entity;
-		this.state = state;
-		this.strafe = strafe;
-		this.vertical = vertical;
-		this.forward = forward;
-	}
+    public EntityTravelEvent(EventState state, EntityLivingBase entity,
+        float strafe, float vertical, float forward) {
+        this.entity = entity;
+        this.state = state;
+        this.strafe = strafe;
+        this.vertical = vertical;
+        this.forward = forward;
+    }
 
-	/**
-	 * Sets the strafe travel amount to be passed down to
-	 * {@code EntityLivingBase#travel(float, float, float)}
-	 *
-	 * @param strafe New strafe travel amount
-	 * @return This event
-	 */
-	public final EntityTravelEvent setStrafe(float strafe) {
-		this.strafe = strafe;
-		return this;
-	}
+    /**
+     * Sets the strafe travel amount to be passed down to
+     * {@code EntityLivingBase#travel(float, float, float)}
+     *
+     * @param strafe New strafe travel amount
+     * @return This event
+     */
+    public final EntityTravelEvent setStrafe(float strafe) {
+        this.strafe = strafe;
+        return this;
+    }
 
-	/**
-	 * Sets the vertical travel amount to be passed down to
-	 * {@code EntityLivingBase#travel(float, float, float)}
-	 *
-	 * @param vertical New strafe travel amount
-	 * @return This event
-	 */
-	public final EntityTravelEvent setVertical(float vertical) {
-		this.vertical = vertical;
-		return this;
-	}
+    /**
+     * Sets the vertical travel amount to be passed down to
+     * {@code EntityLivingBase#travel(float, float, float)}
+     *
+     * @param vertical New strafe travel amount
+     * @return This event
+     */
+    public final EntityTravelEvent setVertical(float vertical) {
+        this.vertical = vertical;
+        return this;
+    }
 
-	/**
-	 * Sets the forward travel amount to be passed down to
-	 * {@code EntityLivingBase#travel(float, float, float)}
-	 *
-	 * @param forward New forward travel amount
-	 * @return This event
-	 */
-	public final EntityTravelEvent setForward(float forward) {
-		this.forward = forward;
-		return this;
-	}
+    /**
+     * Sets the forward travel amount to be passed down to
+     * {@code EntityLivingBase#travel(float, float, float)}
+     *
+     * @param forward New forward travel amount
+     * @return This event
+     */
+    public final EntityTravelEvent setForward(float forward) {
+        this.forward = forward;
+        return this;
+    }
 
-	/**
-	 * @return The strafe travel amount
-	 */
-	public final float getStrafe() {
-		return this.strafe;
-	}
+    /**
+     * @return The strafe travel amount
+     */
+    public final float getStrafe() {
+        return this.strafe;
+    }
 
-	/**
-	 * @return The vertical travel amount
-	 */
-	public final float getVertical() {
-		return this.vertical;
-	}
+    /**
+     * @return The vertical travel amount
+     */
+    public final float getVertical() {
+        return this.vertical;
+    }
 
-	/**
-	 * @return The forward travel amount
-	 */
-	public final float getForward() {
-		return this.forward;
-	}
+    /**
+     * @return The forward travel amount
+     */
+    public final float getForward() {
+        return this.forward;
+    }
 
-	/**
-	 * @return The state of this event
-	 */
-	public final EventState getState() {
-		return this.state;
-	}
+    /**
+     * @return The state of this event
+     */
+    public final EventState getState() {
+        return this.state;
+    }
 
-	/**
-	 * @return The entity "travelling"
-	 */
-	public final EntityLivingBase getEntity() {
-		return this.entity;
-	}
+    /**
+     * @return The entity "travelling"
+     */
+    public final EntityLivingBase getEntity() {
+        return this.entity;
+    }
 }

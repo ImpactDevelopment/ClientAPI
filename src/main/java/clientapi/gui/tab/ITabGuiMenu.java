@@ -26,18 +26,18 @@ import java.util.List;
  */
 public interface ITabGuiMenu extends ITabGuiElement {
 
-	/**
-	 * @return The list of sub-elements that belong to this menu
-	 */
-	List<ITabGuiElement> getElements();
+    /**
+     * @return The list of sub-elements that belong to this menu
+     */
+    List<ITabGuiElement> getElements();
 
-	/**
-	 * @return The current selected element
-	 */
-	ITabGuiElement getSelectedElement();
+    /**
+     * @return The current selected element
+     */
+    ITabGuiElement getSelectedElement();
 
-	/**
-	 * @return The current selected index
-	 */
-	int getSelected();
+    /**
+     * @return The current selected index
+     */
+    int getSelected();
 }

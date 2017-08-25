@@ -24,43 +24,43 @@ package clientapi.util;
  */
 public enum Protocol {
 
-	ProtocolVersion4(4, "1.7.2", "1.7.4", "1.7.5"),
-	ProtocolVersion5(5, "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10"),
-	ProtocolVersion47(47, "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5",
-	    "1.8.6", "1.8.7", "1.8.8", "1.8.9"),
-	ProtocolVersion107(107, "1.9"), ProtocolVersion108(108, "1.9.1"),
-	ProtocolVersion109(109, "1.9.2"), ProtocolVersion110(110, "1.9.3", "1.9.4"),
-	ProtocolVersion210(210, "1.10", "1.10.1", "1.10.2"),
-	ProtocolVersion315(315, "1.11"),
-	ProtocolVersion316(316, "1.11.1", "1.11.2"),
-	ProtocolVersion335(335, "1.12");
+    ProtocolVersion4(4, "1.7.2", "1.7.4", "1.7.5"),
+    ProtocolVersion5(5, "1.7.6", "1.7.7", "1.7.8", "1.7.9", "1.7.10"),
+    ProtocolVersion47(47, "1.8", "1.8.1", "1.8.2", "1.8.3", "1.8.4", "1.8.5",
+        "1.8.6", "1.8.7", "1.8.8", "1.8.9"),
+    ProtocolVersion107(107, "1.9"), ProtocolVersion108(108, "1.9.1"),
+    ProtocolVersion109(109, "1.9.2"), ProtocolVersion110(110, "1.9.3", "1.9.4"),
+    ProtocolVersion210(210, "1.10", "1.10.1", "1.10.2"),
+    ProtocolVersion315(315, "1.11"),
+    ProtocolVersion316(316, "1.11.1", "1.11.2"),
+    ProtocolVersion335(335, "1.12");
 
-	/**
-	 * The Protocol ID
-	 */
-	private final int id;
+    /**
+     * The Protocol ID
+     */
+    private final int id;
 
-	/**
-	 * Array of supported game versions for this protocol version
-	 */
-	private final String[] versions;
+    /**
+     * Array of supported game versions for this protocol version
+     */
+    private final String[] versions;
 
-	Protocol(int id, String... versions) {
-		this.id = id;
-		this.versions = versions;
-	}
+    Protocol(int id, String... versions) {
+        this.id = id;
+        this.versions = versions;
+    }
 
-	/**
-	 * @return The Protocol ID
-	 */
-	public final int getId() {
-		return this.id;
-	}
+    /**
+     * @return The Protocol ID
+     */
+    public final int getId() {
+        return this.id;
+    }
 
-	/**
-	 * @return Array of supported game versions for this protocol version
-	 */
-	public final String[] getVersions() {
-		return this.versions;
-	}
+    /**
+     * @return Array of supported game versions for this protocol version
+     */
+    public final String[] getVersions() {
+        return this.versions;
+    }
 }

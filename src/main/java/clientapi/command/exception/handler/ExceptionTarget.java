@@ -35,5 +35,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ExceptionTarget {
 
-	Class<? extends CommandException> value();
+    Class<? extends CommandException> value();
 }

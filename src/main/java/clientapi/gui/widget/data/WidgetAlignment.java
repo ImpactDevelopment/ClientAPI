@@ -27,5 +27,5 @@ package clientapi.gui.widget.data;
  */
 public interface WidgetAlignment {
 
-	float getValue();
+    float getValue();
 }

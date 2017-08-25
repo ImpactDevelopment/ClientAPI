@@ -27,71 +27,71 @@ import clientapi.util.keybind.Keybind;
  */
 public class ModuleMode<T extends Module> implements IModule {
 
-	/**
-	 * Parent Module
-	 */
-	protected final T parent;
+    /**
+     * Parent Module
+     */
+    protected final T parent;
 
-	/**
-	 * Name for the mode
-	 */
-	private final String name;
+    /**
+     * Name for the mode
+     */
+    private final String name;
 
-	/**
-	 * The state of the mode
-	 */
-	private boolean state;
+    /**
+     * The state of the mode
+     */
+    private boolean state;
 
-	public ModuleMode(T parent, String name) {
-		this.parent = parent;
-		this.name = name;
-	}
+    public ModuleMode(T parent, String name) {
+        this.parent = parent;
+        this.name = name;
+    }
 
-	@Override
-	public void toggle() {}
+    @Override
+    public void toggle() {}
 
-	@Override
-	public void setState(boolean state) {
-		this.state = state;
-		if (state) {
-			if (parent.getState()) {
-				this.onEnable();
-				ClientAPI.EVENT_BUS.subscribe(this);
-			}
-		} else {
-			ClientAPI.EVENT_BUS.unsubscribe(this);
-			this.onDisable();
-		}
-	}
+    @Override
+    public void setState(boolean state) {
+        this.state = state;
+        if (state) {
+            if (parent.getState()) {
+                this.onEnable();
+                ClientAPI.EVENT_BUS.subscribe(this);
+            }
+        } else {
+            ClientAPI.EVENT_BUS.unsubscribe(this);
+            this.onDisable();
+        }
+    }
 
-	/**
-	 * @return The name of the mode
-	 */
-	public final String getName() {
-		return this.name;
-	}
+    /**
+     * @return The name of the mode
+     */
+    public final String getName() {
+        return this.name;
+    }
 
-	/**
-	 * @return The parent module
-	 */
-	public final Module getParent() {
-		return this.parent;
-	}
+    /**
+     * @return The parent module
+     */
+    public final Module getParent() {
+        return this.parent;
+    }
 
-	@Override
-	public final boolean getState() {
-		return state;
-	}
+    @Override
+    public final boolean getState() {
+        return state;
+    }
 
-	/* Methods below are irrelevant to Modes */
+    /* Methods below are irrelevant to Modes */
 
-	@Override
-	public final Keybind getBind() {
-		return null;
-	}
+    @Override
+    public final Keybind getBind() {
+        return null;
+    }
 
-	@Override
-	public final Class<?> getType() {
-		return parent.getClass();
-	}
+    @Override
+    public final Class<?> getType() {
+        return parent.getClass();
+    }
 }

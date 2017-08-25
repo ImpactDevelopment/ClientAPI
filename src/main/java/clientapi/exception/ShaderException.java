@@ -22,7 +22,7 @@ package clientapi.exception;
  */
 public final class ShaderException extends RuntimeException {
 
-	public ShaderException(String message) {
-		super(message);
-	}
+    public ShaderException(String message) {
+        super(message);
+    }
 }

@@ -32,42 +32,42 @@ import net.minecraft.client.Minecraft;
  */
 public final class ClickEvent {
 
-	/**
-	 * The Mouse button that was clicked
-	 */
-	private final MouseButton button;
+    /**
+     * The Mouse button that was clicked
+     */
+    private final MouseButton button;
 
-	public ClickEvent(MouseButton button) {
-		this.button = button;
-	}
+    public ClickEvent(MouseButton button) {
+        this.button = button;
+    }
 
-	/**
-	 * @return The button clicked
-	 */
-	public final MouseButton getButton() {
-		return this.button;
-	}
+    /**
+     * @return The button clicked
+     */
+    public final MouseButton getButton() {
+        return this.button;
+    }
 
-	/**
-	 * Types of Mouse Buttons
-	 */
-	public enum MouseButton {
-		LEFT(0), RIGHT(1), MIDDLE(2);
+    /**
+     * Types of Mouse Buttons
+     */
+    public enum MouseButton {
+        LEFT(0), RIGHT(1), MIDDLE(2);
 
-		/**
-		 * Mouse Button ID
-		 */
-		private int id;
+        /**
+         * Mouse Button ID
+         */
+        private int id;
 
-		MouseButton(int id) {
-			this.id = id;
-		}
+        MouseButton(int id) {
+            this.id = id;
+        }
 
-		/**
-		 * @return The ID of the Mouse Button
-		 */
-		public final int getID() {
-			return this.id;
-		}
-	}
+        /**
+         * @return The ID of the Mouse Button
+         */
+        public final int getID() {
+            return this.id;
+        }
+    }
 }

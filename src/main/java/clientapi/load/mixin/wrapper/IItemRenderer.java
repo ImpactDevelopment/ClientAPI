@@ -29,10 +29,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(ItemRenderer.class)
 public interface IItemRenderer {
 
-	@Invoker
-	void callTransformSideFirstPerson(EnumHandSide side,
-	    float rechargeProgress);
+    @Invoker
+    void callTransformSideFirstPerson(EnumHandSide side,
+        float rechargeProgress);
 
-	@Invoker
-	void callTransformFirstPerson(EnumHandSide side, float swingProgress);
+    @Invoker
+    void callTransformFirstPerson(EnumHandSide side, float swingProgress);
 }

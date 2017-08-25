@@ -26,7 +26,7 @@ package clientapi.exception;
  */
 public final class UnexpectedOutcomeException extends RuntimeException {
 
-	public UnexpectedOutcomeException(String message) {
-		super(message);
-	}
+    public UnexpectedOutcomeException(String message) {
+        super(message);
+    }
 }

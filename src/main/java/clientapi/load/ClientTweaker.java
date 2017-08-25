@@ -38,59 +38,59 @@ import java.util.List;
  */
 public final class ClientTweaker implements ITweaker {
 
-	/**
-	 * The Game Launch Arguments
-	 */
-	private List<String> args = new ArrayList<>();
+    /**
+     * The Game Launch Arguments
+     */
+    private List<String> args = new ArrayList<>();
 
-	@Override
-	public void acceptOptions(List<String> args, File gameDir, File assetsDir,
-	    String profile) {
-		this.args.addAll(args);
+    @Override
+    public void acceptOptions(List<String> args, File gameDir, File assetsDir,
+        String profile) {
+        this.args.addAll(args);
 
-		addArg("gameDir", gameDir);
-		addArg("assetsDir", assetsDir);
-		addArg("version", profile);
-	}
+        addArg("gameDir", gameDir);
+        addArg("assetsDir", assetsDir);
+        addArg("version", profile);
+    }
 
-	@Override
-	public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-		Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
+    @Override
+    public void injectIntoClassLoader(LaunchClassLoader classLoader) {
+        Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
 
-		// Initialize the Mixin Bootstrap
-		MixinBootstrap.init();
+        // Initialize the Mixin Bootstrap
+        MixinBootstrap.init();
 
-		// Load the ClientAPI mixin config
-		Mixins.addConfiguration("mixins.capi.json");
+        // Load the ClientAPI mixin config
+        Mixins.addConfiguration("mixins.capi.json");
 
-		// Optional mixin configuration, added by client developers
-		String mixin = "mixins.client.json";
-		if (this.getClass().getResourceAsStream("/" + mixin) != null)
-		    Mixins.addConfiguration(mixin);
+        // Optional mixin configuration, added by client developers
+        String mixin = "mixins.client.json";
+        if (this.getClass().getResourceAsStream("/" + mixin) != null)
+            Mixins.addConfiguration(mixin);
 
-		// Ensure that the mixins are only run on client side
-		MixinEnvironment.getDefaultEnvironment()
-		    .setSide(MixinEnvironment.Side.CLIENT);
-	}
+        // Ensure that the mixins are only run on client side
+        MixinEnvironment.getDefaultEnvironment()
+            .setSide(MixinEnvironment.Side.CLIENT);
+    }
 
-	@Override
-	public String getLaunchTarget() {
-		return "net.minecraft.client.main.Main";
-	}
+    @Override
+    public String getLaunchTarget() {
+        return "net.minecraft.client.main.Main";
+    }
 
-	@Override
-	public String[] getLaunchArguments() {
-		return this.args.toArray(new String[this.args.size()]);
-	}
+    @Override
+    public String[] getLaunchArguments() {
+        return this.args.toArray(new String[this.args.size()]);
+    }
 
-	private void addArg(String label, File file) {
-		if (file != null) addArg(label, file.getAbsolutePath());
-	}
+    private void addArg(String label, File file) {
+        if (file != null) addArg(label, file.getAbsolutePath());
+    }
 
-	private void addArg(String label, String value) {
-		if (!args.contains("--" + label) && value != null) {
-			this.args.add("--" + label);
-			this.args.add(value);
-		}
-	}
+    private void addArg(String label, String value) {
+        if (!args.contains("--" + label) && value != null) {
+            this.args.add("--" + label);
+            this.args.add(value);
+        }
+    }
 }

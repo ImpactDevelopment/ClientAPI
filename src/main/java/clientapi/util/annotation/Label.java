@@ -32,23 +32,23 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Label {
 
-	/**
-	 * @return The name
-	 */
-	String name();
+    /**
+     * @return The name
+     */
+    String name();
 
-	/**
-	 * @return The ID of the field
-	 */
-	String id();
+    /**
+     * @return The ID of the field
+     */
+    String id();
 
-	/**
-	 * @return The description
-	 */
-	String description();
+    /**
+     * @return The description
+     */
+    String description();
 
-	/**
-	 * @return The array of aliases
-	 */
-	String[] aliases() default {};
+    /**
+     * @return The array of aliases
+     */
+    String[] aliases() default {};
 }

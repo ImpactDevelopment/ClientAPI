@@ -27,32 +27,32 @@ import net.minecraft.util.DamageSource;
  */
 public final class EntityDeathEvent {
 
-	/**
-	 * The Entity that died
-	 */
-	private final EntityLivingBase entity;
+    /**
+     * The Entity that died
+     */
+    private final EntityLivingBase entity;
 
-	/**
-	 * Type of Damage that caused the Death
-	 */
-	private final DamageSource source;
+    /**
+     * Type of Damage that caused the Death
+     */
+    private final DamageSource source;
 
-	public EntityDeathEvent(EntityLivingBase entity, DamageSource source) {
-		this.entity = entity;
-		this.source = source;
-	}
+    public EntityDeathEvent(EntityLivingBase entity, DamageSource source) {
+        this.entity = entity;
+        this.source = source;
+    }
 
-	/**
-	 * @return The entity that died
-	 */
-	public final EntityLivingBase getEntity() {
-		return this.entity;
-	}
+    /**
+     * @return The entity that died
+     */
+    public final EntityLivingBase getEntity() {
+        return this.entity;
+    }
 
-	/**
-	 * @return The DamageSource that caused the Death
-	 */
-	public final DamageSource getSource() {
-		return this.source;
-	}
+    /**
+     * @return The DamageSource that caused the Death
+     */
+    public final DamageSource getSource() {
+        return this.source;
+    }
 }

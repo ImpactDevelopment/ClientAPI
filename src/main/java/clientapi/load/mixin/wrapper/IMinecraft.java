@@ -27,30 +27,30 @@ import net.minecraft.util.Timer;
  */
 public interface IMinecraft {
 
-	/**
-	 * @return Returns the Game's Timer
-	 */
-	Timer getTimer();
+    /**
+     * @return Returns the Game's Timer
+     */
+    Timer getTimer();
 
-	/**
-	 * Sets the game's session
-	 *
-	 * @param session The new Session
-	 */
-	void setSession(Session session);
+    /**
+     * Sets the game's session
+     *
+     * @param session The new Session
+     */
+    void setSession(Session session);
 
-	/**
-	 * Sets the right click delay timer
-	 *
-	 * @param delay The new right click delay
-	 */
-	void setRightClickDelayTimer(int delay);
+    /**
+     * Sets the right click delay timer
+     *
+     * @param delay The new right click delay
+     */
+    void setRightClickDelayTimer(int delay);
 
-	/**
-	 * Clicks a mouse button
-	 *
-	 * @param button The button to click (LEFT, MIDDLE, RIGHT)
-	 */
-	void clickMouse(ClickEvent.MouseButton button);
+    /**
+     * Clicks a mouse button
+     *
+     * @param button The button to click (LEFT, MIDDLE, RIGHT)
+     */
+    void clickMouse(ClickEvent.MouseButton button);
 
 }

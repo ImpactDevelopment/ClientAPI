@@ -32,9 +32,9 @@ import org.lwjgl.input.Keyboard;
 @Mod(name = "Fly", description = "Allows you to fly", bind = Keyboard.KEY_F)
 public final class Fly extends Module implements IMovement {
 
-	@EventHandler
-	private Listener<UpdateEvent> updateListener =
-	    new Listener<>(event -> mc.player.motionY =
-	        Boolean.valueOf(mc.gameSettings.keyBindJump.isKeyDown())
-	            .compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2);
+    @EventHandler
+    private Listener<UpdateEvent> updateListener =
+        new Listener<>(event -> mc.player.motionY =
+            Boolean.valueOf(mc.gameSettings.keyBindJump.isKeyDown())
+                .compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2);
 }

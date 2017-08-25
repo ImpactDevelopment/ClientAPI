@@ -27,67 +27,67 @@ import java.util.function.Consumer;
  */
 public abstract class Benchmark {
 
-	/**
-	 * Current number of benchmark threads running
-	 */
-	private static int threads;
+    /**
+     * Current number of benchmark threads running
+     */
+    private static int threads;
 
-	/**
-	 * Number of times that "passes" are made where the defined amount of
-	 * invokations occur.
-	 */
-	private final int passes;
+    /**
+     * Number of times that "passes" are made where the defined amount of
+     * invokations occur.
+     */
+    private final int passes;
 
-	/**
-	 * Number of times that the {@code run} is executed per pass
-	 */
-	private final int invokations;
+    /**
+     * Number of times that the {@code run} is executed per pass
+     */
+    private final int invokations;
 
-	public Benchmark(int passes, int invokations) {
-		this.passes = passes;
-		this.invokations = invokations;
-	}
+    public Benchmark(int passes, int invokations) {
+        this.passes = passes;
+        this.invokations = invokations;
+    }
 
-	/**
-	 * Runs the benchmark, BenchResult is passed to the specified consumer
-	 *
-	 * @param callback Consumer that the BenchResult is passed to
-	 */
-	public final void run(Consumer<BenchResult> callback) {
-		Objects.requireNonNull(callback);
+    /**
+     * Runs the benchmark, BenchResult is passed to the specified consumer
+     *
+     * @param callback Consumer that the BenchResult is passed to
+     */
+    public final void run(Consumer<BenchResult> callback) {
+        Objects.requireNonNull(callback);
 
-		new Thread(() -> {
-			pre();
+        new Thread(() -> {
+            pre();
 
-			long[] results = new long[passes];
-			for (int pass = 0; pass < passes; pass++) {
-				long time = System.nanoTime();
-				for (int i = 0; i < invokations; i++)
-					run();
+            long[] results = new long[passes];
+            for (int pass = 0; pass < passes; pass++) {
+                long time = System.nanoTime();
+                for (int i = 0; i < invokations; i++)
+                    run();
 
-				long diff = System.nanoTime() - time;
-				results[pass] = diff;
-			}
+                long diff = System.nanoTime() - time;
+                results[pass] = diff;
+            }
 
-			post();
+            post();
 
-			callback.accept(new BenchResult(passes, invokations, results));
-			threads--;
-		}, String.format("Benchmark #%s", ++threads)).start();
-	}
+            callback.accept(new BenchResult(passes, invokations, results));
+            threads--;
+        }, String.format("Benchmark #%s", ++threads)).start();
+    }
 
-	/**
-	 * Called before all passes are made
-	 */
-	protected void pre() {}
+    /**
+     * Called before all passes are made
+     */
+    protected void pre() {}
 
-	/**
-	 * Called for each invokation pass
-	 */
-	protected abstract void run();
+    /**
+     * Called for each invokation pass
+     */
+    protected abstract void run();
 
-	/**
-	 * Called after all passes are made
-	 */
-	protected void post() {}
+    /**
+     * Called after all passes are made
+     */
+    protected void post() {}
 }

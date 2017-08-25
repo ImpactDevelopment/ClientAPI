@@ -28,21 +28,21 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(RenderManager.class)
 public interface IRenderManager {
 
-	/**
-	 * @return Render Pos X
-	 */
-	@Accessor
-	double getRenderPosX();
+    /**
+     * @return Render Pos X
+     */
+    @Accessor
+    double getRenderPosX();
 
-	/**
-	 * @return Render Pos Y
-	 */
-	@Accessor
-	double getRenderPosY();
+    /**
+     * @return Render Pos Y
+     */
+    @Accessor
+    double getRenderPosY();
 
-	/**
-	 * @return Render Pos Z
-	 */
-	@Accessor
-	double getRenderPosZ();
+    /**
+     * @return Render Pos Z
+     */
+    @Accessor
+    double getRenderPosZ();
 }

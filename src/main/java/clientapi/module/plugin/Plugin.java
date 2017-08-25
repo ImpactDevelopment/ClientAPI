@@ -30,54 +30,54 @@ import java.util.List;
  */
 public abstract class Plugin {
 
-	/**
-	 * The list of Modules associated with this Plugin
-	 */
-	private final List<Module> modules = new ArrayList<>();
+    /**
+     * The list of Modules associated with this Plugin
+     */
+    private final List<Module> modules = new ArrayList<>();
 
-	/**
-	 * The info for this plugin
-	 */
-	private PluginInfo info;
+    /**
+     * The info for this plugin
+     */
+    private PluginInfo info;
 
-	/**
-	 * Plugin Init method, Not used for anything essential. Just a way for
-	 * plugin developers to know when the Client {@code onInit(ClientInfo)} has
-	 * finished.
-	 */
-	public abstract void onInit();
+    /**
+     * Plugin Init method, Not used for anything essential. Just a way for
+     * plugin developers to know when the Client {@code onInit(ClientInfo)} has
+     * finished.
+     */
+    public abstract void onInit();
 
-	/**
-	 * Sets the info for this plugin, the info will only be set if it has not
-	 * already been set.
-	 *
-	 * @param info The info being set
-	 */
-	final void setInfo(PluginInfo info) {
-		if (this.info != null) return;
-		this.info = info;
-	}
+    /**
+     * Sets the info for this plugin, the info will only be set if it has not
+     * already been set.
+     *
+     * @param info The info being set
+     */
+    final void setInfo(PluginInfo info) {
+        if (this.info != null) return;
+        this.info = info;
+    }
 
-	/**
-	 * @return The Info of this plugin
-	 */
-	public final PluginInfo getInfo() {
-		return this.info;
-	}
+    /**
+     * @return The Info of this plugin
+     */
+    public final PluginInfo getInfo() {
+        return this.info;
+    }
 
-	/**
-	 * Loads a Module into the Module list of this plugin
-	 *
-	 * @param module Module being loaded
-	 */
-	final void loadModule(Module module) {
-		this.modules.add(module);
-	}
+    /**
+     * Loads a Module into the Module list of this plugin
+     *
+     * @param module Module being loaded
+     */
+    final void loadModule(Module module) {
+        this.modules.add(module);
+    }
 
-	/**
-	 * @return The module list associated with this plugin
-	 */
-	public final List<Module> getModules() {
-		return new ArrayList<>(modules);
-	}
+    /**
+     * @return The module list associated with this plugin
+     */
+    public final List<Module> getModules() {
+        return new ArrayList<>(modules);
+    }
 }

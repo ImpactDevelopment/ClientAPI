@@ -28,8 +28,8 @@ import clientapi.manage.Manager;
  */
 public interface Saveable {
 
-	/**
-	 * Save function
-	 */
-	void save();
+    /**
+     * Save function
+     */
+    void save();
 }

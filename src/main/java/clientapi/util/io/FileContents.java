@@ -28,35 +28,35 @@ import java.util.*;
  */
 public final class FileContents {
 
-	private final List<String> split;
-	private final String raw;
+    private final List<String> split;
+    private final String raw;
 
-	public FileContents(String contents) {
-		Objects.requireNonNull(contents);
+    public FileContents(String contents) {
+        Objects.requireNonNull(contents);
 
-		this.raw = contents;
-		this.split = new ArrayList<>(Arrays.asList(contents.split("\n")));
-	}
+        this.raw = contents;
+        this.split = new ArrayList<>(Arrays.asList(contents.split("\n")));
+    }
 
-	public FileContents(List<String> contents) {
-		Objects.requireNonNull(contents);
+    public FileContents(List<String> contents) {
+        Objects.requireNonNull(contents);
 
-		StringJoiner joiner = new StringJoiner("\n");
-		contents.forEach(joiner::add);
-		this.raw = joiner.toString();
-		this.split = contents;
-	}
+        StringJoiner joiner = new StringJoiner("\n");
+        contents.forEach(joiner::add);
+        this.raw = joiner.toString();
+        this.split = contents;
+    }
 
-	/**
-	 * Returns the raw contents of the file read,
-	 *
-	 * @return
-	 */
-	public final String getRawContents() {
-		return this.raw;
-	}
+    /**
+     * Returns the raw contents of the file read,
+     *
+     * @return
+     */
+    public final String getRawContents() {
+        return this.raw;
+    }
 
-	public final List<String> getSplitContents() {
-		return this.split;
-	}
+    public final List<String> getSplitContents() {
+        return this.split;
+    }
 }

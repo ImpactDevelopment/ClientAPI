@@ -29,48 +29,48 @@ import java.util.Map;
  */
 public final class Hash {
 
-	/**
-	 * Cache of all Hash instances
-	 */
-	private static final Map<String, Hash> HASH_CACHE = new HashMap<>();
+    /**
+     * Cache of all Hash instances
+     */
+    private static final Map<String, Hash> HASH_CACHE = new HashMap<>();
 
-	/**
-	 * Algorithm of this Hash object
-	 */
-	private final String algorithm;
+    /**
+     * Algorithm of this Hash object
+     */
+    private final String algorithm;
 
-	private Hash(String algorithm) {
-		this.algorithm = algorithm;
-	}
+    private Hash(String algorithm) {
+        this.algorithm = algorithm;
+    }
 
-	/**
-	 * Creates a new Hash object with the specified algorithm
-	 *
-	 * @param algorithm Algorithm name
-	 * @return Hash object
-	 */
-	public static Hash of(String algorithm) {
-		return HASH_CACHE.computeIfAbsent(algorithm, Hash::new);
-	}
+    /**
+     * Creates a new Hash object with the specified algorithm
+     *
+     * @param algorithm Algorithm name
+     * @return Hash object
+     */
+    public static Hash of(String algorithm) {
+        return HASH_CACHE.computeIfAbsent(algorithm, Hash::new);
+    }
 
-	/**
-	 * Hashes a piece of data with the algorithm
-	 *
-	 * @param data Data being hashed
-	 * @return Hashed data
-	 */
-	public final String hash(String data) {
-		try {
-			MessageDigest md = MessageDigest.getInstance(algorithm);
-			md.update(data.getBytes());
-			byte[] bytes = md.digest();
-			StringBuilder sb = new StringBuilder();
-			for (byte b : bytes)
-				sb.append(
-				    Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-			return sb.toString();
-		} catch (NoSuchAlgorithmException e2) {
-			return data;
-		}
-	}
+    /**
+     * Hashes a piece of data with the algorithm
+     *
+     * @param data Data being hashed
+     * @return Hashed data
+     */
+    public final String hash(String data) {
+        try {
+            MessageDigest md = MessageDigest.getInstance(algorithm);
+            md.update(data.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes)
+                sb.append(
+                    Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e2) {
+            return data;
+        }
+    }
 }

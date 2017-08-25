@@ -34,102 +34,102 @@ import net.minecraft.util.EnumHandSide;
  */
 public final class ItemRenderEvent extends Cancellable implements Helper {
 
-	/**
-	 * Instance of the ItemRenderer
-	 */
-	private final ItemRenderer itemRenderer;
+    /**
+     * Instance of the ItemRenderer
+     */
+    private final ItemRenderer itemRenderer;
 
-	/**
-	 * Render partial ticks
-	 */
-	private final float partialTicks;
+    /**
+     * Render partial ticks
+     */
+    private final float partialTicks;
 
-	/**
-	 * Hand that is holding the item
-	 */
-	private final EnumHand hand;
+    /**
+     * Hand that is holding the item
+     */
+    private final EnumHand hand;
 
-	/**
-	 * Hand side that is holding the item
-	 */
-	private final EnumHandSide handSide;
+    /**
+     * Hand side that is holding the item
+     */
+    private final EnumHandSide handSide;
 
-	/**
-	 * Item swing progress
-	 */
-	private final float swingProgress;
+    /**
+     * Item swing progress
+     */
+    private final float swingProgress;
 
-	/**
-	 * Item stack being rendererd
-	 */
-	private final ItemStack stack;
+    /**
+     * Item stack being rendererd
+     */
+    private final ItemStack stack;
 
-	/**
-	 * Recharge progress of the item
-	 */
-	private final float rechargeProgress;
+    /**
+     * Recharge progress of the item
+     */
+    private final float rechargeProgress;
 
-	public ItemRenderEvent(ItemRenderer itemRenderer, float partialTicks,
-	    EnumHand hand, float swingProgress, ItemStack stack,
-	    float rechargeProgress) {
-		this.itemRenderer = itemRenderer;
-		this.partialTicks = partialTicks;
-		this.hand = hand;
-		this.swingProgress = swingProgress;
-		this.stack = stack;
-		this.rechargeProgress = rechargeProgress;
+    public ItemRenderEvent(ItemRenderer itemRenderer, float partialTicks,
+        EnumHand hand, float swingProgress, ItemStack stack,
+        float rechargeProgress) {
+        this.itemRenderer = itemRenderer;
+        this.partialTicks = partialTicks;
+        this.hand = hand;
+        this.swingProgress = swingProgress;
+        this.stack = stack;
+        this.rechargeProgress = rechargeProgress;
 
-		this.handSide = hand == EnumHand.MAIN_HAND
-		    ? mc.player.getPrimaryHand()
-		    : mc.player.getPrimaryHand().opposite();
-	}
+        this.handSide = hand == EnumHand.MAIN_HAND
+            ? mc.player.getPrimaryHand()
+            : mc.player.getPrimaryHand().opposite();
+    }
 
-	/**
-	 * @return The instance of the ItemRenderer
-	 */
-	public final ItemRenderer getItemRenderer() {
-		return itemRenderer;
-	}
+    /**
+     * @return The instance of the ItemRenderer
+     */
+    public final ItemRenderer getItemRenderer() {
+        return itemRenderer;
+    }
 
-	/**
-	 * @return The current render partial ticks
-	 */
-	public final float getPartialTicks() {
-		return partialTicks;
-	}
+    /**
+     * @return The current render partial ticks
+     */
+    public final float getPartialTicks() {
+        return partialTicks;
+    }
 
-	/**
-	 * @return The hand holding the item
-	 */
-	public final EnumHand getHand() {
-		return hand;
-	}
+    /**
+     * @return The hand holding the item
+     */
+    public final EnumHand getHand() {
+        return hand;
+    }
 
-	/**
-	 * @return The side of the screen that the holding hand is represented by
-	 */
-	public final EnumHandSide getHandSide() {
-		return handSide;
-	}
+    /**
+     * @return The side of the screen that the holding hand is represented by
+     */
+    public final EnumHandSide getHandSide() {
+        return handSide;
+    }
 
-	/**
-	 * @return The swing progress of the item being renderered
-	 */
-	public final float getSwingProgress() {
-		return swingProgress;
-	}
+    /**
+     * @return The swing progress of the item being renderered
+     */
+    public final float getSwingProgress() {
+        return swingProgress;
+    }
 
-	/**
-	 * @return The itemstack being rendered
-	 */
-	public final ItemStack getStack() {
-		return stack;
-	}
+    /**
+     * @return The itemstack being rendered
+     */
+    public final ItemStack getStack() {
+        return stack;
+    }
 
-	/**
-	 * @return The recharge progress of the item being rendered.
-	 */
-	public final float getRechargeProgress() {
-		return rechargeProgress;
-	}
+    /**
+     * @return The recharge progress of the item being rendered.
+     */
+    public final float getRechargeProgress() {
+        return rechargeProgress;
+    }
 }

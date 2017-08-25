@@ -25,7 +25,7 @@ package clientapi.exception;
  */
 public final class ClassWrapperException extends RuntimeException {
 
-	public ClassWrapperException(String message) {
-		super(message);
-	}
+    public ClassWrapperException(String message) {
+        super(message);
+    }
 }

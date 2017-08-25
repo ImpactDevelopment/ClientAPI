@@ -27,8 +27,8 @@ import clientapi.util.keybind.Keybind;
  */
 public interface Bindable {
 
-	/**
-	 * @return The bind associated with this object
-	 */
-	Keybind getBind();
+    /**
+     * @return The bind associated with this object
+     */
+    Keybind getBind();
 }

@@ -26,184 +26,184 @@ import clientapi.util.render.gl.GlUtils;
  */
 public final class Vec2 {
 
-	/**
-	 * Coordinates of this Vec2
-	 */
-	private float x, y;
+    /**
+     * Coordinates of this Vec2
+     */
+    private float x, y;
 
-	public Vec2() {
-		this(0, 0);
-	}
+    public Vec2() {
+        this(0, 0);
+    }
 
-	public Vec2(Vec2 vec) {
-		this(vec.x, vec.y);
-	}
+    public Vec2(Vec2 vec) {
+        this(vec.x, vec.y);
+    }
 
-	public Vec2(double x, double y) {
-		this((float) x, (float) y);
-	}
+    public Vec2(double x, double y) {
+        this((float) x, (float) y);
+    }
 
-	public Vec2(float x, float y) {
-		this.x = x;
-		this.y = y;
-	}
+    public Vec2(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 
-	/**
-	 * Sets the Vec2 X value
-	 *
-	 * @param x The new X value
-	 * @return This Vec2
-	 */
-	public final Vec2 x(float x) {
-		this.x = x;
-		return this;
-	}
+    /**
+     * Sets the Vec2 X value
+     *
+     * @param x The new X value
+     * @return This Vec2
+     */
+    public final Vec2 x(float x) {
+        this.x = x;
+        return this;
+    }
 
-	/**
-	 * Sets the Vec2 Y value
-	 *
-	 * @param y The new Y value
-	 * @return This Vec2
-	 */
-	public final Vec2 y(float y) {
-		this.y = y;
-		return this;
-	}
+    /**
+     * Sets the Vec2 Y value
+     *
+     * @param y The new Y value
+     * @return This Vec2
+     */
+    public final Vec2 y(float y) {
+        this.y = y;
+        return this;
+    }
 
-	/**
-	 * @return The Vec2 x value
-	 */
-	public final float getX() {
-		return this.x;
-	}
+    /**
+     * @return The Vec2 x value
+     */
+    public final float getX() {
+        return this.x;
+    }
 
-	/**
-	 * @return The Vec2 y value
-	 */
-	public final float getY() {
-		return this.y;
-	}
+    /**
+     * @return The Vec2 y value
+     */
+    public final float getY() {
+        return this.y;
+    }
 
-	/**
-	 * Adds the X and Y of one Vec2 to this Vec2
-	 *
-	 * @param vec Vec2 being added
-	 * @return The new Vec2
-	 */
-	public final Vec2 add(Vec2 vec) {
-		return new Vec2(this.x + vec.x, this.y + vec.y);
-	}
+    /**
+     * Adds the X and Y of one Vec2 to this Vec2
+     *
+     * @param vec Vec2 being added
+     * @return The new Vec2
+     */
+    public final Vec2 add(Vec2 vec) {
+        return new Vec2(this.x + vec.x, this.y + vec.y);
+    }
 
-	/**
-	 * Adds the specified X and Y to this Vec2
-	 *
-	 * @param x X value being added
-	 * @param y Y value being added
-	 * @return The new Vec2
-	 */
-	public final Vec2 add(double x, double y) {
-		return add(new Vec2(x, y));
-	}
+    /**
+     * Adds the specified X and Y to this Vec2
+     *
+     * @param x X value being added
+     * @param y Y value being added
+     * @return The new Vec2
+     */
+    public final Vec2 add(double x, double y) {
+        return add(new Vec2(x, y));
+    }
 
-	/**
-	 * Adds the specified X and Y to this Vec2
-	 *
-	 * @param x X value being added
-	 * @param y Y value being added
-	 * @return The new Vec2
-	 */
-	public final Vec2 add(float x, float y) {
-		return add(new Vec2(x, y));
-	}
+    /**
+     * Adds the specified X and Y to this Vec2
+     *
+     * @param x X value being added
+     * @param y Y value being added
+     * @return The new Vec2
+     */
+    public final Vec2 add(float x, float y) {
+        return add(new Vec2(x, y));
+    }
 
-	/**
-	 * Subtracts the X and Y of one Vec3 from this Vec2
-	 *
-	 * @param vec Vec2 being subtracted by
-	 * @return The new Vec2
-	 */
-	public final Vec2 sub(Vec2 vec) {
-		return new Vec2(this.x - vec.x, this.y - vec.y);
-	}
+    /**
+     * Subtracts the X and Y of one Vec3 from this Vec2
+     *
+     * @param vec Vec2 being subtracted by
+     * @return The new Vec2
+     */
+    public final Vec2 sub(Vec2 vec) {
+        return new Vec2(this.x - vec.x, this.y - vec.y);
+    }
 
-	/**
-	 * Subtracts the specified X and Y from this Vec2
-	 *
-	 * @param x X value being subtracted
-	 * @param y Y value being subtracted
-	 * @return The new Vec2
-	 */
-	public final Vec2 sub(double x, double y) {
-		return sub(new Vec2(x, y));
-	}
+    /**
+     * Subtracts the specified X and Y from this Vec2
+     *
+     * @param x X value being subtracted
+     * @param y Y value being subtracted
+     * @return The new Vec2
+     */
+    public final Vec2 sub(double x, double y) {
+        return sub(new Vec2(x, y));
+    }
 
-	/**
-	 * Subtracts the specified X and Y from this Vec2
-	 *
-	 * @param x X value being subtracted
-	 * @param y Y value being subtracted
-	 * @return The new Vec2
-	 */
-	public final Vec2 sub(float x, float y) {
-		return sub(new Vec2(x, y));
-	}
+    /**
+     * Subtracts the specified X and Y from this Vec2
+     *
+     * @param x X value being subtracted
+     * @param y Y value being subtracted
+     * @return The new Vec2
+     */
+    public final Vec2 sub(float x, float y) {
+        return sub(new Vec2(x, y));
+    }
 
-	/**
-	 * Multiplies the X and Y of this Vec2 by a scale
-	 *
-	 * @param scale The scale
-	 * @return The new Vec2
-	 */
-	public final Vec2 scale(float scale) {
-		return new Vec2(this.x * scale, this.y * scale);
-	}
+    /**
+     * Multiplies the X and Y of this Vec2 by a scale
+     *
+     * @param scale The scale
+     * @return The new Vec2
+     */
+    public final Vec2 scale(float scale) {
+        return new Vec2(this.x * scale, this.y * scale);
+    }
 
-	/**
-	 * Creates a Vec3 from this Vec2
-	 *
-	 * @return This Vec2 as a Vec3
-	 */
-	public final Vec3 toVec3() {
-		return new Vec3(x, y, 0);
-	}
+    /**
+     * Creates a Vec3 from this Vec2
+     *
+     * @return This Vec2 as a Vec3
+     */
+    public final Vec3 toVec3() {
+        return new Vec3(x, y, 0);
+    }
 
-	/**
-	 * Creates a new Vec2 with the same X/Y as this Vec2
-	 *
-	 * @return the new Vec2
-	 */
-	public final Vec2 copy() {
-		return new Vec2(this);
-	}
+    /**
+     * Creates a new Vec2 with the same X/Y as this Vec2
+     *
+     * @return the new Vec2
+     */
+    public final Vec2 copy() {
+        return new Vec2(this);
+    }
 
-	/**
-	 * Transfers the X/Y from another Vec2 and sets this Vec2's X/Y to it
-	 *
-	 * @return This Vec2
-	 */
-	public final Vec2 transfer(Vec2 vec) {
-		this.x = vec.x;
-		this.y = vec.y;
-		return this;
-	}
+    /**
+     * Transfers the X/Y from another Vec2 and sets this Vec2's X/Y to it
+     *
+     * @return This Vec2
+     */
+    public final Vec2 transfer(Vec2 vec) {
+        this.x = vec.x;
+        this.y = vec.y;
+        return this;
+    }
 
-	/**
-	 * Calculates the distance to another Vec2
-	 *
-	 * @return The distance
-	 */
-	public final float distanceTo(Vec2 vec) {
-		double dx = x - vec.x;
-		double dy = y - vec.y;
-		return (float) Math.sqrt(dx * dx + dy * dy);
-	}
+    /**
+     * Calculates the distance to another Vec2
+     *
+     * @return The distance
+     */
+    public final float distanceTo(Vec2 vec) {
+        double dx = x - vec.x;
+        double dy = y - vec.y;
+        return (float) Math.sqrt(dx * dx + dy * dy);
+    }
 
-	/**
-	 * Returns the world projected coordinates of this Vec3
-	 *
-	 * @return World projected Coordinates as a Vec3
-	 */
-	public final Vec3 toScreen() {
-		return GlUtils.toWorld(this.toVec3());
-	}
+    /**
+     * Returns the world projected coordinates of this Vec3
+     *
+     * @return World projected Coordinates as a Vec3
+     */
+    public final Vec3 toScreen() {
+        return GlUtils.toWorld(this.toVec3());
+    }
 }

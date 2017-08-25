@@ -24,7 +24,7 @@ package clientapi.exception;
  */
 public final class ValueException extends RuntimeException {
 
-	public ValueException(String message) {
-		super(message);
-	}
+    public ValueException(String message) {
+        super(message);
+    }
 }

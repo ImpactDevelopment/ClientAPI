@@ -30,32 +30,32 @@ import net.minecraft.entity.Entity;
  */
 public final class RenderEntityLabelEvent extends Cancellable {
 
-	/**
-	 * The entity that is having their label rendered
-	 */
-	private final Entity entity;
+    /**
+     * The entity that is having their label rendered
+     */
+    private final Entity entity;
 
-	/**
-	 * The text being rendered on the label
-	 */
-	private final String text;
+    /**
+     * The text being rendered on the label
+     */
+    private final String text;
 
-	public RenderEntityLabelEvent(Entity entity, String text) {
-		this.entity = entity;
-		this.text = text;
-	}
+    public RenderEntityLabelEvent(Entity entity, String text) {
+        this.entity = entity;
+        this.text = text;
+    }
 
-	/**
-	 * The entity having their name rendered
-	 */
-	public final Entity getEntity() {
-		return this.entity;
-	}
+    /**
+     * The entity having their name rendered
+     */
+    public final Entity getEntity() {
+        return this.entity;
+    }
 
-	/**
-	 * @return The text being rendered on the label
-	 */
-	public final String getText() {
-		return this.text;
-	}
+    /**
+     * @return The text being rendered on the label
+     */
+    public final String getText() {
+        return this.text;
+    }
 }

@@ -35,13 +35,13 @@ import java.util.function.Consumer;
 @FunctionalInterface
 public interface ExceptionHandler extends Consumer<CommandException> {
 
-	/**
-	 * Retrieves the command exception type from the {@code ExceptionTarget}
-	 * that belongs to this type.
-	 *
-	 * @return The command exception type
-	 */
-	default Class<? extends CommandException> getType() {
-		return this.getClass().getAnnotation(ExceptionTarget.class).value();
-	}
+    /**
+     * Retrieves the command exception type from the {@code ExceptionTarget}
+     * that belongs to this type.
+     *
+     * @return The command exception type
+     */
+    default Class<? extends CommandException> getType() {
+        return this.getClass().getAnnotation(ExceptionTarget.class).value();
+    }
 }

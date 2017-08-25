@@ -27,32 +27,32 @@ import net.minecraft.client.multiplayer.WorldClient;
  */
 public final class WorldEvent {
 
-	private WorldEvent() {}
+    private WorldEvent() {}
 
-	/**
-	 * Called when the world is loaded
-	 */
-	public static class Load {
+    /**
+     * Called when the world is loaded
+     */
+    public static class Load {
 
-		/**
-		 * World being loaded
-		 */
-		private final WorldClient world;
+        /**
+         * World being loaded
+         */
+        private final WorldClient world;
 
-		public Load(WorldClient world) {
-			this.world = world;
-		}
+        public Load(WorldClient world) {
+            this.world = world;
+        }
 
-		/**
-		 * @return The world being loaded
-		 */
-		public final WorldClient getWorld() {
-			return this.world;
-		}
-	}
+        /**
+         * @return The world being loaded
+         */
+        public final WorldClient getWorld() {
+            return this.world;
+        }
+    }
 
-	/**
-	 * Called when the world is unloaded
-	 */
-	public static class Unload {}
+    /**
+     * Called when the world is unloaded
+     */
+    public static class Unload {}
 }

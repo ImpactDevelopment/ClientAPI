@@ -38,23 +38,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityLivingBase.class)
 public abstract class MixinEntityLivingBase extends MixinEntity {
 
-	@Inject(method = "onDeath", at = @At("HEAD"))
-	private void onDeath(DamageSource cause, CallbackInfo ci) {
-		ClientAPI.EVENT_BUS.post(
-		    new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
-	}
+    @Inject(method = "onDeath", at = @At("HEAD"))
+    private void onDeath(DamageSource cause, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(
+            new EntityDeathEvent((EntityLivingBase) (Object) this, cause));
+    }
 
-	@Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE",
-	    target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
-	private void travel(EntityLivingBase entity, float strafe, float vertical,
-	    float forward) {
-		EntityTravelEvent preEvent = new EntityTravelEvent(EventState.PRE,
-		    entity, strafe, vertical, forward);
-		ClientAPI.EVENT_BUS.post(preEvent);
-		if (!preEvent.isCancelled()) entity.travel(preEvent.getStrafe(),
-		    preEvent.getVertical(), preEvent.getForward());
+    @Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE",
+        target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
+    private void travel(EntityLivingBase entity, float strafe, float vertical,
+        float forward) {
+        EntityTravelEvent preEvent = new EntityTravelEvent(EventState.PRE,
+            entity, strafe, vertical, forward);
+        ClientAPI.EVENT_BUS.post(preEvent);
+        if (!preEvent.isCancelled()) entity.travel(preEvent.getStrafe(),
+            preEvent.getVertical(), preEvent.getForward());
 
-		ClientAPI.EVENT_BUS.post(new EntityTravelEvent(EventState.POST, entity,
-		    strafe, vertical, forward));
-	}
+        ClientAPI.EVENT_BUS.post(new EntityTravelEvent(EventState.POST, entity,
+            strafe, vertical, forward));
+    }
 }

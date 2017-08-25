@@ -26,9 +26,9 @@ import clientapi.command.handler.CommandHandler;
  */
 public class CommandListener {
 
-	protected final CommandHandler handler;
+    protected final CommandHandler handler;
 
-	public CommandListener(CommandHandler handler) {
-		this.handler = handler;
-	}
+    public CommandListener(CommandHandler handler) {
+        this.handler = handler;
+    }
 }

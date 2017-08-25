@@ -27,19 +27,19 @@ import net.minecraft.client.gui.GuiIngame;
  */
 public final class RenderHudEvent {
 
-	/**
-	 * The render partial ticks
-	 */
-	private final float partialTicks;
+    /**
+     * The render partial ticks
+     */
+    private final float partialTicks;
 
-	public RenderHudEvent(float partialTicks) {
-		this.partialTicks = partialTicks;
-	}
+    public RenderHudEvent(float partialTicks) {
+        this.partialTicks = partialTicks;
+    }
 
-	/**
-	 * @return The render partial ticks
-	 */
-	public final float getPartialTicks() {
-		return this.partialTicks;
-	}
+    /**
+     * @return The render partial ticks
+     */
+    public final float getPartialTicks() {
+        return this.partialTicks;
+    }
 }

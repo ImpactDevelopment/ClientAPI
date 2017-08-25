@@ -20,44 +20,44 @@ import org.apache.tools.ant.filters.ReplaceTokens
  * Builds a CDK zip in builds/distributions using the cdk directory and variables from the gradle config
  */
 task('makeCDK', type: Zip) {
-	baseName = project.name
-	classifier = 'CDK'
-	version = project.version
-	destinationDir = file('build/distributions')
+    baseName = project.name
+    classifier = 'CDK'
+    version = project.version
+    destinationDir = file('build/distributions')
 
-	// License
-	from 'LICENSE'
-	rename 'LICENSE', 'LICENSE.txt'
+    // License
+    from 'LICENSE'
+    rename 'LICENSE', 'LICENSE.txt'
 
-	// Include the gradle stuff
-	from 'gradlew', 'gradlew.bat'
-	into('gradle') { from 'gradle' }
+    // Include the gradle stuff
+    from 'gradlew', 'gradlew.bat'
+    into('gradle') { from 'gradle' }
 
-	// Include the example code
-	into('src/main') { from 'src/test' }
+    // Include the example code
+    into('src/main') { from 'src/test' }
 
-	// Include everything in cdk, and replace any @TOKEN@s
-	from('cdk') {
-		filter(ReplaceTokens, tokens: [
-			CAPI_VERSION : project.version,
-			MC_VERSION : minecraft.version,
-			FORGEGRADLE_VERSION: project.forgeGradleVersion,
-			MIXINGRADLE_VERSION: project.mixinGradleVersion,
-			ALPINE_VERSION: project.alpineVersion,
-			MIXIN_VERSION: project.mixinVersion,
-			TT_VERSION: project.typetoolsVersion,
-			MAPPINGS: minecraft.mappings,
-			TWEAKER: minecraft.tweakClass
-		])
+    // Include everything in cdk, and replace any @TOKEN@s
+    from('cdk') {
+        filter(ReplaceTokens, tokens: [
+            CAPI_VERSION : project.version,
+            MC_VERSION : minecraft.version,
+            FORGEGRADLE_VERSION: project.forgeGradleVersion,
+            MIXINGRADLE_VERSION: project.mixinGradleVersion,
+            ALPINE_VERSION: project.alpineVersion,
+            MIXIN_VERSION: project.mixinVersion,
+            TT_VERSION: project.typetoolsVersion,
+            MAPPINGS: minecraft.mappings,
+            TWEAKER: minecraft.tweakClass
+        ])
 
-		rename 'gitignore\\.txt', '.gitignore'
-	}
+        rename 'gitignore\\.txt', '.gitignore'
+    }
 }
 
 tasks.build.dependsOn makeCDK
 
 task('setupGitHooks') {
-	makeScriptFile '.git/hooks/pre-commit', '''#/bin/sh
+    makeScriptFile '.git/hooks/pre-commit', '''#/bin/sh
 # Store the current commit, staged changes and dirty tree as
 # seperate commits, then checkout only the staged changes
 parent_hash=`git rev-parse -q --verify HEAD`
@@ -84,7 +84,7 @@ git read-tree --reset ${dirty_hash}
 exit ${rtn}
 '''
 
-	makeScriptFile '.git/hooks/commit-msg', '''#/bin/sh
+    makeScriptFile '.git/hooks/commit-msg', '''#/bin/sh
 # Validate commit message
 
 # TODO 50/72 rule

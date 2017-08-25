@@ -27,12 +27,12 @@ import net.minecraft.client.gui.FontRenderer;
  */
 public interface IRenderer {
 
-	/**
-	 * Renders this object
-	 *
-	 * @param x The X position of where this render object will start
-	 * @param y The Y position of where this render object will start
-	 * @param font The FontRenderer being used in drawing
-	 */
-	default void render(float x, float y, FontRenderer font) {}
+    /**
+     * Renders this object
+     *
+     * @param x The X position of where this render object will start
+     * @param y The Y position of where this render object will start
+     * @param font The FontRenderer being used in drawing
+     */
+    default void render(float x, float y, FontRenderer font) {}
 }

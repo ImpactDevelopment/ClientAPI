@@ -29,16 +29,16 @@ import clientapi.util.render.camera.CameraHandle;
  */
 public final class RearViewCamera extends Camera {
 
-	public RearViewCamera(CameraHandle handle) {
-		super(handle);
-	}
+    public RearViewCamera(CameraHandle handle) {
+        super(handle);
+    }
 
-	@Override
-	public void updateFramebuffer(float partialTicks) {
-		IEntity entity = (IEntity) mc.player;
-		Vec2 rotations = entity.getRotations();
-		this.position = entity.getPos();
-		this.rotation = new Vec2(rotations.getX() + 180, rotations.getY() * -1);
-		super.updateFramebuffer(partialTicks);
-	}
+    @Override
+    public void updateFramebuffer(float partialTicks) {
+        IEntity entity = (IEntity) mc.player;
+        Vec2 rotations = entity.getRotations();
+        this.position = entity.getPos();
+        this.rotation = new Vec2(rotations.getX() + 180, rotations.getY() * -1);
+        super.updateFramebuffer(partialTicks);
+    }
 }

@@ -38,43 +38,43 @@ import org.lwjgl.input.Keyboard;
 @Mod(name = "Camera", description = "", bind = Keyboard.KEY_B)
 public final class Camera extends Module implements IRender {
 
-	@Label(name = "Height", id = "offset",
-	    description = "How high up the camera is")
-	@NumberValue(min = 10, max = 50)
-	private double height = 30;
+    @Label(name = "Height", id = "offset",
+        description = "How high up the camera is")
+    @NumberValue(min = 10, max = 50)
+    private double height = 30;
 
-	// Must be instantiated before the Render2DEvent Listener
-	private OverheadCamera camera =
-	    new OverheadCamera(new OverheadCamera.OverheadHandle() {
+    // Must be instantiated before the Render2DEvent Listener
+    private OverheadCamera camera =
+        new OverheadCamera(new OverheadCamera.OverheadHandle() {
 
-		    @Override
-		    public float camRotation() {
-			    return mc.player.rotationYaw;
-		    }
+            @Override
+            public float camRotation() {
+                return mc.player.rotationYaw;
+            }
 
-		    @Override
-		    public double camHeight() {
-			    return height;
-		    }
+            @Override
+            public double camHeight() {
+                return height;
+            }
 
-		    @Override
-		    public boolean visible() {
-			    return Camera.this.getState();
-		    }
+            @Override
+            public boolean visible() {
+                return Camera.this.getState();
+            }
 
-		    @Override
-		    public boolean reflected() {
-			    return false;
-		    }
-	    });
+            @Override
+            public boolean reflected() {
+                return false;
+            }
+        });
 
-	@EventHandler
-	private Listener<RenderHudEvent> render2DListener =
-	    new Listener<>(event -> {
-		    height = 10;
-		    ScaledResolution sr = new ScaledResolution(mc);
-		    float size = sr.getScaledWidth() / 5F;
-		    camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(),
-		        size);
-	    }, EventPriority.HIGHEST);
+    @EventHandler
+    private Listener<RenderHudEvent> render2DListener =
+        new Listener<>(event -> {
+            height = 10;
+            ScaledResolution sr = new ScaledResolution(mc);
+            float size = sr.getScaledWidth() / 5F;
+            camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(),
+                size);
+        }, EventPriority.HIGHEST);
 }

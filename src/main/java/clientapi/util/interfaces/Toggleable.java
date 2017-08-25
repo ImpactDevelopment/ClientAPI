@@ -24,32 +24,32 @@ package clientapi.util.interfaces;
  */
 public interface Toggleable {
 
-	/**
-	 * Called when the state is changed from false to true
-	 */
-	default void onEnable() {}
+    /**
+     * Called when the state is changed from false to true
+     */
+    default void onEnable() {}
 
-	/**
-	 * Called when the state is changed from true to false
-	 */
-	default void onDisable() {}
+    /**
+     * Called when the state is changed from true to false
+     */
+    default void onDisable() {}
 
-	/**
-	 * Toggles the state
-	 */
-	default void toggle() {
-		this.setState(!this.getState());
-	}
+    /**
+     * Toggles the state
+     */
+    default void toggle() {
+        this.setState(!this.getState());
+    }
 
-	/**
-	 * Directly sets the state
-	 *
-	 * @param state The new state
-	 */
-	void setState(boolean state);
+    /**
+     * Directly sets the state
+     *
+     * @param state The new state
+     */
+    void setState(boolean state);
 
-	/**
-	 * @return The current state
-	 */
-	boolean getState();
+    /**
+     * @return The current state
+     */
+    boolean getState();
 }

@@ -26,7 +26,7 @@ import clientapi.command.Command;
  */
 public final class CommandInitException extends CommandException {
 
-	public CommandInitException(Command command, String message) {
-		super(command, message);
-	}
+    public CommandInitException(Command command, String message) {
+        super(command, message);
+    }
 }

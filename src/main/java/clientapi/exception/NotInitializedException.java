@@ -25,7 +25,7 @@ package clientapi.exception;
  */
 public final class NotInitializedException extends RuntimeException {
 
-	public NotInitializedException(String message) {
-		super(message);
-	}
+    public NotInitializedException(String message) {
+        super(message);
+    }
 }
