@@ -16,17 +16,17 @@
 
 package clientapi.load.mixin;
 
-import clientapi.event.defaults.game.core.*;
-import com.google.gson.GsonBuilder;
 import clientapi.Client;
-import clientapi.ClientInfo;
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.GuiEvent;
+import clientapi.ClientInfo;
+import clientapi.event.defaults.game.core.*;
+import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
-import clientapi.util.render.gl.GlUtils;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.wrapper.IMinecraft;
+import clientapi.util.render.gl.GlUtils;
+import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -49,7 +49,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
-import static org.lwjgl.input.Keyboard.*;
 
 /**
  * @author Brady
@@ -163,7 +162,7 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
     private GuiScreen displayGuiScreen(GuiScreen screen) {
-        GuiEvent event = new GuiEvent(screen);
+        GuiDisplayEvent event = new GuiDisplayEvent(screen);
         ClientAPI.EVENT_BUS.post(event);
         return event.getScreen();
     }
