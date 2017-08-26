@@ -16,6 +16,8 @@
 
 package clientapi.util.keybind;
 
+import org.lwjgl.input.Keyboard;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -56,6 +58,15 @@ public final class Keybind {
         this.consumer = consumer;
         Keybind.keybinds.add(this);
     }
+
+	/**
+	 * @return the key name as a string
+	 * @since 3.0
+	 */
+	@Override
+	public String toString() {
+		return Keyboard.getKeyName(getKey());
+	}
 
     /**
      * @param key The key code being set
