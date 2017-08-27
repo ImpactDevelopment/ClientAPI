@@ -36,6 +36,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
+apply from: 'tasks.gradle'
 apply from: 'methods.gradle'
 
 version = getVersionFromJava()
@@ -78,8 +79,6 @@ minecraft {
 
     makeObfSourceJar = false
 }
-
-apply from: 'tasks.gradle'
 
 artifacts {
     archives makeCDK
