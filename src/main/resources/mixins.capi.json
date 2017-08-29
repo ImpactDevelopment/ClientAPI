@@ -3,6 +3,7 @@
   "package": "clientapi.load.mixin",
   "refmap": "mixins.capi.refmap.json",
   "compatibilityLevel": "JAVA_8",
+  "verbose": false,
   "mixins": [
     "MixinBlock",
     "MixinEntity",
