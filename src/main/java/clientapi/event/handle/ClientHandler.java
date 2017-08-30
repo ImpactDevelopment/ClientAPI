@@ -59,6 +59,10 @@ public final class ClientHandler implements Helper {
      */
     @EventHandler
     private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
+        // If the event is cancelled, don't process the KeyEvent
+        if (event.isCancelled())
+            return;
+
         // Get all matching keybinds
         Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
                 .filter(bind -> bind.getKey() != KEY_NONE && bind.getKey() == event.getKey());
@@ -70,7 +74,7 @@ public final class ClientHandler implements Helper {
             if (keybind.getType() == Keybind.Type.TOGGLE)
                 keybind.onClick();
         });
-    });
+    }, EventPriority.LOWEST);
 
     @EventHandler
     private final Listener<KeyUpEvent> keyUpListener = new Listener<>(event ->
