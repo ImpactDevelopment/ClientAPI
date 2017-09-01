@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package clientapi;
+package clientapi.plugin;
 
 import clientapi.core.Core;
 import clientapi.util.interfaces.Helper;
 
 /**
- * The base for all ClientAPI Clients. The classpath of implementations
- * of {@code Client} should be defined in the {@code client.json} file.
- *
- * @see ClientInfo
- *
  * @author Brady
- * @since 1/19/2017 12:00 PM
+ * @since 9/1/2017 1:42 PM
  */
-public abstract class Client extends Core<ClientInfo> implements Helper {
+public abstract class Plugin extends Core<PluginInfo> implements Helper {
 
-    public Client(ClientInfo info) {
+    public Plugin(PluginInfo info) {
         super(info);
     }
 }

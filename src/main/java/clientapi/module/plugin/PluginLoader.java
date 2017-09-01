@@ -17,6 +17,7 @@
 package clientapi.module.plugin;
 
 import clientapi.module.Module;
+import clientapi.plugin.PluginInfo;
 import clientapi.util.Messages;
 import clientapi.util.logger.Level;
 import clientapi.util.logger.Logger;
@@ -41,6 +42,7 @@ import java.util.jar.JarFile;
  * @author Brady
  * @since 1/26/2017 12:00 PM
  */
+@Deprecated
 public final class PluginLoader {
 
     /**

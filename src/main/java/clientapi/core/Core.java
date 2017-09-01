@@ -14,23 +14,36 @@
  * limitations under the License.
  */
 
-package clientapi;
+package clientapi.core;
 
-import clientapi.core.Core;
-import clientapi.util.interfaces.Helper;
+import clientapi.Client;
+import clientapi.ClientInfo;
+import clientapi.plugin.Plugin;
+import clientapi.plugin.PluginInfo;
 
 /**
- * The base for all ClientAPI Clients. The classpath of implementations
- * of {@code Client} should be defined in the {@code client.json} file.
+ * Core for Clients and Plugins. Generic argument "T"
+ * should be the info class of the type.
  *
+ * @see Client
+ * @see Plugin
  * @see ClientInfo
+ * @see PluginInfo
  *
  * @author Brady
- * @since 1/19/2017 12:00 PM
+ * @since 9/1/2017 1:46 PM
  */
-public abstract class Client extends Core<ClientInfo> implements Helper {
+public abstract class Core<T> {
 
-    public Client(ClientInfo info) {
-        super(info);
+    protected T info;
+
+    public Core(T info) {
+        this.info = info;
+    }
+
+    public abstract void onInit(T info);
+
+    public final T getInfo() {
+        return this.info;
     }
 }
