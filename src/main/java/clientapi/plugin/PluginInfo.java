@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package clientapi.module.plugin;
+package clientapi.plugin;
 
 /**
- * Info for Plugins
+ * Representation of the {@code plugin.json} format.
  *
  * @author Brady
  * @since 1/26/2017 12:00 PM
  */
-class PluginInfo {
+public final class PluginInfo {
 
     /**
      * Name of the Plugin
@@ -33,6 +33,11 @@ class PluginInfo {
      * Description of the Plugin
      */
     private String description;
+
+    /**
+     * Build version of the plugin
+     */
+    private double build;
 
     /**
      * Main class of the Plugin
@@ -51,6 +56,13 @@ class PluginInfo {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * @return The build version of the plugin
+     */
+    public double getBuild() {
+        return this.build;
     }
 
     /**

@@ -45,7 +45,9 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
-public final class ClientHandler implements Helper {
+public enum ClientHandler implements Helper {
+
+    INSTANCE;
 
     /**
      * Handles camera updates

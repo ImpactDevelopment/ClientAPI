@@ -17,6 +17,7 @@
 package clientapi.module.plugin;
 
 import clientapi.module.Module;
+import clientapi.plugin.PluginInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
  * @author Brady
  * @since 1/27/2017 12:00 PM
  */
+@Deprecated
 public abstract class Plugin {
 
     /**
