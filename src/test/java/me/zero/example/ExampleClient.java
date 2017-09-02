@@ -28,7 +28,7 @@ public final class ExampleClient extends Client {
     }
 
     @Override
-    public void onInit(ClientHandler handler) {
+    public void onInit(ClientInfo info) {
         // Init and load module manager
         moduleManager = new ExampleModManager();
         moduleManager.load();
@@ -36,9 +36,6 @@ public final class ExampleClient extends Client {
         // Init and load command manager
         commandManager = new ExampleCommandManager();
         commandManager.load();
-
-        // Load plugins from a defined directory
-        this.loadPlugins(mc.mcDataDir + "/example/plugins/");
 
         ClientAPI.EVENT_BUS.subscribe(new Object() {
             @EventHandler
