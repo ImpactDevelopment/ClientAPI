@@ -4,7 +4,6 @@ import clientapi.manage.Manager;
 import clientapi.module.Module;
 import clientapi.util.logger.Level;
 import clientapi.util.logger.Logger;
-import me.zero.example.ExampleClient;
 import me.zero.example.mod.mods.*;
 
 /**
@@ -28,9 +27,6 @@ public final class ExampleModManager extends Manager<Module> {
             new Hud(),
             new Speed()
         );
-
-        // Loads Modules from the discovered Plugins by the Plugin loaders
-        ExampleClient.getInstance().getPlugins().forEach(plugin -> this.addData(plugin.getModules()));
     }
 
     @Override
