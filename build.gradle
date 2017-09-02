@@ -16,7 +16,6 @@
 
 buildscript {
     repositories {
-        mavenCentral()
         maven {
             name = 'forge'
             url = 'http://files.minecraftforge.net/maven'
@@ -25,6 +24,7 @@ buildscript {
             name = 'SpongePowered'
             url = 'http://repo.spongepowered.org/maven'
         }
+        jcenter()
     }
 
     dependencies {
@@ -33,7 +33,11 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
 apply from: 'methods.gradle'
@@ -76,12 +80,15 @@ minecraft {
     tweakClass = 'clientapi.load.ClientTweaker'
     runDir = 'run'
 
-    makeObfSourceJar = false
+    // The sources jar should use SRG names not MCP to ensure compatibility with all mappings
+    makeObfSourceJar = true
 }
 
 apply from: 'tasks.gradle'
 
 artifacts {
+    archives sourcesJar
+//    archives javadocJar // FIXME JavaDoc build errors
     archives makeCDK
 }
 
@@ -89,4 +96,57 @@ mixin {
     defaultObfuscationEnv notch
     add sourceSets.main, 'mixins.capi.refmap.json'
     add sourceSets.test, 'mixins.client.refmap.json'
+}
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+    developers {
+        developer {
+            id 'brady'
+            name 'Brady'
+            email 'zeromemes@users.noreply.github.com'
+        }
+        developer {
+            id 'leaf'
+            name 'LeafHacker'
+            email 'leafhacker@yahoo.com'
+        }
+    }
+
+    scm {
+        url project.url
+    }
+}
+
+// Create the publication with the pom configuration:
+publishing {
+    repositories {
+        maven {
+            url "build/maven"
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+//            artifact javadocJar // FIXME
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', project.description)
+                root.appendNode('name', project.name)
+                root.appendNode('url', project.url)
+                root.children().last() + pomConfig
+            }
+        }
+    }
 }
