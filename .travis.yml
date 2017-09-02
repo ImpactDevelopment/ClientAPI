@@ -1,7 +1,35 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 notifications:
   email: false
+env:
+  global:
+    # GITHUB_TOKEN
+    secure: iCEx0CK+kwwVQO/LDvhfoGdvX/h2PpYd1vSx3a68pp45jS5C5skj1G0WtHvinP3lcFP2hkUnGTIPOU+2+gKkcu4jyYm6BevJtS8Dn3HBPHf2ZT0ZrSitYltLSadE8MFcb/1ol1Kmk6FegW1jbpaR/eisQxEniU1I+RfvOijDmks7c8LYrOZqf2EoIpsIEWC7CRShXzjooE3ZutCQjAp9k+ssJesLiS1u+/rp7g9uXv+28gZ5qmQFg/fxZ0d+oKS5I2BcSaSwbZ9BHKd8sscoTucSC4XlDTw9FDv9NsVp8cPz4Kqrg6wvySZs9aWI6UB+h4RaJ2e2Czkku8W+So8NSqfUEhJltd9o00+qnFeXwjrKGCpe2tZe1xT7eAgxDX6ehbWOzZYNGk85a2AWcnBXBxtaLK+DQm1qfwjwHrXToqmmGMmIxgj6tKTix6jpX/31rDyuuw6+n2WrdsMYRN/dyoaGLrsl6w9AUmWAtlNBiBsCMFc5NHk6GVbMpOwRVKIlb+wL+Du9cvuaL3PdsEVrohfL7+u3QB80x1E5LqFqFT5l5VcXMnipNNEg+T2JiNvxA8YFrxuLRipEIQgMr2tSFfB53q1AraPvIovioE+4/VloW2M99yj+uJmZY5xGE4B0i8iyQzKBchu/nusynSQBNaGXSuA4rJG9yAvAR9CTmaA=
 before_install:
-  - chmod +x gradlew
+- chmod +x gradlew
+before_deploy:
+- git clone --depth 1 --branch gh-pages https://github.com/ImpactDevelopment/maven.git
+  build/maven
+- "./gradlew publish"
+deploy:
+- provider: "pages"
+  project_name: "maven"
+  repo: "ImpactDevelopment/maven"
+  target_branch: "gh-pages"
+  local_dir: "build/maven"
+  github_token: "$GITHUB_TOKEN"
+  skip_cleanup: true
+  on:
+    repo: "ImpactDevelopment/ClientAPI"
+    tags: true
+- provider: "releases"
+  file:
+  - "build/distributions/ClientAPI-*-CDK.zip"
+  file_glob: true
+  api_key: "$GITHUB_TOKEN"
+  skip_cleanup: true
+  on:
+    repo: "ImpactDevelopment/ClientAPI"
+    tags: true
