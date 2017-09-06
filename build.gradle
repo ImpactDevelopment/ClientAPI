@@ -49,6 +49,25 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
+sourceSets {
+    example {
+        compileClasspath += main.compileClasspath + main.output
+    }
+    debug {
+        compileClasspath += example.compileClasspath + example.output
+    }
+}
+
+reobf {
+    jar {
+        mappingType = 'SEARGE'
+    }
+    releaseJar {
+        mappingType = 'NOTCH'
+        classpath = sourceSets.main.compileClasspath
+    }
+}
+
 repositories {
     mavenCentral()
 
@@ -87,7 +106,9 @@ minecraft {
 apply from: 'tasks.gradle'
 
 artifacts {
-    archives sourcesJar
+    archives jar
+    archives releaseJar
+    archives sourceJar
 //    archives javadocJar // FIXME JavaDoc build errors
     archives makeCDK
 }
@@ -135,7 +156,8 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            artifact sourcesJar
+            artifact releaseJar
+            artifact sourceJar
 //            artifact javadocJar // FIXME
             groupId project.group
             artifactId project.name
