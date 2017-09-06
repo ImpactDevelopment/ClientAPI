@@ -16,9 +16,14 @@
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
-task('sourcesJar', type: Jar, dependsOn: classes) {
+task('releaseJar', type: Jar) {
+    classifier = 'release'
+    from sourceSets.main.output
+}
+
+sourceJar {
     classifier = 'sources'
-    from sourceSets.main.allSource
+//    from sourceSets.main.allSource
 }
 
 task('javadocJar', type: Jar, dependsOn: javadoc) {
@@ -63,5 +68,3 @@ task('makeCDK', type: Zip) {
         rename 'gitignore\\.txt', '.gitignore'
     }
 }
-
-tasks.build.dependsOn makeCDK
