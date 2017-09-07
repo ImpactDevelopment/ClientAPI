@@ -16,7 +16,7 @@
 
 package clientapi.util.interfaces;
 
-import clientapi.util.keybind.Keybind;
+import clientapi.util.io.Keybind;
 
 /**
  * Marks a type as Bindable.
