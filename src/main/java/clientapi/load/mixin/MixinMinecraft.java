@@ -106,13 +106,13 @@ public abstract class MixinMinecraft implements IMinecraft {
         InputStream stream = this.getClass().getResourceAsStream("/client.json");
 
         if (stream == null)
-            throw new ClientInitException("Unable to locate the Client.json");
+            throw new ClientInitException("Unable to locate Client Configuration (client.json)");
 
         // Construct a ClientInfo object from the client json using GSON
         ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(new BufferedReader(new InputStreamReader(stream)), ClientInfo.class);
 
         if (clientInfo == null)
-            throw new ClientInitException("Unable to create ClientInfo from Client.json");
+            throw new ClientInitException("Unable to create ClientInfo from client.json");
 
         // Attempt to instantiate the specified class from the ClientInfo
         Client client;

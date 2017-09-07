@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.util.keybind;
+package clientapi.util.io;
 
 import org.lwjgl.input.Keyboard;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static clientapi.util.keybind.Keybind.Action.*;
+import static clientapi.util.io.Keybind.Action.*;
 
 /**
  * A keybind that is used to create key hooks
