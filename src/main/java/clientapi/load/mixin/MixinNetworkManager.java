@@ -17,15 +17,21 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.network.PacketEvent;
+import clientapi.event.defaults.game.network.ServerEvent;
+import clientapi.util.interfaces.Helper;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import clientapi.event.defaults.game.network.PacketEvent;
+import me.zero.alpine.type.EventState;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 
@@ -49,6 +55,7 @@ public abstract class MixinNetworkManager {
         ((Packet<INetHandler>) event.getPacket()).processPacket(handler);
     }
 
+    @SuppressWarnings("AmbiguousMixinReference")
     @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;[Lio/netty/util/concurrent/GenericFutureListener;)V"))
     private void sendPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
         PacketEvent event = new PacketEvent.Send(packetIn);
@@ -57,5 +64,10 @@ public abstract class MixinNetworkManager {
             return;
 
         this.dispatchPacket(event.getPacket(), null);
+    }
+
+    @Inject(method = "checkDisconnected", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
+    private void onDisconnect(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
     }
 }
