@@ -54,6 +54,11 @@ public final class ClientTweaker implements ITweaker {
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
 
+        // Check if a ClientInfo JSON is present
+        if (this.getClass().getResourceAsStream("/client.json") == null) {
+            throw new ClientInitException("Unable to locate Client Configuration (client.json)");
+        }
+
         // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
 
