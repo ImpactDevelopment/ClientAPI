@@ -17,7 +17,7 @@
 package clientapi.module;
 
 import clientapi.ClientAPI;
-import clientapi.util.keybind.Keybind;
+import clientapi.util.io.Keybind;
 
 /**
  * A type of module intended for use as a sub-module

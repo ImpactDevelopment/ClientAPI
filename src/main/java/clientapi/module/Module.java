@@ -17,12 +17,12 @@
 package clientapi.module;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.internal.ModuleStateEvent;
 import clientapi.exception.ActionNotSupportedException;
 import clientapi.manage.Node;
 import clientapi.module.exception.ModuleInitException;
 import clientapi.util.ClientAPIUtils;
-import clientapi.util.keybind.Keybind;
-import clientapi.event.defaults.internal.ModuleStateEvent;
+import clientapi.util.io.Keybind;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;

@@ -26,7 +26,7 @@ import clientapi.event.defaults.game.network.PacketEvent;
 import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.interfaces.Helper;
-import clientapi.util.keybind.Keybind;
+import clientapi.util.io.Keybind;
 import clientapi.util.render.camera.Camera;
 import clientapi.util.render.camera.CameraManager;
 import me.zero.alpine.listener.EventHandler;
