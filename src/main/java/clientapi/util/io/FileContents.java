@@ -49,15 +49,15 @@ public final class FileContents {
     }
 
     /**
-     * Returns the raw contents of the file read,
-     *
-     *
-     * @return
+     * @return Returns the raw contents of the file read
      */
     public final String getRawContents() {
         return this.raw;
     }
 
+    /**
+     * @return Returns the contents of the file read split by new lines
+     */
     public final List<String> getSplitContents() {
         return this.split;
     }
