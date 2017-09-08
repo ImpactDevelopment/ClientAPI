@@ -38,6 +38,15 @@ public @interface Label {
     String name();
 
     /**
+     * Returns the parent field's id. Used in nested values.
+     * If the value has a length of 0, that is an indication
+     * that there isn't a parent field.
+     *
+     * @return The parent field id
+     */
+    String parent() default "";
+
+    /**
      * @return The ID of the field
      */
     String id();
