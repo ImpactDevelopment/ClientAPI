@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package clientapi.exception;
+package clientapi.util.interfaces;
 
 /**
- * Exception thrown whenever the outcome of an action is unexpected.
- * Essentially, the process cannot proceed because of the outcome.
- * Suspends the Java Virtual Machine.
- *
  * @author Brady
- * @since 1/21/2017 12:00 PM
+ * @since 9/7/2017 9:35 PM
  */
-public final class UnexpectedOutcomeException extends RuntimeException {
+public interface Identifiable {
 
-    public UnexpectedOutcomeException(String message) {
-        super(message);
-    }
+    String getId();
 }

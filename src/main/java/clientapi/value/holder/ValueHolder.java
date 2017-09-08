@@ -16,11 +16,10 @@
 
 package clientapi.value.holder;
 
-import clientapi.value.Value;
+import clientapi.value.IValue;
 import clientapi.value.Values;
-import com.google.common.collect.Sets;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Implementation of {@code IValueHolder}
@@ -35,25 +34,29 @@ public class ValueHolder implements IValueHolder {
     /**
      * Values that are "Held" by this holder
      */
-    private final Collection<Value> values = Sets.newLinkedHashSet();
+    private final List<IValue> values = new ArrayList<>();
+
+    /**
+     * Cache of values by ID, faster than creating streams every time a value is retrieved
+     */
+    private final Map<String, IValue> valueCache = new HashMap<>();
 
     protected ValueHolder() {
-        Values.discover(this);
+        Values.discover(this).forEach(this::addValue);
     }
 
     @Override
-    public final boolean addValue(Value value) {
+    public final boolean addValue(IValue value) {
         return getValue(value.getId()) == null && this.values.add(value);
-
     }
 
     @Override
-    public final Value getValue(String id) {
-        return values.stream().filter(value -> value.getId().equals(id)).findFirst().orElse(null);
+    public final IValue getValue(String id) {
+        return valueCache.computeIfAbsent(id, _id -> values.stream().filter(value -> value.getId().equals(_id)).findFirst().orElse(null));
     }
 
     @Override
-    public final Collection<Value> getValues() {
-        return Sets.newLinkedHashSet(this.values);
+    public final Collection<IValue> getValues() {
+        return new ArrayList<>(this.values);
     }
 }
