@@ -4,7 +4,8 @@ import clientapi.command.Cmd;
 import clientapi.command.Command;
 import clientapi.command.exception.CommandException;
 import clientapi.command.executor.sender.CommandSender;
-import net.minecraft.util.text.TextComponentString;
+import clientapi.util.builder.impl.ChatBuilder;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.Arrays;
 
@@ -18,8 +19,12 @@ public final class TestCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] arguments) throws CommandException {
         // Print a chat message indicating the success of the
-        mc.ingameGUI.getChatGUI().printChatMessage(new TextComponentString(
-                String.format("%s executed the \"Test\" command with arguments %s", sender.getName(), Arrays.toString(arguments))
-        ));
+        mc.ingameGUI.getChatGUI().printChatMessage(
+                new ChatBuilder()
+                        .append(String.format("%s executed the ", sender.getName()), TextFormatting.GRAY)
+                        .append("\"Test\"", TextFormatting.WHITE)
+                        .append(" command with arguments ", TextFormatting.GRAY)
+                        .append(Arrays.toString(arguments), TextFormatting.WHITE)
+                        .build());
     }
 }
