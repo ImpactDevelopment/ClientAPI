@@ -17,7 +17,6 @@
 package clientapi.value;
 
 import clientapi.util.ReflectionUtils;
-import clientapi.util.interfaces.Nameable;
 
 import java.lang.reflect.Field;
 
@@ -29,7 +28,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
-public class Value<T> implements IValue<T>, Nameable {
+public class Value<T> implements IValue<T> {
 
     /**
      * Name of the Value
@@ -85,6 +84,7 @@ public class Value<T> implements IValue<T>, Nameable {
         return this.description;
     }
 
+    @Override
     public final String getId() {
         return this.id;
     }
