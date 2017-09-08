@@ -44,6 +44,12 @@ public final class Values {
      */
     private static final Map<Class<?>, ResolverData> RESOLVERS = new HashMap<>();
 
+    /**
+     * Cache of objects that have already had their values discovered, prevents
+     * creating duplicate children on multiple calls to {@code discover(Object)}
+     */
+    private static final Map<Object, List<IValue>> DISCOVER_CACHE = new HashMap<>();
+
     static {
         // Default Resolvers
         define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN, Boolean.class, Boolean.TYPE));
@@ -60,10 +66,26 @@ public final class Values {
      * @param holder Object holding values
      */
     public static List<IValue> discover(Object holder) {
-        return Arrays.stream(holder.getClass().getDeclaredFields())
-                .filter(Values::hasValueAnnotation)
-                .map(field -> getValue(holder, field))
-                .collect(Collectors.toList());
+        return DISCOVER_CACHE.computeIfAbsent(holder, obj -> {
+            // Find all fields that are valid values
+            List<IValue> values =  Arrays.stream(obj.getClass().getDeclaredFields())
+                    .filter(Values::hasValueAnnotation)
+                    .map(field -> getValue(obj, field))
+                    .collect(Collectors.toList());
+
+            // Setup the parent values
+            values.forEach(value -> {
+                IValue parent;
+                // Check if the parent target isn't null and if there
+                // is a parent target, the corresponding target isn't null
+                if (value.getParent() != null && (parent = values.stream().filter(v -> v.getId().equals(value.getParent())).findFirst().orElse(null)) != null)
+                    parent.addValue(value);
+            });
+
+            // Remove all values that have a parent from the holder values
+            values.removeIf(value -> value.getParent() != null);
+            return values;
+        });
     }
 
     /**
