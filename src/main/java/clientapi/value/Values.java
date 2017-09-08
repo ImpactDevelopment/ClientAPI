@@ -16,11 +16,10 @@
 
 package clientapi.value;
 
-import clientapi.value.annotation.*;
-import clientapi.value.holder.IValueHolder;
 import clientapi.exception.ValueException;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.annotation.Label;
+import clientapi.value.annotation.*;
 import clientapi.value.type.resolve.DefaultResolvers;
 import clientapi.value.type.resolve.ResolverData;
 
@@ -28,7 +27,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Class used to discover values from various holders
@@ -54,14 +55,15 @@ public final class Values {
     private Values() {}
 
     /**
-     * Discovers all of the Values in a ValueHolder, then registers them
+     * Discovers all of the Values that an object defines
      *
-     * @param holder Holder being scanned
+     * @param holder Object holding values
      */
-    public static void discover(IValueHolder holder) {
-        Arrays.stream(holder.getClass().getDeclaredFields())
+    public static List<IValue> discover(Object holder) {
+        return Arrays.stream(holder.getClass().getDeclaredFields())
                 .filter(Values::hasValueAnnotation)
-                .forEach(field -> holder.addValue(getValue(holder, field)));
+                .map(field -> getValue(holder, field))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -86,8 +88,7 @@ public final class Values {
         if (field.isAnnotationPresent(Label.class)) {
             Annotation a = Arrays.stream(field.getDeclaredAnnotations())
                     .filter(annotation -> annotation.annotationType().isAnnotationPresent(ValueDefinition.class))
-                    .findFirst()
-                    .orElse(null);
+                    .findFirst().orElse(null);
             if (a != null)
                 return a.annotationType();
         }
@@ -103,7 +104,7 @@ public final class Values {
      * @return The resolved field
      */
     @SuppressWarnings("unchecked")
-    private static Value getValue(Object parent, Field field) {
+    private static IValue getValue(Object parent, Field field) {
         Class<? extends Annotation> anno = getValueAnnotation(field);
         if (anno == null)
             throw new ValueException("Value annotation not found for field");
@@ -119,7 +120,7 @@ public final class Values {
         if (resolved == null || !(resolved instanceof Value))
             throw new ValueException("Outcome of resolver was either null or not a value type");
 
-        return (Value) resolved;
+        return (IValue) resolved;
     }
 
     /**

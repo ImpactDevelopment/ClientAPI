@@ -16,7 +16,7 @@
 
 package clientapi.value.holder;
 
-import clientapi.value.Value;
+import clientapi.value.IValue;
 
 import java.util.Collection;
 
@@ -36,7 +36,7 @@ public interface IValueHolder {
      * @param value Value being added
      * @return true if the value was able to be added
      */
-    boolean addValue(Value value);
+    boolean addValue(IValue value);
 
     /**
      * Gets the value that this holder may
@@ -45,10 +45,10 @@ public interface IValueHolder {
      * @param id The id of the target value
      * @return The value, if it is found, otherwise null
      */
-    Value getValue(String id);
+    IValue getValue(String id);
 
     /**
      * @return All of the values that this holder "holds"
      */
-    Collection<Value> getValues();
+    Collection<IValue> getValues();
 }

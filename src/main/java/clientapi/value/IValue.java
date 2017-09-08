@@ -16,13 +16,16 @@
 
 package clientapi.value;
 
+import clientapi.util.interfaces.Identifiable;
+import clientapi.util.interfaces.Nameable;
+
 /**
  * Simple interface for Values
  *
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
-interface IValue<T> {
+public interface IValue<T> extends Nameable, Identifiable {
 
     /**
      * @return The Value of this Object
