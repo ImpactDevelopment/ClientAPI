@@ -17,13 +17,13 @@
 package clientapi.value.type.resolve;
 
 import clientapi.util.ReflectionUtils;
+import clientapi.util.annotation.Label;
+import clientapi.value.annotation.MultiValue;
 import clientapi.value.annotation.NumberValue;
+import clientapi.value.type.BooleanType;
 import clientapi.value.type.MultiType;
 import clientapi.value.type.NumberType;
 import clientapi.value.type.StringType;
-import clientapi.util.annotation.Label;
-import clientapi.value.annotation.MultiValue;
-import clientapi.value.type.BooleanType;
 
 /**
  * Contains all default resolvers
@@ -44,7 +44,7 @@ public final class DefaultResolvers {
         if (value == null)
             value = false;
 
-        BooleanType type = new BooleanType(label.name(), label.id(), label.description(), parent, field);
+        BooleanType type = new BooleanType(label.name(), label.parent(), label.id(), label.description(), parent, field);
         type.setState(value);
         return type;
     };
@@ -54,7 +54,7 @@ public final class DefaultResolvers {
      */
     public static final TypeResolver<StringType> STRING = (parent, field) -> {
         Label label = field.getAnnotation(Label.class);
-        return new StringType(label.name(), label.id(), label.description(), parent, field);
+        return new StringType(label.name(), label.parent(), label.id(), label.description(), parent, field);
     };
 
     /**
@@ -64,7 +64,7 @@ public final class DefaultResolvers {
         Label label = field.getAnnotation(Label.class);
         MultiValue multi = field.getAnnotation(MultiValue.class);
 
-        MultiType type = new MultiType(label.name(), label.id(), label.description(), parent, field, multi.value());
+        MultiType type = new MultiType(label.name(), label.parent(), label.id(), label.description(), parent, field, multi.value());
         if (type.getValue() == null)
             type.setValue(multi.value()[0]);
 
@@ -82,17 +82,17 @@ public final class DefaultResolvers {
         // This is an absolute mess, still finding some other solution
         NumberType type = null;
         if (field.getType() == Byte.class || field.getType() == Byte.TYPE) {
-            type = new NumberType<Byte>(label.name(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max()) { };
+            type = new NumberType<Byte>(label.name(), label.parent(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max()) { };
         } else if (field.getType() == Short.class || field.getType() == Short.TYPE) {
-            type = new NumberType<Short>(label.name(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max()) { };
+            type = new NumberType<Short>(label.name(), label.parent(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max()) { };
         } else if (field.getType() == Integer.class || field.getType() == Integer.TYPE) {
-            type = new NumberType<Integer>(label.name(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max()) { };
+            type = new NumberType<Integer>(label.name(), label.parent(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max()) { };
         } else if (field.getType() == Long.class || field.getType() == Long.TYPE) {
-            type = new NumberType<Long>(label.name(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max()) { };
+            type = new NumberType<Long>(label.name(), label.parent(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max()) { };
         } else if (field.getType() == Float.class || field.getType() == Float.TYPE) {
-            type = new NumberType<Float>(label.name(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max()) { };
+            type = new NumberType<Float>(label.name(), label.parent(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max()) { };
         } else if (field.getType() == Double.class || field.getType() == Double.TYPE) {
-            type = new NumberType<Double>(label.name(), label.id(), label.description(), parent, field, num.min(), num.max()) { };
+            type = new NumberType<Double>(label.name(), label.parent(), label.id(), label.description(), parent, field, num.min(), num.max()) { };
         }
 
         if (type == null)

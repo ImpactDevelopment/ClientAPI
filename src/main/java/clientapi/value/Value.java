@@ -19,6 +19,7 @@ package clientapi.value;
 import clientapi.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * The implementation of IValue
@@ -31,9 +32,24 @@ import java.lang.reflect.Field;
 public class Value<T> implements IValue<T> {
 
     /**
+     * List of child values
+     */
+    private final List<IValue> children = new ArrayList<>();
+
+    /**
+     * Cache of values by ID, faster than creating streams every time a value is retrieved
+     */
+    private final Map<String, IValue> valueCache = new HashMap<>();
+
+    /**
      * Name of the Value
      */
     private final String name;
+
+    /**
+     * ID of the parent value, null if there isn't a parent
+     */
+    private final String parent;
 
     /**
      * Description of the Value
@@ -55,12 +71,18 @@ public class Value<T> implements IValue<T> {
      */
     private final Field field;
 
-    public Value(String name, String id, String description, Object object, Field field) {
+    public Value(String name, String parent, String id, String description, Object object, Field field) {
         this.name = name;
+        this.parent = parent.length() > 0 ? parent : null;
         this.id = id;
         this.description = description;
         this.object = object;
         this.field = field;
+    }
+
+    @Override
+    public String getParent() {
+        return this.parent;
     }
 
     @SuppressWarnings("unchecked")
@@ -87,5 +109,20 @@ public class Value<T> implements IValue<T> {
     @Override
     public final String getId() {
         return this.id;
+    }
+
+    @Override
+    public final boolean addValue(IValue value) {
+        return getValue(value.getId()) == null && this.children.add(value);
+    }
+
+    @Override
+    public final IValue getValue(String id) {
+        return valueCache.computeIfAbsent(id, _id -> children.stream().filter(value -> value.getId().equals(_id)).findFirst().orElse(null));
+    }
+
+    @Override
+    public final Collection<IValue> getValues() {
+        return new ArrayList<>(this.children);
     }
 }
