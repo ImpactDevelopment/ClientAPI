@@ -43,12 +43,6 @@ public class ValueHolder implements IValueHolder {
 
     protected ValueHolder() {
         Values.discover(this).forEach(this::addValue);
-        // Adds child values to parent
-        this.values.forEach(value -> {
-            IValue parent;
-            if (value.getParent() != null && (parent = getValue(value.getParent())) != null)
-                parent.addValue(value);
-        });
     }
 
     @Override
