@@ -18,6 +18,7 @@ package clientapi.value;
 
 import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Nameable;
+import clientapi.value.holder.IValueHolder;
 
 /**
  * Simple interface for Values
@@ -25,7 +26,12 @@ import clientapi.util.interfaces.Nameable;
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
-public interface IValue<T> extends Nameable, Identifiable {
+public interface IValue<T> extends Nameable, Identifiable, IValueHolder {
+
+    /**
+     * @return The ID of the parent value
+     */
+    String getParent();
 
     /**
      * @return The Value of this Object

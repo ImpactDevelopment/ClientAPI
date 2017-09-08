@@ -16,8 +16,8 @@
 
 package clientapi.value.type;
 
-import clientapi.value.Value;
 import clientapi.util.ClientAPIUtils;
+import clientapi.value.Value;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
@@ -35,8 +35,8 @@ public final class MultiType extends Value<String> {
      */
     private final String[] values;
 
-    public MultiType(String name, String id, String description, Object object, Field field, String[] values) {
-        super(name, id, description, object, field);
+    public MultiType(String name, String parent, String id, String description, Object object, Field field, String[] values) {
+        super(name, parent, id, description, object, field);
         this.values = values;
         this.setValue(values[0]);
     }
@@ -69,7 +69,7 @@ public final class MultiType extends Value<String> {
     /**
      * @return All possible values for this MultiType
      */
-    public final String[] getValues() {
+    public final String[] getMultiValues() {
         return this.values;
     }
 }
