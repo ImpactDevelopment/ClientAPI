@@ -16,6 +16,10 @@
 
 package clientapi.load;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Brady
  * @since 9/8/2017 7:27 PM
@@ -23,7 +27,7 @@ package clientapi.load;
 public final class ClientTweakerForge extends ClientTweaker {
 
     @Override
-    public String[] getLaunchArguments() {
-        return new String[0];
+    public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
+        this.args = new ArrayList<>();
     }
 }
