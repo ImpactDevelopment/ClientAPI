@@ -34,7 +34,7 @@ import java.util.List;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class ClientTweaker implements ITweaker {
+public class ClientTweaker implements ITweaker {
 
     /**
      * The Game Launch Arguments
@@ -42,16 +42,12 @@ public final class ClientTweaker implements ITweaker {
     private List<String> args = new ArrayList<>();
 
     @Override
-    public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.args.addAll(args);
-
-        addArg("gameDir", gameDir);
-        addArg("assetsDir", assetsDir);
-        addArg("version", profile);
+    public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
+        this.args = args;
     }
 
     @Override
-    public void injectIntoClassLoader(LaunchClassLoader classLoader) {
+    public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
         Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
 
         // Check if a ClientInfo JSON is present
@@ -61,7 +57,6 @@ public final class ClientTweaker implements ITweaker {
 
         // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
-
         Logger.instance.log(Level.INFO, "Initialized Mixin bootstrap");
 
         // Load the ClientAPI mixin config
@@ -69,8 +64,7 @@ public final class ClientTweaker implements ITweaker {
         if (this.getClass().getResourceAsStream("/" + capi) == null) {
             throw new ClientInitException("Unable to locate ClientAPI mixin configuration");
         }
-        Mixins.addConfiguration("mixins.capi.json");
-
+        Mixins.addConfiguration(capi);
         Logger.instance.log(Level.INFO, "Loaded ClientAPI mixin configuration");
 
         // Optional mixin configuration, added by client developers
@@ -85,24 +79,12 @@ public final class ClientTweaker implements ITweaker {
     }
 
     @Override
-    public String getLaunchTarget() {
+    public final String getLaunchTarget() {
         return "net.minecraft.client.main.Main";
     }
 
     @Override
     public String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
-    }
-
-    private void addArg(String label, File file) {
-        if (file != null)
-            addArg(label, file.getAbsolutePath());
-    }
-
-    private void addArg(String label, String value) {
-        if (!args.contains("--" + label) && value != null) {
-            this.args.add("--" + label);
-            this.args.add(value);
-        }
     }
 }
