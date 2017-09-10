@@ -39,10 +39,10 @@ public class ClientTweaker implements ITweaker {
     /**
      * The Game Launch Arguments
      */
-    private List<String> args = new ArrayList<>();
+    List<String> args;
 
     @Override
-    public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
+    public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.args = args;
     }
 
@@ -84,7 +84,7 @@ public class ClientTweaker implements ITweaker {
     }
 
     @Override
-    public String[] getLaunchArguments() {
+    public final String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
     }
 }
