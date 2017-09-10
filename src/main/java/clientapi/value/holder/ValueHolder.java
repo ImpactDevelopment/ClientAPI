@@ -22,7 +22,8 @@ import clientapi.value.Values;
 import java.util.*;
 
 /**
- * Implementation of {@code IValueHolder}
+ * Implementation of {@code IValueHolder}, intended for
+ * use in classes containing annotated values.
  *
  * @see IValueHolder
  *

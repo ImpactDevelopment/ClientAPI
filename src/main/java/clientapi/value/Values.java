@@ -50,6 +50,8 @@ public final class Values {
      */
     private static final Map<Object, List<IValue>> DISCOVER_CACHE = new HashMap<>();
 
+    private Values() {}
+
     static {
         // Default Resolvers
         define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN, Boolean.class, Boolean.TYPE));
@@ -57,8 +59,6 @@ public final class Values {
         define(MultiValue.class, ResolverData.create(DefaultResolvers.MULTI, String.class));
         define(StringValue.class, ResolverData.create(DefaultResolvers.STRING, String.class));
     }
-
-    private Values() {}
 
     /**
      * Discovers all of the Values that an object defines
@@ -107,14 +107,16 @@ public final class Values {
      * @return The value annotation of the field
      */
     private static Class<? extends Annotation> getValueAnnotation(Field field) {
-        if (field.isAnnotationPresent(Label.class)) {
-            Annotation a = Arrays.stream(field.getDeclaredAnnotations())
-                    .filter(annotation -> annotation.annotationType().isAnnotationPresent(ValueDefinition.class))
-                    .findFirst().orElse(null);
-            if (a != null)
-                return a.annotationType();
-        }
-        return null;
+        // Values must have a label annotation
+        if (!field.isAnnotationPresent(Label.class))
+            return null;
+
+        // Find a valid value type annotation, if any
+        Annotation a = Arrays.stream(field.getDeclaredAnnotations())
+                .filter(annotation -> annotation.annotationType().isAnnotationPresent(ValueDefinition.class))
+                .findFirst().orElse(null);
+
+        return a != null ? a.annotationType() : null;
     }
 
     /**
@@ -139,7 +141,7 @@ public final class Values {
             throw new ValueException("Unable to resolve field if type is not supported");
 
         Object resolved = data.getResolver().apply(parent, field);
-        if (resolved == null || !(resolved instanceof Value))
+        if (resolved == null || !(resolved instanceof IValue))
             throw new ValueException("Outcome of resolver was either null or not a value type");
 
         return (IValue) resolved;
