@@ -44,6 +44,9 @@ public class ClientTweaker implements ITweaker {
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.args = args;
+        addArg("gameDir", gameDir);
+        addArg("assetsDir", assetsDir);
+        addArg("version", profile);
     }
 
     @Override
@@ -86,5 +89,17 @@ public class ClientTweaker implements ITweaker {
     @Override
     public final String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
+    }
+
+    private void addArg(String label, File file) {
+        if (file != null)
+            addArg(label, file.getAbsolutePath());
+    }
+
+    private void addArg(String label, String value) {
+        if (!args.contains("--" + label) && value != null) {
+            this.args.add("--" + label);
+            this.args.add(value);
+        }
     }
 }
