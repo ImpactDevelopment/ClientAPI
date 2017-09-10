@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2017 ZeroMemes
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.packet.play.client;
+package clientapi.load.mixin.packet.play.server;
 
-import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.network.play.server.SPacketExplosion;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+import java.util.List;
+
 /**
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 9/10/2017 11:47 AM
  */
-@Mixin(CPacketPlayer.class)
-public interface ICPacketPlayer {
+@Mixin(SPacketExplosion.class)
+public interface ISPacketExplosion {
 
     @Accessor double getX();
 
@@ -39,23 +42,23 @@ public interface ICPacketPlayer {
 
     @Accessor void setZ(double z);
 
-    @Accessor float getYaw();
+    @Accessor float getStrength();
 
-    @Accessor void setYaw(float yaw);
+    @Accessor void setStrength(float strength);
 
-    @Accessor float getPitch();
+    @Accessor List<BlockPos> getAffectedBlockPositions();
 
-    @Accessor void setPitch(float pitch);
+    @Accessor void setAffectedBlockPositions(List<BlockPos> affectedBlockPositions);
 
-    @Accessor boolean getOnGround();
+    @Accessor float getMotionX();
 
-    @Accessor void setOnGround(boolean onGround);
+    @Accessor void setMotionX(float motionX);
 
-    @Accessor boolean getMoving();
+    @Accessor float getMotionZ();
 
-    @Accessor void setMoving(boolean moving);
+    @Accessor void setMotionZ(float motionZ);
 
-    @Accessor boolean getRotating();
+    @Accessor float getMotionY();
 
-    @Accessor void setRotating(boolean rotating);
+    @Accessor void setMotionY(float motionY);
 }

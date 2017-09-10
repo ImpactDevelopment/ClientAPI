@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2017 ZeroMemes
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,26 @@
 
 package clientapi.load.mixin.packet.play.server;
 
-import net.minecraft.network.play.server.SPacketPlayerPosLook;
+import net.minecraft.network.play.server.SPacketSpawnObject;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Brady
- * @since 2/28/2017 12:00 PM
+ * @since 9/10/2017 2:55 PM
  */
-@Mixin(SPacketPlayerPosLook.class)
-public interface ISPacketPlayerPosLook {
+@Mixin(SPacketSpawnObject.class)
+public interface ISPacketSpawnObject {
+
+    @Accessor int getEntityId();
+
+    @Accessor void setEntityId(int entityId);
+
+    @Accessor UUID getUniqueId();
+
+    @Accessor void setUniqueId(UUID uniqueId);
 
     @Accessor double getX();
 
@@ -41,19 +49,31 @@ public interface ISPacketPlayerPosLook {
 
     @Accessor void setZ(double z);
 
-    @Accessor float getYaw();
+    @Accessor int getSpeedX();
 
-    @Accessor void setYaw(float yaw);
+    @Accessor void setSpeedX(int speedX);
 
-    @Accessor float getPitch();
+    @Accessor int getSpeedY();
 
-    @Accessor void setPitch(float pitch);
+    @Accessor void setSpeedY(int speedY);
 
-    @Accessor Set<SPacketPlayerPosLook.EnumFlags> getFlags();
+    @Accessor int getSpeedZ();
 
-    @Accessor void setFlags(Set<SPacketPlayerPosLook.EnumFlags> flags);
+    @Accessor void setSpeedZ(int speedZ);
 
-    @Accessor int getTeleportId();
+    @Accessor int getPitch();
 
-    @Accessor void setTeleportId(int teleportId);
+    @Accessor void setPitch(int pitch);
+
+    @Accessor int getYaw();
+
+    @Accessor void setYaw(int yaw);
+
+    @Accessor int getType();
+
+    @Accessor void setType(int type);
+
+    @Accessor int getData();
+
+    @Accessor void setData(int data);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2017 ZeroMemes
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.packet.play.client;
+package clientapi.load.mixin.packet.play.server;
 
-import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.network.play.server.SPacketMoveVehicle;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /**
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 9/10/2017 12:30 PM
  */
-@Mixin(CPacketPlayer.class)
-public interface ICPacketPlayer {
+@Mixin(SPacketMoveVehicle.class)
+public interface ISPacketMoveVehicle {
 
     @Accessor double getX();
 
@@ -46,16 +46,4 @@ public interface ICPacketPlayer {
     @Accessor float getPitch();
 
     @Accessor void setPitch(float pitch);
-
-    @Accessor boolean getOnGround();
-
-    @Accessor void setOnGround(boolean onGround);
-
-    @Accessor boolean getMoving();
-
-    @Accessor void setMoving(boolean moving);
-
-    @Accessor boolean getRotating();
-
-    @Accessor void setRotating(boolean rotating);
 }
