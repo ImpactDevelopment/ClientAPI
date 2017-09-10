@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2017 ZeroMemes
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.packet.play.client;
+package clientapi.load.mixin.packet.play.server;
 
-import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraft.network.play.server.SPacketEntityTeleport;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /**
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 9/10/2017 2:59 AM
  */
-@Mixin(CPacketPlayer.class)
-public interface ICPacketPlayer {
+@Mixin(SPacketEntityTeleport.class)
+public interface ISPacketEntityTeleport {
+
+    @Accessor int getEntityId();
+
+    @Accessor void setEntityId(int entityId);
 
     @Accessor double getX();
 
@@ -39,23 +43,15 @@ public interface ICPacketPlayer {
 
     @Accessor void setZ(double z);
 
-    @Accessor float getYaw();
+    @Accessor byte getYaw();
 
-    @Accessor void setYaw(float yaw);
+    @Accessor void setYaw(byte yaw);
 
-    @Accessor float getPitch();
+    @Accessor byte getPitch();
 
-    @Accessor void setPitch(float pitch);
+    @Accessor void setPitch(byte pitch);
 
-    @Accessor boolean getOnGround();
+    @Accessor boolean isOnGround();
 
     @Accessor void setOnGround(boolean onGround);
-
-    @Accessor boolean getMoving();
-
-    @Accessor void setMoving(boolean moving);
-
-    @Accessor boolean getRotating();
-
-    @Accessor void setRotating(boolean rotating);
 }
