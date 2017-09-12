@@ -16,10 +16,13 @@
 
 package clientapi.util.security;
 
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * Used to hash data with a defined algorithm
@@ -54,22 +57,47 @@ public final class Hash {
     }
 
     /**
+     * Hashes a string with the algorithm
+     *
+     * @param data String being hashed
+     * @param format The function used to interpret the hashed bytes
+     * @return Hashed string in bytes
+     */
+    public final <T> T hash(String data, Function<byte[], T> format) {
+        return hash(data.getBytes(), format);
+    }
+
+    /**
      * Hashes a piece of data with the algorithm
      *
      * @param data Data being hashed
+     * @param format The function used to interpret the hashed bytes
      * @return Hashed data
      */
-    public final String hash(String data) {
+    public final <T> T hash(byte[] data, Function<byte[], T> format) {
+        Objects.requireNonNull(format);
+
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
-            md.update(data.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes)
-                sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-            return sb.toString();
+            return format.apply(md.digest(data));
         } catch (NoSuchAlgorithmException e2) {
-            return data;
+            return null;
         }
+    }
+
+    /**
+     * Contains hash return type formats.
+     */
+    public interface Format {
+
+        /**
+         * Converts the hashed bytes into a string containing the bytes as hex values
+         */
+        Function<byte[], String> HEX_STRING_FORMAT = DatatypeConverter::printHexBinary;
+
+        /**
+         * Returns the hashed bytes raw
+         */
+        Function<byte[], byte[]> RAW_FORMAT = bytes -> bytes;
     }
 }
