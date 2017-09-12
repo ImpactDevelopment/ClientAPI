@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL15;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
-import static pw.knx.feather.Feather.feather;
+import static pw.knx.feather.Feather.FEATHER;
 
 /**
  * A simple OpenGL VertexBufferObject implementation for rendering shapes that will stay
@@ -77,7 +77,7 @@ public class VBO {
 	 */
 	public VBO compile(float... points) {
 		if (points != null && points.length > 0) {
-			final FloatBuffer buffer = feather.allocateBuffer(points.length * 4).asFloatBuffer();
+			final FloatBuffer buffer = FEATHER.allocateBuffer(points.length * 4).asFloatBuffer();
 			buffer.put(points).flip();
 			return this.compile(buffer);
 		}
@@ -92,9 +92,9 @@ public class VBO {
 	 */
 	public VBO compile(FloatBuffer buffer) {
 		this.size = buffer.capacity();
-		feather.bindBuffer(this.id);
+		FEATHER.bindBuffer(this.id);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-		feather.bindBuffer(0);
+		FEATHER.bindBuffer(0);
 		return this;
 	}
 
@@ -104,7 +104,7 @@ public class VBO {
 	 * @return The original VBO
 	 */
 	public VBO bind() {
-		feather.bindBuffer(this.id);
+		FEATHER.bindBuffer(this.id);
 		GL11.glVertexPointer(this.dimensions, GL11.GL_FLOAT, 0, 0L);
 		GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
 		return this;
