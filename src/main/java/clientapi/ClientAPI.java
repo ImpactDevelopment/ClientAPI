@@ -33,8 +33,7 @@ public final class ClientAPI {
     private ClientAPI() {}
 
     /**
-     * Instance of the API event bus. All default game event are
-     * passed through this event bus.
+     * Instance of the API event bus. All default events are passed through this event bus.
      */
     public static final EventBus EVENT_BUS = new EventManager();
 }
