@@ -18,7 +18,7 @@ package clientapi.value.holder;
 
 import clientapi.value.IValue;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * The "shell" for a value holder
@@ -50,5 +50,5 @@ public interface IValueHolder {
     /**
      * @return All of the values that this holder "holds"
      */
-    Collection<IValue> getValues();
+    List<IValue> getValues();
 }
