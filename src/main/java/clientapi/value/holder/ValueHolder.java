@@ -19,7 +19,10 @@ package clientapi.value.holder;
 import clientapi.value.IValue;
 import clientapi.value.Values;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Implementation of {@code IValueHolder}, intended for
@@ -57,7 +60,7 @@ public class ValueHolder implements IValueHolder {
     }
 
     @Override
-    public final Collection<IValue> getValues() {
+    public final List<IValue> getValues() {
         return new ArrayList<>(this.values);
     }
 }
