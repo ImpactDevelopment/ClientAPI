@@ -16,7 +16,7 @@ package pw.knx.feather.animate;
  * @author KNOXDEV
  * @since 6/10/2016 06:21
  */
-public class TimeAnimation extends Animation {
+public class TimeAnimation extends TickAnimation {
 
 	/**
 	 * Now that we'll dealing with time, we'll need to keep track of the time that's passed.
@@ -39,7 +39,7 @@ public class TimeAnimation extends Animation {
 	 * @return the original Animation object
 	 */
 	@Override
-	public Animation play() {
+	public TickAnimation play() {
 		prevTime = System.currentTimeMillis();
 		return super.play();
 	}

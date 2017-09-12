@@ -889,5 +889,9 @@ public class Color {
 		public int getAlphaInt(int hex) {
 			return hex >>> ax & 0xFF;
 		}
+
+		public int convert(int hex, HexFormat format) {
+			return getHex(format.getRedInt(hex), format.getGreenInt(hex), format.getBlueInt(hex), format.getAlphaInt(hex));
+		}
 	}
 }
