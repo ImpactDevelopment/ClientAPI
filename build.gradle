@@ -85,6 +85,7 @@ repositories {
 dependencies {
     compile "com.github.ZeroMemes:Alpine:${project.alpineVersion}"
     compile "net.jodah:typetools:${project.typetoolsVersion}"
+    testCompile "junit:junit:${project.junitVersion}"
     compile("org.spongepowered:mixin:${project.mixinVersion}") {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
