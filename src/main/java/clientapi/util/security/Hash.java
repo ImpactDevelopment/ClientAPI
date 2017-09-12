@@ -61,7 +61,7 @@ public final class Hash {
      *
      * @param data String being hashed
      * @param format The function used to interpret the hashed bytes
-     * @return Hashed string in bytes
+     * @return Hashed string in specified format, null if algorithm isn't valid
      */
     public final <T> T hash(String data, Function<byte[], T> format) {
         return hash(data.getBytes(), format);
@@ -72,7 +72,7 @@ public final class Hash {
      *
      * @param data Data being hashed
      * @param format The function used to interpret the hashed bytes
-     * @return Hashed data
+     * @return Hashed data in specified format, null if algorithm isn't valid
      */
     public final <T> T hash(byte[] data, Function<byte[], T> format) {
         Objects.requireNonNull(format);
