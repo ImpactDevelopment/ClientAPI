@@ -15,7 +15,7 @@ package pw.knx.feather.animate;
  * @author KNOXDEV
  * @since 6/10/2016 06:21
  */
-public class Animation {
+public class TickAnimation {
 
 	/**
 	 * Your internal Transition object. Defaults to Linear for simplicity.
@@ -25,7 +25,7 @@ public class Animation {
 	/**
 	 * An integer representing your current animation duration. Stored in "ticks"
 	 */
-	protected int duration = 20;
+	int duration = 20;
 
 	/**
 	 * True if the animation is playing from 0-1.0, false if from 1.0-0
@@ -40,14 +40,14 @@ public class Animation {
 	/**
 	 * The internal double representing your actual progress thus far
 	 */
-	protected double progress = 0;
+	double progress = 0;
 
 	/**
 	 * Sets the animation to progress.
 	 *
 	 * @return the original Animation object
 	 */
-	public Animation play() {
+	public TickAnimation play() {
 		this.inProgress = true;
 		return this;
 	}
@@ -57,7 +57,7 @@ public class Animation {
 	 *
 	 * @return the original Animation object
 	 */
-	public Animation pause() {
+	public TickAnimation pause() {
 		this.inProgress = false;
 		return this;
 	}
@@ -67,7 +67,7 @@ public class Animation {
 	 *
 	 * @return the original Animation object
 	 */
-	public Animation cancel() {
+	public TickAnimation cancel() {
 		return restart().pause();
 	}
 
@@ -76,7 +76,7 @@ public class Animation {
 	 *
 	 * @return the original Animation object
 	 */
-	public Animation restart() {
+	public TickAnimation restart() {
 		this.progress = isForward ? 0 : 1;
 		return this;
 	}
@@ -84,7 +84,7 @@ public class Animation {
 	/**
 	 * @return the original Animation object
 	 */
-	public Animation reverse() {
+	public TickAnimation reverse() {
 		this.isForward = false;
 		return this;
 	}
@@ -92,16 +92,16 @@ public class Animation {
 	/**
 	 * @return the original Animation object
 	 */
-	public Animation forward() {
+	public TickAnimation forward() {
 		this.isForward = true;
 		return this;
 	}
 
 	/**
-	 * @param transition the transition you wish to set your currentl Animation to
+	 * @param transition the transition you wish to set your current Animation to
 	 * @return the original Animation object
 	 */
-	public Animation setTransition(Transition transition) {
+	public TickAnimation setTransition(Transition transition) {
 		this.transition = transition;
 		return this;
 	}
@@ -110,7 +110,7 @@ public class Animation {
 	 * @param duration the duration you wish to set your Animation to
 	 * @return the original Animation object
 	 */
-	public Animation setDuration(int duration) {
+	public TickAnimation setDuration(int duration) {
 		this.duration = duration;
 		return this;
 	}
@@ -121,7 +121,7 @@ public class Animation {
 	 * @param progress the progress as a double from 0-1.0
 	 * @return the original Animation object
 	 */
-	public Animation setProgress(double progress) {
+	public TickAnimation setProgress(double progress) {
 		this.progress = progress;
 		return this;
 	}
@@ -183,94 +183,9 @@ public class Animation {
 	 * @return The output progress given your input progress and your current transition
 	 */
 	protected double translate(double progress) {
-		switch (this.transition) {
-			case CURVE:
-				return progress * progress;
-			case STEEP_CURVE:
-				return Math.pow(progress, 3);
-			case BEZIER_CURVE:
-				return Math.pow(-1 + Math.sqrt(-progress + 1), 2);
-			case INVERSE_CURVE:
-				return -Math.pow(progress - 1, 2) + 1;
-			case INVERSE_STEEP_CURVE:
-				return Math.pow(progress - 1, 3) + 1;
-			case RUBBER:
-				return -Math.sin(10.0 * progress) / (10.0 * progress) + 1;
-			case INERTIA:
-				return Math.cbrt(progress - 0.5) / Transition.INERTIA_CONST + 0.5;
-			case INSTANT:
-				return Math.round(progress);
-		}
+		transition.apply(progress);
 
 		// Min and Max to clamp the value between 0 and 1, just in case.
 		return Math.min(Math.max(progress, 0), 1);
-	}
-
-	/**
-	 * An enum storing the different types of visual Transitions available. Simply set
-	 * the current transition with setTransition() to see the difference.
-	 * It's important to note that the Transition you choose does not change the speed
-	 * of the animation, just the visual output when you use get().
-	 */
-	public enum Transition {
-
-		/**
-		 * LINEAR is just that. No transition whatsoever, from A->B
-		 */
-		LINEAR,
-
-		/**
-		 * CURVE refers to a simple quadratic curve where the beginning starts out
-		 * fast but ends slow.
-		 */
-		CURVE,
-
-		/**
-		 * STEEP_CURVE is simply a cube alternative to CURVE that's a little
-		 * bit more drastic.
-		 */
-		STEEP_CURVE,
-
-		/**
-		 * BEZIER_CURVE results in a mathamatically perfect alternative to CURVE
-		 * that's consistent in variation.
-		 */
-		BEZIER_CURVE,
-
-		/**
-		 * INVERSE_CURVE is literally just the opposite of CURVE, a quadratic curve
-		 * that starts out slow but ends fast.
-		 */
-		INVERSE_CURVE,
-
-		/**
-		 * INVERSE_STEEP_CURVE is simply a cube alternative to INVERSE_CURVE that's a little
-		 * bit more drastic.
-		 */
-		INVERSE_STEEP_CURVE,
-
-		/**
-		 * RUBBER is an applied sin wave algorithm that's named after Apple's patented
-		 * rubber-banding animation. Fortunately, this is a different implementation.
-		 */
-		RUBBER,
-
-		/**
-		 * INERTIA is an interesting little function reminiscent of a bell curve:
-		 * it starts out slow and ends slow, but the middle is fast. This style usually
-		 * looks the most professional and sleek.
-		 */
-		INERTIA,
-
-		/**
-		 * INSTANT clamps the progress to a whole number, resulting in an animation
-		 * that's over as soon as it starts.
-		 */
-		INSTANT;
-
-		/**
-		 * A magic number that's used for the INERTIA transition
-		 */
-		final static double INERTIA_CONST = Math.cbrt(0.5) / 0.5;
 	}
 }
