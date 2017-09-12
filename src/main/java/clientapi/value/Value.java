@@ -19,7 +19,10 @@ package clientapi.value;
 import clientapi.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The implementation of IValue
@@ -122,7 +125,7 @@ public class Value<T> implements IValue<T> {
     }
 
     @Override
-    public final Collection<IValue> getValues() {
+    public final List<IValue> getValues() {
         return new ArrayList<>(this.children);
     }
 }

@@ -33,7 +33,7 @@ import java.util.function.Function;
 public final class Hash {
 
     /**
-     * Cache of all Hash instances
+     * Cache of all Hash instances by algorithm
      */
     private static final Map<String, Hash> HASH_CACHE = new HashMap<>();
 
@@ -50,7 +50,7 @@ public final class Hash {
      * Creates a new Hash object with the specified algorithm
      *
      * @param algorithm Algorithm name
-     * @return Hash object
+     * @return Hash object with specified algorithm
      */
     public static Hash of(String algorithm) {
         return HASH_CACHE.computeIfAbsent(algorithm, Hash::new);
@@ -62,6 +62,7 @@ public final class Hash {
      * @param data String being hashed
      * @param format The function used to interpret the hashed bytes
      * @return Hashed string in specified format, null if algorithm isn't valid
+     * @throws NullPointerException if {@code format} is {@code null}
      */
     public final <T> T hash(String data, Function<byte[], T> format) {
         return hash(data.getBytes(), format);
@@ -73,6 +74,7 @@ public final class Hash {
      * @param data Data being hashed
      * @param format The function used to interpret the hashed bytes
      * @return Hashed data in specified format, null if algorithm isn't valid
+     * @throws NullPointerException if {@code format} is {@code null}
      */
     public final <T> T hash(byte[] data, Function<byte[], T> format) {
         Objects.requireNonNull(format);
@@ -86,7 +88,7 @@ public final class Hash {
     }
 
     /**
-     * Contains hash return type formats.
+     * Contains default hash return type formats.
      */
     public interface Format {
 
