@@ -22,13 +22,13 @@ import net.minecraft.network.Packet;
 import java.util.function.Predicate;
 
 /**
- * Basic filter for packets. Types are valid if their
- * class is assignable from one of the permitted types.
+ * Stricter packet filter. Types are valid if their
+ * class is the same as one of the permitted types.
  *
  * @author Brady
- * @since 3/2/2017 12:00 PM
+ * @since 9/12/2017 7:06 PM
  */
-public final class PacketFilter<T extends PacketEvent> implements Predicate<T> {
+public final class StrictPacketFilter<T extends PacketEvent> implements Predicate<T> {
 
     /**
      * Packets allowed by this filter
@@ -36,14 +36,14 @@ public final class PacketFilter<T extends PacketEvent> implements Predicate<T> {
     private final Class<? extends Packet<?>>[] packets;
 
     @SafeVarargs
-    public PacketFilter(Class<? extends Packet<?>>... packets) {
+    public StrictPacketFilter(Class<? extends Packet<?>>... packets) {
         this.packets = packets;
     }
 
     @Override
     public boolean test(T packetEvent) {
         for (Class<? extends Packet<?>> packet : packets)
-            if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
+            if (packet == packetEvent.getPacket().getClass())
                 return true;
 
         return false;
