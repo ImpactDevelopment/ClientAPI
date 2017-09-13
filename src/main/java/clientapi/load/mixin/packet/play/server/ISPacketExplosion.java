@@ -30,17 +30,17 @@ import java.util.List;
 @Mixin(SPacketExplosion.class)
 public interface ISPacketExplosion {
 
-    @Accessor double getX();
+    @Accessor double getPosX();
 
-    @Accessor void setX(double x);
+    @Accessor void setPosX(double posX);
 
-    @Accessor double getY();
+    @Accessor double getPosY();
 
-    @Accessor void setY(double y);
+    @Accessor void setPosY(double posY);
 
-    @Accessor double getZ();
+    @Accessor double getPosZ();
 
-    @Accessor void setZ(double z);
+    @Accessor void setPosZ(double posZ);
 
     @Accessor float getStrength();
 

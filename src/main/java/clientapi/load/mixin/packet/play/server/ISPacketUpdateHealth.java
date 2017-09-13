@@ -35,7 +35,7 @@ public interface ISPacketUpdateHealth {
 
     @Accessor void setFoodLevel(int foodLevel);
 
-    @Accessor float setSaturationLevel();
+    @Accessor float getSaturationLevel();
 
     @Accessor void setSaturationLevel(float saturationLevel);
 }

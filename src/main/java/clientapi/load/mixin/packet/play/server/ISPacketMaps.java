@@ -60,7 +60,7 @@ public interface ISPacketMaps {
 
     @Accessor void setRows(int rows);
 
-    @Accessor byte getMapDataBytes();
+    @Accessor byte[] getMapDataBytes();
 
-    @Accessor void setMapDataBytes(byte mapDataBytes);
+    @Accessor void setMapDataBytes(byte[] mapDataBytes);
 }

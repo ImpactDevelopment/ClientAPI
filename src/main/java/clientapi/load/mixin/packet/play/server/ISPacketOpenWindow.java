@@ -46,5 +46,5 @@ public interface ISPacketOpenWindow {
 
     @Accessor int getEntityId();
 
-    @Accessor void setEntityId();
+    @Accessor void setEntityId(int entityId);
 }
