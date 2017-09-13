@@ -17,7 +17,7 @@ public interface ICPacketInput {
 
     @Accessor float getForwardSpeed();
 
-    @Accessor void getForwardSpeed(float forwardSpeed);
+    @Accessor void setForwardSpeed(float forwardSpeed);
 
     @Accessor boolean isJumping();
 
