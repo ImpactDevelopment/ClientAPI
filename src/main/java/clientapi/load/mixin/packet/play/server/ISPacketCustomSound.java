@@ -52,7 +52,7 @@ public interface ISPacketCustomSound {
 
     @Accessor void setVolume(float volume);
 
-    @Accessor float setPitch();
+    @Accessor float getPitch();
 
     @Accessor void setPitch(float pitch);
 }

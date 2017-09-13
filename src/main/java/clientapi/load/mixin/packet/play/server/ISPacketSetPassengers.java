@@ -33,5 +33,5 @@ public interface ISPacketSetPassengers {
 
     @Accessor int[] getPassengerIds();
 
-    @Accessor void setPassengerIds(int passengerIds);
+    @Accessor void setPassengerIds(int[] passengerIds);
 }

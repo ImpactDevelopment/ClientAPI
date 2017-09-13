@@ -57,7 +57,7 @@ public interface ISPacketUpdateBossInfo {
 
     @Accessor boolean isDarkenSky();
 
-    @Accessor void setDarkenSky();
+    @Accessor void getDarkenSky();
 
     @Accessor boolean isPlayEndBossMusic();
 

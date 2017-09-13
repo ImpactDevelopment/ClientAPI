@@ -32,7 +32,7 @@ public interface ISPacketRecipeBook {
 
     @Accessor SPacketRecipeBook.State getState();
 
-    @Accessor void setStae(SPacketRecipeBook.State state);
+    @Accessor void setState(SPacketRecipeBook.State state);
 
     @Accessor List<IRecipe> getRecipes();
 
@@ -48,5 +48,5 @@ public interface ISPacketRecipeBook {
 
     @Accessor boolean isFilteringCraftable();
 
-    @Accessor void setFilteringCraftable();
+    @Accessor void setFilteringCraftable(boolean filteringCraftable);
 }

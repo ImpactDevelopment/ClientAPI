@@ -37,7 +37,7 @@ public class MixinGuiConnecting {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.PRE, Helper.mc.getCurrentServerData()));
     }
 
-    @Inject(method = "connect", at = @At(value = "INVOKE_ASSIGN", target = "org/apache/logging/log4j/Logger.error(Ljava/lang/String;Ljava/lang/Throwable;)V"))
+    @Inject(method = "connect", at = @At(value = "INVOKE", target = "net/minecraft/client/Minecraft.displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V"))
     private void onError(CallbackInfo info) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.FAILED, Helper.mc.getCurrentServerData()));
     }

@@ -34,5 +34,5 @@ public interface ISPacketCustomPayload {
 
     @Accessor PacketBuffer getData();
 
-    @Accessor void setData();
+    @Accessor void setData(PacketBuffer data);
 }

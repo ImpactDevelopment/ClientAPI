@@ -31,17 +31,17 @@ public interface ISPacketEntity {
 
     @Accessor void setEntityId(int entityId);
 
-    @Accessor int getX();
+    @Accessor int getPosX();
 
-    @Accessor void setX(int x);
+    @Accessor void setPosX(int posX);
 
-    @Accessor int getY();
+    @Accessor int getPosY();
 
-    @Accessor void setY(int y);
+    @Accessor void setPosY(int posY);
 
-    @Accessor int getZ();
+    @Accessor int getPosZ();
 
-    @Accessor void setZ(int z);
+    @Accessor void setPosZ(int posZ);
 
     @Accessor byte getYaw();
 

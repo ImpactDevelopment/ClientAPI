@@ -30,7 +30,7 @@ import java.util.Map;
 @Mixin(SPacketStatistics.class)
 public interface ISPacketStatistics {
 
-    @Accessor Map<StatBase, Integer> getStatisticsMap();
+    @Accessor Map<StatBase, Integer> getStatisticMap();
 
-    @Accessor void setStatisticsMap(Map<StatBase, Integer> statisticsMap);
+    @Accessor void setStatisticMap(Map<StatBase, Integer> statisticMap);
 }

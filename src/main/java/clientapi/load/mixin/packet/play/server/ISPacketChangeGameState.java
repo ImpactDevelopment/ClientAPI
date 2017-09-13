@@ -31,7 +31,7 @@ public interface ISPacketChangeGameState {
 
     @Accessor void setState(int state);
 
-    @Accessor float setValue();
+    @Accessor float getValue();
 
     @Accessor void setValue(float value);
 }
