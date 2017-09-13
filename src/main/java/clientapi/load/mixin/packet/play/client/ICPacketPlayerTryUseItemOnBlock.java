@@ -24,7 +24,7 @@ public interface ICPacketPlayerTryUseItemOnBlock {
 
     @Accessor EnumHand getHand();
 
-    @Accessor void getHand(EnumHand hand);
+    @Accessor void setHand(EnumHand hand);
 
     @Accessor float getFacingX();
 

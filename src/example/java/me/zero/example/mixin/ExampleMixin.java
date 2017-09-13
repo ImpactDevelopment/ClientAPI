@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ExampleMixin {
 
     @Inject(method = "runTick", at = @At("HEAD"))
-    public void runTickHook(CallbackInfo ci) {
+    private void runTickHook(CallbackInfo ci) {
         // System.out.println("Running game tick");
     }
 }
