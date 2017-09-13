@@ -31,9 +31,9 @@ public interface ISPacketConfirmTransaction {
 
     @Accessor void setWindowId(int windowId);
 
-    @Accessor short getAcceptedNumber();
+    @Accessor short getActionNumber();
 
-    @Accessor void setAcceptedNumber(short acceptedNumber);
+    @Accessor void setActionNumber(short actionNumber);
 
     @Accessor boolean isAccepted();
 
