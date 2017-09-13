@@ -30,7 +30,7 @@ public interface ISPacketMultiBlockChange {
 
     @Accessor ChunkPos getChunkPos();
 
-    @Accessor void setChunkPos(int chunkPos);
+    @Accessor void setChunkPos(ChunkPos chunkPos);
 
     @Accessor SPacketMultiBlockChange.BlockUpdateData[] getChangedBlocks();
 
