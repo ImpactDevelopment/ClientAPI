@@ -43,7 +43,7 @@ public class ClientTweaker implements ITweaker {
 
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.args = args;
+        (this.args = new ArrayList<>()).addAll(args);
         addArg("gameDir", gameDir);
         addArg("assetsDir", assetsDir);
         addArg("version", profile);
