@@ -39,7 +39,7 @@ public enum Feather {
 	/**
 	 * The simple Feather Tessellator we've designated to render our glyphs.
 	 */
-	private static final Tessellator tess = Tessellator.createExpanding(4 * 4, 1, 2);
+	private final Tessellator tess = Tessellator.createExpanding(4 * 4, 1, 2);
 
 	private final Map<Font, FontCache> fonts = new HashMap<>();
 	private FontCache currentFont;
@@ -75,22 +75,6 @@ public enum Feather {
 		glBindBuffer(GL_ARRAY_BUFFER, id);
 		return this;
 	}
-
-
-	/*
-	 * Allocators - Methods that wrap Java's unfortunate Buffer API
-	 */
-
-	/**
-	 * Allocates a ByteBuffer in the platform's native byte order
-	 *
-	 * @param capacity the size of the Buffer to be allocated in bytes
-	 * @return the allocated ByteBuffer
-	 */
-	public synchronized ByteBuffer allocateBuffer(int capacity) {
-		return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
-	}
-
 
 	/*
 	 * Basic Rendering Routines
