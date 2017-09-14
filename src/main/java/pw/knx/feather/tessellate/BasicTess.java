@@ -6,8 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import static pw.knx.feather.Feather.FEATHER;
-
 /**
  * A standard implementation of the Tessellator interface.
  * <p>
@@ -73,7 +71,7 @@ public class BasicTess implements Tessellator {
 		 * takes up in the buffer, since each vertex stores color and texture as well. */
 		capacity *= 6;
 		this.raw = new int[capacity];
-		this.buffer = FEATHER.allocateBuffer(capacity * 4); // 4 bytes in an integer!
+		this.buffer = ByteBuffer.allocateDirect(capacity * 4); // 4 bytes in an integer!
 		this.fBuffer = this.buffer.asFloatBuffer();
 		this.iBuffer = this.buffer.asIntBuffer();
 	}

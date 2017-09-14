@@ -77,7 +77,7 @@ public class VBO {
 	 */
 	public VBO compile(float... points) {
 		if (points != null && points.length > 0) {
-			final FloatBuffer buffer = FEATHER.allocateBuffer(points.length * 4).asFloatBuffer();
+			final FloatBuffer buffer = ByteBuffer.allocateDirect(points.length * 4).asFloatBuffer();
 			buffer.put(points).flip();
 			return this.compile(buffer);
 		}
