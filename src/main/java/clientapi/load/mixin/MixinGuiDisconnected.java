@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiDisconnected.class)
 public class MixinGuiDisconnected {
 
-    @Inject(method = "<init>", at = @At("HEAD"))
+    @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, true, Helper.mc.getCurrentServerData()));
     }
