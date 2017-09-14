@@ -17,6 +17,7 @@
 package clientapi.value;
 
 import clientapi.util.ReflectionUtils;
+import clientapi.value.holder.ValueAccessor;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -74,6 +75,11 @@ public class Value<T> implements IValue<T> {
      */
     private final Field field;
 
+    /**
+     * Whether or not to use direct calls to retrieve field values
+     */
+    private final boolean direct;
+
     public Value(String name, String parent, String id, String description, Object object, Field field) {
         this.name = name;
         this.parent = parent.length() > 0 ? parent : null;
@@ -81,6 +87,7 @@ public class Value<T> implements IValue<T> {
         this.description = description;
         this.object = object;
         this.field = field;
+        this.direct = object instanceof ValueAccessor;
     }
 
     @Override
@@ -91,7 +98,10 @@ public class Value<T> implements IValue<T> {
     @SuppressWarnings("unchecked")
     @Override
     public T getValue() {
-        return (T) ReflectionUtils.getField(object, field);
+        if (direct)
+            return (T) ((ValueAccessor) this.object).getFieldValue(this.id);
+        else
+            return (T) ReflectionUtils.getField(object, field);
     }
 
     @Override
