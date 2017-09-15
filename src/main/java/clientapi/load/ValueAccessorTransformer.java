@@ -17,13 +17,13 @@
 package clientapi.load;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.objectweb.asm.Opcodes.*;
 
 /**
  * @author Brady
@@ -63,6 +63,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         createGetMethod(cn);
         createSetMethod(cn);
+//        createFieldGetter(cn);
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
@@ -70,56 +71,56 @@ public final class ValueAccessorTransformer implements IClassTransformer {
     }
 
     private void createGetMethod(ClassNode cn) {
-        MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, "getFieldValue", "(Ljava/lang/String;)Ljava/lang/Object;", null, null);
+        MethodNode mn = new MethodNode(ACC_PUBLIC, "getFieldValue", "(Ljava/lang/String;)Ljava/lang/Object;", null, null);
 
         fieldCache.forEach((id, fn) -> {
-            LabelNode skip = new LabelNode();
+            Label skip = new Label();
 
-            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1));
-            mn.instructions.add(new LdcInsnNode(id));
-            mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false));
-            mn.instructions.add(new JumpInsnNode(Opcodes.IFEQ, skip));
+            mn.visitVarInsn(ALOAD, 1);
+            mn.visitLdcInsn(id);
+            mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+            mn.visitJumpInsn(IFEQ, skip);
 
-            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
-            mn.instructions.add(new FieldInsnNode(Opcodes.GETFIELD, cn.name, fn.name, fn.desc));
+            mn.visitVarInsn(ALOAD, 0);
+            mn.visitFieldInsn(GETFIELD, cn.name, fn.name, fn.desc);
 
             String object = getObject(fn.desc);
             if (!object.equals(fn.desc))
-                mn.instructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false));
+                mn.visitMethodInsn(INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false);
 
-            mn.instructions.add(new InsnNode(Opcodes.ARETURN));
-            mn.instructions.add(skip);
+            mn.visitInsn(ARETURN);
+            mn.visitLabel(skip);
 
         });
-        mn.instructions.add(new InsnNode(Opcodes.ACONST_NULL));
-        mn.instructions.add(new InsnNode(Opcodes.ARETURN));
+        mn.instructions.add(new InsnNode(ACONST_NULL));
+        mn.instructions.add(new InsnNode(ARETURN));
 
         cn.methods.add(mn);
     }
 
     private void createSetMethod(ClassNode cn) {
-        MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, "setFieldValue", "(Ljava/lang/String;Ljava/lang/Object;)V", null, null);
+        MethodNode mn = new MethodNode(ACC_PUBLIC, "setFieldValue", "(Ljava/lang/String;Ljava/lang/Object;)V", null, null);
 
         fieldCache.forEach((id, fn) -> {
-            LabelNode skip = new LabelNode();
+            Label skip = new Label();
 
-            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1));
-            mn.instructions.add(new LdcInsnNode(id));
-            mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false));
-            mn.instructions.add(new JumpInsnNode(Opcodes.IFEQ, skip));
+            mn.visitVarInsn(ALOAD, 1);
+            mn.visitLdcInsn(id);
+            mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+            mn.visitJumpInsn(IFEQ, skip);
 
-            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
-            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 2));
-            mn.instructions.add(new TypeInsnNode(Opcodes.CHECKCAST, format(getObject(fn.desc))));
+            mn.visitVarInsn(ALOAD, 0);
+            mn.visitVarInsn(ALOAD, 2);
+            mn.visitTypeInsn(CHECKCAST, format(getObject(fn.desc)));
 
             String object = getObject(fn.desc);
             if (!object.equals(fn.desc))
-                mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false));
+                mn.visitMethodInsn(INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false);
 
-            mn.instructions.add(new FieldInsnNode(Opcodes.PUTFIELD, cn.name, fn.name, fn.desc));
-            mn.instructions.add(skip);
+            mn.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
+            mn.visitLabel(skip);
         });
-        mn.instructions.add(new InsnNode(Opcodes.RETURN));
+        mn.visitInsn(RETURN);
 
         cn.methods.add(mn);
     }
