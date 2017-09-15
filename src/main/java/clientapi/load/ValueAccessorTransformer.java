@@ -63,7 +63,6 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         createGetMethod(cn);
         createSetMethod(cn);
-//        createFieldGetter(cn);
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
