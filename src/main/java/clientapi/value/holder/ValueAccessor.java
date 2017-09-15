@@ -17,12 +17,30 @@
 package clientapi.value.holder;
 
 /**
+ * Used in direct accessing of labeled fields. Only
+ * usage is in Values, where this is used as a substitute
+ * to reflection calls.
+ *
  * @author Brady
  * @since 9/13/2017 10:19 PM
  */
 public interface ValueAccessor {
 
+    /**
+     * Returns the value of a labeled field in this
+     * class with the specified id.
+     *
+     * @param id The id of the field
+     * @return The value
+     */
     Object getFieldValue(String id);
 
-    // TODO: setFieldValue
+    /**
+     * Sets the value of a labeled field in this
+     * class with the specified id.
+     *
+     * @param id The id of the field
+     * @param value The new field value
+     */
+    void setFieldValue(String id, Object value);
 }

@@ -99,14 +99,17 @@ public class Value<T> implements IValue<T> {
     @Override
     public T getValue() {
         if (direct)
-            return (T) ((ValueAccessor) this.object).getFieldValue(this.id);
+            return (T) ((ValueAccessor) object).getFieldValue(id);
         else
             return (T) ReflectionUtils.getField(object, field);
     }
 
     @Override
     public void setValue(T value) {
-        ReflectionUtils.setField(object, field, value);
+        if (direct)
+            ((ValueAccessor) object).setFieldValue(id, value);
+        else
+            ReflectionUtils.setField(object, field, value);
     }
 
     @Override

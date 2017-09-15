@@ -22,7 +22,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public final class ValueAccessorTransformer implements IClassTransformer {
 
-    private final Map<String, FieldNode> fieldCache = new HashMap<String, FieldNode>();
+    private final Map<String, FieldNode> fieldCache = new LinkedHashMap<>();
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
@@ -56,66 +56,123 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             }
         }
 
-        if (fieldCache.size() > 0) {
-            cn.interfaces.add("clientapi/value/holder/ValueAccessor");
+        if (fieldCache.isEmpty() || cn.interfaces.contains("clientapi/value/holder/ValueAccessor"))
+            return basicClass;
 
-            MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, "getFieldValue", "(Ljava/lang/String;)Ljava/lang/Object;", null, null);
+        cn.interfaces.add("clientapi/value/holder/ValueAccessor");
 
-            fieldCache.forEach((id, fn) -> {
-                LabelNode match = new LabelNode();
+        createGetMethod(cn);
+        createSetMethod(cn);
 
-                mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1));
-                mn.instructions.add(new LdcInsnNode(id));
-                mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false));
-                mn.instructions.add(new JumpInsnNode(Opcodes.IFEQ, match));
-                mn.instructions.add(new LabelNode());
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+        cn.accept(cw);
+        return cw.toByteArray();
+    }
 
-                mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
-                mn.instructions.add(new FieldInsnNode(Opcodes.GETFIELD, cn.name, fn.name, fn.desc));
+    private void createGetMethod(ClassNode cn) {
+        MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, "getFieldValue", "(Ljava/lang/String;)Ljava/lang/Object;", null, null);
 
-                String valueOf = null;
-                switch (fn.desc) {
-                    case "B":
-                        valueOf = "java/lang/Byte";
-                        break;
-                    case "C":
-                        valueOf = "java/lang/Char";
-                        break;
-                    case "D":
-                        valueOf = "java/lang/Double";
-                        break;
-                    case "F":
-                        valueOf = "java/lang/Float";
-                        break;
-                    case "I":
-                        valueOf = "java/lang/Integer";
-                        break;
-                    case "J":
-                        valueOf = "java/lang/Long";
-                        break;
-                    case "S":
-                        valueOf = "java/lang/Short";
-                        break;
-                    case "Z":
-                        valueOf = "java/lang/Boolean";
-                }
-                if (valueOf != null)
-                    mn.instructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, valueOf, "valueOf", "(" + fn.desc + ")L" + valueOf + ";", false));
+        fieldCache.forEach((id, fn) -> {
+            LabelNode skip = new LabelNode();
 
-                mn.instructions.add(new InsnNode(Opcodes.ARETURN));
-                mn.instructions.add(match);
+            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1));
+            mn.instructions.add(new LdcInsnNode(id));
+            mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false));
+            mn.instructions.add(new JumpInsnNode(Opcodes.IFEQ, skip));
 
-            });
-            mn.instructions.add(new InsnNode(Opcodes.ACONST_NULL));
+            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            mn.instructions.add(new FieldInsnNode(Opcodes.GETFIELD, cn.name, fn.name, fn.desc));
+
+            String object = getObject(fn.desc);
+            if (!object.equals(fn.desc))
+                mn.instructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false));
+
             mn.instructions.add(new InsnNode(Opcodes.ARETURN));
+            mn.instructions.add(skip);
 
-            cn.methods.add(mn);
+        });
+        mn.instructions.add(new InsnNode(Opcodes.ACONST_NULL));
+        mn.instructions.add(new InsnNode(Opcodes.ARETURN));
 
-            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-            cn.accept(cw);
-            return cw.toByteArray();
+        cn.methods.add(mn);
+    }
+
+    private void createSetMethod(ClassNode cn) {
+        MethodNode mn = new MethodNode(Opcodes.ACC_PUBLIC, "setFieldValue", "(Ljava/lang/String;Ljava/lang/Object;)V", null, null);
+
+        fieldCache.forEach((id, fn) -> {
+            LabelNode skip = new LabelNode();
+
+            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1));
+            mn.instructions.add(new LdcInsnNode(id));
+            mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false));
+            mn.instructions.add(new JumpInsnNode(Opcodes.IFEQ, skip));
+
+            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            mn.instructions.add(new VarInsnNode(Opcodes.ALOAD, 2));
+            mn.instructions.add(new TypeInsnNode(Opcodes.CHECKCAST, format(getObject(fn.desc))));
+
+            String object = getObject(fn.desc);
+            if (!object.equals(fn.desc))
+                mn.instructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false));
+
+            mn.instructions.add(new FieldInsnNode(Opcodes.PUTFIELD, cn.name, fn.name, fn.desc));
+            mn.instructions.add(skip);
+        });
+        mn.instructions.add(new InsnNode(Opcodes.RETURN));
+
+        cn.methods.add(mn);
+    }
+
+    private String getObject(String desc) {
+        switch (desc) {
+            case "B":
+                return "java/lang/Byte";
+            case "C":
+                return "java/lang/Char";
+            case "D":
+                return "java/lang/Double";
+            case "F":
+                return "java/lang/Float";
+            case "I":
+                return "java/lang/Integer";
+            case "J":
+                return "java/lang/Long";
+            case "S":
+                return "java/lang/Short";
+            case "Z":
+                return "java/lang/Boolean";
         }
+        return format(desc);
+    }
 
-        return basicClass;
+    private String getName(String desc) {
+        switch (desc) {
+            case "B":
+                return "byte";
+            case "C":
+                return "char";
+            case "D":
+                return "double";
+            case "F":
+                return "float";
+            case "I":
+                return "int";
+            case "J":
+                return "long";
+            case "S":
+                return "short";
+            case "Z":
+                return "boolean";
+        }
+        return null;
+    }
+
+    private String format(String desc) {
+        if (desc.startsWith("L") && desc.endsWith(";"))
+            // removes the "L" and ";" from the descriptor
+            return desc.substring(1, desc.length() - 1);
+        else
+            return desc;
     }
 }

@@ -54,7 +54,7 @@ public class ClientTweaker implements ITweaker {
         Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
 
         // Inject ValueAccessor interfaces into classes
-        classLoader.registerTransformer("clientapi.load.ValueAccessorTransformer");
+        classLoader.registerTransformer(ValueAccessorTransformer.class.getName());
 
         // Check if a ClientInfo JSON is present
         if (this.getClass().getResourceAsStream("/client.json") == null) {
