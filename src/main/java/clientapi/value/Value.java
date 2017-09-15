@@ -78,7 +78,7 @@ public class Value<T> implements IValue<T> {
     private final Field field;
 
     /**
-     * Whether or not to use direct calls to retrieve field values
+     * Whether or not to use direct calls to retrieve field values.
      */
     private final boolean direct;
 
@@ -93,12 +93,17 @@ public class Value<T> implements IValue<T> {
     private final Supplier<Object> getter;
 
     public Value(String name, String parent, String id, String description, Object object, Field field) {
+        // Value properties
         this.name = name;
         this.parent = parent.length() > 0 ? parent : null;
         this.id = id;
         this.description = description;
+
+        // Field reference
         this.object = object;
         this.field = field;
+
+        // Accessor
         this.direct = object instanceof ValueAccessor;
         this.setter = direct ? ((ValueAccessor) object).getFieldSetter(id) : null;
         this.getter = direct ? ((ValueAccessor) object).getFieldGetter(id) : null;

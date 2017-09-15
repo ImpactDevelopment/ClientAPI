@@ -16,6 +16,8 @@
 
 package clientapi.value.holder;
 
+import clientapi.load.ValueAccessorTransformer;
+
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -23,6 +25,8 @@ import java.util.function.Supplier;
  * Used in direct accessing of labeled fields. Only
  * usage is in Values, where this is used as a substitute
  * to reflection calls.
+ *
+ * @see ValueAccessorTransformer
  *
  * @author Brady
  * @since 9/13/2017 10:19 PM
