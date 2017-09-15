@@ -91,8 +91,8 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             mn.visitLabel(skip);
 
         });
-        mn.instructions.add(new InsnNode(ACONST_NULL));
-        mn.instructions.add(new InsnNode(ARETURN));
+        mn.visitInsn(ACONST_NULL);
+        mn.visitInsn(ARETURN);
 
         cn.methods.add(mn);
     }
