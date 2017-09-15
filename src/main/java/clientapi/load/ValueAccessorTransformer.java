@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -147,11 +146,10 @@ public final class ValueAccessorTransformer implements IClassTransformer {
     private void createFieldSetter(ClassNode cn) {
         MethodNode mn = new MethodNode(ACC_PUBLIC | ACC_FINAL, "getFieldSetter", "(Ljava/lang/String;)Ljava/util/function/Consumer;", null, null);
 
-        AtomicInteger index = new AtomicInteger(0);
         fieldCache.forEach((id, fn) -> {
             MethodNode handle; {
                 // Create lambda bootstrap method
-                handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldSetter$" + index.getAndAdd(1), "(Ljava/lang/Object;)V", null, null);
+                handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldSetter$" + current++, "(Ljava/lang/Object;)V", null, null);
 
                 handle.visitVarInsn(ALOAD, 0);
                 handle.visitVarInsn(ALOAD, 1);
