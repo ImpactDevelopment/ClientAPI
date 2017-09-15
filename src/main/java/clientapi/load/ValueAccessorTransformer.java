@@ -17,11 +17,15 @@
 package clientapi.load;
 
 import net.minecraft.launchwrapper.IClassTransformer;
+import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.objectweb.asm.Opcodes.*;
 
@@ -31,7 +35,26 @@ import static org.objectweb.asm.Opcodes.*;
  */
 public final class ValueAccessorTransformer implements IClassTransformer {
 
+    /**
+     * Instance of the handle for {@code LambdaMetaFactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
+     */
+    private final static Handle METAFACTORY = new Handle(
+            H_INVOKESTATIC,
+            "java/lang/invoke/LambdaMetafactory",
+            "metafactory",
+            "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+    );
+
+    /**
+     * Map of value ids and their respective field nodes for the current class
+     * being "operated" on. Reset after each class is processed.
+     */
     private final Map<String, FieldNode> fieldCache = new LinkedHashMap<>();
+
+    /**
+     * Current Lambda bootstrap method index. Reset after each class is processed.
+     */
+    private int current;
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
@@ -41,6 +64,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         // Clear the cache for the new class
         fieldCache.clear();
+        current = 0;
 
         // Assume that any values annotated with @Label should be given accessors
         for (FieldNode fn : cn.fields) {
@@ -61,35 +85,58 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         cn.interfaces.add("clientapi/value/holder/ValueAccessor");
 
-        createGetMethod(cn);
-        createSetMethod(cn);
+        createFieldGetter(cn);
+        createFieldSetter(cn);
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
+        try {
+            FileUtils.writeByteArrayToFile(new File("Generated" + System.nanoTime() + ".class"), cw.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return cw.toByteArray();
     }
 
-    private void createGetMethod(ClassNode cn) {
-        MethodNode mn = new MethodNode(ACC_PUBLIC, "getFieldValue", "(Ljava/lang/String;)Ljava/lang/Object;", null, null);
+    private void createFieldGetter(ClassNode cn) {
+        MethodNode mn = new MethodNode(ACC_PUBLIC | ACC_FINAL, "getFieldGetter", "(Ljava/lang/String;)Ljava/util/function/Supplier;", null, null);
 
         fieldCache.forEach((id, fn) -> {
-            Label skip = new Label();
+            MethodNode handle; {
+                // Create lambda bootstrap method
+                handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldGetter$" + current++, "()Ljava/lang/Object;", null, null);
 
+                // Get the field value
+                handle.visitVarInsn(ALOAD, 0);
+                handle.visitFieldInsn(GETFIELD, cn.name, fn.name, fn.desc);
+
+                // If the field is a primitive type, get the object representation
+                String object = getObject(fn.desc);
+                if (!object.equals(fn.desc))
+                    handle.visitMethodInsn(INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false);
+
+                // Return the value
+                handle.visitInsn(ARETURN);
+
+                // Add the bootstrap method to the class
+                cn.methods.add(handle);
+            }
+
+            // Create lambda
+            Label skip = new Label();
             mn.visitVarInsn(ALOAD, 1);
             mn.visitLdcInsn(id);
             mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
             mn.visitJumpInsn(IFEQ, skip);
-
             mn.visitVarInsn(ALOAD, 0);
-            mn.visitFieldInsn(GETFIELD, cn.name, fn.name, fn.desc);
-
-            String object = getObject(fn.desc);
-            if (!object.equals(fn.desc))
-                mn.visitMethodInsn(INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false);
-
+            mn.visitInvokeDynamicInsn("get", "(L" + cn.name + ";)Ljava/util/function/Supplier;",
+                    METAFACTORY,
+                    Type.getMethodType("()Ljava/lang/Object;"),
+                    new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
+                    Type.getMethodType("()Ljava/lang/Object;")
+            );
             mn.visitInsn(ARETURN);
             mn.visitLabel(skip);
-
         });
         mn.visitInsn(ACONST_NULL);
         mn.visitInsn(ARETURN);
@@ -97,29 +144,50 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         cn.methods.add(mn);
     }
 
-    private void createSetMethod(ClassNode cn) {
-        MethodNode mn = new MethodNode(ACC_PUBLIC, "setFieldValue", "(Ljava/lang/String;Ljava/lang/Object;)V", null, null);
+    private void createFieldSetter(ClassNode cn) {
+        MethodNode mn = new MethodNode(ACC_PUBLIC | ACC_FINAL, "getFieldSetter", "(Ljava/lang/String;)Ljava/util/function/Consumer;", null, null);
 
+        AtomicInteger index = new AtomicInteger(0);
         fieldCache.forEach((id, fn) -> {
-            Label skip = new Label();
+            MethodNode handle; {
+                // Create lambda bootstrap method
+                handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldSetter$" + index.getAndAdd(1), "(Ljava/lang/Object;)V", null, null);
 
+                handle.visitVarInsn(ALOAD, 0);
+                handle.visitVarInsn(ALOAD, 1);
+                handle.visitTypeInsn(CHECKCAST, format(getObject(fn.desc)));
+
+                // If the field is a primitive type, get the primitive value
+                String object = getObject(fn.desc);
+                if (!object.equals(fn.desc))
+                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false);
+
+                // Set the field value
+                handle.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
+                handle.visitInsn(RETURN);
+
+                // Add the bootstrap method to the class
+                cn.methods.add(handle);
+            }
+
+            // Create lambda
+            Label skip = new Label();
             mn.visitVarInsn(ALOAD, 1);
             mn.visitLdcInsn(id);
             mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
             mn.visitJumpInsn(IFEQ, skip);
-
             mn.visitVarInsn(ALOAD, 0);
-            mn.visitVarInsn(ALOAD, 2);
-            mn.visitTypeInsn(CHECKCAST, format(getObject(fn.desc)));
-
-            String object = getObject(fn.desc);
-            if (!object.equals(fn.desc))
-                mn.visitMethodInsn(INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false);
-
-            mn.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
+            mn.visitInvokeDynamicInsn("accept", "(L" + cn.name + ";)Ljava/util/function/Consumer;",
+                    METAFACTORY,
+                    Type.getMethodType("(Ljava/lang/Object;)V"),
+                    new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
+                    Type.getMethodType("(Ljava/lang/Object;)V")
+            );
+            mn.visitInsn(ARETURN);
             mn.visitLabel(skip);
         });
-        mn.visitInsn(RETURN);
+        mn.visitInsn(ACONST_NULL);
+        mn.visitInsn(ARETURN);
 
         cn.methods.add(mn);
     }

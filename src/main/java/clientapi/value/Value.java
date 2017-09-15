@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * The implementation of IValue
@@ -80,6 +82,16 @@ public class Value<T> implements IValue<T> {
      */
     private final boolean direct;
 
+    /**
+     * Setter for this value's field. Should be {@code null} if direct is {@code false}
+     */
+    private final Consumer<Object> setter;
+
+    /**
+     * Getter for this value's field. Should be (@code null} if direct is {@code false}
+     */
+    private final Supplier<Object> getter;
+
     public Value(String name, String parent, String id, String description, Object object, Field field) {
         this.name = name;
         this.parent = parent.length() > 0 ? parent : null;
@@ -88,6 +100,8 @@ public class Value<T> implements IValue<T> {
         this.object = object;
         this.field = field;
         this.direct = object instanceof ValueAccessor;
+        this.setter = direct ? ((ValueAccessor) object).getFieldSetter(id) : null;
+        this.getter = direct ? ((ValueAccessor) object).getFieldGetter(id) : null;
     }
 
     @Override
@@ -99,7 +113,7 @@ public class Value<T> implements IValue<T> {
     @Override
     public T getValue() {
         if (direct)
-            return (T) ((ValueAccessor) object).getFieldValue(id);
+            return (T) getter.get();
         else
             return (T) ReflectionUtils.getField(object, field);
     }
@@ -107,7 +121,7 @@ public class Value<T> implements IValue<T> {
     @Override
     public void setValue(T value) {
         if (direct)
-            ((ValueAccessor) object).setFieldValue(id, value);
+            setter.accept(value);
         else
             ReflectionUtils.setField(object, field, value);
     }
