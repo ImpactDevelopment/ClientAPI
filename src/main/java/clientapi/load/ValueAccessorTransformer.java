@@ -16,6 +16,8 @@
 
 package clientapi.load;
 
+import clientapi.value.holder.ValueAccessor;
+
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
@@ -26,6 +28,12 @@ import java.util.Map;
 import static org.objectweb.asm.Opcodes.*;
 
 /**
+ * Transforms classes containing Labeled fields to create
+ * Consumers and Suppliers to directly access the fields
+ * without the need for reflections.
+ *
+ * @see ValueAccessor
+ *
  * @author Brady
  * @since 9/13/2017 10:24 PM
  */
@@ -58,6 +66,10 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         ClassReader cr = new ClassReader(basicClass);
         cr.accept(cn, 0);
 
+        // Don't process the class if it already implements ValueAccessor
+        if (cn.interfaces.contains("clientapi/value/holder/ValueAccessor"))
+            return basicClass;
+
         // Clear the cache for the new class
         fieldCache.clear();
         current = 0;
@@ -76,22 +88,30 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             }
         }
 
-        if (fieldCache.isEmpty() || cn.interfaces.contains("clientapi/value/holder/ValueAccessor"))
+        // Don't process the class if there weren't any labeled fields
+        if (fieldCache.isEmpty())
             return basicClass;
 
+        // Add the ValueAccessor interface and implement the required methods
         cn.interfaces.add("clientapi/value/holder/ValueAccessor");
-
         createFieldGetter(cn);
         createFieldSetter(cn);
 
+        // Return the modified class
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
         return cw.toByteArray();
     }
 
+    /**
+     * Creates the field-getter getter method in the specified {@code ClassNode}
+     *
+     * @param cn The ClassNode
+     */
     private void createFieldGetter(ClassNode cn) {
         MethodNode mn = new MethodNode(ACC_PUBLIC | ACC_FINAL, "getFieldGetter", "(Ljava/lang/String;)Ljava/util/function/Supplier;", null, null);
 
+        // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
             MethodNode handle; {
                 // Create lambda bootstrap method
@@ -113,12 +133,18 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                 cn.methods.add(handle);
             }
 
-            // Create lambda
+            // Create label for IF statement jump
             Label skip = new Label();
+
+            // Compare the target value with the expected valu
             mn.visitVarInsn(ALOAD, 1);
             mn.visitLdcInsn(id);
             mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+
+            // Jump if the input doesn't match the expected value
             mn.visitJumpInsn(IFEQ, skip);
+
+            // Return the getter
             mn.visitVarInsn(ALOAD, 0);
             mn.visitInvokeDynamicInsn("get", "(L" + cn.name + ";)Ljava/util/function/Supplier;",
                     METAFACTORY,
@@ -127,6 +153,8 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                     Type.getMethodType("()Ljava/lang/Object;")
             );
             mn.visitInsn(ARETURN);
+
+            // Indicate where the IF statement should jump to if it fails
             mn.visitLabel(skip);
         });
         mn.visitInsn(ACONST_NULL);
@@ -135,9 +163,15 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         cn.methods.add(mn);
     }
 
+    /**
+     * Creates the field-setter getter method in the specified {@code ClassNode}
+     *
+     * @param cn The ClassNode
+     */
     private void createFieldSetter(ClassNode cn) {
         MethodNode mn = new MethodNode(ACC_PUBLIC | ACC_FINAL, "getFieldSetter", "(Ljava/lang/String;)Ljava/util/function/Consumer;", null, null);
 
+        // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
             MethodNode handle; {
                 // Create lambda bootstrap method
@@ -150,7 +184,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                 // If the field is a primitive type, get the primitive value
                 String object = getObject(fn.desc);
                 if (!object.equals(fn.desc))
-                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getName(fn.desc) + "Value", "()" + fn.desc, false);
+                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getKeyword(fn.desc) + "Value", "()" + fn.desc, false);
 
                 // Set the field value
                 handle.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
@@ -160,12 +194,18 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                 cn.methods.add(handle);
             }
 
-            // Create lambda
+            // Create label for IF statement jump
             Label skip = new Label();
+
+            // Compare the target value with the expected value
             mn.visitVarInsn(ALOAD, 1);
             mn.visitLdcInsn(id);
             mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+
+            // Jump if the input doesn't match the expected value
             mn.visitJumpInsn(IFEQ, skip);
+
+            // Return the setter
             mn.visitVarInsn(ALOAD, 0);
             mn.visitInvokeDynamicInsn("accept", "(L" + cn.name + ";)Ljava/util/function/Consumer;",
                     METAFACTORY,
@@ -174,6 +214,8 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                     Type.getMethodType("(Ljava/lang/Object;)V")
             );
             mn.visitInsn(ARETURN);
+
+            // Indicate where the IF statement should jump to if it fails
             mn.visitLabel(skip);
         });
         mn.visitInsn(ACONST_NULL);
@@ -182,6 +224,14 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         cn.methods.add(mn);
     }
 
+    /**
+     * Returns the object representation of a primitive
+     * type, if the specified description is a primitive type
+     * otherwise, the input value is returned.
+     *
+     * @param desc The description of the type
+     * @return The object representation, if primitive
+     */
     private String getObject(String desc) {
         switch (desc) {
             case "B":
@@ -204,7 +254,13 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         return desc;
     }
 
-    private String getName(String desc) {
+    /**
+     * Returns the keyword of the specified primitive type description
+     *
+     * @param desc Primitive type description
+     * @return Type keyword
+     */
+    private String getKeyword(String desc) {
         switch (desc) {
             case "B":
                 return "byte";
@@ -226,6 +282,12 @@ public final class ValueAccessorTransformer implements IClassTransformer {
         return null;
     }
 
+    /**
+     * Removes the L prefix and ; suffix from a type descriptor
+     *
+     * @param desc Type descriptor
+     * @return The formatted descriptor
+     */
     private String format(String desc) {
         if (desc.startsWith("L") && desc.endsWith(";"))
             // removes the "L" and ";" from the descriptor
