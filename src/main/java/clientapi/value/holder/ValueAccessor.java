@@ -16,6 +16,9 @@
 
 package clientapi.value.holder;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 /**
  * Used in direct accessing of labeled fields. Only
  * usage is in Values, where this is used as a substitute
@@ -27,20 +30,20 @@ package clientapi.value.holder;
 public interface ValueAccessor {
 
     /**
-     * Returns the value of a labeled field in this
-     * class with the specified id.
+     * Returns a supplier that can be used to get
+     * the value of the target field. (By id)
      *
      * @param id The id of the field
-     * @return The value
+     * @return The supplier "getter"
      */
-    Object getFieldValue(String id);
+    Supplier<Object> getFieldGetter(String id);
 
     /**
-     * Sets the value of a labeled field in this
-     * class with the specified id.
+     * Returns a consumer that can be used to set the
+     * value of the target field. (By id)
      *
      * @param id The id of the field
-     * @param value The new field value
+     * @return The consumer "setter"
      */
-    void setFieldValue(String id, Object value);
+    Consumer<Object> getFieldSetter(String id);
 }
