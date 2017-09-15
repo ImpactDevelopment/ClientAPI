@@ -147,7 +147,9 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             // Return the getter
             mn.visitVarInsn(ALOAD, 0);
             mn.visitInvokeDynamicInsn("get", "(L" + cn.name + ";)Ljava/util/function/Supplier;",
+                    // Define the bootstrap method
                     METAFACTORY,
+                    // Fill the remaining 3 args for the method
                     Type.getMethodType("()Ljava/lang/Object;"),
                     new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
                     Type.getMethodType("()Ljava/lang/Object;")
@@ -208,7 +210,9 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             // Return the setter
             mn.visitVarInsn(ALOAD, 0);
             mn.visitInvokeDynamicInsn("accept", "(L" + cn.name + ";)Ljava/util/function/Consumer;",
+                    // Define the bootstrap method
                     METAFACTORY,
+                    // Fill the remaining 3 args for the method
                     Type.getMethodType("(Ljava/lang/Object;)V"),
                     new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
                     Type.getMethodType("(Ljava/lang/Object;)V")
