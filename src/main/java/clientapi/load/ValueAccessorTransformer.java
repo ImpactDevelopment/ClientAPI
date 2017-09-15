@@ -151,7 +151,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                     METAFACTORY,
                     // Fill the remaining 3 args for the method
                     Type.getMethodType("()Ljava/lang/Object;"),
-                    new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
+                    createBootstrapHandle(H_INVOKESPECIAL, cn, handle),
                     Type.getMethodType("()Ljava/lang/Object;")
             );
             mn.visitInsn(ARETURN);
@@ -214,7 +214,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
                     METAFACTORY,
                     // Fill the remaining 3 args for the method
                     Type.getMethodType("(Ljava/lang/Object;)V"),
-                    new Handle(H_INVOKESPECIAL, cn.name, handle.name, handle.desc),
+                    createBootstrapHandle(H_INVOKESPECIAL, cn, handle),
                     Type.getMethodType("(Ljava/lang/Object;)V")
             );
             mn.visitInsn(ARETURN);
@@ -262,7 +262,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
      * Returns the keyword of the specified primitive type description
      *
      * @param desc Primitive type description
-     * @return Type keyword
+     * @return Type keyword, null if not primitive
      */
     private String getKeyword(String desc) {
         switch (desc) {
@@ -298,5 +298,16 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             return desc.substring(1, desc.length() - 1);
         else
             return desc;
+    }
+
+    /**
+     * Creates the handle for a MetaFactory bootstrap
+     *
+     * @param tag The handle tag
+     * @param owner The ClassNode containing the method
+     * @param bootstrap The handle method
+     */
+    private Handle createBootstrapHandle(int tag, ClassNode owner, MethodNode bootstrap) {
+        return new Handle(tag, owner.name, bootstrap.name, bootstrap.desc);
     }
 }
