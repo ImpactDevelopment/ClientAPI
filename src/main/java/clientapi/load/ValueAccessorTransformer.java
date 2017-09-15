@@ -17,12 +17,9 @@
 package clientapi.load;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -89,11 +86,6 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
-        try {
-            FileUtils.writeByteArrayToFile(new File("Generated" + System.nanoTime() + ".class"), cw.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return cw.toByteArray();
     }
 
@@ -209,7 +201,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
             case "Z":
                 return "java/lang/Boolean";
         }
-        return format(desc);
+        return desc;
     }
 
     private String getName(String desc) {
