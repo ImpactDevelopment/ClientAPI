@@ -143,7 +143,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                     METAFACTORY,
                     // Fill the remaining 3 args for the method
                     Type.getMethodType("()Ljava/lang/Object;"),
-                    createBootstrapHandle(H_INVOKESPECIAL, cn, handle),
+                    createMethodHandle(H_INVOKESPECIAL, cn, handle),
                     Type.getMethodType("()Ljava/lang/Object;")
             );
             mn.visitInsn(ARETURN);
@@ -173,7 +173,7 @@ public final class ValueAccessorTransformer implements ITransformer {
 
                 handle.visitVarInsn(ALOAD, 0);
                 handle.visitVarInsn(ALOAD, 1);
-                handle.visitTypeInsn(CHECKCAST, stripDesc(getObject(fn.desc)));
+                handle.visitTypeInsn(CHECKCAST, getStrippedDesc(getObject(fn.desc)));
 
                 // If the field is a primitive type, get the primitive value
                 String object = getObject(fn.desc);
@@ -206,7 +206,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                     METAFACTORY,
                     // Fill the remaining 3 args for the method
                     Type.getMethodType("(Ljava/lang/Object;)V"),
-                    createBootstrapHandle(H_INVOKESPECIAL, cn, handle),
+                    createMethodHandle(H_INVOKESPECIAL, cn, handle),
                     Type.getMethodType("(Ljava/lang/Object;)V")
             );
             mn.visitInsn(ARETURN);
@@ -218,70 +218,5 @@ public final class ValueAccessorTransformer implements ITransformer {
         mn.visitInsn(ARETURN);
 
         cn.methods.add(mn);
-    }
-
-    /**
-     * Returns the object representation of a primitive
-     * type, if the specified description is a primitive type
-     * otherwise, the input value is returned.
-     *
-     * @param desc The description of the type
-     * @return The object representation, if primitive
-     */
-    private String getObject(String desc) {
-        switch (desc) {
-            case "B":
-                return "java/lang/Byte";
-            case "C":
-                return "java/lang/Char";
-            case "D":
-                return "java/lang/Double";
-            case "F":
-                return "java/lang/Float";
-            case "I":
-                return "java/lang/Integer";
-            case "J":
-                return "java/lang/Long";
-            case "S":
-                return "java/lang/Short";
-            case "Z":
-                return "java/lang/Boolean";
-        }
-        return desc;
-    }
-
-    /**
-     * Returns the {@code Class} name of the specified primitive type description
-     *
-     * @param desc Primitive type description
-     * @return Type class name, null if not primitive
-     */
-    private String getClassName(String desc) {
-        return desc.length() == 1 ? Type.getType(desc).getClassName() : null;
-    }
-
-    /**
-     * Removes the L prefix and ; suffix from a type descriptor
-     *
-     * @param desc Type descriptor
-     * @return The formatted descriptor
-     */
-    private String stripDesc(String desc) {
-        if (desc.startsWith("L") && desc.endsWith(";"))
-            // removes the "L" and ";" from the descriptor
-            return desc.substring(1, desc.length() - 1);
-        else
-            return desc;
-    }
-
-    /**
-     * Creates the handle for a {@code LambdaMetaFactory} bootstrap
-     *
-     * @param tag The handle tag
-     * @param owner The ClassNode containing the method
-     * @param bootstrap The handle method
-     */
-    private Handle createBootstrapHandle(int tag, ClassNode owner, MethodNode bootstrap) {
-        return new Handle(tag, owner.name, bootstrap.name, bootstrap.desc);
     }
 }
