@@ -16,7 +16,7 @@
 
 package clientapi.value.holder;
 
-import clientapi.load.ValueAccessorTransformer;
+import clientapi.load.transform.impl.ValueAccessorTransformer;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
