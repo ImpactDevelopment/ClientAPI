@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package clientapi.load;
+package clientapi.load.transform.impl;
 
+import clientapi.load.transform.ITransformer;
 import clientapi.value.holder.ValueAccessor;
 
 import net.minecraft.launchwrapper.IClassTransformer;
@@ -37,7 +38,7 @@ import static org.objectweb.asm.Opcodes.*;
  * @author Brady
  * @since 9/13/2017 10:24 PM
  */
-public final class ValueAccessorTransformer implements IClassTransformer {
+public final class ValueAccessorTransformer implements ITransformer {
 
     /**
      * Instance of the handle for {@code LambdaMetaFactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
@@ -61,14 +62,10 @@ public final class ValueAccessorTransformer implements IClassTransformer {
     private int current;
 
     @Override
-    public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        ClassNode cn = new ClassNode();
-        ClassReader cr = new ClassReader(basicClass);
-        cr.accept(cn, 0);
-
+    public void transform(ClassNode cn) {
         // Don't process the class if it already implements ValueAccessor
         if (cn.interfaces.contains("clientapi/value/holder/ValueAccessor"))
-            return basicClass;
+            return;
 
         // Clear the cache for the new class
         fieldCache.clear();
@@ -90,17 +87,12 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
         // Don't process the class if there weren't any labeled fields
         if (fieldCache.isEmpty())
-            return basicClass;
+            return;
 
         // Add the ValueAccessor interface and implement the required methods
         cn.interfaces.add("clientapi/value/holder/ValueAccessor");
         createFieldGetter(cn);
         createFieldSetter(cn);
-
-        // Return the modified class
-        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-        cn.accept(cw);
-        return cw.toByteArray();
     }
 
     /**
