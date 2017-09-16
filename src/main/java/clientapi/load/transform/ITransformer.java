@@ -16,7 +16,10 @@
 
 package clientapi.load.transform;
 
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
 
 /**
  * Basic class transformer. Can optionally target specific classes. Only
@@ -43,5 +46,70 @@ public interface ITransformer {
      */
     default String[] getTargets() {
         return new String[0];
+    }
+
+    /**
+     * Returns the object representation of a primitive
+     * type, if the specified description is a primitive type
+     * otherwise, the input value is returned.
+     *
+     * @param desc The description of the type
+     * @return The object representation, if primitive
+     */
+    default String getObject(String desc) {
+        switch (desc) {
+            case "B":
+                return "java/lang/Byte";
+            case "C":
+                return "java/lang/Char";
+            case "D":
+                return "java/lang/Double";
+            case "F":
+                return "java/lang/Float";
+            case "I":
+                return "java/lang/Integer";
+            case "J":
+                return "java/lang/Long";
+            case "S":
+                return "java/lang/Short";
+            case "Z":
+                return "java/lang/Boolean";
+        }
+        return desc;
+    }
+
+    /**
+     * Returns the {@code Class} name of the specified primitive type description
+     *
+     * @param desc Primitive type description
+     * @return Type class name, null if not primitive
+     */
+    default String getClassName(String desc) {
+        return desc.length() == 1 ? Type.getType(desc).getClassName() : null;
+    }
+
+    /**
+     * Removes the L prefix and ; suffix from a type descriptor
+     *
+     * @param desc Type descriptor
+     * @return The formatted descriptor
+     */
+    default String getStrippedDesc(String desc) {
+        if (desc.startsWith("L") && desc.endsWith(";"))
+            // removes the "L" and ";" from the descriptor
+            return desc.substring(1, desc.length() - 1);
+        else
+            return desc;
+    }
+
+    /**
+     * Creates a handle for a method
+     *
+     * @param tag The handle tag
+     * @param owner The method container
+     * @param bootstrap The method
+     */
+    default Handle createMethodHandle(int tag, ClassNode owner, MethodNode bootstrap) {
+        return new Handle(tag, owner.name, bootstrap.name, bootstrap.desc);
     }
 }
