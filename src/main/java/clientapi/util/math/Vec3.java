@@ -212,4 +212,13 @@ public final class Vec3 {
     public final Vec3 toScreen() {
         return GlUtils.toScreen(this);
     }
+
+    @Override
+    public String toString() {
+        return "Vec3{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

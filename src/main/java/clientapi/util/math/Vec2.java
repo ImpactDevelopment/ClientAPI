@@ -207,4 +207,12 @@ public final class Vec2 {
     public final Vec3 toScreen() {
         return GlUtils.toWorld(this.toVec3());
     }
+
+    @Override
+    public String toString() {
+        return "Vec2{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
