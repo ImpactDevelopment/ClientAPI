@@ -95,7 +95,7 @@ public class Value<T> implements IValue<T> {
     public Value(String name, String parent, String id, String description, Object object, Field field) {
         // Value properties
         this.name = name;
-        this.parent = parent.length() > 0 ? parent : null;
+        this.parent = parent != null && parent.length() > 0 ? parent : null;
         this.id = id;
         this.description = description;
 
