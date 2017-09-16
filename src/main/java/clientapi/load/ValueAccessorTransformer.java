@@ -181,12 +181,12 @@ public final class ValueAccessorTransformer implements IClassTransformer {
 
                 handle.visitVarInsn(ALOAD, 0);
                 handle.visitVarInsn(ALOAD, 1);
-                handle.visitTypeInsn(CHECKCAST, format(getObject(fn.desc)));
+                handle.visitTypeInsn(CHECKCAST, stripDesc(getObject(fn.desc)));
 
                 // If the field is a primitive type, get the primitive value
                 String object = getObject(fn.desc);
                 if (!object.equals(fn.desc))
-                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getKeyword(fn.desc) + "Value", "()" + fn.desc, false);
+                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getClassName(fn.desc) + "Value", "()" + fn.desc, false);
 
                 // Set the field value
                 handle.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
@@ -259,31 +259,13 @@ public final class ValueAccessorTransformer implements IClassTransformer {
     }
 
     /**
-     * Returns the keyword of the specified primitive type description
+     * Returns the {@code Class} name of the specified primitive type description
      *
      * @param desc Primitive type description
-     * @return Type keyword, null if not primitive
+     * @return Type class name, null if not primitive
      */
-    private String getKeyword(String desc) {
-        switch (desc) {
-            case "B":
-                return "byte";
-            case "C":
-                return "char";
-            case "D":
-                return "double";
-            case "F":
-                return "float";
-            case "I":
-                return "int";
-            case "J":
-                return "long";
-            case "S":
-                return "short";
-            case "Z":
-                return "boolean";
-        }
-        return null;
+    private String getClassName(String desc) {
+        return desc.length() == 1 ? Type.getType(desc).getClassName() : null;
     }
 
     /**
@@ -292,7 +274,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
      * @param desc Type descriptor
      * @return The formatted descriptor
      */
-    private String format(String desc) {
+    private String stripDesc(String desc) {
         if (desc.startsWith("L") && desc.endsWith(";"))
             // removes the "L" and ";" from the descriptor
             return desc.substring(1, desc.length() - 1);
@@ -301,7 +283,7 @@ public final class ValueAccessorTransformer implements IClassTransformer {
     }
 
     /**
-     * Creates the handle for a MetaFactory bootstrap
+     * Creates the handle for a {@code LambdaMetaFactory} bootstrap
      *
      * @param tag The handle tag
      * @param owner The ClassNode containing the method
