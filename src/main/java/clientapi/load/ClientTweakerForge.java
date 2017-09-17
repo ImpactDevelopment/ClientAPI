@@ -20,7 +20,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.launchwrapper.Launch;
+
 /**
+ * Implementation of ClientTweaker that leaves the argument list alone.
+ * This is due to Forge being the primary Tweaker.
+ *
+ * @see Launch
+ *
  * @author Brady
  * @since 9/8/2017 7:27 PM
  */

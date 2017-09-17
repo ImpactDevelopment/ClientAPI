@@ -17,6 +17,9 @@
 package clientapi.module.exception;
 
 /**
+ * Thrown during the initialization of {@code Modules} if
+ * invalid or insufficient data is provided.
+ *
  * @author Brady
  * @since 6/29/2017 3:05 PM
  */
