@@ -31,5 +31,10 @@ import clientapi.command.executor.sender.CommandSender;
  */
 public interface CommandExecutor {
 
+    /**
+     * Default executor that directly executes all commands passed to it.
+     */
+    CommandExecutor DIRECT = (command, sender, arguments) -> command.execute(sender, arguments);
+
     void execute(Command command, CommandSender sender, String[] arguments) throws CommandException;
 }
