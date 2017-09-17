@@ -27,6 +27,7 @@ import clientapi.util.interfaces.Loadable;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
+@Deprecated
 public interface ITabGui extends Loadable, IRenderer {
 
     /**
