@@ -22,8 +22,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Basic label for fields. Gives them a name,
- * description, id and an array of aliases.
+ * Basic label for fields. Allows them to have a name,
+ * id, parent field, description, and any aliases.
  *
  * @author Brady
  * @since 2/11/2017 12:00 PM
@@ -33,13 +33,16 @@ import java.lang.annotation.Target;
 public @interface Label {
 
     /**
+     * Should return the name of the field or a simplified
+     * descriptor of the field's function.
+     *
      * @return The name
      */
     String name();
 
     /**
-     * Returns the parent field's id. Used in nested values.
-     * If the value has a length of 0, that is an indication
+     * Returns the parent field's id. If the value
+     * has a length of 0, that is an indication
      * that there isn't a parent field.
      *
      * @return The parent field id
@@ -47,17 +50,19 @@ public @interface Label {
     String parent() default "";
 
     /**
+     * Returns the id of the marked field. There should only
+     * be one field with the given id per class.
+     *
      * @return The ID of the field
      */
     String id();
 
     /**
+     * Returns a description of the marked field. Should
+     * be used to explain the usage of whatever that
+     * field is responsible for.
+     *
      * @return The description
      */
     String description();
-
-    /**
-     * @return The array of aliases
-     */
-    String[] aliases() default {};
 }
