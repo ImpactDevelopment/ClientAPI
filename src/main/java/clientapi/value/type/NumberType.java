@@ -42,10 +42,16 @@ public class NumberType<T extends Number> extends Value<T> {
      */
     private final T maximum;
 
-    public NumberType(String name, String parent, String id, String description, Object object, Field field, T minimum, T maximum) {
+    /**
+     * Interval amount for this value
+     */
+    private final T interval;
+
+    public NumberType(String name, String parent, String id, String description, Object object, Field field, T minimum, T maximum, T interval) {
         super(name, parent, id, description, object, field);
         this.minimum = minimum;
         this.maximum = maximum;
+        this.interval = interval;
     }
 
     @Override
@@ -54,7 +60,6 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public final void setValue(T value) {
         super.setValue(cast(MathUtils.clamp(value, minimum, maximum)));
     }
@@ -74,6 +79,13 @@ public class NumberType<T extends Number> extends Value<T> {
     }
 
     /**
+     * @return The interval of change for this value
+     */
+    public final T getInterval() {
+        return this.interval;
+    }
+
+    /**
      * Increments the value by the number specified
      * times the number range divided by 10
      */
@@ -87,7 +99,6 @@ public class NumberType<T extends Number> extends Value<T> {
      * Decrement the value by the number specified
      * times the number range divided by 10
      */
-    @SuppressWarnings("unchecked")
     public final void decrement(float multiplier) {
         this.increment(-multiplier);
     }
