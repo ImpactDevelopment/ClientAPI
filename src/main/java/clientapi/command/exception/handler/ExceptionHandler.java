@@ -18,8 +18,6 @@ package clientapi.command.exception.handler;
 
 import clientapi.command.exception.CommandException;
 
-import java.util.function.Consumer;
-
 /**
  * Put in place by developers to hook into when exceptions
  * are thrown. Implementations should have an {@code ExceptionTarget}
@@ -29,22 +27,25 @@ import java.util.function.Consumer;
  * when an exception is thrown, rather than a default console output
  * performed by the Client API.
  *
- * @see ExceptionTarget
- *
  * @author Brady
  * @since 6/1/2017 2:54 PM
  */
-@FunctionalInterface
-public interface ExceptionHandler extends Consumer<CommandException> {
+public interface ExceptionHandler {
 
     /**
-     * Retrieves the command exception type from the
-     * {@code ExceptionTarget} that belongs to this
-     * type.
+     * Handles a thrown {@code CommandException} of the target type.
+     *
+     * @see ExceptionHandler#getTarget
+     *
+     * @param exception Exception that was thrown
+     */
+    void handle(CommandException exception);
+
+    /**
+     * Returns the target {@code CommandException} that should be
+     * accepted by this handler.
      *
      * @return The command exception type
      */
-    default Class<? extends CommandException> getType() {
-        return this.getClass().getAnnotation(ExceptionTarget.class).value();
-    }
+    Class<? extends CommandException> getTarget();
 }

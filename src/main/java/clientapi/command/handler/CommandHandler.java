@@ -16,11 +16,11 @@
 
 package clientapi.command.handler;
 
+import clientapi.command.Cmd;
 import clientapi.command.Command;
 import clientapi.command.exception.CommandException;
 import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
-import clientapi.command.executor.DirectExecutor;
 import clientapi.manage.Manager;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
 import me.zero.alpine.listener.EventHandler;
@@ -32,7 +32,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Handles and processes command execution events
+ * Handles and processes command execution events.
+ *
+ * @see Command
+ * @see Cmd
  *
  * @author Brady
  * @since 6/1/2017 3:03 PM
@@ -45,19 +48,22 @@ public final class CommandHandler {
     private final List<ExceptionHandler> handlers = new ArrayList<>();
 
     /**
-     * Executor that is called to execute commands. The default executor
-     * is set to a {@code DirectExecutor}
+     * Executor that is called to execute commands. All commands
+     * are passed through the executor. Default is set to
+     * {@code CommandExecutor#DIRECT}
+     *
+     * @see CommandExecutor#DIRECT
      */
-    private CommandExecutor executor = new DirectExecutor();
+    private CommandExecutor executor = CommandExecutor.DIRECT;
 
     /**
-     * Command manager using this handler
+     * Command manager using this handler. Used to access
+     * the list of commands that the client provides.
      */
     private final Manager<Command> commandManager;
 
     /**
-     * Prefix used to indicate command input. The default
-     * prefix is "."
+     * Prefix used to indicate command input. By default, it is set to "x"
      */
     private String prefix = ".";
 
@@ -68,31 +74,38 @@ public final class CommandHandler {
     @EventHandler
     private final Listener<CommandExecutionEvent> commandExecutionListener = new Listener<>(event -> {
         try {
-            if (event.getCommand() != null)
+            if (event.getCommand() != null) {
                 executor.execute(event.getCommand(), event.getSender(), event.getArguments());
-            else
-                throw new UnknownCommandException();
+                return;
+            }
+            throw new UnknownCommandException();
         } catch (CommandException e) {
             List<ExceptionHandler> handlers = findHandlers(e);
-            if (handlers.isEmpty())
+            if (handlers.isEmpty()) {
                 e.printStackTrace();
-            else
-                handlers.forEach(handler -> handler.accept(e));
+                return;
+            }
+
+            handlers.forEach(handler -> handler.handle(e));
         }
     });
 
     /**
-     * Finds handlers that target the specified CommandException
+     * Finds handlers that target the specified {@code CommandException}
      *
      * @param exception The command exception
      * @return The list of handlers, empty if none
      */
     private List<ExceptionHandler> findHandlers(CommandException exception) {
-        return handlers.stream().filter(handler -> handler.getType() == exception.getClass()).collect(Collectors.toList());
+        return handlers.stream().filter(handler -> handler.getTarget() == exception.getClass()).collect(Collectors.toList());
     }
 
     /**
      * Registers an {@code ExceptionHandler} to the handlers list.
+     *
+     * @see ExceptionHandler
+     *
+     * @param handler {@code ExceptionHandler} being registered.
      */
     public final void registerHandler(ExceptionHandler handler) {
         if (!handlers.contains(handler))
@@ -108,6 +121,8 @@ public final class CommandHandler {
 
     /**
      * Sets the command executor
+     *
+     * @param executor New command executor
      */
     public final void setExecutor(CommandExecutor executor) {
         this.executor = executor;
@@ -122,6 +137,8 @@ public final class CommandHandler {
 
     /**
      * Sets the chat command prefix
+     *
+     * @param prefix New chat command prefix
      */
     public final void setPrefix(String prefix) {
         this.prefix = prefix;
