@@ -160,6 +160,8 @@ public final class ValueAccessorTransformer implements ITransformer {
     /**
      * Creates the field-setter getter method in the specified {@code ClassNode}
      *
+     * @see ValueAccessor
+     *
      * @param cn The ClassNode
      */
     private void createFieldSetter(ClassNode cn) {

@@ -20,8 +20,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * Used to benchmark the execution of code,
- * can be used for anything
+ * Used to benchmark the execution speed of code, can be used for anything
  *
  * @author Brady
  * @since 5/11/2017 6:11 PM
