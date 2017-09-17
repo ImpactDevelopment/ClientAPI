@@ -16,8 +16,8 @@
 
 package clientapi.util.io;
 
-import clientapi.util.logger.Level;
-import clientapi.util.logger.Logger;
+import clientapi.ClientAPI;
+import org.apache.logging.log4j.Level;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -60,7 +60,7 @@ public final class FileManager {
 
             bufferedReader.close();
         } catch (IOException ex) {
-            Logger.instance.log(Level.WARNING, "Unable to read from " + file);
+            ClientAPI.LOGGER.log(Level.WARN, "Unable to read from " + file);
         }
 
         return new FileContents(data);
@@ -86,7 +86,7 @@ public final class FileManager {
             }
             bw.close();
         } catch (IOException e) {
-            Logger.instance.log(Level.WARNING, "Unable to write to " + file);
+            ClientAPI.LOGGER.log(Level.WARN, "Unable to write to " + file);
         }
     }
 
@@ -99,14 +99,14 @@ public final class FileManager {
         try {
             Files.createDirectories(Paths.get(new File(file).getParent()));
         } catch (IOException e) {
-            Logger.instance.logf(Level.WARNING, "Unable to create parent directories %s", e);
+            ClientAPI.LOGGER.log(Level.WARN, "Unable to create parent directories", e);
             return;
         }
 
         try {
             Files.createFile(Paths.get(file));
         } catch (IOException e) {
-            Logger.instance.logf(Level.WARNING, "Unable to create file", e);
+            ClientAPI.LOGGER.log(Level.WARN, "Unable to create file", e);
         }
     }
 
