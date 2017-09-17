@@ -16,10 +16,10 @@
 
 package clientapi.load;
 
-import clientapi.util.logger.Level;
-import clientapi.util.logger.Logger;
+import clientapi.ClientAPI;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
+import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
@@ -51,7 +51,7 @@ public class ClientTweaker implements ITweaker {
 
     @Override
     public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        Logger.instance.log(Level.INFO, "Injecting into ClassLoader");
+        ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
 
         // Register custom transformer
         classLoader.registerTransformer(ClientTransformer.class.getName());
@@ -63,7 +63,7 @@ public class ClientTweaker implements ITweaker {
 
         // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
-        Logger.instance.log(Level.INFO, "Initialized Mixin bootstrap");
+        ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
 
         // Load the ClientAPI mixin config
         String capi = "mixins.capi.json";
@@ -71,13 +71,13 @@ public class ClientTweaker implements ITweaker {
             throw new ClientInitException("Unable to locate ClientAPI mixin configuration");
         }
         Mixins.addConfiguration(capi);
-        Logger.instance.log(Level.INFO, "Loaded ClientAPI mixin configuration");
+        ClientAPI.LOGGER.log(Level.INFO, "Loaded ClientAPI mixin configuration");
 
         // Optional mixin configuration, added by client developers
         String mixin = "mixins.client.json";
         if (this.getClass().getResourceAsStream("/" + mixin) != null) {
             Mixins.addConfiguration(mixin);
-            Logger.instance.log(Level.INFO, "Loaded Client mixin configuration");
+            ClientAPI.LOGGER.log(Level.INFO, "Loaded Client mixin configuration");
         }
 
         // Ensure that the mixins are only run on client side
