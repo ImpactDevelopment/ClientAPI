@@ -27,7 +27,6 @@ import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.network.play.client.CPacketTabComplete;
 import net.minecraft.network.play.server.SPacketTabComplete;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -83,7 +82,7 @@ public final class PluginFinder implements Helper {
 
         ClientAPI.EVENT_BUS.subscribe(this);
         this.callback = callback;
-        mc.player.connection.sendPacket(new CPacketTabComplete("/", BlockPos.ORIGIN, false));
+        mc.player.connection.sendPacket(new CPacketTabComplete("/", null, false));
     }
 
     @EventHandler
