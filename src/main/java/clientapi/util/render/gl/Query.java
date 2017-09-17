@@ -62,13 +62,13 @@ public final class Query extends GLObject {
      * @return The result of the query.
      */
     public final int getResult() {
-        return glGetQueryObjecti(target, GL_QUERY_RESULT);
+        return glGetQueryObjecti(id(), GL_QUERY_RESULT);
     }
 
     /**
      * @return Whether or not the result of the query is available yet
      */
     public final boolean isResultAvailable() {
-        return glGetQueryObjecti(target, GL_QUERY_RESULT_AVAILABLE) == GL_TRUE;
+        return glGetQueryObjecti(id(), GL_QUERY_RESULT_AVAILABLE) == GL_TRUE;
     }
 }
