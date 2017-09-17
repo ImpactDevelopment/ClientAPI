@@ -24,6 +24,7 @@ import clientapi.gui.tab.ITabGuiElement;
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
+@Deprecated
 public class TabGuiText implements ITabGuiElement {
 
     /**

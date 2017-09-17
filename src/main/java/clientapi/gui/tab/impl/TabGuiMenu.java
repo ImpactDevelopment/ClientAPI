@@ -33,6 +33,7 @@ import static org.lwjgl.input.Keyboard.*;
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
+@Deprecated
 public class TabGuiMenu implements ITabGuiMenu {
 
     /**
