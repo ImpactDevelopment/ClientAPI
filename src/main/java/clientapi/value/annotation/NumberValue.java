@@ -32,7 +32,25 @@ import java.lang.annotation.Target;
 @ValueDefinition
 public @interface NumberValue {
 
+    /**
+     * The minimum value that this value can go to.
+     *
+     * @return The min value
+     */
     double min();
 
+    /**
+     * The maximum value that this value can go to.
+     *
+     * @return The max value
+     */
     double max();
+
+    /**
+     * The interval at which this value will change.
+     * If the increment is set to 0,
+     *
+     * @return The value change interval
+     */
+    double interval() default 0;
 }
