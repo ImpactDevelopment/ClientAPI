@@ -25,6 +25,7 @@ import java.util.List;
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
+@Deprecated
 public interface ITabGuiMenu extends ITabGuiElement {
 
     /**
