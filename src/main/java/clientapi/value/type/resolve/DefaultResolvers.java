@@ -82,17 +82,17 @@ public final class DefaultResolvers {
         // This is an absolute mess, still finding some other solution
         NumberType type = null;
         if (field.getType() == Byte.class || field.getType() == Byte.TYPE) {
-            type = new NumberType<Byte>(label.name(), label.parent(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max()) { };
+            type = new NumberType<Byte>(label.name(), label.parent(), label.id(), label.description(), parent, field, (byte) num.min(), (byte) num.max(), (byte) num.interval()) { };
         } else if (field.getType() == Short.class || field.getType() == Short.TYPE) {
-            type = new NumberType<Short>(label.name(), label.parent(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max()) { };
+            type = new NumberType<Short>(label.name(), label.parent(), label.id(), label.description(), parent, field, (short) num.min(), (short) num.max(), (short) num.interval()) { };
         } else if (field.getType() == Integer.class || field.getType() == Integer.TYPE) {
-            type = new NumberType<Integer>(label.name(), label.parent(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max()) { };
+            type = new NumberType<Integer>(label.name(), label.parent(), label.id(), label.description(), parent, field, (int) num.min(), (int) num.max(), (int) num.interval()) { };
         } else if (field.getType() == Long.class || field.getType() == Long.TYPE) {
-            type = new NumberType<Long>(label.name(), label.parent(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max()) { };
+            type = new NumberType<Long>(label.name(), label.parent(), label.id(), label.description(), parent, field, (long) num.min(), (long) num.max(), (long) num.interval()) { };
         } else if (field.getType() == Float.class || field.getType() == Float.TYPE) {
-            type = new NumberType<Float>(label.name(), label.parent(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max()) { };
+            type = new NumberType<Float>(label.name(), label.parent(), label.id(), label.description(), parent, field, (float) num.min(), (float) num.max(), (float) num.interval()) { };
         } else if (field.getType() == Double.class || field.getType() == Double.TYPE) {
-            type = new NumberType<Double>(label.name(), label.parent(), label.id(), label.description(), parent, field, num.min(), num.max()) { };
+            type = new NumberType<Double>(label.name(), label.parent(), label.id(), label.description(), parent, field, num.min(), num.max(), num.interval()) { };
         }
 
         if (type == null)
