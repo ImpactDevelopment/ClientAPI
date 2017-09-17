@@ -21,7 +21,7 @@ import clientapi.command.exception.CommandException;
 import clientapi.command.executor.sender.CommandSender;
 
 /**
- * Directly executes commands that are passed to this executor
+ * Directly executes commands that are passed to this executor.
  *
  * @author Brady
  * @since 6/11/2017 9:27 AM
@@ -29,7 +29,7 @@ import clientapi.command.executor.sender.CommandSender;
 public final class DirectExecutor implements CommandExecutor {
 
     @Override
-    public void execute(Command command, CommandSender sender, String[] arguments) throws CommandException {
+    public final void execute(Command command, CommandSender sender, String[] arguments) throws CommandException {
         command.execute(sender, arguments);
     }
 }
