@@ -20,6 +20,8 @@ import clientapi.core.Core;
 import clientapi.util.interfaces.Helper;
 
 /**
+ * An extension to ClientAPI
+ *
  * @author Brady
  * @since 9/1/2017 1:42 PM
  */
