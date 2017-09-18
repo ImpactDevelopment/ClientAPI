@@ -109,7 +109,7 @@ public final class ValueAccessorTransformer implements ITransformer {
         // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
             MethodNode handle; {
-                // Create lambda bootstrap method
+                // Create lambda handle method
                 handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldGetter$" + current++, "()Ljava/lang/Object;", null, null);
 
                 // Get the field value
@@ -173,7 +173,7 @@ public final class ValueAccessorTransformer implements ITransformer {
         // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
             MethodNode handle; {
-                // Create lambda bootstrap method
+                // Create lambda handle method
                 handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldSetter$" + current++, "(Ljava/lang/Object;)V", null, null);
 
                 handle.visitVarInsn(ALOAD, 0);
