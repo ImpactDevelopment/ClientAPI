@@ -107,9 +107,33 @@ public interface ITransformer {
      *
      * @param tag The handle tag
      * @param owner The method container
-     * @param bootstrap The method
+     * @param method The method
      */
-    default Handle createMethodHandle(int tag, ClassNode owner, MethodNode bootstrap) {
-        return new Handle(tag, owner.name, bootstrap.name, bootstrap.desc);
+    default Handle createMethodHandle(int tag, ClassNode owner, MethodNode method) {
+        return createMethodHandle(tag, owner.name, method.name, method.desc);
+    }
+
+    /**
+     * Creates a handle for a method
+     *
+     * @param tag The handle tag
+     * @param owner The method container
+     * @param method The method name
+     * @param desc The method description
+     */
+    default Handle createMethodHandle(int tag, ClassNode owner, String method, String desc) {
+        return createMethodHandle(tag, owner.name, method, desc);
+    }
+
+    /**
+     * Creates a handle for a method
+     *
+     * @param tag The handle tag
+     * @param owner The method container
+     * @param method The method name
+     * @param desc The method description
+     */
+    default Handle createMethodHandle(int tag, String owner, String method, String desc) {
+        return new Handle(tag, owner, method, desc);
     }
 }
