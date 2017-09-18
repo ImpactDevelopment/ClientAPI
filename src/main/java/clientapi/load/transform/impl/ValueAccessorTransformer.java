@@ -18,10 +18,13 @@ package clientapi.load.transform.impl;
 
 import clientapi.load.transform.ITransformer;
 import clientapi.value.holder.ValueAccessor;
-
-import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AnnotationNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
