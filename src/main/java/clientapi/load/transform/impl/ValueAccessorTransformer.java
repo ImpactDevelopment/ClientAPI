@@ -124,7 +124,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                 // Return the value
                 handle.visitInsn(ARETURN);
 
-                // Add the bootstrap method to the class
+                // Add the handle method to the class
                 cn.methods.add(handle);
             }
 
@@ -189,7 +189,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                 handle.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);
                 handle.visitInsn(RETURN);
 
-                // Add the bootstrap method to the class
+                // Add the handle method to the class
                 cn.methods.add(handle);
             }
 
