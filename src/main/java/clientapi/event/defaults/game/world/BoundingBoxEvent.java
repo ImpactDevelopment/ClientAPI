@@ -18,8 +18,12 @@ package clientapi.event.defaults.game.world;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Called from Block#addCollisionBoxToList(BlockPos, AxisAlignedBB, List, AxisAlignedBB).
@@ -45,10 +49,22 @@ public final class BoundingBoxEvent extends Cancellable {
      */
     private AxisAlignedBB aabb;
 
-    public BoundingBoxEvent(Block block, BlockPos pos, AxisAlignedBB aabb) {
+    /**
+     * Colliding list being added onto
+     */
+    private final List<AxisAlignedBB> collidingBoxes;
+
+    /**
+     * Entity being checked, may be {@code null}
+     */
+    private final Entity entity;
+
+    public BoundingBoxEvent(Block block, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity) {
         this.block = block;
         this.pos = pos;
         this.aabb = aabb;
+        this.collidingBoxes = collidingBoxes;
+        this.entity = entity;
     }
 
     /**
@@ -81,5 +97,19 @@ public final class BoundingBoxEvent extends Cancellable {
      */
     public final AxisAlignedBB getBoundingBox() {
         return this.aabb;
+    }
+
+    /**
+     * @return The current collision box list
+     */
+    public final List<AxisAlignedBB> getCollidingBoxes() {
+        return this.collidingBoxes;
+    }
+
+    /**
+     * @return Entity being checked, may be {@code null}
+     */
+    public final Entity getEntity() {
+        return this.entity;
     }
 }
