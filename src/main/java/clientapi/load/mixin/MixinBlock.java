@@ -62,7 +62,7 @@ public abstract class MixinBlock {
         Block block = (Block) (Object) (this);
         AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(state, worldIn, pos);
 
-        BoundingBoxEvent event = new BoundingBoxEvent(block, pos, axisalignedbb);
+        BoundingBoxEvent event = new BoundingBoxEvent(block, pos, axisalignedbb, collidingBoxes);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
