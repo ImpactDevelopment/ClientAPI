@@ -87,10 +87,12 @@ dependencies {
     compile "net.jodah:typetools:${project.typetoolsVersion}"
     testCompile "junit:junit:${project.junitVersion}"
     compile("org.spongepowered:mixin:${project.mixinVersion}") {
+        // Mixin includes a lot of dependencies that are too up-to-date
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
         exclude module: 'commons-io'
+        exclude module: 'log4j-core'
     }
 }
 
