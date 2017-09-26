@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(SPacketKeepAlive.class)
 public interface ISPacketKeepAlive {
 
-    @Accessor int getId();
+    @Accessor long getId();
 
-    @Accessor void setId(int id);
+    @Accessor void setId(long id);
 }
