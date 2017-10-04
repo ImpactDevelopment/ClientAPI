@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/ImpactDevelopment/ClientAPI.svg?branch=master)](https://travis-ci.org/ImpactDevelopment/ClientAPI)
-[![Dependency Status](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21/badge.svg)](https://www.versioneye.com/user/projects/588a834fbe496c0037c74b21)
-[![License](https://img.shields.io/github/license/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%20License%202.0-blue.svg)](https://github.com/ImpactDevelopment/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/releases)
 
 # ClientAPI
