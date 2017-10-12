@@ -9,11 +9,6 @@ Like other modding APIs it is a tweaker and has the potential to be stacked with
 
 Unlike most other modding APIs it is designed to be used by a single "client" mod. It is this "client" that is installed, not the ClientAPI, so the "client" mod has full control over all modifications to the vanilla code, unless of course the installation is stacked on top of other modding APIs.
 
-## Credits
-| Name                | Contribution         |
-|---------------------|----------------------|
-| Nerxit              | Tab GUI System       |
-
 ## Development Kit
 To use the Client API, you must download the CDK from the Releases page. Instructions on how to set it up are included in the README.
 
