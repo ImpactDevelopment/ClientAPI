@@ -75,14 +75,14 @@ public final class RenderUtils {
     }
 
     /**
-     * Enables/Disables the {@code GL_VERTEX_ARRAY} cap
+     * Enables/Disables the specified client state cap.
      *
-     * @param enabled The new enabled state of {@code GL_VERTEX_ARRAY}
+     * @param enabled The new enabled state of the specified client state cap
      */
     public static void setupClientState(GLClientState state, boolean enabled) {
         csBuffer.clear();
         if (state.ordinal() > 0)
-            csBuffer.add(state.cap);
+            csBuffer.add(state.getCap());
 
         csBuffer.add(GL_VERTEX_ARRAY);
 
