@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package clientapi.util.render.gl;
+package clientapi.util.render.gl.shader;
 
+import clientapi.util.render.gl.Shader;
+import clientapi.util.render.gl.ShaderProgram;
 import clientapi.util.render.gl.glenum.GLShaderType;
 
 /**
