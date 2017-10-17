@@ -34,7 +34,8 @@ public abstract class GLObject {
      * whether or not the operation was a success or not.
      *
      * @return Whether or not the operation was a success.
-     *         May return 'false' if
+     *         May return 'false' if the object has already
+     *         been generated or the object was unable to generate.
      */
     public final boolean gen() {
         return !isGen() && (id = nativeGen()) != UNABLE_TO_GENERATE;

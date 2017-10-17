@@ -71,6 +71,32 @@ public final class Shader extends GLObject {
     }
 
     /**
+     * Attachs this shader to the given Shader Program
+     *
+     * @param program The shader program
+     */
+    final void attach(int program) {
+        if (!isGen()) {
+            throw new ShaderException("Cannot attach a shader to program when shader is generated!");
+        }
+
+        adapter.attachShader(program, id());
+    }
+
+    /**
+     * Detaches this shader from the given Shader Program
+     *
+     * @param program The shader program
+     */
+    final void detach(int program) {
+        if (!isGen()) {
+            throw new ShaderException("Cannot detach a shader from program when shader is generated!");
+        }
+
+        adapter.detachShader(program, id());
+    }
+
+    /**
      * @return The type of shader this object represents
      */
     public final GLShaderType getType() {
