@@ -41,11 +41,11 @@ public class BasicShaderProgram extends ShaderProgram {
     public BasicShaderProgram(String vSource, String fSource) {
         Shader vertex = new Shader(GLShaderType.VERTEX, vSource);
         vertex.gen();
-        this.attachShader(vertex);
+        this.addShader(vertex);
 
         Shader fragment = new Shader(GLShaderType.FRAGMENT, fSource);
         fragment.gen();
-        this.attachShader(fragment);
+        this.addShader(fragment);
 
         this.gen();
     }
