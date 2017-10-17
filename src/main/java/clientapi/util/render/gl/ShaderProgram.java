@@ -40,6 +40,12 @@ public class ShaderProgram extends GLObject {
     private static final ShaderAdapter adapter = ShaderAdapters.getSystemAdapter();
 
     /**
+     * Used to ensure that shader programs cannot be attached
+     * if another shader program is already attached.
+     */
+    private static boolean isShaderAttached;
+
+    /**
      * The uniform variables for this shader program
      */
     private final Map<String, Uniform> uniforms = new HashMap<>();
@@ -52,7 +58,11 @@ public class ShaderProgram extends GLObject {
     @Override
     protected final int nativeGen() {
         int id = adapter.createProgram();
-        shaders.forEach(shader -> adapter.attachShader(id, shader.id()));
+        if (id == 0) {
+            return 0;
+        }
+
+        shaders.forEach(shader -> shader.attach(id));
 
         try {
             adapter.linkProgram(id);
@@ -70,7 +80,7 @@ public class ShaderProgram extends GLObject {
     @Override
     public boolean delete() {
         shaders.forEach(shader -> {
-            adapter.detachShader(this.id(), shader.id());
+            shader.detach(this.id());
             shader.delete();
         });
         return super.delete();
@@ -83,18 +93,23 @@ public class ShaderProgram extends GLObject {
 
     /**
      * Attaches the shader program. Multiple shader
-     * programs may not be attached simultaneously.
+     * programs cannot be attached simultaneously.
      */
     public final void attach() {
-        adapter.useProgram(id());
-        update();
+        if (!isShaderAttached) {
+            isShaderAttached = true;
+            adapter.useProgram(id());
+            update();
+        }
     }
 
     /**
      * Detaches the shader program
      */
     public final void detach() {
-        adapter.useProgram(0);
+        if (isShaderAttached) {
+            adapter.useProgram(0);
+        }
     }
 
     /**
@@ -104,19 +119,21 @@ public class ShaderProgram extends GLObject {
     protected void update() {}
 
     /**
-     * Attaches a shader to this shader program. This may only be
-     * done before the shader has been compiled via the gen() method
-     * and there isn't already a shader with the same type.
+     * Adds a shader to this shader program. This may only be
+     * done before the shader has been compiled via the gen()
+     * method and there isn't already a shader with the same type.
      *
      * @param shader The shader
      * @return Whether or not the operation was a success
      */
-    public final boolean attachShader(Shader shader) {
-        if (isGen() || getShader(shader.getType()) != null)
-            return false;
+    public final void addShader(Shader shader) {
+        if (isGen())
+            throw new ShaderException("Cannot add shader to program after it has been generated");
+
+        if (getShader(shader.getType()) != null)
+            throw new ShaderException("Cannot add shader to program if shader with same type has already been added");
 
         shaders.add(shader);
-        return true;
     }
 
     /**
