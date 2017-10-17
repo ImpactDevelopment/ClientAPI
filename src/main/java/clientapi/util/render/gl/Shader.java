@@ -52,14 +52,14 @@ public final class Shader extends GLObject {
     protected int nativeGen() {
         int shaderID = adapter.createShader(type);
         if (shaderID == 0)
-            return 0;
+            return UNABLE_TO_GENERATE;
 
         try {
             adapter.shaderSource(shaderID, src);
             adapter.compileShader(shaderID);
             adapter.checkStatus(shaderID, GLShaderStatus.COMPILE);
         } catch (ShaderException e) {
-            return 0;
+            return UNABLE_TO_GENERATE;
         }
 
         return shaderID;
