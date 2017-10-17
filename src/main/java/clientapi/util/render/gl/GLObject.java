@@ -24,7 +24,14 @@ package clientapi.util.render.gl;
  */
 public abstract class GLObject {
 
+    /**
+     * ID indicating that generation was attempted, but it was unsuccessful.
+     */
     public static final int UNABLE_TO_GENERATE = 0;
+
+    /**
+     * ID indicating that the object has not yet been generated.
+     */
     public static final int NOT_GENERATED = -1;
 
     private int id = NOT_GENERATED;
@@ -42,7 +49,7 @@ public abstract class GLObject {
     }
 
     /**
-     * Called by GlObject#gen() to generate this object.
+     * Called by GLObject#gen() to generate this object.
      *
      * @return The ID of the (possibly) created object
      */
@@ -65,7 +72,7 @@ public abstract class GLObject {
     }
 
     /**
-     * Called by GlObject#delete() to delete this object from memory.
+     * Called by GLObject#delete() to delete this object from memory.
      */
     protected abstract void nativeDelete();
 
