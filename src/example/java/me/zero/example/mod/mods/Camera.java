@@ -66,7 +66,7 @@ public final class Camera extends Module implements IRender {
     @EventHandler
     private Listener<RenderHudEvent> render2DListener = new Listener<>(event -> {
         height = 10;
-        ScaledResolution sr = new ScaledResolution(mc);
+        ScaledResolution sr = event.getScaledResolution();
         float size = sr.getScaledWidth() / 5F;
         camera.draw(sr.getScaledWidth() - size, 0, sr.getScaledWidth(), size);
     }, EventPriority.HIGHEST);
