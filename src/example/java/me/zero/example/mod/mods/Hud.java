@@ -43,7 +43,7 @@ public final class Hud extends Module implements IRender {
 
     @EventHandler
     private Listener<RenderHudEvent> render2DListener = new Listener<>(event -> {
-        ScaledResolution sr = new ScaledResolution(mc);
+        ScaledResolution sr = event.getScaledResolution();
         FontRenderer font = mc.fontRenderer;
 
         int color = 0xFF98ABB8;
