@@ -16,7 +16,9 @@
 
 package clientapi.event.defaults.game.render;
 
+import clientapi.util.interfaces.Helper;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * Called after the in-game overlay is finished rendering.
@@ -26,15 +28,21 @@ import net.minecraft.client.gui.GuiIngame;
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
-public final class RenderHudEvent {
+public final class RenderHudEvent implements Helper {
 
     /**
      * The render partial ticks
      */
     private final float partialTicks;
 
+    /**
+     * The render scaled resolution
+     */
+    private final ScaledResolution scaledResolution;
+
     public RenderHudEvent(float partialTicks) {
         this.partialTicks = partialTicks;
+        this.scaledResolution = new ScaledResolution(mc);
     }
 
     /**
@@ -42,5 +50,12 @@ public final class RenderHudEvent {
      */
     public final float getPartialTicks() {
         return this.partialTicks;
+    }
+
+    /**
+     * @return The render scaled resolution
+     */
+    public final ScaledResolution getScaledResolution() {
+        return this.scaledResolution;
     }
 }
