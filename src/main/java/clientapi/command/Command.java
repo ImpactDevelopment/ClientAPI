@@ -113,7 +113,7 @@ public class Command implements ICommand {
                 }
 
                 // Parse the string
-                Object parsed = parser.parse(arguments[i]);
+                Object parsed = parser.parse(context, type, arguments[i]);
                 if (parsed == null) {
                     throw new InvalidArgumentException(this, arguments, i, type);
                 }

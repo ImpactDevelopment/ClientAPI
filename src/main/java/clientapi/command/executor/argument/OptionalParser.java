@@ -18,30 +18,26 @@ package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
 
+import java.util.Optional;
+
 /**
  * @author Brady
- * @since 10/18/2017 11:10 AM
+ * @since 10/18/2017 9:17 PM
  */
-public final class BooleanParser implements ArgumentParser<Boolean> {
+public final class OptionalParser implements ArgumentParser<Optional<?>> {
 
     @Override
-    public final Boolean parse(ExecutionContext context, Class<?> type, String raw) {
-        switch (raw.toLowerCase()) {
-            case "true":
-            case "yes":
-            case "1":
-                return true;
-            case "false":
-            case "no":
-            case "0":
-                return false;
-            default:
-                return null;
-        }
+    public Optional<?> parse(ExecutionContext context, Class<?> type, String raw) {
+        ArgumentParser<?> parser = context.handler().getParser(type);
+        if (parser == null)
+            // noinspection OptionalAssignedToNull
+            return null;
+
+        return Optional.of(parser.parse(context, type, raw));
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return Boolean.class.isAssignableFrom(type) || Boolean.TYPE.isAssignableFrom(type);
+    public boolean isTarget(Class<?> type) {
+        return false;
     }
 }
