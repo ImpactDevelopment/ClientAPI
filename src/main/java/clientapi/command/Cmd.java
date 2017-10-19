@@ -46,13 +46,4 @@ public @interface Cmd {
      * @return Command description
      */
     String description();
-
-    /**
-     * Provides the command class with the syntax
-     *
-     * @see ICommand#syntax()
-     *
-     * @return Command syntax
-     */
-    String[] syntax() default {};
 }

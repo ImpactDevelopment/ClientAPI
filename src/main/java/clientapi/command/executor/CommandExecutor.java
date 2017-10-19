@@ -18,13 +18,10 @@ package clientapi.command.executor;
 
 import clientapi.command.Command;
 import clientapi.command.exception.CommandException;
-import clientapi.command.executor.sender.CommandSender;
 
 /**
  * Takes in a command, and executes it from the specified
  * sender and arguments.
- *
- * @see DirectExecutor
  *
  * @author Brady
  * @since 6/11/2017 9:26 AM
@@ -34,7 +31,7 @@ public interface CommandExecutor {
     /**
      * Default executor that directly executes all commands passed to it.
      */
-    CommandExecutor DIRECT = (command, sender, arguments) -> command.execute(sender, arguments);
+    CommandExecutor DIRECT = Command::execute;
 
-    void execute(Command command, CommandSender sender, String[] arguments) throws CommandException;
+    void execute(Command command, ExecutionContext sender, String[] arguments) throws CommandException;
 }
