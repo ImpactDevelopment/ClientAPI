@@ -18,11 +18,12 @@ package clientapi.command.handler.listener;
 
 import clientapi.ClientAPI;
 import clientapi.command.Command;
-import clientapi.event.defaults.game.misc.ChatEvent;
-import clientapi.util.interfaces.Helper;
-import clientapi.command.executor.sender.CommandSender;
+import clientapi.command.executor.ExecutionContext;
 import clientapi.command.handler.CommandHandler;
+import clientapi.command.sender.CommandSender;
+import clientapi.event.defaults.game.misc.ChatEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
+import clientapi.util.interfaces.Helper;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.util.text.TextComponentString;
@@ -93,7 +94,7 @@ public final class ChatCommandListener extends CommandListener implements Helper
                     for (int i = 1; i < matches.size(); i++)
                         args[i - 1] = matches.get(i).replace("\"", "").replace("\'", "");
 
-                    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(command, CommandSender.from(mc.player), args));
+                    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(command, ExecutionContext.of(CommandSender.from(mc.player), this.handler), args));
                     return;
                 }
             }

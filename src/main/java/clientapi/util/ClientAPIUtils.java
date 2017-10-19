@@ -56,7 +56,7 @@ public final class ClientAPIUtils {
     }
 
     /**
-     * Checks if a generic list contains any null members.
+     * Checks if a generic array contains any null members.
      *
      * @param members The Members to be Checked
      */
@@ -64,6 +64,22 @@ public final class ClientAPIUtils {
     public static <T> boolean containsNull(T... members) {
         for (T member : members)
             if (member == null)
+                return true;
+        return false;
+    }
+
+    /**
+     * Checks if a string array contains the specified
+     * string, non case-sensitive
+     *
+     * @param array Array of strings being checked
+     * @param target String being searched for
+     */
+    public static boolean containsIgnoreCase(String[] array, String target) {
+        Objects.requireNonNull(array);
+        Objects.requireNonNull(target);
+        for (String string : array)
+            if (string != null && string.equalsIgnoreCase(target))
                 return true;
         return false;
     }

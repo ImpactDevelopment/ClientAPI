@@ -21,11 +21,12 @@ import clientapi.command.Command;
 import clientapi.command.exception.CommandException;
 import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
-import clientapi.manage.Manager;
+import clientapi.command.executor.CommandExecutor;
+import clientapi.command.executor.argument.ArgumentParser;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
+import clientapi.manage.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import clientapi.command.executor.CommandExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,11 @@ public final class CommandHandler {
     private final List<ExceptionHandler> handlers = new ArrayList<>();
 
     /**
+     * Argument parsers to resolve command argument types
+     */
+    private final List<ArgumentParser<?>> parsers = new ArrayList<>();
+
+    /**
      * Executor that is called to execute commands. All commands
      * are passed through the executor. Default is set to
      * {@code CommandExecutor#DIRECT}
@@ -63,7 +69,7 @@ public final class CommandHandler {
     private final Manager<Command> commandManager;
 
     /**
-     * Prefix used to indicate command input. By default, it is set to "x"
+     * Prefix used to indicate command input. By default, it is set to "."
      */
     private String prefix = ".";
 
@@ -75,7 +81,7 @@ public final class CommandHandler {
     private final Listener<CommandExecutionEvent> commandExecutionListener = new Listener<>(event -> {
         try {
             if (event.getCommand() != null) {
-                executor.execute(event.getCommand(), event.getSender(), event.getArguments());
+                executor.execute(event.getCommand(), event.getContext(), event.getArguments());
                 return;
             }
             throw new UnknownCommandException();
@@ -97,7 +103,7 @@ public final class CommandHandler {
      * @return The list of handlers, empty if none
      */
     private List<ExceptionHandler> findHandlers(CommandException exception) {
-        return handlers.stream().filter(handler -> handler.getTarget() == exception.getClass()).collect(Collectors.toList());
+        return handlers.stream().filter(handler -> handler.isTarget(exception.getClass())).collect(Collectors.toList());
     }
 
     /**
@@ -110,6 +116,29 @@ public final class CommandHandler {
     public final void registerHandler(ExceptionHandler handler) {
         if (!handlers.contains(handler))
             handlers.add(handler);
+    }
+
+    /**
+     * Finds a parser that targets the specified {@code Class} type.
+     *
+     * @param type The type
+     * @return A parser targeting the type, {@code null} if none
+     */
+    public final ArgumentParser getParser(Class<?> type) {
+        return parsers.stream().filter(parser -> parser.isTarget(type)).findFirst().orElse(null);
+    }
+
+    /**
+     * Registers an {@code ArgumentParser} to the parsers list.
+     *
+     * @see ArgumentParser
+     * @see CommandHandler#getParser(Class)
+     *
+     * @param parser {@code ArgumentParser} being registered
+     */
+    public final void registerParser(ArgumentParser<?> parser) {
+        if (!parsers.contains(parser))
+            parsers.add(parser);
     }
 
     /**

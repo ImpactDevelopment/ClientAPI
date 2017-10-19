@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package clientapi.command.executor.sender;
+package clientapi.command.sender;
 
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
@@ -28,7 +29,11 @@ public interface CommandSender {
 
     String getName();
 
-    static CommandSender from(EntityPlayer player) {
-        return player::getName;
+    static PlayerSender from(EntityPlayer player) {
+        return new PlayerSender.Impl(player);
+    }
+
+    static RemotePlayerSender from(NetworkPlayerInfo player) {
+        return new RemotePlayerSender.Impl(player);
     }
 }
