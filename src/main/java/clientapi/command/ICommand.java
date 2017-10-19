@@ -17,11 +17,11 @@
 package clientapi.command;
 
 import clientapi.command.exception.CommandException;
-import clientapi.command.executor.sender.CommandSender;
+import clientapi.command.executor.ExecutionContext;
 import clientapi.util.interfaces.Helper;
 
 /**
- * Base for Command
+ * Base for {@code Command}
  *
  * @see Command
  *
@@ -34,10 +34,10 @@ interface ICommand extends Helper {
      * Executes this command from the specified sender with
      * the specified arguments, represented as a {@code String} array
      *
-     * @param sender The Sender that executed this command
+     * @param context The context behind command execution
      * @param arguments The arguments that
      */
-    void execute(CommandSender sender, String[] arguments) throws CommandException;
+    void execute(ExecutionContext context, String[] arguments) throws CommandException;
 
     /**
      * Returns the array of possible command "headers"
@@ -57,11 +57,11 @@ interface ICommand extends Helper {
     String description();
 
     /**
-     * Returns the syntax of the command. The syntax
-     * gives instructions on how the command may be executed.
-     * Commands without arguments can provide an empty array.
+     * Returns the parent command. Parent commands are the
+     * holders of sub-commands. Holders will have a {@code null}
+     * parent.
      *
-     * @return The syntax of the command.
+     * @return The parent command
      */
-    String[] syntax();
+    ICommand parent();
 }

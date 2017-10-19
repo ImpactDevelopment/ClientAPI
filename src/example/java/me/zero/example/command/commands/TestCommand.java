@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2017 ZeroMemes
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package me.zero.example.command.commands;
 
 import clientapi.command.Cmd;
 import clientapi.command.Command;
-import clientapi.command.exception.CommandException;
-import clientapi.command.executor.sender.CommandSender;
+import clientapi.command.Sub;
+import clientapi.command.executor.ExecutionContext;
 import clientapi.util.builder.impl.ChatBuilder;
 import net.minecraft.util.text.TextFormatting;
 
@@ -32,12 +32,20 @@ import java.util.Arrays;
 @Cmd(headers = { "test", "example"}, description = "Test Command")
 public final class TestCommand extends Command {
 
-    @Override
-    public void execute(CommandSender sender, String[] arguments) throws CommandException {
+    /**
+     * Sub command with no defining header, that takes
+     * in any arguments that are passed to the command,
+     * indicated by the vararg.
+     *
+     * @param context Context behind command execution
+     * @param arguments Arguments
+     */
+    @Sub
+    private void handle(ExecutionContext context, String... arguments) {
         // Print a chat message indicating the success of the
         mc.ingameGUI.getChatGUI().printChatMessage(
                 new ChatBuilder()
-                        .append(String.format("%s executed the ", sender.getName()), TextFormatting.GRAY)
+                        .append(String.format("%s executed the ", context.sender().getName()), TextFormatting.GRAY)
                         .append("\"Test\"", TextFormatting.WHITE)
                         .append(" command with arguments ", TextFormatting.GRAY)
                         .append(Arrays.toString(arguments), TextFormatting.WHITE)

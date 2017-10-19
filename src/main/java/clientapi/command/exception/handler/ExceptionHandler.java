@@ -33,9 +33,9 @@ import clientapi.command.exception.CommandException;
 public interface ExceptionHandler {
 
     /**
-     * Handles a thrown {@code CommandException} of the target type.
+     * Handles a thrown {@code CommandException} of a valid target type.
      *
-     * @see ExceptionHandler#getTarget
+     * @see ExceptionHandler#isTarget
      *
      * @param exception Exception that was thrown
      */
@@ -47,5 +47,5 @@ public interface ExceptionHandler {
      *
      * @return The command exception type
      */
-    Class<? extends CommandException> getTarget();
+    boolean isTarget(Class<? extends CommandException> type);
 }
