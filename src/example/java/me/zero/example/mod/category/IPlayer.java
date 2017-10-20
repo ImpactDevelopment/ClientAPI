@@ -19,7 +19,8 @@ package me.zero.example.mod.category;
 import clientapi.module.Category;
 
 /**
- * Created by Brady on 2/6/2017.
+ * @author Brady
+ * @since 2/6/2017 12:00 PM
  */
 @Category(name = "Player")
 public interface IPlayer {}

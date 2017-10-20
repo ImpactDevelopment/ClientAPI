@@ -23,7 +23,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Created by Brady on 4/30/2017.
+ * @author Brady
+ * @since 4/30/2017 12:00 PM
  */
 @Mixin(Minecraft.class)
 public class ExampleMixin {
