@@ -9,7 +9,7 @@ import clientapi.command.executor.ExecutionContext;
 public final class CharParser implements ArgumentParser<Character> {
 
     @Override
-    public final Character parse(ExecutionContext context, Class type, String raw) {
+    public final Character parse(ExecutionContext context, Class<?> type, String raw) {
         if (raw.length() == 1) {
             return raw.charAt(0);
         }
@@ -17,7 +17,7 @@ public final class CharParser implements ArgumentParser<Character> {
     }
 
     @Override
-    public final boolean isTarget(Class type) {
+    public final boolean isTarget(Class<?> type) {
         return Character.class.isAssignableFrom(type) || Character.TYPE.isAssignableFrom(type);
     }
 }
