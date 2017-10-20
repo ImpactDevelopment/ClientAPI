@@ -39,7 +39,7 @@ public final class OptionalParser implements ArgumentParser<Optional<?>> {
     }
 
     @Override
-    public final  boolean isTarget(Class<?> type) {
-        return false;
+    public final boolean isTarget(Class<?> type) {
+        return Optional.class.isAssignableFrom(type);
     }
 }
