@@ -30,7 +30,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 
 /**
- * Created by Brady on 2/11/2017.
+ * @author Brady
+ * @since 2/11/2017 12:00 PM
  */
 @Mod(name = "Camera", description = "", bind = Keyboard.KEY_B)
 public final class Camera extends Module implements IRender {

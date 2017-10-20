@@ -30,7 +30,8 @@ import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
 
 /**
- * Created by Brady on 1/19/2017.
+ * @author Brady
+ * @since 1/19/2017 12:00 PM
  */
 public final class ExampleClient extends Client {
 
