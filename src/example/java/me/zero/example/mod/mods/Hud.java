@@ -29,7 +29,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import java.util.Comparator;
 
 /**
- * Created by Brady on 2/8/2017.
+ * @author Brady
+ * @since 2/8/2017 12:00 PM
  */
 @Mod(name = "HUD", description = "Displays an In-Game HUD")
 public final class Hud extends Module implements IRender {

@@ -23,7 +23,8 @@ import me.zero.example.mod.mods.*;
 import org.apache.logging.log4j.Level;
 
 /**
- * Created by Brady on 1/25/2017.
+ * @author Brady
+ * @since 1/25/2017 12:00 PM
  */
 public final class ExampleModManager extends Manager<Module> {
 

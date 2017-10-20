@@ -36,7 +36,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Brady on 2/12/2017.
+ * @author Brady
+ * @since 2/12/2017 12:00 PM
  */
 @Mod(name = "Aura", description = "XD", bind = Keyboard.KEY_K)
 public final class Aura extends Module implements ICombat {

@@ -27,7 +27,8 @@ import me.zero.example.mod.category.IMovement;
 import org.lwjgl.input.Keyboard;
 
 /**
- * Created by Brady on 2/11/2017.
+ * @author Brady
+ * @since 2/11/2017 12:00 PM
  */
 @Mod(name = "Speed", description = "A basic speed module", bind = Keyboard.KEY_Z)
 public final class Speed extends Module implements IMovement {

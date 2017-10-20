@@ -25,7 +25,8 @@ import clientapi.manage.Manager;
 import me.zero.example.command.commands.TestCommand;
 
 /**
- * Created by Brady on 2/16/2017.
+ * @author Brady
+ * @since 2/16/2017 12:00 PM
  */
 public final class ExampleCommandManager extends Manager<Command> {
 
