@@ -77,6 +77,7 @@ public class Command implements ICommand {
                 if (parameters == 0 || !method.getParameterTypes()[0].equals(ExecutionContext.class) || !method.isAnnotationPresent(Sub.class))
                     continue;
 
+                // Ensure that there is only one optional at most, and that it is the last parameter
                 int optionals = 0;
                 for (int i = 0; i < parameters; i++) {
                     if (method.getParameterTypes()[i].isAssignableFrom(Optional.class)) {
@@ -89,6 +90,7 @@ public class Command implements ICommand {
                     }
                 }
 
+                // Create the child command
                 Sub sub = method.getAnnotation(Sub.class);
                 children.add(new Command(sub.headers(), sub.description(), this, method));
             }
@@ -107,16 +109,24 @@ public class Command implements ICommand {
 
             sub.execute(context, arguments);
         } else {
-            // Subtract 1 because the first parameter is the context
             int params = handle.getParameterCount();
+
+            // Subtract 1 because the first parameter is the context
             int expectedArgs = params - 1;
+
+            // Check if the handle has an optional argument
             boolean hasOptional = params > 1 && Optional.class.isAssignableFrom(handle.getParameterTypes()[params - 1]);
-            if (hasOptional ? arguments.length > expectedArgs - 1 : arguments.length != expectedArgs) {
+
+            // Only accept the argument count if there are the same acmount of specified arguemnts
+            // as the expected amount, or, if there is an optional argument, one less than the specified
+            // amount.
+            if (!(arguments.length == expectedArgs || (hasOptional && arguments.length == expectedArgs - 1))) {
                 throw new ArgumentCountException(this, arguments.length, expectedArgs);
             }
 
-            List<Object> parsedArguments = new ArrayList<>();
-            parsedArguments.add(context);
+            // List to hold all arguments to be passed to the handle method
+            List<Object> callArguments = new ArrayList<>();
+            callArguments.add(context);
 
             for (int i = 0; i < expectedArgs; i++) {
                 boolean isMissingOptional = hasOptional && arguments.length != expectedArgs && i == expectedArgs - 1;
@@ -138,7 +148,7 @@ public class Command implements ICommand {
 
                 // Ensure that the return type is valid
                 if (parser.isTarget(parsed.getClass())) {
-                    parsedArguments.add(parsed);
+                    callArguments.add(parsed);
                 } else {
                     throw new ParserException(this, parser, isMissingOptional ? "Optional<?>" : arguments[i], type, parsed.getClass());
                 }
@@ -146,7 +156,7 @@ public class Command implements ICommand {
 
             try {
                 // Invoke the sub-command handle method
-                handle.invoke(this, parsedArguments.toArray(new Object[0]));
+                handle.invoke(this, callArguments.toArray(new Object[0]));
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
