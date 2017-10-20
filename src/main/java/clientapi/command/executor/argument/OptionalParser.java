@@ -17,6 +17,7 @@
 package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
+import net.jodah.typetools.TypeResolver;
 
 import java.util.Optional;
 
@@ -27,7 +28,8 @@ import java.util.Optional;
 public final class OptionalParser implements ArgumentParser<Optional<?>> {
 
     @Override
-    public Optional<?> parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Optional<?> parse(ExecutionContext context, Class<?> type, String raw) {
+        type = TypeResolver.resolveRawArgument(Optional.class, type);
         ArgumentParser<?> parser = context.handler().getParser(type);
         if (parser == null)
             // noinspection OptionalAssignedToNull
@@ -37,7 +39,7 @@ public final class OptionalParser implements ArgumentParser<Optional<?>> {
     }
 
     @Override
-    public boolean isTarget(Class<?> type) {
+    public final  boolean isTarget(Class<?> type) {
         return false;
     }
 }
