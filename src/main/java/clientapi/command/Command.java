@@ -25,6 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of {@code ICommand}
@@ -72,8 +73,21 @@ public class Command implements ICommand {
 
         if (this.parent == null) {
             for (Method method : this.getClass().getDeclaredMethods()) {
-                if (method.getParameterCount() == 0 || !method.getParameterTypes()[0].equals(ExecutionContext.class) || !method.isAnnotationPresent(Sub.class))
+                int parameters = method.getParameterCount();
+                if (parameters == 0 || !method.getParameterTypes()[0].equals(ExecutionContext.class) || !method.isAnnotationPresent(Sub.class))
                     continue;
+
+                int optionals = 0;
+                for (int i = 0; i < parameters; i++) {
+                    if (method.getParameterTypes()[i].isAssignableFrom(Optional.class)) {
+                        if (i != parameters - 1) {
+                            throw new RuntimeException(new CommandInitException(this, "Optionals must be defined as the last parameter"));
+                        }
+                        if (++optionals > 1) {
+                            throw new RuntimeException(new CommandInitException(this, "More than one optional parameter is not supported"));
+                        }
+                    }
+                }
 
                 Sub sub = method.getAnnotation(Sub.class);
                 children.add(new Command(sub.headers(), sub.description(), this, method));
@@ -94,8 +108,10 @@ public class Command implements ICommand {
             sub.execute(context, arguments);
         } else {
             // Subtract 1 because the first parameter is the context
-            int expectedArgs = handle.getParameterCount() - 1;
-            if (arguments.length != expectedArgs) {
+            int params = handle.getParameterCount();
+            int expectedArgs = params - 1;
+            boolean hasOptional = params > 1 && Optional.class.isAssignableFrom(handle.getParameterTypes()[params - 1]);
+            if (hasOptional ? arguments.length > expectedArgs - 1 : arguments.length != expectedArgs) {
                 throw new ArgumentCountException(this, arguments.length, expectedArgs);
             }
 
@@ -122,7 +138,7 @@ public class Command implements ICommand {
                 if (parser.isTarget(parsed.getClass())) {
                     parsedArguments.add(parsed);
                 } else {
-                    throw new ParserException(this, parser, arguments[i], type, parsed.getClass());
+                    throw new ParserException(this, parser, hasOptional ? "" : arguments[i], type, parsed.getClass());
                 }
             }
 
