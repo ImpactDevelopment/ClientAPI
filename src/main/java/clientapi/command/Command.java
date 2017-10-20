@@ -119,6 +119,8 @@ public class Command implements ICommand {
             parsedArguments.add(context);
 
             for (int i = 0; i < expectedArgs; i++) {
+                boolean isMissingOptional = hasOptional && arguments.length != expectedArgs && i == expectedArgs - 1;
+
                 // Add 1 because the first parameter is the context
                 Class<?> type = handle.getParameterTypes()[i + 1];
 
@@ -129,7 +131,7 @@ public class Command implements ICommand {
                 }
 
                 // Parse the string
-                Object parsed = parser.parse(context, type, arguments[i]);
+                Object parsed = parser.parse(context, type, isMissingOptional ? "" : arguments[i]);
                 if (parsed == null) {
                     throw new InvalidArgumentException(this, arguments, i, type);
                 }
@@ -138,7 +140,7 @@ public class Command implements ICommand {
                 if (parser.isTarget(parsed.getClass())) {
                     parsedArguments.add(parsed);
                 } else {
-                    throw new ParserException(this, parser, hasOptional ? "" : arguments[i], type, parsed.getClass());
+                    throw new ParserException(this, parser, isMissingOptional ? "Optional<?>" : arguments[i], type, parsed.getClass());
                 }
             }
 
