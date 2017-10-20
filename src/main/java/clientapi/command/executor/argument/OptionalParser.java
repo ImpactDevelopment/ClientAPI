@@ -29,6 +29,10 @@ public final class OptionalParser implements ArgumentParser<Optional<?>> {
 
     @Override
     public final Optional<?> parse(ExecutionContext context, Class<?> type, String raw) {
+        if (raw.isEmpty()) {
+            return Optional.empty();
+        }
+
         type = TypeResolver.resolveRawArgument(Optional.class, type);
         ArgumentParser<?> parser = context.handler().getParser(type);
         if (parser == null)
