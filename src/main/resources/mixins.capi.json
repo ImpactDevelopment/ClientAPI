@@ -18,6 +18,7 @@
     "MixinGuiIngameMenu",
     "MixinItemRenderer",
     "MixinLayerArmorBase",
+    "MixinMain",
     "MixinMinecraft",
     "MixinNetHandlerPlayClient",
     "MixinNetHandlerLoginClient",
