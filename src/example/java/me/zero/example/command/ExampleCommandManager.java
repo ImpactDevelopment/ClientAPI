@@ -18,6 +18,7 @@ package me.zero.example.command;
 
 import clientapi.ClientAPI;
 import clientapi.command.Command;
+import clientapi.command.executor.argument.*;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.handler.listener.ChatCommandListener;
 import clientapi.manage.Manager;
@@ -39,6 +40,12 @@ public final class ExampleCommandManager extends Manager<Command> {
         this.addData(
                 new TestCommand()
         );
+
+        handler.registerParser(new BooleanParser());
+        handler.registerParser(new CharParser());
+        handler.registerParser(new NumberParser());
+        handler.registerParser(new OptionalParser());
+        handler.registerParser(new StringParser());
 
         // Setup the handler and a chat command listener
         ClientAPI.EVENT_BUS.subscribe(
