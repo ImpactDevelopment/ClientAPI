@@ -36,7 +36,7 @@ public final class RenderHudEvent implements Helper {
     private final float partialTicks;
 
     /**
-     * The render scaled resolution
+     * Instance of the current {@code ScaledResolution}
      */
     private final ScaledResolution scaledResolution;
 
@@ -53,7 +53,7 @@ public final class RenderHudEvent implements Helper {
     }
 
     /**
-     * @return The render scaled resolution
+     * @return Instance of the current {@code ScaledResolution}
      */
     public final ScaledResolution getScaledResolution() {
         return this.scaledResolution;
