@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.exception;
+package clientapi.value.exception;
 
 /**
  * Called during value registry when an error is run into.

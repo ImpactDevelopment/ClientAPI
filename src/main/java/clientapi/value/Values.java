@@ -16,7 +16,7 @@
 
 package clientapi.value;
 
-import clientapi.exception.ValueException;
+import clientapi.value.exception.ValueException;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.annotation.Label;
 import clientapi.value.annotation.*;
