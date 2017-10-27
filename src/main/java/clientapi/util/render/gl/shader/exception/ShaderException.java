@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.exception;
+package clientapi.util.render.gl.shader.exception;
 
 /**
  * @author Brady
