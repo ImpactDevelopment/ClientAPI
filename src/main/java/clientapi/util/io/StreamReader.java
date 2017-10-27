@@ -21,9 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 /**
- * Reads from an InputStream
+ * Reads the lines returned from an {@code InputStream}.
  *
  * @author Brady
  * @since 2/15/2017 12:00 PM
@@ -40,19 +41,31 @@ public final class StreamReader {
     }
 
     /**
-     * Reads the stream and returns the output
+     * Returns the lines found from the {@code InputStream}. An empty
+     * stream will be returned in the case of an {@code IOException} being thrown.
+     *
+     * @return Stream containing all lines from the {@code InputStream}.
+     */
+    public final Stream<String> lines() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+            Stream<String> lines = br.lines();
+            br.close();
+            return lines;
+        } catch (IOException e) {
+            return Stream.empty();
+        }
+    }
+
+    /**
+     * Returns all of the lines from the {@code InputStream}
+     * as a single string. New lines are broken up by "\n"
      *
      * @return The stream's output
      */
-    public final String read() {
+    public final String all() {
         StringJoiner joiner = new StringJoiner("\n");
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-            br.lines().forEach(joiner::add);
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        lines().forEach(joiner::add);
         return joiner.toString();
     }
 }
