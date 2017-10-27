@@ -51,7 +51,7 @@ public final class Vec3 {
      * @param x The new X value
      * @return This Vec3
      */
-    public final Vec3 x(double x) {
+    public final Vec3 setX(double x) {
         this.x = x;
         return this;
     }
@@ -62,7 +62,7 @@ public final class Vec3 {
      * @param y The new Y value
      * @return This Vec3
      */
-    public final Vec3 y(double y) {
+    public final Vec3 setY(double y) {
         this.y = y;
         return this;
     }
@@ -73,7 +73,7 @@ public final class Vec3 {
      * @param z The new Z value
      * @return This Vec3
      */
-    public final Vec3 z(double z) {
+    public final Vec3 setZ(double z) {
         this.z = z;
         return this;
     }

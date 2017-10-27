@@ -54,7 +54,7 @@ public final class Vec2 {
      * @param x The new X value
      * @return This Vec2
      */
-    public final Vec2 x(float x) {
+    public final Vec2 setX(float x) {
         this.x = x;
         return this;
     }
@@ -65,7 +65,7 @@ public final class Vec2 {
      * @param y The new Y value
      * @return This Vec2
      */
-    public final Vec2 y(float y) {
+    public final Vec2 setY(float y) {
         this.y = y;
         return this;
     }
