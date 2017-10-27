@@ -38,6 +38,11 @@ public class ModuleMode<T extends Module> implements IModule {
     private final String name;
 
     /**
+     * The Keybind of this Module
+     */
+    private Keybind bind;
+
+    /**
      * The state of the mode
      */
     private boolean state;
@@ -45,13 +50,27 @@ public class ModuleMode<T extends Module> implements IModule {
     public ModuleMode(T parent, String name) {
         this.parent = parent;
         this.name = name;
+
+        this.bind = new Keybind(Keybind.Type.TOGGLE, 0, type -> {
+            if (type == Keybind.Action.CLICK) {
+                this.toggle();
+            }
+        });
     }
 
     @Override
-    public void toggle() {}
+    public void toggle() {
+        this.setState(!this.getState());
+    }
 
     @Override
     public void setState(boolean state) {
+        if (state && !parent.getState()) {
+            parent.setMode(this);
+            parent.setState(true);
+            return;
+        }
+
         this.state = state;
         if (state) {
             if (parent.getState()) {
@@ -83,11 +102,9 @@ public class ModuleMode<T extends Module> implements IModule {
         return state;
     }
 
-    /* Methods below are irrelevant to Modes */
-
     @Override
     public final Keybind getBind() {
-        return null;
+        return this.bind;
     }
 
     @Override
