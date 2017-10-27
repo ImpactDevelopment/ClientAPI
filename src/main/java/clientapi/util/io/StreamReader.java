@@ -48,10 +48,7 @@ public final class StreamReader {
         StringJoiner joiner = new StringJoiner("\n");
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-            String line;
-            while ((line = br.readLine()) != null)
-                joiner.add(line);
-
+            br.lines().forEach(joiner::add);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
