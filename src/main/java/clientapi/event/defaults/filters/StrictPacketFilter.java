@@ -43,7 +43,7 @@ public final class StrictPacketFilter<T extends PacketEvent> implements Predicat
     @Override
     public boolean test(T packetEvent) {
         for (Class<? extends Packet<?>> packet : packets)
-            if (packet == packetEvent.getPacket().getClass())
+            if (packet.equals(packetEvent.getPacket().getClass()))
                 return true;
 
         return false;
