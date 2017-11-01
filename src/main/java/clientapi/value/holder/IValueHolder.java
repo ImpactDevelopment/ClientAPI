@@ -42,7 +42,7 @@ public interface IValueHolder {
      * Gets the value that this holder may
      * or may not hold, from an id.
      *
-     * @param id The id of the target value
+     * @param id The ID of the target value
      * @return The value, if it is found, otherwise null
      */
     IValue getValue(String id);
