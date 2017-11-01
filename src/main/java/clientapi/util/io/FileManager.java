@@ -53,11 +53,7 @@ public final class FileManager {
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            String line;
-            while ((line = bufferedReader.readLine()) != null)
-                data.add(line);
-
+            bufferedReader.lines().forEach(data::add);
             bufferedReader.close();
         } catch (IOException ex) {
             ClientAPI.LOGGER.log(Level.WARN, "Unable to read from " + file);
