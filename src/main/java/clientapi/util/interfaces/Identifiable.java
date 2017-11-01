@@ -22,5 +22,19 @@ package clientapi.util.interfaces;
  */
 public interface Identifiable {
 
+    /**
+     * @return The ID of this {@code Identifiable}
+     */
     String getId();
+
+    /**
+     * Checks if the ID of this {@code Identifiable} and
+     * the ID of another {@code Identifiable} match each other.
+     *
+     * @param id The other {@code Identifiable}
+     * @return Whether or not they match
+     */
+    default boolean matches(Identifiable id) {
+        return this.getId().equals(id.getId());
+    }
 }
