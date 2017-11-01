@@ -21,9 +21,7 @@ import clientapi.value.holder.ValueHolder;
 import clientapi.util.interfaces.Nameable;
 import com.google.common.collect.Sets;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Nodes can have children, values, properties
