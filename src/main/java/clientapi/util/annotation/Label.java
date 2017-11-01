@@ -50,8 +50,8 @@ public @interface Label {
     String parent() default "";
 
     /**
-     * Returns the id of the marked field. There should only
-     * be one field with the given id per class.
+     * Returns the ID of the marked field. There should only
+     * be one field with the given ID per class.
      *
      * @return The ID of the field
      */
