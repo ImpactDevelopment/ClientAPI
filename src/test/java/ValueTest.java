@@ -42,14 +42,14 @@ public class ValueTest {
         assertEquals("Test ValueHolder should have exactly 1 value", holder.getValues().size(), 1);
 
         IValue parent;
-        assertNotNull("IValue with a valid id should evaluate to non null", (parent = holder.getValue("boolean_value")));
+        assertNotNull("IValue with a valid ID should evaluate to non null", (parent = holder.getValue("boolean_value")));
         assertEquals("BooleanValue should resolve to false if undefined", parent.getValue(), false);
         assertEquals("Test BooleanValue should have exactly 1 child value", parent.getValues().size(), 1);
 
         IValue child;
         assertNotNull("Child value shouldn't be null", (child = parent.getValues().get(0)));
         assertNotNull("Child value should have a non-null parent", child.getParent());
-        assertEquals("Child value's parent id should match the Test BooleanValue id", child.getParent(), parent.getId());
+        assertEquals("Child value's parent ID should match the Test BooleanValue id", child.getParent(), parent.getId());
         assertEquals("Child value shouldn't have any children", child.getValues().size(), 0);
         assertEquals("Child value's value should be equal to its field value", child.getValue(), 5);
     }

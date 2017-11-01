@@ -104,7 +104,7 @@ public final class Uniform {
     }
 
     /**
-     * Creates a uniform variable from the shader object id and the uniform's name
+     * Creates a uniform variable from the shader object ID and the uniform's name
      *
      * @param programID Shader program ID
      * @param uniformName Uniform Name
