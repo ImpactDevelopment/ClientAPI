@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * Gives an object access to have tags that give identity to that object.
  *
+ * @see Tag
+ *
  * @author Brady
  * @since 11/1/2017 1:39 PM
  */
