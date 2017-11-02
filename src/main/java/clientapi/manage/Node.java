@@ -16,7 +16,8 @@
 
 package clientapi.manage;
 
-import clientapi.value.Property;
+import clientapi.util.Tag;
+import clientapi.util.interfaces.Taggable;
 import clientapi.value.holder.ValueHolder;
 import clientapi.util.interfaces.Nameable;
 import com.google.common.collect.Sets;
@@ -24,22 +25,22 @@ import com.google.common.collect.Sets;
 import java.util.*;
 
 /**
- * Nodes can have children, values, properties
+ * Nodes can have child nodes, contain values, and be taggable.
  *
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
-public class Node extends ValueHolder implements Nameable {
+public class Node extends ValueHolder implements Nameable, Taggable {
 
     /**
      * Child nodes
      */
-    private final Set<Node> children = Sets.newLinkedHashSet();
+    private final Set<Node> children = new LinkedHashSet<>();
 
     /**
-     * Properties
+     * Tags
      */
-    private final Set<Property> properties = Sets.newLinkedHashSet();
+    private final List<Tag> tags = new ArrayList<>();
 
     /**
      * Name of the node
@@ -76,33 +77,6 @@ public class Node extends ValueHolder implements Nameable {
         return Sets.newLinkedHashSet(this.children);
     }
 
-    /**
-     * Sets the property with the specified label's value
-     *
-     * @param label Label of the property
-     * @param value Value being set
-     */
-    public final void setProperty(String label, Object value) {
-        Property property = getProperty(label);
-        if (property != null) {
-            property.setValue(value);
-            return;
-        }
-
-        properties.add(property = new Property(label));
-        property.setValue(value);
-    }
-
-    /**
-     * Gets a property with the specified label from the properties set
-     *
-     * @param label Target property label
-     * @return Property found, null if not found
-     */
-    public final Property getProperty(String label) {
-        return properties.stream().filter(property -> property.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
-    }
-
     @Override
     public final String getName() {
         return this.name;
@@ -111,5 +85,33 @@ public class Node extends ValueHolder implements Nameable {
     @Override
     public final String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public final void addTag(Tag tag) {
+        if (getTag(tag) == null)
+            tags.add(tag);
+    }
+
+    @Override
+    public final void removeTag(String id) {
+        Tag tag;
+        if ((tag = getTag(id).orElse(null)) != null)
+            tags.remove(tag);
+    }
+
+    @Override
+    public final boolean hasTag(String id) {
+        return getTag(id) != null;
+    }
+
+    @Override
+    public Optional<Tag> getTag(String id) {
+        return this.tags.stream().filter(tag -> tag.getId().equals(id)).findFirst();
+    }
+
+    @Override
+    public final List<Tag> getTags() {
+        return this.tags;
     }
 }
