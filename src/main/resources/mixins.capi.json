@@ -123,7 +123,6 @@
     "packet.play.server.ISPacketPlaceGhostRecipe",
     "packet.play.server.ISPacketPlayerAbilities",
     "packet.play.server.ISPacketPlayerListHeaderFooter",
-    "packet.play.server.ISPacketPlayerListItem",
     "packet.play.server.ISPacketPlayerPosLook",
     "packet.play.server.ISPacketRecipeBook",
     "packet.play.server.ISPacketRemoveEntityEffect",
