@@ -3,6 +3,7 @@ package clientapi.util.interfaces;
 import clientapi.util.Tag;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Gives an object access to have tags that give identity to that object.
@@ -57,6 +58,31 @@ public interface Taggable {
     default boolean hasTag(Identifiable id) {
         return this.hasTag(id.getId());
     }
+
+    /**
+     * Gets a tag with an ID matching the specified ID.
+     *
+     * @param id The ID of the target tag
+     * @return The tag with the specified ID
+     */
+    Optional<Tag> getTag(String id);
+
+    /**
+     * Gets a tag with an ID matching the ID of the specified {@code Identifiable}.
+     *
+     * @param id The {@code Identifiable} being matched
+     * @return The tag with a matching ID
+     */
+    default Optional<Tag> getTag(Identifiable id) {
+        return this.getTag(id.getId());
+    }
+
+    /**
+     * Gets a tag with an ID matching that of the specified
+     * {@code Identifiable}'s ID.
+     *
+     * @param id The {@code Identifiable} being matched
+     */
 
     /**
      * @return A list of this object's tags
