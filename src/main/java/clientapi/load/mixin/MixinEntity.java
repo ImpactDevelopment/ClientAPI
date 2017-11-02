@@ -109,7 +109,7 @@ public abstract class MixinEntity implements IEntity {
         if (pos == null)
             pos = new Vec3();
 
-        return pos.x(posX).y(posY).z(posZ);
+        return pos.setX(posX).setY(posY).setZ(posZ);
     }
 
     @Override
@@ -117,7 +117,7 @@ public abstract class MixinEntity implements IEntity {
         if (prevPos == null)
             prevPos = new Vec3();
 
-        return prevPos.x(prevPosX).y(prevPosY).z(prevPosZ);
+        return prevPos.setX(prevPosX).setY(prevPosY).setZ(prevPosZ);
     }
 
     @Override
@@ -125,7 +125,7 @@ public abstract class MixinEntity implements IEntity {
         if (lastTickPos == null)
             lastTickPos = new Vec3();
 
-        return lastTickPos.x(lastTickPosX).y(lastTickPosY).z(lastTickPosZ);
+        return lastTickPos.setX(lastTickPosX).setY(lastTickPosY).setZ(lastTickPosZ);
     }
 
     @Override
@@ -133,7 +133,7 @@ public abstract class MixinEntity implements IEntity {
         if (rotation == null)
             rotation = new Vec2();
 
-        return rotation.x(rotationYaw).y(rotationPitch);
+        return rotation.setX(rotationYaw).setY(rotationPitch);
     }
 
     @Override
@@ -141,7 +141,7 @@ public abstract class MixinEntity implements IEntity {
         if (prevRotation == null)
             prevRotation = new Vec2();
 
-        return prevRotation.x(prevRotationYaw).y(prevRotationPitch);
+        return prevRotation.setX(prevRotationYaw).setY(prevRotationPitch);
     }
 
     @Override

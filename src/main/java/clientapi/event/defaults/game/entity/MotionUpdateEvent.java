@@ -57,7 +57,7 @@ public final class MotionUpdateEvent implements Helper {
             return;
 
         IEntity me = (IEntity) mc.player;
-        pos.transfer(me.getPos()).y(mc.player.getEntityBoundingBox().minY);
+        pos.transfer(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
         rotations.transfer(me.getRotations());
         onGround = mc.player.onGround;
     }
@@ -69,7 +69,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent x(double x) {
-        pos.x(x);
+        pos.setX(x);
         return this;
     }
 
@@ -80,7 +80,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent y(double y) {
-        pos.y(y);
+        pos.setY(y);
         return this;
     }
 
@@ -91,7 +91,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent z(double z) {
-        pos.z(z);
+        pos.setZ(z);
         return this;
     }
 
@@ -102,7 +102,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent yaw(float yaw) {
-        rotations.x(yaw);
+        rotations.setX(yaw);
         return this;
     }
 
@@ -113,7 +113,7 @@ public final class MotionUpdateEvent implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent pitch(float pitch) {
-        rotations.y(pitch);
+        rotations.setY(pitch);
         return this;
     }
 
