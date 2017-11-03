@@ -22,6 +22,7 @@ import clientapi.command.executor.argument.*;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.handler.listener.ChatCommandListener;
 import clientapi.manage.Manager;
+import me.zero.example.ExampleClient;
 import me.zero.example.command.commands.TestCommand;
 
 /**
@@ -44,6 +45,7 @@ public final class ExampleCommandManager extends Manager<Command> {
 
         handler.registerParser(new BooleanParser());
         handler.registerParser(new CharParser());
+        handler.registerParser(new ModuleParser(ExampleClient.getInstance().getModuleManager()));
         handler.registerParser(new NumberParser());
         handler.registerParser(new OptionalParser());
         handler.registerParser(new StringParser());
