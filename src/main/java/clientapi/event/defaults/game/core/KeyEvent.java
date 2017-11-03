@@ -16,8 +16,6 @@
 
 package clientapi.event.defaults.game.core;
 
-import me.zero.alpine.type.Cancellable;
-
 /**
  * Event called when a Key is pressed outside of a GUI while in-game.
  * When cancelled, any ClientAPI related KeyEvent Listener won't process
@@ -28,12 +26,7 @@ import me.zero.alpine.type.Cancellable;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class KeyEvent extends Cancellable {
-
-    /**
-     * Key code that belongs to the pressed key
-     */
-    private final int key;
+public final class KeyEvent extends InputEvent {
 
     /**
      * Char representation of the pressed key
@@ -46,15 +39,8 @@ public final class KeyEvent extends Cancellable {
      * @param key - The key code for the key that was pressed
      */
     public KeyEvent(int key, char character) {
-        this.key = key;
+        super(key);
         this.character = character;
-    }
-
-    /**
-     * @return The key code that corresponds to the pressed key
-     */
-    public final int getKey() {
-        return this.key;
     }
 
     /**

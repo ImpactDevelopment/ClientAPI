@@ -16,7 +16,6 @@
 
 package clientapi.load.mixin.wrapper;
 
-import clientapi.event.defaults.game.core.ClickEvent;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 
@@ -50,6 +49,6 @@ public interface IMinecraft {
      *
      * @param button The button to click (LEFT, MIDDLE, RIGHT)
      */
-    void clickMouse(ClickEvent.MouseButton button);
+    void clickMouse(int button);
 
 }
