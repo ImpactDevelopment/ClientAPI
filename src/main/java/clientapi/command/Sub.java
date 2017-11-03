@@ -14,8 +14,6 @@ import java.lang.annotation.Target;
  * {@code java.util.Optional} may be used to mark arguments
  * as "optional", but only if the argument is the last.
  *
- * {@code java.lang.Object} can be used to accept any type of argument.
- *
  * @author Brady
  * @since 10/17/2017 2:49 PM
  */
