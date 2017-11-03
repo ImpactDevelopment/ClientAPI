@@ -23,7 +23,7 @@ import clientapi.command.executor.ExecutionContext;
 import clientapi.util.builder.impl.ChatBuilder;
 import net.minecraft.util.text.TextFormatting;
 
-import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author Brady
@@ -38,17 +38,17 @@ public final class TestCommand extends Command {
      * indicated by the vararg.
      *
      * @param context Context behind command execution
-     * @param arguments Arguments
+     * @param argument Arguments
      */
     @Sub
-    private void handle(ExecutionContext context, String... arguments) {
+    private void handle(ExecutionContext context, Optional<String> argument) {
         // Print a chat message indicating the success of the
         mc.ingameGUI.getChatGUI().printChatMessage(
                 new ChatBuilder()
                         .append(String.format("%s executed the ", context.sender().getName()), TextFormatting.GRAY)
                         .append("\"Test\"", TextFormatting.WHITE)
-                        .append(" command with arguments ", TextFormatting.GRAY)
-                        .append(Arrays.toString(arguments), TextFormatting.WHITE)
+                        .append(" command with argument ", TextFormatting.GRAY)
+                        .append(argument.orElse("undefined"), TextFormatting.WHITE)
                         .build());
     }
 }
