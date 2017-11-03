@@ -1,7 +1,10 @@
 package clientapi.event.defaults.game.core;
 
+import me.zero.alpine.type.Cancellable;
+
 /**
- * Generic input event.
+ * Generic input event. Cancelling will cause any ClientAPI
+ * listeners to the event to not proceed with processing the event.
  *
  * The keycode will be equal to its respective value
  * in {@code Keyboard} if the input is from the keyboard.
@@ -15,7 +18,7 @@ package clientapi.event.defaults.game.core;
  * @author Brady
  * @since 11/3/2017 11:06 AM
  */
-abstract class InputEvent {
+abstract class InputEvent extends Cancellable {
 
     /**
      * The key that was pressed or clicked
