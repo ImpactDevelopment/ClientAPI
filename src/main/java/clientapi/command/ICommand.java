@@ -49,6 +49,15 @@ interface ICommand extends Helper {
     String[] headers();
 
     /**
+     * Returns the argument names of this command. Parent
+     * commands will return the sub-command headers. Sub-commands
+     * will return the name of the arguments.
+     *
+     * @return The possible arguments for this command
+     */
+    String[] arguments();
+
+    /**
      * Returns the intended purpose of the command, a
      * brief description of the usage.
      *
