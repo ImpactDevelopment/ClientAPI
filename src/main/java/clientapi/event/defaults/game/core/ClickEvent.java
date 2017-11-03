@@ -20,57 +20,37 @@ import net.minecraft.client.Minecraft;
 
 /**
  * Event called when a Mouse button is pressed
- * outside of a gui screen while in-game. The
- * only mouse buttons that are supported are the
- * present in the {@code MouseButton} enum.
- * (Left, Right, Middle)
+ * outside of a gui screen while in-game. Default
+ * recognized buttons are LEFT, RIGHT and MIDDLE.
  *
  * @see KeyEvent
- * @see Minecraft#clickMouse()
- * @see Minecraft#rightClickMouse()
- * @see Minecraft#middleClickMouse()
+ * @see MouseButton
+ * @see Minecraft#runTickMouse()
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class ClickEvent {
+public final class ClickEvent extends InputEvent {
 
-    /**
-     * The Mouse button that was clicked
-     */
-    private final MouseButton button;
-
-    public ClickEvent(MouseButton button) {
-        this.button = button;
+    public ClickEvent(int key) {
+        super(key - 100);
     }
 
     /**
-     * @return The button clicked
+     * Returns the actual mouse button that was pressed.
+     * Equal to {@code getKey() + 100}. Should be used
+     * instead of getKey() in the context of comparing the
+     * actual mouse button that was pressed.
+     *
+     * @return The mouse button pressed
      */
-    public final MouseButton getButton() {
-        return this.button;
+    public final int getButton() {
+        return this.key + 100;
     }
 
-    /**
-     * Types of Mouse Buttons
-     */
-    public enum MouseButton {
-        LEFT(0), RIGHT(1), MIDDLE(2);
-
-        /**
-         * Mouse Button ID
-         */
-        private int id;
-
-        MouseButton(int id) {
-            this.id = id;
-        }
-
-        /**
-         * @return The ID of the Mouse Button
-         */
-        public final int getID() {
-            return this.id;
-        }
+    public interface MouseButton {
+        int LEFT = 0;
+        int RIGHT = 1;
+        int MIDDLE = 2;
     }
 }

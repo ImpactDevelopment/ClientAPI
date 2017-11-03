@@ -33,6 +33,7 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -68,7 +69,7 @@ public abstract class MixinMinecraft implements IMinecraft {
     @Shadow private void middleClickMouse() {}
 
     @Override
-    public void clickMouse(ClickEvent.MouseButton button) {
+    public void clickMouse(int button) {
         // IF statements are required because Mixin doesn't support SWITCH
         if (button == LEFT)
             clickMouse();
@@ -98,6 +99,14 @@ public abstract class MixinMinecraft implements IMinecraft {
         char ch = Keyboard.getEventCharacter();
 
         ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
+    }
+
+    @Inject(method = "runTickMouse", at = @At(value = "INVOKE_ASSIGN", id = "org/lwjgl/input/Mouse.getEventButton()I"))
+    private void onMouseEvent(CallbackInfo info) {
+        if (currentScreen != null)
+            return;
+
+        ClientAPI.EVENT_BUS.post(new ClickEvent(Mouse.getEventButton()));
     }
 
     @Inject(method = "init", at = @At("RETURN"))
@@ -141,21 +150,6 @@ public abstract class MixinMinecraft implements IMinecraft {
         client.onInit(clientInfo);
 
         ClientAPI.EVENT_BUS.subscribe(ClientHandler.INSTANCE);
-    }
-
-    @Inject(method = "clickMouse", at = @At("HEAD"))
-    private void clickMouse(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ClickEvent(LEFT));
-    }
-
-    @Inject(method = "rightClickMouse", at = @At("HEAD"))
-    private void rightClickMouse(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ClickEvent(RIGHT));
-    }
-
-    @Inject(method = "middleClickMouse", at = @At("HEAD"))
-    private void middleClickMouse(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ClickEvent(MIDDLE));
     }
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
