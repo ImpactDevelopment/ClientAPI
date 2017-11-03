@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@code ICommand}
@@ -38,8 +39,8 @@ public class Command implements ICommand {
     private final Command parent;
     private final List<Command> children = new ArrayList<>();
     private final Method handle;
-
     private String[] headers;
+    private String[] arguments;
     private String description;
 
     public Command() {
@@ -92,8 +93,25 @@ public class Command implements ICommand {
 
                 // Create the child command
                 Sub sub = method.getAnnotation(Sub.class);
-                children.add(new Command(sub.headers(), sub.description(), this, method));
+                Command subc = new Command(sub.headers(), sub.description(), this, method);
+
+                // Setup argument names
+                String[] arguments = sub.arguments();
+                if (arguments.length != parameters - 1) {
+                    arguments = new String[parameters - 1];
+                    for (int i = 1; i < parameters; i++) {
+                        arguments[i - 1] = method.getParameters()[i].getName();
+                    }
+                }
+                subc.arguments = arguments;
+
+                children.add(subc);
             }
+
+            this.arguments = this.children.stream()
+                    .map(child -> child.arguments.length > 0 ? child.arguments[0] : "")
+                    .collect(Collectors.toList())
+                    .toArray(new String[0]);
         }
 
         if (ClientAPIUtils.containsNull(headers, description))
@@ -176,6 +194,11 @@ public class Command implements ICommand {
     @Override
     public final String[] headers() {
         return this.headers;
+    }
+
+    @Override
+    public String[] arguments() {
+        return this.arguments;
     }
 
     @Override

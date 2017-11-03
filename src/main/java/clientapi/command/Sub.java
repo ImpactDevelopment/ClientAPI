@@ -39,6 +39,12 @@ public @interface Sub {
     String[] headers() default {};
 
     /**
+     * Returns the names of the arguments. Will be automatically
+     * filled if not specified. Intended for use with obfuscation.
+     */
+    String[] arguments() default {};
+
+    /**
      * A basic description of the usage for this
      * sub-command argument handler. If undefined,
      * any reference to this sub-command's description
