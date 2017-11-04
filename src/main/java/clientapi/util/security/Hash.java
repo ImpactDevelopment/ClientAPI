@@ -95,7 +95,7 @@ public final class Hash {
         /**
          * Converts the hashed bytes into a string containing the bytes as hex values
          */
-        Function<byte[], String> HEX_STRING_FORMAT = DatatypeConverter::printHexBinary;
+        Function<byte[], String> HEX_STRING_FORMAT = bytes -> DatatypeConverter.printHexBinary(bytes).toLowerCase();
 
         /**
          * Returns the hashed bytes raw
