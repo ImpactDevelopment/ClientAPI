@@ -20,8 +20,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 /**
  * Reads the lines returned from an {@code InputStream}.
@@ -46,14 +48,14 @@ public final class StreamReader {
      *
      * @return Stream containing all lines from the {@code InputStream}.
      */
-    public final Stream<String> lines() {
+    public final List<String> lines() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(stream));
-            Stream<String> lines = br.lines();
+            List<String> lines = br.lines().collect(Collectors.toList());
             br.close();
             return lines;
         } catch (IOException e) {
-            return Stream.empty();
+            return new ArrayList<>();
         }
     }
 
