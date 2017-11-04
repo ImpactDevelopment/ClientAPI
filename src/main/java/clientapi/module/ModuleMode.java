@@ -71,12 +71,6 @@ public class ModuleMode<T extends Module> implements IModule {
 
     @Override
     public void setState(boolean state) {
-        if (state && !parent.getState()) {
-            parent.setMode(this);
-            parent.setState(true);
-            return;
-        }
-
         this.state = state;
         if (state) {
             if (parent.getState()) {
