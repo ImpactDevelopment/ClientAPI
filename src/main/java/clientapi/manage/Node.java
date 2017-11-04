@@ -89,7 +89,7 @@ public class Node extends ValueHolder implements Nameable, Taggable {
 
     @Override
     public final void addTag(Tag tag) {
-        if (getTag(tag) == null)
+        if (!getTag(tag).isPresent())
             tags.add(tag);
     }
 
