@@ -16,7 +16,6 @@
 
 package clientapi.util;
 
-import clientapi.exception.ArraySizeException;
 import clientapi.manage.Manager;
 import clientapi.module.Category;
 import clientapi.module.Module;
@@ -43,7 +42,7 @@ public final class ClientAPIUtils {
     @SafeVarargs
     public static <T> T[] concat(T[]... arrays){
         if (arrays.length < 2)
-            throw new ArraySizeException("At least 2 arrays should be supplied");
+            throw new IllegalArgumentException("At least 2 arrays should be supplied");
 
         T[] result = arrays[0];
         for (int i = 1; i < arrays.length; i++) {
