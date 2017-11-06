@@ -18,7 +18,6 @@ package clientapi.module;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.internal.ModuleStateEvent;
-import clientapi.exception.ActionNotSupportedException;
 import clientapi.manage.Node;
 import clientapi.module.exception.ModuleInitException;
 import clientapi.util.ClientAPIUtils;
@@ -241,12 +240,12 @@ public abstract class Module extends Node implements IModule {
 
     /**
      * Called when mode related actions are carried out,
-     * throws an {@code ActionNotSupportedException} if
+     * throws an {@code UnsupportedOperationException} if
      * modes aren't supported by this module.
      */
     private void checkModes() {
         if (!hasModes())
-            throw new ActionNotSupportedException("Cannot use mode required actions when modes aren't supported");
+            throw new UnsupportedOperationException("Cannot use mode required actions when modes aren't supported");
     }
 
     @Override

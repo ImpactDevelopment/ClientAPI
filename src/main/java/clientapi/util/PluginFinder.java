@@ -20,7 +20,6 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.filters.PacketFilter;
 import clientapi.event.defaults.game.core.TickEvent;
 import clientapi.event.defaults.game.network.PacketEvent;
-import clientapi.exception.InvalidActionException;
 import clientapi.util.interfaces.Helper;
 import com.google.common.collect.Sets;
 import me.zero.alpine.listener.EventHandler;
@@ -144,7 +143,7 @@ public final class PluginFinder implements Helper {
          */
         public final Set<String> getPlugins() {
             if (result != SUCCESS)
-                throw new InvalidActionException("Cannot get plugins that were retrieved unless response type is SUCCESS");
+                throw new UnsupportedOperationException("Cannot get plugins that were retrieved unless response type is SUCCESS");
 
             return this.plugins;
         }
@@ -154,7 +153,7 @@ public final class PluginFinder implements Helper {
          */
         public final String getError() {
             if (result != FAILURE)
-                throw new InvalidActionException("Cannot get error that occured unless response type is FAILURE");
+                throw new UnsupportedOperationException("Cannot get error that occured unless response type is FAILURE");
 
             return this.error;
         }
