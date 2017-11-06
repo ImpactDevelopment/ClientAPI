@@ -17,7 +17,6 @@
 package clientapi.manage;
 
 import clientapi.util.interfaces.Saveable;
-import clientapi.exception.ActionNotSupportedException;
 import clientapi.util.interfaces.Loadable;
 
 import java.util.*;
@@ -96,7 +95,7 @@ public abstract class Manager<T> implements Loadable, Saveable {
     @SuppressWarnings("unchecked")
     public final <I extends T> I get(Class<I> clazz) {
         if (!(this instanceof AbstractManager))
-            throw new ActionNotSupportedException("Entry access via class is not supported by this Manager, does not implement AbstractManager.");
+            throw new UnsupportedOperationException("Entry access via class is not supported by this Manager, does not implement AbstractManager.");
 
         if (clazz == null)
             return null;
