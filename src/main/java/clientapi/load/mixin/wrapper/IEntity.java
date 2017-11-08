@@ -61,6 +61,13 @@ public interface IEntity {
     void setPrevRotations(Vec2 rotations);
 
     /**
+     * Sets the entity motion
+     *
+     * @param motion New motion
+     */
+    void setMotion(Vec3 motion);
+
+    /**
      * Converts the entity position to a {@code Vec3}
      *
      * @return Position as a {@code Vec3}
@@ -94,6 +101,13 @@ public interface IEntity {
      * @return Previous rotations as a {@code Vec2}
      */
     Vec2 getPrevRotations();
+
+    /**
+     * Converts the entity motion to a {@code Vec3}
+     *
+     * @return Motion as a {@code Vec3}
+     */
+    Vec3 getMotion();
 
     /**
      * Calculates the predicted position that an entity will

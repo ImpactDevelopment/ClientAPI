@@ -60,7 +60,7 @@ public abstract class MixinEntity implements IEntity {
     @Shadow public abstract boolean isRiding();
     @Shadow public abstract AxisAlignedBB getEntityBoundingBox();
 
-    private Vec3 pos, prevPos, lastTickPos;
+    private Vec3 pos, prevPos, lastTickPos, motion;
     private Vec2 rotation, prevRotation;
 
     @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
@@ -105,6 +105,13 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
+    public void setMotion(Vec3 motion) {
+        this.motionX = pos.getX();
+        this.motionY = pos.getY();
+        this.motionZ = pos.getZ();
+    }
+
+    @Override
     public Vec3 getPos() {
         if (pos == null)
             pos = new Vec3();
@@ -142,6 +149,14 @@ public abstract class MixinEntity implements IEntity {
             prevRotation = new Vec2();
 
         return prevRotation.setX(prevRotationYaw).setY(prevRotationPitch);
+    }
+
+    @Override
+    public Vec3 getMotion() {
+        if (motion == null)
+            motion = new Vec3();
+
+        return motion.setX(motionX).setY(motionY).setZ(motionZ);
     }
 
     @Override
