@@ -38,18 +38,41 @@ public final class LuaHookManager {
         allow(true);
     }
 
+    /**
+     * Creates a hook for the specified event with the specified function.
+     *
+     * @param event The hook event target
+     * @param function The lua hook function
+     */
     public final void create(String event, LuaFunction function) {
         getHooks(currentScript).computeIfAbsent(event, e -> new ArrayList<>()).add(function);
     }
 
+    /**
+     * Detaches a {@code LuaScript's} active hooks
+     *
+     * @param script The script
+     * @return Whether or not the hooks were able to be detached
+     */
     public final boolean detach(LuaScript script) {
         return hooks.remove(script) != null;
     }
 
+    /**
+     * Returns the hooks defined by the specified {@code LuaScript}
+     *
+     * @param script The script
+     * @return The hooks
+     */
     public final Map<String, List<LuaFunction>> getHooks(LuaScript script) {
         return hooks.computeIfAbsent(script, e -> new HashMap<>());
     }
 
+    /**
+     * Returns all of the active hooks
+     *
+     * @return All of the active hooks
+     */
     public final Map<LuaScript, Map<String, List<LuaFunction>>> getHooks() {
         return this.hooks;
     }
