@@ -32,11 +32,11 @@ public final class render extends LuaLibrary {
     static final class DrawText extends FourArgFunction {
 
         @Override
-        public final LuaValue call(LuaValue string, LuaValue x, LuaValue y, LuaValue color) {
-            if (!string.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
+        public final LuaValue call(LuaValue text, LuaValue x, LuaValue y, LuaValue color) {
+            if (!text.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
                 return NIL;
 
-            return LuaInteger.valueOf(mc.fontRenderer.drawString(string.tojstring(), x.tofloat(), y.tofloat(), color.toint(), false));
+            return LuaInteger.valueOf(mc.fontRenderer.drawString(text.tojstring(), x.tofloat(), y.tofloat(), color.toint(), false));
         }
     }
 
@@ -46,11 +46,11 @@ public final class render extends LuaLibrary {
     static final class DrawTextWithShadow extends FourArgFunction {
 
         @Override
-        public final LuaValue call(LuaValue string, LuaValue x, LuaValue y, LuaValue color) {
-            if (!string.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
+        public final LuaValue call(LuaValue text, LuaValue x, LuaValue y, LuaValue color) {
+            if (!text.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
                 return NIL;
 
-            return LuaInteger.valueOf(mc.fontRenderer.drawString(string.tojstring(), x.tofloat(), y.tofloat(), color.toint(), true));
+            return LuaInteger.valueOf(mc.fontRenderer.drawString(text.tojstring(), x.tofloat(), y.tofloat(), color.toint(), true));
         }
     }
 }

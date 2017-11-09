@@ -1,5 +1,7 @@
 package clientapi.lua;
 
+import org.luaj.vm2.script.LuaScriptEngine;
+
 import javax.script.CompiledScript;
 import javax.script.ScriptException;
 
@@ -10,9 +12,14 @@ import javax.script.ScriptException;
 public final class LuaScript {
 
     /**
-     * {@code LuaContext} that created this {@code LuaScript}
+     * The engine that is used to compile this script
      */
-    private final LuaContext context;
+    private final LuaScriptEngine engine;
+
+    /**
+     * {@code LuaHandler} that created this {@code LuaScript}
+     */
+    private final LuaHandler handler;
 
     /**
      * The type of script
@@ -34,8 +41,9 @@ public final class LuaScript {
      */
     private boolean canEval = true;
 
-    public LuaScript(LuaContext context, Type type, String code) {
-        this.context = context;
+    public LuaScript(LuaHandler handler, Type type, String code) {
+        this.engine = handler.genScriptEngine();
+        this.handler = handler;
         this.type = type;
         this.code = code;
     }
@@ -51,7 +59,7 @@ public final class LuaScript {
         if (compiled != null)
             throw new ScriptException("Script already compiled");
 
-        compiled = context.getHandler().getEngine().compile(this.code);
+        compiled = engine.compile(this.code);
     }
 
     /**
@@ -60,7 +68,7 @@ public final class LuaScript {
      * script is re-compiled).
      */
     public final void delete() {
-        context.getHookManager().detach(this);
+        handler.getHookManager().detach(this);
         compiled = null;
         canEval = true;
     }
@@ -79,7 +87,7 @@ public final class LuaScript {
             return false;
 
         // Evaluate the script
-        context.getHookManager().setCurrentScript(this);
+        handler.getHookManager().setCurrentScript(this);
         compiled.eval();
 
         // Set the new canEval flag
