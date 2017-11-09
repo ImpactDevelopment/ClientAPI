@@ -24,15 +24,13 @@ public final class mc extends LuaLibrary {
 
     @Override
     public final void load(Map<String, LuaValue> table) {
-        table.put("message", new message());
-        table.put("drawString", new drawString());
-        table.put("drawStringWithShadow", new drawStringWithShadow());
+        table.put("SendChat", new SendChat());
     }
 
     /**
      * @see EntityPlayerSP#sendChatMessage(String)
      */
-    static final class message extends OneArgFunction {
+    static final class SendChat extends OneArgFunction {
 
         @Override
         public final LuaValue call(LuaValue message) {
@@ -41,34 +39,6 @@ public final class mc extends LuaLibrary {
                 return TRUE;
             }
             return FALSE;
-        }
-    }
-
-    /**
-     * @see FontRenderer#drawString(String, float, float, int, boolean)
-     */
-    static final class drawString extends FourArgFunction {
-
-        @Override
-        public final LuaValue call(LuaValue string, LuaValue x, LuaValue y, LuaValue color) {
-            if (!string.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
-                return NIL;
-
-            return LuaInteger.valueOf(mc.fontRenderer.drawString(string.tojstring(), x.tofloat(), y.tofloat(), color.toint(), false));
-        }
-    }
-
-    /**
-     * @see FontRenderer#drawString(String, float, float, int, boolean)
-     */
-    static final class drawStringWithShadow extends FourArgFunction {
-
-        @Override
-        public final LuaValue call(LuaValue string, LuaValue x, LuaValue y, LuaValue color) {
-            if (!string.isstring() || !x.isnumber() || !y.isnumber() || !color.isnumber())
-                return NIL;
-
-            return LuaInteger.valueOf(mc.fontRenderer.drawString(string.tojstring(), x.tofloat(), y.tofloat(), color.toint(), true));
         }
     }
 }
