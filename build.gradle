@@ -85,7 +85,7 @@ repositories {
 dependencies {
     compile "com.github.ZeroMemes:Alpine:${project.alpineVersion}"
     compile "net.jodah:typetools:${project.typetoolsVersion}"
-    testCompile "junit:junit:${project.junitVersion}"
+    compile "org.luaj:luaj-jse:3.0.1"
     compile("org.spongepowered:mixin:${project.mixinVersion}") {
         // Mixin includes a lot of dependencies that are too up-to-date
         exclude module: 'launchwrapper'
@@ -94,6 +94,7 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
     }
+    testCompile "junit:junit:${project.junitVersion}"
 }
 
 minecraft {
