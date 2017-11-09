@@ -2,26 +2,26 @@ package clientapi.lua.lib;
 
 import clientapi.lua.LuaContext;
 import clientapi.lua.LuaHookManager;
+import clientapi.lua.LuaLibrary;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
+
+import java.util.Map;
 
 /**
  * @author Brady
  * @since 11/8/2017 4:26 PM
  */
-public final class hook extends TwoArgFunction {
+public final class hook extends LuaLibrary {
+
+    public hook() {
+        super("hook");
+    }
 
     @Override
-    public final LuaValue call(LuaValue modname, LuaValue env) {
-        LuaValue library = tableOf();
-
-        // Setup functions
-        library.set("create", new create());
-
-        env.set("hook", library);
-
-        return library;
+    public final void load(Map<String, LuaValue> table) {
+        table.put("create", new create());
     }
 
     /**
