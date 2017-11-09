@@ -21,7 +21,7 @@ public final class hook extends LuaLibrary {
 
     @Override
     public final void load(Map<String, LuaValue> table) {
-        table.put("create", new create());
+        table.put("Add", new Add());
     }
 
     /**
@@ -29,7 +29,7 @@ public final class hook extends LuaLibrary {
      *
      * @see LuaHookManager#create(String, LuaFunction)
      */
-    private static final class create extends TwoArgFunction {
+    private static final class Add extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue event, LuaValue function) {
