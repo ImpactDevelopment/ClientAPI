@@ -25,6 +25,7 @@ import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.wrapper.IMinecraft;
+import clientapi.lua.LuaContext;
 import clientapi.util.render.gl.GlUtils;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
@@ -145,6 +146,9 @@ public abstract class MixinMinecraft implements IMinecraft {
 
         // Init GLUtils
         GlUtils.init();
+
+        // Load Lua Handler
+        LuaContext.getContext().getHandler().load();
 
         // Init client
         client.onInit(clientInfo);
