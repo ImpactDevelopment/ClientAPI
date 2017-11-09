@@ -34,7 +34,7 @@ public final class LuaHandler {
      */
     private final LuaHookManager hookManager;
 
-    LuaHandler() {
+    private LuaHandler() {
         this.hookManager = new LuaHookManager();
     }
 
