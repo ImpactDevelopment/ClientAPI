@@ -1,6 +1,6 @@
 package clientapi.lua.lib;
 
-import clientapi.lua.LuaContext;
+import clientapi.lua.LuaHandler;
 import clientapi.lua.LuaHookManager;
 import clientapi.lua.LuaLibrary;
 import org.luaj.vm2.LuaFunction;
@@ -36,7 +36,7 @@ public final class hook extends LuaLibrary {
             if (!event.isstring() || !function.isfunction()) {
                 return FALSE;
             }
-            LuaContext.getContext().getHookManager().create(event.tojstring(), (LuaFunction) function);
+            LuaHandler.getHandler().getHookManager().create(event.tojstring(), (LuaFunction) function);
             return TRUE;
         }
     }

@@ -1,38 +1,81 @@
 package clientapi.lua;
 
-import clientapi.util.interfaces.Loadable;
+import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.script.LuaScriptEngine;
+import org.luaj.vm2.script.LuajContext;
 
 import javax.script.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Brady
  * @since 11/8/2017 12:22 PM
  */
-public final class LuaHandler implements Loadable {
+public final class LuaHandler {
 
     /**
-     * Instance of the LuaJ script engine. Created when {@code LuaHandler#load()}
-     * is called. Used to compile and evaluate lua scripts.
+     * The instance of {@code LuaHandler}
      */
-    private LuaScriptEngine engine;
+    private static final LuaHandler INSTANCE = new LuaHandler();
 
-    LuaHandler() {}
+    /**
+     * An Immutable List of default libraries
+     */
+    private static final List<String> DEFAULT_LIBS = Arrays.asList("hook", "mc", "render");
 
-    @Override
-    public final void load() {
-        // Setup the script engine
-        this.engine = (LuaScriptEngine) new ScriptEngineManager().getEngineByName("luaj");
+    /**
+     * The manager to create the {@code LuaScriptEngines} for all {@code LuaScripts}
+     */
+    private ScriptEngineManager engineManager = new ScriptEngineManager();
 
-        // Setup the script bindings
-        Bindings bindings = engine.createBindings();
-        engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
+    /**
+     * Instance of {@code LuaHookManager}
+     */
+    private final LuaHookManager hookManager;
+
+    LuaHandler() {
+        this.hookManager = new LuaHookManager();
     }
 
     /**
-     * @return The {@code LuaScriptEngine} being used by this {@code LuaHandler}
+     * Creates a script through this {@code LuaHandler}.
+     *
+     * @param type The type of script.
+     * @param code The raw lua source.
+     * @return The created {@code LuaScript}
      */
-    public final LuaScriptEngine getEngine() {
-        return this.engine;
+    public final LuaScript createScript(LuaScript.Type type, String code) {
+        return new LuaScript(this, type, code);
+    }
+
+    /**
+     * Creates a {@code LuaScriptEngine} for a {@code LuaScript}.
+     * Only to be used by the {@code LuaScript} class.
+     */
+    final LuaScriptEngine genScriptEngine() {
+        // Create a new LuaScriptEngine
+        LuaScriptEngine engine = (LuaScriptEngine) engineManager.getEngineByName("luaj");
+
+        // Load default libraries
+        LuajContext context = (LuajContext) engine.getContext();
+        OneArgFunction require = (OneArgFunction) context.globals.get("require");
+        DEFAULT_LIBS.forEach(lib -> require.call("clientapi.lua.lib." + lib));
+
+        return engine;
+    }
+
+    /**
+     * @return The instance of {@code LuaHookManager}
+     */
+    public final LuaHookManager getHookManager() {
+        return this.hookManager;
+    }
+
+    /**
+     * @return The instance of {@code LuaHandler}
+     */
+    public static LuaHandler getHandler() {
+        return INSTANCE;
     }
 }
