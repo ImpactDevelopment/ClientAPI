@@ -16,18 +16,18 @@
 
 package me.zero.example;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
+import clientapi.lua.LuaContext;
+import clientapi.lua.LuaScript;
+import clientapi.util.io.StreamReader;
 import clientapi.Client;
-import clientapi.ClientAPI;
 import clientapi.ClientInfo;
 import clientapi.command.Command;
-import clientapi.event.defaults.game.render.TextEvent;
-import clientapi.event.handle.ClientHandler;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
+
+import javax.script.ScriptException;
 
 /**
  * @author Brady
@@ -54,14 +54,15 @@ public final class ExampleClient extends Client {
         commandManager = new ExampleCommandManager();
         commandManager.load();
 
-        ClientAPI.EVENT_BUS.subscribe(new Object() {
-            @EventHandler
-            private final Listener<TextEvent> textEventListener = new Listener<>(event -> {
-                if (event.getText().contains("Singleplayer")) {
-                    event.setText(event.getText().replace("Singleplayer", "Singleplayer"));
-                }
-            });
-        });
+        // Setup example script
+        String scriptSource = new StreamReader(ExampleClient.class.getResourceAsStream("/lua/example.lua")).all();
+        LuaScript script = LuaContext.getContext().createScript(LuaScript.Type.HOOK, scriptSource);
+        try {
+            script.compile();
+            script.eval();
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
     }
 
     public final String getName() {
