@@ -28,12 +28,10 @@ final class LuaEventBus extends AbstractEventBus {
         // Coerce the event to a LuaValue
         LuaValue luaEvent = CoerceJavaToLua.coerce(event);
 
-        String eventName = event.getClass().getSimpleName();
-
         // Call lua hook functions
-        hookManager.getHooks().values().forEach(map -> map.forEach((e, funcs) -> {
-            if (e.equals(eventName)) {
-                funcs.forEach(func -> func.call(luaEvent));
+        hookManager.getHooks().values().forEach(hooks -> hooks.forEach(hook -> {
+            if (hook.isTargetEvent(event)) {
+                hook.invoke(luaEvent);
             }
         }));
     }
