@@ -38,7 +38,8 @@ public final class LuaHookManager {
     }
 
     /**
-     * Creates a hook for the specified event with the specified function.
+     * Creates a hook for the specified event with the specified function. The
+     * last script to be evaluated is bound to the newly created {@code LuaEventHook}.
      *
      * @param event The hook event target
      * @param function The lua hook function
@@ -48,7 +49,7 @@ public final class LuaHookManager {
     }
 
     /**
-     * Detaches a {@code LuaScript's} active hooks
+     * Detaches the specified {@code LuaScript's} active hooks
      *
      * @param script The script
      * @return Whether or not the hooks were able to be detached
@@ -58,7 +59,7 @@ public final class LuaHookManager {
     }
 
     /**
-     * Returns the hooks defined by the specified {@code LuaScript}
+     * Returns the hooks created by the specified {@code LuaScript}
      *
      * @param script The script
      * @return The hooks
@@ -68,8 +69,6 @@ public final class LuaHookManager {
     }
 
     /**
-     * Returns all of the active hooks
-     *
      * @return All of the active hooks
      */
     public final Map<LuaScript, List<LuaEventHook>> getHooks() {
