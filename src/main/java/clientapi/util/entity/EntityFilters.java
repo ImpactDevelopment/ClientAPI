@@ -156,7 +156,7 @@ public final class EntityFilters implements Helper {
         // Check if the village dislike the player
         {
             Village village = e.getVillage();
-            //noinspection ConstantConditions
+            // noinspection ConstantConditions
             if (village != null && village.isPlayerReputationTooLow(mc.player.getName()))
                 return true;
         }
