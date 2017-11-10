@@ -26,6 +26,7 @@ import pw.knx.feather.tessellate.Tessellator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -48,6 +49,16 @@ public final class RenderUtils {
      * Stores ClientState Gl Caps when setting up
      */
     private static final List<Integer> csBuffer = new ArrayList<>();
+
+    /**
+     * Method reference to {@code GlStateManager#glEnableClientState(int)}
+     */
+    private static final Consumer<Integer> ENABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
+
+    /**
+     * Method reference to {@code GlStateManager#glDisableClientState(int)}
+     */
+    private static final Consumer<Integer> DISABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
 
     /**
      * Called before rendering. Enables blending,
@@ -85,9 +96,7 @@ public final class RenderUtils {
             csBuffer.add(state.getCap());
 
         csBuffer.add(GL_VERTEX_ARRAY);
-
-        if (enabled) csBuffer.forEach(GlStateManager::glEnableClientState);
-        else         csBuffer.forEach(GlStateManager::glDisableClientState);
+        csBuffer.forEach(enabled ? ENABLE_CLIENT_STATE : DISABLE_CLIENT_STATE);
     }
 
     /**
@@ -149,10 +158,10 @@ public final class RenderUtils {
     /**
      * Draws a flipped textured rectangle
      *
-     * @param x1 Top corner X of the rectangle
-     * @param y1 Top corner Y of the rectangle
-     * @param x2 Bottom corner X of the rectangle
-     * @param y2 Bottom corner Y of the rectangle
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
      */
     public static void drawFlippedTexturedRect(float x1, float y1, float x2, float y2) {
         setupClientState(GLClientState.TEXTURE, true);
@@ -170,10 +179,10 @@ public final class RenderUtils {
     /**
      * Draws a reflected textured rectangle
      *
-     * @param x1 Top corner X of the rectangle
-     * @param y1 Top corner Y of the rectangle
-     * @param x2 Bottom corner X of the rectangle
-     * @param y2 Bottom corner Y of the rectangle
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
      */
     public static void drawReflectedTexturedRect(float x1, float y1, float x2, float y2) {
         setupClientState(GLClientState.TEXTURE, true);
@@ -189,12 +198,12 @@ public final class RenderUtils {
     }
 
     /**
-     * Renders a rectangle
+     * Renders a rectangle at the specified position with the specified color.
      *
-     * @param x1 Top corner X of the rectangle
-     * @param y1 Top corner Y of the rectangle
-     * @param x2 Bottom corner X of the rectangle
-     * @param y2 Bottom corner Y of the rectangle
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
      * @param color The color of the rectangle
      */
     public static void rectangle(float x1, float y1, float x2, float y2, int color) {
@@ -219,12 +228,37 @@ public final class RenderUtils {
         setupRender(false);
     }
 
-    // Bordered
-
+    /**
+     * Renders a colored rectangle at the specified position with the specified
+     * inner color, and border color. The border is given a width of 0.5
+     *
+     * @see RenderUtils#rectangleBordered(float, float, float, float, float, int, int)
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param borderColor The outer color of the rectangle
+     * @param internalColor The inner color of the rectangle
+     */
     public static void rectangleBordered(float x1, float y1, float x2, float y2, int borderColor, int internalColor) {
         rectangleBordered(x1, y1, x2, y2, 0.5F, borderColor, internalColor);
     }
 
+    /**
+     * Renders a colored rectangle at the specified position with the specified
+     * inner color, border color, and border width.
+     *
+     * @see RenderUtils#rectangleBordered(float, float, float, float, int, int)
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param width The width of the border
+     * @param borderColor The outer color of the rectangle
+     * @param internalColor The inner color of the rectangle
+     */
     public static void rectangleBordered(float x1, float y1, float x2, float y2, float width, int borderColor, int internalColor) {
         rectangle(x1 + width, y1 + width, x2 - width, y2 - width, internalColor);
         rectangle(x1 + width, y1, x2 - width, y1 + width, borderColor);
@@ -233,12 +267,32 @@ public final class RenderUtils {
         rectangle(x1 + width, y2 - width, x2 - width, y2, borderColor);
     }
 
-    // Gradient
-
+    /**
+     * Renders a rectangle with the specified corner coordinates with a
+     * gradient that starts at the top of the rectangle and ends at the bottom.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param c1 The color at the top of the rectangle
+     * @param c2 The color at the bottom of the rectangle
+     */
     public static void rectangleGradient(float x1, float y1, float x2, float y2, int c1, int c2) {
         rectangleGradient(x1, y1, x2, y2, new int[] { c1, c2 });
     }
 
+    /**
+     * Renders a rectangle with the specified corner coordinates with a gradient
+     * from the specified array of colors. Colors are oriented clockwise starting
+     * at the top left corner of the rectangle.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param color The colors for each of the rectangle verticies clockwise
+     */
     private static void rectangleGradient(float x1, float y1, float x2, float y2, int[] color) {
         if (color.length == 0)
             throw new RuntimeException("At least one set of colors should be supplied");
@@ -290,21 +344,72 @@ public final class RenderUtils {
         setupRender(false);
     }
 
-    // Bordered Gradient
-
+    /**
+     * Renders a rectangle with the specified corner coordinates with a
+     * gradient that starts at the top of the rectangle and ends at the bottom
+     * and a border with a default width of 0.5 and specified color.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param border The border color of the rectangle
+     * @param c1 The color at the top of the rectangle
+     * @param c2 The color at the bottom of the rectangle
+     */
     public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int border, int c1, int c2) {
         rectangleBorderedGradient(x1, y1, x2, y2, border, c1, c2, 0.5F);
     }
 
+    /**
+     * Renders a rectangle with the specified corner coordinates with a
+     * gradient that starts at the top of the rectangle and ends at the bottom
+     * and a border with a specified width and specified color.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param border The border color of the rectangle
+     * @param c1 The color at the top of the rectangle
+     * @param c2 The color at the bottom of the rectangle
+     * @param width The width of the border
+     */
     public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int border, int c1, int c2, float width) {
         rectangleBorderedGradient(x1, y1, x2, y2, new int[] { c1, c2 }, new int[] { border }, width);
     }
 
-    public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int[] fill, int[] outline, float width) {
-        rectangleOutlinedGradient(x1, y1, x2, y2, outline, width);
+    /**
+     * Renders a rectangle with the specified corner coordinates with a
+     * gradient that starts at the top of the rectangle and ends at the bottom
+     * and a border with a specified width and specified color. Fill and border
+     * colors are oriented clockwise starting at the top left corner.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param fill The fill vertex colors oriented clockwise
+     * @param border The border vertex colors oriented clockwise
+     * @param width The width of the border
+     */
+    public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int[] fill, int[] border, float width) {
+        rectangleOutlinedGradient(x1, y1, x2, y2, border, width);
         rectangleGradient(x1 + width, y1 + width, x2 - width, y2 - width, fill);
     }
 
+    /**
+     * Renders a rectangle border that is colored with the specified gradient
+     * colors and has the specified border width. Colors are oriented clockwise
+     * starting at the top left corner of the rectangle border.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param color The vertex colors oriented clockwise
+     * @param width The width of the border
+     */
     public static void rectangleOutlinedGradient(float x1, float y1, float x2, float y2, int[] color, float width) {
         rectangleGradient(x1, y1, x2, y1 + width, color);
         rectangleGradient(x1, y2 - width, x2, y2, color);
