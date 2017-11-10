@@ -2,7 +2,6 @@ package clientapi.lua;
 
 import clientapi.ClientAPI;
 import org.luaj.vm2.LuaFunction;
-import org.luaj.vm2.LuaValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +17,9 @@ import java.util.Map;
 public final class LuaHookManager {
 
     /**
-     * Map matching lua scripts to a map matching the hook event name to the functions that hook to it.
+     * Map matching lua scripts to a list of {@code LuaEventHooks} that they created
      */
-    private final Map<LuaScript, Map<String, List<LuaFunction>>> hooks;
+    private final Map<LuaScript, List<LuaEventHook>> hooks;
 
     /**
      * A child event bus that passes events posted by {@code ClientAPI#EVENT_BUS} to Lua event hooks.
@@ -45,7 +44,7 @@ public final class LuaHookManager {
      * @param function The lua hook function
      */
     public final void create(String event, LuaFunction function) {
-        getHooks(currentScript).computeIfAbsent(event, e -> new ArrayList<>()).add(function);
+        getHooks(currentScript).add(new LuaEventHook(currentScript, event, function));
     }
 
     /**
@@ -64,8 +63,8 @@ public final class LuaHookManager {
      * @param script The script
      * @return The hooks
      */
-    public final Map<String, List<LuaFunction>> getHooks(LuaScript script) {
-        return hooks.computeIfAbsent(script, e -> new HashMap<>());
+    public final List<LuaEventHook> getHooks(LuaScript script) {
+        return hooks.computeIfAbsent(script, s -> new ArrayList<>());
     }
 
     /**
@@ -73,7 +72,7 @@ public final class LuaHookManager {
      *
      * @return All of the active hooks
      */
-    public final Map<LuaScript, Map<String, List<LuaFunction>>> getHooks() {
+    public final Map<LuaScript, List<LuaEventHook>> getHooks() {
         return this.hooks;
     }
 
