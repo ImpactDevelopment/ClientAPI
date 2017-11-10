@@ -46,7 +46,7 @@ public final class ValueAccessorTransformer implements ITransformer {
     /**
      * Instance of the handle for {@code LambdaMetaFactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
      */
-    private final static Handle METAFACTORY = new Handle(
+    private static final Handle METAFACTORY = new Handle(
             H_INVOKESTATIC,
             "java/lang/invoke/LambdaMetafactory",
             "metafactory",
