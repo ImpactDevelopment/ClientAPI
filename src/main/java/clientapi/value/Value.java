@@ -110,17 +110,14 @@ public class Value<T> implements IValue<T> {
     }
 
     @Override
-    public String getParent() {
+    public final String getParent() {
         return this.parent;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public T getValue() {
-        if (direct)
-            return (T) getter.get();
-        else
-            return (T) ReflectionUtils.getField(object, field);
+        return (T) (direct ? getter.get() : ReflectionUtils.getField(object, field));
     }
 
     @Override
