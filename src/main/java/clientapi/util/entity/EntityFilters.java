@@ -23,30 +23,103 @@ public final class EntityFilters implements Helper {
 
     private EntityFilters() {}
 
+    /**
+     * Creates an {@code EntityFilter} that restricts entities that can't
+     * be seen by the client player.
+     *
+     * @param allowCantBeSeen Whether or not to allow entities that can't be seen
+     * @return An entity filter that can restrict entities that can't be seen
+     */
     public static EntityFilter allowCantBeSeen(Supplier<Boolean> allowCantBeSeen) {
         return entity -> allowCantBeSeen.get() || mc.player.canEntityBeSeen(entity);
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts sleeping players.
+     *
+     * @param allowSleeping Whether or not to allow sleeping players
+     * @return An entity filter that can restrict sleeping players
+     */
     public static EntityFilter allowSleeping(Supplier<Boolean> allowSleeping) {
         return entity -> allowSleeping.get() || (!isPlayer(entity) || !((EntityPlayer) entity).isPlayerSleeping());
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts invisible entities.
+     *
+     * @param allowInvisible Whether or not to allow invisible entities
+     * @return An entity filter that can restrict invisible entities
+     */
     public static EntityFilter allowInvisible(Supplier<Boolean> allowInvisible) {
         return entity -> allowInvisible.get() || !entity.isInvisible();
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts other
+     * players that are on the same team as the client player.
+     *
+     * @see EntityFilters#onSameTeam(Entity, Entity)
+     *
+     * @param allowTeammates Whether or not to allow teammates
+     * @return An entity filter that can restrict teammates
+     */
     public static EntityFilter allowTeammates(Supplier<Boolean> allowTeammates) {
         return entity -> allowTeammates.get() || !onSameTeam(entity, mc.player);
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts player,
+     * hostile, and passive entities if their corresponding
+     * suppliers return false.
+     *
+     * @see EntityFilters#isPlayer(Entity)
+     * @see EntityFilters#isHostile(Entity)
+     * @see EntityFilters#isPassive(Entity)
+     *
+     * @param allowPlayers Whether or not to allow players
+     * @param allowHostiles Whether or not to allow hostiles
+     * @param allowPassives Whether or not to allow passives
+     * @return An entity filter that can restrict player, hostile, and passive entities
+     */
+    public static EntityFilter allowType(Supplier<Boolean> allowPlayers, Supplier<Boolean> allowHostiles, Supplier<Boolean> allowPassives) {
+        return new MultiEntityFilter(allowPlayers(allowPlayers), allowHostiles(allowHostiles), allowPassives(allowPassives));
+    }
+
+    /**
+     * Creates an {@code EntityFilter} that restricts player
+     * entities if the specified supplier returns false.
+     *
+     * @see EntityFilters#isPlayer(Entity)
+     *
+     * @param allowPlayers Whether or not to allow players
+     * @return An entity filter that can restrict players
+     */
     public static EntityFilter allowPlayers(Supplier<Boolean> allowPlayers) {
         return entity -> allowPlayers.get() || !isPlayer(entity);
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts hostile
+     * entities if the specified supplier returns false.
+     *
+     * @see EntityFilters#isHostile(Entity)
+     *
+     * @param allowHostiles Whether or not to allow hostiles
+     * @return An entity filter that can restrict hostiles
+     */
     public static EntityFilter allowHostiles(Supplier<Boolean> allowHostiles) {
         return entity -> allowHostiles.get() || !isHostile(entity);
     }
 
+    /**
+     * Creates an {@code EntityFilter} that restricts passive
+     * entities if the specified supplier returns false.
+     *
+     * @see EntityFilters#isPassive(Entity)
+     *
+     * @param allowPassives Whether or not to allow passives
+     * @return An entity filter that can restrict passives
+     */
     public static EntityFilter allowPassives(Supplier<Boolean> allowPassives) {
         return entity -> allowPassives.get() || !isPassive(entity);
     }
@@ -59,10 +132,8 @@ public final class EntityFilters implements Helper {
      * @return Whether or not the entities are on the same team
      */
     public static boolean onSameTeam(Entity e1, Entity e2) {
-        if (!(e1 instanceof EntityPlayer) || !(e2 instanceof EntityPlayer))
-            return false;
+        return e1 instanceof EntityPlayer && e2 instanceof EntityPlayer && e1.isOnSameTeam(e2);
 
-        return e1.isOnSameTeam(e2);
     }
 
     /**
