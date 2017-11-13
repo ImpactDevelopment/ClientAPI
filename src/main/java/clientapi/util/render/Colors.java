@@ -18,6 +18,7 @@ package clientapi.util.render;
 
 import clientapi.util.interfaces.Helper;
 import clientapi.util.math.MathUtils;
+import net.minecraft.util.text.TextFormatting;
 
 import java.awt.*;
 
@@ -44,6 +45,16 @@ public final class Colors implements Helper {
                 (hex & 0xFF) / 255F,
                 (hex >> 24 & 0xFF) / 255F
         };
+    }
+
+    /**
+     * Gets the hex from a {@code TextFormatting} value.
+     *
+     * @param color The {@code TextFormatting} value
+     * @return Hex corresponding to {@code TextFormatting} value
+     */
+    public static int getColor(TextFormatting color) {
+        return getColor(color.toString().charAt(1));
     }
 
     /**
