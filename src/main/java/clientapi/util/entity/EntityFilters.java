@@ -24,6 +24,26 @@ public final class EntityFilters implements Helper {
     private EntityFilters() {}
 
     /**
+     * Creates an {@code EntityFilter} that restricts the specified entity
+     *
+     * @param targetEntity The entity to filter out
+     * @return An entity filter that can restrict entities that can't be seen
+     */
+    public static EntityFilter restrictEntity(Supplier<Entity> targetEntity) {
+        return entity -> entity != targetEntity.get();
+    }
+
+    /**
+     * Creates an {@code EntityFilter} that restricts entities that are dead.
+     *
+     * @param allowDead Whether or not to allow entities that are dead
+     * @return An entity filter that can restrict entities that are dead
+     */
+    public static EntityFilter allowDead(Supplier<Boolean> allowDead) {
+        return entity -> allowDead.get() || entity.isEntityAlive();
+    }
+
+    /**
      * Creates an {@code EntityFilter} that restricts entities that can't
      * be seen by the client player.
      *
