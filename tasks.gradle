@@ -61,6 +61,7 @@ task('makeCDK', type: Zip) {
                 ALPINE_VERSION: project.alpineVersion,
                 MIXIN_VERSION: project.mixinVersion,
                 TT_VERSION: project.typetoolsVersion,
+                LUAJ_VERSION: project.luajVersion,
                 MAPPINGS: minecraft.mappings,
                 TWEAKER: minecraft.tweakClass
         ])
