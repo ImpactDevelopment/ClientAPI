@@ -1,9 +1,13 @@
 package clientapi.lua;
 
-import org.luaj.vm2.script.LuaScriptEngine;
+import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.jse.JsePlatform;
 
 import javax.script.CompiledScript;
 import javax.script.ScriptException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Brady
@@ -12,9 +16,9 @@ import javax.script.ScriptException;
 public final class LuaScript {
 
     /**
-     * The engine that is used to compile this script
+     * An Immutable List of default libraries
      */
-    private final LuaScriptEngine engine;
+    private static final List<String> DEFAULT_LIBS = Arrays.asList("hook", "mc", "render");
 
     /**
      * {@code LuaHandler} that created this {@code LuaScript}
@@ -32,9 +36,14 @@ public final class LuaScript {
     private final String code;
 
     /**
-     * A compiled instance of this script
+     * The scope for this script
      */
-    private CompiledScript compiled;
+    private Globals globals;
+
+    /**
+     * The compiled script
+     */
+    private LuaValue compiled;
 
     /**
      * Whether or not this script can be evaluated
@@ -42,7 +51,6 @@ public final class LuaScript {
     private boolean canEval = true;
 
     public LuaScript(LuaHandler handler, Type type, String code) {
-        this.engine = handler.genScriptEngine();
         this.handler = handler;
         this.type = type;
         this.code = code;
@@ -51,15 +59,20 @@ public final class LuaScript {
     /**
      * Compiles this script in preperation for evaluation
      *
-     * @see LuaScript#eval
+     * @see LuaScript#exec
      *
      * @throws ScriptException if the script has already been compiled
      */
     public final void compile() throws ScriptException {
-        if (compiled != null)
-            throw new ScriptException("Script already compiled");
+        // Create globals
+        globals = JsePlatform.standardGlobals();
 
-        compiled = engine.compile(this.code);
+        // Load libs
+        LuaValue require = globals.get("require");
+        DEFAULT_LIBS.forEach(lib -> require.call("clientapi.lua.lib." + lib));
+
+        // Compile script
+        compiled = globals.load(code);
     }
 
     /**
@@ -69,26 +82,27 @@ public final class LuaScript {
      */
     public final void delete() {
         handler.getHookManager().detach(this);
+        globals = null;
         compiled = null;
         canEval = true;
     }
 
     /**
-     * Evaluates/executes this script, can only be done once if
-     * the {@code Type} is set to {@code HOOK}. Returns whether
-     * or not the operation was a success, based on if this script
-     * has already been compiled or not and if the script can be evaluated.
+     * Executes this script, can only be done once if the
+     * {@code Type} is set to {@code HOOK}. Returns whether or
+     * not the operation was a success, based on if this script
+     * has already been compiled or not and if the script can be executed.
      *
      * @return Whether or not the operation was a success
-     * @throws ScriptException if the script is unable to be evaluated.
+     * @throws ScriptException if the script is unable to be executed.
      */
-    public final boolean eval() throws ScriptException {
+    public final boolean exec() throws ScriptException {
         if (compiled == null || !canEval)
             return false;
 
         // Evaluate the script
         handler.getHookManager().setCurrentScript(this);
-        compiled.eval();
+        compiled.call();
 
         // Set the new canEval flag
         canEval = type == Type.SINGLE;
@@ -107,13 +121,6 @@ public final class LuaScript {
      */
     public final String getCode() {
         return this.code;
-    }
-
-    /**
-     * @return The compiled instance of this script, {@code null} if not yet compiled
-     */
-    public final CompiledScript getCompiled() {
-        return this.compiled;
     }
 
     public enum Type {
