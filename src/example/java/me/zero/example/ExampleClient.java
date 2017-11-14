@@ -59,7 +59,7 @@ public final class ExampleClient extends Client {
         LuaScript script = LuaHandler.getHandler().createScript(LuaScript.Type.HOOK, scriptSource);
         try {
             script.compile();
-            script.eval();
+            script.exec();
         } catch (ScriptException e) {
             e.printStackTrace();
         }
