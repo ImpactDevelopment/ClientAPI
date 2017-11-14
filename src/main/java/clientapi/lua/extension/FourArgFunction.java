@@ -19,8 +19,7 @@ abstract public class FourArgFunction extends LibFunction {
     public FourArgFunction() {
     }
 
-    public Varargs invoke(Varargs varargs) {
-        return call(varargs.arg1(),varargs.arg(2), varargs.arg(3), varargs.arg(4));
+    public final Varargs invoke(Varargs varargs) {
+        return call(varargs.arg1(), varargs.arg(2), varargs.arg(3), varargs.arg(4));
     }
-
 }
