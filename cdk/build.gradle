@@ -65,6 +65,7 @@ dependencies {
     compile 'com.github.ZeroMemes:ClientAPI:@CAPI_VERSION@-dev'
     compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
     compile 'net.jodah:typetools:@TT_VERSION@'
+    compile 'org.luaj:luaj-jse:@LUAJ_VERSION@'
     compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
