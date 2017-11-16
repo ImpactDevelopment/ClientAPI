@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Used to manage lua event hooking
@@ -38,14 +39,26 @@ public final class LuaHookManager {
     }
 
     /**
-     * Creates a hook for the specified event with the specified function. The
+     * Adds a hook for the specified event with the specified function. The
      * last script to be evaluated is bound to the newly created {@code LuaEventHook}.
      *
      * @param event The hook event target
+     * @param identifier The unique identifier
      * @param function The lua hook function
      */
-    public final void create(String event, LuaFunction function) {
-        getHooks(currentScript).add(new LuaEventHook(currentScript, event, function));
+    public final void add(String event, String identifier, LuaFunction function) {
+        getScriptHooks(currentScript).add(new LuaEventHook(currentScript, event, identifier, function));
+    }
+
+    /**
+     * Removes a {@code LuaEventHook} with the specified identifier from
+     * the event hooks that target the specified event.
+     *
+     * @param event The hook event target
+     * @param identifier The lua hook function
+     */
+    public final void remove(String event, String identifier) {
+        getEventHooks(event).removeIf(hook -> hook.getIdentifier().equals(identifier));
     }
 
     /**
@@ -64,8 +77,21 @@ public final class LuaHookManager {
      * @param script The script
      * @return The hooks
      */
-    public final List<LuaEventHook> getHooks(LuaScript script) {
+    public final List<LuaEventHook> getScriptHooks(LuaScript script) {
         return hooks.computeIfAbsent(script, s -> new ArrayList<>());
+    }
+
+    /**
+     * Returns the hooks targetting the specified event
+     *
+     * @param event The target event
+     * @return The hooks
+     */
+    public final List<LuaEventHook> getEventHooks(String event) {
+        return hooks.values().stream()
+                .flatMap(List::stream)
+                .filter(hook -> hook.getEvent().equals(event))
+                .collect(Collectors.toList());
     }
 
     /**
