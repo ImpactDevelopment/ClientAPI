@@ -27,14 +27,42 @@ public final class LuaEventHook implements EventHook<LuaValue> {
     private final String event;
 
     /**
+     * The unique string identifier for this hook. Identifiers
+     * only have to be unique for the same event.
+     */
+    private final String identifier;
+
+    /**
      * The lua function that hooks into the target event
      */
     private final LuaFunction function;
 
-    public LuaEventHook(LuaScript script, String event, LuaFunction function) {
+    public LuaEventHook(LuaScript script, String event, String identifier, LuaFunction function) {
         this.script = script;
         this.event = event;
+        this.identifier = identifier;
         this.function = function;
+    }
+
+    /**
+     * @return The script that created this {@code LuaEventHook}
+     */
+    public final LuaScript getScript() {
+        return this.script;
+    }
+
+    /**
+     * @return The target event class's simple name
+     */
+    public final String getEvent() {
+        return this.event;
+    }
+
+    /**
+     * @return The unique string identifier for this hook.
+     */
+    public final String getIdentifier() {
+        return this.identifier;
     }
 
     /**
