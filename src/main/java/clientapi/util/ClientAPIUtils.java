@@ -172,4 +172,28 @@ public final class ClientAPIUtils {
 
         return categories;
     }
+
+    /**
+     * Sleeps the current thread for the specified length
+     * of time represented as milliseconds without the need
+     * for a try/catch enclosure.
+     *
+     * @see Thread#sleep(long)
+     *
+     * @param ms The milliseconds to sleep
+     * @return Whether or not an {@code InterruptedException} was thrown by {@code Thread#sleep(long)}
+     */
+    public static boolean sleep(long ms) {
+        if (ms <= 0) {
+            return true;
+        }
+
+        try {
+            Thread.sleep(ms);
+            return true;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
