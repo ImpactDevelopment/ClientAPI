@@ -1,10 +1,16 @@
 package clientapi.lua;
 
+import clientapi.ClientAPI;
 import clientapi.event.AbstractEventBus;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 /**
+ * Used as a child event bus to hook into all events coming
+ * from the ClientAPI event bus
+ *
+ * @see ClientAPI#EVENT_BUS
+ *
  * @author Brady
  * @since 11/8/2017 4:57 PM
  */
