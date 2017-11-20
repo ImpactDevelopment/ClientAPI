@@ -29,7 +29,7 @@ public final class render extends LuaLibrary {
     /**
      * @see FontRenderer#drawString(String, float, float, int, boolean)
      */
-    static final class DrawText extends FourArgFunction {
+    private static final class DrawText extends FourArgFunction {
 
         @Override
         public final LuaValue call(LuaValue text, LuaValue x, LuaValue y, LuaValue color) {
@@ -43,7 +43,7 @@ public final class render extends LuaLibrary {
     /**
      * @see FontRenderer#drawString(String, float, float, int, boolean)
      */
-    static final class DrawTextWithShadow extends FourArgFunction {
+    private static final class DrawTextWithShadow extends FourArgFunction {
 
         @Override
         public final LuaValue call(LuaValue text, LuaValue x, LuaValue y, LuaValue color) {

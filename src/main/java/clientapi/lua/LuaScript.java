@@ -18,7 +18,7 @@ public final class LuaScript {
     /**
      * An Immutable List of default libraries
      */
-    private static final List<String> DEFAULT_LIBS = Arrays.asList("hook", "mc", "render");
+    private static final List<String> DEFAULT_LIBS = Arrays.asList("hook", "mc", "render", "time");
 
     /**
      * {@code LuaHandler} that created this {@code LuaScript}
@@ -46,9 +46,9 @@ public final class LuaScript {
     private LuaValue compiled;
 
     /**
-     * Whether or not this script can be evaluated
+     * Whether or not this script can be executed
      */
-    private boolean canEval = true;
+    private boolean canExec = true;
 
     public LuaScript(LuaHandler handler, Type type, String code) {
         this.handler = handler;
@@ -84,20 +84,23 @@ public final class LuaScript {
         handler.getHookManager().detach(this);
         globals = null;
         compiled = null;
-        canEval = true;
+        canExec = true;
     }
 
     /**
-     * Executes this script, can only be done once if the
-     * {@code Type} is set to {@code HOOK}. Returns whether or
-     * not the operation was a success, based on if this script
-     * has already been compiled or not and if the script can be executed.
+     * Executes this script, can only be done once if the {@code Type}
+     * is set to {@code HOOK}. If the script is type {@code SINGLE},
+     * the script should be run on a separate thread in the case that
+     * {@code time.Wait(int)} calls are made to sleep the execution
+     * thread. Returns whether or not the operation was a success,
+     * based on if this script has already been compiled or not and
+     * if the script can be executed.
      *
      * @return Whether or not the operation was a success
      * @throws ScriptException if the script is unable to be executed.
      */
     public final boolean exec() throws ScriptException {
-        if (compiled == null || !canEval)
+        if (compiled == null || !canExec)
             return false;
 
         // Evaluate the script
@@ -105,7 +108,7 @@ public final class LuaScript {
         compiled.call();
 
         // Set the new canEval flag
-        canEval = type == Type.SINGLE;
+        canExec = type == Type.SINGLE;
         return true;
     }
 

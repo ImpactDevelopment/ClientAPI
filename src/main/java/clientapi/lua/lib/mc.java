@@ -30,7 +30,7 @@ public final class mc extends LuaLibrary {
     /**
      * @see EntityPlayerSP#sendChatMessage(String)
      */
-    static final class SendChat extends OneArgFunction {
+    private static final class SendChat extends OneArgFunction {
 
         @Override
         public final LuaValue call(LuaValue message) {
