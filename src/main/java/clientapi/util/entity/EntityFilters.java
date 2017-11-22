@@ -45,7 +45,7 @@ public final class EntityFilters implements Helper {
 
     /**
      * Creates an {@code EntityFilter} that restricts entities that can't
-     * be seen by the client player.
+     * be seen by the local player.
      *
      * @param allowCantBeSeen Whether or not to allow entities that can't be seen
      * @return An entity filter that can restrict entities that can't be seen
@@ -76,7 +76,7 @@ public final class EntityFilters implements Helper {
 
     /**
      * Creates an {@code EntityFilter} that restricts other
-     * players that are on the same team as the client player.
+     * players that are on the same team as the local player.
      *
      * @see EntityFilters#onSameTeam(Entity, Entity)
      *
