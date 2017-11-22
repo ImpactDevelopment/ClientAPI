@@ -59,7 +59,7 @@ public final class LuaScript {
     /**
      * Compiles this script in preperation for evaluation
      *
-     * @see LuaScript#exec
+     * @see LuaScript#exec()
      *
      * @throws ScriptException if the script has already been compiled
      */
