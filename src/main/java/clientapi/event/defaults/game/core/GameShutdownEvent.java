@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.core;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.client.Minecraft;
 
 /**
  * Called when the game is requested to be shutdown.
@@ -25,6 +26,8 @@ import me.zero.alpine.type.Cancellable;
  * process cancelling. The only reason a developer should
  * cancel shutdown is to complete a cleanup process,
  * if it is unable to be done directly before the shutdown.
+ *
+ * @see Minecraft#shutdown()
  *
  * @author Brady
  * @since 5/24/2017 12:26 PM

@@ -23,7 +23,7 @@ import clientapi.util.math.Vec2;
 /**
  * Default implementations of {@code WidgetPos}
  *
- * @see WidgetPos`
+ * @see WidgetPos
  *
  * @author Brady
  * @since 5/28/2017 10:00 AM
