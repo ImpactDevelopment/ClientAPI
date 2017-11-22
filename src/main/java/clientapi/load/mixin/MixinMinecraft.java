@@ -25,7 +25,7 @@ import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.wrapper.IMinecraft;
-import clientapi.lua.LuaHandler;
+import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GlUtils;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
@@ -44,9 +44,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -119,7 +117,7 @@ public abstract class MixinMinecraft implements IMinecraft {
             throw new ClientInitException("Unable to locate Client Configuration (client.json)");
 
         // Construct a ClientInfo object from the client json using GSON
-        ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(new BufferedReader(new InputStreamReader(stream)), ClientInfo.class);
+        ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(new StreamReader(stream).all(), ClientInfo.class);
 
         if (clientInfo == null)
             throw new ClientInitException("Unable to create ClientInfo from client.json");
@@ -130,14 +128,12 @@ public abstract class MixinMinecraft implements IMinecraft {
             Class<?> clientClass = Class.forName(clientInfo.getMain());
             Constructor<?> constructor;
             if (clientClass != null && clientClass.getSuperclass().equals(Client.class) && (constructor = clientClass.getConstructor(ClientInfo.class)) != null) {
-                try {
-                    client = (Client) constructor.newInstance(clientInfo);
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    throw new ClientInitException("Unable to instantiate Client");
-                }
+                client = (Client) constructor.newInstance(clientInfo);
             } else {
                 throw new ClientInitException("Client class is null or the superclass is not Client type");
             }
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new ClientInitException("Unable to instantiate Client");
         } catch (ClassNotFoundException e) {
             throw new ClientInitException("Unable to find client class");
         } catch (NoSuchMethodException e) {
