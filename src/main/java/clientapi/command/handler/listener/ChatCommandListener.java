@@ -78,7 +78,7 @@ public final class ChatCommandListener extends CommandListener implements Helper
 
             // Only handle the command if there is at least 1 argument group
             if (matches.size() > 0) {
-                Command command = handler.getCommandManager().getData().stream().filter(cmd -> {
+                Command command = handler.getCommandManager().stream().filter(cmd -> {
                     for (String header : cmd.headers()) {
                         if (header.equalsIgnoreCase(matches.get(0))) {
                             return true;

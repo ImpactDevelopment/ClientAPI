@@ -53,7 +53,7 @@ public final class Hud extends Module implements IRender {
 
         y = sr.getScaledHeight() - 12;
 
-        ExampleClient.getInstance().getModuleManager().getData().stream().filter(Module::getState)
+        ExampleClient.getInstance().getModuleManager().stream().filter(Module::getState)
                 .sorted(Comparator.comparingInt(m -> -font.getStringWidth(m.getName()))).forEach(module -> {
             font.drawStringWithShadow(module.getName(), sr.getScaledWidth() - 2 - font.getStringWidth(module.getName()), y, color);
             y -= font.FONT_HEIGHT;

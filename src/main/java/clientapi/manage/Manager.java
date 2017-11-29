@@ -18,6 +18,7 @@ package clientapi.manage;
 
 import clientapi.util.interfaces.Saveable;
 import clientapi.util.interfaces.Loadable;
+import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ import java.util.*;
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public abstract class Manager<T> implements Loadable, Saveable {
+public abstract class Manager<T> implements Collection<T>, Loadable, Saveable {
 
     /**
      * The list of all of the entries that this Manager contains
@@ -94,9 +95,6 @@ public abstract class Manager<T> implements Loadable, Saveable {
      */
     @SuppressWarnings("unchecked")
     public final <I extends T> I get(Class<I> clazz) {
-        if (!(this instanceof AbstractManager))
-            throw new UnsupportedOperationException("Entry access via class is not supported by this Manager, does not implement AbstractManager.");
-
         if (clazz == null)
             return null;
 
@@ -105,16 +103,76 @@ public abstract class Manager<T> implements Loadable, Saveable {
     }
 
     /**
-     * @return All of the entries that this manager holds
-     */
-    public final List<T> getData() {
-        return new ArrayList<>(this.data);
-    }
-
-    /**
      * @return The name of this manager
      */
-    public String getName() {
+    public final String getName() {
         return this.name;
+    }
+
+    @Override
+    public final int size() {
+        return this.data.size();
+    }
+
+    @Override
+    public final boolean isEmpty() {
+        return this.data.isEmpty();
+    }
+
+    @Override
+    public final boolean contains(Object o) {
+        return this.data.contains(o);
+    }
+
+    @Override
+    @NotNull
+    public final Object[] toArray() {
+        return this.data.toArray();
+    }
+
+    @Override
+    @NotNull
+    public final <T1> T1[] toArray(T1[] a) {
+        return this.data.toArray(a);
+    }
+
+    @Override
+    public final boolean add(T t) {
+        return this.data.add(t);
+    }
+
+    @Override
+    public final boolean remove(Object o) {
+        return this.data.remove(o);
+    }
+
+    @Override
+    public final boolean containsAll(Collection<?> c) {
+        return this.data.containsAll(c);
+    }
+
+    @Override
+    public final boolean addAll(Collection<? extends T> c) {
+        return this.data.addAll(c);
+    }
+
+    @Override
+    public final boolean removeAll(Collection<?> c) {
+        return this.data.removeAll(c);
+    }
+
+    @Override
+    public final boolean retainAll(Collection<?> c) {
+        return this.data.retainAll(c);
+    }
+
+    @Override
+    public final void clear() {
+        this.data.clear();
+    }
+
+    @Override
+    public final Iterator<T> iterator() {
+        return this.data.iterator();
     }
 }
