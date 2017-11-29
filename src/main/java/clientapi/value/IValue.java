@@ -16,6 +16,7 @@
 
 package clientapi.value;
 
+import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Nameable;
 import clientapi.value.holder.IValueHolder;
@@ -26,7 +27,7 @@ import clientapi.value.holder.IValueHolder;
  * @author Brady
  * @since 1/23/2017 12:00 PM
  */
-public interface IValue<T> extends Nameable, Identifiable, IValueHolder {
+public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHolder {
 
     /**
      * @return The ID of the parent value
