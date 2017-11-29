@@ -54,7 +54,7 @@ public enum ClientHandler implements Helper {
      */
     @EventHandler
     private final Listener<RenderHudEvent> render2DListener = new Listener<>(event ->
-            CameraManager.getInstance().getData().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
+            CameraManager.getInstance().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
 
     /**
      * Handles keybinds

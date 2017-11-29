@@ -17,7 +17,7 @@
 package clientapi.util.interfaces;
 
 /**
- * Gives objects a name, alias, and description
+ * Gives objects a name, and description
  *
  * @author Brady
  * @since 2/10/2017 12:00 PM

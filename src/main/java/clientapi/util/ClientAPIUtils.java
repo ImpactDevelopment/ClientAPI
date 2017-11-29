@@ -159,7 +159,7 @@ public final class ClientAPIUtils {
      */
     public static Collection<Class<?>> getCategories(Manager<Module> moduleManager, boolean sort) {
         LinkedHashSet<Class<?>> categories = new LinkedHashSet<>();
-        moduleManager.getData().stream().map(Module::getType).forEach(categories::add);
+        moduleManager.stream().map(Module::getType).forEach(categories::add);
 
         if (sort) {
             List<Class<?>> sorted = new ArrayList<>(categories);
