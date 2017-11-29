@@ -17,6 +17,7 @@
 package clientapi.manage;
 
 import clientapi.util.Tag;
+import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Taggable;
 import clientapi.value.holder.ValueHolder;
 import clientapi.util.interfaces.Nameable;
@@ -30,7 +31,7 @@ import java.util.*;
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
-public class Node extends ValueHolder implements Nameable, Taggable {
+public class Node extends ValueHolder implements Nameable, Describable, Taggable {
 
     /**
      * Child nodes
