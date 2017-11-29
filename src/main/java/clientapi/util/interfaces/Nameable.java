@@ -17,7 +17,7 @@
 package clientapi.util.interfaces;
 
 /**
- * Gives objects a name, and description
+ * Gives objects a name and optional aliases
  *
  * @author Brady
  * @since 2/10/2017 12:00 PM
@@ -30,7 +30,9 @@ public interface Nameable {
     String getName();
 
     /**
-     * @return Description of this object
+     * @return An array of aliases.
      */
-    String getDescription();
+    default String[] getAliases() {
+        return new String[0];
+    }
 }

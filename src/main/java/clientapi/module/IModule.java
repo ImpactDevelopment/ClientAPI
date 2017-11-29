@@ -16,10 +16,7 @@
 
 package clientapi.module;
 
-import clientapi.util.interfaces.Bindable;
-import clientapi.util.interfaces.Helper;
-import clientapi.util.interfaces.Nameable;
-import clientapi.util.interfaces.Toggleable;
+import clientapi.util.interfaces.*;
 
 /**
  * Base for Module
@@ -29,7 +26,7 @@ import clientapi.util.interfaces.Toggleable;
  * @author Brady
  * @since 1/21/2017 12:00 PM
  */
-interface IModule extends Nameable, Helper, Toggleable, Bindable {
+interface IModule extends Nameable, Describable, Helper, Toggleable, Bindable {
 
     /**
      * @return The type of the Module
