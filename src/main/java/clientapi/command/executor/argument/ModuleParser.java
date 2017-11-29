@@ -18,7 +18,7 @@ public final class ModuleParser implements ArgumentParser<Module> {
 
     @Override
     public final Module parse(ExecutionContext context, Class<?> type, String raw) {
-        return moduleManager.getData().stream().filter(mod -> format(mod.getName()).equals(format(raw))).findFirst().orElse(null);
+        return moduleManager.stream().filter(mod -> format(mod.getName()).equals(format(raw))).findFirst().orElse(null);
     }
 
     @Override

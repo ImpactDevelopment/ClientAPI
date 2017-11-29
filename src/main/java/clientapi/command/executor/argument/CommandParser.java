@@ -21,7 +21,7 @@ public final class CommandParser implements ArgumentParser<Command> {
 
     @Override
     public final Command parse(ExecutionContext context, Class<?> type, String raw) {
-        return commandManager.getData().stream().filter(cmd -> Arrays.stream(cmd.headers()).anyMatch(s -> s.equalsIgnoreCase(raw))).findFirst().orElse(null);
+        return commandManager.stream().filter(cmd -> Arrays.stream(cmd.headers()).anyMatch(s -> s.equalsIgnoreCase(raw))).findFirst().orElse(null);
     }
 
     @Override
