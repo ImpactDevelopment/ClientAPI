@@ -18,8 +18,8 @@ package clientapi.manage;
 
 import clientapi.util.interfaces.Saveable;
 import clientapi.util.interfaces.Loadable;
-import com.sun.istack.internal.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
@@ -125,13 +125,11 @@ public abstract class Manager<T> implements Collection<T>, Loadable, Saveable {
     }
 
     @Override
-    @NotNull
     public final Object[] toArray() {
         return this.data.toArray();
     }
 
     @Override
-    @NotNull
     public final <T1> T1[] toArray(T1[] a) {
         return this.data.toArray(a);
     }
