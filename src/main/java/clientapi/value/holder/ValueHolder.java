@@ -51,12 +51,12 @@ public class ValueHolder implements IValueHolder {
 
     @Override
     public final boolean addValue(IValue value) {
-        return getValue(value.getId()) == null && this.values.add(value);
+        return getValue(value.getID()) == null && this.values.add(value);
     }
 
     @Override
     public final IValue getValue(String id) {
-        return valueCache.computeIfAbsent(id, _id -> values.stream().filter(value -> value.getId().equals(_id)).findFirst().orElse(null));
+        return valueCache.computeIfAbsent(id, _id -> values.stream().filter(value -> value.getID().equals(_id)).findFirst().orElse(null));
     }
 
     @Override

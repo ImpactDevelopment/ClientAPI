@@ -108,7 +108,7 @@ public class Node extends ValueHolder implements Nameable, Describable, Taggable
 
     @Override
     public Optional<Tag> getTag(String id) {
-        return this.tags.stream().filter(tag -> tag.getId().equals(id)).findFirst();
+        return this.tags.stream().filter(tag -> tag.getID().equals(id)).findFirst();
     }
 
     @Override

@@ -36,7 +36,7 @@ public interface Taggable {
      * @param id The ID
      */
     default void removeTag(Identifiable id) {
-        removeTag(id.getId());
+        removeTag(id.getID());
     }
 
     /**
@@ -56,7 +56,7 @@ public interface Taggable {
      * @return Whether or not this object has a tag with the specified ID
      */
     default boolean hasTag(Identifiable id) {
-        return this.hasTag(id.getId());
+        return this.hasTag(id.getID());
     }
 
     /**
@@ -74,7 +74,7 @@ public interface Taggable {
      * @return The tag with a matching ID
      */
     default Optional<Tag> getTag(Identifiable id) {
-        return this.getTag(id.getId());
+        return this.getTag(id.getID());
     }
 
     /**
