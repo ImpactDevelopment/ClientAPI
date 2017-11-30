@@ -139,18 +139,18 @@ public class Value<T> implements IValue<T> {
     }
 
     @Override
-    public final String getId() {
+    public final String getID() {
         return this.id;
     }
 
     @Override
     public final boolean addValue(IValue value) {
-        return getValue(value.getId()) == null && this.children.add(value);
+        return getValue(value.getID()) == null && this.children.add(value);
     }
 
     @Override
     public final IValue getValue(String id) {
-        return valueCache.computeIfAbsent(id, _id -> children.stream().filter(value -> value.getId().equals(_id)).findFirst().orElse(null));
+        return valueCache.computeIfAbsent(id, _id -> children.stream().filter(value -> value.getID().equals(_id)).findFirst().orElse(null));
     }
 
     @Override

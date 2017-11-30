@@ -78,7 +78,7 @@ public final class Values {
                 IValue parent;
                 // Check if the parent target isn't null and if there
                 // is a parent target, the corresponding target isn't null
-                if (value.getParent() != null && (parent = values.stream().filter(v -> v.getId().equals(value.getParent())).findFirst().orElse(null)) != null)
+                if (value.getParent() != null && (parent = values.stream().filter(v -> v.getID().equals(value.getParent())).findFirst().orElse(null)) != null)
                     parent.addValue(value);
             });
 
