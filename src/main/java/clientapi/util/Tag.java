@@ -56,7 +56,7 @@ public final class Tag<T> implements Identifiable {
     }
 
     @Override
-    public final String getId() {
+    public final String getID() {
         return this.id;
     }
 }

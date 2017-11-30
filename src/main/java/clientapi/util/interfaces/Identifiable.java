@@ -25,7 +25,7 @@ public interface Identifiable {
     /**
      * @return The ID of this {@code Identifiable}
      */
-    String getId();
+    String getID();
 
     /**
      * Checks if the ID of this {@code Identifiable} and
@@ -35,6 +35,6 @@ public interface Identifiable {
      * @return Whether or not they match
      */
     default boolean matches(Identifiable id) {
-        return this.getId().equals(id.getId());
+        return this.getID().equals(id.getID());
     }
 }
