@@ -49,7 +49,7 @@ public class ValueTest {
         IValue child;
         assertNotNull("Child value shouldn't be null", (child = parent.getValues().get(0)));
         assertNotNull("Child value should have a non-null parent", child.getParent());
-        assertEquals("Child value's parent ID should match the Test BooleanValue id", child.getParent(), parent.getId());
+        assertEquals("Child value's parent ID should match the Test BooleanValue id", child.getParent(), parent.getID());
         assertEquals("Child value shouldn't have any children", child.getValues().size(), 0);
         assertEquals("Child value's value should be equal to its field value", child.getValue(), 5);
     }
