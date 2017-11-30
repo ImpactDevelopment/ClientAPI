@@ -62,7 +62,7 @@ public final class time extends LuaLibrary {
             new Thread(() -> {
                 ClientAPIUtils.sleep(arg1.toint());
                 arg2.invoke();
-            });
+            }).start();
 
             return LuaValue.TRUE;
         }
