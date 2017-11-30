@@ -3,10 +3,15 @@ package clientapi.event;
 import me.zero.alpine.EventBus;
 
 /**
+ * An implementation of {@code EventBus} where all inherited abstract methods
+ * have been implemented with empty bodies, so that only required methods have
+ * to be implemented. This is particularly useful in child event buses, where
+ * not all methods may need to be implemented.
+ *
  * @author Brady
  * @since 11/8/2017 4:58 PM
  */
-public class AbstractEventBus implements EventBus {
+public abstract class AbstractEventBus implements EventBus {
 
     @Override
     public void subscribe(Object object) {}
