@@ -12,6 +12,9 @@ import java.util.Map;
  */
 public abstract class LuaLibrary extends TwoArgFunction {
 
+    /**
+     * The identifier for the {@code LuaTable} reference.
+     */
     private final String key;
 
     public LuaLibrary(String key) {
@@ -31,5 +34,12 @@ public abstract class LuaLibrary extends TwoArgFunction {
         return library;
     }
 
+    /**
+     * Loads the library value table by passing a {@code Map}
+     * with the generic parameters {@code String} and {@code LuaValue},
+     * where string represents the identifier it's paired value.
+     *
+     * @param table The library value table
+     */
     public abstract void load(Map<String, LuaValue> table);
 }
