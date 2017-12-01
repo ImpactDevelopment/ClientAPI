@@ -14,33 +14,41 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.wrapper;
+package clientapi.load.mixin.extension;
 
-import net.minecraft.client.multiplayer.PlayerControllerMP;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import net.minecraft.util.Session;
+import net.minecraft.util.Timer;
 
 /**
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/20/2017 12:00 PM
  */
-@Mixin(PlayerControllerMP.class)
-public interface IPlayerControllerMP {
+public interface IMinecraft {
 
     /**
-     * @return PlayerControllerMP#isHittingBlock
+     * @return Returns the Game's Timer
      */
-    @Accessor boolean getIsHittingBlock();
+    Timer getTimer();
 
     /**
-     * @return PlayerControllerMP#curBlockDamageMP
-     */
-    @Accessor float getCurBlockDamageMP();
-
-    /**
-     * Sets PlayerControllerMP#curBlockDamageMP
+     * Sets the game's session
      *
-     * @param damage New damage value
+     * @param session The new Session
      */
-    @Accessor void setCurBlockDamageMP(float damage);
+    void setSession(Session session);
+
+    /**
+     * Sets the right click delay timer
+     *
+     * @param delay The new right click delay
+     */
+    void setRightClickDelayTimer(int delay);
+
+    /**
+     * Clicks a mouse button
+     *
+     * @param button The button to click (LEFT, MIDDLE, RIGHT)
+     */
+    void clickMouse(int button);
+
 }
