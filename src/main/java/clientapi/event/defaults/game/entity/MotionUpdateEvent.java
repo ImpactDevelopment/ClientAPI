@@ -68,7 +68,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param x The new X position
      * @return This event
      */
-    public final MotionUpdateEvent x(double x) {
+    public final MotionUpdateEvent setX(double x) {
         pos.setX(x);
         return this;
     }
@@ -79,7 +79,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param y The new Y position
      * @return This event
      */
-    public final MotionUpdateEvent y(double y) {
+    public final MotionUpdateEvent setY(double y) {
         pos.setY(y);
         return this;
     }
@@ -90,7 +90,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param z The new Z position
      * @return This event
      */
-    public final MotionUpdateEvent z(double z) {
+    public final MotionUpdateEvent setZ(double z) {
         pos.setZ(z);
         return this;
     }
@@ -101,7 +101,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param yaw The new yaw rotation
      * @return This event
      */
-    public final MotionUpdateEvent yaw(float yaw) {
+    public final MotionUpdateEvent setYaw(float yaw) {
         rotations.setX(yaw);
         return this;
     }
@@ -112,7 +112,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param pitch The new pitch rotation
      * @return This event
      */
-    public final MotionUpdateEvent pitch(float pitch) {
+    public final MotionUpdateEvent setPitch(float pitch) {
         rotations.setY(pitch);
         return this;
     }
@@ -123,7 +123,7 @@ public final class MotionUpdateEvent implements Helper {
      * @param onGround The new onGround state
      * @return This event
      */
-    public final MotionUpdateEvent onGround(boolean onGround) {
+    public final MotionUpdateEvent setOnGround(boolean onGround) {
         MotionUpdateEvent.onGround = onGround;
         return this;
     }
