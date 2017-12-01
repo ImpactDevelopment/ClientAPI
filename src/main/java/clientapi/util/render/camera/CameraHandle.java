@@ -33,4 +33,14 @@ public interface CameraHandle {
      * @return Whether or not this camera is reflected
      */
     boolean reflected();
+
+    /**
+     * @return The width of the camera window
+     */
+    int width();
+
+    /**
+     * @return The height of the camera window
+     */
+    int height();
 }

@@ -16,11 +16,11 @@
 
 package clientapi.util.render.camera;
 
+import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.RenderUtils;
 import clientapi.load.mixin.wrapper.IEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
 import org.lwjgl.opengl.Display;
@@ -33,23 +33,53 @@ import org.lwjgl.opengl.Display;
  * @author Brady
  * @since 2/4/2017 12:00 PM
  */
-public class Camera {
+public class Camera implements Helper {
 
-    protected static Minecraft mc = Minecraft.getMinecraft();
+    /**
+     * State to keep track of whether or not any cameras are capturing
+     */
     private static boolean capturing;
 
+    /**
+     * The position of the camera
+     */
     protected Vec3 position;
+
+    /**
+     * The angle rotations of the camera
+     */
     protected Vec2 rotation;
+
+    /**
+     * {@code Framebuffer} rendered to
+     */
     private Framebuffer framebuffer;
+
+    /**
+     *
+     */
     protected CameraHandle handle;
-    private int lastWidth, lastHeight;
-    private boolean updated, reflected;
+
+    /**
+     * The last width of the display window
+     */
+    private int lastWidth;
+
+    /**
+     * The last height of the display window
+     */
+    private int lastHeight;
+
+    /**
+     * Whether or
+     */
+    private boolean updated;
+    private boolean reflected;
 
     public Camera(CameraHandle handle) {
         this.handle = handle;
         this.reflected = handle.reflected();
-        this.framebuffer = new Framebuffer(Display.getWidth(), Display.getHeight(), true);
-        this.createNewFramebuffer();
+        this.framebuffer = new Framebuffer(handle.width(), handle.height(), true);
 
         CameraManager.getInstance().register(this);
     }
@@ -69,7 +99,7 @@ public class Camera {
         if (entity == null)
             return;
 
-        // Preserve all of the settings before entity change them.
+        // Preserve all of the settings before changing them on rendering
         Vec3 pos = entity.getPos(), prevPos = entity.getPrevPos(), lastTickPos = entity.getLastTickPos();
         Vec2 angles = entity.getRotations(), prevAngles = entity.getPrevRotations();
         int displayWidth = mc.displayWidth, displayHeight = mc.displayHeight, thirdPersonView = mc.gameSettings.thirdPersonView;
@@ -95,14 +125,14 @@ public class Camera {
     private void render(IEntity entity, float partialTicks) {
         // Setup camera
         entity.setAll(this.position, this.rotation);
+        mc.displayWidth = handle.width();
+        mc.displayHeight = handle.height();
         mc.gameSettings.thirdPersonView = 0;
         mc.gameSettings.viewBobbing = false;
         mc.gameSettings.hideGUI = true;
 
         // Run framebuffer update check
         checkUpdate();
-        if (!updated)
-            createNewFramebuffer();
 
         // Render camera
         setCapture(true);
@@ -137,29 +167,14 @@ public class Camera {
     }
 
     /**
-     * @return Whether or not the Framebuffer has been updated
-     */
-    public boolean isUpdated() {
-        return this.updated;
-    }
-
-    /**
      * Checks if the framebuffer requires an update
      */
     private void checkUpdate() {
-        if (lastWidth != Display.getWidth() || lastHeight != Display.getHeight())
-            updated = false;
+        if (lastWidth != handle.width() || lastHeight != handle.height())
+            this.framebuffer.createFramebuffer(handle.width(), handle.height());
 
-        lastWidth = Display.getWidth();
-        lastHeight = Display.getHeight();
-    }
-
-    /**
-     * Resizes the Framebuffer to the current
-     * handle width and height
-     */
-    private void createNewFramebuffer() {
-        this.framebuffer.createFramebuffer(Display.getWidth(), Display.getHeight());
+        lastWidth = handle.width();
+        lastHeight = handle.height();
     }
 
     /**
