@@ -57,7 +57,7 @@ public final class Aura extends Module implements ICombat {
                    IEntity me = (IEntity) mc.player;
                    IEntity them = (IEntity) target;
                    Vec2 rotations = me.getPos().rotationsTo(them.getPos());
-                   event.yaw(rotations.getX()).pitch(rotations.getY());
+                   event.setYaw(rotations.getX()).setPitch(rotations.getY());
                    me.setRotations(rotations);
                } else {
                    target = null;

@@ -116,7 +116,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
         if (this.isCurrentViewEntity()) {
 
-            // Override vanilla defaults of _tis.posX, etc
+            // Override vanilla defaults of this.posX, this.posY, etc.
             // This is why we need to overwrite the method body.
             double pX = pre.getX();
             double pY = pre.getY();
