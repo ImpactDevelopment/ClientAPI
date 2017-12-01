@@ -85,17 +85,6 @@ public enum ClientHandler implements Helper {
                     .forEach(Keybind::onRelease));
 
     /**
-     * Handles profiling events
-     */
-    @EventHandler
-    private final Listener<ProfilerEvent> profilerListener = new Listener<>(event -> {
-        String section = event.getSection();
-
-        if (section != null && section.equalsIgnoreCase("hand") && !Camera.isCapturing())
-            ClientAPI.EVENT_BUS.post(new RenderWorldEvent());
-    });
-
-    /**
      * Handles packet out-flow
      */
     @EventHandler
