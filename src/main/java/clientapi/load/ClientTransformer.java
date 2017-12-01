@@ -49,6 +49,8 @@ public final class ClientTransformer implements IClassTransformer {
 
         if (!transformers.isEmpty()) {
             ClassNode cn = getClassNode(basicClass);
+            if (cn == null)
+                return basicClass;
 
             // Run all transformers on the Class
             transformers.forEach(transformer -> transformer.transform(cn));
@@ -83,6 +85,9 @@ public final class ClientTransformer implements IClassTransformer {
      * @return ClassNode
      */
     private ClassNode getClassNode(byte[] bytecode) {
+        if (bytecode == null)
+            return null;
+
         ClassNode cn = new ClassNode();
         new ClassReader(bytecode).accept(cn, 0);
         return cn;

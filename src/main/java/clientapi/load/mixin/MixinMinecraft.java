@@ -24,7 +24,7 @@ import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
-import clientapi.load.mixin.wrapper.IMinecraft;
+import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GlUtils;
 import com.google.gson.GsonBuilder;

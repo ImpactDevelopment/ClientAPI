@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.load.mixin.wrapper;
+package clientapi.load.mixin.extension;
 
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;

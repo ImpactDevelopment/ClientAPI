@@ -16,7 +16,7 @@
 
 package clientapi.util.interfaces;
 
-import clientapi.load.mixin.wrapper.IMinecraft;
+import clientapi.load.mixin.extension.IMinecraft;
 import net.minecraft.client.Minecraft;
 
 /**

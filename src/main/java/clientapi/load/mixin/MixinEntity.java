@@ -20,7 +20,7 @@ import clientapi.util.math.Vec3;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityCollisionEvent;
 import clientapi.util.math.Vec2;
-import clientapi.load.mixin.wrapper.IEntity;
+import clientapi.load.mixin.extension.IEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.util.math.AxisAlignedBB;
