@@ -31,8 +31,8 @@ public final class RenderWorldEvent implements Helper {
      */
     private final float partialTicks;
 
-    public RenderWorldEvent() {
-        this.partialTicks = mca.getTimer().renderPartialTicks;
+    public RenderWorldEvent(float partialTicks) {
+        this.partialTicks = partialTicks;
     }
 
     /**
