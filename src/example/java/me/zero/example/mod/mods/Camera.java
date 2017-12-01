@@ -44,23 +44,33 @@ public final class Camera extends Module implements IRender {
     private OverheadCamera camera = new OverheadCamera(new OverheadCamera.OverheadHandle() {
 
         @Override
-        public float camRotation() {
+        public final float camRotation() {
             return mc.player.rotationYaw;
         }
 
         @Override
-        public double camHeight() {
+        public final double camHeight() {
             return height;
         }
 
         @Override
-        public boolean visible() {
+        public final boolean visible() {
             return Camera.this.getState();
         }
 
         @Override
-        public boolean reflected() {
+        public final boolean reflected() {
             return false;
+        }
+
+        @Override
+        public final int width() {
+            return (int) (new ScaledResolution(mc).getScaledWidth() / 5F);
+        }
+
+        @Override
+        public final int height() {
+            return (int) (new ScaledResolution(mc).getScaledWidth() / 5F);
         }
     });
 
