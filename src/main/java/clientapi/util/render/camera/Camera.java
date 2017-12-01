@@ -20,10 +20,9 @@ import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.RenderUtils;
-import clientapi.load.mixin.wrapper.IEntity;
+import clientapi.load.mixin.extension.IEntity;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
-import org.lwjgl.opengl.Display;
 
 /**
  * The base for Cameras.
