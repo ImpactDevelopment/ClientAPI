@@ -35,6 +35,7 @@ public class MixinGuiGameOver {
 
     @Inject(method = "confirmClicked", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/client/Minecraft.loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V"))
     private void postLoadWorld(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));
+        if (Helper.mc.getCurrentServerData() != null)
+            ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));
     }
 }
