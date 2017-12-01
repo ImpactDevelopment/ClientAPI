@@ -16,7 +16,6 @@
 
 package clientapi.event.defaults.game.render;
 
-import clientapi.util.interfaces.Helper;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -28,12 +27,7 @@ import net.minecraft.client.gui.ScaledResolution;
  * @author Brady
  * @since 2/6/2017 12:00 PM
  */
-public final class RenderHudEvent implements Helper {
-
-    /**
-     * The render partial ticks
-     */
-    private final float partialTicks;
+public final class RenderHudEvent extends RenderEvent {
 
     /**
      * Instance of the current {@code ScaledResolution}
@@ -41,15 +35,8 @@ public final class RenderHudEvent implements Helper {
     private final ScaledResolution scaledResolution;
 
     public RenderHudEvent(float partialTicks) {
-        this.partialTicks = partialTicks;
+        super(partialTicks);
         this.scaledResolution = new ScaledResolution(mc);
-    }
-
-    /**
-     * @return The render partial ticks
-     */
-    public final float getPartialTicks() {
-        return this.partialTicks;
     }
 
     /**

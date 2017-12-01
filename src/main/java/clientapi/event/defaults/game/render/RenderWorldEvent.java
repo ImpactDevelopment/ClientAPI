@@ -16,29 +16,15 @@
 
 package clientapi.event.defaults.game.render;
 
-import clientapi.util.interfaces.Helper;
-
 /**
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
-public final class RenderWorldEvent implements Helper {
-
-    /**
-     * The render partial ticks
-     */
-    private final float partialTicks;
+public final class RenderWorldEvent extends RenderEvent {
 
     public RenderWorldEvent(float partialTicks) {
-        this.partialTicks = partialTicks;
-    }
-
-    /**
-     * @return The render partial ticks
-     */
-    public final float getPartialTicks() {
-        return this.partialTicks;
+        super(partialTicks);
     }
 }
