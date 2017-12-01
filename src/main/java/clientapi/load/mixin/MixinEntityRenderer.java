@@ -18,6 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.RenderScreenEvent;
+import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.render.camera.Camera;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,5 +43,10 @@ public class MixinEntityRenderer {
     @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V"))
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
+    }
+
+    @Inject(method = "renderWorldPass", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
+    private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks));
     }
 }
