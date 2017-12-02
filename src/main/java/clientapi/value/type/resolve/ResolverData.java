@@ -68,7 +68,7 @@ public final class ResolverData {
 
         // Otherwise, find a type that matches
         for (Class<?> rType : resolvableTypes)
-            if (rType == type)
+            if (rType.isAssignableFrom(type))
                 return true;
 
         return false;

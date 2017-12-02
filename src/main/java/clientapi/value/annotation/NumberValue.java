@@ -47,8 +47,8 @@ public @interface NumberValue {
     double max();
 
     /**
-     * The interval at which this value will change.
-     * If the increment is set to 0,
+     * The interval at which this value will change. If
+     * the interval is set to 0, no interval will be used.
      *
      * @return The value change interval
      */
