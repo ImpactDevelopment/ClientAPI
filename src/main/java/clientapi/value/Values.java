@@ -58,6 +58,7 @@ public final class Values {
         define(NumberValue.class, ResolverData.create(DefaultResolvers.NUMBER));
         define(MultiValue.class, ResolverData.create(DefaultResolvers.MULTI, String.class));
         define(StringValue.class, ResolverData.create(DefaultResolvers.STRING, String.class));
+        define(EnumValue.class, ResolverData.create(DefaultResolvers.ENUM, Enum.class));
     }
 
     /**

@@ -18,12 +18,10 @@ package clientapi.value.type.resolve;
 
 import clientapi.util.ReflectionUtils;
 import clientapi.util.annotation.Label;
+import clientapi.value.annotation.EnumValue;
 import clientapi.value.annotation.MultiValue;
 import clientapi.value.annotation.NumberValue;
-import clientapi.value.type.BooleanType;
-import clientapi.value.type.MultiType;
-import clientapi.value.type.NumberType;
-import clientapi.value.type.StringType;
+import clientapi.value.type.*;
 
 /**
  * Contains all default resolvers
@@ -66,7 +64,7 @@ public final class DefaultResolvers {
 
         MultiType type = new MultiType(label.name(), label.parent(), label.id(), label.description(), parent, field, multi.value());
         if (type.getValue() == null)
-            type.setValue(multi.value()[0]);
+            type.setValue(type.getMultiValues()[0]);
 
         return type;
     };
@@ -105,6 +103,23 @@ public final class DefaultResolvers {
             if (type.getValue() == null)
                 type.setValue(type.getMinimum());
         }
+
+        return type;
+    };
+
+    /**
+     * Resolves Enum Types
+     */
+    @SuppressWarnings("unchecked")
+    public static final TypeResolver<EnumType> ENUM = (parent, field) -> {
+        Label label = field.getAnnotation(Label.class);
+        EnumValue value = field.getAnnotation(EnumValue.class);
+
+        Class<?> enumType = field.getType();
+
+        EnumType type = new EnumType(label.name(), label.parent(), label.id(), label.description(), parent, field, enumType);
+        if (type.getValue() == null)
+            type.setValue(type.getMultiValues()[0]);
 
         return type;
     };
