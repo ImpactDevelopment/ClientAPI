@@ -32,7 +32,7 @@ import java.util.*;
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public abstract class Manager<T> implements Collection<T>, Loadable, Saveable {
+public abstract class Manager<T> implements List<T>, Loadable, Saveable {
 
     /**
      * The list of all of the entries that this Manager contains
@@ -51,40 +51,6 @@ public abstract class Manager<T> implements Collection<T>, Loadable, Saveable {
 
     public Manager(String name) {
         this.name = name;
-    }
-
-    /**
-     * Resets all of the data in this manager
-     */
-    public final void reset(){
-        this.data.clear();
-    }
-    /**
-     * Adds multiple entries into the data array
-     *
-     * @param data The entries
-     */
-    @SafeVarargs
-    protected final void addData(T... data) {
-        this.data.addAll(Arrays.asList(data));
-    }
-
-    /**
-     * Adds a list of entries into the data array
-     *
-     * @param data The entries
-     */
-    protected final void addData(List<T> data) {
-        this.data.addAll(data);
-    }
-
-    /**
-     * Removes an entry, if present, from the data array
-     *
-     * @param data The entry
-     */
-    protected final void removeData(T data) {
-        this.data.remove(data);
     }
 
     /**
@@ -107,6 +73,56 @@ public abstract class Manager<T> implements Collection<T>, Loadable, Saveable {
      */
     public final String getName() {
         return this.name;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return this.data.addAll(index, c);
+    }
+
+    @Override
+    public T get(int index) {
+        return this.data.get(index);
+    }
+
+    @Override
+    public T set(int index, T element) {
+        return this.data.set(index, element);
+    }
+
+    @Override
+    public void add(int index, T element) {
+        this.data.add(index, element);
+    }
+
+    @Override
+    public T remove(int index) {
+        return this.data.remove(index);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return this.data.indexOf(o);
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return this.data.lastIndexOf(o);
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return this.data.listIterator();
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return this.data.listIterator(index);
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        return this.data.subList(fromIndex, toIndex);
     }
 
     @Override
