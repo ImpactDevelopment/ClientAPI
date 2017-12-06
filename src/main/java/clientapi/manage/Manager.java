@@ -74,4 +74,17 @@ public abstract class Manager<T> extends ArrayList<T> implements Loadable, Savea
     public final String getName() {
         return this.name;
     }
+
+    /**
+     * Adds all of the elements specified
+     *
+     * @param elements The elements
+     * @return If this manager's entries changed as a result of this call
+     */
+    public final boolean addAll(T... elements) {
+        if (elements.length == 0)
+            return false;
+
+        return this.addAll(Arrays.asList(elements));
+    }
 }
