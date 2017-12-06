@@ -48,7 +48,7 @@ public final class CameraManager extends Manager<Camera> {
      */
     final void register(Camera camera) {
         if (!this.contains(camera))
-            this.addData(camera);
+            this.add(camera);
     }
 
     /**
