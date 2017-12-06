@@ -75,53 +75,58 @@ public abstract class Manager<T> implements List<T>, Loadable, Saveable {
         return this.name;
     }
 
+    @SafeVarargs
+    public final boolean addAll(T... c) {
+        return this.addAll(Arrays.asList(c));
+    }
+
     @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
+    public final boolean addAll(int index, Collection<? extends T> c) {
         return this.data.addAll(index, c);
     }
 
     @Override
-    public T get(int index) {
+    public final T get(int index) {
         return this.data.get(index);
     }
 
     @Override
-    public T set(int index, T element) {
+    public final T set(int index, T element) {
         return this.data.set(index, element);
     }
 
     @Override
-    public void add(int index, T element) {
+    public final void add(int index, T element) {
         this.data.add(index, element);
     }
 
     @Override
-    public T remove(int index) {
+    public final T remove(int index) {
         return this.data.remove(index);
     }
 
     @Override
-    public int indexOf(Object o) {
+    public final int indexOf(Object o) {
         return this.data.indexOf(o);
     }
 
     @Override
-    public int lastIndexOf(Object o) {
+    public final int lastIndexOf(Object o) {
         return this.data.lastIndexOf(o);
     }
 
     @Override
-    public ListIterator<T> listIterator() {
+    public final ListIterator<T> listIterator() {
         return this.data.listIterator();
     }
 
     @Override
-    public ListIterator<T> listIterator(int index) {
+    public final ListIterator<T> listIterator(int index) {
         return this.data.listIterator(index);
     }
 
     @Override
-    public List<T> subList(int fromIndex, int toIndex) {
+    public final List<T> subList(int fromIndex, int toIndex) {
         return this.data.subList(fromIndex, toIndex);
     }
 
