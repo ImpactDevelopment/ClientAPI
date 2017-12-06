@@ -59,7 +59,7 @@ public final class MoveEvent extends Cancellable {
      * @param x New X motion
      * @return This event
      */
-    public final MoveEvent x(double x) {
+    public final MoveEvent setX(double x) {
         this.x = x;
         return this;
     }
@@ -70,7 +70,7 @@ public final class MoveEvent extends Cancellable {
      * @param y New Y motion
      * @return This event
      */
-    public final MoveEvent y(double y) {
+    public final MoveEvent setY(double y) {
         this.y = y;
         return this;
     }
@@ -82,7 +82,7 @@ public final class MoveEvent extends Cancellable {
      * @param z New Z motion
      * @return This event
      */
-    public final MoveEvent z(double z) {
+    public final MoveEvent setZ(double z) {
         this.z = z;
         return this;
     }
