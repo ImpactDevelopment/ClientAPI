@@ -16,6 +16,8 @@
 
 package clientapi.event.defaults.game.render;
 
+import clientapi.util.render.camera.Camera;
+
 /**
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
@@ -31,7 +33,7 @@ public final class RenderWorldEvent extends RenderEvent {
 
     public RenderWorldEvent(float partialTicks, int pass) {
         super(partialTicks);
-        this.pass = Pass.values()[pass];
+        this.pass = Camera.isCapturing() ? Pass.CAMERA : Pass.values()[pass];
     }
 
     /**
@@ -42,6 +44,6 @@ public final class RenderWorldEvent extends RenderEvent {
     }
 
     public enum Pass {
-        ANAGLYPH_CYAN, ANAGLYPH_RED, NORMAL
+        ANAGLYPH_CYAN, ANAGLYPH_RED, NORMAL, CAMERA
     }
 }
