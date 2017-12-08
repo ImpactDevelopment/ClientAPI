@@ -72,47 +72,47 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public void setPos(Vec3 pos) {
+    public final void setPos(Vec3 pos) {
         this.posX = pos.getX();
         this.posY = pos.getY();
         this.posZ = pos.getZ();
     }
 
     @Override
-    public void setPrevPos(Vec3 pos) {
+    public final void setPrevPos(Vec3 pos) {
         this.prevPosX = pos.getX();
         this.prevPosY = pos.getY();
         this.prevPosZ = pos.getZ();
     }
 
     @Override
-    public void setLastTickPos(Vec3 pos) {
+    public final void setLastTickPos(Vec3 pos) {
         this.lastTickPosX = pos.getX();
         this.lastTickPosY = pos.getY();
         this.lastTickPosZ = pos.getZ();
     }
 
     @Override
-    public void setRotations(Vec2 rotations) {
+    public final void setRotations(Vec2 rotations) {
         this.rotationYaw = rotations.getX();
         this.rotationPitch = rotations.getY();
     }
 
     @Override
-    public void setPrevRotations(Vec2 rotations) {
+    public final void setPrevRotations(Vec2 rotations) {
         this.prevRotationYaw = rotations.getX();
         this.prevRotationPitch = rotations.getY();
     }
 
     @Override
-    public void setMotion(Vec3 motion) {
+    public final void setMotion(Vec3 motion) {
         this.motionX = pos.getX();
         this.motionY = pos.getY();
         this.motionZ = pos.getZ();
     }
 
     @Override
-    public Vec3 getPos() {
+    public final Vec3 getPos() {
         if (pos == null)
             pos = new Vec3();
 
@@ -120,7 +120,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec3 getPrevPos() {
+    public final Vec3 getPrevPos() {
         if (prevPos == null)
             prevPos = new Vec3();
 
@@ -128,7 +128,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec3 getLastTickPos() {
+    public final Vec3 getLastTickPos() {
         if (lastTickPos == null)
             lastTickPos = new Vec3();
 
@@ -136,7 +136,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec2 getRotations() {
+    public final Vec2 getRotations() {
         if (rotation == null)
             rotation = new Vec2();
 
@@ -144,7 +144,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec2 getPrevRotations() {
+    public  final Vec2 getPrevRotations() {
         if (prevRotation == null)
             prevRotation = new Vec2();
 
@@ -152,7 +152,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec3 getMotion() {
+    public final Vec3 getMotion() {
         if (motion == null)
             motion = new Vec3();
 
@@ -160,7 +160,7 @@ public abstract class MixinEntity implements IEntity {
     }
 
     @Override
-    public Vec3 interpolate(float ticks) {
+    public final Vec3 interpolate(float ticks) {
         return this.getLastTickPos().add(this.getPos().sub(this.getLastTickPos()).scale(ticks));
     }
 }
