@@ -18,6 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityDeathEvent;
+import clientapi.event.defaults.game.entity.EntityJumpEvent;
 import clientapi.event.defaults.game.entity.EntityTravelEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,11 +46,24 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
     private void travel(EntityLivingBase entity, float strafe, float vertical, float forward) {
-        EntityTravelEvent preEvent = new EntityTravelEvent(EventState.PRE, entity, strafe, vertical, forward);
-        ClientAPI.EVENT_BUS.post(preEvent);
-        if (!preEvent.isCancelled())
-            entity.travel(preEvent.getStrafe(), preEvent.getVertical(), preEvent.getForward());
+        EntityTravelEvent event = new EntityTravelEvent(EventState.PRE, entity, strafe, vertical, forward);
+        ClientAPI.EVENT_BUS.post(event);
+        if (!event.isCancelled())
+            entity.travel(event.getStrafe(), event.getVertical(), event.getForward());
 
         ClientAPI.EVENT_BUS.post(new EntityTravelEvent(EventState.POST, entity, strafe, vertical, forward));
+    }
+
+    @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
+    private void preJump(CallbackInfo ci) {
+        EntityJumpEvent event = new EntityJumpEvent(EventState.PRE, (EntityLivingBase) (Object) this);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled())
+            ci.cancel();
+    }
+
+    @Inject(method = "jump", at = @At("RETURN"))
+    private void postJump(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new EntityJumpEvent(EventState.POST, (EntityLivingBase) (Object) this));
     }
 }
