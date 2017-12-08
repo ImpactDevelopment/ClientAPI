@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.render;
 
 import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.settings.GameSettings;
 
 /**
  * Called before the overlay rendering is setup, will call
@@ -29,7 +30,48 @@ import net.minecraft.client.renderer.EntityRenderer;
  */
 public final class RenderScreenEvent extends RenderEvent {
 
+    /**
+     * The inner window width of the display
+     */
+    private final int width;
+
+    /**
+     * The inner window height of the display
+     */
+    private final int height;
+
+    /**
+     * Whether or not hide gui is enabled
+     *
+     * @see GameSettings#hideGUI
+     */
+    private final boolean guiHidden;
+
     public RenderScreenEvent(float partialTicks) {
         super(partialTicks);
+        this.width = mc.displayWidth;
+        this.height = mc.displayHeight;
+        this.guiHidden = mc.gameSettings.hideGUI;
+    }
+
+    /**
+     * @return The inner window width of the display
+     */
+    public final int getWidth() {
+        return this.width;
+    }
+
+    /**
+     * @return The inner window height of the display
+     */
+    public final int getHeight() {
+        return this.height;
+    }
+
+    /**
+     * @return Whether or not hide gui is enabled
+     */
+    public final boolean isGuiHidden() {
+        return this.guiHidden;
     }
 }
