@@ -24,7 +24,24 @@ package clientapi.event.defaults.game.render;
  */
 public final class RenderWorldEvent extends RenderEvent {
 
-    public RenderWorldEvent(float partialTicks) {
+    /**
+     * The Render pass this event was called from
+     */
+    private final Pass pass;
+
+    public RenderWorldEvent(float partialTicks, int pass) {
         super(partialTicks);
+        this.pass = Pass.values()[pass];
+    }
+
+    /**
+     * @return The render pass that this event was called from
+     */
+    public final Pass getPass() {
+        return this.pass;
+    }
+
+    public enum Pass {
+        ANAGLYPH_CYAN, ANAGLYPH_RED, NORMAL
     }
 }
