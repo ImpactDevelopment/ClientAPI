@@ -28,6 +28,7 @@ import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GLUtils;
 import com.google.gson.GsonBuilder;
+import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -79,13 +80,23 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @Inject(method = "runTick", at = @At("HEAD"))
-    private void onTick(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new TickEvent());
+    private void preRunTick(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new TickEvent(EventState.PRE));
+    }
+
+    @Inject(method = "runTick", at = @At("RETURN"))
+    private void postRunTick(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new TickEvent(EventState.POST));
     }
 
     @Inject(method = "runGameLoop", at = @At("HEAD"))
-    private void onLoop(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new LoopEvent());
+    private void preRunGameLoop(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.PRE));
+    }
+
+    @Inject(method = "runGameLoop", at = @At("RETURN"))
+    private void postRunGameLoop(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.POST));
     }
 
     @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
