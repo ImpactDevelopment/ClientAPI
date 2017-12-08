@@ -18,7 +18,7 @@ package clientapi.util.render;
 
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-import clientapi.util.render.gl.GlUtils;
+import clientapi.util.render.gl.GLUtils;
 import clientapi.util.render.gl.glenum.GLClientState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -207,7 +207,7 @@ public final class RenderUtils {
      * @param color The color of the rectangle
      */
     public static void rectangle(float x1, float y1, float x2, float y2, int color) {
-        GlUtils.glColor(color);
+        GLUtils.glColor(color);
 
         if (x1 > x2) {
             float temp = x1;

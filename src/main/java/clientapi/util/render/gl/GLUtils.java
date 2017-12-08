@@ -38,9 +38,9 @@ import static org.lwjgl.opengl.GL11.*;
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
-public final class GlUtils {
+public final class GLUtils {
 
-    private GlUtils() {}
+    private GLUtils() {}
 
     private static final FloatBuffer MODELVIEW;
     private static final FloatBuffer PROJECTION;
@@ -123,12 +123,12 @@ public final class GlUtils {
     /**
      * Converts a Vec3 to its screen projection
      *
-     * @see GlUtils#toScreen(double, double, double)
+     * @see GLUtils#toScreen(double, double, double)
      *
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(Vec3 pos) {
-        return GlUtils.toScreen(pos.getX(), pos.getY(), pos.getZ());
+        return GLUtils.toScreen(pos.getX(), pos.getY(), pos.getZ());
     }
 
     /**
@@ -153,12 +153,12 @@ public final class GlUtils {
     /**
      * Converts a Vec3 to its world projection
      *
-     * @see GlUtils#toWorld(double, double, double)
+     * @see GLUtils#toWorld(double, double, double)
      *
      * @return World projected coordinates
      */
     public static Vec3 toWorld(Vec3 pos) {
-        return GlUtils.toWorld(pos.getX(), pos.getY(), pos.getZ());
+        return GLUtils.toWorld(pos.getX(), pos.getY(), pos.getZ());
     }
 
     /**

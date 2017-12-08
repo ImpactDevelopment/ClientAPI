@@ -26,7 +26,7 @@ import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.StreamReader;
-import clientapi.util.render.gl.GlUtils;
+import clientapi.util.render.gl.GLUtils;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -141,7 +141,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         }
 
         // Init GLUtils
-        GlUtils.init();
+        GLUtils.init();
 
         // Init client
         client.onInit(clientInfo);

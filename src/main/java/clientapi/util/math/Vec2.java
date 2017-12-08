@@ -16,7 +16,7 @@
 
 package clientapi.util.math;
 
-import clientapi.util.render.gl.GlUtils;
+import clientapi.util.render.gl.GLUtils;
 
 /**
  * A Vec with an X and Y position
@@ -205,7 +205,7 @@ public final class Vec2 {
      * @return World projected Coordinates as a Vec3
      */
     public final Vec3 toScreen() {
-        return GlUtils.toWorld(this.toVec3());
+        return GLUtils.toWorld(this.toVec3());
     }
 
     @Override
