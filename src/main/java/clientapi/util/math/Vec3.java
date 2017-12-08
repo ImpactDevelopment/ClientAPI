@@ -16,7 +16,7 @@
 
 package clientapi.util.math;
 
-import clientapi.util.render.gl.GlUtils;
+import clientapi.util.render.gl.GLUtils;
 
 /**
  * A Vec with a X, Y, and Z position
@@ -210,7 +210,7 @@ public final class Vec3 {
      * @return Screen projected Coordinates as a Vec3
      */
     public final Vec3 toScreen() {
-        return GlUtils.toScreen(this);
+        return GLUtils.toScreen(this);
     }
 
     @Override
