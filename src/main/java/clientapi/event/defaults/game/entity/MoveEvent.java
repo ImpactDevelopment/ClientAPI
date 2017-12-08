@@ -17,12 +17,13 @@
 package clientapi.event.defaults.game.entity;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 
 /**
  * Called when the Client player is moved.
  *
- * @see net.minecraft.entity.Entity#move(net.minecraft.entity.MoverType, double, double, double)
+ * @see Entity#move(net.minecraft.entity.MoverType, double, double, double)
  *
  * @author Brady
  * @since 2/9/2017 12:00 PM
