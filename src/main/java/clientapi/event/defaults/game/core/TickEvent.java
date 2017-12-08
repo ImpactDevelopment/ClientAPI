@@ -16,6 +16,7 @@
 
 package clientapi.event.defaults.game.core;
 
+import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 
 /**
@@ -26,4 +27,21 @@ import net.minecraft.client.Minecraft;
  * @author Brady
  * @since 1/24/2017 12:00 PM
  */
-public final class TickEvent {}
+public final class TickEvent {
+
+    /**
+     * The state of the event
+     */
+    private final EventState state;
+
+    public TickEvent(EventState state) {
+        this.state = state;
+    }
+
+    /**
+     * The state of the event
+     */
+    public final EventState getState() {
+        return this.state;
+    }
+}
