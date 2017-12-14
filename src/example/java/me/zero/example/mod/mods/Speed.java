@@ -39,6 +39,6 @@ public final class Speed extends Module implements IMovement {
 
     @EventHandler
     private Listener<MoveEvent> moveListener = new Listener<>(event -> {
-        event.x(event.getX() * speed).z(event.getZ() * speed);
+        event.setX(event.getX() * speed).setZ(event.getZ() * speed);
     });
 }
