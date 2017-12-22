@@ -22,5 +22,5 @@ To use the Client API, you must download the CDK from the Releases page. Instruc
   * The minecraft launcher will automatically download the ClientAPI lib to the `.minecraft/libraries` folder
 
 ## Usage
-Refer to the [Example](src/test) to view how clients using the ClientAPI are structured.
+Refer to the [Example](src/example) to view how clients using the ClientAPI are structured.
 
