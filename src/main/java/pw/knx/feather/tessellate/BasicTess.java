@@ -3,6 +3,7 @@ package pw.knx.feather.tessellate;
 import org.lwjgl.opengl.GL11;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -71,7 +72,7 @@ public class BasicTess implements Tessellator {
 		 * takes up in the buffer, since each vertex stores color and texture as well. */
 		capacity *= 6;
 		this.raw = new int[capacity];
-		this.buffer = ByteBuffer.allocateDirect(capacity * 4); // 4 bytes in an integer!
+		this.buffer = ByteBuffer.allocateDirect(capacity * 4).order(ByteOrder.nativeOrder()); // 4 bytes in an integer!
 		this.fBuffer = this.buffer.asFloatBuffer();
 		this.iBuffer = this.buffer.asIntBuffer();
 	}

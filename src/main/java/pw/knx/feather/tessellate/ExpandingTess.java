@@ -1,6 +1,7 @@
 package pw.knx.feather.tessellate;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * An automatically resizing implementation of the Tessellator interface.
@@ -58,7 +59,7 @@ public class ExpandingTess extends BasicTess {
 			final int[] newBuffer = new int[capacity];          // allocate the new data
 			System.arraycopy(raw, 0, newBuffer, 0, raw.length); // transfer the data from the old array to the new array
 			raw = newBuffer;                                    // replace the array
-			buffer = ByteBuffer.allocateDirect(capacity * 4);       // allocate a new corresponding ByteBuffer
+			buffer = ByteBuffer.allocateDirect(capacity * 4).order(ByteOrder.nativeOrder());       // allocate a new corresponding ByteBuffer
 			iBuffer = buffer.asIntBuffer();
 			fBuffer = buffer.asFloatBuffer();
 		}
