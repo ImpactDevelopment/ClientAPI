@@ -36,10 +36,10 @@ public final class CameraManager extends Manager<Camera> {
     }
 
     @Override
-    public void load() {}
+    public final void load() {}
 
     @Override
-    public void save() {}
+    public final void save() {}
 
     /**
      * Registers a camera to the Manager
@@ -48,7 +48,7 @@ public final class CameraManager extends Manager<Camera> {
      */
     final void register(Camera camera) {
         if (!this.contains(camera))
-            this.add(camera);
+            this.addData(camera);
     }
 
     /**
