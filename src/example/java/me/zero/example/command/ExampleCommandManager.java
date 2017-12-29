@@ -39,7 +39,7 @@ public final class ExampleCommandManager extends Manager<Command> {
 
     @Override
     public void load() {
-        this.addAll(
+        this.addData(
                 new TestCommand()
         );
 

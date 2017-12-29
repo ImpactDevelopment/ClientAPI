@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 import static pw.knx.feather.Feather.FEATHER;
@@ -77,7 +78,7 @@ public class VBO {
 	 */
 	public VBO compile(float... points) {
 		if (points != null && points.length > 0) {
-			final FloatBuffer buffer = ByteBuffer.allocateDirect(points.length * 4).asFloatBuffer();
+			final FloatBuffer buffer = ByteBuffer.allocateDirect(points.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
 			buffer.put(points).flip();
 			return this.compile(buffer);
 		}
