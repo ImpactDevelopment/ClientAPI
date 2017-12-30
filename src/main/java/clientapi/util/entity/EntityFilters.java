@@ -152,7 +152,8 @@ public final class EntityFilters implements Helper {
      * @return Whether or not the entities are on the same team
      */
     public static boolean onSameTeam(Entity e1, Entity e2) {
-        return e1 instanceof EntityPlayer && e2 instanceof EntityPlayer && e1.isOnSameTeam(e2);
+        return e1.isOnSameTeam(e2);
+
     }
 
     /**
