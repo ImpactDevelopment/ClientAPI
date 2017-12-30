@@ -176,7 +176,7 @@ public class Command implements ICommand {
                 // Invoke the sub-command handle method
                 boolean accessible = handle.isAccessible();
                 handle.setAccessible(true);
-                handle.invoke(this, callArguments.toArray(new Object[0]));
+                handle.invoke(this.parent, callArguments.toArray(new Object[0]));
                 handle.setAccessible(accessible);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
