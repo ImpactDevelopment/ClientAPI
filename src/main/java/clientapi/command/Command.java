@@ -121,7 +121,7 @@ public class Command implements ICommand {
     @Override
     public final void execute(ExecutionContext context, String[] arguments) throws CommandException {
         if (this.parent == null) {
-            Command sub = findChild(arguments.length == 0 ? null : arguments[0]);
+            Command sub = findChild(arguments);
             if (sub == null)
                 throw new InvalidSyntaxException(this);
 
@@ -185,13 +185,27 @@ public class Command implements ICommand {
     }
 
     /**
-     * Finds a child command with the given header
+     * Finds a child command from the specified arguments
      *
-     * @param header The header of a possible child command
+     * @param arguments The arguments
      * @return The child command, {@code null} if not found
      */
-    private Command findChild(String header) {
-        return this.children.stream().filter(child -> (header == null && child.headers.length == 0) || ClientAPIUtils.containsIgnoreCase(child.headers, header)).findFirst().orElse(null);
+    private Command findChild(String[] arguments) {
+        String header = arguments.length == 0 ? null : arguments[0];
+
+        // Find the command by the header defined by the first argument
+        Command child = this.children.stream().filter(c -> (header == null && c.headers.length == 0) || ClientAPIUtils.containsIgnoreCase(c.headers, header)).findFirst().orElse(null);
+        if (child != null) {
+            return child;
+        }
+
+        // Find the command by the length of the arguments
+        child = this.children.stream().filter(c -> arguments.length == c.arguments.length).findFirst().orElse(null);
+        if (child != null) {
+            return child;
+        }
+
+        return null;
     }
 
     @Override
