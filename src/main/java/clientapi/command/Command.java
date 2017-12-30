@@ -121,7 +121,7 @@ public class Command implements ICommand {
     @Override
     public final void execute(ExecutionContext context, String[] arguments) throws CommandException {
         if (this.parent == null) {
-            Command sub = findChild(arguments.length == 0 ? null : arguments[1]);
+            Command sub = findChild(arguments.length == 0 ? null : arguments[0]);
             if (sub == null)
                 throw new InvalidSyntaxException(this);
 
