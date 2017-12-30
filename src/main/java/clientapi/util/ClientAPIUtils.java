@@ -76,7 +76,6 @@ public final class ClientAPIUtils {
      */
     public static boolean containsIgnoreCase(String[] array, String target) {
         Objects.requireNonNull(array);
-        Objects.requireNonNull(target);
         for (String string : array)
             if (string != null && string.equalsIgnoreCase(target))
                 return true;
