@@ -37,7 +37,7 @@ public final class ExampleModManager extends Manager<Module> {
         ClientAPI.LOGGER.log(Level.INFO, "Loading Modules");
 
         // Load Modules
-        this.addData(
+        this.addAll(
             new Aura(),
             new Camera(),
             new Fly(),
