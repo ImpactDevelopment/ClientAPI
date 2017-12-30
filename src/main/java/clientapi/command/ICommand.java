@@ -28,7 +28,7 @@ import clientapi.util.interfaces.Helper;
  * @author Brady
  * @since 5/30/2017 11:38 AM
  */
-interface ICommand extends Helper {
+public interface ICommand extends Helper {
 
     /**
      * Executes this command from the specified sender with
