@@ -18,6 +18,8 @@ package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
 
+import java.lang.reflect.Type;
+
 /**
  * @author Brady
  * @since 10/18/2017 11:14 AM
@@ -25,12 +27,12 @@ import clientapi.command.executor.ExecutionContext;
 public final class StringParser implements ArgumentParser<String> {
 
     @Override
-    public final String parse(ExecutionContext context, Class<?> type, String raw) {
+    public final String parse(ExecutionContext context, Type type, String raw) {
         return raw;
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return String.class.isAssignableFrom(type);
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && String.class.isAssignableFrom((Class) type);
     }
 }

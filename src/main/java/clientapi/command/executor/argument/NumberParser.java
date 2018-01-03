@@ -3,6 +3,7 @@ package clientapi.command.executor.argument;
 import clientapi.command.executor.ExecutionContext;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -13,7 +14,7 @@ import java.math.BigInteger;
 public final class NumberParser implements ArgumentParser<Number> {
 
     @Override
-    public final Number parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Number parse(ExecutionContext context, Type type, String raw) {
         if (NumberUtils.isCreatable(raw)) {
             return NumberUtils.createNumber(raw);
         }
@@ -21,19 +22,24 @@ public final class NumberParser implements ArgumentParser<Number> {
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
+    public final boolean isTarget(Type type) {
+        if (!(type instanceof Class)) {
+            return false;
+        }
+
+        Class c = (Class) type;
         // Check all NumberUtils#createNumber(String) supported types
         // Integer -> BigInteger
         // Float -> BigDecimal
-        return Integer.class.isAssignableFrom(type)
-                || Long.class.isAssignableFrom(type)
-                || BigInteger.class.isAssignableFrom(type)
-                || Float.class.isAssignableFrom(type)
-                || Double.class.isAssignableFrom(type)
-                || BigDecimal.class.isAssignableFrom(type)
-                || Integer.TYPE.isAssignableFrom(type)
-                || Long.TYPE.isAssignableFrom(type)
-                || Float.TYPE.isAssignableFrom(type)
-                || Double.TYPE.isAssignableFrom(type);
+        return Integer.class.isAssignableFrom(c)
+                || Long.class.isAssignableFrom(c)
+                || BigInteger.class.isAssignableFrom(c)
+                || Float.class.isAssignableFrom(c)
+                || Double.class.isAssignableFrom(c)
+                || BigDecimal.class.isAssignableFrom(c)
+                || Integer.TYPE.isAssignableFrom(c)
+                || Long.TYPE.isAssignableFrom(c)
+                || Float.TYPE.isAssignableFrom(c)
+                || Double.TYPE.isAssignableFrom(c);
     }
 }

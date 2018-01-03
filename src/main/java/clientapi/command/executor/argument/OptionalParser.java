@@ -17,8 +17,10 @@
 package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
-import net.jodah.typetools.TypeResolver;
 
+import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Optional;
 
 /**
@@ -28,13 +30,24 @@ import java.util.Optional;
 public final class OptionalParser implements ArgumentParser<Optional<?>> {
 
     @Override
-    public final Optional<?> parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Optional<?> parse(ExecutionContext context, Type type, String raw) {
         if (raw.isEmpty()) {
             return Optional.empty();
         }
 
-        type = TypeResolver.resolveRawArgument(Optional.class, type);
-        ArgumentParser<?> parser = context.handler().getParser(type);
+        if (!(type instanceof ParameterizedType)) {
+            // noinspection OptionalAssignedToNull
+            return null;
+        }
+
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+        if (actualTypeArguments.length != 1) {
+            // noinspection OptionalAssignedToNull
+            return null;
+        }
+
+        ArgumentParser<?> parser = context.handler().getParser(parameterizedType.getActualTypeArguments()[0]);
         if (parser == null)
             // noinspection OptionalAssignedToNull
             return null;
@@ -43,7 +56,8 @@ public final class OptionalParser implements ArgumentParser<Optional<?>> {
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return Optional.class.isAssignableFrom(type);
+    public final boolean isTarget(Type type) {
+        return type instanceof Class ? Optional.class.isAssignableFrom((Class) type)
+                : type instanceof ParameterizedType && Optional.class.isAssignableFrom((Class) ((ParameterizedType) type).getRawType());
     }
 }

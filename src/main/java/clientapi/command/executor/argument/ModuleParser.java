@@ -4,6 +4,8 @@ import clientapi.command.executor.ExecutionContext;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
 
+import java.lang.reflect.Type;
+
 /**
  * @author Brady
  * @since 11/3/2017 2:22 PM
@@ -17,13 +19,13 @@ public final class ModuleParser implements ArgumentParser<Module> {
     }
 
     @Override
-    public final Module parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Module parse(ExecutionContext context, Type type, String raw) {
         return moduleManager.stream().filter(mod -> format(mod.getName()).equals(format(raw))).findFirst().orElse(null);
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return Module.class.isAssignableFrom(type);
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && Module.class.isAssignableFrom((Class) type);
     }
 
     /**

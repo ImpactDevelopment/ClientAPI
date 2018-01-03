@@ -23,6 +23,7 @@ import clientapi.util.ClientAPIUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -150,7 +151,7 @@ public class Command implements ICommand {
                 boolean isMissingOptional = hasOptional && arguments.length != expectedArgs && i == expectedArgs - 1;
 
                 // Add 1 because the first parameter is the context
-                Class<?> type = handle.getParameterTypes()[i + 1];
+                Type type = handle.getGenericParameterTypes()[i + 1];
 
                 // Get the parser for the parameter type
                 ArgumentParser<?> parser = context.handler().getParser(type);
