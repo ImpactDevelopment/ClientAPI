@@ -5,6 +5,7 @@ import clientapi.command.executor.ExecutionContext;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
 /**
@@ -20,12 +21,12 @@ public final class CommandParser implements ArgumentParser<Command> {
     }
 
     @Override
-    public final Command parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Command parse(ExecutionContext context, Type type, String raw) {
         return commandManager.stream().filter(cmd -> Arrays.stream(cmd.headers()).anyMatch(s -> s.equalsIgnoreCase(raw))).findFirst().orElse(null);
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return Command.class.isAssignableFrom(type);
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && Command.class.isAssignableFrom((Class) type);
     }
 }

@@ -18,6 +18,8 @@ package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
 
+import java.lang.reflect.Type;
+
 /**
  * @author Brady
  * @since 10/18/2017 11:10 AM
@@ -25,7 +27,7 @@ import clientapi.command.executor.ExecutionContext;
 public final class BooleanParser implements ArgumentParser<Boolean> {
 
     @Override
-    public final Boolean parse(ExecutionContext context, Class<?> type, String raw) {
+    public final Boolean parse(ExecutionContext context, Type type, String raw) {
         switch (raw.toLowerCase()) {
             case "true":
             case "yes":
@@ -41,7 +43,7 @@ public final class BooleanParser implements ArgumentParser<Boolean> {
     }
 
     @Override
-    public final boolean isTarget(Class<?> type) {
-        return Boolean.class.isAssignableFrom(type) || Boolean.TYPE.isAssignableFrom(type);
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && (Boolean.class.isAssignableFrom((Class) type) || Boolean.TYPE.isAssignableFrom((Class) type));
     }
 }

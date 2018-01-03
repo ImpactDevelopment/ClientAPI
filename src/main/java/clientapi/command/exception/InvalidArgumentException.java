@@ -18,6 +18,8 @@ package clientapi.command.exception;
 
 import clientapi.command.Command;
 
+import java.lang.reflect.Type;
+
 /**
  * Thrown when an argument that was passed to the command
  * was not the expected type. For example, a number was expected
@@ -41,9 +43,9 @@ public final class InvalidArgumentException extends CommandException {
     /**
      * Expected type
      */
-    private final Class<?> expected;
+    private final Type expected;
 
-    public InvalidArgumentException(Command command, String[] args, int badArg, Class<?> expected) {
+    public InvalidArgumentException(Command command, String[] args, int badArg, Type expected) {
         super(command);
         this.args = args;
         this.badArg = badArg;
@@ -69,7 +71,7 @@ public final class InvalidArgumentException extends CommandException {
      *
      * @return The expected type
      */
-    public Class<?> getExpectedType() {
+    public Type getExpectedType() {
         return this.expected;
     }
 }

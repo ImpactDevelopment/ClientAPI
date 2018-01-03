@@ -18,6 +18,8 @@ package clientapi.command.executor.argument;
 
 import clientapi.command.executor.ExecutionContext;
 
+import java.lang.reflect.Type;
+
 /**
  * @author Brady
  * @since 10/18/2017 11:05 AM
@@ -33,11 +35,11 @@ public interface ArgumentParser<T> {
      * @param raw Type represented in a string
      * @return String resolved to type
      */
-    T parse(ExecutionContext context, Class<?> type, String raw);
+    T parse(ExecutionContext context, Type type, String raw);
 
     /**
      * @param type A type
      * @return Whether or not the specified type is a target for this parser.
      */
-    boolean isTarget(Class<?> type);
+    boolean isTarget(Type type);
 }
