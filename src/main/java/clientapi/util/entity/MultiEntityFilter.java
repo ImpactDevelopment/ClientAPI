@@ -2,10 +2,7 @@ package clientapi.util.entity;
 
 import net.minecraft.entity.Entity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +30,9 @@ public final class MultiEntityFilter implements EntityFilter {
 
     @Override
     public final boolean isValid(Entity entity) {
+        if (entity == null)
+            return false;
+
         return this.filters.stream().filter(filter -> !filter.isValid(entity)).count() > 0;
     }
 
