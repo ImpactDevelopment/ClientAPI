@@ -28,6 +28,7 @@ import clientapi.manage.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -124,7 +125,7 @@ public final class CommandHandler {
      * @param type The type
      * @return A parser targeting the type, {@code null} if none
      */
-    public final ArgumentParser getParser(Class<?> type) {
+    public final ArgumentParser getParser(Type type) {
         return parsers.stream().filter(parser -> parser.isTarget(type)).findFirst().orElse(null);
     }
 
@@ -132,7 +133,7 @@ public final class CommandHandler {
      * Registers an {@code ArgumentParser} to the parsers list.
      *
      * @see ArgumentParser
-     * @see CommandHandler#getParser(Class)
+     * @see CommandHandler#getParser(Type)
      *
      * @param parser {@code ArgumentParser} being registered
      */
