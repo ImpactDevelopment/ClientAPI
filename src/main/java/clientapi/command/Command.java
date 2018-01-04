@@ -124,7 +124,7 @@ public class Command implements ICommand {
         if (this.parent == null) {
             Command sub = findChild(arguments);
             if (sub == null)
-                throw new InvalidSyntaxException(this);
+                throw new UnknownSubCommandException(this, arguments);
 
             sub.execute(context, arguments);
         } else {
@@ -140,7 +140,7 @@ public class Command implements ICommand {
             // as the expected amount, or, if there is an optional argument, one less than the specified
             // amount.
             if (!(arguments.length == expectedArgs || (hasOptional && arguments.length == expectedArgs - 1))) {
-                throw new ArgumentCountException(this, arguments.length, expectedArgs);
+                throw new InvalidSyntaxException(this, arguments.length, expectedArgs);
             }
 
             // List to hold all arguments to be passed to the handle method
