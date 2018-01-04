@@ -156,7 +156,7 @@ public class Command implements ICommand {
                 // Get the parser for the parameter type
                 ArgumentParser<?> parser = context.handler().getParser(type);
                 if (parser == null) {
-                    throw new InvalidArgumentException(this, arguments, i, type);
+                    throw new InvalidParserException(this, arguments[i], type);
                 }
 
                 // Parse the string
@@ -169,7 +169,7 @@ public class Command implements ICommand {
                 if (parser.isTarget(parsed.getClass())) {
                     callArguments.add(parsed);
                 } else {
-                    throw new ParserException(this, parser, isMissingOptional ? "Optional<?>" : arguments[i], type, parsed.getClass());
+                    throw new ParserException(this, parser, isMissingOptional ? "Optional (none provided)" : arguments[i], type, parsed.getClass());
                 }
             }
 
