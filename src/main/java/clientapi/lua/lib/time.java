@@ -3,6 +3,7 @@ package clientapi.lua.lib;
 import clientapi.lua.LuaLibrary;
 import clientapi.util.ClientAPIUtils;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.LibFunction;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
 
@@ -22,6 +23,7 @@ public final class time extends LuaLibrary {
     public final void load(Map<String, LuaValue> table) {
         table.put("Wait", new Wait());
         table.put("Later", new Later());
+        table.put("Now", new Now());
     }
 
     /**
@@ -65,6 +67,19 @@ public final class time extends LuaLibrary {
             }).start();
 
             return LuaValue.TRUE;
+        }
+    }
+
+    /**
+     * Returns the current system clock time.
+     *
+     * @see System#currentTimeMillis()
+     */
+    private static final class Now extends LibFunction {
+
+        @Override
+        public final LuaValue call() {
+            return LuaValue.valueOf(System.currentTimeMillis());
         }
     }
 }
