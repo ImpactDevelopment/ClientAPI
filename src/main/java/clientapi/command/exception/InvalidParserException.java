@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
  * @author Brady
  * @since 1/4/2018 11:06 AM
  */
-public class InvalidParserException extends CommandException {
+public final class InvalidParserException extends CommandException {
 
     /**
      * The argument that was given for the parameter
