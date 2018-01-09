@@ -45,7 +45,7 @@ public final class ExampleClient extends Client {
     }
 
     @Override
-    public void onInit(ClientInfo info) {
+    public final void onInit(ClientInfo info) {
         // Init and load module manager
         moduleManager = new ExampleModManager();
         moduleManager.load();
