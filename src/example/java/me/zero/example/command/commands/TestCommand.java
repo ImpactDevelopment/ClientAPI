@@ -42,7 +42,7 @@ public final class TestCommand extends Command {
      */
     @Sub
     private void handle(ExecutionContext context, Optional<String> argument) {
-        // Print a chat message indicating the success of the
+        // Print a chat message indicating the success of the execution
         mc.ingameGUI.getChatGUI().printChatMessage(
                 new ChatBuilder()
                         .append(String.format("%s executed the ", context.sender().getName()), TextFormatting.GRAY)
