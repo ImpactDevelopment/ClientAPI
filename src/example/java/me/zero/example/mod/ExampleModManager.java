@@ -33,7 +33,7 @@ public final class ExampleModManager extends Manager<Module> {
     }
 
     @Override
-    public void load() {
+    public final void load() {
         ClientAPI.LOGGER.log(Level.INFO, "Loading Modules");
 
         // Load Modules
@@ -47,7 +47,7 @@ public final class ExampleModManager extends Manager<Module> {
     }
 
     @Override
-    public void save() {
+    public final void save() {
         // Save Modules
     }
 }

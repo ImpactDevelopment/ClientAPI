@@ -33,6 +33,6 @@ public final class Fly extends Module implements IMovement {
 
     @EventHandler
     private Listener<UpdateEvent> updateListener = new Listener<>(event ->
-        mc.player.motionY = Boolean.valueOf(mc.gameSettings.keyBindJump.isKeyDown()).compareTo(mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2
+        mc.player.motionY = Boolean.compare(mc.gameSettings.keyBindJump.isKeyDown(), mc.gameSettings.keyBindSneak.isKeyDown()) * 0.2
     );
 }

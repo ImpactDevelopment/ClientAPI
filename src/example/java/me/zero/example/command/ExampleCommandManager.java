@@ -38,19 +38,21 @@ public final class ExampleCommandManager extends Manager<Command> {
     }
 
     @Override
-    public void load() {
+    public final void load() {
         this.addAll(
                 new TestCommand()
         );
 
+        handler.registerParser(new BlockParser());
         handler.registerParser(new BooleanParser());
         handler.registerParser(new CharParser());
+        handler.registerParser(new CommandParser(ExampleClient.getInstance().getCommandManager()));
         handler.registerParser(new ModuleParser(ExampleClient.getInstance().getModuleManager()));
         handler.registerParser(new NumberParser());
         handler.registerParser(new OptionalParser());
         handler.registerParser(new StringParser());
 
-        // Setup the handler and a chat command listener
+        // Subscribe the handler and a chat command listener to the event bus
         ClientAPI.EVENT_BUS.subscribe(
                 handler,
                 new ChatCommandListener(handler)
@@ -58,5 +60,7 @@ public final class ExampleCommandManager extends Manager<Command> {
     }
 
     @Override
-    public void save() {}
+    public final void save() {
+
+    }
 }
