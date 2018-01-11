@@ -38,16 +38,24 @@ public class ValueTest {
     }
 
     @Test
-    public void test() {
+    public void valueDiscovery() {
         assertEquals("Test ValueHolder should have exactly 1 value", holder.getValues().size(), 1);
+        assertNotNull("IValue with a valid ID should evaluate to non null", holder.getValue("boolean_value"));
+    }
 
-        IValue parent;
-        assertNotNull("IValue with a valid ID should evaluate to non null", (parent = holder.getValue("boolean_value")));
+    @Test
+    public void booleanValue() {
+        IValue parent = holder.getValue("boolean_value");
         assertEquals("BooleanValue should resolve to false if undefined", parent.getValue(), false);
         assertEquals("Test BooleanValue should have exactly 1 child value", parent.getValues().size(), 1);
+    }
 
-        IValue child;
-        assertNotNull("Child value shouldn't be null", (child = parent.getValues().get(0)));
+    @Test
+    public void childValue() {
+        IValue parent = holder.getValue("boolean_value");
+        IValue child = parent.getValues().get(0);
+
+        assertNotNull("Child value shouldn't be null", child);
         assertNotNull("Child value should have a non-null parent", child.getParent());
         assertEquals("Child value's parent ID should match the Test BooleanValue id", child.getParent(), parent.getID());
         assertEquals("Child value shouldn't have any children", child.getValues().size(), 0);
@@ -56,7 +64,7 @@ public class ValueTest {
 
     private class TestHolder extends ValueHolder {
 
-        //@formatter:off
+        // @formatter:off
 
         @Label(name = "Boolean Value", id = "boolean_value", description = "An example boolean value")
         @BooleanValue
@@ -66,6 +74,6 @@ public class ValueTest {
             @NumberValue(min = 0, max = 10)
             private int child = 5;
 
-        //@formatter:on
+        // @formatter:on
     }
 }
