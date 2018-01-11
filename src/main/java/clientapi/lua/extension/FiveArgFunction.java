@@ -11,9 +11,9 @@ import org.luaj.vm2.lib.LibFunction;
  * @author Brady
  * @since 11/8/2017 6:05 PM
  */
-abstract public class FiveArgFunction extends LibFunction {
+public abstract class FiveArgFunction extends LibFunction {
 
-    abstract public LuaValue call(LuaValue arg1, LuaValue arg2, LuaValue arg3, LuaValue arg4, LuaValue arg5);
+    public abstract LuaValue call(LuaValue arg1, LuaValue arg2, LuaValue arg3, LuaValue arg4, LuaValue arg5);
 
     /** Default constructor */
     public FiveArgFunction() {
