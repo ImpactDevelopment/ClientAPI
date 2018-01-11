@@ -151,8 +151,8 @@ public final class ExampleClient extends Client {
     }
     
     public static ExampleClient getInstance() {
-            return instance;
-        }
+        return instance;
+    }
 }
 ```
 
