@@ -9,7 +9,7 @@ to an instance of ``clientapi.ClientInfo``. An example of a properly defined ``c
 file is below. Please note that comments are not official supported in JSON, and if you choose
 to copy the config below, they must be removed.
 
-```json
+```js
 {
   "name": "Example Client",           // The name of the Client
   "authors": [ "Your Name" ],         // An array of the Client authors
