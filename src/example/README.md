@@ -156,44 +156,6 @@ public final class ExampleClient extends Client {
 }
 ```
 
-## Creating a Command Argument Parser
-For parsing parameter types that aren't covered by the ClientAPI default parsers, or you want to
-effectively replace one of the ClientAPI parsers, it is very simple to do so.
-
-All argument parsers implement ``clientapi.command.executor.argument.ArgumentParser``. There are 2
-methods that must be implemented, ``parse(ExecutionContext, Type, String)`` and ``isTarget(Type)``.
-
-The ``parse`` method is invoked only if the ``isTarget`` method returns true for a specified type.
-
-Let's create a parser for hex colors as an example.
-```java
-public final class ColorParser implements ArgumentParser<Color> {
-    
-    @Override
-    public final Color parse(ExecutionContext context, Type type, String raw) {
-        // Remove all non-hexadecimal characters
-        raw = raw.replaceAll("([^0-9a-fA-F])", "");
-        
-        // If there aren't either 24 or 32 bits, return null
-        if (raw.length() != 6 && raw.length() != 8) {
-            return null;
-        }
-        
-        // If there are only 24 bits, set the first 8 (alpha) to equal 255.
-        if (raw.length() == 6) {
-            raw = "FF" + raw;
-        }
-        
-        return new Color(Integer.parseInt(raw, 16), true);
-    }
-  
-    @Override
-    public final boolean isTarget(Type type) {
-        return type instanceof Class && Color.class.isAssignableFrom((Class) type);
-    }
-}
-```
-
 ## Creating an Event Listener
 Event listeners are provided by [Alpine](https://github.com/ZeroMemes/Alpine) and allow for any
 class with valid listener fields to receive events when they are posted to the ClientAPI event
@@ -383,6 +345,44 @@ public final class ExampleClient extends Client {
     
     public static ExampleClient getInstance() {
         return instance;
+    }
+}
+```
+
+## Creating a Command Argument Parser
+For parsing parameter types that aren't covered by the ClientAPI default parsers, or you want to
+effectively replace one of the ClientAPI parsers, it is very simple to do so.
+
+All argument parsers implement ``clientapi.command.executor.argument.ArgumentParser``. There are 2
+methods that must be implemented, ``parse(ExecutionContext, Type, String)`` and ``isTarget(Type)``.
+
+The ``parse`` method is invoked only if the ``isTarget`` method returns true for a specified type.
+
+Let's create a parser for hex colors as an example.
+```java
+public final class ColorParser implements ArgumentParser<Color> {
+    
+    @Override
+    public final Color parse(ExecutionContext context, Type type, String raw) {
+        // Remove all non-hexadecimal characters
+        raw = raw.replaceAll("([^0-9a-fA-F])", "");
+        
+        // If there aren't either 24 or 32 bits, return null
+        if (raw.length() != 6 && raw.length() != 8) {
+            return null;
+        }
+        
+        // If there are only 24 bits, set the first 8 (alpha) to equal 255.
+        if (raw.length() == 6) {
+            raw = "FF" + raw;
+        }
+        
+        return new Color(Integer.parseInt(raw, 16), true);
+    }
+  
+    @Override
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && Color.class.isAssignableFrom((Class) type);
     }
 }
 ```
