@@ -31,7 +31,6 @@ public final class MultiEntityFilter implements EntityFilter {
     @Override
     public final boolean isValid(Entity entity) {
         return entity != null && this.filters.stream().filter(filter -> !filter.isValid(entity)).count() == 0;
-
     }
 
     /**
