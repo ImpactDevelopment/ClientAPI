@@ -56,7 +56,7 @@ public final class ExampleClient extends Client {
 
         // Setup example script
         String scriptSource = new StreamReader(ExampleClient.class.getResourceAsStream("/lua/example.lua")).all();
-        LuaScript script = LuaHandler.getHandler().createScript(LuaScript.Type.HOOK, scriptSource);
+        LuaScript script = LuaHandler.getHandler().createScript(scriptSource);
         try {
             script.compile();
             script.exec();
