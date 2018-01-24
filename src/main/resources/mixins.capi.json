@@ -29,6 +29,7 @@
     "MixinRenderItem",
     "MixinRenderLivingBase",
     "MixinRenderManager",
+    "MixinTimer",
     "MixinWorldClient"
   ]
 }
