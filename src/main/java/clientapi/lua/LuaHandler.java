@@ -1,5 +1,8 @@
 package clientapi.lua;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Brady
  * @since 11/8/2017 12:22 PM
@@ -16,6 +19,11 @@ public final class LuaHandler {
      */
     private final LuaHookManager hookManager;
 
+    /**
+     * A list containing all scripts created by this {@code LuaHandler}
+     */
+    private final List<LuaScript> scripts = new ArrayList<>();
+
     private LuaHandler() {
         this.hookManager = new LuaHookManager();
     }
@@ -23,12 +31,35 @@ public final class LuaHandler {
     /**
      * Creates a script through this {@code LuaHandler}.
      *
-     * @param type The type of script.
      * @param code The raw lua source.
      * @return The created {@code LuaScript}
      */
-    public final LuaScript createScript(LuaScript.Type type, String code) {
-        return new LuaScript(this, type, code);
+    public final LuaScript createScript(String code) {
+        LuaScript script = new LuaScript(this, code);
+        this.scripts.add(script);
+        return script;
+    }
+
+    /**
+     * Deletes the specified script and removes it from this handler.
+     *
+     * @param script The script to release
+     * @return Whether or not the specified script was released
+     */
+    public final boolean release(LuaScript script) {
+        if (!scripts.contains(script))
+            return false;
+
+        scripts.remove(script);
+        script.delete();
+
+        return true;
+    }
+    /**
+     * @return The scripts that have been created by this {@code LuaHandler}
+     */
+    public final List<LuaScript> getScripts() {
+        return this.scripts;
     }
 
     /**

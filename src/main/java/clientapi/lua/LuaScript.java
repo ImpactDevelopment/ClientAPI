@@ -4,7 +4,6 @@ import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
-import javax.script.CompiledScript;
 import javax.script.ScriptException;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +25,6 @@ public final class LuaScript {
     private final LuaHandler handler;
 
     /**
-     * The type of script
-     */
-    private final Type type;
-
-    /**
      * The raw lua code
      */
     private final String code;
@@ -45,14 +39,8 @@ public final class LuaScript {
      */
     private LuaValue compiled;
 
-    /**
-     * Whether or not this script can be executed
-     */
-    private boolean canExec = true;
-
-    public LuaScript(LuaHandler handler, Type type, String code) {
+    LuaScript(LuaHandler handler, String code) {
         this.handler = handler;
-        this.type = type;
         this.code = code;
     }
 
@@ -80,11 +68,10 @@ public final class LuaScript {
      * and allows the script to be re-evaluated. (Only once the
      * script is re-compiled).
      */
-    public final void delete() {
+    final void delete() {
         handler.getHookManager().detach(this);
         globals = null;
         compiled = null;
-        canExec = true;
     }
 
     /**
@@ -100,23 +87,13 @@ public final class LuaScript {
      * @throws ScriptException if the script is unable to be executed.
      */
     public final boolean exec() throws ScriptException {
-        if (compiled == null || !canExec)
+        if (compiled == null)
             return false;
 
         // Evaluate the script
         handler.getHookManager().setCurrentScript(this);
         compiled.call();
-
-        // Set the new canEval flag
-        canExec = type == Type.SINGLE;
         return true;
-    }
-
-    /**
-     * @return The type of script
-     */
-    public final Type getType() {
-        return this.type;
     }
 
     /**
@@ -124,21 +101,5 @@ public final class LuaScript {
      */
     public final String getCode() {
         return this.code;
-    }
-
-    public enum Type {
-        /**
-         * Type of script that is intended to only be executed
-         * a single time, triggered by some event. For example,
-         * "macro" type scripts that would
-         */
-        SINGLE,
-
-        /**
-         * Type of script that is intended to be executed once to
-         * create event hook functions and have them invoked as long
-         * as the script is active.
-         */
-        HOOK
     }
 }
