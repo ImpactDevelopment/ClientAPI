@@ -18,7 +18,7 @@ public class MixinTimer implements ITimer {
 
     @Shadow private float tickLength;
 
-    private float speed;
+    private float speed = 1;
 
     /**
      * Apply timer hack to the Timer class
