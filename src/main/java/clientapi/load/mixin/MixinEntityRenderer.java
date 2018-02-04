@@ -45,7 +45,7 @@ public class MixinEntityRenderer {
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
     }
 
-    @Inject(method = "renderWorldPass", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
+    @Inject(method = "renderWorldPass", at = @At(value = "INVOKE", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
     private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks, pass));
     }
