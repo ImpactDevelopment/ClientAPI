@@ -58,7 +58,6 @@ public abstract class MixinEntity implements IEntity {
     @Shadow public void move(MoverType type, double x, double y, double z) {}
     @Shadow public abstract boolean isSprinting();
     @Shadow public abstract boolean isRiding();
-    @Shadow public abstract AxisAlignedBB getEntityBoundingBox();
 
     private Vec3 pos, prevPos, lastTickPos, motion;
     private Vec2 rotation, prevRotation;
