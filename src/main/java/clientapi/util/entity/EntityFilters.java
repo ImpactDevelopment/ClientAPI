@@ -29,8 +29,10 @@ public final class EntityFilters implements Helper {
      * @param targetEntity The entity to filter out
      * @return An entity filter that can restrict entities that can't be seen
      */
-    public static EntityFilter restrictEntity(Supplier<Entity> targetEntity) {
-        return entity -> entity != targetEntity.get();
+    public static EntityCheck restrictEntity(Supplier<Entity> targetEntity) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                entity != targetEntity.get()
+        );
     }
 
     /**
@@ -39,8 +41,10 @@ public final class EntityFilters implements Helper {
      * @param allowDead Whether or not to allow entities that are dead
      * @return An entity filter that can restrict entities that are dead
      */
-    public static EntityFilter allowDead(Supplier<Boolean> allowDead) {
-        return entity -> allowDead.get() || entity.isEntityAlive();
+    public static EntityCheck allowDead(Supplier<Boolean> allowDead) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                allowDead.get() || entity.isEntityAlive()
+        );
     }
 
     /**
@@ -50,8 +54,10 @@ public final class EntityFilters implements Helper {
      * @param allowCantBeSeen Whether or not to allow entities that can't be seen
      * @return An entity filter that can restrict entities that can't be seen
      */
-    public static EntityFilter allowCantBeSeen(Supplier<Boolean> allowCantBeSeen) {
-        return entity -> allowCantBeSeen.get() || mc.player.canEntityBeSeen(entity);
+    public static EntityCheck allowCantBeSeen(Supplier<Boolean> allowCantBeSeen) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                allowCantBeSeen.get() || mc.player.canEntityBeSeen(entity)
+        );
     }
 
     /**
@@ -60,8 +66,10 @@ public final class EntityFilters implements Helper {
      * @param allowSleeping Whether or not to allow sleeping players
      * @return An entity filter that can restrict sleeping players
      */
-    public static EntityFilter allowSleeping(Supplier<Boolean> allowSleeping) {
-        return entity -> allowSleeping.get() || (!isPlayer(entity) || !((EntityPlayer) entity).isPlayerSleeping());
+    public static EntityCheck allowSleeping(Supplier<Boolean> allowSleeping) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                allowSleeping.get() || !isPlayer(entity) || !((EntityPlayer) entity).isPlayerSleeping()
+        );
     }
 
     /**
@@ -70,8 +78,10 @@ public final class EntityFilters implements Helper {
      * @param allowInvisible Whether or not to allow invisible entities
      * @return An entity filter that can restrict invisible entities
      */
-    public static EntityFilter allowInvisible(Supplier<Boolean> allowInvisible) {
-        return entity -> allowInvisible.get() || !entity.isInvisible();
+    public static EntityCheck allowInvisible(Supplier<Boolean> allowInvisible) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                allowInvisible.get() || !entity.isInvisible()
+        );
     }
 
     /**
@@ -83,8 +93,10 @@ public final class EntityFilters implements Helper {
      * @param allowTeammates Whether or not to allow teammates
      * @return An entity filter that can restrict teammates
      */
-    public static EntityFilter allowTeammates(Supplier<Boolean> allowTeammates) {
-        return entity -> allowTeammates.get() || !onSameTeam(entity, mc.player);
+    public static EntityCheck allowTeammates(Supplier<Boolean> allowTeammates) {
+        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+                allowTeammates.get() || !onSameTeam(entity, mc.player)
+        );
     }
 
     /**
@@ -101,8 +113,8 @@ public final class EntityFilters implements Helper {
      * @param allowPassives Whether or not to allow passives
      * @return An entity filter that can restrict player, hostile, and passive entities
      */
-    public static EntityFilter allowType(Supplier<Boolean> allowPlayers, Supplier<Boolean> allowHostiles, Supplier<Boolean> allowPassives) {
-        return new MultiEntityFilter(allowPlayers(allowPlayers), allowHostiles(allowHostiles), allowPassives(allowPassives));
+    public static EntityCheck allowType(Supplier<Boolean> allowPlayers, Supplier<Boolean> allowHostiles, Supplier<Boolean> allowPassives) {
+        return new EntityFilter(allowPlayers(allowPlayers), allowHostiles(allowHostiles), allowPassives(allowPassives));
     }
 
     /**
@@ -114,8 +126,10 @@ public final class EntityFilters implements Helper {
      * @param allowPlayers Whether or not to allow players
      * @return An entity filter that can restrict players
      */
-    public static EntityFilter allowPlayers(Supplier<Boolean> allowPlayers) {
-        return entity -> allowPlayers.get() || !isPlayer(entity);
+    public static EntityCheck allowPlayers(Supplier<Boolean> allowPlayers) {
+        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+                allowPlayers.get() && isPlayer(entity)
+        );
     }
 
     /**
@@ -127,8 +141,10 @@ public final class EntityFilters implements Helper {
      * @param allowHostiles Whether or not to allow hostiles
      * @return An entity filter that can restrict hostiles
      */
-    public static EntityFilter allowHostiles(Supplier<Boolean> allowHostiles) {
-        return entity -> allowHostiles.get() || !isHostile(entity);
+    public static EntityCheck allowHostiles(Supplier<Boolean> allowHostiles) {
+        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+                allowHostiles.get() && isHostile(entity)
+        );
     }
 
     /**
@@ -140,8 +156,10 @@ public final class EntityFilters implements Helper {
      * @param allowPassives Whether or not to allow passives
      * @return An entity filter that can restrict passives
      */
-    public static EntityFilter allowPassives(Supplier<Boolean> allowPassives) {
-        return entity -> allowPassives.get() || !isPassive(entity);
+    public static EntityCheck allowPassives(Supplier<Boolean> allowPassives) {
+        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+                allowPassives.get() && isPassive(entity)
+        );
     }
 
     /**
