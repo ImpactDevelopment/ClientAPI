@@ -24,10 +24,10 @@ public final class EntityFilters implements Helper {
     private EntityFilters() {}
 
     /**
-     * Creates an {@code EntityFilter} that restricts the specified entity
+     * Creates an {@code EntityCheck} that restricts the specified entity
      *
      * @param targetEntity The entity to filter out
-     * @return An entity filter that can restrict entities that can't be seen
+     * @return An entity check that can restrict entities that can't be seen
      */
     public static EntityCheck restrictEntity(Supplier<Entity> targetEntity) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -36,10 +36,10 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts entities that are dead.
+     * Creates an {@code EntityCheck} that restricts entities that are dead.
      *
      * @param allowDead Whether or not to allow entities that are dead
-     * @return An entity filter that can restrict entities that are dead
+     * @return An entity check that can restrict entities that are dead
      */
     public static EntityCheck allowDead(Supplier<Boolean> allowDead) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -48,11 +48,11 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts entities that can't
+     * Creates an {@code EntityCheck} that restricts entities that can't
      * be seen by the local player.
      *
      * @param allowCantBeSeen Whether or not to allow entities that can't be seen
-     * @return An entity filter that can restrict entities that can't be seen
+     * @return An entity check that can restrict entities that can't be seen
      */
     public static EntityCheck allowCantBeSeen(Supplier<Boolean> allowCantBeSeen) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -61,10 +61,10 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts sleeping players.
+     * Creates an {@code EntityCheck} that restricts sleeping players.
      *
      * @param allowSleeping Whether or not to allow sleeping players
-     * @return An entity filter that can restrict sleeping players
+     * @return An entity check that can restrict sleeping players
      */
     public static EntityCheck allowSleeping(Supplier<Boolean> allowSleeping) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -73,10 +73,10 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts invisible entities.
+     * Creates an {@code EntityCheck} that restricts invisible entities.
      *
      * @param allowInvisible Whether or not to allow invisible entities
-     * @return An entity filter that can restrict invisible entities
+     * @return An entity check that can restrict invisible entities
      */
     public static EntityCheck allowInvisible(Supplier<Boolean> allowInvisible) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -85,13 +85,13 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts other
+     * Creates an {@code EntityCheck} that restricts other
      * players that are on the same team as the local player.
      *
      * @see EntityFilters#onSameTeam(Entity, Entity)
      *
      * @param allowTeammates Whether or not to allow teammates
-     * @return An entity filter that can restrict teammates
+     * @return An entity check that can restrict teammates
      */
     public static EntityCheck allowTeammates(Supplier<Boolean> allowTeammates) {
         return new EntityCheckImpl(CheckType.RESTRICT, entity ->
@@ -100,7 +100,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts player,
+     * Creates an {@code EntityCheck} that restricts player,
      * hostile, and passive entities if their corresponding
      * suppliers return false.
      *
@@ -111,20 +111,20 @@ public final class EntityFilters implements Helper {
      * @param allowPlayers Whether or not to allow players
      * @param allowHostiles Whether or not to allow hostiles
      * @param allowPassives Whether or not to allow passives
-     * @return An entity filter that can restrict player, hostile, and passive entities
+     * @return An entity check that can restrict player, hostile, and passive entities
      */
-    public static EntityCheck allowType(Supplier<Boolean> allowPlayers, Supplier<Boolean> allowHostiles, Supplier<Boolean> allowPassives) {
+    public static EntityFilter allowType(Supplier<Boolean> allowPlayers, Supplier<Boolean> allowHostiles, Supplier<Boolean> allowPassives) {
         return new EntityFilter(allowPlayers(allowPlayers), allowHostiles(allowHostiles), allowPassives(allowPassives));
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts player
+     * Creates an {@code EntityCheck} that restricts player
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isPlayer(Entity)
      *
      * @param allowPlayers Whether or not to allow players
-     * @return An entity filter that can restrict players
+     * @return An entity check that can restrict players
      */
     public static EntityCheck allowPlayers(Supplier<Boolean> allowPlayers) {
         return new EntityCheckImpl(CheckType.ALLOW, entity ->
@@ -133,13 +133,13 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts hostile
+     * Creates an {@code EntityCheck} that restricts hostile
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isHostile(Entity)
      *
      * @param allowHostiles Whether or not to allow hostiles
-     * @return An entity filter that can restrict hostiles
+     * @return An entity check that can restrict hostiles
      */
     public static EntityCheck allowHostiles(Supplier<Boolean> allowHostiles) {
         return new EntityCheckImpl(CheckType.ALLOW, entity ->
@@ -148,13 +148,13 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityFilter} that restricts passive
+     * Creates an {@code EntityCheck} that restricts passive
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isPassive(Entity)
      *
      * @param allowPassives Whether or not to allow passives
-     * @return An entity filter that can restrict passives
+     * @return An entity check that can restrict passives
      */
     public static EntityCheck allowPassives(Supplier<Boolean> allowPassives) {
         return new EntityCheckImpl(CheckType.ALLOW, entity ->
@@ -171,7 +171,6 @@ public final class EntityFilters implements Helper {
      */
     public static boolean onSameTeam(Entity e1, Entity e2) {
         return e1.isOnSameTeam(e2);
-
     }
 
     /**
