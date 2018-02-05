@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * {@code EntityFilter} implementation that can have multiple child entity filters.
@@ -30,9 +31,12 @@ public final class EntityFilter implements EntityCheck {
 
     @Override
     public final boolean isValid(Entity entity) {
+        Stream<EntityCheck> restrictChecks = this.checks.stream().filter(filter -> filter.getType() == CheckType.RESTRICT);
+        Stream<EntityCheck> allowChecks = this.checks.stream().filter(filter -> filter.getType() == CheckType.ALLOW);
+
         return entity != null
-                && this.checks.stream().filter(filter -> filter.getType() == CheckType.RESTRICT).allMatch(filter -> filter.isValid(entity))
-                && this.checks.stream().filter(filter -> filter.getType() == CheckType.ALLOW).anyMatch(filter -> filter.isValid(entity));
+                && restrictChecks.allMatch(filter -> filter.isValid(entity))
+                && (allowChecks.count() == 0 || allowChecks.anyMatch(filter -> filter.isValid(entity)));
 
     }
 
