@@ -108,6 +108,7 @@ public class ShaderProgram extends GLObject {
      */
     public final void detach() {
         if (isShaderAttached) {
+            isShaderAttached = false;
             adapter.useProgram(0);
         }
     }
