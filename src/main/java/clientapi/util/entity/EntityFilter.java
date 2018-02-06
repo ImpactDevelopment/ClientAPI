@@ -31,11 +31,11 @@ public final class EntityFilter implements EntityCheck {
 
     @Override
     public final boolean isValid(Entity entity) {
-        List<EntityCheck> allowChecks = this.checks.stream().filter(filter -> filter.getType() == CheckType.ALLOW).collect(Collectors.toList());
+        boolean containsAllow = this.checks.stream().anyMatch(filter -> filter.getType() == CheckType.ALLOW);
 
         return entity != null
                 && this.checks.stream().filter(filter -> filter.getType() == CheckType.RESTRICT).allMatch(filter -> filter.isValid(entity))
-                && (allowChecks.size() == 0 || allowChecks.stream().anyMatch(filter -> filter.isValid(entity)));
+                && (!containsAllow || this.checks.stream().filter(filter -> filter.getType() == CheckType.ALLOW).anyMatch(filter -> filter.isValid(entity)));
 
     }
 
