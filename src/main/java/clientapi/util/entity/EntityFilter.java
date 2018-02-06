@@ -2,9 +2,11 @@ package clientapi.util.entity;
 
 import net.minecraft.entity.Entity;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * {@code EntityFilter} implementation that can have multiple child entity filters.
