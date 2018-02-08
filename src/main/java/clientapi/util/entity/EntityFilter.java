@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * {@code EntityFilter} implementation that can have multiple child entity filters.
+ * {@code EntityCheck} implementation that can have multiple child entity checks.
  *
  * @author Brady
  * @since 11/7/2017 12:14 PM
