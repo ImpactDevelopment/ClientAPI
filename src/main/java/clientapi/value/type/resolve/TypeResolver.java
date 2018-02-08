@@ -19,7 +19,6 @@ package clientapi.value.type.resolve;
 import clientapi.value.Value;
 
 import java.lang.reflect.Field;
-import java.util.function.BiFunction;
 
 /**
  * Takes in a field and its parent object and
@@ -28,4 +27,7 @@ import java.util.function.BiFunction;
  * @author Brady
  * @since 2/21/2017 12:00 PM
  */
-public interface TypeResolver<T extends Value> extends BiFunction<Object, Field, T> {}
+public interface TypeResolver<T extends Value> {
+
+    T resolve(Object parent, Field field);
+}

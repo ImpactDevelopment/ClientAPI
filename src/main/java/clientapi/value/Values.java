@@ -16,12 +16,15 @@
 
 package clientapi.value;
 
-import clientapi.value.exception.ValueException;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.annotation.Label;
 import clientapi.value.annotation.*;
-import clientapi.value.type.resolve.DefaultResolvers;
+import clientapi.value.exception.ValueException;
 import clientapi.value.type.resolve.ResolverData;
+import clientapi.value.type.resolve.impl.BooleanTypeResolver;
+import clientapi.value.type.resolve.impl.EnumTypeResolver;
+import clientapi.value.type.resolve.impl.NumberTypeResolver;
+import clientapi.value.type.resolve.impl.StringTypeResolver;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -54,11 +57,11 @@ public final class Values {
 
     static {
         // Default Resolvers
-        define(BooleanValue.class, ResolverData.create(DefaultResolvers.BOOLEAN, Boolean.class, Boolean.TYPE));
-        define(NumberValue.class, ResolverData.create(DefaultResolvers.NUMBER));
-        define(MultiValue.class, ResolverData.create(DefaultResolvers.MULTI, String.class));
-        define(StringValue.class, ResolverData.create(DefaultResolvers.STRING, String.class));
-        define(EnumValue.class, ResolverData.create(DefaultResolvers.ENUM, Enum.class));
+        define(BooleanValue.class, ResolverData.create(new BooleanTypeResolver(), Boolean.class, Boolean.TYPE));
+        define(NumberValue.class, ResolverData.create(new NumberTypeResolver()));
+        define(MultiValue.class, ResolverData.create(new StringTypeResolver(), String.class));
+        define(StringValue.class, ResolverData.create(new StringTypeResolver(), String.class));
+        define(EnumValue.class, ResolverData.create(new EnumTypeResolver(), Enum.class));
     }
 
     /**
@@ -141,8 +144,8 @@ public final class Values {
         if (!data.isResolvable(field.getType()))
             throw new ValueException("Unable to resolve field if type is not supported");
 
-        Object resolved = data.getResolver().apply(parent, field);
-        if (resolved == null || !(resolved instanceof IValue))
+        Object resolved = data.getResolver().resolve(parent, field);
+        if (resolved == null)
             throw new ValueException("Outcome of resolver was either null or not a value type");
 
         return (IValue) resolved;
