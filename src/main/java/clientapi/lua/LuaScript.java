@@ -75,13 +75,9 @@ public final class LuaScript {
     }
 
     /**
-     * Executes this script, can only be done once if the {@code Type}
-     * is set to {@code HOOK}. If the script is type {@code SINGLE},
-     * the script should be run on a separate thread in the case that
-     * {@code time.Wait(int)} calls are made to sleep the execution
-     * thread. Returns whether or not the operation was a success,
-     * based on if this script has already been compiled or not and
-     * if the script can be executed.
+     * Executes this script. Returns whether or not the operation
+     * was a success, based on if this script has already been
+     * compiled or not and if the script can be executed.
      *
      * @return Whether or not the operation was a success
      * @throws ScriptException if the script is unable to be executed.
