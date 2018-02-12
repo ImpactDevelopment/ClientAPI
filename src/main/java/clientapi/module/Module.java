@@ -18,15 +18,20 @@ package clientapi.module;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.internal.ModuleStateEvent;
-import clientapi.manage.Node;
 import clientapi.module.exception.ModuleInitException;
 import clientapi.util.ClientAPIUtils;
+import clientapi.util.Tag;
+import clientapi.util.interfaces.Describable;
+import clientapi.util.interfaces.Nameable;
+import clientapi.util.interfaces.Taggable;
 import clientapi.util.io.Keybind;
+import clientapi.value.holder.ValueHolder;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The base for all modules. Contains the data
@@ -39,12 +44,22 @@ import java.util.List;
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public abstract class Module extends Node implements IModule {
+public abstract class Module extends ValueHolder implements IModule, Nameable, Describable, Taggable {
 
     /**
      * Reference to self-class
      */
     private final Class<? extends Module> self = this.getClass();
+
+    /**
+     * Name of the node
+     */
+    protected String name;
+
+    /**
+     * Description of the node
+     */
+    protected String description;
 
     /**
      * The type/category of the module
@@ -70,6 +85,11 @@ public abstract class Module extends Node implements IModule {
      * The Current Mode
      */
     private ModuleMode mode;
+
+    /**
+     * List of Tags
+     */
+    private final List<Tag> tags = new ArrayList<>();
 
     public Module() {
         if (!self.isAnnotationPresent(Mod.class))
@@ -282,5 +302,43 @@ public abstract class Module extends Node implements IModule {
     @Override
     public final Keybind getBind() {
         return this.bind;
+    }
+
+    @Override
+    public final String getName() {
+        return this.name;
+    }
+
+    @Override
+    public final String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public final void addTag(Tag tag) {
+        if (!getTag(tag).isPresent())
+            tags.add(tag);
+    }
+
+    @Override
+    public final void removeTag(String id) {
+        Tag tag;
+        if ((tag = getTag(id).orElse(null)) != null)
+            tags.remove(tag);
+    }
+
+    @Override
+    public final boolean hasTag(String id) {
+        return getTag(id) != null;
+    }
+
+    @Override
+    public final Optional<Tag> getTag(String id) {
+        return this.tags.stream().filter(tag -> tag.getID().equals(id)).findFirst();
+    }
+
+    @Override
+    public final List<Tag> getTags() {
+        return this.tags;
     }
 }
