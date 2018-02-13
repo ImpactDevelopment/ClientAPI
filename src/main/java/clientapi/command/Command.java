@@ -126,6 +126,13 @@ public class Command implements ICommand {
             if (sub == null)
                 throw new UnknownSubCommandException(this, arguments);
 
+            // If the child was found by it's header, then remove the first argument.
+            if (sub.headers.length > 0 && arguments.length > 0) {
+                String[] newArgs = new String[arguments.length - 1];
+                System.arraycopy(arguments, 1, newArgs, 0, arguments.length - 1);
+                arguments = newArgs;
+            }
+
             sub.execute(context, arguments);
         } else {
             int params = handle.getParameterCount();
