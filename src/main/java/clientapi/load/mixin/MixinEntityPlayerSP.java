@@ -95,13 +95,15 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
     @Inject(method = "sendChatMessage", at = @At(value = "HEAD"), cancellable = true)
     private void sendChatMessage(String message, CallbackInfo ci) {
+        // Effectively overwrite the method
+        ci.cancel();
+
         ChatEvent event = new ChatEvent.Send(message);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
 
         this.connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
-        ci.cancel();
     }
 
     /**
