@@ -208,7 +208,7 @@ public class Command implements ICommand {
         }
 
         // Find the command by the length of the arguments
-        child = this.children.stream().filter(c -> arguments.length == c.arguments.length).findFirst().orElse(null);
+        child = this.children.stream().filter(c -> c.headers.length == 0 && arguments.length == c.arguments.length).findFirst().orElse(null);
         if (child != null) {
             return child;
         }
