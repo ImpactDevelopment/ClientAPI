@@ -28,7 +28,6 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.MoverType;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayer;
@@ -94,14 +93,14 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         super.move(type, event.getX(), event.getY(), event.getZ());
     }
 
-    @Redirect(method = "sendChatMessage", at = @At(value = "INVOKE", target = "net/minecraft/client/network/NetHandlerPlayClient.sendPacket(Lnet/minecraft/network/Packet;)V"))
-    private void sendChatMessage_sendPacket(NetHandlerPlayClient netHandlerPlayClient, Packet packet) {
-        ChatEvent event = new ChatEvent.Send(((CPacketChatMessage) packet).getMessage());
+    @Inject(method = "sendChatMessage", at = @At(value = "HEAD"))
+    private void sendChatMessage(String message, CallbackInfo ci) {
+        ChatEvent event = new ChatEvent.Send(message);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
 
-        netHandlerPlayClient.sendPacket(new CPacketChatMessage(event.getRawMessage()));
+        this.connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
     }
 
     /**
