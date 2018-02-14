@@ -16,12 +16,8 @@
 
 package clientapi.event.handle;
 
-import clientapi.ClientAPI;
-import clientapi.event.defaults.filters.PacketFilter;
 import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.game.core.KeyUpEvent;
-import clientapi.event.defaults.game.misc.ChatEvent;
-import clientapi.event.defaults.game.network.PacketEvent;
 import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.io.Keybind;
@@ -29,8 +25,6 @@ import clientapi.util.render.camera.CameraManager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.type.EventPriority;
-import net.minecraft.network.play.client.CPacketChatMessage;
-import net.minecraft.network.play.server.SPacketChat;
 
 import java.util.stream.Stream;
 
@@ -80,30 +74,4 @@ public enum ClientHandler implements Helper {
             Keybind.getKeybinds().stream()
                     .filter(bind -> bind.getKey() == event.getKey())
                     .forEach(Keybind::onRelease));
-
-    /**
-     * Handles packet out-flow
-     */
-    @EventHandler
-    private final Listener<PacketEvent.Send> packetSendListener = new Listener<>(event -> {
-        CPacketChatMessage packet = (CPacketChatMessage) event.getPacket();
-        ChatEvent chatEvent = new ChatEvent.Send(packet.getMessage());
-        ClientAPI.EVENT_BUS.post(chatEvent);
-        if (chatEvent.isCancelled())
-            event.cancel();
-
-        event.setPacket(new CPacketChatMessage(chatEvent.getRawMessage()));
-    }, new PacketFilter<>(CPacketChatMessage.class));
-
-    /**
-     * Handles packet in-flow
-     */
-    @EventHandler
-    private final Listener<PacketEvent.Receive> packetReceiveListener = new Listener<>(event -> {
-        SPacketChat packet = (SPacketChat) event.getPacket();
-        ChatEvent chatEvent = new ChatEvent.Receive(packet.getChatComponent());
-        ClientAPI.EVENT_BUS.post(chatEvent);
-        if (chatEvent.isCancelled())
-            event.cancel();
-    }, new PacketFilter<>(SPacketChat.class));
 }
