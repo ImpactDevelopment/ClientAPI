@@ -17,16 +17,19 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.core.UpdateEvent;
 import clientapi.event.defaults.game.entity.LivingUpdateEvent;
 import clientapi.event.defaults.game.entity.MotionUpdateEvent;
 import clientapi.event.defaults.game.entity.MoveEvent;
-import clientapi.event.defaults.game.core.UpdateEvent;
+import clientapi.event.defaults.game.misc.ChatEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.MoverType;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayer;
 import org.spongepowered.asm.mixin.Final;
@@ -89,6 +92,16 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             return;
 
         super.move(type, event.getX(), event.getY(), event.getZ());
+    }
+
+    @Redirect(method = "sendChatMessage", at = @At(value = "INVOKE", target = "net/minecraft/client/network/NetHandlerPlayClient.sendPacket(Lnet/minecraft/network/Packet;)V"))
+    private void sendChatMessage_sendPacket(NetHandlerPlayClient netHandlerPlayClient, Packet packet) {
+        ChatEvent event = new ChatEvent.Send(((CPacketChatMessage) packet).getMessage());
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled())
+            return;
+
+        netHandlerPlayClient.sendPacket(new CPacketChatMessage(event.getRawMessage()));
     }
 
     /**

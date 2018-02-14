@@ -19,16 +19,21 @@ package clientapi.load.mixin;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityStatusEvent;
 import clientapi.event.defaults.game.entity.PlayerDeathEvent;
+import clientapi.event.defaults.game.misc.ChatEvent;
 import me.zero.alpine.type.EventState;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.server.SPacketCombatEvent;
 import net.minecraft.network.play.server.SPacketEntityStatus;
+import net.minecraft.util.text.ChatType;
+import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static clientapi.util.interfaces.Helper.mc;
@@ -83,5 +88,15 @@ public class MixinNetHandlerPlayClient {
             if (died instanceof EntityPlayer)
                 ClientAPI.EVENT_BUS.post(new PlayerDeathEvent((EntityPlayer) died, (EntityLivingBase) killer));
         }
+    }
+
+    @Redirect(method = "handleChat", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.addChatMessage(Lnet/minecraft/util/text/ChatType;Lnet/minecraft/util/text/ITextComponent;)V"))
+    private void handleChat_addChatMessage(GuiIngame guiIngame, ChatType chatTypeIn, ITextComponent message) {
+        ChatEvent event = new ChatEvent.Receive(message);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled())
+            return;
+
+        guiIngame.addChatMessage(chatTypeIn, event.getMessage());
     }
 }
