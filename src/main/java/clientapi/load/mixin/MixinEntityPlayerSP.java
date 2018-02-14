@@ -93,7 +93,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         super.move(type, event.getX(), event.getY(), event.getZ());
     }
 
-    @Inject(method = "sendChatMessage", at = @At(value = "HEAD"))
+    @Inject(method = "sendChatMessage", at = @At(value = "HEAD"), cancellable = true)
     private void sendChatMessage(String message, CallbackInfo ci) {
         ChatEvent event = new ChatEvent.Send(message);
         ClientAPI.EVENT_BUS.post(event);
@@ -101,6 +101,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             return;
 
         this.connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
+        ci.cancel();
     }
 
     /**
