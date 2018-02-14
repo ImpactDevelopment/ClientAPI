@@ -21,10 +21,7 @@ import clientapi.util.annotation.Label;
 import clientapi.value.annotation.*;
 import clientapi.value.exception.ValueException;
 import clientapi.value.type.resolve.ResolverData;
-import clientapi.value.type.resolve.impl.BooleanTypeResolver;
-import clientapi.value.type.resolve.impl.EnumTypeResolver;
-import clientapi.value.type.resolve.impl.NumberTypeResolver;
-import clientapi.value.type.resolve.impl.StringTypeResolver;
+import clientapi.value.type.resolve.impl.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -59,7 +56,7 @@ public final class Values {
         // Default Resolvers
         define(BooleanValue.class, ResolverData.create(new BooleanTypeResolver(), Boolean.class, Boolean.TYPE));
         define(NumberValue.class, ResolverData.create(new NumberTypeResolver()));
-        define(MultiValue.class, ResolverData.create(new StringTypeResolver(), String.class));
+        define(MultiValue.class, ResolverData.create(new MultiTypeResolver(), String.class));
         define(StringValue.class, ResolverData.create(new StringTypeResolver(), String.class));
         define(EnumValue.class, ResolverData.create(new EnumTypeResolver(), Enum.class));
     }
