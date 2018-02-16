@@ -16,7 +16,7 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.Command;
+import clientapi.command.ICommand;
 
 /**
  * Superclass for all exceptions in the {@code clientapi.command.exception} package.
@@ -29,18 +29,18 @@ public class CommandException extends Exception {
     /**
      * Command that encountered an exception
      */
-    private final Command command;
+    private final ICommand command;
 
-    public CommandException(Command command) {
+    public CommandException(ICommand command) {
         this.command = command;
     }
 
-    public CommandException(Command command, String message) {
+    public CommandException(ICommand command, String message) {
         super(message);
         this.command = command;
     }
 
-    public CommandException(Command command, String message, Object... args) {
+    public CommandException(ICommand command, String message, Object... args) {
         super(String.format(message, args));
         this.command = command;
     }
@@ -48,7 +48,7 @@ public class CommandException extends Exception {
     /**
      * @return The command that encountered an exception
      */
-    public final Command getCommand() {
+    public final ICommand getCommand() {
         return this.command;
     }
 }

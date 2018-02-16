@@ -16,7 +16,7 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.Command;
+import clientapi.command.ICommand;
 
 import java.lang.reflect.Type;
 
@@ -45,7 +45,7 @@ public final class InvalidArgumentException extends CommandException {
      */
     private final Type expected;
 
-    public InvalidArgumentException(Command command, String[] args, int badArg, Type expected) {
+    public InvalidArgumentException(ICommand command, String[] args, int badArg, Type expected) {
         super(command);
         this.args = args;
         this.badArg = badArg;
