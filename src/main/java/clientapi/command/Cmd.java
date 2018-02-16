@@ -32,7 +32,7 @@ public @interface Cmd {
     /**
      * Provides the command class with the headers
      *
-     * @see ICommand#headers()
+     * @see ICommand#getHeaders()
      *
      * @return Command headers
      */
@@ -41,7 +41,7 @@ public @interface Cmd {
     /**
      * Provides the command class with the description
      *
-     * @see ICommand#description()
+     * @see ICommand#getDescription()
      *
      * @return Command description
      */

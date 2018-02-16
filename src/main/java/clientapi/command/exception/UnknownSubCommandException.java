@@ -16,7 +16,7 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.Command;
+import clientapi.command.ICommand;
 
 /**
  * Thrown by implementations of Command if the provided
@@ -32,7 +32,7 @@ public final class UnknownSubCommandException extends CommandException {
      */
     private final String[] arguments;
 
-    public UnknownSubCommandException(Command command, String[] arguments) {
+    public UnknownSubCommandException(ICommand command, String[] arguments) {
         super(command, "Unknown sub-command specified by given arguments");
         this.arguments = arguments;
     }

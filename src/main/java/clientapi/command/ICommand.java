@@ -18,6 +18,7 @@ package clientapi.command;
 
 import clientapi.command.exception.CommandException;
 import clientapi.command.executor.ExecutionContext;
+import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Helper;
 
 /**
@@ -28,7 +29,7 @@ import clientapi.util.interfaces.Helper;
  * @author Brady
  * @since 5/30/2017 11:38 AM
  */
-public interface ICommand extends Helper {
+public interface ICommand extends Describable, Helper {
 
     /**
      * Executes this command from the specified sender with
@@ -46,31 +47,5 @@ public interface ICommand extends Helper {
      *
      * @return The list of possible command headers
      */
-    String[] headers();
-
-    /**
-     * Returns the argument names of this command. Parent
-     * commands will return the sub-command headers. Sub-commands
-     * will return the name of the arguments.
-     *
-     * @return The possible arguments for this command
-     */
-    String[] arguments();
-
-    /**
-     * Returns the intended purpose of the command, a
-     * brief description of the usage.
-     *
-     * @return The description of the command usage.
-     */
-    String description();
-
-    /**
-     * Returns the parent command. Parent commands are the
-     * holders of sub-commands. Holders will have a {@code null}
-     * parent.
-     *
-     * @return The parent command
-     */
-    ICommand parent();
+    String[] getHeaders();
 }

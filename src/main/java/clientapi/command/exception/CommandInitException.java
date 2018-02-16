@@ -16,7 +16,7 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.Command;
+import clientapi.command.ICommand;
 
 /**
  * Thrown when the initialization of a {@code Command} fails.
@@ -26,7 +26,7 @@ import clientapi.command.Command;
  */
 public final class CommandInitException extends CommandException {
 
-    public CommandInitException(Command command, String message) {
+    public CommandInitException(ICommand command, String message) {
         super(command, message);
     }
 }
