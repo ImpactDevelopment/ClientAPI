@@ -16,14 +16,17 @@
 
 package clientapi.gui.widget;
 
-import clientapi.util.render.gl.DisplayList;
 import clientapi.gui.widget.data.WidgetPos;
 import clientapi.util.math.Vec2;
 import clientapi.util.render.RenderUtils;
+import clientapi.util.render.gl.DisplayList;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 

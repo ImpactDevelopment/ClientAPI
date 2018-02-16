@@ -16,8 +16,8 @@
 
 package clientapi.util.render.gl.shader;
 
-import clientapi.util.math.Vec3;
 import clientapi.util.math.Vec2;
+import clientapi.util.math.Vec3;
 
 import static org.lwjgl.opengl.ARBShaderObjects.*;
 

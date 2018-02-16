@@ -16,10 +16,10 @@
 
 package clientapi.util.render.camera.defaults;
 
-import clientapi.util.render.camera.Camera;
-import clientapi.util.math.Vec2;
-import clientapi.util.render.camera.CameraHandle;
 import clientapi.load.mixin.extension.IEntity;
+import clientapi.util.math.Vec2;
+import clientapi.util.render.camera.Camera;
+import clientapi.util.render.camera.CameraHandle;
 
 /**
  * An implementation of Camera that renders what is directly behind the player.

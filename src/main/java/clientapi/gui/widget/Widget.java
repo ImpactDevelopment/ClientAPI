@@ -17,8 +17,8 @@
 package clientapi.gui.widget;
 
 import clientapi.gui.widget.data.WidgetAlignment;
-import clientapi.util.interfaces.Helper;
 import clientapi.gui.widget.data.WidgetPos;
+import clientapi.util.interfaces.Helper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 

@@ -16,14 +16,13 @@
 
 package clientapi.load.mixin;
 
-import clientapi.util.math.Vec3;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityCollisionEvent;
-import clientapi.util.math.Vec2;
 import clientapi.load.mixin.extension.IEntity;
+import clientapi.util.math.Vec2;
+import clientapi.util.math.Vec3;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.util.math.AxisAlignedBB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

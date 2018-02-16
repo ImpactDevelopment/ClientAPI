@@ -16,10 +16,13 @@
 
 package clientapi.manage;
 
-import clientapi.util.interfaces.Saveable;
 import clientapi.util.interfaces.Loadable;
+import clientapi.util.interfaces.Saveable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Managers are used to store arrays of objects. {@code Manager}

@@ -17,9 +17,9 @@
 package clientapi.event.bench.impl;
 
 import clientapi.ClientAPI;
+import clientapi.event.bench.Benchmark;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import clientapi.event.bench.Benchmark;
 
 /**
  * Implementation of Benchmark that invokes
