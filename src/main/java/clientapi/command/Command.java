@@ -73,19 +73,8 @@ public class Command implements ICommand {
                 }
             }
 
-            Sub sub = method.getAnnotation(Sub.class);
-
-            // Setup argument names
-            String[] arguments = sub.arguments();
-            if (arguments.length != parameters - 1) {
-                arguments = new String[parameters - 1];
-                for (int i = 1; i < parameters; i++) {
-                    arguments[i - 1] = method.getParameters()[i].getName();
-                }
-            }
-
             // Create the child command
-            children.add(new ChildCommand(sub.headers(), sub.description(), arguments, this, method));
+            children.add(new ChildCommand(this, method));
         }
 
         if (ClientAPIUtils.containsNull(headers, description))

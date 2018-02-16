@@ -38,18 +38,16 @@ public final class ChildCommand implements ICommand {
     private final Command parent;
     private final Method handle;
 
-    ChildCommand(String[] headers, String description, String[] arguments, Command parent, Method handle) {
-        this.headers = headers;
-        this.description = description;
+    ChildCommand(Command parent, Method handle) {
+        Sub sub = handle.getAnnotation(Sub.class);
+
+        this.headers = sub.headers();
+        this.description = sub.description();
         this.arguments = new ArrayList<>();
         this.parent = parent;
         this.handle = handle;
 
-        // Setup the command arguments
-        for (int i = 1; i < handle.getGenericParameterTypes().length; i++) {
-            Type type = handle.getGenericParameterTypes()[i];
-            this.arguments.add(new CommandArgument(arguments[i - 1], type));
-        }
+        this.setupArguments(sub);
     }
 
     @Override
@@ -127,5 +125,31 @@ public final class ChildCommand implements ICommand {
      */
     public final Command getParent() {
         return this.parent;
+    }
+
+    /**
+     * Finds and creates the arguments for this {@code ChildCommand}.
+     *
+     * @param sub The {@code @Sub} annotation on the handle method
+     */
+    private void setupArguments(Sub sub) {
+        // Find argument names
+        String[] arguments = sub.arguments();
+
+        // If the arguments specified by @Sub do not match the expected
+        // arguments length, then get the names of the method's parameters.
+        int expected = handle.getParameterCount() - 1;
+        if (arguments.length != expected) {
+            arguments = new String[expected];
+            for (int i = 0; i < expected; i++) {
+                arguments[i] = handle.getParameters()[i + 1].getName();
+            }
+        }
+
+        // Create arguments
+        for (int i = 1; i < handle.getGenericParameterTypes().length; i++) {
+            Type type = handle.getGenericParameterTypes()[i];
+            this.arguments.add(new CommandArgument(arguments[i - 1], type));
+        }
     }
 }
