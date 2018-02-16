@@ -16,7 +16,8 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.ICommand;
+import clientapi.command.ChildCommand;
+import clientapi.command.Command;
 import clientapi.command.executor.argument.ArgumentParser;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,11 @@ import java.lang.reflect.Type;
  * @since 10/18/2017 2:50 PM
  */
 public final class ParserException extends CommandException {
+
+    /**
+     * The child command involved in the exception
+     */
+    private final ChildCommand child;
 
     /**
      * The parser involved
@@ -47,12 +53,20 @@ public final class ParserException extends CommandException {
      */
     private final Class<?> returned;
 
-    public ParserException(ICommand command, ArgumentParser<?> parser, String raw, Type expected, Class<?> returned) {
+    public ParserException(Command command, ChildCommand child, ArgumentParser<?> parser, String raw, Type expected, Class<?> returned) {
         super(command, "Parser return type was unexpected");
+        this.child = child;
         this.parser = parser;
         this.raw = raw;
         this.expected = expected;
         this.returned = returned;
+    }
+
+    /**
+     * @return The child command involved in the exception
+     */
+    public final ChildCommand getChildCommand() {
+        return this.child;
     }
 
     /**

@@ -16,7 +16,8 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.ICommand;
+import clientapi.command.ChildCommand;
+import clientapi.command.Command;
 
 import java.lang.reflect.Type;
 
@@ -29,6 +30,11 @@ import java.lang.reflect.Type;
  * @since 6/7/2017 9:34 AM
  */
 public final class InvalidArgumentException extends CommandException {
+
+    /**
+     * The child command involved in the exception
+     */
+    private final ChildCommand child;
 
     /**
      * Array of inputted arguments
@@ -45,11 +51,19 @@ public final class InvalidArgumentException extends CommandException {
      */
     private final Type expected;
 
-    public InvalidArgumentException(ICommand command, String[] args, int badArg, Type expected) {
+    public InvalidArgumentException(Command command, ChildCommand child, String[] args, int badArg, Type expected) {
         super(command);
+        this.child = child;
         this.args = args;
         this.badArg = badArg;
         this.expected = expected;
+    }
+
+    /**
+     * @return The child command involved in the exception
+     */
+    public final ChildCommand getChildCommand() {
+        return this.child;
     }
 
     /**
