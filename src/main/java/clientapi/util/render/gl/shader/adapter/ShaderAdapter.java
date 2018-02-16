@@ -16,8 +16,8 @@
 
 package clientapi.util.render.gl.shader.adapter;
 
-import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
+import clientapi.util.render.gl.glenum.GLShaderType;
 
 /**
  * The shell for a Shader Adapter. Used as

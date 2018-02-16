@@ -16,17 +16,17 @@
 
 package clientapi.util.render.gl.shader.adapter;
 
-import clientapi.util.render.gl.shader.exception.ShaderException;
-import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
+import clientapi.util.render.gl.glenum.GLShaderType;
+import clientapi.util.render.gl.shader.exception.ShaderException;
 
 import java.util.Objects;
 
-import static org.lwjgl.opengl.ARBFragmentShader.*;
-import static org.lwjgl.opengl.ARBGeometryShader4.*;
+import static org.lwjgl.opengl.ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
+import static org.lwjgl.opengl.ARBGeometryShader4.GL_GEOMETRY_SHADER_ARB;
 import static org.lwjgl.opengl.ARBShaderObjects.*;
-import static org.lwjgl.opengl.ARBVertexShader.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.ARBVertexShader.GL_VERTEX_SHADER_ARB;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 /**
  * @author Brady

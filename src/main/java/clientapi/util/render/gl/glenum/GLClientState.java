@@ -17,8 +17,8 @@
 package clientapi.util.render.gl.glenum;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL14.*;
-import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL14.GL_SECONDARY_COLOR_ARRAY;
+import static org.lwjgl.opengl.GL15.GL_FOG_COORD_ARRAY;
 
 /**
  * Contains all valid GLenum ClientState caps.

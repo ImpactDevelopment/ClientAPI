@@ -16,11 +16,11 @@
 
 package clientapi.util.render.gl;
 
-import clientapi.util.render.gl.shader.exception.ShaderException;
-import clientapi.util.render.gl.glenum.GLShaderType;
-import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
+import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.shader.adapter.ShaderAdapter;
+import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
+import clientapi.util.render.gl.shader.exception.ShaderException;
 
 /**
  * @author Brady

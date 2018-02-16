@@ -31,7 +31,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import static clientapi.util.PluginFinder.PResponse.Result.*;
+import static clientapi.util.PluginFinder.PResponse.Result.FAILURE;
+import static clientapi.util.PluginFinder.PResponse.Result.SUCCESS;
 
 /**
  * Used to find possible plugins on servers
