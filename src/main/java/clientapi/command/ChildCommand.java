@@ -63,7 +63,7 @@ public final class ChildCommand implements ICommand {
         // as the expected amount, or, if there is an optional argument, one less than the specified
         // amount.
         if (!(arguments.length == expectedArgs || (hasOptional && arguments.length == expectedArgs - 1))) {
-            throw new InvalidSyntaxException(this, arguments.length, expectedArgs);
+            throw new InvalidSyntaxException(this.parent, this, arguments.length, expectedArgs);
         }
 
         // List to hold all arguments to be passed to the handle method
@@ -77,20 +77,20 @@ public final class ChildCommand implements ICommand {
 
             ArgumentParser<?> parser = context.handler().getParser(type);
             if (parser == null) {
-                throw new InvalidParserException(this, arguments[i], type);
+                throw new InvalidParserException(this.parent, this, arguments[i], type);
             }
 
             // Parse the string
             Object parsed = parser.parse(context, type, isMissingOptional ? "" : arguments[i]);
             if (parsed == null) {
-                throw new InvalidArgumentException(this, arguments, i, type);
+                throw new InvalidArgumentException(this.parent, this, arguments, i, type);
             }
 
             // Ensure that the return type is valid
             if (parser.isTarget(parsed.getClass())) {
                 callArguments.add(parsed);
             } else {
-                throw new ParserException(this, parser, isMissingOptional ? "Optional (none provided)" : arguments[i], type, parsed.getClass());
+                throw new ParserException(this.parent, this, parser, isMissingOptional ? "Optional (none provided)" : arguments[i], type, parsed.getClass());
             }
         }
 

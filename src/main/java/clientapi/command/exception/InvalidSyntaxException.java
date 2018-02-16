@@ -16,7 +16,8 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.ICommand;
+import clientapi.command.ChildCommand;
+import clientapi.command.Command;
 
 /**
  * @author Brady
@@ -24,11 +25,20 @@ import clientapi.command.ICommand;
  */
 public final class InvalidSyntaxException extends CommandException {
 
-    public InvalidSyntaxException(ICommand command) {
-        super(command, "An invalid amount of arguments were provided");
+    /**
+     * The child command involved in the exception
+     */
+    private final ChildCommand child;
+
+    public InvalidSyntaxException(Command command, ChildCommand child, int found, int expected) {
+        super(command, found > expected ? "Too many arguments provided" : found < expected ? "Not enough arguments provided" : "Correct amount of arguments provided, unknown cause.");
+        this.child = child;
     }
 
-    public InvalidSyntaxException(ICommand command, int found, int expected) {
-        super(command, found > expected ? "Too many arguments provided" : found < expected ? "Not enough arguments provided" : "Correct amount of arguments provided, unknown cause.");
+    /**
+     * @return The child command involved in the exception
+     */
+    public final ChildCommand getChildCommand() {
+        return this.child;
     }
 }
