@@ -16,7 +16,8 @@
 
 package clientapi.command.exception;
 
-import clientapi.command.ICommand;
+import clientapi.command.ChildCommand;
+import clientapi.command.Command;
 
 import java.lang.reflect.Type;
 
@@ -29,20 +30,33 @@ import java.lang.reflect.Type;
 public final class InvalidParserException extends CommandException {
 
     /**
+     * The child command involved in the exception
+     */
+    private final ChildCommand child;
+
+    /**
      * The argument that was given for the parameter
      * with a type that doesn't have a defined parser.
      */
-    private String argument;
+    private final String argument;
 
     /**
      * The {@code Type} that doesn't have a defined parser.
      */
-    private Type type;
+    private final Type type;
 
-    public InvalidParserException(ICommand command, String argument, Type type) {
+    public InvalidParserException(Command command, ChildCommand child, String argument, Type type) {
         super(command);
+        this.child = child;
         this.argument = argument;
         this.type = type;
+    }
+
+    /**
+     * @return The child command involved in the exception
+     */
+    public final ChildCommand getChildCommand() {
+        return this.child;
     }
 
     /**
