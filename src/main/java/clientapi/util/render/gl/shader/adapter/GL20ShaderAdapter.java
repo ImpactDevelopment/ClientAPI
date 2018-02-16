@@ -16,15 +16,15 @@
 
 package clientapi.util.render.gl.shader.adapter;
 
-import clientapi.util.render.gl.shader.exception.ShaderException;
-import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
+import clientapi.util.render.gl.glenum.GLShaderType;
+import clientapi.util.render.gl.shader.exception.ShaderException;
 
 import java.util.Objects;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 /**
  * @author Brady

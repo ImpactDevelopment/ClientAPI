@@ -16,7 +16,7 @@
 
 package clientapi.util.render.gl;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
 import static org.lwjgl.opengl.GL15.*;
 
 /**

@@ -16,11 +16,11 @@
 
 package clientapi.load;
 
+import net.minecraft.launchwrapper.Launch;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.launchwrapper.Launch;
 
 /**
  * Implementation of ClientTweaker that leaves the argument list alone.

@@ -16,8 +16,8 @@
 
 package clientapi.load.mixin;
 
-import clientapi.event.defaults.game.render.ItemRenderEvent;
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.ItemRenderEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;

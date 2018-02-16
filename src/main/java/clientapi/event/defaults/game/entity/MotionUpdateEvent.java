@@ -16,10 +16,10 @@
 
 package clientapi.event.defaults.game.entity;
 
+import clientapi.load.mixin.extension.IEntity;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-import clientapi.load.mixin.extension.IEntity;
 import me.zero.alpine.type.EventState;
 
 /**

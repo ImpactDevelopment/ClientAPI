@@ -16,11 +16,11 @@
 
 package clientapi.util.render.camera;
 
+import clientapi.load.mixin.extension.IEntity;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.RenderUtils;
-import clientapi.load.mixin.extension.IEntity;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
 
