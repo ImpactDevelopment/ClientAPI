@@ -35,8 +35,19 @@ import java.util.Optional;
  */
 public class Command implements ICommand {
 
+    /**
+     * A list of this command's child commands
+     */
     private final List<ChildCommand> children = new ArrayList<>();
+
+    /**
+     * A list of headers used to execute this command
+     */
     private String[] headers;
+
+    /**
+     * A description of this command's usage
+     */
     private String description;
 
     public Command() {
