@@ -32,10 +32,29 @@ import java.util.List;
  */
 public final class ChildCommand implements ICommand {
 
+    /**
+     * A list of headers used to execute this command
+     */
     private final String[] headers;
+
+    /**
+     * A description of this command's usage
+     */
     private final String description;
+
+    /**
+     * A list of the arguments of this child command
+     */
     private final List<CommandArgument> arguments;
+
+    /**
+     * This child command's parent
+     */
     private final Command parent;
+
+    /**
+     * The method invoked to execute this child command
+     */
     private final Method handle;
 
     ChildCommand(Command parent, Method handle) {
