@@ -50,7 +50,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
 
     @SuppressWarnings("unchecked")
     @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
-    private void processPacket(Packet<?> packetIn, INetHandler handler) {
+    private void channelRead0$processPacket(Packet<?> packetIn, INetHandler handler) {
         PacketEvent event = new PacketEvent.Receive(packetIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
