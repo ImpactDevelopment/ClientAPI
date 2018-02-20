@@ -63,7 +63,7 @@ public abstract class MixinNetworkManager {
         if (event.isCancelled())
             return;
 
-        this.dispatchPacket(event.getPacket(), null);
+        this.dispatchPacket(event.getPacket(), futureListeners);
     }
 
     @Inject(method = "checkDisconnected", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
