@@ -81,6 +81,12 @@ public abstract class MixinNetworkManager implements INetworkManager {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
     }
 
+    @Inject(method = "flushOutboundQueue", at = @At("HEAD"), cancellable = true)
+    private void flushOutboundQueue(CallbackInfo ci) {
+        if (!sendPackets)
+            ci.cancel();
+    }
+
     @Override
     public final void setSendPackets(boolean sendPackets) {
         this.sendPackets = sendPackets;
