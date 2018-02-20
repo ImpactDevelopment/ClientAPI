@@ -45,7 +45,7 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
     }
 
     @Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
-    private void travel(EntityLivingBase entity, float strafe, float vertical, float forward) {
+    private void onLivingUpdate$travel(EntityLivingBase entity, float strafe, float vertical, float forward) {
         EntityTravelEvent event = new EntityTravelEvent(EventState.PRE, entity, strafe, vertical, forward);
         ClientAPI.EVENT_BUS.post(event);
         if (!event.isCancelled())
