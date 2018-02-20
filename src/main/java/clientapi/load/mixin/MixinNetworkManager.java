@@ -19,6 +19,7 @@ package clientapi.load.mixin;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import clientapi.event.defaults.game.network.ServerEvent;
+import clientapi.load.mixin.extension.INetworkManager;
 import clientapi.util.interfaces.Helper;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -40,12 +41,15 @@ import javax.annotation.Nullable;
  * @since 4/27/2017 12:00 PM
  */
 @Mixin(NetworkManager.class)
-public abstract class MixinNetworkManager {
+public abstract class MixinNetworkManager implements INetworkManager {
+
+    private boolean sendPackets = true;
 
     @Shadow protected abstract void dispatchPacket(final Packet<?> inPacket, @Nullable final GenericFutureListener<? extends Future<? super Void>>[] futureListeners);
+    @Shadow public abstract boolean isChannelOpen();
 
-    @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
     @SuppressWarnings("unchecked")
+    @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
     private void processPacket(Packet<?> packetIn, INetHandler handler) {
         PacketEvent event = new PacketEvent.Receive(packetIn);
         ClientAPI.EVENT_BUS.post(event);
@@ -57,7 +61,7 @@ public abstract class MixinNetworkManager {
 
     @SuppressWarnings("AmbiguousMixinReference")
     @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;[Lio/netty/util/concurrent/GenericFutureListener;)V"))
-    private void sendPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
+    private void sendPacket$dispatchPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
         PacketEvent event = new PacketEvent.Send(packetIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
@@ -66,8 +70,24 @@ public abstract class MixinNetworkManager {
         this.dispatchPacket(event.getPacket(), futureListeners);
     }
 
+    @SuppressWarnings("AmbiguousMixinReference")
+    @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"))
+    private boolean sendPacket$isChannelOpen() {
+        return this.sendPackets && this.isChannelOpen();
+    }
+
     @Inject(method = "checkDisconnected", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
     private void onDisconnect(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
+    }
+
+    @Override
+    public final void setSendPackets(boolean sendPackets) {
+        this.sendPackets = sendPackets;
+    }
+
+    @Override
+    public final boolean isSendPackets() {
+        return this.sendPackets;
     }
 }
