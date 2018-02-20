@@ -84,7 +84,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
     }
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
-    private void move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
+    private void move$move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
         MoveEvent event = new MoveEvent(type, x, y, z);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

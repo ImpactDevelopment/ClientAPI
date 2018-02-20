@@ -91,7 +91,7 @@ public class MixinNetHandlerPlayClient {
     }
 
     @Redirect(method = "handleChat", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.addChatMessage(Lnet/minecraft/util/text/ChatType;Lnet/minecraft/util/text/ITextComponent;)V"))
-    private void handleChat_addChatMessage(GuiIngame guiIngame, ChatType chatTypeIn, ITextComponent message) {
+    private void handleChat$addChatMessage(GuiIngame guiIngame, ChatType chatTypeIn, ITextComponent message) {
         ChatEvent event = new ChatEvent.Receive(message);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
