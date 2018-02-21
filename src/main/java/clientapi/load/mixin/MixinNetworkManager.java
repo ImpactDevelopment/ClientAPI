@@ -72,8 +72,8 @@ public abstract class MixinNetworkManager implements INetworkManager {
 
     @SuppressWarnings("AmbiguousMixinReference")
     @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"))
-    private boolean sendPacket$isChannelOpen() {
-        return this.sendPackets && this.isChannelOpen();
+    private boolean sendPacket$isChannelOpen(NetworkManager networkManager) {
+        return this.sendPackets && networkManager.isChannelOpen();
     }
 
     @Inject(method = "checkDisconnected", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
