@@ -17,6 +17,9 @@
 package clientapi.load;
 
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.launchwrapper.LaunchClassLoader;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+import org.spongepowered.tools.obfuscation.mcp.ObfuscationServiceMCP;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,5 +39,11 @@ public final class ClientTweakerForge extends ClientTweaker {
     @Override
     public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.args = new ArrayList<>();
+    }
+
+    @Override
+    public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
+        super.injectIntoClassLoader(classLoader);
+        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(ObfuscationServiceMCP.SEARGE);
     }
 }
