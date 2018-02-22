@@ -16,22 +16,18 @@
 
 package clientapi.load;
 
-import net.minecraft.launchwrapper.Launch;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Implementation of ClientTweaker that leaves the argument list alone
- * so that forge's tweaker does not cause any conflictions.
- *
- * @see Launch
+ * so that optifine's tweaker does not cause any conflictions.
  *
  * @author Brady
- * @since 9/8/2017 7:27 PM
+ * @since 2/21/2018 8:01 PM
  */
-public final class ClientTweakerForge extends ClientTweaker {
+public final class ClientTweakerOptifine extends ClientTweaker {
 
     @Override
     public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
