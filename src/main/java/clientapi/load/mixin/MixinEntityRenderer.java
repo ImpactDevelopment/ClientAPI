@@ -17,13 +17,16 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.event.defaults.game.render.RenderScreenEvent;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.render.camera.Camera;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -48,5 +51,11 @@ public class MixinEntityRenderer {
     @Inject(method = "renderWorldPass", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
     private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks, pass));
+    }
+
+    @Redirect(method = "updateCameraAndRender", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.renderGameOverlay(F)V"))
+    private void updateCameraAndRender$renderGameOverlay(GuiIngame guiIngame, float partialTicks) {
+        guiIngame.renderGameOverlay(partialTicks);
+        ClientAPI.EVENT_BUS.post(new RenderHudEvent(partialTicks));
     }
 }
