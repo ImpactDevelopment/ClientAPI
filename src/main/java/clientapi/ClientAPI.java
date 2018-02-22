@@ -43,4 +43,24 @@ public final class ClientAPI {
      * Instance of the API logger.
      */
     public static final Logger LOGGER = LogManager.getLogger("ClientAPI");
+
+    /**
+     * Whether or not the game is running with Minecraft Forge
+     */
+    public static final boolean RUNNING_IN_FORGE = findMinecraftForgeClass() != null;
+
+    /**
+     * Tries to find the {@code MinecraftForge} class. Will return
+     * {@code null} if the class is not found, indicating that Minecraft
+     * Forge is not present in this environment.
+     *
+     * @return The {@code MinecraftForge} class. {@code null} if not found.
+     */
+    private static Class<?> findMinecraftForgeClass() {
+        try {
+            return Class.forName("net/minecraftforge/common/MinecraftForge");
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
 }

@@ -23,6 +23,7 @@ import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
+import org.spongepowered.tools.obfuscation.mcp.ObfuscationServiceMCP;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class ClientTweaker implements ITweaker {
     }
 
     @Override
-    public final void injectIntoClassLoader(LaunchClassLoader classLoader) {
+    public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
 
         // Register custom transformer
@@ -82,6 +83,9 @@ public class ClientTweaker implements ITweaker {
 
         // Ensure that the mixins are only run on client side
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
+
+        // Set the obfuscation context
+        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(ObfuscationServiceMCP.NOTCH);
     }
 
     @Override
