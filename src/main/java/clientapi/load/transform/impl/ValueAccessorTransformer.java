@@ -65,7 +65,7 @@ public final class ValueAccessorTransformer implements ITransformer {
     private int current;
 
     @Override
-    public void transform(ClassNode cn) {
+    public final void transform(ClassNode cn) {
         // Don't process the class if it already implements ValueAccessor
         if (cn.interfaces.contains("clientapi/value/holder/ValueAccessor"))
             return;
@@ -76,13 +76,16 @@ public final class ValueAccessorTransformer implements ITransformer {
 
         // Assume that any values annotated with @Label should be given accessors
         for (FieldNode fn : cn.fields) {
-            if (fn.visibleAnnotations != null) {
-                for (AnnotationNode an : fn.visibleAnnotations) {
-                    if (an.desc.equals("Lclientapi/util/annotation/Label;")) {
-                        for (int i = 0; i < an.values.size(); i++) {
-                            if (i % 2 == 0 && an.values.get(i).equals("id"))
-                                fieldCache.put(an.values.get(i + 1).toString(), fn);
-                        }
+            if (fn.visibleAnnotations == null)
+                continue;
+
+            for (AnnotationNode an : fn.visibleAnnotations) {
+                if (!an.desc.equals("Lclientapi/util/annotation/Label;"))
+                    continue;
+
+                for (int i = 0; i < an.values.size(); i++) {
+                    if (i % 2 == 0 && an.values.get(i).equals("id")) {
+                        fieldCache.put(an.values.get(i + 1).toString(), fn);
                     }
                 }
             }
@@ -108,7 +111,8 @@ public final class ValueAccessorTransformer implements ITransformer {
 
         // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
-            MethodNode handle; {
+            MethodNode handle;
+            {
                 // Create lambda handle method
                 handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldGetter$" + current++, "()Ljava/lang/Object;", null, null);
 
@@ -172,7 +176,8 @@ public final class ValueAccessorTransformer implements ITransformer {
 
         // Create a check for all labeled fields in the cache
         fieldCache.forEach((id, fn) -> {
-            MethodNode handle; {
+            MethodNode handle;
+            {
                 // Create lambda handle method
                 handle = new MethodNode(ACC_PRIVATE | ACC_SYNTHETIC, "lambda$getFieldSetter$" + current++, "(Ljava/lang/Object;)V", null, null);
 
