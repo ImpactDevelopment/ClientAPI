@@ -51,7 +51,7 @@ public final class OptionalParser implements ArgumentParser<Optional<?>> {
             // noinspection OptionalAssignedToNull
             return null;
 
-        return Optional.of(parser.parse(context, type, raw));
+        return Optional.ofNullable(parser.parse(context, type, raw));
     }
 
     @Override
