@@ -16,7 +16,7 @@
 
 package clientapi.util.render.gl;
 
-import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.GlStateManager;
 
 /**
  * Display lists are used to capture OpenGL instructions.
@@ -41,12 +41,12 @@ public final class DisplayList extends GLObject {
 
     @Override
     protected final int nativeGen() {
-        return glGenLists(range);
+        return GlStateManager.glGenLists(range);
     }
 
     @Override
     protected final void nativeDelete() {
-        glDeleteLists(id(), range);
+        GlStateManager.glDeleteLists(id(), range);
     }
 
     /**
@@ -57,7 +57,7 @@ public final class DisplayList extends GLObject {
      * @param mode Instruction capture mode
      */
     public final void start(int mode) {
-        glNewList(id(), mode);
+        GlStateManager.glNewList(id(), mode);
     }
 
     /**
@@ -66,13 +66,13 @@ public final class DisplayList extends GLObject {
      * @see #start(int)
      */
     public final void stop() {
-        glEndList();
+        GlStateManager.glEndList();
     }
 
     /**
      * Calls all instructions that have been captured by this list
      */
     public final void call() {
-        glCallList(id());
+        GlStateManager.callList(id());
     }
 }

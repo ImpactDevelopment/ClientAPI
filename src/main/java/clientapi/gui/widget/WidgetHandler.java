@@ -22,13 +22,14 @@ import clientapi.util.render.RenderUtils;
 import clientapi.util.render.gl.DisplayList;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_COMPILE;
 
 /**
  * Used to manage and render widgets
@@ -92,9 +93,9 @@ public final class WidgetHandler {
             if (widgets.isEmpty())
                 return;
 
-            glPushMatrix();
+            GlStateManager.pushMatrix();
             Vec2 screenPos = pos.getScreenPos(sr);
-            glTranslatef(screenPos.getX(), screenPos.getY(), 0.0F);
+            GlStateManager.translate(screenPos.getX(), screenPos.getY(), 0.0F);
 
             // Reset current position
             position = 0.0F;
@@ -108,26 +109,26 @@ public final class WidgetHandler {
                 float xP = pos.getPadding().getX() * padding * mP;
                 float yP = pos.getPadding().getY() * padding;
 
-                glPushMatrix();
-                glTranslatef(widget.getAlignment().getValue() * widget.getWidth() + xP, yP, 0.0F);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(widget.getAlignment().getValue() * widget.getWidth() + xP, yP, 0.0F);
                 if (outlines)
                     RenderUtils.rectangleBordered(0, 0, widget.getWidth(), widget.getHeight(), 0xFFFFFFFF, 0x00000000);
 
                 widget.render(font, sr);
-                glPopMatrix();
+                GlStateManager.popMatrix();
 
-                glTranslatef(0.0F, widget.getHeight() + spacing, 0.0F);
+                GlStateManager.translate(0.0F, widget.getHeight() + spacing, 0.0F);
                 position += widget.getHeight();
             });
             list.stop();
 
             position += spacing * (widgets.size() - 1);
-            glTranslatef(0.0F, position * pos.getOffset(), 0.0F);
+            GlStateManager.translate(0.0F, position * pos.getOffset(), 0.0F);
 
             // Render all of the widgets
             list.call();
 
-            glPopMatrix();
+            GlStateManager.popMatrix();
         });
 
         RenderUtils.setupRender(false);
