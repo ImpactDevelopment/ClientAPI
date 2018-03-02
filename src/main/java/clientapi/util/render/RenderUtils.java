@@ -74,7 +74,7 @@ public final class RenderUtils {
             GlStateManager.disableDepth();
             GlStateManager.disableTexture2D();
 
-            GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         } else {
             GlStateManager.disableBlend();
@@ -146,7 +146,7 @@ public final class RenderUtils {
      * @param width Line width
      */
     public static void drawLine(float x, float y, float z, float x1, float y1, float z1, float width) {
-        glLineWidth(width);
+        GlStateManager.glLineWidth(width);
 
         setupRender(true);
         setupClientState(GLClientState.VERTEX, true);
