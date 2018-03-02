@@ -42,18 +42,16 @@ public final class GLUtils {
 
     private GLUtils() {}
 
-    private static final FloatBuffer MODELVIEW;
-    private static final FloatBuffer PROJECTION;
-    private static final IntBuffer VIEWPORT;
+    private static final FloatBuffer MODELVIEW = BufferUtils.createFloatBuffer(16);
+    private static final FloatBuffer PROJECTION = BufferUtils.createFloatBuffer(16);
+    private static final IntBuffer VIEWPORT = BufferUtils.createIntBuffer(16);
+    private static final FloatBuffer TO_SCREEN_BUFFER = BufferUtils.createFloatBuffer(3);
+    private static final FloatBuffer TO_WORLD_BUFFER = BufferUtils.createFloatBuffer(3);
 
     // Calls clinit
     public static void init() {}
 
     static {
-        MODELVIEW = BufferUtils.createFloatBuffer(16);
-        PROJECTION = BufferUtils.createFloatBuffer(16);
-        VIEWPORT = BufferUtils.createIntBuffer(16);
-
         ClientAPI.EVENT_BUS.subscribe(new Object() {
 
             @EventHandler
@@ -142,10 +140,9 @@ public final class GLUtils {
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(double x, double y, double z) {
-        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
-        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, screenCoords);
+        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_SCREEN_BUFFER);
         if (result) {
-            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+            return new Vec3(TO_SCREEN_BUFFER.get(0), Display.getHeight() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
         }
         return null;
     }
@@ -170,10 +167,9 @@ public final class GLUtils {
      * @return World projected coordinates
      */
     public static Vec3 toWorld(double x, double y, double z) {
-        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
-        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, screenCoords);
+        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_WORLD_BUFFER);
         if (result) {
-            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+            return new Vec3(TO_WORLD_BUFFER.get(0), TO_WORLD_BUFFER.get(1), TO_WORLD_BUFFER.get(2));
         }
         return null;
     }
