@@ -130,16 +130,17 @@ public final class GLUtils {
     }
 
     /**
-     * Converts the specified X, Y, and Z position to
-     * the 2D projected position. The returned result
-     * is a Vec3 containing the X and Y position, to
-     * represent the position on-screen, and a Z position
-     * that can be used to indicate whether or not the
-     * projected position
+     * Projects the specified XYZ world position to a
+     * 2D position representing as screen coordinates.
+     * Projected positions that are outside of the
+     * viewing frustum can be calculated by checking
+     * the returned Z value.
      *
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(double x, double y, double z) {
+        TO_SCREEN_BUFFER.clear();
+
         boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_SCREEN_BUFFER);
         if (result) {
             return new Vec3(TO_SCREEN_BUFFER.get(0), Display.getHeight() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
@@ -159,14 +160,16 @@ public final class GLUtils {
     }
 
     /**
-     * Converts the specified X, Y, and Z screen positions
-     * to a position in the world, that through some fancy
-     * maths (raytracing) can be used get the actual block
-     * position of the conversion
+     * Projects the specified XYZ screen position to
+     * a 3D position representing a world position. Can
+     * be used to calculate what object the mouse over in
+     * the 3D game world using raytracing.
      *
      * @return World projected coordinates
      */
     public static Vec3 toWorld(double x, double y, double z) {
+        TO_WORLD_BUFFER.clear();
+
         boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_WORLD_BUFFER);
         if (result) {
             return new Vec3(TO_WORLD_BUFFER.get(0), TO_WORLD_BUFFER.get(1), TO_WORLD_BUFFER.get(2));
