@@ -56,9 +56,9 @@ public final class GLUtils {
 
             @EventHandler
             private final Listener<RenderWorldEvent> render3DListener = new Listener<>(event -> {
-                glGetFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
-                glGetFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
-                glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
+                GlStateManager.getFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
+                GlStateManager.getFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
+                GlStateManager.glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
             });
         });
     }
@@ -83,9 +83,9 @@ public final class GLUtils {
      * @param z The z position being rotated on
      */
     public static void rotateX(float angle, double x, double y, double z) {
-        glTranslated(x, y, z);
-        glRotated(angle, 1, 0, 0);
-        glTranslated(-x, -y, -z);
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(angle, 1, 0, 0);
+        GlStateManager.translate(-x, -y, -z);
     }
 
     /**
@@ -98,9 +98,9 @@ public final class GLUtils {
      * @param z The z position being rotated on
      */
     public static void rotateY(float angle, double x, double y, double z) {
-        glTranslated(x, y, z);
-        glRotated(angle, 0, 1, 0);
-        glTranslated(-x, -y, -z);
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(angle, 0, 1, 0);
+        GlStateManager.translate(-x, -y, -z);
     }
 
     /**
@@ -113,9 +113,9 @@ public final class GLUtils {
      * @param z The z position being rotated on
      */
     public static void rotateZ(float angle, double x, double y, double z) {
-        glTranslated(x, y, z);
-        glRotated(angle, 0, 0, 1);
-        glTranslated(-x, -y, -z);
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(angle, 0, 0, 1);
+        GlStateManager.translate(-x, -y, -z);
     }
 
     /**
@@ -139,9 +139,7 @@ public final class GLUtils {
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(double x, double y, double z) {
-        TO_SCREEN_BUFFER.clear();
-
-        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_SCREEN_BUFFER);
+        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_SCREEN_BUFFER.clear());
         if (result) {
             return new Vec3(TO_SCREEN_BUFFER.get(0), Display.getHeight() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
         }
@@ -168,9 +166,7 @@ public final class GLUtils {
      * @return World projected coordinates
      */
     public static Vec3 toWorld(double x, double y, double z) {
-        TO_WORLD_BUFFER.clear();
-
-        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, TO_WORLD_BUFFER);
+        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_WORLD_BUFFER.clear());
         if (result) {
             return new Vec3(TO_WORLD_BUFFER.get(0), TO_WORLD_BUFFER.get(1), TO_WORLD_BUFFER.get(2));
         }
