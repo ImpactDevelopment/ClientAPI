@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2018 ImpactDevelopment
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package me.zero.example.mod.mods;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import clientapi.event.defaults.game.core.ClickEvent;
 import clientapi.event.defaults.game.entity.MotionUpdateEvent;
+import clientapi.load.mixin.extension.IEntity;
+import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.module.Mod;
 import clientapi.module.Module;
 import clientapi.util.math.Vec2;
-import clientapi.load.mixin.extension.IEntity;
-import clientapi.load.mixin.extension.IMinecraft;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import me.zero.example.mod.category.ICombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
