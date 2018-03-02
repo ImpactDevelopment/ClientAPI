@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ImpactDevelopment
+ * Copyright 2018 ImpactDevelopment
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
 
 package me.zero.example;
 
-import clientapi.lua.LuaHandler;
-import clientapi.lua.LuaScript;
-import clientapi.util.io.StreamReader;
 import clientapi.Client;
 import clientapi.ClientInfo;
 import clientapi.command.Command;
+import clientapi.lua.LuaHandler;
+import clientapi.lua.LuaScript;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
+import clientapi.util.io.StreamReader;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
 
