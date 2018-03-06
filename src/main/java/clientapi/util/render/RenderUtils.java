@@ -21,7 +21,6 @@ import clientapi.util.math.Vec3;
 import clientapi.util.render.gl.GLUtils;
 import clientapi.util.render.gl.glenum.GLClientState;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import pw.knx.feather.tessellate.Tessellator;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ import java.util.function.Consumer;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * The basic render utils for any client,
+ * The basic render utils for any client
  *
  * @author Brady
  * @since 2/4/2017 12:00 PM
@@ -150,7 +149,12 @@ public final class RenderUtils {
 
         setupRender(true);
         setupClientState(GLClientState.VERTEX, true);
-        tessellator.addVertex(x, y, z).addVertex(x1, y1, z1).draw(GL_LINE_STRIP);
+
+        tessellator
+                .addVertex(x, y, z)
+                .addVertex(x1, y1, z1)
+                .draw(GL_LINE_STRIP);
+
         setupClientState(GLClientState.VERTEX, false);
         setupRender(false);
     }
@@ -167,10 +171,10 @@ public final class RenderUtils {
         setupClientState(GLClientState.TEXTURE, true);
 
         tessellator
-                .addVertex(x1, y2, 0).setTexture(0, 0)
-                .addVertex(x2, y2, 0).setTexture(1, 0)
-                .addVertex(x2, y1, 0).setTexture(1, 1)
-                .addVertex(x1, y1, 0).setTexture(0, 1)
+                .setTexture(0, 0).addVertex(x1, y2, 0)
+                .setTexture(1, 0).addVertex(x2, y2, 0)
+                .setTexture(1, 1).addVertex(x2, y1, 0)
+                .setTexture(0, 1).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
         setupClientState(GLClientState.TEXTURE, false);
@@ -188,10 +192,10 @@ public final class RenderUtils {
         setupClientState(GLClientState.TEXTURE, true);
 
         tessellator
-                .addVertex(x1, y2, 0).setTexture(1, 0)
-                .addVertex(x2, y2, 0).setTexture(1, 0)
-                .addVertex(x2, y1, 0).setTexture(0, 1)
-                .addVertex(x1, y1, 0).setTexture(1, 1)
+                .setTexture(1, 0).addVertex(x1, y2, 0)
+                .setTexture(0, 0).addVertex(x2, y2, 0)
+                .setTexture(0, 1).addVertex(x2, y1, 0)
+                .setTexture(1, 1).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
         setupClientState(GLClientState.TEXTURE, false);
@@ -222,9 +226,16 @@ public final class RenderUtils {
         }
 
         setupRender(true);
-        setupClientState(GLClientState.VERTEX, true);
-        tessellator.addVertex(x1, y2, 0).addVertex(x2, y2, 0).addVertex(x2, y1, 0).addVertex(x1, y1, 0).draw(GL_QUADS);
-        setupClientState(GLClientState.VERTEX, false);
+        setupClientState(GLClientState.COLOR, true);
+
+        tessellator
+                .setColor(color).addVertex(x1, y2, 0)
+                .setColor(color).addVertex(x2, y2, 0)
+                .setColor(color).addVertex(x2, y1, 0)
+                .setColor(color).addVertex(x1, y1, 0)
+                .draw(GL_QUADS);
+
+        setupClientState(GLClientState.COLOR, false);
         setupRender(false);
     }
 
@@ -293,7 +304,7 @@ public final class RenderUtils {
      * @param y2 Bottom right corner Y of the rectangle
      * @param color The colors for each of the rectangle verticies clockwise
      */
-    private static void rectangleGradient(float x1, float y1, float x2, float y2, int[] color) {
+    public static void rectangleGradient(float x1, float y1, float x2, float y2, int[] color) {
         if (color.length == 0)
             throw new RuntimeException("At least one set of colors should be supplied");
 
@@ -329,7 +340,7 @@ public final class RenderUtils {
         }
 
         setupRender(true);
-        OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.shadeModel(GL_FLAT);
         setupClientState(GLClientState.COLOR, true);
 
