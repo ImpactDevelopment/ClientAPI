@@ -58,7 +58,7 @@ public final class ClientAPI {
      */
     private static Class<?> findMinecraftForgeClass() {
         try {
-            return Class.forName("net/minecraftforge/common/MinecraftForge");
+            return Class.forName("net.minecraftforge.common.MinecraftForge");
         } catch (ClassNotFoundException e) {
             return null;
         }
