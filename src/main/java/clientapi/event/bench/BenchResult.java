@@ -32,18 +32,18 @@ public final class BenchResult {
     private final int passes;
 
     /**
-     * Number of invokations per pass
+     * Number of invocations per pass
      */
-    private final int invokations;
+    private final int invocations;
 
     /**
      * The time in nanoseconds for each pass
      */
     private final long[] results;
 
-    BenchResult(int passes, int invokations, long[] results) {
+    BenchResult(int passes, int invocations, long[] results) {
         this.passes = passes;
-        this.invokations = invokations;
+        this.invocations = invocations;
         this.results = results;
     }
 
@@ -55,10 +55,10 @@ public final class BenchResult {
     }
 
     /**
-     * @return The amount of invokations per pass
+     * @return The amount of invocations per pass
      */
-    public final int getInvokations() {
-        return this.invokations;
+    public final int getInvocations() {
+        return this.invocations;
     }
 
     /**
