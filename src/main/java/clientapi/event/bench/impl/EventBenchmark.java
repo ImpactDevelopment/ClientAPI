@@ -30,8 +30,8 @@ import me.zero.alpine.listener.Listener;
  */
 public final class EventBenchmark extends Benchmark {
 
-    public EventBenchmark(int passes, int invokations) {
-        super(passes, invokations);
+    public EventBenchmark(int passes, int invocations) {
+        super(passes, invocations);
     }
 
     @Override
