@@ -33,19 +33,18 @@ public abstract class Benchmark {
     private static int threads;
 
     /**
-     * Number of times that "passes" are made where the defined
-     * amount of invokations occur.
+     * Number of times that "passes" are made where the defined amount of invocations occur.
      */
     private final int passes;
 
     /**
      * Number of times that the {@code run} is executed per pass
      */
-    private final int invokations;
+    private final int invocations;
 
-    public Benchmark(int passes, int invokations) {
+    public Benchmark(int passes, int invocations) {
         this.passes = passes;
-        this.invokations = invokations;
+        this.invocations = invocations;
     }
 
     /**
@@ -63,7 +62,7 @@ public abstract class Benchmark {
             long[] results = new long[passes];
             for (int pass = 0; pass < passes; pass++) {
                 long time = System.nanoTime();
-                for (int i = 0; i < invokations; i++)
+                for (int i = 0; i < invocations; i++)
                     run();
 
                 long diff = System.nanoTime() - time;
@@ -72,7 +71,7 @@ public abstract class Benchmark {
 
             post();
 
-            callback.accept(new BenchResult(passes, invokations, results));
+            callback.accept(new BenchResult(passes, invocations, results));
             threads--;
         }, String.format("Benchmark #%s", ++threads)).start();
     }
