@@ -46,7 +46,6 @@ public abstract class MixinNetworkManager implements INetworkManager {
     private boolean sendPackets = true;
 
     @Shadow protected abstract void dispatchPacket(final Packet<?> inPacket, @Nullable final GenericFutureListener<? extends Future<? super Void>>[] futureListeners);
-    @Shadow public abstract boolean isChannelOpen();
 
     @SuppressWarnings("unchecked")
     @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
