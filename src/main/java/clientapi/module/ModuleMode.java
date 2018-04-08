@@ -18,6 +18,7 @@ package clientapi.module;
 
 import clientapi.ClientAPI;
 import clientapi.util.io.Keybind;
+import clientapi.value.holder.ValueHolder;
 
 /**
  * A type of module intended for use as a sub-module
@@ -25,7 +26,7 @@ import clientapi.util.io.Keybind;
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
-public class ModuleMode<T extends Module> implements IModule {
+public class ModuleMode<T extends Module> extends ValueHolder implements IModule {
 
     /**
      * Parent Module
