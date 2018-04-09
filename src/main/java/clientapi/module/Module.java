@@ -270,7 +270,8 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
 
     @Override
     public final void setState(boolean state) {
-        if (state == this.state) return;
+        if (state == this.state)
+            return;
 
         ModuleStateEvent event = new ModuleStateEvent(this, state);
         ClientAPI.EVENT_BUS.post(event);
