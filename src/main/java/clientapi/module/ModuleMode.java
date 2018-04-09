@@ -16,7 +16,6 @@
 
 package clientapi.module;
 
-import clientapi.ClientAPI;
 import clientapi.util.io.Keybind;
 import clientapi.value.holder.ValueHolder;
 
@@ -48,11 +47,6 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
      */
     private Keybind bind;
 
-    /**
-     * The state of the mode
-     */
-    private boolean state;
-
     public ModuleMode(T parent, String name, String description) {
         this.parent = parent;
         this.name = name;
@@ -66,22 +60,9 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
     }
 
     @Override
-    public void toggle() {
-        this.setState(!this.getState());
-    }
-
-    @Override
     public void setState(boolean state) {
-        this.state = state;
-        if (state) {
-            if (parent.getState()) {
-                this.onEnable();
-                ClientAPI.EVENT_BUS.subscribe(this);
-            }
-        } else {
-            ClientAPI.EVENT_BUS.unsubscribe(this);
-            this.onDisable();
-        }
+        parent.setState(state);
+        parent.setMode(this);
     }
 
     /**
@@ -100,13 +81,13 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
     }
 
     @Override
-    public String getDescription() {
+    public final String getDescription() {
         return this.description;
     }
 
     @Override
     public final boolean getState() {
-        return state;
+        return this.parent.getState() && this.parent.getMode() == this;
     }
 
     @Override
