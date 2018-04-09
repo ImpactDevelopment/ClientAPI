@@ -53,11 +53,8 @@ public final class ExampleCommandManager extends Manager<Command> {
         handler.registerParser(new OptionalParser());
         handler.registerParser(new StringParser());
 
-        // Subscribe the handler and a chat command listener to the event bus
-        ClientAPI.EVENT_BUS.subscribe(
-                handler,
-                new ChatCommandListener(handler)
-        );
+        // Create a new chat command listener so chat commands can be passed through chat
+        ClientAPI.EVENT_BUS.subscribe(new ChatCommandListener(handler));
     }
 
     @Override
