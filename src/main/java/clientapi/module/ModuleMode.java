@@ -16,6 +16,7 @@
 
 package clientapi.module;
 
+import clientapi.ClientAPI;
 import clientapi.util.io.Keybind;
 import clientapi.value.holder.ValueHolder;
 
@@ -60,9 +61,17 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
     }
 
     @Override
-    public void setState(boolean state) {
+    public final void setState(boolean state) {
         parent.setState(state);
         parent.setMode(this);
+
+        if (state) {
+            onEnable();
+            ClientAPI.EVENT_BUS.subscribe(this);
+        } else {
+            ClientAPI.EVENT_BUS.unsubscribe(this);
+            onDisable();
+        }
     }
 
     /**
