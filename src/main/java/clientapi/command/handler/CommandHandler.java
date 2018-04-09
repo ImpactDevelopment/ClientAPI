@@ -16,6 +16,7 @@
 
 package clientapi.command.handler;
 
+import clientapi.ClientAPI;
 import clientapi.command.Cmd;
 import clientapi.command.Command;
 import clientapi.command.exception.CommandException;
@@ -23,10 +24,13 @@ import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
 import clientapi.command.executor.CommandExecutor;
 import clientapi.command.executor.argument.ArgumentParser;
+import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
 import clientapi.manage.Manager;
+import clientapi.util.interfaces.Helper;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
+import net.minecraft.client.gui.GuiChat;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -42,7 +46,7 @@ import java.util.stream.Collectors;
  * @author Brady
  * @since 6/1/2017 3:03 PM
  */
-public final class CommandHandler {
+public final class CommandHandler implements Helper {
 
     /**
      * Handlers to process command exceptions
@@ -74,9 +78,26 @@ public final class CommandHandler {
      */
     private String prefix = ".";
 
+    /**
+     * Whether or not typing the prefix char should open the in-game chat gui
+     */
+    private boolean openChat = false;
+
     public CommandHandler(Manager<Command> commandManager) {
         this.commandManager = commandManager;
+        ClientAPI.EVENT_BUS.subscribe(this);
     }
+
+    @EventHandler
+    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
+        // Check if opening chat with the prefix is supported
+        if (!openChat || prefix == null)
+            return;
+
+        // Ensure the prefix is a single character
+        if (prefix.length() == 1 && prefix.charAt(0) == event.getCharacter())
+            mc.displayGuiScreen(new GuiChat(prefix));
+    });
 
     @EventHandler
     private final Listener<CommandExecutionEvent> commandExecutionListener = new Listener<>(event -> {
@@ -87,7 +108,7 @@ public final class CommandHandler {
             }
             throw new UnknownCommandException();
         } catch (CommandException e) {
-            List<ExceptionHandler> handlers = findHandlers(e);
+            List<ExceptionHandler> handlers = getExceptionHandlers(e);
             if (handlers.isEmpty()) {
                 e.printStackTrace();
                 return;
@@ -103,7 +124,7 @@ public final class CommandHandler {
      * @param exception The command exception
      * @return The list of handlers, empty if none
      */
-    private List<ExceptionHandler> findHandlers(CommandException exception) {
+    private List<ExceptionHandler> getExceptionHandlers(CommandException exception) {
         return handlers.stream().filter(handler -> handler.isTarget(exception.getClass())).collect(Collectors.toList());
     }
 
@@ -179,5 +200,21 @@ public final class CommandHandler {
      */
     public final String getPrefix() {
         return this.prefix;
+    }
+
+    /**
+     * Sets whether or not typing the prefix char should open the in-game chat gui
+     *
+     * @param openChat The new state
+     */
+    public final void setPrefixOpenChat(boolean openChat) {
+        this.openChat = openChat;
+    }
+
+    /**
+     * @return Whether or not typing the prefix char should open the in-game chat gui
+     */
+    public final boolean doesPrefixOpenChat() {
+        return this.openChat;
     }
 }
