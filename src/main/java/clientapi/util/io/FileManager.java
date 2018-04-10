@@ -76,9 +76,11 @@ public final class FileManager {
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
-            for (String piece : data) {
-                bw.write(piece);
-                bw.newLine();
+            for (int i = 0; i < data.size(); i++) {
+                if (i > 0)
+                    bw.newLine();
+
+                bw.write(data.get(i));
             }
             bw.close();
         } catch (IOException e) {
