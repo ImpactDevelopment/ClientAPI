@@ -63,7 +63,9 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
     @Override
     public final void setState(boolean state) {
         parent.setState(state);
-        parent.setMode(this);
+
+        if (parent.getMode() != this)
+            parent.setMode(this);
 
         if (state) {
             onEnable();
