@@ -23,6 +23,7 @@
     "MixinNettyPacketDecoder",
     "MixinNettyPacketEncoder",
     "MixinNetworkManager",
+    "MixinParticleManager",
     "MixinProfiler",
     "MixinRender",
     "MixinRenderItem",
