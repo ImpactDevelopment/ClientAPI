@@ -159,6 +159,9 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
         if (mode == null || mode.getParent() != this)
             return null;
 
+        if (mode == this.mode)
+            return mode;
+
         if (this.mode != null)
             this.mode.setState(false);
 
