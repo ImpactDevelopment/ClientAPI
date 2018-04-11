@@ -48,6 +48,11 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
      */
     private Keybind bind;
 
+    /**
+     * The state of the mode
+     */
+    private boolean state;
+
     public ModuleMode(T parent, String name, String description) {
         this.parent = parent;
         this.name = name;
@@ -55,24 +60,23 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
 
         this.bind = new Keybind(Keybind.Type.TOGGLE, 0, type -> {
             if (type == Keybind.Action.CLICK) {
-                this.toggle();
+                parent.setState(parent.getMode() != this || !parent.getState());
+                parent.setMode(this);
             }
         });
     }
 
     @Override
     public final void setState(boolean state) {
-        parent.setState(state);
-
-        if (parent.getMode() != this)
-            parent.setMode(this);
-
+        this.state = state;
         if (state) {
-            onEnable();
-            ClientAPI.EVENT_BUS.subscribe(this);
+            if (parent.getState()) {
+                this.onEnable();
+                ClientAPI.EVENT_BUS.subscribe(this);
+            }
         } else {
             ClientAPI.EVENT_BUS.unsubscribe(this);
-            onDisable();
+            this.onDisable();
         }
     }
 
@@ -98,7 +102,7 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
 
     @Override
     public final boolean getState() {
-        return this.parent.getState() && this.parent.getMode() == this;
+        return this.state;
     }
 
     @Override
