@@ -16,39 +16,22 @@
 
 package clientapi.value.type;
 
-import clientapi.util.interfaces.Toggleable;
 import clientapi.value.Value;
-import clientapi.value.annotation.BooleanValue;
+import clientapi.value.annotation.ColorValue;
 
 import java.lang.reflect.Field;
 
 /**
- * Basic type for Boolean values
+ * Basic type for Color values
  *
- * @see BooleanValue
+ * @see ColorValue
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 4/11/2018 11:27 AM
  */
-public final class BooleanType extends Value<Boolean> implements Toggleable {
+public final class ColorType extends Value<Integer> {
 
-    public BooleanType(String name, String parent, String id, String description, Object object, Field field) {
+    public ColorType(String name, String parent, String id, String description, Object object, Field field) {
         super(name, parent, id, description, object, field);
-    }
-
-    @Override
-    public final void setState(boolean state) {
-        this.setValue(state);
-
-        if (this.getState()) {
-            this.onEnable();
-        } else {
-            this.onDisable();
-        }
-    }
-
-    @Override
-    public final boolean getState() {
-        return super.getValue();
     }
 }

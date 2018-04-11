@@ -17,11 +17,16 @@
 package clientapi.value.type;
 
 import clientapi.value.Value;
+import clientapi.value.annotation.EnumValue;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 
 /**
+ * Basic type for Enum values
+ *
+ * @see EnumValue
+ *
  * @author Brady
  * @since 12/1/2017 7:12 PM
  */

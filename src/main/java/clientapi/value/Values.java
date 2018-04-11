@@ -59,6 +59,7 @@ public final class Values {
         define(MultiValue.class, ResolverData.create(new MultiTypeResolver(), String.class));
         define(StringValue.class, ResolverData.create(new StringTypeResolver(), String.class));
         define(EnumValue.class, ResolverData.create(new EnumTypeResolver(), Enum.class));
+        define(ColorValue.class, ResolverData.create(new ColorTypeResolver(), Integer.class, Integer.TYPE));
     }
 
     /**
