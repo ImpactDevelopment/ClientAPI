@@ -16,6 +16,7 @@
 
 package clientapi.value.type;
 
+import clientapi.util.interfaces.Cycleable;
 import clientapi.value.Value;
 import clientapi.value.annotation.EnumValue;
 import org.apache.commons.lang3.ArrayUtils;
@@ -30,7 +31,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 12/1/2017 7:12 PM
  */
-public final class EnumType<T extends Enum<?>> extends Value<T> {
+public final class EnumType<T extends Enum<?>> extends Value<T> implements Cycleable<T> {
 
     private final T[] values;
 
@@ -39,27 +40,43 @@ public final class EnumType<T extends Enum<?>> extends Value<T> {
         this.values = enumClass.getEnumConstants();
     }
 
-    /**
-     * Sets value to the next one in the set
-     */
-    public final void next() {
+    @Override
+    public final T current() {
+        return this.getValue();
+    }
+
+    @Override
+    public final T next() {
+        T value = peekNext();
+        this.setValue(value);
+        return value;
+    }
+
+    @Override
+    public final T last() {
+        T value = peekLast();
+        this.setValue(value);
+        return value;
+    }
+
+    @Override
+    public final T peekNext() {
         int index = ArrayUtils.indexOf(values, getValue());
         if (++index >= values.length)
             index = 0;
-        this.setValue(values[index]);
+        return values[index];
     }
 
-    /**
-     * Sets value to the last one in the set
-     */
-    public final void last() {
+    @Override
+    public final T peekLast() {
         int index = ArrayUtils.indexOf(values, getValue());
         if (--index < 0)
             index = values.length - 1;
-        this.setValue(values[index]);
+        return values[index];
     }
 
-    public final T[] getMultiValues() {
+    @Override
+    public final T[] getElements() {
         return this.values;
     }
 }
