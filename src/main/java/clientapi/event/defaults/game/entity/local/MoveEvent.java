@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.event.defaults.game.entity;
+package clientapi.event.defaults.game.entity.local;
 
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.entity.Entity;

@@ -16,7 +16,7 @@
 
 package me.zero.example.mod.mods;
 
-import clientapi.event.defaults.game.entity.MoveEvent;
+import clientapi.event.defaults.game.entity.local.MoveEvent;
 import clientapi.module.Mod;
 import clientapi.module.Module;
 import clientapi.util.annotation.Label;
@@ -38,7 +38,6 @@ public final class Speed extends Module implements IMovement {
     private double speed = 3;
 
     @EventHandler
-    private Listener<MoveEvent> moveListener = new Listener<>(event -> {
-        event.setX(event.getX() * speed).setZ(event.getZ() * speed);
-    });
+    private Listener<MoveEvent> moveListener = new Listener<>(event ->
+            event.setX(event.getX() * speed).setZ(event.getZ() * speed));
 }

@@ -16,10 +16,8 @@
 
 package me.zero.example.mod.mods;
 
-import clientapi.event.defaults.game.core.ClickEvent;
-import clientapi.event.defaults.game.entity.MotionUpdateEvent;
+import clientapi.event.defaults.game.entity.local.MotionUpdateEvent;
 import clientapi.load.mixin.extension.IEntity;
-import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.module.Mod;
 import clientapi.module.Module;
 import clientapi.util.math.Vec2;
@@ -68,7 +66,6 @@ public final class Aura extends Module implements ICombat {
                if (target != null && mc.player.getCooledAttackStrength(0F) == 1F) {
                    mc.playerController.attackEntity(mc.player, target);
                    mc.player.swingArm(EnumHand.MAIN_HAND);
-                   ((IMinecraft) mc).clickMouse(ClickEvent.MouseButton.LEFT);
                }
                break;
            }
