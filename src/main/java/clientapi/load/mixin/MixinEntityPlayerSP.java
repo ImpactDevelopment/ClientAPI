@@ -18,9 +18,9 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.core.UpdateEvent;
-import clientapi.event.defaults.game.entity.LivingUpdateEvent;
-import clientapi.event.defaults.game.entity.MotionUpdateEvent;
-import clientapi.event.defaults.game.entity.MoveEvent;
+import clientapi.event.defaults.game.entity.local.LivingUpdateEvent;
+import clientapi.event.defaults.game.entity.local.MotionUpdateEvent;
+import clientapi.event.defaults.game.entity.local.MoveEvent;
 import clientapi.event.defaults.game.misc.ChatEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
