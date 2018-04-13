@@ -35,7 +35,9 @@ public enum Protocol {
     ProtocolVersion210(210, "1.10", "1.10.1", "1.10.2"),
     ProtocolVersion315(315, "1.11"),
     ProtocolVersion316(316, "1.11.1", "1.11.2"),
-    ProtocolVersion335(335, "1.12");
+    ProtocolVersion335(335, "1.12"),
+    ProtocolVersion338(338, "1.12.1"),
+    ProtocolVersion340(340, "1.12.2");
 
     /**
      * The Protocol ID
