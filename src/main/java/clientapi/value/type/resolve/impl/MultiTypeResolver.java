@@ -38,7 +38,7 @@ public final class MultiTypeResolver implements TypeResolver<MultiType> {
 
         MultiType type = new MultiType(label.name(), label.parent(), label.id(), label.description(), parent, field, multi.value());
         if (type.getValue() == null)
-            type.setValue(type.getMultiValues()[0]);
+            type.setValue(type.getElements()[0]);
 
         return type;
     }

@@ -17,6 +17,7 @@
 package clientapi.value.type;
 
 import clientapi.util.ClientAPIUtils;
+import clientapi.util.interfaces.Cycleable;
 import clientapi.value.Value;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -28,7 +29,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 2/24/2017 12:00 PM
  */
-public final class MultiType extends Value<String> {
+public final class MultiType extends Value<String> implements Cycleable<String> {
 
     /**
      * Different values
@@ -46,30 +47,43 @@ public final class MultiType extends Value<String> {
         super.setValue(ClientAPIUtils.objectFrom(value, values));
     }
 
-    /**
-     * Sets value to the next one in the set
-     */
-    public final void next() {
+    @Override
+    public final String current() {
+        return this.getValue();
+    }
+
+    @Override
+    public final String next() {
+        String value = peekNext();
+        this.setValue(value);
+        return value;
+    }
+
+    @Override
+    public final String last() {
+        String value = peekLast();
+        this.setValue(value);
+        return value;
+    }
+
+    @Override
+    public final String peekNext() {
         int index = ArrayUtils.indexOf(values, getValue());
         if (++index >= values.length)
             index = 0;
-        this.setValue(values[index]);
+        return values[index];
     }
 
-    /**
-     * Sets value to the last one in the set
-     */
-    public final void last() {
+    @Override
+    public final String peekLast() {
         int index = ArrayUtils.indexOf(values, getValue());
         if (--index < 0)
             index = values.length - 1;
-        this.setValue(values[index]);
+        return values[index];
     }
 
-    /**
-     * @return All possible values for this MultiType
-     */
-    public final String[] getMultiValues() {
+    @Override
+    public final String[] getElements() {
         return this.values;
     }
 }
