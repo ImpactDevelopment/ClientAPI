@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package clientapi.util;
+package clientapi.util.server;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.filters.PacketFilter;
 import clientapi.event.defaults.game.core.TickEvent;
 import clientapi.event.defaults.game.network.PacketEvent;
+import clientapi.util.Timer;
 import clientapi.util.interfaces.Helper;
 import com.google.common.collect.Sets;
 import me.zero.alpine.listener.EventHandler;
@@ -30,9 +31,6 @@ import net.minecraft.network.play.server.SPacketTabComplete;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Consumer;
-
-import static clientapi.util.PluginFinder.PResponse.Result.FAILURE;
-import static clientapi.util.PluginFinder.PResponse.Result.SUCCESS;
 
 /**
  * Used to find possible plugins on servers
@@ -45,7 +43,7 @@ public final class PluginFinder implements Helper {
     /**
      * Called in response to finding plugins
      */
-    private Consumer<PResponse> callback;
+    private Consumer<PluginFinderResponse> callback;
 
     /**
      * Used to keep track of the timeout
@@ -64,7 +62,7 @@ public final class PluginFinder implements Helper {
      *
      * @param callback Plugin Response callback
      */
-    public final void find(Consumer<PResponse> callback) {
+    public final void find(Consumer<PluginFinderResponse> callback) {
         this.find(callback, 10000);
     }
 
@@ -74,9 +72,9 @@ public final class PluginFinder implements Helper {
      * found.
      *
      * @param callback Plugin Response callback
-     * @param timeout Timeout in MS
+     * @param timeout Timeout in milliseconds
      */
-    public final void find(Consumer<PResponse> callback, long timeout) {
+    public final void find(Consumer<PluginFinderResponse> callback, long timeout) {
         packetTimer.reset();
         this.timeout = timeout;
 
@@ -87,12 +85,9 @@ public final class PluginFinder implements Helper {
 
     @EventHandler
     private final Listener<TickEvent> tickListener = new Listener<>(event -> {
-        if (!packetTimer.delay(timeout))
-            return;
-
         ClientAPI.EVENT_BUS.unsubscribe(this);
-        callback.accept(new PResponse("Request timed out after " + timeout + "ms"));
-    });
+        callback.accept(new PluginFinderResponse("Request timed out after " + timeout + "ms"));
+    }, e -> packetTimer.delay(timeout));
 
     @EventHandler
     private final Listener<PacketEvent.Receive> packetListener = new Listener<>(event -> {
@@ -105,69 +100,8 @@ public final class PluginFinder implements Helper {
                 plugins.add(plugin);
         });
 
-        callback.accept(new PResponse(plugins));
+        callback.accept(new PluginFinderResponse(plugins));
         callback = null;
         ClientAPI.EVENT_BUS.unsubscribe(this);
     }, new PacketFilter<>(SPacketTabComplete.class));
-
-    public static class PResponse {
-
-        /**
-         * The list of plugins found
-         */
-        private final Set<String> plugins;
-
-        /**
-         * The last error
-         */
-        private final String error;
-
-        /**
-         * The result status, either SUCCESS or FAILURE
-         */
-        private final Result result;
-
-        private PResponse(String error) {
-            this.plugins = null;
-            this.error = error;
-            this.result = FAILURE;
-        }
-
-        private PResponse(Set<String> plugins) {
-            this.plugins = plugins;
-            this.error = null;
-            this.result = SUCCESS;
-        }
-
-        /**
-         * @return The plugins found, if found
-         */
-        public final Set<String> getPlugins() {
-            if (result != SUCCESS)
-                throw new UnsupportedOperationException("Cannot get plugins that were retrieved unless response type is SUCCESS");
-
-            return this.plugins;
-        }
-
-        /**
-         * @return The last error, if there is one
-         */
-        public final String getError() {
-            if (result != FAILURE)
-                throw new UnsupportedOperationException("Cannot get error that occured unless response type is FAILURE");
-
-            return this.error;
-        }
-
-        /**
-         * @return The outcome of the request, SUCCESS or FAILURE
-         */
-        public final Result getResult() {
-            return this.result;
-        }
-
-        public enum Result {
-            SUCCESS, FAILURE
-        }
-    }
 }
