@@ -25,6 +25,7 @@ import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.extension.IMinecraft;
+import clientapi.util.io.MouseKeyTracker;
 import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GLUtils;
 import com.google.gson.GsonBuilder;
@@ -116,7 +117,10 @@ public abstract class MixinMinecraft implements IMinecraft {
         if (currentScreen != null)
             return;
 
-        ClientAPI.EVENT_BUS.post(new ClickEvent(Mouse.getEventButton()));
+        int button = Mouse.getEventButton();
+        if (button > 0 && MouseKeyTracker.INSTANCE.wasButtonPressed(button, Mouse.getEventButtonState())) {
+            ClientAPI.EVENT_BUS.post(new ClickEvent(button));
+        }
     }
 
     @Inject(method = "init", at = @At("RETURN"))
