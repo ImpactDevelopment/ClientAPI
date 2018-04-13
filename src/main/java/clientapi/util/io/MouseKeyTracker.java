@@ -26,7 +26,12 @@ public enum MouseKeyTracker {
             mouseKeyStates = expandedArray;
         }
 
-        // Return true if the mouse is pressed in the new state and wasn't in the old state
-        return newState && !mouseKeyStates[button];
+        // true if the mouse is pressed in the new state and wasn't in the old state
+        boolean wasPressed = newState && !mouseKeyStates[button];
+
+        // Set the new state
+        mouseKeyStates[button] = newState;
+
+        return wasPressed;
     }
 }
