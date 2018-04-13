@@ -39,7 +39,7 @@ public final class EnumTypeResolver implements TypeResolver<EnumType> {
 
         EnumType type = new EnumType(label.name(), label.parent(), label.id(), label.description(), parent, field, enumType);
         if (type.getValue() == null)
-            type.setValue(type.getMultiValues()[0]);
+            type.setValue(type.getElements()[0]);
 
         return type;
     }
