@@ -16,9 +16,10 @@
 
 package clientapi.command;
 
+import clientapi.command.executor.parser.CommandArgument;
 import clientapi.command.exception.*;
 import clientapi.command.executor.ExecutionContext;
-import clientapi.command.executor.argument.ArgumentParser;
+import clientapi.command.executor.parser.ArgumentParser;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

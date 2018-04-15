@@ -18,7 +18,7 @@ package clientapi.command.exception;
 
 import clientapi.command.ChildCommand;
 import clientapi.command.Command;
-import clientapi.command.executor.argument.ArgumentParser;
+import clientapi.command.executor.parser.ArgumentParser;
 
 import java.lang.reflect.Type;
 

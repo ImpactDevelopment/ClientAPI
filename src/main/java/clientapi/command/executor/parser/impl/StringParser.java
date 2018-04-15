@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-package clientapi.command.executor.argument;
+package clientapi.command.executor.parser.impl;
 
 import clientapi.command.executor.ExecutionContext;
+import clientapi.command.executor.parser.ArgumentParser;
 
 import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 10/18/2017 11:05 AM
+ * @since 10/18/2017 11:14 AM
  */
-public interface ArgumentParser<T> {
+public final class StringParser implements ArgumentParser<String> {
 
-    /**
-     * Returns the resolved/parsed type from a
-     * raw string representation.
-     *
-     * @param context Context behind command execution
-     * @param type The expected return type
-     * @param raw Type represented in a string
-     * @return String resolved to type
-     */
-    T parse(ExecutionContext context, Type type, String raw);
+    @Override
+    public final String parse(ExecutionContext context, Type type, String raw) {
+        return raw;
+    }
 
-    /**
-     * @param type A type
-     * @return Whether or not the specified type is a target for this parser.
-     */
-    boolean isTarget(Type type);
+    @Override
+    public final boolean isTarget(Type type) {
+        return type instanceof Class && String.class.isAssignableFrom((Class) type);
+    }
 }
