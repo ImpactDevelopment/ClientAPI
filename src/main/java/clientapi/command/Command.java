@@ -20,6 +20,7 @@ import clientapi.command.exception.CommandException;
 import clientapi.command.exception.CommandInitException;
 import clientapi.command.exception.UnknownSubCommandException;
 import clientapi.command.executor.ExecutionContext;
+import clientapi.command.executor.parser.CommandInputParser;
 import clientapi.util.ClientAPIUtils;
 
 import java.lang.reflect.Method;
@@ -75,12 +76,10 @@ public class Command implements ICommand {
             int optionals = 0;
             for (int i = 0; i < parameters; i++) {
                 if (method.getParameterTypes()[i].isAssignableFrom(Optional.class)) {
-                    if (i != parameters - 1) {
+                    if (i != parameters - 1)
                         throw new RuntimeException(new CommandInitException(this, "Optionals must be defined as the last parameter"));
-                    }
-                    if (++optionals > 1) {
+                    if (++optionals > 1)
                         throw new RuntimeException(new CommandInitException(this, "More than one optional parameter is not supported"));
-                    }
                 }
             }
 
@@ -94,18 +93,18 @@ public class Command implements ICommand {
 
     @Override
     public final void execute(ExecutionContext context, String[] arguments) throws CommandException {
-        ChildCommand sub = findChild(arguments);
-        if (sub == null)
+        Optional<ChildCommand> sub = CommandInputParser.INSTANCE.findChild(this, arguments);
+        if (!sub.isPresent())
             throw new UnknownSubCommandException(this, arguments);
 
         // If the child was found by it's header, then remove the first argument.
-        if (sub.getHeaders().length > 0 && arguments.length > 0) {
+        if (sub.get().getHeaders().length > 0 && arguments.length > 0) {
             String[] newArgs = new String[arguments.length - 1];
             System.arraycopy(arguments, 1, newArgs, 0, arguments.length - 1);
             arguments = newArgs;
         }
 
-        sub.execute(context, arguments);
+        sub.get().execute(context, arguments);
     }
 
     @Override
@@ -123,29 +122,5 @@ public class Command implements ICommand {
      */
     public final List<ChildCommand> getChildren() {
         return this.children;
-    }
-
-    /**
-     * Finds a child command from the specified arguments
-     *
-     * @param arguments The arguments
-     * @return The child command, {@code null} if not found
-     */
-    private ChildCommand findChild(String[] arguments) {
-        String header = arguments.length == 0 ? null : arguments[0];
-
-        // Find the command by the header defined by the first argument
-        ChildCommand child = this.children.stream().filter(c -> (header == null && c.getHeaders().length == 0) || ClientAPIUtils.containsIgnoreCase(c.getHeaders(), header)).findFirst().orElse(null);
-        if (child != null) {
-            return child;
-        }
-
-        // Find the command by the length of the arguments
-        child = this.children.stream().filter(c -> c.getHeaders().length == 0 && arguments.length == c.getArguments().size()).findFirst().orElse(null);
-        if (child != null) {
-            return child;
-        }
-
-        return null;
     }
 }

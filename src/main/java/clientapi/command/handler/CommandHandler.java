@@ -23,7 +23,7 @@ import clientapi.command.exception.CommandException;
 import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
 import clientapi.command.executor.CommandExecutor;
-import clientapi.command.executor.argument.ArgumentParser;
+import clientapi.command.executor.parser.ArgumentParser;
 import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
 import clientapi.manage.Manager;

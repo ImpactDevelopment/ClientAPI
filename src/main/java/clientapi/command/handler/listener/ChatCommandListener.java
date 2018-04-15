@@ -18,19 +18,20 @@ package clientapi.command.handler.listener;
 
 import clientapi.ClientAPI;
 import clientapi.command.Command;
+import clientapi.command.executor.parser.CommandInputParser;
+import clientapi.command.executor.parser.ParsedCommandInput;
 import clientapi.command.executor.ExecutionContext;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.sender.CommandSender;
 import clientapi.event.defaults.game.misc.ChatEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
+import clientapi.util.ClientAPIUtils;
 import clientapi.util.interfaces.Helper;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.util.text.TextComponentString;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
@@ -68,38 +69,28 @@ public final class ChatCommandListener extends CommandListener implements Helper
             // Removed the prefix from the message
             raw = raw.substring(handler.getPrefix().length());
 
-            // Create a matcher to parse the message
-            Matcher matcher = REGEX.matcher(raw);
+            // Parse the input, if the optional is empty that indicates that
+            // the raw data that was input into
+            Optional<ParsedCommandInput> input = CommandInputParser.INSTANCE.parseCommandInput(raw);
 
-            List<String> matches = new ArrayList<>();
-            while (matcher.find()) {
-                matches.add(matcher.group());
-            }
-
-            // Only handle the command if there is at least 1 argument group
-            if (matches.size() > 0) {
-                Command command = handler.getCommandManager().stream().filter(cmd -> {
-                    for (String header : cmd.getHeaders()) {
-                        if (header.equalsIgnoreCase(matches.get(0))) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }).findFirst().orElse(null);
+            // Execute the command if the input was valid
+            if (input.isPresent()) {
+                // Find a command that has a header matching the input command header
+                Command command = handler.getCommandManager().stream()
+                        .filter(cmd -> ClientAPIUtils.containsIgnoreCase(cmd.getHeaders(), input.get().getCommand()))
+                        .findFirst().orElse(null);
 
                 // Only handle the command if it's found
                 if (command != null) {
-                    // Get all matches after the first one, these are treated as arguments
-                    String[] args = new String[matches.size() - 1];
-                    for (int i = 1; i < matches.size(); i++)
-                        args[i - 1] = matches.get(i).replace("\"", "").replace("\'", "");
-
-                    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(command, ExecutionContext.of(CommandSender.from(mc.player), this.handler), args));
+                    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(
+                            command,
+                            ExecutionContext.of(CommandSender.from(mc.player), this.handler),
+                            input.get().getArguments()
+                    ));
                     return;
                 }
             }
 
-            // This will be interpreted as an unknown command
             ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(null, null, null));
         }
     });

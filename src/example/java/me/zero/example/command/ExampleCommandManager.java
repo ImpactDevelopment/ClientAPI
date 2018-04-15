@@ -18,7 +18,7 @@ package me.zero.example.command;
 
 import clientapi.ClientAPI;
 import clientapi.command.Command;
-import clientapi.command.executor.argument.*;
+import clientapi.command.executor.parser.impl.*;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.handler.listener.ChatCommandListener;
 import clientapi.manage.Manager;

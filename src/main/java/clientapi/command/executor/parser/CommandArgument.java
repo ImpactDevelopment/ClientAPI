@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.command;
+package clientapi.command.executor.parser;
 
 import clientapi.util.interfaces.Nameable;
 
@@ -31,7 +31,7 @@ public final class CommandArgument implements Nameable {
     private final String name;
     private final Type type;
 
-    CommandArgument(String name, Type type) {
+    public CommandArgument(String name, Type type) {
         this.name = name;
         this.type = type;
     }

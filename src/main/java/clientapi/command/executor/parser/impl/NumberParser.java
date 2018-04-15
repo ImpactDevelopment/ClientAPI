@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package clientapi.command.executor.argument;
+package clientapi.command.executor.parser.impl;
 
 import clientapi.command.executor.ExecutionContext;
+import clientapi.command.executor.parser.ArgumentParser;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.lang.reflect.Type;
