@@ -57,8 +57,9 @@ public abstract class MixinEntity implements IEntity {
     @Shadow public void move(MoverType type, double x, double y, double z) {}
     @Shadow public abstract boolean isSprinting();
     @Shadow public abstract boolean isRiding();
+    @Shadow public abstract float getEyeHeight();
 
-    private Vec3 pos, prevPos, lastTickPos, motion;
+    private Vec3 pos, prevPos, lastTickPos, headPos, motion;
     private Vec2 rotation, prevRotation;
 
     @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
@@ -131,6 +132,14 @@ public abstract class MixinEntity implements IEntity {
             lastTickPos = new Vec3();
 
         return lastTickPos.setX(lastTickPosX).setY(lastTickPosY).setZ(lastTickPosZ);
+    }
+
+    @Override
+    public final Vec3 getHeadPos() {
+        if (headPos == null)
+            headPos = new Vec3();
+
+        return headPos.setX(posX).setY(posY + getEyeHeight()).setZ(posZ);
     }
 
     @Override
