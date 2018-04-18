@@ -89,6 +89,13 @@ public interface IEntity {
     Vec3 getLastTickPos();
 
     /**
+     * Returns a {@code Vec3} with the world position of this entity's head
+     *
+     * @return This entity's head position
+     */
+    Vec3 getHeadPos();
+
+    /**
      * Converts the entity rotation angles to a {@code Vec2}
      *
      * @return Rotations as a {@code Vec2}
