@@ -48,6 +48,7 @@ public final class ExampleCommandManager extends Manager<Command> {
         handler.registerParser(new CharParser());
         handler.registerParser(new ColorParser());
         handler.registerParser(new CommandParser(ExampleClient.getInstance().getCommandManager()));
+        handler.registerParser(new ItemParser());
         handler.registerParser(new ModuleParser(ExampleClient.getInstance().getModuleManager()));
         handler.registerParser(new NumberParser());
         handler.registerParser(new OptionalParser());
