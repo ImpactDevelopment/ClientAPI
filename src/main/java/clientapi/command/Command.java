@@ -93,7 +93,7 @@ public class Command implements ICommand {
 
     @Override
     public final void execute(ExecutionContext context, String[] arguments) throws CommandException {
-        Optional<ChildCommand> sub = CommandInputParser.INSTANCE.findChild(this, arguments);
+        Optional<ChildCommand> sub = CommandInputParser.INSTANCE.findChild(this, arguments, true);
         if (!sub.isPresent())
             throw new UnknownSubCommandException(this, arguments);
 
