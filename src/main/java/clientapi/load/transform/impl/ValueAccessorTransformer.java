@@ -83,11 +83,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                 if (!an.desc.equals("Lclientapi/util/annotation/Label;"))
                     continue;
 
-                for (int i = 0; i < an.values.size(); i++) {
-                    if (i % 2 == 0 && an.values.get(i).equals("id")) {
-                        fieldCache.put(an.values.get(i + 1).toString(), fn);
-                    }
-                }
+                fieldCache.put(fn.name, fn);
             }
         }
 
@@ -135,7 +131,7 @@ public final class ValueAccessorTransformer implements ITransformer {
             // Create label for IF statement jump
             Label skip = new Label();
 
-            // Compare the target value with the expected valu
+            // Compare the target value with the expected value
             mn.visitVarInsn(ALOAD, 1);
             mn.visitLdcInsn(id);
             mn.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
