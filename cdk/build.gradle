@@ -67,10 +67,12 @@ dependencies {
     compile 'net.jodah:typetools:@TT_VERSION@'
     compile 'org.luaj:luaj-jse:@LUAJ_VERSION@'
     compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
+        // Mixin includes a lot of dependencies that are too up-to-date
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
         exclude module: 'commons-io'
+        exclude module: 'log4j-core'
     }
 }
 
