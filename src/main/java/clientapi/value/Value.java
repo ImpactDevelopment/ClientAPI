@@ -105,8 +105,8 @@ public class Value<T> implements IValue<T> {
 
         // Accessor
         this.direct = object instanceof ValueAccessor;
-        this.setter = direct ? ((ValueAccessor) object).getFieldSetter(id) : null;
-        this.getter = direct ? ((ValueAccessor) object).getFieldGetter(id) : null;
+        this.setter = direct ? ((ValueAccessor) object).getFieldSetter(field.getName()) : null;
+        this.getter = direct ? ((ValueAccessor) object).getFieldGetter(field.getName()) : null;
     }
 
     @Override

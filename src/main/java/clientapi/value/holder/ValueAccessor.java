@@ -35,19 +35,19 @@ public interface ValueAccessor {
 
     /**
      * Returns a supplier that can be used to get
-     * the value of the target field. (By id)
+     * the value of the target field. (By field name)
      *
-     * @param id The ID of the field
+     * @param field The name of the field
      * @return The supplier "getter"
      */
-    Supplier<Object> getFieldGetter(String id);
+    Supplier<Object> getFieldGetter(String field);
 
     /**
      * Returns a consumer that can be used to set the
-     * value of the target field. (By id)
+     * value of the target field. (By field name)
      *
-     * @param id The ID of the field
+     * @param field The name of the field
      * @return The consumer "setter"
      */
-    Consumer<Object> getFieldSetter(String id);
+    Consumer<Object> getFieldSetter(String field);
 }
