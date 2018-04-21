@@ -16,8 +16,7 @@
 
 package clientapi;
 
-import me.zero.alpine.EventBus;
-import me.zero.alpine.EventManager;
+import clientapi.event.ClientAPIEventManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,7 +36,7 @@ public final class ClientAPI {
     /**
      * Instance of the API event bus. All default events are passed through this event bus.
      */
-    public static final EventBus EVENT_BUS = new EventManager();
+    public static final ClientAPIEventManager EVENT_BUS = new ClientAPIEventManager();
 
     /**
      * Instance of the API logger.
