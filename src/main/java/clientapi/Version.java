@@ -40,7 +40,7 @@ public final class Version {
     /**
      * Incremented every release, reset when the minor version is modified
      */
-    public static final int PATCH = 0;
+    public static final int PATCH = 1;
 
     /**
      * @return The version formatted as {@code MAJOR.MINOR.PATCH}
