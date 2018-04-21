@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="ClientAPI_api" target="1.8" />
+      <module name="ClientAPI_debug" target="1.8" />
+      <module name="ClientAPI_example" target="1.8" />
+      <module name="ClientAPI_main" target="1.8" />
+      <module name="ClientAPI_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
