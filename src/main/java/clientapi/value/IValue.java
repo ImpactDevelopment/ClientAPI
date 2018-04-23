@@ -21,6 +21,8 @@ import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Nameable;
 import clientapi.value.holder.IValueHolder;
 
+import java.util.stream.Stream;
+
 /**
  * Simple interface for Values
  *
@@ -45,4 +47,15 @@ public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHo
      * @param value The new value
      */
     void setValue(T value);
+
+    /**
+     * Intended to be used with flatMap() to flatten the IValue tree recursively
+     * @param value the root node of the tree
+     * @return the flattened tree as a stream
+     */
+    static Stream<IValue> flatten(IValue value) {
+        return Stream.concat(
+                Stream.of(value),
+                value.getValues().stream().flatMap(IValue::flatten));
+    }
 }
