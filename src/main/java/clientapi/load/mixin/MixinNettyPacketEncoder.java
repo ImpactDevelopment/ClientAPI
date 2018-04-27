@@ -20,15 +20,14 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.network.*;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.network.EnumConnectionState;
+import net.minecraft.network.NettyPacketEncoder;
+import net.minecraft.network.Packet;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-
-import java.io.IOException;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
@@ -37,41 +36,19 @@ import java.io.IOException;
 @Mixin(NettyPacketEncoder.class)
 public class MixinNettyPacketEncoder {
 
-    @Shadow @Final private static Logger LOGGER;
-    @Shadow @Final private static Marker RECEIVED_PACKET_MARKER;
-    @Shadow @Final private EnumPacketDirection direction;
+    private PacketEvent event;
 
-    /**
-     * @reason mostly because we need to mutate msg, but also so that we can pass the connection state to the event constructor
-     * @author Brady
-     */
-    @Overwrite
-    protected void encode(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out) throws Exception {
-        EnumConnectionState state = ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
-        Integer packetId = state.getPacketId(this.direction, msg);
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(RECEIVED_PACKET_MARKER, "OUT: [{}:{}] {}", state, packetId, msg.getClass().getName());
-        }
-
-        // We need the state and we plan to mutate the msg, hence the overwrite
-        PacketEvent event = new PacketEvent.Encode(msg, state);
+    @ModifyArg(method = "encode", at = @At(value = "INVOKE_ASSIGN", target = "Lio/netty/util/Attribute;get()Ljava/lang/Object;", remap = false))
+    private Packet<?> mutatePacket(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out, CallbackInfo ci, EnumConnectionState state) {
+        event = new PacketEvent.Encode(msg, state);
         ClientAPI.EVENT_BUS.post(event);
-        msg = event.getPacket();
-        if (event.isCancelled() || msg == null)
-            return;
+        return event.getPacket();
+    }
 
-        if (packetId == null) {
-            throw new IOException("Can\'t serialize unregistered packet");
-        } else {
-            PacketBuffer buffer = new PacketBuffer(out);
-            buffer.writeVarInt(packetId);
-
-            try {
-                msg.writePacketData(buffer);
-            } catch (Throwable throwable) {
-                LOGGER.error(throwable);
-            }
-        }
+    @Inject(method = "encode", at = @At(value = "JUMP", ordinal = 0), cancellable = true)
+    private void checkCancelled(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out, CallbackInfo ci) {
+        if (event != null && (event.isCancelled() || event.getPacket() == null))
+            ci.cancel();
+        event = null;
     }
 }
