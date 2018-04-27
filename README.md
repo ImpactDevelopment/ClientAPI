@@ -3,24 +3,52 @@
 [![Release](https://img.shields.io/github/release/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/releases)
 
 # ClientAPI
-ClientAPI is a modding API/Framework just like Forge, Sponge and Liteloader, it is designed to provide a shared base for large client-rewrite style mods.
+ClientAPI is a modding API/Framework for Minecraft just like Forge, Sponge and Liteloader, it
+is designed to provide a shared base for client-side mods for minecraft.
 
-Like other modding APIs it is a tweaker and has the potential to be stacked with other tweakers, so long as they do not both entirely overwrite the same methods.
+Like other modding APIs it is a tweaker and has the potential to be stacked with other tweakers, so long
+as they do not both entirely overwrite the same methods.
 
-Unlike most other modding APIs it is designed to be used by a single "client" mod. It is this "client" that is installed, not the ClientAPI, so the "client" mod has full control over all modifications to the vanilla code, unless of course the installation is stacked on top of other modding APIs.
+Unlike most other modding APIs it is designed to be used by a single "client" mod. It is this "client"
+that is installed, not ClientAPI, so the "client" mod has full control over all modifications to
+the vanilla code, unless of course the installation is stacked on top of other modding APIs.
 
-## Development Kit
-To use the Client API, you must download the CDK from the Releases page. Instructions on how to set it up are included in the README.
+## Developing ClientAPI mods
 
-## Concept
-* Clients will install into `.minecraft/versions` and `.minecraft/libraries` if they are published to a maven repo
-  * An installer could be used to configure stacking on top of other tweakers (e.g. Forge)
-  * If an installer is used, it could also add a profile to the launcher
-* The client will inherit from a vanilla minecraft version
-  * This means the client doesn't need to include actual minecraft code
-* The client will list ClientAPI as a maven dependency
-  * The minecraft launcher will automatically download the ClientAPI lib to the `.minecraft/libraries` folder
+### Downloading the CDK
+To use the Client API, you must download the CDK from the Releases page. Instructions on how to set
+it up are included in the README.
 
-## Usage
-Refer to the [Example](src/example) to view how clients using the ClientAPI are structured.
+### Developing a ClientAPI Mod
+An example ClientAPI mod is provided with the CDK, however if you choose to start from scratch, an overview
+of how to setup the core functionalities can be found [here](https://github.com/ImpactDevelopment/ClientAPI/blob/master/src/example/README.md).
 
+### Creating a Launcher Profile
+In order to create a Minecraft Launcher Profile for a ClientAPI based mod, you need to...
+* Create a copy of the vanilla Minecraft JSON for the game version that is being used by your ClientAPI version.
+* Open the JSON file in a text editor like [Notepad++](https://notepad-plus-plus.org)
+* Add the ClientAPI dependencies as well as ClientAPI itself into the ``libraries`` array.
+  ```
+  {
+      "name": "project-group:project-id:project-version",
+      "url": "https://dependency.repository.url/"
+  }
+  ```
+* Add Mojang's launchwrapper as a dependency
+  ```
+  {
+      "name": "net.minecraft:launchwrapper:1.12"
+  }
+  ```
+* Add a launch argument to load ClientAPI's tweaker 
+  ```
+  --tweakClass clientapi.load.ClientTweaker
+  ```
+  If you are planning on using [Minecraft Forge](https://files.minecraftforge.net/) or [OptiFine](https://optifine.net/)
+  in parallel with ClientAPI, you should use their respective tweakers found [here](https://github.com/ImpactDevelopment/ClientAPI/tree/master/src/main/java/clientapi/load).
+* Add your client mod's dependency. This follows the same format as normal dependencies. If your
+  client mod is not on a maven repository then the URL should not be defined, and the jar file
+  should be installed into the ``libraries`` directory of minecraft.
+
+## Contributing to ClientAPI
+This section is incomplete.
