@@ -20,15 +20,16 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.network.*;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.network.EnumConnectionState;
+import net.minecraft.network.EnumPacketDirection;
+import net.minecraft.network.NettyPacketDecoder;
+import net.minecraft.network.Packet;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,45 +39,19 @@ import java.util.List;
 @Mixin(NettyPacketDecoder.class)
 public class MixinNettyPacketDecoder {
 
-    @Shadow @Final private static Logger LOGGER;
-    @Shadow @Final private static Marker RECEIVED_PACKET_MARKER;
-    @Shadow @Final private EnumPacketDirection direction;
+    private PacketEvent.Decode event;
 
-    /**
-     * @reason we need to wait until the packet is built and then pass it (and the connection state) to the event constructor
-     * @author Brady
-     */
-    @Overwrite
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws IOException, InstantiationException, IllegalAccessException {
-        if (in.readableBytes() == 0)
-            return;
-
-        PacketBuffer packetbuffer = new PacketBuffer(in);
-        int packetId = packetbuffer.readVarInt();
-        EnumConnectionState state = ctx.channel().attr(NetworkManager.PROTOCOL_ATTRIBUTE_KEY).get();
-        Packet<?> packet = state.getPacket(this.direction, packetId);
-
-        // We need the packet to create our Event, so we have to overwrite the method body
-        PacketEvent event = new PacketEvent.Decode(packet, state);
+    @Redirect(method = "decode", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/network/EnumConnectionState;getPacket(Lnet/minecraft/network/EnumPacketDirection;I)Lnet/minecraft/network/Packet;"))
+    private Packet<?> mutatePacket(EnumConnectionState state, EnumPacketDirection direction, int id) throws IllegalAccessException, InstantiationException {
+        event = new PacketEvent.Decode(state.getPacket(direction, id), state);
         ClientAPI.EVENT_BUS.post(event);
-        packet = event.getPacket();
-        if (event.isCancelled())
-            return;
+        return event.getPacket();
+    }
 
-        if (packet == null) {
-            throw new IOException(String.format("Bad packet id %s", packetId));
-        } else {
-            packet.readPacketData(packetbuffer);
-
-            if (packetbuffer.readableBytes() > 0) {
-                throw new IOException(String.format("Packet %s/%s (%s) was larger than I expected, found %s bytes extra whilst reading packet %s", state.getId(), packetId, packet.getClass().getSimpleName(), packetbuffer.readableBytes(), packetId));
-            } else {
-                out.add(packet);
-
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug(RECEIVED_PACKET_MARKER, " IN: [{}:{}] {}", state, packetId, packet.getClass().getName());
-                }
-            }
-        }
+    @Inject(method = "decode", at = @At(value = "JUMP", ordinal = 0))
+    private void checkCancelled(ChannelHandlerContext ctx, ByteBuf in, List<Object> out, CallbackInfo ci) {
+        if (event != null && event.isCancelled())
+            ci.cancel();
+        event = null;
     }
 }
