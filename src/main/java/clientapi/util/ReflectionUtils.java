@@ -33,6 +33,27 @@ public final class ReflectionUtils {
     private ReflectionUtils() {}
 
     /**
+     * Finds the field from the specified object's class
+     *
+     * @param object An object of the defining class
+     * @param field The field's name
+     */
+    public static Field findField(Object object, String field) {
+        return findField(object.getClass(), field);
+    }
+
+    /**
+     * Finds the field from the specified class
+     *
+     * @param clazz The defining class
+     * @param field The field's name
+     */
+    public static Field findField(Class<?> clazz, String field) {
+        return Arrays.stream(clazz.getDeclaredFields())
+                .filter(f -> f.getName().equals(field)).findFirst().orElse(null);
+    }
+
+    /**
      * Gets the value of a field from an Object
      *
      * @param object Object that field belongs to
@@ -40,10 +61,22 @@ public final class ReflectionUtils {
      * @return The value of the field
      */
     public static Object getField(Object object, String fieldName) {
-        Field field = Arrays.stream(object.getClass().getDeclaredFields())
-                .filter(f -> f.getName().equals(fieldName)).findFirst().orElse(null);
+        return getField(object, object.getClass(), fieldName);
+    }
 
-        return getField(object, field);
+    /**
+     * Gets the value of a field from an Object
+     *
+     * @param object Object that field belongs to
+     * @param clazz The class the field is being defined by
+     * @param fieldName Field that is being retrieved
+     * @return The value of the field
+     */
+    public static Object getField(Object object, Class<?> clazz, String fieldName) {
+        if (!clazz.isAssignableFrom(object.getClass()))
+            return null;
+
+        return getField(object, findField(clazz, fieldName));
     }
 
     /**
@@ -73,7 +106,23 @@ public final class ReflectionUtils {
      * @return true if setting the field was successful, false if otherwise
      */
     public static boolean setField(Object object, String fieldName, Object value) {
-        Field field = Arrays.stream(object.getClass().getDeclaredFields())
+        return setField(object, object.getClass(), fieldName, value);
+    }
+
+    /**
+     * Sets the value of a field in an object
+     *
+     * @param object The object that the field belongs to
+     * @param clazz The class that the field is defined by
+     * @param fieldName The name of the field being set
+     * @param value The value that the field is being set to
+     * @return true if setting the field was successful, false if otherwise
+     */
+    public static boolean setField(Object object, Class<?> clazz, String fieldName, Object value) {
+        if (!clazz.isAssignableFrom(object.getClass()))
+            return false;
+
+        Field field = Arrays.stream(clazz.getDeclaredFields())
                 .filter(f -> f.getName().equals(fieldName)).findFirst().orElse(null);
 
         return setField(object, field, value);
@@ -107,7 +156,7 @@ public final class ReflectionUtils {
      * @param parameters Paramaters of the method, as classes
      * @return The method, if found, null if not
      */
-    public static Method getMethod(Class<?> clazz, String name, Class<?>... parameters) {
+    public static Method findMethod(Class<?> clazz, String name, Class<?>... parameters) {
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().equals(name) && Arrays.deepEquals(method.getParameters(), parameters)) {
                 return method;
