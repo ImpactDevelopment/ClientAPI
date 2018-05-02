@@ -16,7 +16,9 @@
 
 package clientapi.value;
 
-import clientapi.util.ReflectionUtils;
+import clientapi.util.interfaces.Mutable;
+import clientapi.util.interfaces.impl.MergedMutable;
+import clientapi.util.interfaces.impl.MutableField;
 import clientapi.value.holder.ValueAccessor;
 
 import java.lang.reflect.Field;
@@ -24,8 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * The implementation of IValue
@@ -78,19 +78,9 @@ public class Value<T> implements IValue<T> {
     private final Field field;
 
     /**
-     * Whether or not to use direct calls to retrieve field values.
+     * A {@code Mutable} used to set/get this value.
      */
-    private final boolean direct;
-
-    /**
-     * Setter for this value's field. Should be {@code null} if direct is {@code false}
-     */
-    private final Consumer<Object> setter;
-
-    /**
-     * Getter for this value's field. Should be (@code null} if direct is {@code false}
-     */
-    private final Supplier<Object> getter;
+    private final Mutable<Object> mutable;
 
     public Value(String name, String parent, String id, String description, Object object, Field field) {
         // Value properties
@@ -104,9 +94,14 @@ public class Value<T> implements IValue<T> {
         this.field = field;
 
         // Accessor
-        this.direct = object instanceof ValueAccessor;
-        this.setter = direct ? ((ValueAccessor) object).getFieldSetter(field.getName()) : null;
-        this.getter = direct ? ((ValueAccessor) object).getFieldGetter(field.getName()) : null;
+        if (object instanceof ValueAccessor) {
+            this.mutable = new MergedMutable<>(
+                    ((ValueAccessor) object).getFieldSetter(field.getName()),
+                    ((ValueAccessor) object).getFieldGetter(field.getName())
+            );
+        } else {
+            this.mutable = new MutableField<>(object, field);
+        }
     }
 
     @Override
@@ -117,15 +112,12 @@ public class Value<T> implements IValue<T> {
     @SuppressWarnings("unchecked")
     @Override
     public T getValue() {
-        return (T) (direct ? getter.get() : ReflectionUtils.getField(object, field));
+        return (T) this.mutable.get();
     }
 
     @Override
     public void setValue(T value) {
-        if (direct)
-            setter.accept(value);
-        else
-            ReflectionUtils.setField(object, field, value);
+        this.mutable.accept(value);
     }
 
     @Override
