@@ -118,7 +118,7 @@ public abstract class MixinMinecraft implements IMinecraft {
             return;
 
         int button = Mouse.getEventButton();
-        if (button > 0 && MouseKeyTracker.INSTANCE.wasButtonPressed(button, Mouse.getEventButtonState())) {
+        if (button >= 0 && MouseKeyTracker.INSTANCE.wasButtonPressed(button, Mouse.getEventButtonState())) {
             ClientAPI.EVENT_BUS.post(new ClickEvent(button));
         }
     }
