@@ -16,20 +16,29 @@
 
 package clientapi.event.defaults.game.core;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
+
 /**
  * Called when a section is started in the profiler.
  *
  * @author Brady
  * @since 4/8/2017 12:00 PM
  */
-public final class ProfilerEvent {
+public class ProfilerEvent {
+
+    /**
+     * Array containing the current profiler sections
+     */
+    private static final List<String> SECTIONS = new ArrayList<>();
 
     /**
      * Complete current profiler section.
      *
      * ex) 'root.tick.render'
      */
-    private final String sectionPath;
+    private String sectionPath;
 
     /**
      * Current profiler section.
@@ -38,8 +47,7 @@ public final class ProfilerEvent {
      */
     private final String section;
 
-    public ProfilerEvent(String sectionPath, String section) {
-        this.sectionPath = sectionPath;
+    private ProfilerEvent(String section) {
         this.section = section;
     }
 
@@ -47,6 +55,13 @@ public final class ProfilerEvent {
      * @return The full profiler section
      */
     public final String getSectionPath() {
+        // If the section's path hasn't been created yet, create it.
+        if (sectionPath == null) {
+            StringJoiner joiner = new StringJoiner(".");
+            SECTIONS.forEach(joiner::add);
+            sectionPath = joiner.toString();
+        }
+
         return this.sectionPath;
     }
 
@@ -55,5 +70,22 @@ public final class ProfilerEvent {
      */
     public final String getSection() {
         return this.section;
+    }
+
+    public static final class Start extends ProfilerEvent {
+
+        public Start(String section) {
+            super(section);
+            SECTIONS.add(section);
+        }
+    }
+
+    public static final class End extends ProfilerEvent {
+
+        public End() {
+            super(SECTIONS.get(SECTIONS.size() - 1));
+            if (SECTIONS.size() > 0)
+                SECTIONS.remove(SECTIONS.size() - 1);
+        }
     }
 }
