@@ -20,7 +20,6 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.core.ProfilerEvent;
 import net.minecraft.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -32,10 +31,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Profiler.class)
 public class MixinProfiler {
 
-    @Shadow private String profilingSection;
-
     @Inject(method = "startSection", at = @At("HEAD"))
     private void startSection(String name, CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ProfilerEvent(profilingSection, name));
+        ClientAPI.EVENT_BUS.post(new ProfilerEvent.Start(name));
+    }
+
+    @Inject(method = "endSection", at = @At("HEAD"))
+    private void endSection(CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new ProfilerEvent.End());
     }
 }
