@@ -34,12 +34,12 @@ public final class MotionUpdateEvent implements Helper {
     /**
      * Position
      */
-    private static Vec3 pos = new Vec3();
+    private Vec3 pos = new Vec3();
 
     /**
      * Rotations
      */
-    private static Vec2 rotations = new Vec2();
+    private Vec2 rotations = new Vec2();
 
     /**
      * OnGround state
