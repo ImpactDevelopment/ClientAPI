@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.ImpactDevelopment:ClientAPI:@CAPI_VERSION@-dev'
+    deobfCompile 'com.github.ImpactDevelopment:ClientAPI:@CAPI_VERSION@-dev'
     compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
     compile 'net.jodah:typetools:@TT_VERSION@'
     compile 'org.luaj:luaj-jse:@LUAJ_VERSION@'
