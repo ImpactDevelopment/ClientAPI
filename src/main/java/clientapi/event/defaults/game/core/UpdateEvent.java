@@ -16,6 +16,7 @@
 
 package clientapi.event.defaults.game.core;
 
+import me.zero.alpine.type.Cancellable;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.entity.EntityPlayerSP;
 
@@ -27,7 +28,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
  * @author Brady
  * @since 2/8/2017 12:00 PM
  */
-public final class UpdateEvent {
+public final class UpdateEvent extends Cancellable {
 
     private final EventState state;
 
