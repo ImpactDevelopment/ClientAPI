@@ -20,6 +20,7 @@ import clientapi.load.mixin.extension.IEntity;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
+import me.zero.alpine.type.Cancellable;
 import me.zero.alpine.type.EventState;
 
 /**
@@ -29,7 +30,7 @@ import me.zero.alpine.type.EventState;
  * @author Brady
  * @since 2/12/2017 12:00 PM
  */
-public final class MotionUpdateEvent implements Helper {
+public final class MotionUpdateEvent extends Cancellable implements Helper {
 
     /**
      * Position
