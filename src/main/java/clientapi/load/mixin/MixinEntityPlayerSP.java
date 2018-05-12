@@ -50,9 +50,12 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
     private MotionUpdateEvent preMotionUpdateEvent;
 
-    @Inject(method = "onUpdate", at = @At("HEAD"))
+    @Inject(method = "onUpdate", at = @At("HEAD"), cancellable = true)
     private void onPreUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.PRE));
+        UpdateEvent preUpdateEvent = new UpdateEvent(EventState.PRE);
+        ClientAPI.EVENT_BUS.post(preUpdateEvent);
+        if (preUpdateEvent.isCancelled())
+            ci.cancel();
     }
 
     @Inject(method = "onUpdate", at = @At("RETURN"))
@@ -93,9 +96,11 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         this.connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
     }
 
-    @Inject(method = "onUpdateWalkingPlayer", at = @At("HEAD"))
+    @Inject(method = "onUpdateWalkingPlayer", at = @At("HEAD"), cancellable = true)
     private void onPreUpdateWalking(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(this.preMotionUpdateEvent = new MotionUpdateEvent(EventState.PRE));
+        if (this.preMotionUpdateEvent.isCancelled())
+            ci.cancel();
     }
 
     @Inject(method = "onUpdateWalkingPlayer", at = @At("RETURN"))
