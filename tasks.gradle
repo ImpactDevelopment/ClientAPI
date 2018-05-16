@@ -49,7 +49,7 @@ task('makeCDK', type: Zip) {
     into('gradle') { from 'gradle' }
 
     // Include the example code
-    into('src/main') { from 'src/test' }
+    into('src/main') { from 'src/example' }
 
     // Include everything in cdk, and replace any @TOKEN@s
     from('cdk') {
