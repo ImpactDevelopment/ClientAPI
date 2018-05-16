@@ -28,9 +28,9 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.MoverType;
+import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.util.math.AxisAlignedBB;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,7 +45,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityPlayerSP.class)
 public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
-    @Shadow @Final public NetHandlerPlayClient connection;
     @Shadow protected Minecraft mc;
 
     private MotionUpdateEvent preMotionUpdateEvent;
@@ -83,17 +82,13 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         super.move(type, event.getX(), event.getY(), event.getZ());
     }
 
-    @Inject(method = "sendChatMessage", at = @At(value = "HEAD"), cancellable = true)
-    private void sendChatMessage(String message, CallbackInfo ci) {
-        // Effectively overwrite the method
-        ci.cancel();
-
-        ChatEvent event = new ChatEvent.Send(message);
+    @Redirect(method = "sendChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/NetHandlerPlayClient;sendPacket(Lnet/minecraft/network/Packet;)V"))
+    private void sendChatPacket(NetHandlerPlayClient connection, Packet<?> packet) {
+        ChatEvent event = new ChatEvent.Send(((CPacketChatMessage) packet).getMessage());
         ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            return;
+        if (event.isCancelled()) return;
 
-        this.connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
+        connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
     }
 
     @Inject(method = "onUpdateWalkingPlayer", at = @At("HEAD"), cancellable = true)
