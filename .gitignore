@@ -5,6 +5,9 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 .idea/
+!/.idea/compiler.xml
+!/.idea/copyright/ClientAPI.xml
+!/.idea/copyright/profiles_settings.xml
 
 # Gradle:
 .gradle/
@@ -13,7 +16,6 @@ build/
 ### Intellij Patch ###
 *.iml
 modules.xml
-.idea/misc.xml
 *.ipr
 
 # IntelliJ
@@ -21,4 +23,3 @@ out/
 
 # ForgeGradle
 run/
-
