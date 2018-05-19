@@ -16,14 +16,12 @@
 
 package clientapi.event.defaults.game.render;
 
+import me.zero.alpine.type.EventState;
 import net.minecraft.client.gui.GuiScreen;
 
 /**
- * Called when a Gui Screen is displayed. The
- * screen can be overriden by using the
- * {@code setScreen(GuiScreen)} method, which
- * will completely override the screen that would've
- * been displayed.
+ * Called when a Gui Screen is displayed. The screen can be
+ * overriden by using the {@code setScreen(GuiScreen)} method.
  *
  * @author Brady
  * @since 2/23/2017 12:00 PM
@@ -31,11 +29,17 @@ import net.minecraft.client.gui.GuiScreen;
 public final class GuiDisplayEvent {
 
     /**
+     * The state of the event, whether or not it was invoked before or after the target.
+     */
+    private final EventState state;
+
+    /**
      * The GuiScreen being displayed
      */
     private GuiScreen screen;
 
-    public GuiDisplayEvent(GuiScreen screen) {
+    public GuiDisplayEvent(EventState state, GuiScreen screen) {
+        this.state = state;
         this.screen = screen;
     }
 
@@ -49,6 +53,13 @@ public final class GuiDisplayEvent {
     public GuiDisplayEvent setScreen(GuiScreen screen) {
         this.screen = screen;
         return this;
+    }
+
+    /**
+     * @return The state of this event
+     */
+    public final EventState getState() {
+        return this.state;
     }
 
     /**

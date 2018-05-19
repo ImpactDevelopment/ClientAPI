@@ -165,10 +165,15 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
-    private GuiScreen displayGuiScreen(GuiScreen screen) {
-        GuiDisplayEvent event = new GuiDisplayEvent(screen);
+    private GuiScreen displayGuiScreen$HEAD(GuiScreen screen) {
+        GuiDisplayEvent event = new GuiDisplayEvent(EventState.PRE, screen);
         ClientAPI.EVENT_BUS.post(event);
         return event.getScreen();
+    }
+
+    @Inject(method = "displayGuiScreen", at = @At("RETURN"))
+    private void displayGuiScreen$RETURN(GuiScreen screen, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new GuiDisplayEvent(EventState.POST, screen));
     }
 
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
