@@ -41,7 +41,7 @@ public class MixinNettyPacketDecoder {
 
     private PacketEvent.Decode event;
 
-    @Redirect(method = "decode", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/network/EnumConnectionState;getPacket(Lnet/minecraft/network/EnumPacketDirection;I)Lnet/minecraft/network/Packet;"))
+    @Redirect(method = "decode", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/EnumConnectionState;getPacket(Lnet/minecraft/network/EnumPacketDirection;I)Lnet/minecraft/network/Packet;"))
     private Packet<?> mutatePacket(EnumConnectionState state, EnumPacketDirection direction, int id) throws IllegalAccessException, InstantiationException {
         event = new PacketEvent.Decode(state.getPacket(direction, id), state);
         ClientAPI.EVENT_BUS.post(event);
