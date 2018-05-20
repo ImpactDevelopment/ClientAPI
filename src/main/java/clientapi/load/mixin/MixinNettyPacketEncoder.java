@@ -38,7 +38,7 @@ public class MixinNettyPacketEncoder {
 
     private PacketEvent event;
 
-    @ModifyArg(method = "encode", at = @At(value = "INVOKE_ASSIGN", target = "Lio/netty/util/Attribute;get()Ljava/lang/Object;", remap = false))
+    @ModifyArg(method = "encode", at = @At(value = "INVOKE", target = "Lio/netty/util/Attribute;get()Ljava/lang/Object;", remap = false))
     private Packet<?> mutatePacket(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out, CallbackInfo ci, EnumConnectionState state) {
         event = new PacketEvent.Encode(msg, state);
         ClientAPI.EVENT_BUS.post(event);
