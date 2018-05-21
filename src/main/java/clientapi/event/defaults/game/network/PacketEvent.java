@@ -87,9 +87,9 @@ public class PacketEvent extends Cancellable {
 
         private final EnumConnectionState state;
 
-        public Encode(Packet<?> packet, EnumConnectionState state) {
+        public Encode(Packet<?> packet) {
             super(packet);
-            this.state = state;
+            this.state = EnumConnectionState.getFromPacket(packet);
         }
 
         public final EnumConnectionState getDirection() {
