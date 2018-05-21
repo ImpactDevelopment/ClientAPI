@@ -26,7 +26,7 @@ import net.minecraft.network.Packet;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
@@ -38,9 +38,9 @@ public class MixinNettyPacketEncoder {
 
     private PacketEvent event;
 
-    @ModifyArg(method = "encode", at = @At(value = "INVOKE", target = "Lio/netty/util/Attribute;get()Ljava/lang/Object;", remap = false))
-    private Packet<?> mutatePacket(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out, CallbackInfo ci, EnumConnectionState state) {
-        event = new PacketEvent.Encode(msg, state);
+    @ModifyVariable(method = "encode", at = @At("HEAD"), index = 1, remap = false)
+    private Packet<?> mutatePacket(Packet<?> msg) {
+        event = new PacketEvent.Encode(msg);
         ClientAPI.EVENT_BUS.post(event);
         return event.getPacket();
     }
