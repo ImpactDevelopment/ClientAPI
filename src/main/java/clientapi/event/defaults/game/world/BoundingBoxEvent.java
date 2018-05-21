@@ -16,7 +16,6 @@
 
 package clientapi.event.defaults.game.world;
 
-import me.zero.alpine.type.Cancellable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -32,7 +31,7 @@ import java.util.List;
  * @author Brady
  * @since 4/10/2017 12:00 PM
  */
-public final class BoundingBoxEvent extends Cancellable {
+public final class BoundingBoxEvent {
 
     /**
      * The block itself
@@ -68,7 +67,8 @@ public final class BoundingBoxEvent extends Cancellable {
     }
 
     /**
-     * Sets the block's bounding box
+     * Sets the block's bounding box. Setting it to
+     * {@code null} will effectively cancel the call.
      *
      * @param aabb New bounding box
      * @return This event
