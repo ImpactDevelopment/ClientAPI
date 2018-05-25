@@ -158,7 +158,7 @@ public final class ReflectionUtils {
      */
     public static Method findMethod(Class<?> clazz, String name, Class<?>... parameters) {
         for (Method method : clazz.getDeclaredMethods()) {
-            if (method.getName().equals(name) && Arrays.deepEquals(method.getParameters(), parameters)) {
+            if (method.getName().equals(name) && Arrays.deepEquals(method.getParameterTypes(), parameters)) {
                 return method;
             }
         }

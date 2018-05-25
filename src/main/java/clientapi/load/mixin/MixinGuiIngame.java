@@ -26,12 +26,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.lib.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 
 /**
  * @author Brady
@@ -116,14 +117,14 @@ public class MixinGuiIngame {
             gui.drawTexturedModalRect(x, y, textureX, textureY, width, height);
     }
 
-    @Redirect(method = "renderAttackIndicator", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = Opcodes.GETFIELD))
+    @Redirect(method = "renderAttackIndicator", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = GETFIELD))
     private int renderAttackIndicator$attackIndicator(GameSettings gameSettings) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.ATTACK_INDICATOR);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? 0 : gameSettings.attackIndicator;
     }
 
-    @Redirect(method = "renderHotbar", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = Opcodes.GETFIELD))
+    @Redirect(method = "renderHotbar", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = GETFIELD))
     private int renderHotbar$attackIndicator(GameSettings gameSettings) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.ATTACK_INDICATOR);
         ClientAPI.EVENT_BUS.post(event);
