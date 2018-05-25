@@ -44,9 +44,9 @@ import static net.minecraft.block.material.Material.WATER;
 public class MixinEntityRenderer {
 
     @Inject(method = "getFOVModifier", at = @At("HEAD"), cancellable = true)
-    private void getFOVModifier(float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Float> ci) {
+    private void getFOVModifier(float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Float> cir) {
         if (Camera.isCapturing())
-            ci.setReturnValue(90.0F);
+            cir.setReturnValue(90.0F);
     }
 
     @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=gui" }))

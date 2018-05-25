@@ -46,11 +46,11 @@ public abstract class MixinBlock {
     private BoundingBoxEvent bbEvent;
 
     @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
-    private void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> ci) {
+    private void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> cir) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
-            ci.setReturnValue(false);
+            cir.setReturnValue(false);
     }
 
     @Inject(method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
