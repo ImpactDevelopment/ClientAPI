@@ -48,17 +48,19 @@ public final class ClientTransformer implements IClassTransformer {
         List<ITransformer> transformers = getTransformers(transformedName);
 
         if (!transformers.isEmpty()) {
-            ClassNode cn = getClassNode(basicClass);
-            if (cn == null)
-                return basicClass;
+            try {
+                ClassNode cn = getClassNode(basicClass);
+                if (cn == null)
+                    return basicClass;
 
-            // Run all transformers on the Class
-            transformers.forEach(transformer -> transformer.transform(cn));
+                // Run all transformers on the Class
+                transformers.forEach(transformer -> transformer.transform(cn));
 
-            // Return transformed class bytecode
-            ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-            cn.accept(cw);
-            return cw.toByteArray();
+                // Return transformed class bytecode
+                ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+                cn.accept(cw);
+                return cw.toByteArray();
+            } catch (Exception ignored) {}
         }
 
         return basicClass;
