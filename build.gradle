@@ -136,7 +136,7 @@ def pomConfig = {
         developer {
             id 'brady'
             name 'Brady'
-            email 'zeromemes@users.noreply.github.com'
+            email 'zeromemesdev@gmail.com'
         }
         developer {
             id 'leaf'
