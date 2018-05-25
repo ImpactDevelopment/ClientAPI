@@ -41,10 +41,11 @@ public final class TeamColorEvent extends Cancellable {
     /**
      * The color of the entity.
      */
-    private int color = 0xFFFFFFFF;
+    private int color;
 
-    public TeamColorEvent(Entity entity) {
+    public TeamColorEvent(Entity entity, int color) {
         this.entity = entity;
+        this.color = color;
     }
 
     /**
