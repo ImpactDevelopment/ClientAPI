@@ -17,6 +17,7 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
+import clientapi.event.defaults.game.render.HudOverlayEvent;
 import clientapi.event.defaults.game.render.ItemRenderEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -37,6 +38,14 @@ public abstract class MixinItemRenderer {
     @Inject(method = "renderItemInFirstPerson(Lnet/minecraft/client/entity/AbstractClientPlayer;FFLnet/minecraft/util/EnumHand;FLnet/minecraft/item/ItemStack;F)V", at = @At("HEAD"), cancellable = true)
     private void renderItemInFirstPerson(AbstractClientPlayer p_187457_1_, float p_187457_2_, float p_187457_3_, EnumHand p_187457_4_, float p_187457_5_, ItemStack p_187457_6_, float p_187457_7_, CallbackInfo ci) {
         ItemRenderEvent event = new ItemRenderEvent((ItemRenderer) (Object) this, p_187457_2_, p_187457_4_, p_187457_5_, p_187457_6_, p_187457_7_);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled())
+            ci.cancel();
+    }
+
+    @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)
+    private void renderFireInFirstPerson(CallbackInfo ci) {
+        HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.FIRE);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
