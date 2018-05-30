@@ -33,9 +33,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RenderManager.class)
 public class MixinRenderManager {
 
-    @Redirect(method = "doRenderEntity(Lnet/minecraft/entity/Entity;DDDFFZ)V", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/entity/Render.doRender(Lnet/minecraft/entity/Entity;DDDFF)V"))
+    @Redirect(method = "renderEntity(Lnet/minecraft/entity/Entity;DDDFFZ)V", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/entity/Render.doRender(Lnet/minecraft/entity/Entity;DDDFF)V"))
     @SuppressWarnings("unchecked")
-    private void doRenderEntity$doRender(Render render, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    private void renderEntity$doRender(Render render, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
         EntityRenderEvent event = new EntityRenderEvent(EventState.PRE, render, entity, x, y, z, entityYaw, partialTicks);
         ClientAPI.EVENT_BUS.post(event);
         if (!event.isCancelled())
