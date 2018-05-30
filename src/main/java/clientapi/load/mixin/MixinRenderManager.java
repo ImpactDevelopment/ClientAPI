@@ -24,7 +24,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * @author Brady
@@ -33,14 +35,24 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RenderManager.class)
 public class MixinRenderManager {
 
-    @Redirect(method = "renderEntity(Lnet/minecraft/entity/Entity;DDDFFZ)V", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/entity/Render.doRender(Lnet/minecraft/entity/Entity;DDDFF)V"))
-    @SuppressWarnings("unchecked")
-    private void renderEntity$doRender(Render render, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        EntityRenderEvent event = new EntityRenderEvent(EventState.PRE, render, entity, x, y, z, entityYaw, partialTicks);
-        ClientAPI.EVENT_BUS.post(event);
-        if (!event.isCancelled())
-            render.doRender(entity, x, y, z, entityYaw, partialTicks);
+    @Inject(
+            method = "renderEntity",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/renderer/entity/Render.setRenderOutlines(Z)V"),
+            locals = LocalCapture.CAPTURE_FAILHARD,
+            cancellable = true
+    )
+    private void preRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
+        EntityRenderEvent entityRenderEvent = new EntityRenderEvent(EventState.PRE, render, entityIn, x, y, z, yaw, partialTicks);
+        ClientAPI.EVENT_BUS.post(entityRenderEvent);
+        if (entityRenderEvent.isCancelled()) {
+            ci.cancel();
+        }
+    }
 
-        ClientAPI.EVENT_BUS.post(new EntityRenderEvent(EventState.POST, render, entity, x, y, x, entityYaw, partialTicks));
+    @Inject(method = "renderEntity", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
+    private void postRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
+        ClientAPI.EVENT_BUS.post(new EntityRenderEvent(EventState.POST, render, entityIn, x, y, z, yaw, partialTicks));
     }
 }
