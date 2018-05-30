@@ -47,8 +47,8 @@ public final class Aura extends Module implements ICombat {
        switch (event.getState()) {
            case PRE : {
                List<Entity> entities = mc.world.loadedEntityList.stream().filter(e ->
-                       e instanceof EntityLivingBase && !e.isDead && e != mc.player && e.getDistanceToEntity(mc.player) < 4.25)
-                       .sorted(Comparator.comparingDouble(e -> mc.player.getDistanceToEntity(e)))
+                       e instanceof EntityLivingBase && !e.isDead && e != mc.player && e.getDistance(mc.player) < 4.25)
+                       .sorted(Comparator.comparingDouble(e -> mc.player.getDistance(e)))
                        .collect(Collectors.toList());
                if (entities.size() > 0) {
                    target = entities.get(0);
