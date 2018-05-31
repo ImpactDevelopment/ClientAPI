@@ -326,14 +326,12 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
 
     @Override
     public final void removeTag(String id) {
-        Tag tag;
-        if ((tag = getTag(id).orElse(null)) != null)
-            tags.remove(tag);
+        getTag(id).ifPresent(tags::remove);
     }
 
     @Override
     public final boolean hasTag(String id) {
-        return getTag(id) != null;
+        return getTag(id).isPresent();
     }
 
     @Override
