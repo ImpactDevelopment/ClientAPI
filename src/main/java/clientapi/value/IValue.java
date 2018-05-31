@@ -49,6 +49,13 @@ public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHo
     void setValue(T value);
 
     /**
+     * Adds a change listener to this value
+     *
+     * @param listener The change listener
+     */
+    void addChangeListener(ValueChangeListener<T> listener);
+
+    /**
      * Intended to be used with flatMap() to flatten the IValue tree recursively
      * @param value the root node of the tree
      * @return the flattened tree as a stream
