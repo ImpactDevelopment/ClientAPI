@@ -20,6 +20,7 @@ import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Nameable;
 import clientapi.value.holder.IValueHolder;
+import me.zero.alpine.type.EventState;
 
 import java.util.stream.Stream;
 
@@ -49,11 +50,18 @@ public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHo
     void setValue(T value);
 
     /**
-     * Adds a change listener to this value
+     * Adds a change listener to this value, defaulting to EventState.PRE
      *
      * @param listener The change listener
      */
     void addChangeListener(ValueChangeListener<T> listener);
+
+    /**
+     * Adds a change listener to this value
+     *
+     * @param listener The change listener
+     */
+    void addChangeListener(EventState state, ValueChangeListener<T> listener);
 
     /**
      * Intended to be used with flatMap() to flatten the IValue tree recursively

@@ -20,6 +20,7 @@ import clientapi.util.interfaces.Mutable;
 import clientapi.util.interfaces.impl.MergedMutable;
 import clientapi.util.interfaces.impl.MutableField;
 import clientapi.value.holder.ValueAccessor;
+import me.zero.alpine.type.EventState;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class Value<T> implements IValue<T> {
     /**
      * A list of all of the {@code ValueChangeListeners} waiting for this value to change
      */
-    private final List<ValueChangeListener<T>> valueChangeListeners = new ArrayList<>();
+    private final Map<EventState, List<ValueChangeListener<T>>> valueChangeListeners = new HashMap<>();
 
     /**
      * Name of the Value
@@ -107,6 +108,11 @@ public class Value<T> implements IValue<T> {
         } else {
             this.mutable = new MutableField<>(object, field);
         }
+
+        // Listeners
+        for (EventState state : EventState.values()) {
+            valueChangeListeners.put(state, new ArrayList<>());
+        }
     }
 
     @Override
@@ -122,15 +128,23 @@ public class Value<T> implements IValue<T> {
 
     @Override
     public void setValue(T value) {
-        // Notify all of the change listeners of the new change of state
-        this.valueChangeListeners.forEach(listener -> listener.onValueChanged(this, this.getValue(), value));
+        T oldValue = this.getValue();
+        // Notify all PRE change listeners
+        this.valueChangeListeners.get(EventState.PRE).forEach(listener -> listener.onValueChanged(this, oldValue, value));
         // Pass the new value to the change function
         this.mutable.accept(value);
+        // Nofify all POST change listeners
+        this.valueChangeListeners.get(EventState.POST).forEach(listener -> listener.onValueChanged(this, oldValue, value));
     }
 
     @Override
     public void addChangeListener(ValueChangeListener<T> listener) {
-        this.valueChangeListeners.add(listener);
+        this.addChangeListener(EventState.PRE, listener);
+    }
+
+    @Override
+    public void addChangeListener(EventState state, ValueChangeListener<T> listener) {
+        this.valueChangeListeners.get(state).add(listener);
     }
 
     @Override
