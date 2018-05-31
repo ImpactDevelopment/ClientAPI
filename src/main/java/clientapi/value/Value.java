@@ -48,6 +48,11 @@ public class Value<T> implements IValue<T> {
     private final Map<String, IValue> valueCache = new HashMap<>();
 
     /**
+     * A list of all of the {@code ValueChangeListeners} waiting for this value to change
+     */
+    private final List<ValueChangeListener<T>> valueChangeListeners = new ArrayList<>();
+
+    /**
      * Name of the Value
      */
     private final String name;
@@ -117,7 +122,15 @@ public class Value<T> implements IValue<T> {
 
     @Override
     public void setValue(T value) {
+        // Notify all of the change listeners of the new change of state
+        this.valueChangeListeners.forEach(listener -> listener.onValueChanged(this, this.getValue(), value));
+        // Pass the new value to the change function
         this.mutable.accept(value);
+    }
+
+    @Override
+    public void addChangeListener(ValueChangeListener<T> listener) {
+        this.valueChangeListeners.add(listener);
     }
 
     @Override
