@@ -23,5 +23,13 @@ package clientapi.value;
 @FunctionalInterface
 public interface ValueChangeListener<T> {
 
+    /**
+     * Called when the value, identified by the first parameter,
+     * has a change in it's inner-value.
+     *
+     * @param value The value that has changed
+     * @param oldValue The old inner-value
+     * @param newValue The new inner-value
+     */
     void onValueChanged(Value<T> value, T oldValue, T newValue);
 }
