@@ -4,6 +4,7 @@
 - Added flatten method to IValue
 - Added an EventState to GuiDisplayEvent
 ### Changed
+- Mixins are now only applied client-side
 - Made MotionUpdateEvent cancellable
 - Made UpdateEvent cancellable
 ### Fixed
