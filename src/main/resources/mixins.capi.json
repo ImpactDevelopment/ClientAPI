@@ -4,7 +4,7 @@
   "refmap": "mixins.capi.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "verbose": false,
-  "mixins": [
+  "client": [
     "MixinBlock",
     "MixinEntity",
     "MixinEntityLivingBase",
