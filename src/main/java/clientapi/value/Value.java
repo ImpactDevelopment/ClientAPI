@@ -138,11 +138,6 @@ public class Value<T> implements IValue<T> {
     }
 
     @Override
-    public void addChangeListener(ValueChangeListener<T> listener) {
-        this.addChangeListener(EventState.PRE, listener);
-    }
-
-    @Override
     public void addChangeListener(EventState state, ValueChangeListener<T> listener) {
         this.valueChangeListeners.get(state).add(listener);
     }
