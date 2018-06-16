@@ -8,7 +8,7 @@
 - Made MotionUpdateEvent cancellable
 - Made UpdateEvent cancellable
 ### Fixed
-- CommandHandler opening chat when the ingameGui is null
+- CommandHandler opening chat when not in a world
 - Fixed left click events not firing
 - Fixed CDK ClientAPI dependency not deobfuscating srg names
 - Fixed CDK version having quotes by default
