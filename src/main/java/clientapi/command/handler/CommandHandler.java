@@ -91,7 +91,7 @@ public final class CommandHandler implements Helper {
     @EventHandler
     private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
         // Check if opening chat with the prefix is supported
-        if (!openChat || prefix == null)
+        if (!openChat || prefix == null || mc.ingameGUI == null)
             return;
 
         // Ensure the prefix is a single character
