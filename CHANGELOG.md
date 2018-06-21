@@ -1,4 +1,4 @@
-## Unreleased
+## 3.0.1
 ### Added
 - Added ability to toggle the event bus post method
 - Added flatten method to IValue
