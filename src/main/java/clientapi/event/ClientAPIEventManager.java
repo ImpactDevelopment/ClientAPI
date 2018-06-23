@@ -40,7 +40,7 @@ public final class ClientAPIEventManager extends EventManager {
 
     @Override
     public final void post(Object event) {
-        if (enabled) {
+        if (enabled && event != null) {
             super.post(event);
         }
     }
