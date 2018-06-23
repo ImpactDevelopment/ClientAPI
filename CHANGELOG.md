@@ -1,3 +1,7 @@
+## 3.0.2
+### Fixed
+- Event Manager accepting ``null`` events
+
 ## 3.0.1
 ### Added
 - Added ability to toggle the event bus post method
