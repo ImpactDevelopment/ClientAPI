@@ -79,7 +79,7 @@ public class MixinEntityRenderer {
 
         HudOverlayEvent event = new HudOverlayEvent(m == WATER ? HudOverlayEvent.Type.WATER : HudOverlayEvent.Type.LAVA);
         ClientAPI.EVENT_BUS.post(event);
-        if (!event.isCancelled())
+        if (event.isCancelled())
             return AIR;
 
         return m;
