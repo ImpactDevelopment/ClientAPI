@@ -114,6 +114,9 @@ minecraft {
     tweakClass = 'clientapi.load.ClientTweaker'
     runDir = 'run'
 
+    // Experimental mappings injection
+    mappingInjectionUrl = 'https://raw.githubusercontent.com/ImpactDevelopment/1.13-MCP-Mappings/master/mappings'
+
     // The sources jar should use SRG names not MCP to ensure compatibility with all mappings
     makeObfSourceJar = true
 }
