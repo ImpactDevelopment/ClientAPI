@@ -281,7 +281,7 @@ public final class EntityFilters implements Helper {
         {
             Village village = e.getVillage();
             // noinspection ConstantConditions
-            if (village != null && village.isPlayerReputationTooLow(mc.player.func_200200_C_().getString()))
+            if (village != null && village.isPlayerReputationTooLow(mc.player.getName().getString()))
                 return true;
         }
 

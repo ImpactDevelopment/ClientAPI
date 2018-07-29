@@ -35,8 +35,8 @@ public abstract class MixinBlock {
 
     private BoundingBoxEvent bbEvent;
 
-    @Inject(method = "func_200293_a", at = @At("HEAD"), cancellable = true)
-    private void canCollideCheck(IBlockState state, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isCollidable(Lnet/minecraft/block/state/IBlockState;)Z", at = @At("HEAD"), cancellable = true)
+    private void isCollidable(IBlockState state, CallbackInfoReturnable<Boolean> cir) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

@@ -34,11 +34,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MouseHelper.class)
 public class MixinMouseHelper {
 
-    @Shadow @Final private Minecraft field_198036_a;
+    @Shadow @Final private Minecraft mc;
 
-    @Inject(method = "func_198023_a", at = @At("HEAD"))
-    private void onCharEvent(long windowPointer, int button, int action, int modifiers, CallbackInfo ci) {
-        if (windowPointer != field_198036_a.field_195558_d.func_198092_i() || field_198036_a.currentScreen != null)
+    @Inject(method = "onButtonEvent", at = @At("HEAD"))
+    private void onButtonEvent(long windowPointer, int button, int action, int modifiers, CallbackInfo ci) {
+        if (windowPointer != mc.mainWindow.getWindowPointer() || mc.currentScreen != null)
             return;
 
         ClientAPI.EVENT_BUS.post(new ClickEvent(button, action, modifiers));

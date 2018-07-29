@@ -59,7 +59,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
     }
 
     @SuppressWarnings("AmbiguousMixinReference")
-    @Redirect(method = "func_201058_a(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V"))
+    @Redirect(method = "sendPacket(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V"))
     private void sendPacket$dispatchPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>> futureListeners) {
         PacketEvent event = new PacketEvent.Send(packetIn);
         ClientAPI.EVENT_BUS.post(event);
@@ -70,7 +70,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
     }
 
     @SuppressWarnings("AmbiguousMixinReference")
-    @Redirect(method = "func_201058_a(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"))
+    @Redirect(method = "sendPacket(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"))
     private boolean sendPacket$isChannelOpen(NetworkManager networkManager) {
         return this.sendPackets && networkManager.isChannelOpen();
     }

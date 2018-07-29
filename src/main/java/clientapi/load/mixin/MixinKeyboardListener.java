@@ -35,16 +35,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(KeyboardListener.class)
 public class MixinKeyboardListener {
 
-    @Shadow @Final private Minecraft field_197972_a;
+    @Shadow @Final private Minecraft mc;
 
-    @Inject(method = "func_197961_a", at = @At(value = "INVOKE", target = "net/minecraft/client/util/InputMappings.func_197956_a(I)Z", ordinal = 4))
+    @Inject(method = "onKeyEvent", at = @At(value = "INVOKE", target = "net/minecraft/client/util/InputMappings.isKeyDown(I)Z", ordinal = 4))
     private void onKeyEvent(long windowPointer, int keyCode, int scanCode, int action, int modifiers, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new KeyEvent(keyCode, action, modifiers));
     }
 
-    @Inject(method = "func_197963_a", at = @At("HEAD"))
+    @Inject(method = "onCharEvent", at = @At("HEAD"))
     private void onCharEvent(long windowPointer, int codePoint, int modifiers, CallbackInfo ci) {
-        if (windowPointer != field_197972_a.field_195558_d.func_198092_i() || field_197972_a.currentScreen != null)
+        if (windowPointer != mc.mainWindow.getWindowPointer() || mc.currentScreen != null)
             return;
 
         if (Character.charCount(codePoint) == 1) {

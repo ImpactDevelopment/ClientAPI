@@ -36,13 +36,13 @@ public final class RenderHudEvent extends RenderEvent {
      * @return The scaled width of the screen
      */
     public final int getScaledWidth() {
-        return mc.field_195558_d.func_198107_o();
+        return mc.mainWindow.getScaledWidth();
     }
 
     /**
      * @return The scaled height of the screen
      */
     public final int getScaledHeight() {
-        return mc.field_195558_d.func_198087_p();
+        return mc.mainWindow.getScaledHeight();
     }
 }

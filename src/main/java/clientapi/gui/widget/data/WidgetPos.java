@@ -54,8 +54,8 @@ public interface WidgetPos extends Helper {
      * @return The screen pos
      */
     default Vec2 getScreenPos() {
-        float screenX = getPos().getX() * mc.field_195558_d.func_198107_o();
-        float screenY = getPos().getY() * mc.field_195558_d.func_198087_p();
+        float screenX = getPos().getX() * mc.mainWindow.getScaledWidth();
+        float screenY = getPos().getY() * mc.mainWindow.getScaledHeight();
         return new Vec2(screenX, screenY);
     }
 

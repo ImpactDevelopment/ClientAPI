@@ -84,12 +84,12 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(new TickEvent(EventState.POST));
     }
 
-    @Inject(method = "func_195542_b", at = @At("HEAD"))
+    @Inject(method = "runGameLoop", at = @At("HEAD"))
     private void preRunGameLoop(boolean p_195542_1_, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.PRE));
     }
 
-    @Inject(method = "func_195542_b", at = @At("RETURN"))
+    @Inject(method = "runGameLoop", at = @At("RETURN"))
     private void postRunGameLoop(boolean p_195542_1_, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.POST));
     }
@@ -147,7 +147,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(new GuiDisplayEvent(EventState.POST, screen));
     }
 
-    @Inject(method = "func_205055_a(Lnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/gui/GuiScreen;)V", at = @At("HEAD"))
+    @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/gui/GuiScreen;)V", at = @At("HEAD"))
     private void loadWorld(@Nullable WorldClient worldClientIn, GuiScreen loadingScreen, CallbackInfo ci) {
         // If the world is null, then it must be unloading
         if (worldClientIn != null)

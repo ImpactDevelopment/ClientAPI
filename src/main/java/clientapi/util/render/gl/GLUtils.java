@@ -142,7 +142,7 @@ public final class GLUtils implements Helper {
     public static Vec3 toScreen(double x, double y, double z) {
         boolean result = Project.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_SCREEN_BUFFER.clear());
         if (result) {
-            return new Vec3(TO_SCREEN_BUFFER.get(0), mc.field_195558_d.func_198083_n() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
+            return new Vec3(TO_SCREEN_BUFFER.get(0), mc.mainWindow.getWindowHeight() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
         }
         return null;
     }

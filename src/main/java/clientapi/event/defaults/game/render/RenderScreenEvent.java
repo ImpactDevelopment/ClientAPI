@@ -49,8 +49,8 @@ public final class RenderScreenEvent extends RenderEvent {
 
     public RenderScreenEvent(float partialTicks) {
         super(partialTicks);
-        this.width = mc.field_195558_d.func_198105_m();
-        this.height = mc.field_195558_d.func_198083_n();
+        this.width = mc.mainWindow.getWindowWidth();
+        this.height = mc.mainWindow.getWindowHeight();
         this.guiHidden = mc.gameSettings.hideGUI;
     }
 

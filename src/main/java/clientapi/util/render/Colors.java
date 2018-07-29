@@ -65,7 +65,7 @@ public final class Colors implements Helper {
      * @return Hex corresponding to color code
      */
     public static int getColor(char cc) {
-        TextFormatting textFormatting = TextFormatting.func_211165_a(cc);
+        TextFormatting textFormatting = TextFormatting.fromFormattingCode(cc);
         return textFormatting == null ? getColor(TextFormatting.WHITE) : getColor(textFormatting);
     }
 

@@ -50,7 +50,7 @@ public interface PlayerSender extends CommandSender {
 
         @Override
         public final String getName() {
-            return this.player.func_200200_C_().getString();
+            return this.player.getName().getString();
         }
     }
 }

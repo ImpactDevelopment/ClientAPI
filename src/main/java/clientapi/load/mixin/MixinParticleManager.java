@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ParticleManager.class)
 public class MixinParticleManager {
 
-    @Inject(method = "func_199280_a", at = @At("HEAD"))
+    @Inject(method = "spawnEffectParticle", at = @At("HEAD"))
     private void spawnEffectParticle(IParticleData particleData, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, CallbackInfoReturnable<Particle> cir) {
         SpawnParticleEvent event = new SpawnParticleEvent(particleData, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         ClientAPI.EVENT_BUS.post(event);
