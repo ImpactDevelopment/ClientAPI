@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiIngameMenu.class)
 public class MixinGuiIngameMenu {
 
-    @Inject(method = "actionPerformed", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/client/Minecraft.loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V"))
+    @Inject(method = "initGui", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/client/Minecraft.loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V"))
     private void postLoadWorld(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));
     }

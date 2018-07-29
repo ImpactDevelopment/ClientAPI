@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.render;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.particles.IParticleData;
 
 /**
  * Called when {@code ParticleManager#spawnEffectParticle} is invoked.
@@ -31,7 +32,7 @@ public final class SpawnParticleEvent extends Cancellable {
     /**
      * The Particle ID of the particle being spawned
      */
-    private final int particleID;
+    private final IParticleData particleData;
 
     /**
      * The X coordinate of the particle being spawned
@@ -63,8 +64,8 @@ public final class SpawnParticleEvent extends Cancellable {
      */
     private final double speedZ;
 
-    public SpawnParticleEvent(int particleID, double x, double y, double z, double speedX, double speedY, double speedZ) {
-        this.particleID = particleID;
+    public SpawnParticleEvent(IParticleData particleData, double x, double y, double z, double speedX, double speedY, double speedZ) {
+        this.particleData = particleData;
         this.x = x;
         this.y = y;
         this.z = z;
@@ -76,8 +77,8 @@ public final class SpawnParticleEvent extends Cancellable {
     /**
      * @return The Particle ID of the particle being spawned
      */
-    public final int getParticleID() {
-        return this.particleID;
+    public final IParticleData getParticleData() {
+        return this.particleData;
     }
 
     /**

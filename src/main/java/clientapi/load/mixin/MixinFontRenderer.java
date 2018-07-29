@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(FontRenderer.class)
 public abstract class MixinFontRenderer {
 
-    @ModifyVariable(method = "renderStringAtPos", at = @At("HEAD"))
+    @ModifyVariable(method = "func_211843_b", at = @At("HEAD"))
     private String renderStringAtPos(String text) {
         TextEvent event = new TextEvent(text);
         ClientAPI.EVENT_BUS.post(event);

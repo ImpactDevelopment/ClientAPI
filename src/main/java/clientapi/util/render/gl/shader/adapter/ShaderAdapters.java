@@ -16,7 +16,7 @@
 
 package clientapi.util.render.gl.shader.adapter;
 
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GL;
 
 /**
  * Used to retrieve the system shader adapter instance
@@ -37,7 +37,7 @@ public final class ShaderAdapters {
         // Check if OpenGL 2.0 and OpenGL 3.2 are supported by the machine
         // If 3.2 is supported, 2.0 should be too, but we have 2 checks here
         // just to be safe.
-        if (GLContext.getCapabilities().OpenGL20 && GLContext.getCapabilities().OpenGL32)
+        if (GL.getCapabilities().OpenGL20 && GL.getCapabilities().OpenGL32)
             systemDefault = new GL20ShaderAdapter();
         else
             systemDefault = new ARBShaderAdapter();

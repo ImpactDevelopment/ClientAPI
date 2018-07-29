@@ -17,18 +17,13 @@
 package clientapi.event.handle;
 
 import clientapi.event.defaults.game.core.KeyEvent;
-import clientapi.event.defaults.game.core.KeyUpEvent;
-import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.io.Keybind;
-import clientapi.util.render.camera.CameraManager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zero.alpine.type.EventPriority;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.stream.Stream;
-
-import static org.lwjgl.input.Keyboard.KEY_NONE;
 
 /**
  * Some basic events that the client uses
@@ -41,33 +36,32 @@ public enum ClientHandler implements Helper {
     INSTANCE;
 
     /**
-     * Handles camera updates
-     */
-    @EventHandler
-    private final Listener<RenderHudEvent> render2DListener = new Listener<>(event ->
-            CameraManager.getInstance().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
-
-    /**
      * Handles keybinds
      */
     @EventHandler
     private final Listener<KeyEvent> keyListener = new Listener<>(event -> {
-        // Get all matching keybinds
-        Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
-                .filter(bind -> bind.getKey() != KEY_NONE && bind.getKey() == event.getKey());
+        System.out.println("KeyEvent {" + event.getKey() + " " + event.getAction() + " " + event.getModifiers() + " }");
+        switch (event.getAction()) {
+            case GLFW.GLFW_PRESS: {
+                // Get all matching keybinds
+                Stream<Keybind> keybinds = Keybind.getKeybinds().stream()
+                        .filter(bind -> bind.getKey() != GLFW.GLFW_KEY_UNKNOWN && bind.getKey() == event.getKey());
 
-        // Run onPress for all matching keybinds
-        // and onClick for the toggle keybinds
-        keybinds.forEach(keybind -> {
-            keybind.onPress();
-            if (keybind.getType() == Keybind.Type.TOGGLE)
-                keybind.onClick();
-        });
-    }, EventPriority.LOWEST, e -> !e.isCancelled());
-
-    @EventHandler
-    private final Listener<KeyUpEvent> keyUpListener = new Listener<>(event ->
-            Keybind.getKeybinds().stream()
-                    .filter(bind -> bind.getKey() == event.getKey())
-                    .forEach(Keybind::onRelease));
+                // Run onPress for all matching keybinds
+                // and onClick for the toggle keybinds
+                keybinds.forEach(keybind -> {
+                    keybind.onPress();
+                    if (keybind.getType() == Keybind.Type.TOGGLE)
+                        keybind.onClick();
+                });
+                break;
+            }
+            case GLFW.GLFW_RELEASE: {
+                Keybind.getKeybinds().stream()
+                        .filter(bind -> bind.getKey() == event.getKey())
+                        .forEach(Keybind::onRelease);
+                break;
+            }
+        }
+    });
 }

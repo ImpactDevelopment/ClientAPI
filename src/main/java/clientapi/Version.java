@@ -30,7 +30,7 @@ public final class Version {
     /**
      * Incremented when a new version of Minecraft is released, never reset
      */
-    public static final int MAJOR = 3;
+    public static final int MAJOR = 4;
 
     /**
      * Incremented when API-breaking changes are made, reset when major version is modified
@@ -40,7 +40,7 @@ public final class Version {
     /**
      * Incremented every release, reset when the minor version is modified
      */
-    public static final int PATCH = 2;
+    public static final int PATCH = 0;
 
     /**
      * @return The version formatted as {@code MAJOR.MINOR.PATCH}

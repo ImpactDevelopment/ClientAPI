@@ -21,20 +21,10 @@ import clientapi.event.defaults.game.world.BlockCollisionEvent;
 import clientapi.event.defaults.game.world.BoundingBoxEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 /**
  * @author Brady
@@ -45,14 +35,17 @@ public abstract class MixinBlock {
 
     private BoundingBoxEvent bbEvent;
 
-    @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
-    private void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "func_200293_a", at = @At("HEAD"), cancellable = true)
+    private void canCollideCheck(IBlockState state, CallbackInfoReturnable<Boolean> cir) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             cir.setReturnValue(false);
     }
 
+    // TODO: Reverse VoxelShape and all of that shenanigans to fix this!
+
+    /*
     @Inject(method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
             at = @At("HEAD"))
     private void addCollisionBox(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState, CallbackInfo ci) {
@@ -74,4 +67,5 @@ public abstract class MixinBlock {
             return bb;
         }
     }
+    */
 }

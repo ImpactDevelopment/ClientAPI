@@ -19,15 +19,10 @@ package me.zero.example;
 import clientapi.Client;
 import clientapi.ClientInfo;
 import clientapi.command.Command;
-import clientapi.lua.LuaHandler;
-import clientapi.lua.LuaScript;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
-import clientapi.util.io.StreamReader;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
-
-import javax.script.ScriptException;
 
 /**
  * @author Brady
@@ -53,16 +48,6 @@ public final class ExampleClient extends Client {
         // Init and load command manager
         commandManager = new ExampleCommandManager();
         commandManager.load();
-
-        // Setup example script
-        String scriptSource = new StreamReader(ExampleClient.class.getResourceAsStream("/lua/example.lua")).all();
-        LuaScript script = LuaHandler.getHandler().createScript(scriptSource);
-        try {
-            script.compile();
-            script.exec();
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        }
     }
 
     public final String getName() {

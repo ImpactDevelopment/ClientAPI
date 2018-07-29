@@ -60,7 +60,7 @@ public class ChatEvent extends Cancellable {
      * @return The raw message, unformatted text component
      */
     public final String getRawMessage() {
-        return this.message.getUnformattedText();
+        return this.message.getString();
     }
 
     /**

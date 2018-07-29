@@ -21,9 +21,6 @@ import clientapi.event.defaults.game.render.HudOverlayEvent;
 import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.event.defaults.game.render.RenderScreenEvent;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
-import clientapi.util.render.camera.Camera;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,10 +28,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import static net.minecraft.block.material.Material.AIR;
-import static net.minecraft.block.material.Material.WATER;
 
 /**
  * @author Brady
@@ -43,23 +36,17 @@ import static net.minecraft.block.material.Material.WATER;
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
 
-    @Inject(method = "getFOVModifier", at = @At("HEAD"), cancellable = true)
-    private void getFOVModifier(float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Float> cir) {
-        if (Camera.isCapturing())
-            cir.setReturnValue(90.0F);
-    }
-
-    @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=gui" }))
-    private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
+    @Inject(method = "func_195458_a", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=gui" }))
+    private void updateCameraAndRender(float partialTicks, long nanoTime, boolean p_195458_4_, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
     }
 
-    @Inject(method = "renderWorldPass", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
-    private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks, pass));
+    @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
+    private void onStartHand(float partialTicks, long nanoTime, CallbackInfo ci) {
+        ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks));
     }
 
-    @Redirect(method = "updateCameraAndRender", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.renderGameOverlay(F)V"))
+    @Redirect(method = "func_195458_a", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.renderGameOverlay(F)V"))
     private void updateCameraAndRender$renderGameOverlay(GuiIngame guiIngame, float partialTicks) {
         guiIngame.renderGameOverlay(partialTicks);
         ClientAPI.EVENT_BUS.post(new RenderHudEvent(partialTicks));
@@ -71,17 +58,5 @@ public class MixinEntityRenderer {
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
-    }
-
-    @Redirect(method = "setupFog", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/state/IBlockState;getMaterial()Lnet/minecraft/block/material/Material;"))
-    private Material setupFog$getMaterial(IBlockState iblockstate) {
-        Material m = iblockstate.getMaterial();
-
-        HudOverlayEvent event = new HudOverlayEvent(m == WATER ? HudOverlayEvent.Type.WATER : HudOverlayEvent.Type.LAVA);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            return AIR;
-
-        return m;
     }
 }

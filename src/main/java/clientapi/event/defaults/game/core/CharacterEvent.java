@@ -17,44 +17,26 @@
 package clientapi.event.defaults.game.core;
 
 /**
- * Event called when a Key is released outside of a GUI while in-game
+ * Called whenever a physical key associated
+ * with a unicode character is pressed.
  *
- * @see ClickEvent
- *
- * @author Leaf
- * @since 2.1
+ * @author Brady
+ * @since 7/28/2018 8:23 PM
  */
-public final class KeyUpEvent {
+public final class CharacterEvent extends InputEvent {
 
     /**
-     * Key code that belongs to the pressed key
-     */
-    private final int key;
-
-    /**
-     * Char representation of the pressed key
+     * The character that was pressed
      */
     private final char character;
 
-    /**
-     * Creates a new instance of KeyEvent.
-     *
-     * @param key - The key code for the key that was pressed
-     */
-    public KeyUpEvent(int key, char character) {
-        this.key = key;
+    public CharacterEvent(char character, int modifiers) {
+        super(modifiers);
         this.character = character;
     }
 
     /**
-     * @return The key code that corresponds to the pressed key
-     */
-    public final int getKey() {
-        return this.key;
-    }
-
-    /**
-     * @return The char that corresponds to the pressed key
+     * @return The character that was pressed
      */
     public final char getCharacter() {
         return this.character;

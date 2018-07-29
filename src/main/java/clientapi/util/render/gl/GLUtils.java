@@ -18,14 +18,15 @@ package clientapi.util.render.gl;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
+import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.Colors;
+import clientapi.util.render.gl.glu.Project;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.glu.GLU;
+import org.lwjgl.opengl.GL11;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -38,7 +39,7 @@ import static org.lwjgl.opengl.GL11.*;
  * @author Brady
  * @since 2/20/2017 12:00 PM
  */
-public final class GLUtils {
+public final class GLUtils implements Helper {
 
     private GLUtils() {}
 
@@ -58,7 +59,7 @@ public final class GLUtils {
             private final Listener<RenderWorldEvent> render3DListener = new Listener<>(event -> {
                 GlStateManager.getFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
                 GlStateManager.getFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
-                GlStateManager.glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
+                GL11.glGetIntegerv(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
             });
         });
     }
@@ -139,9 +140,9 @@ public final class GLUtils {
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(double x, double y, double z) {
-        boolean result = GLU.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_SCREEN_BUFFER.clear());
+        boolean result = Project.gluProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_SCREEN_BUFFER.clear());
         if (result) {
-            return new Vec3(TO_SCREEN_BUFFER.get(0), Display.getHeight() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
+            return new Vec3(TO_SCREEN_BUFFER.get(0), mc.field_195558_d.func_198083_n() - TO_SCREEN_BUFFER.get(1), TO_SCREEN_BUFFER.get(2));
         }
         return null;
     }
@@ -166,7 +167,7 @@ public final class GLUtils {
      * @return World projected coordinates
      */
     public static Vec3 toWorld(double x, double y, double z) {
-        boolean result = GLU.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_WORLD_BUFFER.clear());
+        boolean result = Project.gluUnProject((float) x, (float) y, (float) z, MODELVIEW, PROJECTION, VIEWPORT, (FloatBuffer) TO_WORLD_BUFFER.clear());
         if (result) {
             return new Vec3(TO_WORLD_BUFFER.get(0), TO_WORLD_BUFFER.get(1), TO_WORLD_BUFFER.get(2));
         }

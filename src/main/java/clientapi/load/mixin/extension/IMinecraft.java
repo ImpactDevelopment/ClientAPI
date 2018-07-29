@@ -16,9 +16,6 @@
 
 package clientapi.load.mixin.extension;
 
-import net.minecraft.util.Session;
-import net.minecraft.util.Timer;
-
 /**
  * @author Brady
  * @since 2/20/2017 12:00 PM
@@ -28,14 +25,16 @@ public interface IMinecraft {
     /**
      * @return Returns the Game's Timer
      */
-    Timer getTimer();
+    // TODO: Find solution to classes in accessor mixin being loaded twice
+//    Timer getTimer();
 
     /**
      * Sets the game's session
      *
      * @param session The new Session
      */
-    void setSession(Session session);
+    // TODO: Find solution to classes in accessor mixin being loaded twice
+//    void setSession(Session session);
 
     /**
      * Sets the right click delay timer

@@ -19,6 +19,7 @@ package clientapi.command.executor.parser.impl;
 import clientapi.command.executor.ExecutionContext;
 import clientapi.command.executor.parser.ArgumentParser;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 import java.lang.reflect.Type;
 
@@ -30,7 +31,7 @@ public final class ItemParser implements ArgumentParser<Item> {
 
     @Override
     public final Item parse(ExecutionContext context, Type type, String raw) {
-        return Item.getByNameOrId(raw);
+        return Item.REGISTRY.getObject(new ResourceLocation(raw));
     }
 
     @Override

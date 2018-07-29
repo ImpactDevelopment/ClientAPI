@@ -20,7 +20,6 @@ import clientapi.gui.widget.data.WidgetAlignment;
 import clientapi.gui.widget.data.WidgetPos;
 import clientapi.util.interfaces.Helper;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * A widget, an element rendered on your HUD
@@ -31,13 +30,11 @@ import net.minecraft.client.gui.ScaledResolution;
 public interface Widget extends Helper {
 
     /**
-     * Renders this widget on a screen with the specified
-     * scaled resolution using the specified font renderer.
+     * Renders this widget using the specified font renderer.
      *
      * @param font The font that used to render text
-     * @param sr The screen size
      */
-    void render(FontRenderer font, ScaledResolution sr);
+    void render(FontRenderer font);
 
     /**
      * Sets this widget's position on the screen

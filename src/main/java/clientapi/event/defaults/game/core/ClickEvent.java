@@ -16,41 +16,23 @@
 
 package clientapi.event.defaults.game.core;
 
-import net.minecraft.client.Minecraft;
+import org.lwjgl.glfw.GLFW;
 
 /**
- * Event called when a Mouse button is pressed
- * outside of a gui screen while in-game. Default
- * recognized buttons are LEFT, RIGHT and MIDDLE.
+ * Event called when a Mouse button is pressed outside of a gui screen while in-game.
  *
  * @see KeyEvent
- * @see MouseButton
- * @see Minecraft#runTickMouse()
+ *
+ * @see GLFW#GLFW_MOUSE_BUTTON_LEFT
+ * @see GLFW#GLFW_MOUSE_BUTTON_RIGHT
+ * @see GLFW#GLFW_MOUSE_BUTTON_MIDDLE
  *
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class ClickEvent extends InputEvent {
+public final class ClickEvent extends RawInputEvent {
 
-    public ClickEvent(int key) {
-        super(key - 100);
-    }
-
-    /**
-     * Returns the actual mouse button that was pressed.
-     * Equal to {@code getKey() + 100}. Should be used
-     * instead of getKey() in the context of comparing the
-     * actual mouse button that was pressed.
-     *
-     * @return The mouse button pressed
-     */
-    public final int getButton() {
-        return this.key + 100;
-    }
-
-    public interface MouseButton {
-        int LEFT = 0;
-        int RIGHT = 1;
-        int MIDDLE = 2;
+    public ClickEvent(int key, int action, int modifiers) {
+        super(key, action, modifiers);
     }
 }

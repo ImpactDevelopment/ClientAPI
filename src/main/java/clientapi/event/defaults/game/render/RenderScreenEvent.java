@@ -16,8 +16,8 @@
 
 package clientapi.event.defaults.game.render;
 
+import net.minecraft.client.GameSettings;
 import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.settings.GameSettings;
 
 /**
  * Called before the overlay rendering is setup, will call
@@ -49,8 +49,8 @@ public final class RenderScreenEvent extends RenderEvent {
 
     public RenderScreenEvent(float partialTicks) {
         super(partialTicks);
-        this.width = mc.displayWidth;
-        this.height = mc.displayHeight;
+        this.width = mc.field_195558_d.func_198105_m();
+        this.height = mc.field_195558_d.func_198083_n();
         this.guiHidden = mc.gameSettings.hideGUI;
     }
 

@@ -19,7 +19,7 @@ package clientapi.load.mixin;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
 import clientapi.util.interfaces.Helper;
-import net.minecraft.client.multiplayer.GuiConnecting;
+import net.minecraft.client.gui.GuiConnecting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

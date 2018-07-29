@@ -17,7 +17,6 @@
 package clientapi.event.defaults.game.render;
 
 import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * Called after the in-game overlay is finished rendering.
@@ -29,20 +28,21 @@ import net.minecraft.client.gui.ScaledResolution;
  */
 public final class RenderHudEvent extends RenderEvent {
 
-    /**
-     * Instance of the current {@code ScaledResolution}
-     */
-    private final ScaledResolution scaledResolution;
-
     public RenderHudEvent(float partialTicks) {
         super(partialTicks);
-        this.scaledResolution = new ScaledResolution(mc);
     }
 
     /**
-     * @return Instance of the current {@code ScaledResolution}
+     * @return The scaled width of the screen
      */
-    public final ScaledResolution getScaledResolution() {
-        return this.scaledResolution;
+    public final int getScaledWidth() {
+        return mc.field_195558_d.func_198107_o();
+    }
+
+    /**
+     * @return The scaled height of the screen
+     */
+    public final int getScaledHeight() {
+        return mc.field_195558_d.func_198087_p();
     }
 }

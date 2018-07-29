@@ -17,12 +17,9 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.HudOverlayEvent;
-import clientapi.event.defaults.game.render.ItemRenderEvent;
-import net.minecraft.client.entity.AbstractClientPlayer;
+import clientapi.event.defaults.game.render.GlintEffectEvent;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.client.renderer.texture.TextureManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,17 +32,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemRenderer.class)
 public abstract class MixinItemRenderer {
 
-    @Inject(method = "renderItemInFirstPerson(Lnet/minecraft/client/entity/AbstractClientPlayer;FFLnet/minecraft/util/EnumHand;FLnet/minecraft/item/ItemStack;F)V", at = @At("HEAD"), cancellable = true)
-    private void renderItemInFirstPerson(AbstractClientPlayer p_187457_1_, float partialTicks, float pitch, EnumHand hand, float swingProgress, ItemStack stack, float rechargeProgress, CallbackInfo ci) {
-        ItemRenderEvent event = new ItemRenderEvent((ItemRenderer) (Object) this, partialTicks, hand, swingProgress, stack, rechargeProgress);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            ci.cancel();
-    }
-
-    @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)
-    private void renderFireInFirstPerson(CallbackInfo ci) {
-        HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.FIRE);
+    @Inject(method = "func_211128_a", at = @At("HEAD"), cancellable = true)
+    private static void renderEffect(TextureManager textureManagerIn, Runnable renderModelFunctionIn, int scaleIn, CallbackInfo ci) {
+        GlintEffectEvent event = new GlintEffectEvent(GlintEffectEvent.GlintTarget.ITEM);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();

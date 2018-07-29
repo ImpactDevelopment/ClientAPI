@@ -16,39 +16,33 @@
 
 package clientapi.event.defaults.game.core;
 
-import me.zero.alpine.type.Cancellable;
+import org.lwjgl.glfw.GLFW;
 
 /**
- * Generic input event. Cancelling will cause any ClientAPI
- * listeners to the event to not proceed with processing the event.
+ * Basis for an input event, containing a single modifier
+ * field that describes the modifiers that were held down
+ * when the input event was called.
  *
- * The keycode will be equal to its respective value
- * in {@code Keyboard} if the input is from the keyboard.
- *
- * The keycode will be equal to {@code button - 100}
- * if the input is from the mouse.
- *
- * @see KeyEvent
- * @see ClickEvent
+ * @see GLFW#GLFW_MOD_SHIFT
  *
  * @author Brady
- * @since 11/3/2017 11:06 AM
+ * @since 7/28/2018 8:30 PM
  */
-abstract class InputEvent extends Cancellable {
+abstract class InputEvent {
 
     /**
-     * The key that was pressed or clicked
+     * The modifier keys that were held down at the time of the input
      */
-    protected final int key;
+    private final int modifiers;
 
-    InputEvent(int key) {
-        this.key = key;
+    public InputEvent(int modifiers) {
+        this.modifiers = modifiers;
     }
 
     /**
-     * @return The key that was pressed or clicked
+     * @return The modifier keys that were held down at the time of the input
      */
-    public final int getKey() {
-        return this.key;
+    public final int getModifiers() {
+        return this.modifiers;
     }
 }

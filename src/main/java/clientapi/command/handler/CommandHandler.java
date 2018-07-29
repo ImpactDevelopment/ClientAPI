@@ -24,7 +24,7 @@ import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
 import clientapi.command.executor.CommandExecutor;
 import clientapi.command.executor.parser.ArgumentParser;
-import clientapi.event.defaults.game.core.KeyEvent;
+import clientapi.event.defaults.game.core.CharacterEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
 import clientapi.manage.Manager;
 import clientapi.util.interfaces.Helper;
@@ -89,7 +89,7 @@ public final class CommandHandler implements Helper {
     }
 
     @EventHandler
-    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
+    private final Listener<CharacterEvent> characterListener = new Listener<>(event -> {
         // Check if opening chat with the prefix is supported
         if (!openChat || prefix == null || mc.world == null)
             return;

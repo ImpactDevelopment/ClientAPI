@@ -26,27 +26,9 @@ package clientapi.event.defaults.game.core;
  * @author Brady
  * @since 1/20/2017 12:00 PM
  */
-public final class KeyEvent extends InputEvent {
+public final class KeyEvent extends RawInputEvent {
 
-    /**
-     * Char representation of the pressed key
-     */
-    private final char character;
-
-    /**
-     * Creates a new instance of KeyEvent.
-     *
-     * @param key - The key code for the key that was pressed
-     */
-    public KeyEvent(int key, char character) {
-        super(key);
-        this.character = character;
-    }
-
-    /**
-     * @return The char that corresponds to the pressed key
-     */
-    public final char getCharacter() {
-        return this.character;
+    public KeyEvent(int key, int action, int modifiers) {
+        super(key, action, modifiers);
     }
 }

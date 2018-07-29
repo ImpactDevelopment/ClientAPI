@@ -26,7 +26,7 @@ import clientapi.util.interfaces.Nameable;
 import clientapi.util.interfaces.Taggable;
 import clientapi.util.io.Keybind;
 import clientapi.value.holder.ValueHolder;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,7 +100,7 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
     }
 
     public Module(String name, String description) {
-        this(name, description, Keyboard.KEY_NONE);
+        this(name, description, GLFW.GLFW_KEY_UNKNOWN);
     }
 
     public Module(String name, String description, int bind) {

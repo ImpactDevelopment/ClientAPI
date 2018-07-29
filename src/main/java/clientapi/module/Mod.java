@@ -16,7 +16,7 @@
 
 package clientapi.module;
 
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -48,5 +48,5 @@ public @interface Mod {
     /**
      * Keybind of Module, Key is {@code KEY_NONE} by default.
      */
-    int bind() default Keyboard.KEY_NONE;
+    int bind() default GLFW.GLFW_KEY_UNKNOWN;
 }

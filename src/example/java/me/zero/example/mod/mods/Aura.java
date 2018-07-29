@@ -27,7 +27,7 @@ import me.zero.example.mod.category.ICombat;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumHand;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author Brady
  * @since 2/12/2017 12:00 PM
  */
-@Mod(name = "Aura", description = "XD", bind = Keyboard.KEY_K)
+@Mod(name = "Aura", description = "XD", bind = GLFW.GLFW_KEY_K)
 public final class Aura extends Module implements ICombat {
 
     private Entity target;

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018 ImpactDevelopment
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pw.knx.feather.tessellate;
 
 import org.lwjgl.opengl.GL11;
@@ -141,14 +157,14 @@ public class BasicTess implements Tessellator {
 		this.buffer.limit(dex * 4);
 		if (this.color) {                           // if we've entered color data, push color data down the pipeline.
 			this.buffer.position(12);
-			GL11.glColorPointer(4, true, 24, this.buffer);
+			GL11.glColorPointer(4, GL11.GL_UNSIGNED_BYTE, 24, this.buffer);
 		}
 		if (this.texture) {                         // if we've entered texture data, push texture data down the pipeline.
 			this.fBuffer.position(4);
-			GL11.glTexCoordPointer(2, 24, this.fBuffer);
+			GL11.glTexCoordPointer(2, GL11.GL_FLOAT, 24, this.fBuffer);
 		}
 		this.fBuffer.position(0);
-		GL11.glVertexPointer(3, 24, this.fBuffer); // pushing bare minimum vertex data.
+		GL11.glVertexPointer(3, GL11.GL_FLOAT, 24, this.fBuffer); // pushing bare minimum vertex data.
 		return this;
 	}
 

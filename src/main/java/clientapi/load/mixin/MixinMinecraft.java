@@ -19,13 +19,14 @@ package clientapi.load.mixin;
 import clientapi.Client;
 import clientapi.ClientAPI;
 import clientapi.ClientInfo;
-import clientapi.event.defaults.game.core.*;
+import clientapi.event.defaults.game.core.GameShutdownEvent;
+import clientapi.event.defaults.game.core.LoopEvent;
+import clientapi.event.defaults.game.core.TickEvent;
 import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
 import clientapi.load.mixin.extension.IMinecraft;
-import clientapi.util.io.MouseKeyTracker;
 import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GLUtils;
 import com.google.gson.GsonBuilder;
@@ -33,10 +34,7 @@ import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.util.Session;
-import net.minecraft.util.Timer;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -50,8 +48,6 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
-
 /**
  * @author Brady
  * @since 4/27/2017 12:00 PM
@@ -59,10 +55,8 @@ import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {
 
-    @Shadow public GuiScreen currentScreen;
-
-    @Accessor @Override public abstract Timer getTimer();
-    @Accessor @Override public abstract void setSession(Session session);
+//    @Accessor @Override public abstract Timer getTimer();
+//    @Accessor @Override public abstract void setSession(Session session);
     @Accessor @Override public abstract void setRightClickDelayTimer(int delay);
 
     @Shadow private void clickMouse() {}
@@ -72,11 +66,11 @@ public abstract class MixinMinecraft implements IMinecraft {
     @Override
     public void clickMouse(int button) {
         // IF statements are required because Mixin doesn't support SWITCH
-        if (button == LEFT)
+        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT)
             clickMouse();
-        if (button == RIGHT)
+        if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
             rightClickMouse();
-        if (button == MIDDLE)
+        if (button == GLFW.GLFW_MOUSE_BUTTON_MIDDLE)
             middleClickMouse();
     }
 
@@ -90,37 +84,14 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(new TickEvent(EventState.POST));
     }
 
-    @Inject(method = "runGameLoop", at = @At("HEAD"))
-    private void preRunGameLoop(CallbackInfo ci) {
+    @Inject(method = "func_195542_b", at = @At("HEAD"))
+    private void preRunGameLoop(boolean p_195542_1_, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.PRE));
     }
 
-    @Inject(method = "runGameLoop", at = @At("RETURN"))
-    private void postRunGameLoop(CallbackInfo ci) {
+    @Inject(method = "func_195542_b", at = @At("RETURN"))
+    private void postRunGameLoop(boolean p_195542_1_, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.POST));
-    }
-
-    @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
-    private void onKeyEvent(CallbackInfo ci) {
-        if (currentScreen != null)
-            return;
-
-        boolean down = Keyboard.getEventKeyState();
-        int key = Keyboard.getEventKey();
-        char ch = Keyboard.getEventCharacter();
-
-        ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
-    }
-
-    @Inject(method = "runTickMouse", at = @At(value = "INVOKE_ASSIGN", id = "org/lwjgl/input/Mouse.getEventButton()I"))
-    private void onMouseEvent(CallbackInfo info) {
-        if (currentScreen != null)
-            return;
-
-        int button = Mouse.getEventButton();
-        if (button >= 0 && MouseKeyTracker.INSTANCE.wasButtonPressed(button, Mouse.getEventButtonState())) {
-            ClientAPI.EVENT_BUS.post(new ClickEvent(button));
-        }
     }
 
     @Inject(method = "init", at = @At("RETURN"))
@@ -176,8 +147,8 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(new GuiDisplayEvent(EventState.POST, screen));
     }
 
-    @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
-    private void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
+    @Inject(method = "func_205055_a(Lnet/minecraft/client/multiplayer/WorldClient;Lnet/minecraft/client/gui/GuiScreen;)V", at = @At("HEAD"))
+    private void loadWorld(@Nullable WorldClient worldClientIn, GuiScreen loadingScreen, CallbackInfo ci) {
         // If the world is null, then it must be unloading
         if (worldClientIn != null)
             ClientAPI.EVENT_BUS.post(new WorldEvent.Load(worldClientIn));

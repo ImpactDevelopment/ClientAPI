@@ -21,7 +21,6 @@ import clientapi.util.math.Vec2;
 import clientapi.util.render.RenderUtils;
 import clientapi.util.render.gl.DisplayList;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
 import java.util.ArrayList;
@@ -67,13 +66,11 @@ public final class WidgetHandler {
     }
 
     /**
-     * Renders all of the widgets on a screen with the specified
-     * scaled resolution using the specified font renderer.
+     * Renders all of the widgets using the specified font renderer.
      *
      * @param font The font that is passed to the widgets
-     * @param sr The scaled resolution used to calculate widget pos
      */
-    public final void draw(FontRenderer font, ScaledResolution sr) {
+    public final void draw(FontRenderer font) {
         widgetMap.forEach((pos, widgets) -> widgets.clear());
         widgets.forEach(widget -> {
             List<Widget> list = widgetMap.get(widget.getPos());
@@ -94,7 +91,7 @@ public final class WidgetHandler {
                 return;
 
             GlStateManager.pushMatrix();
-            Vec2 screenPos = pos.getScreenPos(sr);
+            Vec2 screenPos = pos.getScreenPos();
             GlStateManager.translate(screenPos.getX(), screenPos.getY(), 0.0F);
 
             // Reset current position
@@ -114,7 +111,7 @@ public final class WidgetHandler {
                 if (outlines)
                     RenderUtils.rectangleBordered(0, 0, widget.getWidth(), widget.getHeight(), 0xFFFFFFFF, 0x00000000);
 
-                widget.render(font, sr);
+                widget.render(font);
                 GlStateManager.popMatrix();
 
                 GlStateManager.translate(0.0F, widget.getHeight() + spacing, 0.0F);

@@ -16,7 +16,7 @@
 
 package clientapi.util.io;
 
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public final class Keybind {
 	 */
 	@Override
 	public String toString() {
-		return Keyboard.getKeyName(getKey());
+		return getKey() == GLFW.GLFW_KEY_UNKNOWN ? "None": GLFW.glfwGetKeyName(getKey(), 0);
 	}
 
     /**

@@ -18,13 +18,13 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.SpawnParticleEvent;
-import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.world.World;
+import net.minecraft.particles.IParticleData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * @author Brady
@@ -33,13 +33,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ParticleManager.class)
 public class MixinParticleManager {
 
-    @Redirect(method = "spawnEffectParticle", at = @At(value = "INVOKE", target = "net/minecraft/client/particle/IParticleFactory.createParticle(ILnet/minecraft/world/World;DDDDDD[I)Lnet/minecraft/client/particle/Particle;"))
-    private Particle spawnParticle(IParticleFactory particleFactory, int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... parameters) {
-        SpawnParticleEvent event = new SpawnParticleEvent(particleID, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+    @Inject(method = "func_199280_a", at = @At("HEAD"))
+    private void spawnEffectParticle(IParticleData particleData, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, CallbackInfoReturnable<Particle> cir) {
+        SpawnParticleEvent event = new SpawnParticleEvent(particleData, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
-            return null;
-
-        return particleFactory.createParticle(particleID, worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn, parameters);
+            cir.setReturnValue(null);
     }
 }

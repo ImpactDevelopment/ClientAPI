@@ -19,7 +19,6 @@ package clientapi.load.mixin;
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.HudOverlayEvent;
 import net.minecraft.client.gui.GuiSpectator;
-import net.minecraft.client.gui.ScaledResolution;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,8 +31,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiSpectator.class)
 public class MixinGuiSpectator {
 
-    @Inject(method = "renderSelectedItem", at = @At("HEAD"), cancellable = true)
-    private void renderSelectedItem(ScaledResolution scaledRes, CallbackInfo ci) {
+    @Inject(method = "func_195623_a", at = @At("HEAD"), cancellable = true)
+    private void renderSelectedItem(CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.SELECTED_ITEM_TOOLTIP);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())

@@ -28,7 +28,9 @@ buildscript {
     }
 
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:${project.forgeGradleVersion}"
+//        classpath "net.minecraftforge.gradle:ForgeGradle:${project.forgeGradleVersion}"
+        // Load hacky experimental ForgeGradle build
+        classpath files('ForgeGradle-1.13-Compatibility.jar')
         classpath "org.spongepowered:mixingradle:${project.mixinGradleVersion}"
     }
 }
@@ -80,13 +82,22 @@ repositories {
         name = 'spongepowered-repo'
         url = 'http://repo.spongepowered.org/maven/'
     }
+
+    maven {
+        url = 'https://jitpack.io'
+    }
 }
 
 dependencies {
-    compile "com.github.ZeroMemes:Alpine:${project.alpineVersion}"
-    compile "net.jodah:typetools:${project.typetoolsVersion}"
-    compile "org.luaj:luaj-jse:${project.luajVersion}"
-    compile("org.spongepowered:mixin:${project.mixinVersion}") {
+    implementation ('net.minecraft:launchwrapper:1.11') {
+        exclude module: 'lwjgl'
+        exclude module: 'jopt-simple'
+        exclude module: 'log4j-core'
+        exclude module: 'log4j-api'
+    }
+    implementation "com.github.ZeroMemes:Alpine:${project.alpineVersion}"
+    implementation "net.jodah:typetools:${project.typetoolsVersion}"
+    implementation("org.spongepowered:mixin:${project.mixinVersion}") {
         // Mixin includes a lot of dependencies that are too up-to-date
         exclude module: 'launchwrapper'
         exclude module: 'guava'
@@ -94,7 +105,7 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
     }
-    testCompile "junit:junit:${project.junitVersion}"
+    testImplementation "junit:junit:${project.junitVersion}"
 }
 
 minecraft {

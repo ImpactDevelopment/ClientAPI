@@ -22,13 +22,13 @@ import clientapi.module.Module;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.example.mod.category.IMovement;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * @author Brady
  * @since 2/8/2017 12:00 PM
  */
-@Mod(name = "Fly", description = "Allows you to fly", bind = Keyboard.KEY_F)
+@Mod(name = "Fly", description = "Allows you to fly", bind = GLFW.GLFW_KEY_F)
 public final class Fly extends Module implements IMovement {
 
     @EventHandler

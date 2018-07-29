@@ -16,34 +16,15 @@
 
 package clientapi.event.defaults.game.render;
 
-import clientapi.util.render.camera.Camera;
-
 /**
- * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
+ * Called at the end of EntityRenderer#updateCameraAndRender(float, long)
  *
  * @author Brady
  * @since 2/9/2017 12:00 PM
  */
 public final class RenderWorldEvent extends RenderEvent {
 
-    /**
-     * The Render pass this event was called from
-     */
-    private final Pass pass;
-
-    public RenderWorldEvent(float partialTicks, int pass) {
+    public RenderWorldEvent(float partialTicks) {
         super(partialTicks);
-        this.pass = Camera.isCapturing() ? Pass.CAMERA : Pass.values()[pass];
-    }
-
-    /**
-     * @return The render pass that this event was called from
-     */
-    public final Pass getPass() {
-        return this.pass;
-    }
-
-    public enum Pass {
-        ANAGLYPH_CYAN, ANAGLYPH_RED, NORMAL, CAMERA
     }
 }

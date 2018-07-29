@@ -17,8 +17,8 @@
 package clientapi.gui.widget.data;
 
 import clientapi.gui.widget.WidgetHelper;
+import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
-import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * Stores the data that is used to
@@ -30,7 +30,7 @@ import net.minecraft.client.gui.ScaledResolution;
  * @author Brady
  * @since 5/28/2017 10:00 AM
  */
-public interface WidgetPos {
+public interface WidgetPos extends Helper {
 
     /**
      * Returns the position of this widget. Both
@@ -51,12 +51,11 @@ public interface WidgetPos {
      * by multiplying the Vec2 returned by {@code getPos}
      * by the scaled resolution X and Y values.
      *
-     * @param sr The scaled resolution used to calculate the screen pos
      * @return The screen pos
      */
-    default Vec2 getScreenPos(ScaledResolution sr) {
-        float screenX = getPos().getX() * sr.getScaledWidth();
-        float screenY = getPos().getY() * sr.getScaledHeight();
+    default Vec2 getScreenPos() {
+        float screenX = getPos().getX() * mc.field_195558_d.func_198107_o();
+        float screenY = getPos().getY() * mc.field_195558_d.func_198087_p();
         return new Vec2(screenX, screenY);
     }
 

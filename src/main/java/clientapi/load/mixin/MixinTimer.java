@@ -18,6 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.load.mixin.extension.ITimer;
 import net.minecraft.util.Timer;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +33,7 @@ import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 @Mixin(Timer.class)
 public class MixinTimer implements ITimer {
 
-    @Shadow private float tickLength;
+    @Shadow @Final private float tickLength;
 
     private float speed = 1;
 

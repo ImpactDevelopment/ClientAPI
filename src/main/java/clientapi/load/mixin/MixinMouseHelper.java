@@ -17,26 +17,30 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.GlintEffectEvent;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.IBakedModel;
+import clientapi.event.defaults.game.core.ClickEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHelper;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 7/28/2018 8:52 PM
  */
-@Mixin(RenderItem.class)
-public class MixinRenderItem {
+@Mixin(MouseHelper.class)
+public class MixinMouseHelper {
 
-    @Inject(method = "renderEffect", at = @At("HEAD"), cancellable = true)
-    private void renderEffect(IBakedModel model, CallbackInfo ci) {
-        GlintEffectEvent event = new GlintEffectEvent(GlintEffectEvent.GlintTarget.ITEM);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            ci.cancel();
+    @Shadow @Final private Minecraft field_198036_a;
+
+    @Inject(method = "func_198023_a", at = @At("HEAD"))
+    private void onCharEvent(long windowPointer, int button, int action, int modifiers, CallbackInfo ci) {
+        if (windowPointer != field_198036_a.field_195558_d.func_198092_i() || field_198036_a.currentScreen != null)
+            return;
+
+        ClientAPI.EVENT_BUS.post(new ClickEvent(button, action, modifiers));
     }
 }

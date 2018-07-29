@@ -48,13 +48,14 @@ public final class Colors implements Helper {
     }
 
     /**
-     * Gets the hex from a {@code TextFormatting} value.
+     * Gets the hex color value from a {@code TextFormatting} value.
      *
-     * @param color The {@code TextFormatting} value
-     * @return Hex corresponding to {@code TextFormatting} value
+     * @param textFormatting The {@code TextFormatting} value
+     * @return Hex color value corresponding to {@code TextFormatting} value
      */
-    public static int getColor(TextFormatting color) {
-        return getColor(color.toString().charAt(1));
+    public static int getColor(TextFormatting textFormatting) {
+        Integer color = textFormatting.func_211163_e();
+        return 0xFF000000 | (color == null ? 0xFFFFFF : color);
     }
 
     /**
@@ -64,7 +65,8 @@ public final class Colors implements Helper {
      * @return Hex corresponding to color code
      */
     public static int getColor(char cc) {
-        return 0xFF000000 | mc.fontRenderer.getColorCode(cc);
+        TextFormatting textFormatting = TextFormatting.func_211165_a(cc);
+        return textFormatting == null ? getColor(TextFormatting.WHITE) : getColor(textFormatting);
     }
 
     /**

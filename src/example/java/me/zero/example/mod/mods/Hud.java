@@ -24,7 +24,6 @@ import me.zero.alpine.listener.Listener;
 import me.zero.example.ExampleClient;
 import me.zero.example.mod.category.IRender;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 
 import java.util.Comparator;
 
@@ -44,18 +43,17 @@ public final class Hud extends Module implements IRender {
 
     @EventHandler
     private Listener<RenderHudEvent> render2DListener = new Listener<>(event -> {
-        ScaledResolution sr = event.getScaledResolution();
         FontRenderer font = mc.fontRenderer;
 
         int color = 0xFF98ABB8;
 
         font.drawStringWithShadow("Client", 2, 2, color);
 
-        y = sr.getScaledHeight() - 12;
+        y = event.getScaledHeight() - 12;
 
         ExampleClient.getInstance().getModuleManager().stream().filter(Module::getState)
                 .sorted(Comparator.comparingInt(m -> -font.getStringWidth(m.getName()))).forEach(module -> {
-            font.drawStringWithShadow(module.getName(), sr.getScaledWidth() - 2 - font.getStringWidth(module.getName()), y, color);
+            font.drawStringWithShadow(module.getName(), event.getScaledWidth() - 2 - font.getStringWidth(module.getName()), y, color);
             y -= font.FONT_HEIGHT;
         });
     });

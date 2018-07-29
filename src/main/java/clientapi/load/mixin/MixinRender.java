@@ -21,13 +21,11 @@ import clientapi.event.defaults.game.render.RenderEntityLabelEvent;
 import clientapi.event.defaults.game.render.TeamColorEvent;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.scoreboard.ScorePlayerTeam;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * @author Brady
@@ -36,9 +34,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Render.class)
 public class MixinRender {
 
-    @Inject(method = "getTeamColor", at = @At("RETURN"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void getTeamColor(Entity entityIn, CallbackInfoReturnable<Integer> cir, int i, ScorePlayerTeam scoreplayerteam) {
-        TeamColorEvent event = new TeamColorEvent(entityIn, i);
+    @Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
+    private void getTeamColor(Entity entityIn, CallbackInfoReturnable<Integer> cir) {
+        Integer color = null;
+
+        if (entityIn.getTeam() != null)
+            color = entityIn.getTeam().getColor().func_211163_e();
+
+        TeamColorEvent event = new TeamColorEvent(entityIn, color == null ? 0xFFFFFFFF : color);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             cir.setReturnValue(event.getColor());
