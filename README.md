@@ -2,6 +2,9 @@
 [![License](https://img.shields.io/github/license/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/releases)
 
+# 1.13 Warning
+This branch is highly experimental and relies on our [custom mappings](https://github.com/ImpactDevelopment/1.13-MCP-Mappings/).
+
 # ClientAPI
 ClientAPI is a modding API/Framework for Minecraft just like Forge, Sponge and Liteloader, it
 is designed to provide a shared base for client-side mods for minecraft.
