@@ -18,7 +18,6 @@ package clientapi.load.mixin;
 
 import clientapi.Client;
 import clientapi.ClientAPI;
-import clientapi.ClientInfo;
 import clientapi.event.defaults.game.core.GameShutdownEvent;
 import clientapi.event.defaults.game.core.LoopEvent;
 import clientapi.event.defaults.game.core.TickEvent;
@@ -26,10 +25,10 @@ import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
+import clientapi.load.config.ClientConfiguration;
+import clientapi.load.config.JsonConfiguration;
 import clientapi.load.mixin.extension.IMinecraft;
-import clientapi.util.io.StreamReader;
 import clientapi.util.render.gl.GLUtils;
-import com.google.gson.GsonBuilder;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -96,30 +95,29 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     @Inject(method = "init", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
-        // Try and find the "client.json" config
         InputStream stream = this.getClass().getResourceAsStream("/client.json");
 
         if (stream == null)
-            throw new ClientInitException("Unable to locate Client Configuration (client.json)");
+            throw new ClientInitException("Unable to locate Client Configuration");
 
-        // Construct a ClientInfo object from the client json using GSON
-        ClientInfo clientInfo = new GsonBuilder().setPrettyPrinting().create().fromJson(new StreamReader(stream).all(), ClientInfo.class);
+        // Construct a ClientConfiguration object from the client json using GSON
+        ClientConfiguration clientConfig = JsonConfiguration.loadConfiguration(stream, ClientConfiguration.class);
 
-        if (clientInfo == null)
-            throw new ClientInitException("Unable to create ClientInfo from client.json");
+        if (clientConfig == null)
+            throw new ClientInitException("Unable to create Client Configuration from client.json");
 
-        // Attempt to instantiate the specified class from the ClientInfo
+        // Attempt to instantiate the specified class from the client configuration
         Client client;
         try {
-            Class<?> clientClass = Class.forName(clientInfo.getMain());
+            Class<?> clientClass = Class.forName(clientConfig.getMainClass());
             Constructor<?> constructor;
-            if (clientClass != null && clientClass.getSuperclass().equals(Client.class) && (constructor = clientClass.getConstructor(ClientInfo.class)) != null) {
-                client = (Client) constructor.newInstance(clientInfo);
+            if (clientClass != null && clientClass.getSuperclass().equals(Client.class) && (constructor = clientClass.getConstructor(ClientConfiguration.class)) != null) {
+                client = (Client) constructor.newInstance(clientConfig);
             } else {
                 throw new ClientInitException("Client class is null or the superclass is not Client type");
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ClientInitException("Unable to instantiate Client");
+            throw new ClientInitException("Unable to instantiate main client class");
         } catch (ClassNotFoundException e) {
             throw new ClientInitException("Unable to find client class");
         } catch (NoSuchMethodException e) {
@@ -130,7 +128,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         GLUtils.init();
 
         // Init client
-        client.onInit(clientInfo);
+        client.init();
 
         ClientAPI.EVENT_BUS.subscribe(ClientHandler.INSTANCE);
     }
