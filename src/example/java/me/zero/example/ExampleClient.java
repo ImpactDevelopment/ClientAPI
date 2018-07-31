@@ -17,17 +17,12 @@
 package me.zero.example;
 
 import clientapi.Client;
-import clientapi.ClientInfo;
 import clientapi.command.Command;
-import clientapi.lua.LuaHandler;
-import clientapi.lua.LuaScript;
+import clientapi.load.config.ClientConfiguration;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
-import clientapi.util.io.StreamReader;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
-
-import javax.script.ScriptException;
 
 /**
  * @author Brady
@@ -39,13 +34,13 @@ public final class ExampleClient extends Client {
     private Manager<Module> moduleManager;
     private Manager<Command> commandManager;
 
-    public ExampleClient(ClientInfo info) {
-        super(info);
+    public ExampleClient(ClientConfiguration config) {
+        super(config);
         instance = this;
     }
 
     @Override
-    public final void onInit(ClientInfo info) {
+    public final void init() {
         // Init and load module manager
         moduleManager = new ExampleModManager();
         moduleManager.load();
@@ -53,24 +48,14 @@ public final class ExampleClient extends Client {
         // Init and load command manager
         commandManager = new ExampleCommandManager();
         commandManager.load();
-
-        // Setup example script
-        String scriptSource = new StreamReader(ExampleClient.class.getResourceAsStream("/lua/example.lua")).all();
-        LuaScript script = LuaHandler.getHandler().createScript(scriptSource);
-        try {
-            script.compile();
-            script.exec();
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        }
     }
 
     public final String getName() {
-        return this.info.getName();
+        return this.config.getName();
     }
 
-    public final double getVersion() {
-        return this.info.getBuild();
+    public final String getVersion() {
+        return this.config.getVersion();
     }
 
     public final Manager<Module> getModuleManager() {

@@ -17,6 +17,8 @@
 package clientapi.load;
 
 import clientapi.ClientAPI;
+import clientapi.load.config.ClientConfiguration;
+import clientapi.load.config.JsonConfiguration;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.Level;
@@ -26,6 +28,7 @@ import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.tools.obfuscation.mcp.ObfuscationServiceMCP;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,38 +57,26 @@ public class ClientTweaker implements ITweaker {
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
 
-        // Register custom transformer
-        classLoader.registerTransformer(ClientTransformer.class.getName());
-
-        // Check if a ClientInfo JSON is present
-        if (this.getClass().getResourceAsStream("/client.json") == null) {
-            throw new ClientInitException("Unable to locate Client Configuration (client.json)");
-        }
-
-        // Initialize the Mixin Bootstrap
         MixinBootstrap.init();
         ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
 
-        // Load the ClientAPI mixin config
-        String capi = "mixins.capi.json";
-        if (this.getClass().getResourceAsStream("/" + capi) == null) {
-            throw new ClientInitException("Unable to locate ClientAPI mixin configuration");
-        }
-        Mixins.addConfiguration(capi);
-        ClientAPI.LOGGER.log(Level.INFO, "Loaded ClientAPI mixin configuration");
-
-        // Optional mixin configuration, added by client developers
-        String mixin = "mixins.client.json";
-        if (this.getClass().getResourceAsStream("/" + mixin) != null) {
-            Mixins.addConfiguration(mixin);
-            ClientAPI.LOGGER.log(Level.INFO, "Loaded Client mixin configuration");
-        }
-
-        // Ensure that the mixins are only run on client side
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
-
-        // Set the obfuscation context
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext(ObfuscationServiceMCP.NOTCH);
+        ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
+
+        // Load byteode transformers
+        classLoader.registerTransformer(ClientTransformer.class.getName());
+
+        ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
+
+        // Load mixin configs
+        loadMixinConfig("mixins.capi.json");
+
+        // Load Client defined mixin configs
+        for (String config : findClientConfig().getMixins())
+            loadMixinConfig(config);
+
+        ClientAPI.LOGGER.log(Level.INFO, "Loaded Mixin Configurations");
     }
 
     @Override
@@ -96,6 +87,22 @@ public class ClientTweaker implements ITweaker {
     @Override
     public final String[] getLaunchArguments() {
         return this.args.toArray(new String[this.args.size()]);
+    }
+
+    private ClientConfiguration findClientConfig() {
+        InputStream stream;
+        if ((stream = this.getClass().getResourceAsStream("/client.json")) == null)
+            throw new ClientInitException("Unable to locate Client Configuration");
+
+        return JsonConfiguration.loadConfiguration(stream, ClientConfiguration.class);
+    }
+
+    private void loadMixinConfig(String config) {
+        // Verify the existence of the specified configuration file
+        if (this.getClass().getResourceAsStream("/" + config) == null)
+            throw new ClientInitException("Unable to locate mixin configuration %s", config);
+
+        Mixins.addConfiguration(config);
     }
 
     private void addArg(String label, File file) {

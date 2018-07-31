@@ -18,10 +18,8 @@ package clientapi.event.handle;
 
 import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.game.core.KeyUpEvent;
-import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.io.Keybind;
-import clientapi.util.render.camera.CameraManager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.type.EventPriority;
@@ -39,13 +37,6 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
 public enum ClientHandler implements Helper {
 
     INSTANCE;
-
-    /**
-     * Handles camera updates
-     */
-    @EventHandler
-    private final Listener<RenderHudEvent> render2DListener = new Listener<>(event ->
-            CameraManager.getInstance().forEach(camera -> camera.updateFramebuffer(event.getPartialTicks())), EventPriority.LOWEST);
 
     /**
      * Handles keybinds

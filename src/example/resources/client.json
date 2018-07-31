@@ -1,8 +1,10 @@
 {
   "name": "Example Client",
-  "authors": [ "Zero" ],
+  "authors": [ "Brady" ],
   "id": "example",
-  "build": 1.0,
-  "type": "RELEASE",
-  "main": "me.zero.example.ExampleClient"
+  "build": "1.0",
+  "mainClass": "me.zero.example.ExampleClient",
+  "mixins": [
+    "mixins.client.json"
+  ]
 }
