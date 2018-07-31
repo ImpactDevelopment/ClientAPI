@@ -35,12 +35,12 @@ public final class Version {
     /**
      * Incremented when API-breaking changes are made, reset when major version is modified
      */
-    public static final int MINOR = 0;
+    public static final int MINOR = 1;
 
     /**
      * Incremented every release, reset when the minor version is modified
      */
-    public static final int PATCH = 2;
+    public static final int PATCH = 0;
 
     /**
      * @return The version formatted as {@code MAJOR.MINOR.PATCH}
