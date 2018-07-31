@@ -5,18 +5,24 @@ an overview of the usage of the basic features of ClientAPI.
 
 ## Creating the Client JSON
 The JSON is loaded using [Gson](https://github.com/google/gson), mapping the JSON file
-to an instance of ``clientapi.ClientInfo``. An example of a properly defined ``client.json``
+to an instance of ``ClientConfiguration``. An example of a properly defined ``client.json``
 file is below. Please note that comments are not official supported in JSON, and if you choose
-to copy the config below, they must be removed.
+to copy the config below, they must be removed. Not all fields are required, see the
+``ClientConfiguration`` class for additional details.
 
 ```js
 {
-  "name": "Example Client",           // The name of the Client
-  "authors": [ "Your Name" ],         // An array of the Client authors
-  "id": "example",                    // A unique ID for the Client
-  "build": 1.0,                       // The build/version number
-  "type": "RELEASE",                  // The version type, either ALPHA, BETA, SNAPSHOT, or RELEASE
-  "main": "com.example.ExampleClient" // The classpath of the main class extending clientapi.Client
+  "name": "Example Client",             // The name of the Client
+  "authors": [ "Your Name" ],           // An array of the Client authors
+  "id": "example",                      // A unique ID for the Client
+  "build": "1.0",                       // The build/version
+  "main": "com.example.ExampleClient",  // The classpath of the main class extending clientapi.Client
+  "mixins": [                           // A list of mixin configuration files
+    "mixins.example.json"               // The name of the Mixin configuration file
+  ],
+  "transformers": [                     // A list of transformer class names
+    "com.example.transform.Transformer" // The class name of a transformer
+  ]
 }
 
 ```
@@ -26,8 +32,8 @@ directory of the compiled client jar file. When using the CDK, it should be loca
 ``src/main/java/resources`` to be recognized when compiling in a testing environment.
 
 ## Creating the Client class
-All Clients/Utility mods extend ``clientapi.Client`` and must inherit the ``onInit(ClientInfo)``
-method and the default ``(ClientInfo)`` constructor. Even though there should only be one active
+All Clients/Utility mods extend ``clientapi.Client`` and must inherit the ``init``
+method and the default ``(ClientConfiguration)`` constructor. Even though there should only be one active
 instance of the ``Client`` class per game instance, ClientAPI does not provide a static method to
 access the instance of the Client, therefore it is recommended that one is added.
 
@@ -36,13 +42,13 @@ public final class ExampleClient extends Client {
     
     private static ExampleClient instance;
     
-    public ExampleClient(ClientInfo info) {
-        super(info);
+    public ExampleClient(ClientConfiguration config) {
+        super(config);
         instance = this;
     }
     
     @Override
-    public final void onInit(ClientInfo info) {
+    public final void init() {
         // Your init code here
     }
     
@@ -135,13 +141,13 @@ public final class ExampleClient extends Client {
     private static ExampleClient instance;
     private ExampleModManager moduleManager;
     
-    public ExampleClient(ClientInfo info) {
-        super(info);
+    public ExampleClient(ClientConfiguration config) {
+        super(config);
         instance = this;
     }
     
     @Override
-    public final void onInit(ClientInfo info) {
+    public final void init() {
         moduleManager = new ExampleModManager();
         moduleManager.load();
     }
@@ -321,13 +327,13 @@ public final class ExampleClient extends Client {
     private Manager<Module> moduleManager;
     private Manager<Command> commandManager;
     
-    public ExampleClient(ClientInfo info) {
-        super(info);
+    public ExampleClient(ClientConfiguration config) {
+        super(config);
         instance = this;
     }
     
     @Override
-    public final void onInit(ClientInfo info) {
+    public final void init() {
         moduleManager = new ExampleModManager();
         moduleManager.load();
         

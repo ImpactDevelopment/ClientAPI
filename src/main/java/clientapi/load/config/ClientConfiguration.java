@@ -17,6 +17,7 @@
 package clientapi.load.config;
 
 import clientapi.Client;
+import net.minecraft.launchwrapper.IClassTransformer;
 
 /**
  * Representation of the {@code client.json} format.
@@ -57,6 +58,11 @@ public final class ClientConfiguration implements JsonConfiguration {
      * An array of the defined mixin configurations
      */
     private String[] mixins;
+
+    /**
+     * An array of the bytecode transformers
+     */
+    private String[] transformers;
 
     /**
      * @return The Client Name
@@ -111,7 +117,7 @@ public final class ClientConfiguration implements JsonConfiguration {
      * Returns an array of the defined mixin configurations that
      * are used in the transformation loading stage. (Prior to
      * Minecraft being launched). If left undefined, an empty
-     * String array will be returned.
+     * array will be returned.
      *
      * @return An array of the defined mixin configurations
      */
@@ -121,5 +127,22 @@ public final class ClientConfiguration implements JsonConfiguration {
             this.mixins = new String[0];
 
         return this.mixins;
+    }
+
+    /**
+     * Returns an array of the defined bytecode transformers
+     * that are used in the transformation loading stage. All
+     * transformers must be defined as their full class name
+     * and be an implementation of {@link IClassTransformer}.
+     * If left undefined, an empty array will be returned.
+     *
+     * @return An array of transformer class names
+     */
+    public String[] getTransformers() {
+        // If the transformers were left unspecified just default it to none
+        if (this.transformers == null)
+            this.transformers = new String[0];
+
+        return this.transformers;
     }
 }
