@@ -35,7 +35,7 @@ public final class Version {
     /**
      * Incremented when API-breaking changes are made, reset when major version is modified
      */
-    public static final int MINOR = 1;
+    public static final int MINOR = 0;
 
     /**
      * Incremented every release, reset when the minor version is modified
