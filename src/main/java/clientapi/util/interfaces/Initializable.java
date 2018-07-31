@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package clientapi.plugin;
-
-import clientapi.core.Core;
-import clientapi.util.interfaces.Helper;
+package clientapi.util.interfaces;
 
 /**
- * An extension to ClientAPI
- *
  * @author Brady
- * @since 9/1/2017 1:42 PM
+ * @since 7/31/2018 2:51 PM
  */
-public abstract class Plugin extends Core<PluginInfo> implements Helper {
+public interface Initializable {
 
-    public Plugin(PluginInfo info) {
-        super(info);
-    }
+    void init();
 }

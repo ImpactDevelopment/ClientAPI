@@ -17,8 +17,8 @@
 package me.zero.example;
 
 import clientapi.Client;
-import clientapi.ClientInfo;
 import clientapi.command.Command;
+import clientapi.load.config.ClientConfiguration;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
 import me.zero.example.command.ExampleCommandManager;
@@ -34,13 +34,13 @@ public final class ExampleClient extends Client {
     private Manager<Module> moduleManager;
     private Manager<Command> commandManager;
 
-    public ExampleClient(ClientInfo info) {
-        super(info);
+    public ExampleClient(ClientConfiguration config) {
+        super(config);
         instance = this;
     }
 
     @Override
-    public final void onInit(ClientInfo info) {
+    public final void init() {
         // Init and load module manager
         moduleManager = new ExampleModManager();
         moduleManager.load();
@@ -51,11 +51,11 @@ public final class ExampleClient extends Client {
     }
 
     public final String getName() {
-        return this.info.getName();
+        return this.config.getName();
     }
 
-    public final double getVersion() {
-        return this.info.getBuild();
+    public final String getVersion() {
+        return this.config.getVersion();
     }
 
     public final Manager<Module> getModuleManager() {

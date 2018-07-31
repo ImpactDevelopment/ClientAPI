@@ -16,21 +16,21 @@
 
 package clientapi;
 
-import clientapi.core.Core;
-import clientapi.util.interfaces.Helper;
+import clientapi.load.config.ClientConfiguration;
+import clientapi.load.config.Configurable;
 
 /**
  * The base for all ClientAPI Clients. The classpath of implementations
  * of {@code Client} should be defined in the {@code client.json} file.
  *
- * @see ClientInfo
+ * @see ClientConfiguration
  *
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public abstract class Client extends Core<ClientInfo> implements Helper {
+public abstract class Client extends Configurable<ClientConfiguration> {
 
-    public Client(ClientInfo info) {
-        super(info);
+    public Client(ClientConfiguration config) {
+        super(config);
     }
 }

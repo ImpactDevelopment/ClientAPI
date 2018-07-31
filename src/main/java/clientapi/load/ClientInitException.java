@@ -28,4 +28,8 @@ public final class ClientInitException extends RuntimeException {
     public ClientInitException(String message) {
         super(message);
     }
+
+    public ClientInitException(String message, Object... args) {
+        this(String.format(message, args));
+    }
 }
