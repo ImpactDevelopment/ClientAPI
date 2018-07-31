@@ -14,33 +14,13 @@
  * limitations under the License.
  */
 
-package clientapi.util.render.camera;
+package clientapi.util.interfaces;
 
 /**
- * Class for handling camera properties
- *
  * @author Brady
- * @since 2/4/2017 12:00 PM
+ * @since 7/31/2018 2:51 PM
  */
-public interface CameraHandle {
+public interface Initializable {
 
-    /**
-     * @return The visibility of this camera
-     */
-    boolean visible();
-
-    /**
-     * @return Whether or not this camera is reflected
-     */
-    boolean reflected();
-
-    /**
-     * @return The width of the camera window
-     */
-    int width();
-
-    /**
-     * @return The height of the camera window
-     */
-    int height();
+    void init();
 }

@@ -19,7 +19,10 @@ package me.zero.example.mod;
 import clientapi.ClientAPI;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
-import me.zero.example.mod.mods.*;
+import me.zero.example.mod.mods.Aura;
+import me.zero.example.mod.mods.Fly;
+import me.zero.example.mod.mods.Hud;
+import me.zero.example.mod.mods.Speed;
 import org.apache.logging.log4j.Level;
 
 /**
@@ -39,7 +42,6 @@ public final class ExampleModManager extends Manager<Module> {
         // Load Modules
         this.addAll(
             new Aura(),
-            new Camera(),
             new Fly(),
             new Hud(),
             new Speed()

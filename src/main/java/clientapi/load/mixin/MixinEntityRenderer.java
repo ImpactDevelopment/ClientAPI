@@ -21,7 +21,6 @@ import clientapi.event.defaults.game.render.HudOverlayEvent;
 import clientapi.event.defaults.game.render.RenderHudEvent;
 import clientapi.event.defaults.game.render.RenderScreenEvent;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
-import clientapi.util.render.camera.Camera;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiIngame;
@@ -31,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.minecraft.block.material.Material.AIR;
 import static net.minecraft.block.material.Material.WATER;
@@ -42,12 +40,6 @@ import static net.minecraft.block.material.Material.WATER;
  */
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
-
-    @Inject(method = "getFOVModifier", at = @At("HEAD"), cancellable = true)
-    private void getFOVModifier(float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Float> cir) {
-        if (Camera.isCapturing())
-            cir.setReturnValue(90.0F);
-    }
 
     @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=gui" }))
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
