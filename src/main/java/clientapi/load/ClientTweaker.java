@@ -64,8 +64,13 @@ public class ClientTweaker implements ITweaker {
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext(ObfuscationServiceMCP.NOTCH);
         ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
 
-        // Load byteode transformers
+        ClientConfiguration config = findClientConfig();
+
+        // Load bytecode transformers
         classLoader.registerTransformer(ClientTransformer.class.getName());
+
+        for (String transformer : config.getTransformers())
+            classLoader.registerTransformer(transformer);
 
         ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
 
@@ -73,8 +78,8 @@ public class ClientTweaker implements ITweaker {
         loadMixinConfig("mixins.capi.json");
 
         // Load Client defined mixin configs
-        for (String config : findClientConfig().getMixins())
-            loadMixinConfig(config);
+        for (String mixin : config.getMixins())
+            loadMixinConfig(mixin);
 
         ClientAPI.LOGGER.log(Level.INFO, "Loaded Mixin Configurations");
     }
