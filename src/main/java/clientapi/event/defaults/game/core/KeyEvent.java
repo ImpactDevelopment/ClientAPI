@@ -49,4 +49,12 @@ public final class KeyEvent extends InputEvent {
     public final char getCharacter() {
         return this.character;
     }
+
+    @Override
+    public String toString() {
+        return "KeyEvent{" +
+                "character=" + character +
+                ", key=" + key +
+                '}';
+    }
 }

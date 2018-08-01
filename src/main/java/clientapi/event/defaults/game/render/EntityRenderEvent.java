@@ -126,4 +126,18 @@ public final class EntityRenderEvent extends Cancellable {
     public final float getPartialTicks() {
         return this.partialTicks;
     }
+
+    @Override
+    public String toString() {
+        return "EntityRenderEvent{" +
+                "state=" + state +
+                ", renderer=" + renderer +
+                ", entity=" + entity +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", entityYaw=" + entityYaw +
+                ", partialTicks=" + partialTicks +
+                '}';
+    }
 }

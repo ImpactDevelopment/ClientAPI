@@ -44,4 +44,11 @@ public final class LoopEvent {
     public final EventState getState() {
         return this.state;
     }
+
+    @Override
+    public String toString() {
+        return "LoopEvent{" +
+                "state=" + state +
+                '}';
+    }
 }

@@ -60,4 +60,12 @@ public final class EntityJumpEvent extends Cancellable {
     public final EntityLivingBase getEntity() {
         return this.entity;
     }
+
+    @Override
+    public String toString() {
+        return "EntityJumpEvent{" +
+                "state=" + state +
+                ", entity=" + entity +
+                '}';
+    }
 }

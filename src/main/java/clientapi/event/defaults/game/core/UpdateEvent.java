@@ -39,4 +39,11 @@ public final class UpdateEvent extends Cancellable {
     public EventState getState() {
         return this.state;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateEvent{" +
+                "state=" + state +
+                '}';
+    }
 }

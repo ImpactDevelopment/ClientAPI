@@ -68,4 +68,12 @@ public final class GuiDisplayEvent {
     public final GuiScreen getScreen() {
         return this.screen;
     }
+
+    @Override
+    public String toString() {
+        return "GuiDisplayEvent{" +
+                "state=" + state +
+                ", screen=" + screen +
+                '}';
+    }
 }

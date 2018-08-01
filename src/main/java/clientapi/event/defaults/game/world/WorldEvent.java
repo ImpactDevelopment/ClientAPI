@@ -56,4 +56,9 @@ public final class WorldEvent {
      * Called when the world is unloaded
      */
     public static class Unload {}
+
+    @Override
+    public String toString() {
+        return "WorldEvent{}";
+    }
 }

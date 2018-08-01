@@ -32,4 +32,10 @@ import net.minecraft.client.Minecraft;
  * @author Brady
  * @since 5/24/2017 12:26 PM
  */
-public final class GameShutdownEvent extends Cancellable {}
+public final class GameShutdownEvent extends Cancellable {
+
+    @Override
+    public String toString() {
+        return "GameShutdownEvent{}";
+    }
+}

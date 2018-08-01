@@ -44,4 +44,12 @@ public final class RenderWorldEvent extends RenderEvent {
     public enum Pass {
         ANAGLYPH_CYAN, ANAGLYPH_RED, NORMAL
     }
+
+    @Override
+    public String toString() {
+        return "RenderWorldEvent{" +
+                "pass=" + pass +
+                ", partialTicks=" + partialTicks +
+                '}';
+    }
 }
