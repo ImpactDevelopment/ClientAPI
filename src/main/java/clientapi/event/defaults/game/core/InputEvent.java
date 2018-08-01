@@ -33,7 +33,7 @@ abstract class InputEvent {
     /**
      * The modifier keys that were held down at the time of the input
      */
-    private final int modifiers;
+    protected final int modifiers;
 
     public InputEvent(int modifiers) {
         this.modifiers = modifiers;

@@ -35,8 +35,9 @@ public final class KeyEvent extends RawInputEvent {
     @Override
     public String toString() {
         return "KeyEvent{" +
-                "character=" + character +
-                ", key=" + key +
+                "key=" + key +
+                ", action=" + action +
+                ", modifiers=" + Integer.toHexString(modifiers) +
                 '}';
     }
 }

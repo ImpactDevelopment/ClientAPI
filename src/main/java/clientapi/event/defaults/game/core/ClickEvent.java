@@ -35,4 +35,13 @@ public final class ClickEvent extends RawInputEvent {
     public ClickEvent(int key, int action, int modifiers) {
         super(key, action, modifiers);
     }
+
+    @Override
+    public String toString() {
+        return "ClickEvent{" +
+                "key=" + key +
+                ", action=" + action +
+                ", modifiers=" + Integer.toHexString(modifiers) +
+                '}';
+    }
 }

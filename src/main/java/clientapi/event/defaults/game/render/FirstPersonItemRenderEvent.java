@@ -126,4 +126,17 @@ public final class FirstPersonItemRenderEvent extends Cancellable implements Hel
     public final float getRechargeProgress() {
         return this.rechargeProgress;
     }
+
+    @Override
+    public String toString() {
+        return "FirstPersonItemRenderEvent{" +
+                "firstPersonRenderer=" + firstPersonRenderer +
+                ", partialTicks=" + partialTicks +
+                ", hand=" + hand +
+                ", handSide=" + handSide +
+                ", swingProgress=" + swingProgress +
+                ", stack=" + stack +
+                ", rechargeProgress=" + rechargeProgress +
+                '}';
+    }
 }

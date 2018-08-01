@@ -41,4 +41,12 @@ public final class CharacterEvent extends InputEvent {
     public final char getCharacter() {
         return this.character;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterEvent{" +
+                "character=" + character +
+                ", modifiers=" + Integer.toHexString(modifiers) +
+                '}';
+    }
 }

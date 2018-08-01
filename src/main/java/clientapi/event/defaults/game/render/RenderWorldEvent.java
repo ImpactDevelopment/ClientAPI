@@ -31,7 +31,6 @@ public final class RenderWorldEvent extends RenderEvent {
     @Override
     public String toString() {
         return "RenderWorldEvent{" +
-                "pass=" + pass +
                 ", partialTicks=" + partialTicks +
                 '}';
     }

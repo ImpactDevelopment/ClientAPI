@@ -33,7 +33,7 @@ abstract class RawInputEvent extends InputEvent {
     /**
      * The physical key that was pressed or clicked
      */
-    private final int key;
+    protected final int key;
 
     /**
      * The action that occurred with the key
@@ -42,7 +42,7 @@ abstract class RawInputEvent extends InputEvent {
      * @see GLFW#GLFW_PRESS
      * @see GLFW#GLFW_REPEAT
      */
-    private final int action;
+    protected final int action;
 
     RawInputEvent(int key, int action, int mods) {
         super(mods);

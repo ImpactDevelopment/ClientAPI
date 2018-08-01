@@ -126,7 +126,7 @@ public final class SpawnParticleEvent extends Cancellable {
     @Override
     public String toString() {
         return "SpawnParticleEvent{" +
-                "particleID=" + particleID +
+                "particleData=" + particleData +
                 ", x=" + x +
                 ", y=" + y +
                 ", z=" + z +
