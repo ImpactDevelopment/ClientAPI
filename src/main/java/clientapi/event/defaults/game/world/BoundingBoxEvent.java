@@ -112,4 +112,15 @@ public final class BoundingBoxEvent {
     public final Entity getEntity() {
         return this.entity;
     }
+
+    @Override
+    public String toString() {
+        return "BoundingBoxEvent{" +
+                "block=" + block +
+                ", pos=" + pos +
+                ", aabb=" + aabb +
+                ", collidingBoxes=" + collidingBoxes +
+                ", entity=" + entity +
+                '}';
+    }
 }

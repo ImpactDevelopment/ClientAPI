@@ -45,4 +45,12 @@ public final class RenderHudEvent extends RenderEvent {
     public final ScaledResolution getScaledResolution() {
         return this.scaledResolution;
     }
+
+    @Override
+    public String toString() {
+        return "RenderHudEvent{" +
+                "scaledResolution=" + scaledResolution +
+                ", partialTicks=" + partialTicks +
+                '}';
+    }
 }

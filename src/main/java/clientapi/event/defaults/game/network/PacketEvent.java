@@ -113,4 +113,11 @@ public class PacketEvent extends Cancellable {
             return this.state;
         }
     }
+
+    @Override
+    public String toString() {
+        return "PacketEvent{" +
+                "packet=" + packet +
+                '}';
+    }
 }

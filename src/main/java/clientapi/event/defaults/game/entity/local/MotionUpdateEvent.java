@@ -45,7 +45,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
     /**
      * OnGround state
      */
-    private static boolean onGround;
+    private boolean onGround;
 
     /**
      * State of this event
@@ -58,9 +58,9 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
             return;
 
         IEntity me = (IEntity) mc.player;
-        pos.transfer(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
-        rotations.transfer(me.getRotations());
-        onGround = mc.player.onGround;
+        this.pos.transfer(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
+        this.rotations.transfer(me.getRotations());
+        this.onGround = mc.player.onGround;
     }
 
     /**
@@ -70,7 +70,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setX(double x) {
-        pos.setX(x);
+        this.pos.setX(x);
         return this;
     }
 
@@ -81,7 +81,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setY(double y) {
-        pos.setY(y);
+        this.pos.setY(y);
         return this;
     }
 
@@ -92,7 +92,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setZ(double z) {
-        pos.setZ(z);
+        this.pos.setZ(z);
         return this;
     }
 
@@ -103,7 +103,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setYaw(float yaw) {
-        rotations.setX(yaw);
+        this.rotations.setX(yaw);
         return this;
     }
 
@@ -114,7 +114,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setPitch(float pitch) {
-        rotations.setY(pitch);
+        this.rotations.setY(pitch);
         return this;
     }
 
@@ -125,7 +125,7 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return This event
      */
     public final MotionUpdateEvent setOnGround(boolean onGround) {
-        MotionUpdateEvent.onGround = onGround;
+        this.onGround = onGround;
         return this;
     }
 
@@ -133,42 +133,42 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      * @return The X position
      */
     public final double getX() {
-        return pos.getX();
+        return this.pos.getX();
     }
 
     /**
      * @return The Y position
      */
     public final double getY() {
-        return pos.getY();
+        return this.pos.getY();
     }
 
     /**
      * @return The Z position
      */
     public final double getZ() {
-        return pos.getZ();
+        return this.pos.getZ();
     }
 
     /**
      * @return The Yaw rotation
      */
     public final float getYaw() {
-        return rotations.getX();
+        return this.rotations.getX();
     }
 
     /**
      * @return The Pitch rotation
      */
     public final float getPitch() {
-        return rotations.getY();
+        return this.rotations.getY();
     }
 
     /**
      * @return The OnGround state
      */
     public final boolean isOnGround() {
-        return onGround;
+        return this.onGround;
     }
 
     /**
@@ -176,5 +176,15 @@ public final class MotionUpdateEvent extends Cancellable implements Helper {
      */
     public final EventState getState() {
         return this.type;
+    }
+
+    @Override
+    public String toString() {
+        return "MotionUpdateEvent{" +
+                "pos=" + pos +
+                ", rotations=" + rotations +
+                ", onGround=" + onGround +
+                ", type=" + type +
+                '}';
     }
 }

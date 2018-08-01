@@ -48,6 +48,13 @@ public final class ClickEvent extends InputEvent {
         return this.key + 100;
     }
 
+    @Override
+    public String toString() {
+        return "ClickEvent{" +
+                "key=" + key +
+                '}';
+    }
+
     public interface MouseButton {
         int LEFT = 0;
         int RIGHT = 1;

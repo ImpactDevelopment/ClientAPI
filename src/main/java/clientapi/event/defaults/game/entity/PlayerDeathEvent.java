@@ -55,4 +55,12 @@ public final class PlayerDeathEvent {
     public final EntityLivingBase getSource() {
         return this.source;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerDeathEvent{" +
+                "player=" + player +
+                ", source=" + source +
+                '}';
+    }
 }

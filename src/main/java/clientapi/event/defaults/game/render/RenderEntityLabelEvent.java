@@ -57,4 +57,12 @@ public final class RenderEntityLabelEvent extends Cancellable {
     public final String getText() {
         return this.text;
     }
+
+    @Override
+    public String toString() {
+        return "RenderEntityLabelEvent{" +
+                "entity=" + entity +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

@@ -70,4 +70,12 @@ public final class TeamColorEvent extends Cancellable {
     public final void setColor(int color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "TeamColorEvent{" +
+                "entity=" + entity +
+                ", color=" + Integer.toHexString(color) +
+                '}';
+    }
 }

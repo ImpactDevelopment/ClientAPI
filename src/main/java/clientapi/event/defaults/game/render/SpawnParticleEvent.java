@@ -121,4 +121,17 @@ public final class SpawnParticleEvent extends Cancellable {
     public final double getSpeedZ() {
         return this.speedZ;
     }
+
+    @Override
+    public String toString() {
+        return "SpawnParticleEvent{" +
+                "particleID=" + particleID +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", speedX=" + speedX +
+                ", speedY=" + speedY +
+                ", speedZ=" + speedZ +
+                '}';
+    }
 }

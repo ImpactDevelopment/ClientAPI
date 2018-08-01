@@ -44,4 +44,11 @@ public final class TickEvent {
     public final EventState getState() {
         return this.state;
     }
+
+    @Override
+    public String toString() {
+        return "TickEvent{" +
+                "state=" + state +
+                '}';
+    }
 }
