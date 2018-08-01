@@ -130,4 +130,15 @@ public final class EntityTravelEvent extends Cancellable {
     public final EntityLivingBase getEntity() {
         return this.entity;
     }
+
+    @Override
+    public String toString() {
+        return "EntityTravelEvent{" +
+                "state=" + state +
+                ", entity=" + entity +
+                ", strafe=" + strafe +
+                ", vertical=" + vertical +
+                ", forward=" + forward +
+                '}';
+    }
 }

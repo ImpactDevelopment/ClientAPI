@@ -82,4 +82,11 @@ public class ChatEvent extends Cancellable {
             super(message);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ChatEvent{" +
+                "message=" + message +
+                '}';
+    }
 }

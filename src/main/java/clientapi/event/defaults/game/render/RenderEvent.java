@@ -29,7 +29,7 @@ abstract class RenderEvent implements Helper {
     /**
      * The render partial ticks
      */
-    private final float partialTicks;
+    protected final float partialTicks;
 
     public RenderEvent(float partialTicks) {
         this.partialTicks = partialTicks;

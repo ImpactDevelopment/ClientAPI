@@ -44,4 +44,11 @@ public final class BlockCollisionEvent extends Cancellable {
     public final Block getBlock() {
         return this.block;
     }
+
+    @Override
+    public String toString() {
+        return "BlockCollisionEvent{" +
+                "block=" + block +
+                '}';
+    }
 }

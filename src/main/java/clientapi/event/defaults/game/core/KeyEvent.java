@@ -31,4 +31,12 @@ public final class KeyEvent extends RawInputEvent {
     public KeyEvent(int key, int action, int modifiers) {
         super(key, action, modifiers);
     }
+
+    @Override
+    public String toString() {
+        return "KeyEvent{" +
+                "character=" + character +
+                ", key=" + key +
+                '}';
+    }
 }

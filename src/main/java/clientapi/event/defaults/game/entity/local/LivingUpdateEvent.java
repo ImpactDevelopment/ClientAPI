@@ -41,4 +41,11 @@ public final class LivingUpdateEvent {
     public final EventState getState() {
         return this.state;
     }
+
+    @Override
+    public String toString() {
+        return "LivingUpdateEvent{" +
+                "state=" + state +
+                '}';
+    }
 }

@@ -56,4 +56,12 @@ public final class EntityCollisionEvent extends Cancellable {
     public final Entity getCollidingEntity() {
         return this.collidingEntity;
     }
+
+    @Override
+    public String toString() {
+        return "EntityCollisionEvent{" +
+                "entity=" + entity +
+                ", collidingEntity=" + collidingEntity +
+                '}';
+    }
 }

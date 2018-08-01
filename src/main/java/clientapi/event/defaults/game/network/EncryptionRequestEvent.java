@@ -52,4 +52,6 @@ public final class EncryptionRequestEvent extends Cancellable {
     public SPacketEncryptionRequest getPacket() {
         return packet;
     }
+
+
 }

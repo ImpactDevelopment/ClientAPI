@@ -45,4 +45,12 @@ public final class RenderHudEvent extends RenderEvent {
     public final int getScaledHeight() {
         return mc.mainWindow.getScaledHeight();
     }
+
+    @Override
+    public String toString() {
+        return "RenderHudEvent{" +
+                "scaledResolution=" + scaledResolution +
+                ", partialTicks=" + partialTicks +
+                '}';
+    }
 }
