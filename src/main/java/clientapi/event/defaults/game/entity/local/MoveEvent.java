@@ -108,4 +108,14 @@ public final class MoveEvent extends Cancellable {
     public final double getZ() {
         return this.z;
     }
+
+    @Override
+    public String toString() {
+        return "MoveEvent{" +
+                "type=" + type +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

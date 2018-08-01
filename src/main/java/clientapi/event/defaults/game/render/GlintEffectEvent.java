@@ -49,4 +49,11 @@ public final class GlintEffectEvent extends Cancellable {
     public enum GlintTarget {
         ARMOR, ITEM
     }
+
+    @Override
+    public String toString() {
+        return "GlintEffectEvent{" +
+                "target=" + target +
+                '}';
+    }
 }

@@ -126,4 +126,17 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
     public final float getRechargeProgress() {
         return rechargeProgress;
     }
+
+    @Override
+    public String toString() {
+        return "ItemRenderEvent{" +
+                "itemRenderer=" + itemRenderer +
+                ", partialTicks=" + partialTicks +
+                ", hand=" + hand +
+                ", handSide=" + handSide +
+                ", swingProgress=" + swingProgress +
+                ", stack=" + stack +
+                ", rechargeProgress=" + rechargeProgress +
+                '}';
+    }
 }

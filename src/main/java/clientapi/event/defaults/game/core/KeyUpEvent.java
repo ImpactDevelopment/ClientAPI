@@ -59,4 +59,12 @@ public final class KeyUpEvent {
     public final char getCharacter() {
         return this.character;
     }
+
+    @Override
+    public String toString() {
+        return "KeyUpEvent{" +
+                "key=" + key +
+                ", character=" + character +
+                '}';
+    }
 }

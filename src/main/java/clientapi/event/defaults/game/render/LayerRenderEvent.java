@@ -44,4 +44,12 @@ public final class LayerRenderEvent extends Cancellable {
     public final LayerRenderer getLayerRenderer() {
         return this.layerRenderer;
     }
+
+    @Override
+    public String toString() {
+        return "LayerRenderEvent{" +
+                "entity=" + entity +
+                ", layerRenderer=" + layerRenderer +
+                '}';
+    }
 }

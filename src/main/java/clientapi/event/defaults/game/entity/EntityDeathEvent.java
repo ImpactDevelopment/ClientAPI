@@ -55,4 +55,12 @@ public final class EntityDeathEvent {
     public final DamageSource getSource() {
         return this.source;
     }
+
+    @Override
+    public String toString() {
+        return "EntityDeathEvent{" +
+                "entity=" + entity +
+                ", source=" + source +
+                '}';
+    }
 }

@@ -151,4 +151,11 @@ public final class HudOverlayEvent extends Cancellable {
          */
         POTION_EFFECTS
     }
+
+    @Override
+    public String toString() {
+        return "HudOverlayEvent{" +
+                "type=" + type +
+                '}';
+    }
 }

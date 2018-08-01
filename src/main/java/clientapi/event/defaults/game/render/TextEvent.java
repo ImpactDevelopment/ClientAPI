@@ -51,4 +51,11 @@ public final class TextEvent {
         this.text = text;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "TextEvent{" +
+                "text='" + text + '\'' +
+                '}';
+    }
 }

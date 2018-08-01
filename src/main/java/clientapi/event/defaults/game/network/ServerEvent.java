@@ -125,4 +125,11 @@ public class ServerEvent {
             return this.forced;
         }
     }
+
+    @Override
+    public String toString() {
+        return "ServerEvent{" +
+                "serverData=" + serverData +
+                '}';
+    }
 }

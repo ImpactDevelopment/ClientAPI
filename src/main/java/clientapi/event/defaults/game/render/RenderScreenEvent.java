@@ -74,4 +74,14 @@ public final class RenderScreenEvent extends RenderEvent {
     public final boolean isGuiHidden() {
         return this.guiHidden;
     }
+
+    @Override
+    public String toString() {
+        return "RenderScreenEvent{" +
+                "width=" + width +
+                ", height=" + height +
+                ", guiHidden=" + guiHidden +
+                ", partialTicks=" + partialTicks +
+                '}';
+    }
 }
