@@ -39,7 +39,7 @@ public class MixinRender {
         Integer color = null;
 
         if (entityIn.getTeam() != null)
-            color = entityIn.getTeam().getColor().func_211163_e();
+            color = entityIn.getTeam().getColor().getColor();
 
         TeamColorEvent event = new TeamColorEvent(entityIn, color == null ? 0xFFFFFFFF : color);
         ClientAPI.EVENT_BUS.post(event);

@@ -54,7 +54,7 @@ public final class Colors implements Helper {
      * @return Hex color value corresponding to {@code TextFormatting} value
      */
     public static int getColor(TextFormatting textFormatting) {
-        Integer color = textFormatting.func_211163_e();
+        Integer color = textFormatting.getColor();
         return 0xFF000000 | (color == null ? 0xFFFFFF : color);
     }
 

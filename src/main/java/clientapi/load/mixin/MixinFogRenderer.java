@@ -38,10 +38,10 @@ public class MixinFogRenderer {
     private boolean setupFog$getMaterial(IFluidState fluidState, Tag<Fluid> fluidTag) {
         HudOverlayEvent event = null;
 
-        if (fluidTag == FluidTags.field_206959_a)
+        if (fluidTag == FluidTags.WATER)
             event = new HudOverlayEvent(HudOverlayEvent.Type.WATER);
 
-        if (fluidTag == FluidTags.field_206960_b)
+        if (fluidTag == FluidTags.LAVA)
             event = new HudOverlayEvent(HudOverlayEvent.Type.LAVA);
 
         if (event != null) {
