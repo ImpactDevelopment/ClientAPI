@@ -18,14 +18,16 @@ package clientapi.load;
 
 import clientapi.load.transform.ITransformer;
 import clientapi.load.transform.impl.ValueAccessorTransformer;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -37,14 +39,25 @@ import java.util.stream.Collectors;
 public final class ClientTransformer implements IClassTransformer {
 
     /**
-     * {@code ImmutableList} of all transformers.
+     * The instance of {@link ClientTransformer}
      */
-    private static final ImmutableList<ITransformer> transformers = new ImmutableList.Builder<ITransformer>()
-            .add(new ValueAccessorTransformer())
-            .build();
+    private static ClientTransformer instance;
+
+    /**
+     * A {@link List} of all of the transformers
+     */
+    private final List<ITransformer> transformers = new ArrayList<>();
+
+    public ClientTransformer() {
+        // Set the instance
+        instance = this;
+
+        // Register the default transformers
+        this.transformers.add(new ValueAccessorTransformer());
+    }
 
     @Override
-    public byte[] transform(String name, String transformedName, byte[] basicClass) {
+    public final byte[] transform(String name, String transformedName, byte[] basicClass) {
         List<ITransformer> transformers = getTransformers(transformedName);
 
         if (!transformers.isEmpty()) {
@@ -64,6 +77,18 @@ public final class ClientTransformer implements IClassTransformer {
         }
 
         return basicClass;
+    }
+
+    /**
+     * Registers all of the specified transformer classpaths.
+     *
+     * @param transformers The transformer classpaths
+     */
+    final void registerAll(String... transformers) {
+        Arrays.stream(transformers)
+                .map(ITransformer::create)
+                .filter(Objects::nonNull)
+                .forEach(this.transformers::add);
     }
 
     /**
@@ -93,5 +118,12 @@ public final class ClientTransformer implements IClassTransformer {
         ClassNode cn = new ClassNode();
         new ClassReader(bytecode).accept(cn, 0);
         return cn;
+    }
+
+    /**
+     * @return The instance of {@link ClientTransformer}
+     */
+    public static ClientTransformer getInstance() {
+        return instance;
     }
 }

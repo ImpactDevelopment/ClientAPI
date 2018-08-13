@@ -68,9 +68,7 @@ public class ClientTweaker implements ITweaker {
 
         // Load bytecode transformers
         classLoader.registerTransformer(ClientTransformer.class.getName());
-
-        for (String transformer : config.getTransformers())
-            classLoader.registerTransformer(transformer);
+        ClientTransformer.getInstance().registerAll(config.getTransformers());
 
         ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
 
@@ -91,7 +89,7 @@ public class ClientTweaker implements ITweaker {
 
     @Override
     public final String[] getLaunchArguments() {
-        return this.args.toArray(new String[this.args.size()]);
+        return this.args.toArray(new String[0]);
     }
 
     private ClientConfiguration findClientConfig() {
