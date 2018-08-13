@@ -32,7 +32,7 @@ import java.util.Arrays;
  * to appending the control codes to text strings.
  *
  * @author Brady
- * @since 9/7/2017 7:20 PM
+ * @since 9/7/2017
  */
 public final class ChatBuilder implements Builder<ITextComponent> {
 

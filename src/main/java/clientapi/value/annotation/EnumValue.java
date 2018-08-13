@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * Annotation to mark fields as Enum Values
  *
  * @author Brady
- * @since 12/2/2017 11:53 AM
+ * @since 12/2/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

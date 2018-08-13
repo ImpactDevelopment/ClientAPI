@@ -31,7 +31,7 @@ import java.util.Map;
  * @see IValueHolder
  *
  * @author Brady
- * @since 5/12/2017 2:52 PM
+ * @since 5/12/2017
  */
 public class ValueHolder implements IValueHolder {
 

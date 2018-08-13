@@ -29,7 +29,7 @@ import java.util.List;
  * Used for File I/O
  *
  * @author Brady
- * @since 2/23/2017 12:00 PM
+ * @since 2/23/2017
  */
 public final class FileManager {
 

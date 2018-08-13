@@ -26,7 +26,7 @@ import clientapi.util.math.Vec2;
  * @see WidgetPos
  *
  * @author Brady
- * @since 5/28/2017 10:00 AM
+ * @since 5/28/2017
  */
 public enum DefaultWidgetPos implements WidgetPos, Helper {
 

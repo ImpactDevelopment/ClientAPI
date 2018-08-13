@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * @author Brady
- * @since 7/23/2017 3:31 PM
+ * @since 7/23/2017
  */
 public class ShaderProgram extends GLObject {
 

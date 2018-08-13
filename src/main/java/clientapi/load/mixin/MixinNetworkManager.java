@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 @Mixin(NetworkManager.class)
 public abstract class MixinNetworkManager implements INetworkManager {

@@ -24,7 +24,7 @@ import clientapi.util.interfaces.*;
  * @see Module
  *
  * @author Brady
- * @since 1/21/2017 12:00 PM
+ * @since 1/21/2017
  */
 interface IModule extends Nameable, Describable, Helper, Toggleable, Bindable {
 

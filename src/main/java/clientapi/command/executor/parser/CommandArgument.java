@@ -24,7 +24,7 @@ import java.util.Optional;
 
 /**
  * @author Brady
- * @since 2/15/2018 6:21 PM
+ * @since 2/15/2018
  */
 public final class CommandArgument implements Nameable {
 

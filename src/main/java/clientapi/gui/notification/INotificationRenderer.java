@@ -22,7 +22,7 @@ import java.util.Collection;
  * Used to render notifications
  *
  * @author Brady
- * @since 1/6/2017 12:00 PM
+ * @since 1/6/2017
  */
 public interface INotificationRenderer {
 

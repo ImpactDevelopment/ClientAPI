@@ -18,7 +18,7 @@ package clientapi.util.entity;
 
 /**
  * @author Brady
- * @since 2/5/2018 2:16 PM
+ * @since 2/5/2018
  */
 public enum CheckType {
 

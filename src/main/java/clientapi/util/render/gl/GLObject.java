@@ -20,7 +20,7 @@ package clientapi.util.render.gl;
  * Representation of an Object in OpenGL
  *
  * @author Brady
- * @since 7/22/2017 4:18 PM
+ * @since 7/22/2017
  */
 public abstract class GLObject {
 

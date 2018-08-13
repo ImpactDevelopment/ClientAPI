@@ -25,7 +25,7 @@ import java.util.Optional;
 
 /**
  * @author Brady
- * @since 10/18/2017 9:17 PM
+ * @since 10/18/2017
  */
 public final class OptionalParser implements ArgumentParser<Optional<?>> {
 

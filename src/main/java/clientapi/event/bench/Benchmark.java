@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  * Used to benchmark the execution speed of code, can be used for anything
  *
  * @author Brady
- * @since 5/11/2017 6:11 PM
+ * @since 5/11/2017
  */
 public abstract class Benchmark {
 

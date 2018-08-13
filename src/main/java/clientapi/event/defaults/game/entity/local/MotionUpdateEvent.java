@@ -28,7 +28,7 @@ import me.zero.alpine.type.EventState;
  * the server to update your location and position
  *
  * @author Brady
- * @since 2/12/2017 12:00 PM
+ * @since 2/12/2017
  */
 public final class MotionUpdateEvent extends Cancellable implements Helper {
 

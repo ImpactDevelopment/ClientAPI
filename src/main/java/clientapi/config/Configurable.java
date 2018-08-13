@@ -29,7 +29,7 @@ import clientapi.util.interfaces.Initializable;
  * @see ClientConfiguration
  *
  * @author Brady
- * @since 9/1/2017 1:46 PM
+ * @since 9/1/2017
  */
 public abstract class Configurable<T extends JsonConfiguration> implements Initializable, Helper {
 

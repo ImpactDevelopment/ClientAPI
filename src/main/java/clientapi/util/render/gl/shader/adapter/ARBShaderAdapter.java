@@ -30,7 +30,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 
 /**
  * @author Brady
- * @since 5/21/2017 12:07 PM
+ * @since 5/21/2017
  */
 final class ARBShaderAdapter implements ShaderAdapter {
 

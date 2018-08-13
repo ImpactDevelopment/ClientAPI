@@ -26,7 +26,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
  * @see EntityPlayerSP#onUpdate()
  *
  * @author Brady
- * @since 2/8/2017 12:00 PM
+ * @since 2/8/2017
  */
 public final class UpdateEvent extends Cancellable {
 

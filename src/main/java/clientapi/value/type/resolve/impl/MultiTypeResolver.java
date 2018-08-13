@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * Default implementation of {@code TypeResolver} used to parse {@code MultiType} fields
  *
  * @author Brady
- * @since 2/8/2018 3:24 PM
+ * @since 2/8/2018
  */
 public final class MultiTypeResolver implements TypeResolver<MultiType> {
 

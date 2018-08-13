@@ -21,7 +21,7 @@ import static org.lwjgl.opengl.GL15.*;
 
 /**
  * @author Brady
- * @since 7/22/2017 10:16 PM
+ * @since 7/22/2017
  */
 public final class Query extends GLObject {
 

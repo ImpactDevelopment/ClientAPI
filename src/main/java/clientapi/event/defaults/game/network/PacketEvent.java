@@ -29,7 +29,7 @@ import net.minecraft.network.Packet;
  * @see Decode
  *
  * @author Brady
- * @since 2/7/2017 12:00 PM
+ * @since 2/7/2017
  */
 public class PacketEvent extends Cancellable {
 

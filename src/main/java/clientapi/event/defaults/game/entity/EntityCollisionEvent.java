@@ -24,7 +24,7 @@ import net.minecraft.entity.Entity;
  * If cancelled, the collision doesn't occur.
  *
  * @author Brady
- * @since 4/8/2017 12:00 PM
+ * @since 4/8/2017
  */
 public final class EntityCollisionEvent extends Cancellable {
 

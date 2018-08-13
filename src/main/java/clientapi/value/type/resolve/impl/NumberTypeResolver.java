@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * Default implementation of {@code TypeResolver} used to parse {@code NumberType} fields
  *
  * @author Brady
- * @since 2/8/2018 3:27 PM
+ * @since 2/8/2018
  */
 public final class NumberTypeResolver implements TypeResolver<NumberType> {
 

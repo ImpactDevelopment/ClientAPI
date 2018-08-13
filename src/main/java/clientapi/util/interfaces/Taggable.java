@@ -27,7 +27,7 @@ import java.util.Optional;
  * @see Tag
  *
  * @author Brady
- * @since 11/1/2017 1:39 PM
+ * @since 11/1/2017
  */
 public interface Taggable {
 

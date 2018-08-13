@@ -20,7 +20,7 @@ package clientapi.gui.notification;
  * Implementation of INotification.
  *
  * @author Brady
- * @since 1/6/2017 12:00 PM
+ * @since 1/6/2017
  */
 public class Notification implements INotification {
 

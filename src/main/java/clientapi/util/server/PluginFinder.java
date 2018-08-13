@@ -36,7 +36,7 @@ import java.util.function.Consumer;
  * Used to find possible plugins on servers
  *
  * @author Brady
- * @since 3/24/2017 12:00 PM
+ * @since 3/24/2017
  */
 public final class PluginFinder implements Helper {
 

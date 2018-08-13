@@ -18,7 +18,7 @@ package clientapi.value;
 
 /**
  * @author Brady
- * @since 5/31/2018 3:02 PM
+ * @since 5/31/2018
  */
 @FunctionalInterface
 public interface ValueChangeListener<T> {

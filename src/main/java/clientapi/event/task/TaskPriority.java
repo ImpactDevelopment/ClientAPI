@@ -22,7 +22,7 @@ package clientapi.event.task;
  * of lower priorities when they are being started.
  *
  * @author Brady
- * @since 11/30/2017 2:50 PM
+ * @since 11/30/2017
  */
 public interface TaskPriority {
 

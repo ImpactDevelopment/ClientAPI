@@ -23,7 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * Called when {@code SPacketCombatEvent} reports a player death
  *
  * @author Brady
- * @since 2/28/2017 12:00 PM
+ * @since 2/28/2017
  */
 public final class PlayerDeathEvent {
 

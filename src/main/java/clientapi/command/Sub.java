@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  * as "optional", but only if the argument is the last.
  *
  * @author Brady
- * @since 10/17/2017 2:49 PM
+ * @since 10/17/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

@@ -30,7 +30,7 @@ import java.util.Objects;
  * Generic Block Utils
  *
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/24/2017
  */
 public final class BlockUtils implements Helper {
 

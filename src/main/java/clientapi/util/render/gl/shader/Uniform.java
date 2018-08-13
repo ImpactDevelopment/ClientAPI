@@ -25,7 +25,7 @@ import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
  * A representation of a GLSL Uniform Variable
  *
  * @author Brady
- * @since 2/16/2017 12:00 PM
+ * @since 2/16/2017
  */
 public final class Uniform {
 

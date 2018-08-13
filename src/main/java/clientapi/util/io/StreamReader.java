@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * Reads the lines returned from an {@code InputStream}.
  *
  * @author Brady
- * @since 2/15/2017 12:00 PM
+ * @since 2/15/2017
  */
 public final class StreamReader {
 

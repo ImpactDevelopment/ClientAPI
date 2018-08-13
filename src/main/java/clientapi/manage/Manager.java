@@ -38,7 +38,7 @@ import java.util.Map;
  * @param <T> The type of entries that this manager holds
  *
  * @author Brady
- * @since 1/19/2017 12:00 PM
+ * @since 1/19/2017
  */
 public abstract class Manager<T> extends ArrayList<T> implements Loadable, Saveable {
 

@@ -20,7 +20,7 @@ package clientapi.util.interfaces;
  * Simple Toggleable interface
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 1/23/2017
  */
 public interface Toggleable {
 

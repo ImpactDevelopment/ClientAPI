@@ -26,7 +26,7 @@ import java.awt.*;
  * A collection of methods to help with color values
  *
  * @author Brady
- * @since 4/4/2017 12:00 PM
+ * @since 4/4/2017
  */
 public final class Colors implements Helper {
 

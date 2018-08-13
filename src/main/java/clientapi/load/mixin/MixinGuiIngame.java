@@ -36,7 +36,7 @@ import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 
 /**
  * @author Brady
- * @since 5/24/2018 10:53 AM
+ * @since 5/24/2018
  */
 @Mixin(GuiIngame.class)
 public class MixinGuiIngame {

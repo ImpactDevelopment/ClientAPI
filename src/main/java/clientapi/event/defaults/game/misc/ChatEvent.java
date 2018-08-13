@@ -27,7 +27,7 @@ import net.minecraft.util.text.TextComponentString;
  * @see Receive
  *
  * @author Brady
- * @since 2/10/2017 12:00 PM
+ * @since 2/10/2017
  */
 public class ChatEvent extends Cancellable {
 

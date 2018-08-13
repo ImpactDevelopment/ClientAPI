@@ -24,7 +24,7 @@ import clientapi.command.sender.CommandSender;
  * is defined by the {@code CommandSender} and {@code CommandHandler}.
  *
  * @author Brady
- * @since 10/18/2017 11:19 AM
+ * @since 10/18/2017
  */
 public interface ExecutionContext {
 

@@ -53,7 +53,7 @@ import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {

@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 
 /**
  * @author Brady
- * @since 11/9/2017 9:02 PM
+ * @since 11/9/2017
  */
 public final class EntityFilters implements Helper {
 

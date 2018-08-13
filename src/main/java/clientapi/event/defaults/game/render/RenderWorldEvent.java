@@ -20,7 +20,7 @@ package clientapi.event.defaults.game.render;
  * Called at the end of EntityRenderer#renderWorldPass(int, float, long)
  *
  * @author Brady
- * @since 2/9/2017 12:00 PM
+ * @since 2/9/2017
  */
 public final class RenderWorldEvent extends RenderEvent {
 

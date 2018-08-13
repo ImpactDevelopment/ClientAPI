@@ -26,7 +26,7 @@ import me.zero.alpine.listener.Listener;
  * events to test how fast the event system is
  *
  * @author Brady
- * @since 5/17/2017 2:34 PM
+ * @since 5/17/2017
  */
 public final class EventBenchmark extends Benchmark {
 

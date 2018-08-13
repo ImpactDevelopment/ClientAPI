@@ -18,7 +18,7 @@ package clientapi.util.render.gl.glenum;
 
 /**
  * @author Brady
- * @since 5/21/2017 1:05 PM
+ * @since 5/21/2017
  */
 public enum GLShaderStatus {
 

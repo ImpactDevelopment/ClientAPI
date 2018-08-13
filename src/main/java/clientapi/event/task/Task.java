@@ -20,7 +20,7 @@ import clientapi.util.interfaces.Identifiable;
 
 /**
  * @author Brady
- * @since 11/29/2017 2:46 PM
+ * @since 11/29/2017
  */
 public interface Task extends Identifiable {
 

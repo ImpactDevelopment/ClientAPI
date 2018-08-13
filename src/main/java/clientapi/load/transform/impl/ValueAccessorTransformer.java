@@ -39,7 +39,7 @@ import static org.objectweb.asm.Opcodes.*;
  * @see ValueAccessor
  *
  * @author Brady
- * @since 9/13/2017 10:24 PM
+ * @since 9/13/2017
  */
 public final class ValueAccessorTransformer implements ITransformer {
 

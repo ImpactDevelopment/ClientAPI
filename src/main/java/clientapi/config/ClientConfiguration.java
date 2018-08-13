@@ -25,7 +25,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
  * @see Client
  *
  * @author Brady
- * @since 1/24/2017 12:00 PM
+ * @since 1/24/2017
  */
 public final class ClientConfiguration implements JsonConfiguration {
 

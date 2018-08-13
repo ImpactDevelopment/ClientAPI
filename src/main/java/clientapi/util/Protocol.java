@@ -21,7 +21,7 @@ package clientapi.util;
  * after the netty rewrite in 1.7
  *
  * @author Brady
- * @since 3/6/2017 12:00 PM
+ * @since 3/6/2017
  */
 public enum Protocol {
 

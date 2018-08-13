@@ -27,7 +27,7 @@ import java.util.function.Function;
  * @see CheckType
  *
  * @author Brady
- * @since 2/5/2018 2:24 PM
+ * @since 2/5/2018
  */
 public final class EntityCheckImpl implements EntityCheck {
 

@@ -22,7 +22,7 @@ import clientapi.command.handler.CommandHandler;
  * Base for command input listeners
  *
  * @author Brady
- * @since 6/11/2017 1:47 PM
+ * @since 6/11/2017
  */
 public class CommandListener {
 

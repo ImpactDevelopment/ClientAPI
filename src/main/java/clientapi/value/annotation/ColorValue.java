@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * Annotation used to mark fields as Color Values
  *
  * @author Brady
- * @since 4/11/2018 11:26 AM
+ * @since 4/11/2018
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

@@ -20,7 +20,7 @@ package clientapi.value.exception;
  * Called during value registry when an error is run into.
  *
  * @author Brady
- * @since 5/22/2017 5:25 PM
+ * @since 5/22/2017
  */
 public final class ValueException extends RuntimeException {
 

@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
  * Thrown when there isn't a parser for an expected argument type.
  *
  * @author Brady
- * @since 1/4/2018 11:06 AM
+ * @since 1/4/2018
  */
 public final class InvalidParserException extends CommandException {
 

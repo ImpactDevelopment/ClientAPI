@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 5/24/2018 10:57 AM
+ * @since 5/24/2018
  */
 @Mixin(GuiBossOverlay.class)
 public class MixinGuiBossOverlay {

@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * @author Brady
- * @since 8/12/2018 6:09 PM
+ * @since 8/12/2018
  */
 public final class Environment {
 

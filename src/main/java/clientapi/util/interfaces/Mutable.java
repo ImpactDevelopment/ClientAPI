@@ -26,6 +26,6 @@ import java.util.function.Supplier;
  * @see Supplier
  *
  * @author Brady
- * @since 5/1/2018 6:49 PM
+ * @since 5/1/2018
  */
 public interface Mutable<T> extends Consumer<T>, Supplier<T> {}

@@ -27,7 +27,7 @@ import java.util.*;
  * Contains methods that ClientAPI uses throughout its code.
  *
  * @author Brady
- * @since 1/20/2017 12:00 PM
+ * @since 1/20/2017
  */
 public final class ClientAPIUtils {
 

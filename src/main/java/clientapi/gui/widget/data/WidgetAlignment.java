@@ -25,7 +25,7 @@ package clientapi.gui.widget.data;
  * @see DefaultWidgetAlignment
  *
  * @author Brady
- * @since 5/28/2017 10:00 AM
+ * @since 5/28/2017
  */
 public interface WidgetAlignment {
 

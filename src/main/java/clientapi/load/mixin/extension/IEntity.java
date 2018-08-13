@@ -21,7 +21,7 @@ import clientapi.util.math.Vec3;
 
 /**
  * @author Brady
- * @since 2/25/2017 12:00 PM
+ * @since 2/25/2017
  */
 public interface IEntity {
 

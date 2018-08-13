@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 7/16/2017 5:22 PM
+ * @since 7/16/2017
  */
 @Mixin(NettyPacketEncoder.class)
 public class MixinNettyPacketEncoder {

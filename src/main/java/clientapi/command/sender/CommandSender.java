@@ -23,7 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * Represents a sender
  *
  * @author Brady
- * @since 6/11/2017 6:41 PM
+ * @since 6/11/2017
  */
 public interface CommandSender {
 

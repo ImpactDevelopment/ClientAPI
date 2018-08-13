@@ -25,7 +25,7 @@ import me.zero.alpine.EventBus;
  * not all methods may need to be implemented.
  *
  * @author Brady
- * @since 11/8/2017 4:58 PM
+ * @since 11/8/2017
  */
 public abstract class AbstractEventBus implements EventBus {
 
