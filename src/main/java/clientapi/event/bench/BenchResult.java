@@ -22,7 +22,7 @@ import java.util.stream.LongStream;
  * Holds data from a benchmark
  *
  * @author Brady
- * @since 5/11/2017 6:15 PM
+ * @since 5/11/2017
  */
 public final class BenchResult {
 

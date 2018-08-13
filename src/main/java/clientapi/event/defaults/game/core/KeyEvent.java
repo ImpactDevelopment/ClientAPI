@@ -24,7 +24,7 @@ package clientapi.event.defaults.game.core;
  * @see ClickEvent
  *
  * @author Brady
- * @since 1/20/2017 12:00 PM
+ * @since 1/20/2017
  */
 public final class KeyEvent extends InputEvent {
 

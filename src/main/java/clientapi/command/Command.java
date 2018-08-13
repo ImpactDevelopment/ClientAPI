@@ -32,7 +32,7 @@ import java.util.Optional;
  * Implementation of {@code ICommand}
  *
  * @author Brady
- * @since 5/31/2017 8:55 AM
+ * @since 5/31/2017
  */
 public class Command implements ICommand {
 

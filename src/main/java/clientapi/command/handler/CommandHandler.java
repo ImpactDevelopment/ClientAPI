@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
  * @see Cmd
  *
  * @author Brady
- * @since 6/1/2017 3:03 PM
+ * @since 6/1/2017
  */
 public final class CommandHandler implements Helper {
 

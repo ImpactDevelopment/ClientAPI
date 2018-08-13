@@ -25,7 +25,7 @@ import clientapi.util.interfaces.Taggable;
  * @see Taggable
  *
  * @author Brady
- * @since 11/1/2017 2:29 PM
+ * @since 11/1/2017
  */
 public final class Tag<T> implements Identifiable {
 

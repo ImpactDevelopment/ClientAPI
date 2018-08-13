@@ -25,7 +25,7 @@ import net.minecraft.entity.Entity;
  * Called before and after an entity is rendered
  *
  * @author Brady
- * @since 3/2/2017 12:00 PM
+ * @since 3/2/2017
  */
 public final class EntityRenderEvent extends Cancellable {
 

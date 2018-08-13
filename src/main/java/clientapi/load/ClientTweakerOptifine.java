@@ -25,7 +25,7 @@ import java.util.List;
  * so that optifine's tweaker does not cause any conflictions.
  *
  * @author Brady
- * @since 2/21/2018 8:01 PM
+ * @since 2/21/2018
  */
 public final class ClientTweakerOptifine extends ClientTweaker {
 

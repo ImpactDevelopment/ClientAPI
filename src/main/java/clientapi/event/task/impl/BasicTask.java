@@ -24,7 +24,7 @@ import clientapi.util.interfaces.Identifiable;
  * The most basic implementation of {@code Task}.
  *
  * @author Brady
- * @since 11/30/2017 2:58 PM
+ * @since 11/30/2017
  */
 public class BasicTask implements Task {
 

@@ -21,7 +21,7 @@ package clientapi.load;
  * to proceed while the Client is being initialized.
  *
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 public final class ClientInitException extends RuntimeException {
 

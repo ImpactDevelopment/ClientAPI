@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * @author Brady
- * @since 2/15/2018 1:47 PM
+ * @since 2/15/2018
  */
 public final class ChildCommand implements ICommand {
 

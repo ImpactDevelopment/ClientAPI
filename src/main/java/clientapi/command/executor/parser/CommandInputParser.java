@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Used to parse raw text into the individual arguments that will be used for execution
  *
  * @author Brady
- * @since 4/14/2018 6:10 PM
+ * @since 4/14/2018
  */
 public enum CommandInputParser {
 

@@ -26,7 +26,7 @@ import net.minecraft.client.settings.GameSettings;
  * @see EntityRenderer#updateCameraAndRender(float, long)
  *
  * @author Brady
- * @since 4/30/2017 12:00 PM
+ * @since 4/30/2017
  */
 public final class RenderScreenEvent extends RenderEvent {
 

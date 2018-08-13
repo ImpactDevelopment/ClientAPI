@@ -24,7 +24,7 @@ import org.apache.logging.log4j.Logger;
  * Contains some constants that are used throughout the API.
  *
  * @author Brady
- * @since 5/27/2017 9:52 AM
+ * @since 5/27/2017
  */
 public final class ClientAPI {
 

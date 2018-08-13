@@ -24,7 +24,7 @@ import me.zero.alpine.type.Cancellable;
  * get spawned.
  *
  * @author Brady
- * @since 4/10/2018 3:25 PM
+ * @since 4/10/2018
  */
 public final class SpawnParticleEvent extends Cancellable {
 

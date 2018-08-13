@@ -28,7 +28,7 @@ import clientapi.command.exception.CommandException;
  * performed by the Client API.
  *
  * @author Brady
- * @since 6/1/2017 2:54 PM
+ * @since 6/1/2017
  */
 public interface ExceptionHandler {
 

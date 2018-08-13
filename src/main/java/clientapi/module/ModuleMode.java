@@ -24,7 +24,7 @@ import clientapi.value.holder.ValueHolder;
  * A type of module intended for use as a sub-module
  *
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/24/2017
  */
 public class ModuleMode<T extends Module> extends ValueHolder implements IModule {
 

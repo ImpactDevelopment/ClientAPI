@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
  * Annotation to mark fields as Multi Values
  *
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/24/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

@@ -23,7 +23,7 @@ import net.minecraft.client.multiplayer.ServerData;
  * Called when the client user connects or disconnects from a server
  *
  * @author Brady
- * @since 9/7/2017 5:59 PM
+ * @since 9/7/2017
  */
 public class ServerEvent {
 

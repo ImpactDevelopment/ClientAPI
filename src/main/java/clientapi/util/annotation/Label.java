@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * id, parent field, description, and any aliases.
  *
  * @author Brady
- * @since 2/11/2017 12:00 PM
+ * @since 2/11/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

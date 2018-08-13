@@ -26,7 +26,7 @@ import me.zero.alpine.type.Cancellable;
  * @see Module#setState(boolean)
  *
  * @author Brady
- * @since 4/5/2017 12:00 PM
+ * @since 4/5/2017
  */
 public final class ModuleStateEvent extends Cancellable {
 

@@ -7,7 +7,7 @@ import static clientapi.util.server.PluginFinderResponse.Result.SUCCESS;
 
 /**
  * @author Brady
- * @since 4/12/2018 8:38 PM
+ * @since 4/12/2018
  */
 public final class PluginFinderResponse {
 

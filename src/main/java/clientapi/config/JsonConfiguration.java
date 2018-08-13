@@ -26,7 +26,7 @@ import java.io.InputStream;
  * Base for a Json based Configuration file.
  *
  * @author Brady
- * @since 7/31/2018 2:53 PM
+ * @since 7/31/2018
  */
 public interface JsonConfiguration {
 

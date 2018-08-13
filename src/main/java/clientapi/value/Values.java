@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * Class used to discover values from various holders
  *
  * @author Brady
- * @since 2/21/2017 12:00 PM
+ * @since 2/21/2017
  */
 public final class Values {
 

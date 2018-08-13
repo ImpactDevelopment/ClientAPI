@@ -24,7 +24,7 @@ import java.util.Random;
  * Utils used for mathematical operations.
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 1/23/2017
  */
 public final class MathUtils {
 

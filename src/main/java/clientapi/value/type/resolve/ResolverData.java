@@ -21,7 +21,7 @@ package clientapi.value.type.resolve;
  * its resolvable types
  *
  * @author Brady
- * @since 5/22/2017 5:14 PM
+ * @since 5/22/2017
  */
 public final class ResolverData {
 

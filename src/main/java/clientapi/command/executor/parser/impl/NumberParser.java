@@ -26,7 +26,7 @@ import java.math.BigInteger;
 
 /**
  * @author Brady
- * @since 10/20/2017 11:09 AM
+ * @since 10/20/2017
  */
 public final class NumberParser implements ArgumentParser<Number> {
 

@@ -24,7 +24,7 @@ import me.zero.alpine.EventManager;
  * allow/prevent events from being posted to their listeners.
  *
  * @author Brady
- * @since 4/21/2018 9:28 AM
+ * @since 4/21/2018
  */
 public final class ClientAPIEventManager extends EventManager {
 

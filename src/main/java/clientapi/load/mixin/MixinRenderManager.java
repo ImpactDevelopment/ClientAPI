@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 @Mixin(RenderManager.class)
 public class MixinRenderManager {

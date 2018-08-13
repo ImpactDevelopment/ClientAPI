@@ -25,7 +25,7 @@ import java.util.function.Supplier;
  * A mutable that is constructed from merging a {@code Consumer} and {@code Supplier}.
  *
  * @author Brady
- * @since 5/1/2018 6:51 PM
+ * @since 5/1/2018
  */
 public class MergedMutable<T> implements Mutable<T> {
 

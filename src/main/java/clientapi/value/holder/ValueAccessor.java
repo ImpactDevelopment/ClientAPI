@@ -29,7 +29,7 @@ import java.util.function.Supplier;
  * @see ValueAccessorTransformer
  *
  * @author Brady
- * @since 9/13/2017 10:19 PM
+ * @since 9/13/2017
  */
 public interface ValueAccessor {
 

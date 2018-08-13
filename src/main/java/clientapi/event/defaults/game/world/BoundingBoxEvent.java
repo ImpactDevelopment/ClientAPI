@@ -29,7 +29,7 @@ import java.util.List;
  * Used to hook into block collision, used to modify the bounding boxes of blocks.
  *
  * @author Brady
- * @since 4/10/2017 12:00 PM
+ * @since 4/10/2017
  */
 public final class BoundingBoxEvent {
 

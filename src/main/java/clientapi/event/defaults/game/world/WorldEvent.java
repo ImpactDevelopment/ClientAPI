@@ -24,7 +24,7 @@ import net.minecraft.client.multiplayer.WorldClient;
  * unloading the current world.
  *
  * @author Brady
- * @since 2/9/2017 12:00 PM
+ * @since 2/9/2017
  */
 public final class WorldEvent {
 

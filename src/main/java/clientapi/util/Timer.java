@@ -22,7 +22,7 @@ import clientapi.value.type.NumberType;
  * Basic timer to keep track of tasks
  *
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/24/2017
  */
 public final class Timer {
 

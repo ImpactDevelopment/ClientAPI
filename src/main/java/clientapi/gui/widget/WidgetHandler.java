@@ -35,7 +35,7 @@ import static org.lwjgl.opengl.GL11.GL_COMPILE;
  * Used to manage and render widgets
  *
  * @author Brady
- * @since 5/28/2017 10:00 AM
+ * @since 5/28/2017
  */
 public final class WidgetHandler {
 

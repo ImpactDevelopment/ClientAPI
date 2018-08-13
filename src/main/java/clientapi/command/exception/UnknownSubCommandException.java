@@ -23,7 +23,7 @@ import clientapi.command.Command;
  * arguments aren't valid. Hence, invalid synax.
  *
  * @author Brady
- * @since 5/31/2017 9:13 AM
+ * @since 5/31/2017
  */
 public final class UnknownSubCommandException extends CommandException {
 

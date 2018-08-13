@@ -27,7 +27,7 @@ import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 
 /**
  * @author Brady
- * @since 1/24/2018 11:35 AM
+ * @since 1/24/2018
  */
 @Mixin(Timer.class)
 public class MixinTimer implements ITimer {

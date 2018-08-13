@@ -24,7 +24,7 @@ import net.minecraft.client.gui.GuiScreen;
  * overriden by using the {@code setScreen(GuiScreen)} method.
  *
  * @author Brady
- * @since 2/23/2017 12:00 PM
+ * @since 2/23/2017
  */
 public final class GuiDisplayEvent {
 

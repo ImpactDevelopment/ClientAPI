@@ -28,7 +28,7 @@ import net.minecraft.client.Minecraft;
  * @see Minecraft#runTickMouse()
  *
  * @author Brady
- * @since 1/20/2017 12:00 PM
+ * @since 1/20/2017
  */
 public final class ClickEvent extends InputEvent {
 

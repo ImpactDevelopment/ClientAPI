@@ -25,7 +25,7 @@ import net.minecraft.entity.Entity;
  * rendering of the label will be cancelled.
  *
  * @author Brady
- * @since 5/23/2017 5:40 PM
+ * @since 5/23/2017
  */
 public final class RenderEntityLabelEvent extends Cancellable {
 

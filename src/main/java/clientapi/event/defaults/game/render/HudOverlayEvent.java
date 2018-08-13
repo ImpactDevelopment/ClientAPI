@@ -25,7 +25,7 @@ import me.zero.alpine.type.Cancellable;
  * @see Type
  *
  * @author Brady
- * @since 5/24/2018 10:47 AM
+ * @since 5/24/2018
  */
 public final class HudOverlayEvent extends Cancellable {
 

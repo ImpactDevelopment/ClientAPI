@@ -26,7 +26,7 @@ import net.minecraft.entity.MoverType;
  * @see Entity#move(net.minecraft.entity.MoverType, double, double, double)
  *
  * @author Brady
- * @since 2/9/2017 12:00 PM
+ * @since 2/9/2017
  */
 public final class MoveEvent extends Cancellable {
 

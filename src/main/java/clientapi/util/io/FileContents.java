@@ -25,7 +25,7 @@ import java.util.*;
  * line break as a {@code List}.
  *
  * @author Brady
- * @since 5/17/2017 10:21 AM
+ * @since 5/17/2017
  */
 public final class FileContents {
 

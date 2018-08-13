@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GLContext;
  * Used to retrieve the system shader adapter instance
  *
  * @author Brady
- * @since 5/21/2017 12:27 PM
+ * @since 5/21/2017
  */
 public final class ShaderAdapters {
 

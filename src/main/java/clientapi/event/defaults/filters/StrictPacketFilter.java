@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * class is the same as one of the permitted types.
  *
  * @author Brady
- * @since 9/12/2017 7:06 PM
+ * @since 9/12/2017
  */
 public final class StrictPacketFilter<T extends PacketEvent> implements Predicate<T> {
 

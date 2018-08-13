@@ -20,7 +20,7 @@ package clientapi.util.render.gl.glenum;
  * Enum to represent different shader types.
  *
  * @author Brady
- * @since 5/21/2017 12:02 PM
+ * @since 5/21/2017
  */
 public enum GLShaderType {
 

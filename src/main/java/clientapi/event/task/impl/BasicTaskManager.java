@@ -26,7 +26,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * The most basic implementation of {@code TaskManager}.
  *
  * @author Brady
- * @since 11/30/2017 2:31 PM
+ * @since 11/30/2017
  */
 public class BasicTaskManager implements TaskManager {
 

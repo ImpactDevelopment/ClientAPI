@@ -32,7 +32,7 @@ import me.zero.alpine.type.Cancellable;
  * @see ClickEvent
  *
  * @author Brady
- * @since 11/3/2017 11:06 AM
+ * @since 11/3/2017
  */
 abstract class InputEvent extends Cancellable {
 

@@ -32,7 +32,7 @@ import java.util.List;
  * @see Launch
  *
  * @author Brady
- * @since 9/8/2017 7:27 PM
+ * @since 9/8/2017
  */
 public final class ClientTweakerForge extends ClientTweaker {
 

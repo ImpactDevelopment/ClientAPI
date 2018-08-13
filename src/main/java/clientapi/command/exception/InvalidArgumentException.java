@@ -27,7 +27,7 @@ import java.lang.reflect.Type;
  * but the number was unable to be parsed.
  *
  * @author Brady
- * @since 6/7/2017 9:34 AM
+ * @since 6/7/2017
  */
 public final class InvalidArgumentException extends CommandException {
 

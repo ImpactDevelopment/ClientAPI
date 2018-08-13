@@ -42,7 +42,7 @@ import java.util.Optional;
  * @see Category
  *
  * @author Brady
- * @since 1/19/2017 12:00 PM
+ * @since 1/19/2017
  */
 public abstract class Module extends ValueHolder implements IModule, Nameable, Describable, Taggable {
 

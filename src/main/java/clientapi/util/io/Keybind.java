@@ -28,7 +28,7 @@ import static clientapi.util.io.Keybind.Action.*;
  * A keybind that is used to create key hooks
  *
  * @author Brady
- * @since 2/10/2017 12:00 PM
+ * @since 2/10/2017
  */
 public final class Keybind {
 

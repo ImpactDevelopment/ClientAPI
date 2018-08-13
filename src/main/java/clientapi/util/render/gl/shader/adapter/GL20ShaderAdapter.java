@@ -28,7 +28,7 @@ import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 
 /**
  * @author Brady
- * @since 5/21/2017 12:00 PM
+ * @since 5/21/2017
  */
 final class GL20ShaderAdapter implements ShaderAdapter {
 

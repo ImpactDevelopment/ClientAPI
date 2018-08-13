@@ -18,7 +18,7 @@ package clientapi.util.interfaces;
 
 /**
  * @author Brady
- * @since 9/7/2017 9:35 PM
+ * @since 9/7/2017
  */
 public interface Identifiable {
 

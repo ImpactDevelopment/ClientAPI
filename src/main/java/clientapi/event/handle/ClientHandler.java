@@ -32,7 +32,7 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
  * Some basic events that the client uses
  *
  * @author Brady
- * @since 2/9/2017 12:00 PM
+ * @since 2/9/2017
  */
 public enum ClientHandler implements Helper {
 

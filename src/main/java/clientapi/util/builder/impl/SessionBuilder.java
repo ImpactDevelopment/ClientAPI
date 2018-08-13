@@ -30,7 +30,7 @@ import java.net.Proxy;
  * Builder used to create a {@code Session} object.
  *
  * @author Brady
- * @since 8/13/2017 8:45 PM
+ * @since 8/13/2017
  */
 public final class SessionBuilder implements Builder<Session> {
 

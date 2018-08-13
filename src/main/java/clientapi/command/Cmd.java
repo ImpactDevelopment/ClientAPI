@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author Brady
- * @since 5/31/2017 8:55 AM
+ * @since 5/31/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * fields as values as valid value annotations.
  *
  * @author Brady
- * @since 5/22/2017 5:06 PM
+ * @since 5/22/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)

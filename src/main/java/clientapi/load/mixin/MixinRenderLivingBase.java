@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 @Mixin(RenderLivingBase.class)
 public class MixinRenderLivingBase {

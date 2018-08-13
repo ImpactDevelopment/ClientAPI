@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  * sent through client-sided input
  *
  * @author Brady
- * @since 6/11/2017 1:47 PM
+ * @since 6/11/2017
  */
 public final class ChatCommandListener extends CommandListener implements Helper {
 

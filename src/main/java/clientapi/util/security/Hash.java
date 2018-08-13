@@ -28,7 +28,7 @@ import java.util.function.Function;
  * Used to hash data with a defined algorithm
  *
  * @author Brady
- * @since 2/25/2017 12:00 PM
+ * @since 2/25/2017
  */
 public final class Hash {
 

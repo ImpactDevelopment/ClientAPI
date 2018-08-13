@@ -28,7 +28,7 @@ import net.minecraft.util.EnumHandSide;
  * If cancelled, the item isn't rendered.
  *
  * @author Brady
- * @since 4/8/2017 12:00 PM
+ * @since 4/8/2017
  */
 public final class ItemRenderEvent extends Cancellable implements Helper {
 
