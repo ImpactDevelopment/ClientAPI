@@ -18,7 +18,7 @@ package me.zero.example;
 
 import clientapi.Client;
 import clientapi.command.Command;
-import clientapi.load.config.ClientConfiguration;
+import clientapi.config.ClientConfiguration;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
 import me.zero.example.command.ExampleCommandManager;
@@ -41,6 +41,8 @@ public final class ExampleClient extends Client {
 
     @Override
     public final void init() {
+        System.out.println(mc.mcDataDir);
+
         // Init and load module manager
         moduleManager = new ExampleModManager();
         moduleManager.load();

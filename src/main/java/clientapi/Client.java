@@ -16,8 +16,8 @@
 
 package clientapi;
 
-import clientapi.load.config.ClientConfiguration;
-import clientapi.load.config.Configurable;
+import clientapi.config.ClientConfiguration;
+import clientapi.config.Configurable;
 
 /**
  * The base for all ClientAPI Clients. The classpath of implementations

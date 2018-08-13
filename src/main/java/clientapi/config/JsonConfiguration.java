@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.load.config;
+package clientapi.config;
 
 import clientapi.util.io.StreamReader;
 import com.google.gson.Gson;

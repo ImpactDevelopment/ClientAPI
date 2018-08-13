@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package clientapi.load.config;
+package clientapi.config;
 
 import clientapi.Client;
 import clientapi.util.interfaces.Helper;

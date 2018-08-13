@@ -17,8 +17,8 @@
 package clientapi.load;
 
 import clientapi.ClientAPI;
-import clientapi.load.config.ClientConfiguration;
-import clientapi.load.config.JsonConfiguration;
+import clientapi.config.ClientConfiguration;
+import clientapi.config.JsonConfiguration;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.Level;
