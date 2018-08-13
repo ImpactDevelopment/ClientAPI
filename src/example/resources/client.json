@@ -2,7 +2,7 @@
   "name": "Example Client",
   "authors": [ "Brady" ],
   "id": "example",
-  "build": "1.0",
+  "version": "1.0",
   "mainClass": "me.zero.example.ExampleClient",
   "mixins": [
     "mixins.client.json"

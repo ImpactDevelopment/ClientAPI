@@ -12,16 +12,16 @@ to copy the config below, they must be removed. Not all fields are required, see
 
 ```js
 {
-  "name": "Example Client",             // The name of the Client
-  "authors": [ "Your Name" ],           // An array of the Client authors
-  "id": "example",                      // A unique ID for the Client
-  "build": "1.0",                       // The build/version
-  "main": "com.example.ExampleClient",  // The classpath of the main class extending clientapi.Client
-  "mixins": [                           // A list of mixin configuration files
-    "mixins.example.json"               // The name of the Mixin configuration file
+  "name": "Example Client",                  // The name of the Client
+  "authors": [ "Your Name" ],                // An array of the Client authors
+  "id": "example",                           // A unique ID for the Client
+  "version": "1.0",                          // The build/version
+  "mainClass": "com.example.ExampleClient",  // The classpath of the main class extending clientapi.Client
+  "mixins": [                                // A list of mixin configuration files
+    "mixins.example.json"                    // The name of the Mixin configuration file
   ],
-  "transformers": [                     // A list of transformer class names
-    "com.example.transform.Transformer" // The class name of a transformer
+  "transformers": [                          // A list of transformer class names
+    "com.example.transform.Transformer"      // The class name of a transformer
   ]
 }
 
