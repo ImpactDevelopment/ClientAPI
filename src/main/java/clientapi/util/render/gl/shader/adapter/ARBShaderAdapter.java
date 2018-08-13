@@ -127,4 +127,29 @@ final class ARBShaderAdapter implements ShaderAdapter {
     public String getProgramLogInfo(int program) {
         return glGetInfoLogARB(program, glGetObjectParameteriARB(program, GL_OBJECT_INFO_LOG_LENGTH_ARB));
     }
+
+    @Override
+    public void setUniform(int location, int value) {
+        glUniform1iARB(location, value);
+    }
+
+    @Override
+    public void setUniform(int location, float value) {
+        glUniform1fARB(location, value);
+    }
+
+    @Override
+    public void setUniform(int location, float value1, float value2) {
+        glUniform2fARB(location, value1, value2);
+    }
+
+    @Override
+    public void setUniform(int location, float value1, float value2, float value3) {
+        glUniform3fARB(location, value1, value2, value3);
+    }
+
+    @Override
+    public int getUniformLocation(int program, String name) {
+        return glGetUniformLocationARB(program, name);
+    }
 }

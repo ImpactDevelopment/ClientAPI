@@ -125,4 +125,29 @@ final class GL20ShaderAdapter implements ShaderAdapter {
     public String getProgramLogInfo(int program) {
         return glGetProgramInfoLog(program, glGetProgrami(program, GL_INFO_LOG_LENGTH));
     }
+
+    @Override
+    public void setUniform(int location, int value) {
+        glUniform1i(location, value);
+    }
+
+    @Override
+    public void setUniform(int location, float value) {
+        glUniform1f(location, value);
+    }
+
+    @Override
+    public void setUniform(int location, float value1, float value2) {
+        glUniform2f(location, value1, value2);
+    }
+
+    @Override
+    public void setUniform(int location, float value1, float value2, float value3) {
+        glUniform3f(location, value1, value2, value3);
+    }
+
+    @Override
+    public int getUniformLocation(int program, String name) {
+        return glGetUniformLocation(program, name);
+    }
 }
