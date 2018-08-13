@@ -30,7 +30,10 @@ import java.io.InputStream;
  */
 public interface JsonConfiguration {
 
-    Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    /**
+     * Instance of GSON used to load configurations
+     */
+    Gson GSON = new GsonBuilder().create();
 
     /**
      * Loads a configuration
