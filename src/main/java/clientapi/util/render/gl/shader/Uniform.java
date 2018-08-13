@@ -18,8 +18,8 @@ package clientapi.util.render.gl.shader;
 
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-
-import static org.lwjgl.opengl.ARBShaderObjects.*;
+import clientapi.util.render.gl.shader.adapter.ShaderAdapter;
+import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
 
 /**
  * A representation of a GLSL Uniform Variable
@@ -28,6 +28,11 @@ import static org.lwjgl.opengl.ARBShaderObjects.*;
  * @since 2/16/2017 12:00 PM
  */
 public final class Uniform {
+
+    /**
+     * Instance of the system supported shader adapter
+     */
+    private static final ShaderAdapter adapter = ShaderAdapters.getSystemAdapter();
 
     /**
      * The Uniform name
@@ -50,7 +55,7 @@ public final class Uniform {
      * @param value New value
      */
     public final void setInt(int value) {
-        glUniform1iARB(location, value);
+        adapter.setUniform(location, value);
     }
 
     /**
@@ -59,7 +64,7 @@ public final class Uniform {
      * @param value New value
      */
     public final void setFloat(float value) {
-        glUniform1fARB(location, value);
+        adapter.setUniform(location, value);
     }
 
     /**
@@ -68,7 +73,7 @@ public final class Uniform {
      * @param value New value
      */
     public final void setBoolean(boolean value) {
-        glUniform1fARB(location, value ? 1 : 0);
+        adapter.setUniform(location, value ? 1 : 0);
     }
 
     /**
@@ -77,7 +82,7 @@ public final class Uniform {
      * @param value New value
      */
     public final void setVec(Vec2 value) {
-        glUniform2fARB(location, value.getX(), value.getY());
+        adapter.setUniform(location, value.getX(), value.getY());
     }
 
     /**
@@ -86,7 +91,7 @@ public final class Uniform {
      * @param value New value
      */
     public final void setVec(Vec3 value) {
-        glUniform3fARB(location, (float) value.getX(), (float) value.getY(), (float) value.getZ());
+        adapter.setUniform(location, (float) value.getX(), (float) value.getY(), (float) value.getZ());
     }
 
     /**
@@ -111,6 +116,6 @@ public final class Uniform {
      * @return The UniformVariable representation
      */
     public static Uniform get(int programID, String uniformName) {
-        return new Uniform(uniformName, glGetUniformLocationARB(programID, uniformName));
+        return new Uniform(uniformName, adapter.getUniformLocation(programID, uniformName));
     }
 }
