@@ -22,7 +22,7 @@ import clientapi.command.Command;
  * Superclass for all exceptions in the {@code clientapi.command.exception} package.
  *
  * @author Brady
- * @since 5/30/2017 11:39 AM
+ * @since 5/30/2017
  */
 public class CommandException extends Exception {
 

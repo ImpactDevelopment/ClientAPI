@@ -20,7 +20,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 
 /**
  * @author Brady
- * @since 10/17/2017 9:29 PM
+ * @since 10/17/2017
  */
 public interface RemotePlayerSender extends CommandSender {
 

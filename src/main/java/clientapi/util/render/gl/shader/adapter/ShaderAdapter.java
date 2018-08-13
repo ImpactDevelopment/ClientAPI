@@ -25,7 +25,7 @@ import clientapi.util.render.gl.glenum.GLShaderType;
  * of shaders (Specifically ARB and 2.0)
  *
  * @author Brady
- * @since 5/21/2017 11:52 AM
+ * @since 5/21/2017
  */
 public interface ShaderAdapter {
 

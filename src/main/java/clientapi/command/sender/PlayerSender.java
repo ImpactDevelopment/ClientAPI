@@ -23,7 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * is defined by an {@code EntityPlayer}
  *
  * @author Brady
- * @since 10/17/2017 9:17 PM
+ * @since 10/17/2017
  */
 public interface PlayerSender extends CommandSender {
 

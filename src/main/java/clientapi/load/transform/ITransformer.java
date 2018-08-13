@@ -26,7 +26,7 @@ import org.objectweb.asm.tree.MethodNode;
  * used to perform code injections that Mixins are incapable of.
  *
  * @author Brady
- * @since 9/15/2017 9:39 PM
+ * @since 9/15/2017
  */
 public interface ITransformer {
 

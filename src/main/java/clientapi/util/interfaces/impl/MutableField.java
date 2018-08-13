@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
  * {@code Mutable} that has access over a field via the Reflection API
  *
  * @author Brady
- * @since 5/1/2018 9:48 PM
+ * @since 5/1/2018
  */
 public class MutableField<T> extends MergedMutable<T> {
 

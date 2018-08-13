@@ -23,7 +23,7 @@ import net.minecraft.util.DamageSource;
  * Called from EntityLivingBase#onDeath
  *
  * @author Brady
- * @since 2/28/2017 12:00 PM
+ * @since 2/28/2017
  */
 public final class EntityDeathEvent {
 

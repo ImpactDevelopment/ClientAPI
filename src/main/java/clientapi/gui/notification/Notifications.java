@@ -23,7 +23,7 @@ import java.util.Set;
  * Essentially a Notification Manager, only takes in a renderer
  *
  * @author Brady
- * @since 1/6/2017 12:00 PM
+ * @since 1/6/2017
  */
 public class Notifications {
 

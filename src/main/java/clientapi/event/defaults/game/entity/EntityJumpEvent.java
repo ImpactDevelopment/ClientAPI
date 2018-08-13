@@ -28,7 +28,7 @@ import net.minecraft.entity.EntityLivingBase;
  * @see EntityLivingBase#jump()
  *
  * @author Brady
- * @since 12/8/2017 2:35 PM
+ * @since 12/8/2017
  */
 public final class EntityJumpEvent extends Cancellable {
 

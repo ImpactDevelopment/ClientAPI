@@ -7,7 +7,7 @@ import java.util.List;
  * targetted command and the arguments for execution as raw text.
  *
  * @author Brady
- * @since 4/14/2018 6:10 PM
+ * @since 4/14/2018
  */
 public final class ParsedCommandInput {
 

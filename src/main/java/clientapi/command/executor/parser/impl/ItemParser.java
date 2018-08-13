@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 4/19/2018 3:13 PM
+ * @since 4/19/2018
  */
 public final class ItemParser implements ArgumentParser<Item> {
 

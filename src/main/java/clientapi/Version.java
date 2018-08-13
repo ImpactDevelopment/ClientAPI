@@ -21,7 +21,7 @@ package clientapi;
  * consists of a Major, Minor, and Patch version.
  *
  * @author Brady
- * @since 8/16/2017 7:11 PM
+ * @since 8/16/2017
  */
 public final class Version {
 

@@ -21,7 +21,7 @@ import net.minecraft.util.Timer;
 
 /**
  * @author Brady
- * @since 2/20/2017 12:00 PM
+ * @since 2/20/2017
  */
 public interface IMinecraft {
 

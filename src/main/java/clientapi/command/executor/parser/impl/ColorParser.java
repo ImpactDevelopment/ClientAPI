@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 2/8/2018 5:25 PM
+ * @since 2/8/2018
  */
 public final class ColorParser implements ArgumentParser<Color> {
 

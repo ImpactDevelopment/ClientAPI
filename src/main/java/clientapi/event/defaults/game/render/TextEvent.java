@@ -21,7 +21,7 @@ package clientapi.event.defaults.game.render;
  * and string width is checked
  *
  * @author Brady
- * @since 3/30/2017 12:00 PM
+ * @since 3/30/2017
  */
 public final class TextEvent {
 

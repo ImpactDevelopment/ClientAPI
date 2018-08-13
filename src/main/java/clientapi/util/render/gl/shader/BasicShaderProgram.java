@@ -28,7 +28,7 @@ import clientapi.util.render.gl.glenum.GLShaderType;
  * this shader program.
  *
  * @author Brady
- * @since 9/6/2017 4:43 PM
+ * @since 9/6/2017
  */
 public class BasicShaderProgram extends ShaderProgram {
 

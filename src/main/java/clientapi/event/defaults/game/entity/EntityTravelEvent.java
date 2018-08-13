@@ -28,7 +28,7 @@ import net.minecraft.entity.EntityLivingBase;
  * {@code PRE} state, and prevents the entity from "travelling".
  *
  * @author Brady
- * @since 8/16/2017 6:10 PM
+ * @since 8/16/2017
  */
 public final class EntityTravelEvent extends Cancellable {
 

@@ -25,7 +25,7 @@ import net.minecraft.entity.EntityLivingBase;
  * When cancelled, the layer rendering won't execute.
  *
  * @author Brady
- * @since 4/23/2017 12:00 PM
+ * @since 4/23/2017
  */
 public final class LayerRenderEvent extends Cancellable {
 

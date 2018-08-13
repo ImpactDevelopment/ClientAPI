@@ -36,7 +36,7 @@ import static net.minecraft.block.material.Material.WATER;
 
 /**
  * @author Brady
- * @since 4/27/2017 12:00 PM
+ * @since 4/27/2017
  */
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {

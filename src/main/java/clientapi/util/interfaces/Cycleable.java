@@ -2,7 +2,7 @@ package clientapi.util.interfaces;
 
 /**
  * @author Brady
- * @since 4/12/2018 6:53 PM
+ * @since 4/12/2018
  */
 public interface Cycleable<T> {
 

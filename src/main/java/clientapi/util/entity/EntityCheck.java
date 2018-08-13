@@ -23,7 +23,7 @@ import net.minecraft.entity.Entity;
  * of an entity based on this filter's standards.
  *
  * @author Brady
- * @since 11/7/2017 12:15 PM
+ * @since 11/7/2017
  */
 public interface EntityCheck {
 

@@ -22,7 +22,7 @@ import clientapi.util.interfaces.Helper;
  * Abstract class to represent render events that have a partialTicks parameter.
  *
  * @author Brady
- * @since 12/1/2017 9:54 AM
+ * @since 12/1/2017
  */
 abstract class RenderEvent implements Helper {
 

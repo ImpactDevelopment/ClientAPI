@@ -33,7 +33,7 @@ import static org.lwjgl.opengl.GL11.*;
  * The basic render utils for any client
  *
  * @author Brady
- * @since 2/4/2017 12:00 PM
+ * @since 2/4/2017
  */
 public final class RenderUtils {
 

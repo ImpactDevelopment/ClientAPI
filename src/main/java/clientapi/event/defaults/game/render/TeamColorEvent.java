@@ -29,7 +29,7 @@ import net.minecraft.entity.Entity;
  * must be cancelled. {@code Cancellable#cancel}
  *
  * @author Brady
- * @since 5/21/2017 11:37 AM
+ * @since 5/21/2017
  */
 public final class TeamColorEvent extends Cancellable {
 

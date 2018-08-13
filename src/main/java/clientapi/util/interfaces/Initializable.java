@@ -18,7 +18,7 @@ package clientapi.util.interfaces;
 
 /**
  * @author Brady
- * @since 7/31/2018 2:51 PM
+ * @since 7/31/2018
  */
 public interface Initializable {
 

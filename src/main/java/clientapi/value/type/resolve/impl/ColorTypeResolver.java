@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * Default implementation of {@code TypeResolver} used to parse {@code ColorType} fields
  *
  * @author Brady
- * @since 4/11/2018 11:27 AM
+ * @since 4/11/2018
  */
 public final class ColorTypeResolver implements TypeResolver<ColorType> {
 

@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
  * @author Brady
- * @since 4/10/2018 9:54 PM
+ * @since 4/10/2018
  */
 @Mixin(ParticleManager.class)
 public class MixinParticleManager {

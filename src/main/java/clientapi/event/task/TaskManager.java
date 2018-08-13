@@ -18,7 +18,7 @@ package clientapi.event.task;
 
 /**
  * @author Brady
- * @since 11/30/2017 2:22 PM
+ * @since 11/30/2017
  */
 public interface TaskManager {
 

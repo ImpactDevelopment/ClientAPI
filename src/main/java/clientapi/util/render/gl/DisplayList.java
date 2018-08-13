@@ -25,7 +25,7 @@ import net.minecraft.client.renderer.GlStateManager;
  * instructions multiple times in the code directly.
  *
  * @author Brady
- * @since 7/22/2017 4:27 PM
+ * @since 7/22/2017
  */
 public final class DisplayList extends GLObject {
 

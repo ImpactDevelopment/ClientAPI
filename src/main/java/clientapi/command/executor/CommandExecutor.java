@@ -24,7 +24,7 @@ import clientapi.command.exception.CommandException;
  * sender and arguments.
  *
  * @author Brady
- * @since 6/11/2017 9:26 AM
+ * @since 6/11/2017
  */
 public interface CommandExecutor {
 

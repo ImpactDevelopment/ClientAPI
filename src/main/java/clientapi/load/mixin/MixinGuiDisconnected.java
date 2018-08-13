@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 9/7/2017 6:18 PM
+ * @since 9/7/2017
  */
 @Mixin(GuiDisconnected.class)
 public class MixinGuiDisconnected {

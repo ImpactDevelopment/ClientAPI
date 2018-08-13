@@ -18,7 +18,7 @@ package clientapi.util.render.gl.glenum;
 
 /**
  * @author Brady
- * @since 10/12/2017 3:30 PM
+ * @since 10/12/2017
  */
 public interface GLenum {
 

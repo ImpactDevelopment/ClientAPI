@@ -20,7 +20,7 @@ package clientapi.util.interfaces;
  * Gives objects a description
  *
  * @author Brady
- * @since 11/29/2017 2:53 PM
+ * @since 11/29/2017
  */
 public interface Describable {
 

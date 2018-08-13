@@ -25,7 +25,7 @@ import java.lang.reflect.Field;
  * attempts to convert it to a usable value object
  *
  * @author Brady
- * @since 2/21/2017 12:00 PM
+ * @since 2/21/2017
  */
 public interface TypeResolver<T extends Value> {
 

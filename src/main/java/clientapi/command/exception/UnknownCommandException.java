@@ -21,7 +21,7 @@ package clientapi.command.exception;
  * matched the specified command.
  *
  * @author Brady
- * @since 6/11/2017 3:26 PM
+ * @since 6/11/2017
  */
 public final class UnknownCommandException extends CommandException {
 

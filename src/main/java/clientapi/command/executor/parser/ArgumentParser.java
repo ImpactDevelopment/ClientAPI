@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 10/18/2017 11:05 AM
+ * @since 10/18/2017
  */
 public interface ArgumentParser<T> {
 

@@ -25,7 +25,7 @@ import clientapi.util.io.Keybind;
  * inside of the interface.
  *
  * @author Brady
- * @since 1/21/2017 12:00 PM
+ * @since 1/21/2017
  */
 public interface Bindable {
 

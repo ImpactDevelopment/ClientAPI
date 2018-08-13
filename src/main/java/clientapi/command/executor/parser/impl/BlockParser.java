@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 11/3/2017 5:33 PM
+ * @since 11/3/2017
  */
 public final class BlockParser implements ArgumentParser<Block> {
 

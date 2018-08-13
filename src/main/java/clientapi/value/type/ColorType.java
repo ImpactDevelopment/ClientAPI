@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * @see ColorValue
  *
  * @author Brady
- * @since 4/11/2018 11:27 AM
+ * @since 4/11/2018
  */
 public final class ColorType extends Value<Integer> {
 

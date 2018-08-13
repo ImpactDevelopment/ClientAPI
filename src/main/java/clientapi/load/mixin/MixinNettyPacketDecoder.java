@@ -34,7 +34,7 @@ import java.util.List;
 
 /**
  * @author Brady
- * @since 7/17/2017 2:22 PM
+ * @since 7/17/2017
  */
 @Mixin(NettyPacketDecoder.class)
 public class MixinNettyPacketDecoder {

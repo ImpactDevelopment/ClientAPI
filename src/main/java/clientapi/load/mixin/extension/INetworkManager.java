@@ -18,7 +18,7 @@ package clientapi.load.mixin.extension;
 
 /**
  * @author Brady
- * @since 2/20/2018 2:13 PM
+ * @since 2/20/2018
  */
 public interface INetworkManager {
 

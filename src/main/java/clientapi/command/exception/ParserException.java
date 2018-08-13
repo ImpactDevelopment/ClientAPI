@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 10/18/2017 2:50 PM
+ * @since 10/18/2017
  */
 public final class ParserException extends CommandException {
 

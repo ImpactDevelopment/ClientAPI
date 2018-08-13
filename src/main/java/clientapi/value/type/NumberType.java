@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
  * @see NumberValue
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 1/23/2017
  */
 public class NumberType<T extends Number> extends Value<T> {
 

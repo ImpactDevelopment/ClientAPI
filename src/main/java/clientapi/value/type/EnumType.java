@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
  * @see EnumValue
  *
  * @author Brady
- * @since 12/1/2017 7:12 PM
+ * @since 12/1/2017
  */
 public final class EnumType<T extends Enum<?>> extends Value<T> implements Cycleable<T> {
 

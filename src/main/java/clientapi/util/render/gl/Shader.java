@@ -24,7 +24,7 @@ import clientapi.util.render.gl.shader.exception.ShaderException;
 
 /**
  * @author Brady
- * @since 7/23/2017 3:24 PM
+ * @since 7/23/2017
  */
 public final class Shader extends GLObject {
 

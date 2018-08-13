@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * A value that can have a specific set of values
  *
  * @author Brady
- * @since 2/24/2017 12:00 PM
+ * @since 2/24/2017
  */
 public final class MultiType extends Value<String> implements Cycleable<String> {
 

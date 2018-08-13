@@ -22,7 +22,7 @@ import clientapi.util.render.gl.GLUtils;
  * A Vec with a X, Y, and Z position
  *
  * @author Brady
- * @since 2/12/2017 12:00 PM
+ * @since 2/12/2017
  */
 public final class Vec3 {
 

@@ -22,7 +22,7 @@ package clientapi.util.builder;
  * already exist of this, this one is to be used in ClientAPI.
  *
  * @author Brady
- * @since 8/13/2017 8:45 PM
+ * @since 8/13/2017
  */
 @FunctionalInterface
 public interface Builder<T> {

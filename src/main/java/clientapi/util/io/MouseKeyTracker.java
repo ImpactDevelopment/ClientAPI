@@ -2,7 +2,7 @@ package clientapi.util.io;
 
 /**
  * @author Brady
- * @since 4/13/2018 4:59 PM
+ * @since 4/13/2018
  */
 public enum MouseKeyTracker {
 

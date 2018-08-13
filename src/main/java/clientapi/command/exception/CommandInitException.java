@@ -22,7 +22,7 @@ import clientapi.command.Command;
  * Thrown when the initialization of a {@code Command} fails.
  *
  * @author Brady
- * @since 5/31/2017 9:08 AM
+ * @since 5/31/2017
  */
 public final class CommandInitException extends CommandException {
 

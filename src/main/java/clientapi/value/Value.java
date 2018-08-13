@@ -34,7 +34,7 @@ import java.util.Map;
  * @see IValue
  *
  * @author Brady
- * @since 1/23/2017 12:00 PM
+ * @since 1/23/2017
  */
 public class Value<T> implements IValue<T> {
 

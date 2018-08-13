@@ -26,7 +26,7 @@ import clientapi.gui.widget.data.WidgetPos;
  * @see Widget
  *
  * @author Brady
- * @since 5/28/2017 10:00 AM
+ * @since 5/28/2017
  */
 public abstract class AbstractWidget implements Widget {
 

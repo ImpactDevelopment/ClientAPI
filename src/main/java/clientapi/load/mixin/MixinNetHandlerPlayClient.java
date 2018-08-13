@@ -37,7 +37,7 @@ import static clientapi.util.interfaces.Helper.mc;
 
 /**
  * @author Brady
- * @since 8/24/2017 10:18 PM
+ * @since 8/24/2017
  */
 @Mixin(NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {

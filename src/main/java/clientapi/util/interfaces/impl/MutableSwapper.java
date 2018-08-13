@@ -28,7 +28,7 @@ import java.util.function.Supplier;
  * @see Mutable
  *
  * @author Brady
- * @since 5/1/2018 6:50 PM
+ * @since 5/1/2018
  */
 public final class MutableSwapper<T> implements Mutable<T> {
 

@@ -21,7 +21,7 @@ import clientapi.command.executor.ExecutionContext;
 
 /**
  * @author Brady
- * @since 6/11/2017 9:42 AM
+ * @since 6/11/2017
  */
 public final class CommandExecutionEvent {
 

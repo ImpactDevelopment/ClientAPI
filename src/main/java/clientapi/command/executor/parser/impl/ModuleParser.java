@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 11/3/2017 2:22 PM
+ * @since 11/3/2017
  */
 public final class ModuleParser implements ArgumentParser<Module> {
 

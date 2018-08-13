@@ -21,7 +21,7 @@ import clientapi.command.Command;
 
 /**
  * @author Brady
- * @since 10/18/2017 11:07 AM
+ * @since 10/18/2017
  */
 public final class InvalidSyntaxException extends CommandException {
 

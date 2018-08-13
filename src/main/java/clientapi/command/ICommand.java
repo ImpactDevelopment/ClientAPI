@@ -27,7 +27,7 @@ import clientapi.util.interfaces.Helper;
  * @see Command
  *
  * @author Brady
- * @since 5/30/2017 11:38 AM
+ * @since 5/30/2017
  */
 public interface ICommand extends Describable, Helper {
 

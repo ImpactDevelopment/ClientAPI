@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * Implementation of {@code IClassTransformer} used to run all {@code ITransformer}s.
  *
  * @author Brady
- * @since 9/15/2017 9:39 PM
+ * @since 9/15/2017
  */
 public final class ClientTransformer implements IClassTransformer {
 

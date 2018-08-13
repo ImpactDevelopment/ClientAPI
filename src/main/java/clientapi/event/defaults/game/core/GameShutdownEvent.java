@@ -30,7 +30,7 @@ import net.minecraft.client.Minecraft;
  * @see Minecraft#shutdown()
  *
  * @author Brady
- * @since 5/24/2017 12:26 PM
+ * @since 5/24/2017
  */
 public final class GameShutdownEvent extends Cancellable {
 

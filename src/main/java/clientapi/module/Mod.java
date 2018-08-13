@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * otherwise be passed down through a contructor.
  *
  * @author Brady
- * @since 1/21/2017 12:00 PM
+ * @since 1/21/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

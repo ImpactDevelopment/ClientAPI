@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * @author Brady
- * @since 5/24/2018 11:38 AM
+ * @since 5/24/2018
  */
 @Mixin(GuiSpectator.class)
 public class MixinGuiSpectator {

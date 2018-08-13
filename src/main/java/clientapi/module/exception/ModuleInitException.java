@@ -21,7 +21,7 @@ package clientapi.module.exception;
  * invalid or insufficient data is provided.
  *
  * @author Brady
- * @since 6/29/2017 3:05 PM
+ * @since 6/29/2017
  */
 public final class ModuleInitException extends RuntimeException {
 

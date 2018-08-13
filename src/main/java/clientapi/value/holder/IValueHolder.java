@@ -24,7 +24,7 @@ import java.util.List;
  * The "shell" for a value holder
  *
  * @author Brady
- * @since 5/12/2017 2:56 PM
+ * @since 5/12/2017
  */
 public interface IValueHolder {
 

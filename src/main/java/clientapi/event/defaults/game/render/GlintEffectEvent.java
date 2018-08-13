@@ -23,7 +23,7 @@ import me.zero.alpine.type.Cancellable;
  * layer or an item is being rendered.
  *
  * @author Brady
- * @since 2/19/2017 12:00 PM
+ * @since 2/19/2017
  */
 public final class GlintEffectEvent extends Cancellable {
 

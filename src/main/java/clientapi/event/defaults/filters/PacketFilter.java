@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * class is assignable from one of the permitted types.
  *
  * @author Brady
- * @since 3/2/2017 12:00 PM
+ * @since 3/2/2017
  */
 public final class PacketFilter<T extends PacketEvent> implements Predicate<T> {
 

@@ -23,7 +23,7 @@ import java.lang.reflect.Type;
 
 /**
  * @author Brady
- * @since 10/20/2017 11:04 AM
+ * @since 10/20/2017
  */
 public final class CharParser implements ArgumentParser<Character> {
 
