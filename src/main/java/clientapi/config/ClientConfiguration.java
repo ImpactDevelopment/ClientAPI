@@ -17,7 +17,8 @@
 package clientapi.config;
 
 import clientapi.Client;
-import net.minecraft.launchwrapper.IClassTransformer;
+import clientapi.load.transform.ITransformer;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Representation of the {@code client.json} format.
@@ -32,43 +33,50 @@ public final class ClientConfiguration implements JsonConfiguration {
     /**
      * The name of the ClientAPI mod
      */
+    @SerializedName("name")
     private String name;
 
     /**
      * List of the names of the Client authors
      */
+    @SerializedName("authors")
     private String[] authors;
 
     /**
      * A unique ID for the client
      */
+    @SerializedName("id")
     private String id;
 
     /**
      * The version of the Client
      */
+    @SerializedName("version")
     private String version;
 
     /**
      * The classpath of the main class extending {@link Client}
      */
+    @SerializedName("mainClass")
     private String mainClass;
 
     /**
      * An array of the defined mixin configurations
      */
+    @SerializedName("mixins")
     private String[] mixins;
 
     /**
      * An array of the bytecode transformers
      */
+    @SerializedName("transformers")
     private String[] transformers;
 
     /**
      * @return The Client Name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -133,7 +141,7 @@ public final class ClientConfiguration implements JsonConfiguration {
      * Returns an array of the defined bytecode transformers
      * that are used in the transformation loading stage. All
      * transformers must be defined as their full class name
-     * and be an implementation of {@link IClassTransformer}.
+     * and be an implementation of {@link ITransformer}.
      * If left undefined, an empty array will be returned.
      *
      * @return An array of transformer class names

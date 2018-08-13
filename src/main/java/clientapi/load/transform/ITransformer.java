@@ -16,6 +16,8 @@
 
 package clientapi.load.transform;
 
+import clientapi.ClientAPI;
+import org.apache.logging.log4j.Level;
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -146,5 +148,21 @@ public interface ITransformer {
      */
     default Handle createMethodHandle(int tag, String owner, String method, String desc) {
         return new Handle(tag, owner, method, desc);
+    }
+
+    /**
+     * Creates a new transformer from the specified classpath.
+     *
+     * @param classpath The transformer classpath
+     * @return The new transformer, {@code null} if creation failed.
+     */
+    static ITransformer create(String classpath) {
+        try {
+            return (ITransformer) Class.forName(classpath).newInstance();
+        } catch (Exception e) {
+            ClientAPI.LOGGER.log(Level.ERROR, "Unable to instantiate transformer " + classpath);
+            e.printStackTrace();
+        }
+        return null;
     }
 }
