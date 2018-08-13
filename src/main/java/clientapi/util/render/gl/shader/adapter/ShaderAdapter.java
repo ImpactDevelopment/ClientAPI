@@ -126,8 +126,53 @@ public interface ShaderAdapter {
     /**
      * Gets a shader program's log info
      *
-     * @param program The shader progrma id
+     * @param program The shader program id
      * @return The log info
      */
     String getProgramLogInfo(int program);
+
+    /**
+     * Sets the integer value of the specified uniform variable
+     *
+     * @param location The uniform variable location
+     * @param value The integer value
+     */
+    void setUniform(int location, int value);
+
+    /**
+     * Sets the float value of the specified uniform variable
+     *
+     * @param location The uniform variable location
+     * @param value The float value
+     */
+    void setUniform(int location, float value);
+
+    /**
+     * Sets the 2 float values of the specified uniform variable
+     *
+     * @param location The uniform variable location
+     * @param value1 The first float value
+     * @param value2 The second float value
+     */
+    void setUniform(int location, float value1, float value2);
+
+    /**
+     * Sets the 3 float values of the specified uniform variable
+     *
+     * @param location The uniform variable location
+     * @param value1 The first float value
+     * @param value2 The second float value
+     * @param value3 The third float value
+     */
+    void setUniform(int location, float value1, float value2, float value3);
+
+    /**
+     * Retrieves the location of the specified uniform variable name
+     * from the specified shader program.
+     *
+     * @param program The shader program id
+     * @param name The uniform variable name
+     * @return The uniform variable location
+     */
+    int getUniformLocation(int program, String name);
 }
