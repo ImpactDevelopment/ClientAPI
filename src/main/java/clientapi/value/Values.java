@@ -55,11 +55,12 @@ public final class Values {
     static {
         // Default Resolvers
         define(BooleanValue.class, ResolverData.create(new BooleanTypeResolver(), Boolean.class, Boolean.TYPE));
-        define(NumberValue.class, ResolverData.create(new NumberTypeResolver()));
-        define(MultiValue.class, ResolverData.create(new MultiTypeResolver(), String.class));
-        define(StringValue.class, ResolverData.create(new StringTypeResolver(), String.class));
-        define(EnumValue.class, ResolverData.create(new EnumTypeResolver(), Enum.class));
-        define(ColorValue.class, ResolverData.create(new ColorTypeResolver(), Integer.class, Integer.TYPE));
+        define(NumberValue.class,  ResolverData.create(new NumberTypeResolver()));
+        define(MultiValue.class,   ResolverData.create(new MultiTypeResolver(), String.class));
+        define(StringValue.class,  ResolverData.create(new StringTypeResolver(), String.class));
+        define(EnumValue.class,    ResolverData.create(new EnumTypeResolver(), Enum.class));
+        define(ColorValue.class,   ResolverData.create(new ColorTypeResolver(), Integer.class, Integer.TYPE));
+        define(VoidValue.class,    ResolverData.create(new VoidTypeResolver(), Void.class));
     }
 
     /**
