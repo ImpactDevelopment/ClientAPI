@@ -75,7 +75,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
         return this.sendPackets && networkManager.isChannelOpen();
     }
 
-    @Inject(method = "checkDisconnected", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
+    @Inject(method = "handleDisconnection", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
     private void onDisconnect(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
     }
