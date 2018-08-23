@@ -41,7 +41,7 @@ public final class ExampleClient extends Client {
 
     @Override
     public final void init() {
-        System.out.println(mc.mcDataDir);
+        System.out.println(mc.gameDir);
 
         // Init and load module manager
         moduleManager = new ExampleModManager();
