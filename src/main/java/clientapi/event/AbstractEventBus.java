@@ -33,19 +33,19 @@ public abstract class AbstractEventBus implements EventBus {
     public void subscribe(Object object) {}
 
     @Override
-    public void subscribe(Object... objects) {}
+    public void subscribeAll(Object... objects) {}
 
     @Override
-    public void subscribe(Iterable<Object> objects) {}
+    public void subscribeAll(Iterable<Object> objects) {}
 
     @Override
     public void unsubscribe(Object object) {}
 
     @Override
-    public void unsubscribe(Object... objects) {}
+    public void unsubscribeAll(Object... objects) {}
 
     @Override
-    public void unsubscribe(Iterable<Object> objects) {}
+    public void unsubscribeAll(Iterable<Object> objects) {}
 
     @Override
     public void post(Object event) {}
