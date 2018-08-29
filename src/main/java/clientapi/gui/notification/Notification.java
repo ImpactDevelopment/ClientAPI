@@ -16,6 +16,8 @@
 
 package clientapi.gui.notification;
 
+import clientapi.util.Timer;
+
 /**
  * Implementation of INotification.
  *
@@ -52,7 +54,7 @@ public class Notification implements INotification {
 	Notification(String header, String subtext, long fade, long displayTime) {
 		this.header = header;
 		this.subtext = subtext;
-		this.start = System.currentTimeMillis();
+		this.start = Timer.getTimeMillis();
 		this.fade = Math.min(displayTime / 2, fade);
 		this.displayTime = displayTime;
 	}

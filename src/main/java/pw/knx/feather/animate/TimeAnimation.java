@@ -1,5 +1,7 @@
 package pw.knx.feather.animate;
 
+import clientapi.util.Timer;
+
 /**
  * A time-based animation utility. This class essentially acts as a wrapper
  * for a double that tracks your animation's progress. You can then use get() to
@@ -40,7 +42,7 @@ public class TimeAnimation extends TickAnimation {
 	 */
 	@Override
 	public TickAnimation play() {
-		prevTime = System.currentTimeMillis();
+		prevTime = Timer.getTimeMillis();
 		return super.play();
 	}
 
@@ -54,7 +56,7 @@ public class TimeAnimation extends TickAnimation {
 	 */
 	@Override
 	public double get() {
-		final long time = System.currentTimeMillis();
+		final long time = Timer.getTimeMillis();
 		increment((int) (time - prevTime));
 		this.prevTime = time;
 		return translate(progress);
