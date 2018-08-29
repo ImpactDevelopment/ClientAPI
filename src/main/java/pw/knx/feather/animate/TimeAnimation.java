@@ -42,7 +42,7 @@ public class TimeAnimation extends TickAnimation {
 	 */
 	@Override
 	public TickAnimation play() {
-		prevTime = Timer.getTimeMillis();
+		prevTime = Timer.getJVMTime();
 		return super.play();
 	}
 
@@ -56,7 +56,7 @@ public class TimeAnimation extends TickAnimation {
 	 */
 	@Override
 	public double get() {
-		final long time = Timer.getTimeMillis();
+		final long time = Timer.getJVMTime();
 		increment((int) (time - prevTime));
 		this.prevTime = time;
 		return translate(progress);

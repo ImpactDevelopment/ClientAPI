@@ -207,7 +207,7 @@ public final class Colors implements Helper {
      * @return Rainbow hex
      */
     public static int rainbow(float saturation, float brightness, int offset) {
-        float hue = ((Timer.getTimeMillis() + offset) % 1000) / 1000F;
+        float hue = ((Timer.getJVMTime() + offset) % 1000) / 1000F;
         return Color.getHSBColor(hue, saturation, brightness).getRGB();
     }
 
