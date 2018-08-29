@@ -17,6 +17,7 @@
 package clientapi.util.math;
 
 import clientapi.util.render.gl.GLUtils;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * A Vec with a X, Y, and Z position
@@ -199,8 +200,8 @@ public final class Vec3 {
         double[] diff = { vec.x - x, vec.y - y, vec.z - z };
         double hDist = Math.sqrt(diff[0] * diff[0] + diff[2] * diff[2]);
         return new Vec2(
-                Math.toDegrees(Math.atan2(diff[2], diff[0])) - 90.0F,
-                -Math.toDegrees(Math.atan2(diff[1], hDist))
+                Math.toDegrees(MathHelper.atan2(diff[2], diff[0])) - 90.0F,
+                -Math.toDegrees(MathHelper.atan2(diff[1], hDist))
         );
     }
 
