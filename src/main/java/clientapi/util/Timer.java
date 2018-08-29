@@ -61,7 +61,7 @@ public final class Timer {
      * Returns the running JVM's high-resolution time source, in
      * milliseconds. This should not be compared with values returned
      * by {@link System#currentTimeMillis()} because this is <i>not</i>
-     * unix time.
+     * representitive of the current unix time.
      *
      * @return The running JVM's high-resolution time source, in milliseconds.
      */
