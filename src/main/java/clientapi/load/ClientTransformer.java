@@ -53,7 +53,8 @@ public final class ClientTransformer implements IClassTransformer {
         instance = this;
 
         // Register the default transformers
-        this.transformers.add(new ValueAccessorTransformer());
+        if (!Boolean.valueOf(System.getProperty("clientapi.load.devMode", "false")))
+            this.transformers.add(new ValueAccessorTransformer());
     }
 
     @Override
