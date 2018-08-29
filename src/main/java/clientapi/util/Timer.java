@@ -29,15 +29,15 @@ public final class Timer {
     private long prevMS;
 
     public final void reset() {
-        prevMS = System.currentTimeMillis();
+        prevMS = getTimeMillis();
     }
 
     public final long getDiff() {
-        return getTime() - prevMS;
+        return getTimeMillis() - prevMS;
     }
 
     public final boolean delay(long milliseconds) {
-        return getTime() >= prevMS + milliseconds;
+        return getTimeMillis() >= prevMS + milliseconds;
     }
 
     public final boolean delay(NumberType milliseconds) {
@@ -45,19 +45,19 @@ public final class Timer {
     }
 
     public final boolean delay(float milliSec) {
-        return (float) (getTime() - this.prevMS) >= milliSec;
+        return (float) (getTimeMillis() - this.prevMS) >= milliSec;
     }
 
     public final boolean speed(float speed) {
         speed = Math.max(0, speed);
-        return getTime() >= prevMS + (long) (1000 / speed);
+        return getTimeMillis() >= prevMS + (long) (1000 / speed);
     }
 
     public final boolean speed(NumberType speed) {
         return this.speed(speed.getValue().floatValue());
     }
 
-    private long getTime() {
-        return System.currentTimeMillis();
+    public static long getTimeMillis() {
+        return System.nanoTime() / 1000000L; // 1E6 is a double and I don't want to cast
     }
 }
