@@ -29,15 +29,15 @@ public final class Timer {
     private long prevMS;
 
     public final void reset() {
-        prevMS = getTimeMillis();
+        prevMS = getJVMTime();
     }
 
     public final long getDiff() {
-        return getTimeMillis() - prevMS;
+        return getJVMTime() - prevMS;
     }
 
     public final boolean delay(long milliseconds) {
-        return getTimeMillis() >= prevMS + milliseconds;
+        return getJVMTime() >= prevMS + milliseconds;
     }
 
     public final boolean delay(NumberType milliseconds) {
@@ -45,19 +45,27 @@ public final class Timer {
     }
 
     public final boolean delay(float milliSec) {
-        return (float) (getTimeMillis() - this.prevMS) >= milliSec;
+        return (float) (getJVMTime() - this.prevMS) >= milliSec;
     }
 
     public final boolean speed(float speed) {
         speed = Math.max(0, speed);
-        return getTimeMillis() >= prevMS + (long) (1000 / speed);
+        return getJVMTime() >= prevMS + (long) (1000 / speed);
     }
 
     public final boolean speed(NumberType speed) {
         return this.speed(speed.getValue().floatValue());
     }
 
-    public static long getTimeMillis() {
+    /**
+     * Returns the running JVM's high-resolution time source, in
+     * milliseconds. This should not be compared with values returned
+     * by {@link System#currentTimeMillis()} because this is <i>not</i>
+     * unix time.
+     *
+     * @return The running JVM's high-resolution time source, in milliseconds.
+     */
+    public static long getJVMTime() {
         return System.nanoTime() / 1000000L; // 1E6 is a double and I don't want to cast
     }
 }
