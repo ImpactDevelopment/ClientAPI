@@ -79,27 +79,46 @@ public abstract class MixinMinecraft implements IMinecraft {
             middleClickMouse();
     }
 
-    @Inject(method = "runTick", at = @At("HEAD"))
+    @Inject(
+            method = "runTick",
+            at = @At("HEAD")
+    )
     private void preRunTick(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new TickEvent(EventState.PRE));
     }
 
-    @Inject(method = "runTick", at = @At("RETURN"))
+    @Inject(
+            method = "runTick",
+            at = @At("RETURN")
+    )
     private void postRunTick(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new TickEvent(EventState.POST));
     }
 
-    @Inject(method = "runGameLoop", at = @At("HEAD"))
+    @Inject(
+            method = "runGameLoop",
+            at = @At("HEAD")
+    )
     private void preRunGameLoop(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.PRE));
     }
 
-    @Inject(method = "runGameLoop", at = @At("RETURN"))
+    @Inject(
+            method = "runGameLoop",
+            at = @At("RETURN")
+    )
     private void postRunGameLoop(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LoopEvent(EventState.POST));
     }
 
-    @Inject(method = "runTickKeyboard", at = @At(value = "INVOKE_ASSIGN", target = "org/lwjgl/input/Keyboard.getEventKeyState()Z", remap = false))
+    @Inject(
+            method = "runTickKeyboard",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "org/lwjgl/input/Keyboard.getEventKeyState()Z",
+                    remap = false
+            )
+    )
     private void onKeyEvent(CallbackInfo ci) {
         if (currentScreen != null)
             return;
@@ -111,7 +130,13 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.post(down ? new KeyEvent(key, ch) : new KeyUpEvent(key, ch));
     }
 
-    @Inject(method = "runTickMouse", at = @At(value = "INVOKE_ASSIGN", id = "org/lwjgl/input/Mouse.getEventButton()I"))
+    @Inject(
+            method = "runTickMouse",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    id = "org/lwjgl/input/Mouse.getEventButton()I"
+            )
+    )
     private void onMouseEvent(CallbackInfo info) {
         if (currentScreen != null)
             return;
@@ -122,7 +147,10 @@ public abstract class MixinMinecraft implements IMinecraft {
         }
     }
 
-    @Inject(method = "init", at = @At("RETURN"))
+    @Inject(
+            method = "init",
+            at = @At("RETURN")
+    )
     private void init(CallbackInfo ci) {
         InputStream stream = this.getClass().getResourceAsStream("/client.json");
 
@@ -162,19 +190,28 @@ public abstract class MixinMinecraft implements IMinecraft {
         ClientAPI.EVENT_BUS.subscribe(ClientHandler.INSTANCE);
     }
 
-    @ModifyVariable(method = "displayGuiScreen", at = @At("HEAD"))
+    @ModifyVariable(
+            method = "displayGuiScreen",
+            at = @At("HEAD")
+    )
     private GuiScreen displayGuiScreen$HEAD(GuiScreen screen) {
         GuiDisplayEvent event = new GuiDisplayEvent(EventState.PRE, screen);
         ClientAPI.EVENT_BUS.post(event);
         return event.getScreen();
     }
 
-    @Inject(method = "displayGuiScreen", at = @At("RETURN"))
+    @Inject(
+            method = "displayGuiScreen",
+            at = @At("RETURN")
+    )
     private void displayGuiScreen$RETURN(GuiScreen screen, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new GuiDisplayEvent(EventState.POST, screen));
     }
 
-    @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
+    @Inject(
+            method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V",
+            at = @At("HEAD")
+    )
     private void loadWorld(@Nullable WorldClient worldClientIn, String loadingMessage, CallbackInfo ci) {
         // If the world is null, then it must be unloading
         if (worldClientIn != null)
@@ -183,7 +220,11 @@ public abstract class MixinMinecraft implements IMinecraft {
             ClientAPI.EVENT_BUS.post(new WorldEvent.Unload());
     }
 
-    @Inject(method = "shutdown", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "shutdown",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void shutdown(CallbackInfo ci) {
         GameShutdownEvent event = new GameShutdownEvent();
         ClientAPI.EVENT_BUS.post(event);

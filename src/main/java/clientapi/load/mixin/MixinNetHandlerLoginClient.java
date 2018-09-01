@@ -34,7 +34,11 @@ public abstract class MixinNetHandlerLoginClient {
      *
      * @see EncryptionRequestEvent
      */
-    @Inject(method = "handleEncryptionRequest", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "handleEncryptionRequest",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void onLoginEncryptionRequest(SPacketEncryptionRequest packet, CallbackInfo ci) {
         EncryptionRequestEvent event = new EncryptionRequestEvent((NetHandlerLoginClient) (Object) this, packet);
         EVENT_BUS.post(event);

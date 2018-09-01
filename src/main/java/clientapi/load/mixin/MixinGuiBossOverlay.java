@@ -31,7 +31,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiBossOverlay.class)
 public class MixinGuiBossOverlay {
 
-    @Inject(method = "renderBossHealth", at = @At("HEAD"))
+    @Inject(
+            method = "renderBossHealth",
+            at = @At("HEAD")
+    )
     private void renderBossHealth(CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.BOSS_BAR);
         ClientAPI.EVENT_BUS.post(event);
