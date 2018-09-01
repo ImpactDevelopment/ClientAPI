@@ -17,6 +17,8 @@
 package clientapi.value.holder;
 
 import clientapi.load.transform.impl.ValueAccessorTransformer;
+import clientapi.util.interfaces.Mutable;
+import clientapi.util.interfaces.impl.MergedMutable;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -50,4 +52,16 @@ public interface ValueAccessor {
      * @return The consumer "setter"
      */
     Consumer<Object> getFieldSetter(String field);
+
+    /**
+     * Returns a mutable comprised of the specified field's getters and setters,
+     * which are provided by {@link ValueAccessor#getFieldSetter(String)} and
+     * {@link ValueAccessor#getFieldGetter(String)}.
+     *
+     * @param field The name of the field
+     * @return The mutable
+     */
+    default Mutable<Object> getFieldMutable(String field) {
+        return new MergedMutable<>(getFieldSetter(field), getFieldGetter(field));
+    }
 }
