@@ -23,14 +23,14 @@ package clientapi.event.defaults.game.render;
  * @author Brady
  * @since 3/30/2017
  */
-public final class TextEvent {
+public final class RenderTextEvent {
 
     /**
      * The text being rendered
      */
     private String text;
 
-    public TextEvent(String text) {
+    public RenderTextEvent(String text) {
         this.text = text;
     }
 
@@ -47,7 +47,7 @@ public final class TextEvent {
      * @param text New text
      * @return This event
      */
-    public final TextEvent setText(String text) {
+    public final RenderTextEvent setText(String text) {
         this.text = text;
         return this;
     }
