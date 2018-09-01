@@ -18,7 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.HudOverlayEvent;
-import clientapi.event.defaults.game.render.ItemRenderEvent;
+import clientapi.event.defaults.game.render.RenderItemEvent;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
@@ -41,7 +41,7 @@ public abstract class MixinItemRenderer {
             cancellable = true
     )
     private void renderItemInFirstPerson(AbstractClientPlayer p_187457_1_, float partialTicks, float pitch, EnumHand hand, float swingProgress, ItemStack stack, float rechargeProgress, CallbackInfo ci) {
-        ItemRenderEvent event = new ItemRenderEvent((ItemRenderer) (Object) this, partialTicks, hand, swingProgress, stack, rechargeProgress);
+        RenderItemEvent event = new RenderItemEvent((ItemRenderer) (Object) this, partialTicks, hand, swingProgress, stack, rechargeProgress);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
