@@ -30,7 +30,7 @@ import net.minecraft.util.EnumHandSide;
  * @author Brady
  * @since 4/8/2017
  */
-public final class ItemRenderEvent extends Cancellable implements Helper {
+public final class RenderItemEvent extends Cancellable implements Helper {
 
     /**
      * Instance of the ItemRenderer
@@ -67,7 +67,7 @@ public final class ItemRenderEvent extends Cancellable implements Helper {
      */
     private final float rechargeProgress;
 
-    public ItemRenderEvent(ItemRenderer itemRenderer, float partialTicks, EnumHand hand, float swingProgress, ItemStack stack, float rechargeProgress) {
+    public RenderItemEvent(ItemRenderer itemRenderer, float partialTicks, EnumHand hand, float swingProgress, ItemStack stack, float rechargeProgress) {
         this.itemRenderer = itemRenderer;
         this.partialTicks = partialTicks;
         this.hand = hand;
