@@ -46,7 +46,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict entities that can't be seen
      */
     public static EntityCheck restrictEntity(Supplier<Entity> targetEntity) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 entity != targetEntity.get()
         );
     }
@@ -58,7 +58,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict entities that are dead
      */
     public static EntityCheck allowDead(Supplier<Boolean> allowDead) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 allowDead.get() || entity.isEntityAlive()
         );
     }
@@ -71,7 +71,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict entities that can't be seen
      */
     public static EntityCheck allowCantBeSeen(Supplier<Boolean> allowCantBeSeen) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 allowCantBeSeen.get() || mc.player.canEntityBeSeen(entity)
         );
     }
@@ -83,7 +83,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict sleeping players
      */
     public static EntityCheck allowSleeping(Supplier<Boolean> allowSleeping) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 allowSleeping.get() || !isPlayer(entity) || !((EntityPlayer) entity).isPlayerSleeping()
         );
     }
@@ -95,7 +95,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict invisible entities
      */
     public static EntityCheck allowInvisible(Supplier<Boolean> allowInvisible) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 allowInvisible.get() || !entity.isInvisible()
         );
     }
@@ -110,7 +110,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict teammates
      */
     public static EntityCheck allowTeammates(Supplier<Boolean> allowTeammates) {
-        return new EntityCheckImpl(CheckType.RESTRICT, entity ->
+        return new EntityCheckFunction(CheckType.RESTRICT, entity ->
                 allowTeammates.get() || !onSameTeam(entity, mc.player)
         );
     }
@@ -143,7 +143,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict players
      */
     public static EntityCheck allowPlayers(Supplier<Boolean> allowPlayers) {
-        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+        return new EntityCheckFunction(CheckType.ALLOW, entity ->
                 allowPlayers.get() && isPlayer(entity)
         );
     }
@@ -158,7 +158,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict hostiles
      */
     public static EntityCheck allowHostiles(Supplier<Boolean> allowHostiles) {
-        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+        return new EntityCheckFunction(CheckType.ALLOW, entity ->
                 allowHostiles.get() && isHostile(entity)
         );
     }
@@ -173,7 +173,7 @@ public final class EntityFilters implements Helper {
      * @return An entity check that can restrict passives
      */
     public static EntityCheck allowPassives(Supplier<Boolean> allowPassives) {
-        return new EntityCheckImpl(CheckType.ALLOW, entity ->
+        return new EntityCheckFunction(CheckType.ALLOW, entity ->
                 allowPassives.get() && isPassive(entity)
         );
     }
