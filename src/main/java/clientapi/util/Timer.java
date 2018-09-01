@@ -16,7 +16,7 @@
 
 package clientapi.util;
 
-import clientapi.value.type.NumberType;
+import clientapi.value.type.number.AbstractNumberType;
 
 /**
  * Basic timer to keep track of tasks
@@ -40,7 +40,7 @@ public final class Timer {
         return getJVMTime() >= prevMS + milliseconds;
     }
 
-    public final boolean delay(NumberType milliseconds) {
+    public final boolean delay(AbstractNumberType milliseconds) {
         return delay(milliseconds.getValue().intValue());
     }
 
@@ -53,7 +53,7 @@ public final class Timer {
         return getJVMTime() >= prevMS + (long) (1000 / speed);
     }
 
-    public final boolean speed(NumberType speed) {
+    public final boolean speed(AbstractNumberType speed) {
         return this.speed(speed.getValue().floatValue());
     }
 

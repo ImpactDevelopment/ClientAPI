@@ -19,9 +19,11 @@ package clientapi.value;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.annotation.Label;
 import clientapi.value.annotation.*;
+import clientapi.value.annotation.number.*;
 import clientapi.value.exception.ValueException;
 import clientapi.value.type.resolve.ResolverData;
 import clientapi.value.type.resolve.impl.*;
+import clientapi.value.type.resolve.impl.number.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -55,12 +57,18 @@ public final class Values {
     static {
         // Default Resolvers
         define(BooleanValue.class, ResolverData.create(new BooleanTypeResolver(), Boolean.class, Boolean.TYPE));
-        define(NumberValue.class,  ResolverData.create(new NumberTypeResolver()));
-        define(MultiValue.class,   ResolverData.create(new MultiTypeResolver(), String.class));
-        define(StringValue.class,  ResolverData.create(new StringTypeResolver(), String.class));
-        define(EnumValue.class,    ResolverData.create(new EnumTypeResolver(), Enum.class));
-        define(ColorValue.class,   ResolverData.create(new ColorTypeResolver(), Integer.class, Integer.TYPE));
-        define(VoidValue.class,    ResolverData.create(new VoidTypeResolver(), Void.class));
+        define(MultiValue.class,   ResolverData.create(new MultiTypeResolver(),   String.class));
+        define(StringValue.class,  ResolverData.create(new StringTypeResolver(),  String.class));
+        define(EnumValue.class,    ResolverData.create(new EnumTypeResolver(),    Enum.class));
+        define(ColorValue.class,   ResolverData.create(new ColorTypeResolver(),   Integer.class, Integer.TYPE));
+        define(VoidValue.class,    ResolverData.create(new VoidTypeResolver(),    Void.class));
+
+        define(ByteValue.class,    ResolverData.create(new ByteTypeResolver(),    Byte.class,    Byte.TYPE));
+        define(ShortValue.class,   ResolverData.create(new ShortTypeResolver(),   Short.class,   Short.TYPE));
+        define(IntegerValue.class, ResolverData.create(new IntegerTypeResolver(), Integer.class, Integer.TYPE));
+        define(LongValue.class,    ResolverData.create(new LongTypeResolver(),    Long.class,    Long.TYPE));
+        define(FloatValue.class,   ResolverData.create(new FloatTypeResolver(),   Float.class,   Float.TYPE));
+        define(DoubleValue.class,  ResolverData.create(new DoubleTypeResolver(),  Double.class,  Double.TYPE));
     }
 
     /**
