@@ -20,7 +20,6 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.NettyPacketEncoder;
 import net.minecraft.network.Packet;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,14 +37,26 @@ public class MixinNettyPacketEncoder {
 
     private PacketEvent event;
 
-    @ModifyVariable(method = "encode", at = @At("HEAD"), index = 1, remap = false)
+    @ModifyVariable(
+            method = "encode",
+            at = @At("HEAD"),
+            index = 1,
+            remap = false
+    )
     private Packet<?> mutatePacket(Packet<?> msg) {
         event = new PacketEvent.Encode(msg);
         ClientAPI.EVENT_BUS.post(event);
         return event.getPacket();
     }
 
-    @Inject(method = "encode", at = @At(value = "JUMP", ordinal = 0), cancellable = true)
+    @Inject(
+            method = "encode",
+            at = @At(
+                    value = "JUMP",
+                    ordinal = 0
+            ),
+            cancellable = true
+    )
     private void checkCancelled(ChannelHandlerContext ctx, Packet<?> msg, ByteBuf out, CallbackInfo ci) {
         if (event != null && (event.isCancelled() || event.getPacket() == null))
             ci.cancel();

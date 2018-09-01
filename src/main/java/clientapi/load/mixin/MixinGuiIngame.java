@@ -41,7 +41,11 @@ import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 @Mixin(GuiIngame.class)
 public class MixinGuiIngame {
 
-    @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderPumpkinOverlay",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderPumpkinOverlay(ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.PUMPKIN);
         ClientAPI.EVENT_BUS.post(event);
@@ -49,7 +53,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderScoreboard", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderScoreboard",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderScoreboard(ScoreObjective objective, ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.SCOREBOARD);
         ClientAPI.EVENT_BUS.post(event);
@@ -57,7 +65,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderPlayerStats", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderPlayerStats",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderPlayerStats(ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.STAT_ALL);
         ClientAPI.EVENT_BUS.post(event);
@@ -65,35 +77,64 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Redirect(method = "renderPlayerStats", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/EntityPlayer.getTotalArmorValue()I"))
+    @Redirect(
+            method = "renderPlayerStats",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/entity/player/EntityPlayer.getTotalArmorValue()I"
+            )
+    )
     private int renderPlayerStats$getTotalArmorValue(EntityPlayer player) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.STAT_ARMOR);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? 0 : player.getTotalArmorValue();
     }
 
-    @Redirect(method = "renderPlayerStats", at = @At(value = "INVOKE", target = "net/minecraft/util/math/MathHelper.ceil(F)I", ordinal = 4))
+    @Redirect(
+            method = "renderPlayerStats",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/util/math/MathHelper.ceil(F)I",
+                    ordinal = 4
+            )
+    )
     private int renderPlayerStats$ceil$4(float value) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.STAT_HEALTH);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? 0 : MathHelper.ceil(value);
     }
 
-    @Redirect(method = "renderPlayerStats", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/EntityPlayer.getRidingEntity()Lnet/minecraft/entity/Entity;"))
+    @Redirect(
+            method = "renderPlayerStats",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/entity/player/EntityPlayer.getRidingEntity()Lnet/minecraft/entity/Entity;"
+            )
+    )
     private Entity renderPlayerStats$getRidingEntity(EntityPlayer player) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.STAT_FOOD);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? player : player.getRidingEntity();
     }
 
-    @Redirect(method = "renderPlayerStats", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/EntityPlayer.isInsideOfMaterial(Lnet/minecraft/block/material/Material;)Z"))
+    @Redirect(
+            method = "renderPlayerStats",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/entity/player/EntityPlayer.isInsideOfMaterial(Lnet/minecraft/block/material/Material;)Z"
+            )
+    )
     private boolean renderPlayerStats$isInsideOfMaterial(EntityPlayer player, Material materialIn) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.STAT_AIR);
         ClientAPI.EVENT_BUS.post(event);
         return !event.isCancelled() && player.isInsideOfMaterial(materialIn);
     }
 
-    @Inject(method = "renderExpBar", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderExpBar",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderExpBar(ScaledResolution scaledRes, int x, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.EXP_BAR);
         ClientAPI.EVENT_BUS.post(event);
@@ -101,7 +142,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderVignette", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderVignette",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderVignette(float lightLevel, ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.VIGNETTE);
         ClientAPI.EVENT_BUS.post(event);
@@ -109,7 +154,14 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Redirect(method = "renderAttackIndicator", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.drawTexturedModalRect(IIIIII)V", ordinal = 0))
+    @Redirect(
+            method = "renderAttackIndicator",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/gui/GuiIngame.drawTexturedModalRect(IIIIII)V",
+                    ordinal = 0
+            )
+    )
     private void renderAttackIndicator(GuiIngame gui, int x, int y, int textureX, int textureY, int width, int height) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.CROSSHAIR);
         ClientAPI.EVENT_BUS.post(event);
@@ -117,21 +169,39 @@ public class MixinGuiIngame {
             gui.drawTexturedModalRect(x, y, textureX, textureY, width, height);
     }
 
-    @Redirect(method = "renderAttackIndicator", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = GETFIELD))
+    @Redirect(
+            method = "renderAttackIndicator",
+            at = @At(
+                    value = "FIELD",
+                    target = "net/minecraft/client/settings/GameSettings.attackIndicator:I",
+                    opcode = GETFIELD
+            )
+    )
     private int renderAttackIndicator$attackIndicator(GameSettings gameSettings) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.ATTACK_INDICATOR);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? 0 : gameSettings.attackIndicator;
     }
 
-    @Redirect(method = "renderHotbar", at = @At(value = "FIELD", target = "net/minecraft/client/settings/GameSettings.attackIndicator:I", opcode = GETFIELD))
+    @Redirect(
+            method = "renderHotbar",
+            at = @At(
+                    value = "FIELD",
+                    target = "net/minecraft/client/settings/GameSettings.attackIndicator:I",
+                    opcode = GETFIELD
+            )
+    )
     private int renderHotbar$attackIndicator(GameSettings gameSettings) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.ATTACK_INDICATOR);
         ClientAPI.EVENT_BUS.post(event);
         return event.isCancelled() ? 0 : gameSettings.attackIndicator;
     }
 
-    @Inject(method = "renderHorseJumpBar", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderHorseJumpBar",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderHorseJumpBar(ScaledResolution scaledRes, int x, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.JUMP_BAR);
         ClientAPI.EVENT_BUS.post(event);
@@ -139,7 +209,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderPortal", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderPortal",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderPortal(float timeInPortal, ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.PORTAL);
         ClientAPI.EVENT_BUS.post(event);
@@ -147,7 +221,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderSelectedItem", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderSelectedItem",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderSelectedItem(ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.SELECTED_ITEM_TOOLTIP);
         ClientAPI.EVENT_BUS.post(event);
@@ -155,7 +233,11 @@ public class MixinGuiIngame {
             ci.cancel();
     }
 
-    @Inject(method = "renderPotionEffects", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderPotionEffects",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderPotionEffects(ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.POTION_EFFECTS);
         ClientAPI.EVENT_BUS.post(event);

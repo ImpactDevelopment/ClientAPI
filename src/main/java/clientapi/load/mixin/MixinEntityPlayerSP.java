@@ -49,7 +49,11 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
 
     private MotionUpdateEvent preMotionUpdateEvent;
 
-    @Inject(method = "onUpdate", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "onUpdate",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void onPreUpdate(CallbackInfo ci) {
         UpdateEvent preUpdateEvent = new UpdateEvent(EventState.PRE);
         ClientAPI.EVENT_BUS.post(preUpdateEvent);
@@ -57,22 +61,37 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             ci.cancel();
     }
 
-    @Inject(method = "onUpdate", at = @At("RETURN"))
+    @Inject(
+            method = "onUpdate",
+            at = @At("RETURN")
+    )
     private void onPostUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.POST));
     }
 
-    @Inject(method = "onLivingUpdate", at = @At("HEAD"))
+    @Inject(
+            method = "onLivingUpdate",
+            at = @At("HEAD")
+    )
     private void onPreLivingUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
     }
 
-    @Inject(method = "onLivingUpdate", at = @At("RETURN"))
+    @Inject(
+            method = "onLivingUpdate",
+            at = @At("RETURN")
+    )
     private void onPostLivingUpdate(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
     }
 
-    @Redirect(method = "move", at = @At(value = "INVOKE", target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"))
+    @Redirect(
+            method = "move",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/entity/AbstractClientPlayer.move(Lnet/minecraft/entity/MoverType;DDD)V"
+            )
+    )
     private void move$move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
         MoveEvent event = new MoveEvent(type, x, y, z);
         ClientAPI.EVENT_BUS.post(event);
@@ -82,7 +101,13 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         super.move(type, event.getX(), event.getY(), event.getZ());
     }
 
-    @Redirect(method = "sendChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/NetHandlerPlayClient;sendPacket(Lnet/minecraft/network/Packet;)V"))
+    @Redirect(
+            method = "sendChatMessage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/NetHandlerPlayClient;sendPacket(Lnet/minecraft/network/Packet;)V"
+            )
+    )
     private void sendChatPacket(NetHandlerPlayClient connection, Packet<?> packet) {
         ChatEvent event = new ChatEvent.Send(((CPacketChatMessage) packet).getMessage());
         ClientAPI.EVENT_BUS.post(event);
@@ -91,45 +116,88 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
         connection.sendPacket(new CPacketChatMessage(event.getRawMessage()));
     }
 
-    @Inject(method = "onUpdateWalkingPlayer", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "onUpdateWalkingPlayer",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void onPreUpdateWalking(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(this.preMotionUpdateEvent = new MotionUpdateEvent(EventState.PRE));
         if (this.preMotionUpdateEvent.isCancelled())
             ci.cancel();
     }
 
-    @Inject(method = "onUpdateWalkingPlayer", at = @At("RETURN"))
+    @Inject(
+            method = "onUpdateWalkingPlayer",
+            at = @At("RETURN")
+    )
     private void onPostUpdateWalking(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new MotionUpdateEvent(EventState.POST));
         this.preMotionUpdateEvent = null;
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/EntityPlayerSP;posX:D"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/entity/EntityPlayerSP;posX:D"
+            )
+    )
     private double injectPosX(EntityPlayerSP self) {
         return this.preMotionUpdateEvent.getX();
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/util/math/AxisAlignedBB;minY:D"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/util/math/AxisAlignedBB;minY:D"
+            )
+    )
     private double injectPosY(AxisAlignedBB self) {
         return this.preMotionUpdateEvent.getY();
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/EntityPlayerSP;posZ:D"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/entity/EntityPlayerSP;posZ:D"
+            )
+    )
     private double injectPosZ(EntityPlayerSP self) {
         return this.preMotionUpdateEvent.getZ();
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/EntityPlayerSP;rotationYaw:F"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/entity/EntityPlayerSP;rotationYaw:F"
+            )
+    )
     private float injectYaw(EntityPlayerSP self) {
         return this.preMotionUpdateEvent.getYaw();
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/EntityPlayerSP;rotationPitch:F"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/entity/EntityPlayerSP;rotationPitch:F"
+            )
+    )
     private float injectPitch(EntityPlayerSP self) {
         return this.preMotionUpdateEvent.getPitch();
     }
 
-    @Redirect(method = "onUpdateWalkingPlayer", at = @At(value = "FIELD", target = "Lnet/minecraft/client/entity/EntityPlayerSP;onGround:Z"))
+    @Redirect(
+            method = "onUpdateWalkingPlayer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/entity/EntityPlayerSP;onGround:Z"
+            )
+    )
     private boolean injectOnGround(EntityPlayerSP self) {
         return this.preMotionUpdateEvent.isOnGround();
     }

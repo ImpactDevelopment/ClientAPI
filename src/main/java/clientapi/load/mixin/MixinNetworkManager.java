@@ -48,7 +48,13 @@ public abstract class MixinNetworkManager implements INetworkManager {
     @Shadow protected abstract void dispatchPacket(final Packet<?> inPacket, @Nullable final GenericFutureListener<? extends Future<? super Void>>[] futureListeners);
 
     @SuppressWarnings("unchecked")
-    @Redirect(method = "channelRead0", at = @At(value = "INVOKE", target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"))
+    @Redirect(
+            method = "channelRead0",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/network/Packet.processPacket(Lnet/minecraft/network/INetHandler;)V"
+            )
+    )
     private void channelRead0$processPacket(Packet<?> packetIn, INetHandler handler) {
         PacketEvent event = new PacketEvent.Receive(packetIn);
         ClientAPI.EVENT_BUS.post(event);
@@ -59,7 +65,13 @@ public abstract class MixinNetworkManager implements INetworkManager {
     }
 
     @SuppressWarnings("AmbiguousMixinReference")
-    @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;[Lio/netty/util/concurrent/GenericFutureListener;)V"))
+    @Redirect(
+            method = "sendPacket",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/network/NetworkManager.dispatchPacket(Lnet/minecraft/network/Packet;[Lio/netty/util/concurrent/GenericFutureListener;)V"
+            )
+    )
     private void sendPacket$dispatchPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
         PacketEvent event = new PacketEvent.Send(packetIn);
         ClientAPI.EVENT_BUS.post(event);
@@ -70,17 +82,33 @@ public abstract class MixinNetworkManager implements INetworkManager {
     }
 
     @SuppressWarnings("AmbiguousMixinReference")
-    @Redirect(method = "sendPacket", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"))
+    @Redirect(
+            method = "sendPacket",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/network/NetworkManager.isChannelOpen()Z"
+            )
+    )
     private boolean sendPacket$isChannelOpen(NetworkManager networkManager) {
         return this.sendPackets && networkManager.isChannelOpen();
     }
 
-    @Inject(method = "handleDisconnection", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"))
+    @Inject(
+            method = "handleDisconnection",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "net/minecraft/network/INetHandler.onDisconnect(Lnet/minecraft/util/text/ITextComponent;)V"
+            )
+    )
     private void onDisconnect(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
     }
 
-    @Inject(method = "flushOutboundQueue", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "flushOutboundQueue",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void flushOutboundQueue(CallbackInfo ci) {
         if (!sendPackets)
             ci.cancel();

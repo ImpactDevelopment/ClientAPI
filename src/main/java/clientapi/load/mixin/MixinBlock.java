@@ -45,7 +45,11 @@ public abstract class MixinBlock {
 
     private BoundingBoxEvent bbEvent;
 
-    @Inject(method = "canCollideCheck", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "canCollideCheck",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void canCollideCheck(IBlockState state, boolean hitIfLiquid, CallbackInfoReturnable<Boolean> cir) {
         BlockCollisionEvent event = new BlockCollisionEvent((Block) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
@@ -53,8 +57,10 @@ public abstract class MixinBlock {
             cir.setReturnValue(false);
     }
 
-    @Inject(method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
-            at = @At("HEAD"))
+    @Inject(
+            method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
+            at = @At("HEAD")
+    )
     private void addCollisionBox(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState, CallbackInfo ci) {
         synchronized (this) {
             Block block = (Block) (Object) (this);
@@ -63,8 +69,13 @@ public abstract class MixinBlock {
         }
     }
 
-    @Redirect(method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/block/state/IBlockState;getCollisionBoundingBox(Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/AxisAlignedBB;"))
+    @Redirect(
+            method = "addCollisionBoxToList(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/AxisAlignedBB;Ljava/util/List;Lnet/minecraft/entity/Entity;Z)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/state/IBlockState;getCollisionBoundingBox(Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/AxisAlignedBB;"
+            )
+    )
     private AxisAlignedBB getBB(IBlockState state, IBlockAccess world, BlockPos pos) {
         synchronized (this) {
             AxisAlignedBB bb = (bbEvent == null) ?

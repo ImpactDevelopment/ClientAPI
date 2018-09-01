@@ -42,7 +42,13 @@ import static clientapi.util.interfaces.Helper.mc;
 @Mixin(NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {
 
-    @Inject(method = "handleCombatEvent", at=  @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/PacketThreadUtil.checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V"))
+    @Inject(
+            method = "handleCombatEvent",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "net/minecraft/network/PacketThreadUtil.checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V"
+            )
+    )
     private void handleCombatEvent(SPacketCombatEvent event, CallbackInfo ci) {
         if (mc.world == null)
             return;
@@ -58,7 +64,13 @@ public class MixinNetHandlerPlayClient {
         }
     }
 
-    @Redirect(method = "handleChat", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.addChatMessage(Lnet/minecraft/util/text/ChatType;Lnet/minecraft/util/text/ITextComponent;)V"))
+    @Redirect(
+            method = "handleChat",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/gui/GuiIngame.addChatMessage(Lnet/minecraft/util/text/ChatType;Lnet/minecraft/util/text/ITextComponent;)V"
+            )
+    )
     private void handleChat$addChatMessage(GuiIngame guiIngame, ChatType chatTypeIn, ITextComponent message) {
         ChatEvent event = new ChatEvent.Receive(message);
         ClientAPI.EVENT_BUS.post(event);

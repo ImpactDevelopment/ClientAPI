@@ -32,17 +32,33 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiConnecting.class)
 public class MixinGuiConnecting {
 
-    @Inject(method = "connect", at = @At("HEAD"))
+    @Inject(
+            method = "connect",
+            at = @At("HEAD")
+    )
     private void onPreConnect(CallbackInfo info) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.PRE, Helper.mc.getCurrentServerData()));
     }
 
-    @Inject(method = "connect", at = @At(value = "INVOKE", target = "net/minecraft/client/Minecraft.displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V"))
+    @Inject(
+            method = "connect",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/Minecraft.displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V"
+            )
+    )
     private void onError(CallbackInfo info) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.FAILED, Helper.mc.getCurrentServerData()));
     }
 
-    @Inject(method = "connect", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/network/NetworkManager.sendPacket(Lnet/minecraft/network/Packet;)V", ordinal = 1))
+    @Inject(
+            method = "connect",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "net/minecraft/network/NetworkManager.sendPacket(Lnet/minecraft/network/Packet;)V",
+                    ordinal = 1
+            )
+    )
     private void onSendPacket(CallbackInfo info) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.CONNECT, Helper.mc.getCurrentServerData()));
     }

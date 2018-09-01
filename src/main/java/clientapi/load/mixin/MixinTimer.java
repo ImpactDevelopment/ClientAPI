@@ -41,7 +41,14 @@ public class MixinTimer implements ITimer {
      *
      * @author LeafHacker
      */
-    @Redirect(method = "updateTimer", at = @At(value = "FIELD", target = "Lnet/minecraft/util/Timer;tickLength:F", opcode = GETFIELD))
+    @Redirect(
+            method = "updateTimer",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/util/Timer;tickLength:F",
+                    opcode = GETFIELD
+            )
+    )
     private float getTickLength(Timer self) {
         return this.tickLength / speed;
     }
