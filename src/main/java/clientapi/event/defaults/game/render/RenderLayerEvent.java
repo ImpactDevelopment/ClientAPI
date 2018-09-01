@@ -27,12 +27,12 @@ import net.minecraft.entity.EntityLivingBase;
  * @author Brady
  * @since 4/23/2017
  */
-public final class LayerRenderEvent extends Cancellable {
+public final class RenderLayerEvent extends Cancellable {
 
     private final EntityLivingBase entity;
     private final LayerRenderer layerRenderer;
 
-    public LayerRenderEvent(EntityLivingBase entity, LayerRenderer layerRenderer) {
+    public RenderLayerEvent(EntityLivingBase entity, LayerRenderer layerRenderer) {
         this.entity = entity;
         this.layerRenderer = layerRenderer;
     }
