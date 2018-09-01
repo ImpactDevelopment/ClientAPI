@@ -29,19 +29,19 @@ import java.util.function.Function;
  * @author Brady
  * @since 2/5/2018
  */
-public final class EntityCheckImpl implements EntityCheck {
-
-    /**
-     * A function that tests the specified entity
-     */
-    private final Function<Entity, Boolean> isValid;
+public final class EntityCheckFunction implements EntityCheck {
 
     /**
      * The type of check
      */
     private final CheckType type;
 
-    public EntityCheckImpl(CheckType type, Function<Entity, Boolean> isValid) {
+    /**
+     * A function that tests the specified entity
+     */
+    private final Function<Entity, Boolean> isValid;
+
+    public EntityCheckFunction(CheckType type, Function<Entity, Boolean> isValid) {
         this.type = type;
         this.isValid = isValid;
     }
