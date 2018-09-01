@@ -27,7 +27,7 @@ import net.minecraft.entity.Entity;
  * @author Brady
  * @since 3/2/2017
  */
-public final class EntityRenderEvent extends Cancellable {
+public final class RenderEntityEvent extends Cancellable {
 
     /**
      * The state of this Event
@@ -59,7 +59,7 @@ public final class EntityRenderEvent extends Cancellable {
      */
     private final float partialTicks;
 
-    public EntityRenderEvent(EventState state, Render<?> renderer, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public RenderEntityEvent(EventState state, Render<?> renderer, Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
         this.state = state;
         this.renderer = renderer;
 

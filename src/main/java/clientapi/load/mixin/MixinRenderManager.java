@@ -17,7 +17,7 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.EntityRenderEvent;
+import clientapi.event.defaults.game.render.RenderEntityEvent;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -45,7 +45,7 @@ public class MixinRenderManager {
             cancellable = true
     )
     private void preRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
-        EntityRenderEvent event = new EntityRenderEvent(EventState.PRE, render, entityIn, x, y, z, yaw, partialTicks);
+        RenderEntityEvent event = new RenderEntityEvent(EventState.PRE, render, entityIn, x, y, z, yaw, partialTicks);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             ci.cancel();
@@ -57,6 +57,6 @@ public class MixinRenderManager {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void postRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
-        ClientAPI.EVENT_BUS.post(new EntityRenderEvent(EventState.POST, render, entityIn, x, y, z, yaw, partialTicks));
+        ClientAPI.EVENT_BUS.post(new RenderEntityEvent(EventState.POST, render, entityIn, x, y, z, yaw, partialTicks));
     }
 }
