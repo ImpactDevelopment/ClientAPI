@@ -99,15 +99,9 @@ public class Value<T> implements IValue<T> {
         this.object = object;
         this.field = field;
 
-        // Accessor
-        if (object instanceof ValueAccessor) {
-            this.mutable = new MergedMutable<>(
-                    ((ValueAccessor) object).getFieldSetter(field.getName()),
-                    ((ValueAccessor) object).getFieldGetter(field.getName())
-            );
-        } else {
-            this.mutable = new MutableField<>(object, field);
-        }
+        this.mutable = object instanceof ValueAccessor
+                ? ((ValueAccessor) object).getFieldMutable(field.getName())
+                : new MutableField<>(object, field);
 
         // Listeners
         for (EventState state : EventState.values()) {
