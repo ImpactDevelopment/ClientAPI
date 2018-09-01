@@ -33,7 +33,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldClient.class)
 public class MixinWorldClient {
 
-    @Inject(method = "sendQuittingDisconnectingPacket", at = @At("HEAD"))
+    @Inject(
+            method = "sendQuittingDisconnectingPacket",
+            at = @At("HEAD")
+    )
     private void preSendQuittingDisconnectingPacket(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, false, Helper.mc.getCurrentServerData()));
     }

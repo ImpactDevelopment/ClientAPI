@@ -41,23 +41,47 @@ import static net.minecraft.block.material.Material.WATER;
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
 
-    @Inject(method = "updateCameraAndRender", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=gui" }))
+    @Inject(
+            method = "updateCameraAndRender",
+            at = @At(
+                    value = "INVOKE_STRING",
+                    target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V",
+                    args = { "ldc=gui" }
+                    )
+    )
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
     }
 
-    @Inject(method = "renderWorldPass", at = @At(value = "INVOKE_STRING", target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V", args = { "ldc=hand" }))
+    @Inject(
+            method = "renderWorldPass",
+            at = @At(
+                    value = "INVOKE_STRING",
+                    target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V",
+                    args = { "ldc=hand" }
+                    )
+    )
     private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks, pass));
     }
 
-    @Redirect(method = "updateCameraAndRender", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiIngame.renderGameOverlay(F)V"))
+    @Redirect(
+            method = "updateCameraAndRender",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/gui/GuiIngame.renderGameOverlay(F)V"
+            )
+    )
     private void updateCameraAndRender$renderGameOverlay(GuiIngame guiIngame, float partialTicks) {
         guiIngame.renderGameOverlay(partialTicks);
         ClientAPI.EVENT_BUS.post(new RenderHudEvent(partialTicks));
     }
 
-    @Inject(method = "hurtCameraEffect", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "hurtCameraEffect",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void hurtCameraEffect(float partialTicks, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.HURTCAM);
         ClientAPI.EVENT_BUS.post(event);
@@ -65,7 +89,13 @@ public class MixinEntityRenderer {
             ci.cancel();
     }
 
-    @Redirect(method = "setupFog", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/state/IBlockState;getMaterial()Lnet/minecraft/block/material/Material;"))
+    @Redirect(
+            method = "setupFog",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/state/IBlockState;getMaterial()Lnet/minecraft/block/material/Material;"
+            )
+    )
     private Material setupFog$getMaterial(IBlockState iblockstate) {
         Material m = iblockstate.getMaterial();
 

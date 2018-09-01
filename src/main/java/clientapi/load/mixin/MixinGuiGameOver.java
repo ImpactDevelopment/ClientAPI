@@ -33,7 +33,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiGameOver.class)
 public class MixinGuiGameOver {
 
-    @Inject(method = "confirmClicked", at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/client/Minecraft.loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V"))
+    @Inject(
+            method = "confirmClicked",
+            at = @At(
+                    value = "INVOKE_ASSIGN",
+                    target = "net/minecraft/client/Minecraft.loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V"
+            )
+    )
     private void postLoadWorld(CallbackInfo ci) {
         if (Helper.mc.getCurrentServerData() != null)
             ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));

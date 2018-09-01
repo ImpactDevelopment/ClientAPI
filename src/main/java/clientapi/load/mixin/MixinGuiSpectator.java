@@ -32,7 +32,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiSpectator.class)
 public class MixinGuiSpectator {
 
-    @Inject(method = "renderSelectedItem", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderSelectedItem",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void renderSelectedItem(ScaledResolution scaledRes, CallbackInfo ci) {
         HudOverlayEvent event = new HudOverlayEvent(HudOverlayEvent.Type.SELECTED_ITEM_TOOLTIP);
         ClientAPI.EVENT_BUS.post(event);

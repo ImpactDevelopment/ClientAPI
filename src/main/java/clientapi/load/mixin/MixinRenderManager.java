@@ -39,19 +39,23 @@ public class MixinRenderManager {
             method = "renderEntity",
             at = @At(
                     value = "INVOKE",
-                    target = "net/minecraft/client/renderer/entity/Render.setRenderOutlines(Z)V"),
+                    target = "net/minecraft/client/renderer/entity/Render.setRenderOutlines(Z)V"
+            ),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true
     )
     private void preRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
-        EntityRenderEvent entityRenderEvent = new EntityRenderEvent(EventState.PRE, render, entityIn, x, y, z, yaw, partialTicks);
-        ClientAPI.EVENT_BUS.post(entityRenderEvent);
-        if (entityRenderEvent.isCancelled()) {
+        EntityRenderEvent event = new EntityRenderEvent(EventState.PRE, render, entityIn, x, y, z, yaw, partialTicks);
+        ClientAPI.EVENT_BUS.post(event);
+        if (event.isCancelled())
             ci.cancel();
-        }
     }
 
-    @Inject(method = "renderEntity", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(
+            method = "renderEntity",
+            at = @At("RETURN"),
+            locals = LocalCapture.CAPTURE_FAILHARD
+    )
     private void postRenderEntity(Entity entityIn, double x, double y, double z, float yaw, float partialTicks, boolean p_188391_10_, CallbackInfo ci, Render render) {
         ClientAPI.EVENT_BUS.post(new EntityRenderEvent(EventState.POST, render, entityIn, x, y, z, yaw, partialTicks));
     }

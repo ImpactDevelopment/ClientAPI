@@ -37,14 +37,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityLivingBase.class)
 public abstract class MixinEntityLivingBase extends MixinEntity {
 
-    @Inject(method = "onDeath", at = @At("HEAD"))
+    @Inject(
+            method = "onDeath",
+            at = @At("HEAD")
+    )
     private void onDeath(DamageSource cause, CallbackInfo ci) {
         EntityLivingBase _this = (EntityLivingBase) (Object) this;
         if (!(_this instanceof EntityPlayer))
             ClientAPI.EVENT_BUS.post(new EntityDeathEvent(_this, cause));
     }
 
-    @Redirect(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"))
+    @Redirect(
+            method = "onLivingUpdate",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/entity/EntityLivingBase.travel(FFF)V"
+            )
+    )
     private void onLivingUpdate$travel(EntityLivingBase entity, float strafe, float vertical, float forward) {
         EntityTravelEvent event = new EntityTravelEvent(EventState.PRE, entity, strafe, vertical, forward);
         ClientAPI.EVENT_BUS.post(event);
@@ -54,7 +63,11 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
         ClientAPI.EVENT_BUS.post(new EntityTravelEvent(EventState.POST, entity, strafe, vertical, forward));
     }
 
-    @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "jump",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void preJump(CallbackInfo ci) {
         EntityJumpEvent event = new EntityJumpEvent(EventState.PRE, (EntityLivingBase) (Object) this);
         ClientAPI.EVENT_BUS.post(event);
@@ -62,7 +75,10 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
             ci.cancel();
     }
 
-    @Inject(method = "jump", at = @At("RETURN"))
+    @Inject(
+            method = "jump",
+            at = @At("RETURN")
+    )
     private void postJump(CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new EntityJumpEvent(EventState.POST, (EntityLivingBase) (Object) this));
     }

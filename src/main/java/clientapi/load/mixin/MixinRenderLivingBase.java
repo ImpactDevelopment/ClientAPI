@@ -32,7 +32,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RenderLivingBase.class)
 public class MixinRenderLivingBase {
 
-    @Redirect(method = "renderLayers", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/entity/layers/LayerRenderer.doRenderLayer(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V"))
+    @Redirect(
+            method = "renderLayers",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/renderer/entity/layers/LayerRenderer.doRenderLayer(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V"
+            )
+    )
     @SuppressWarnings("unchecked")
     private void renderLayers$doRenderLayer(LayerRenderer renderer, EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scaleIn) {
         LayerRenderEvent event = new LayerRenderEvent(entitylivingbaseIn, renderer);

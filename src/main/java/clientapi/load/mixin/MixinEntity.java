@@ -59,7 +59,11 @@ public abstract class MixinEntity implements IEntity {
     private Vec3 pos, prevPos, lastTickPos, headPos, motion;
     private Vec2 rotation, prevRotation;
 
-    @Inject(method = "applyEntityCollision", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "applyEntityCollision",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void applyEntityCollision(Entity entityIn, CallbackInfo ci) {
         EntityCollisionEvent event = new EntityCollisionEvent((Entity) (Object) this, entityIn);
         ClientAPI.EVENT_BUS.post(event);

@@ -33,7 +33,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ParticleManager.class)
 public class MixinParticleManager {
 
-    @Redirect(method = "spawnEffectParticle", at = @At(value = "INVOKE", target = "net/minecraft/client/particle/IParticleFactory.createParticle(ILnet/minecraft/world/World;DDDDDD[I)Lnet/minecraft/client/particle/Particle;"))
+    @Redirect(
+            method = "spawnEffectParticle",
+            at = @At(
+                    value = "INVOKE",
+                    target = "net/minecraft/client/particle/IParticleFactory.createParticle(ILnet/minecraft/world/World;DDDDDD[I)Lnet/minecraft/client/particle/Particle;"
+            )
+    )
     private Particle spawnParticle(IParticleFactory particleFactory, int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... parameters) {
         SpawnParticleEvent event = new SpawnParticleEvent(particleID, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         ClientAPI.EVENT_BUS.post(event);

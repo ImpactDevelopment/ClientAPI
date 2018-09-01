@@ -34,7 +34,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LayerArmorBase.class)
 public class MixinLayerArmorBase {
 
-    @Inject(method = "renderEnchantedGlint", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderEnchantedGlint",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private static void renderEnchantedGlint(RenderLivingBase<?> renderer, EntityLivingBase entityLivingBaseIn, ModelBase model, float limbSwing, float limbSwingAmount, float partialTicks, float ageTicks, float netHeadYaw, float headPitch, float scale, CallbackInfo ci) {
         GlintEffectEvent event = new GlintEffectEvent(GlintEffectEvent.GlintTarget.ARMOR);
         ClientAPI.EVENT_BUS.post(event);
