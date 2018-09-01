@@ -17,7 +17,7 @@
 import clientapi.util.annotation.Label;
 import clientapi.value.IValue;
 import clientapi.value.annotation.BooleanValue;
-import clientapi.value.annotation.NumberValue;
+import clientapi.value.annotation.number.IntegerValue;
 import clientapi.value.holder.ValueHolder;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,7 +72,7 @@ public class ValueTest {
         private boolean bool;
 
             @Label(name = "Child Value", parent = "boolean_value", id = "child_value", description = "An example child value")
-            @NumberValue(min = 0, max = 10)
+            @IntegerValue(min = 0, max = 10)
             private int child = 5;
 
         // @formatter:on
