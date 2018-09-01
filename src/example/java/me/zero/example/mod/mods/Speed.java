@@ -20,7 +20,7 @@ import clientapi.event.defaults.game.entity.local.MoveEvent;
 import clientapi.module.Mod;
 import clientapi.module.Module;
 import clientapi.util.annotation.Label;
-import clientapi.value.annotation.NumberValue;
+import clientapi.value.annotation.number.DoubleValue;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.example.mod.category.IMovement;
@@ -34,7 +34,7 @@ import org.lwjgl.input.Keyboard;
 public final class Speed extends Module implements IMovement {
 
     @Label(name = "Speed", id = "speed", description = "The multiplier for your speed")
-    @NumberValue(min = 1, max = 10)
+    @DoubleValue(min = 1, max = 10)
     private double speed = 3;
 
     @EventHandler

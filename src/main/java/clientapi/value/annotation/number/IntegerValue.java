@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package clientapi.value.annotation;
+package clientapi.value.annotation.number;
+
+import clientapi.value.annotation.ValueDefinition;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,29 +24,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to mark fields as Number Values
- *
  * @author Brady
- * @since 1/23/2017
+ * @since 9/1/2018
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @ValueDefinition
-public @interface NumberValue {
+public @interface IntegerValue {
 
     /**
      * The minimum value that this value can go to.
      *
      * @return The min value
      */
-    double min();
+     int min();
 
     /**
      * The maximum value that this value can go to.
      *
      * @return The max value
      */
-    double max();
+    int max();
 
     /**
      * The interval at which this value will change. If
@@ -52,5 +52,5 @@ public @interface NumberValue {
      *
      * @return The value change interval
      */
-    double interval() default 0;
+    int interval() default 0;
 }
