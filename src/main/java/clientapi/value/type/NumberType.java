@@ -19,6 +19,7 @@ package clientapi.value.type;
 import clientapi.util.math.MathUtils;
 import clientapi.value.Value;
 import clientapi.value.annotation.NumberValue;
+import it.unimi.dsi.fastutil.longs.Long2BooleanFunction;
 
 import java.lang.reflect.Field;
 
@@ -125,5 +126,65 @@ public class NumberType<T extends Number> extends Value<T> {
             return (T) Double.valueOf(val.doubleValue());
         }
         throw new RuntimeException("A number that isn't a number? Okay, Java.");
+    }
+
+    /**
+     * A byte number type
+     */
+    public static class ByteType extends NumberType<Byte> {
+
+        public ByteType(String name, String parent, String id, String description, Object object, Field field, Byte minimum, Byte maximum, Byte interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
+    }
+
+    /**
+     * A short number type
+     */
+    public static class ShortType extends NumberType<Short> {
+
+        public ShortType(String name, String parent, String id, String description, Object object, Field field, Short minimum, Short maximum, Short interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
+    }
+
+    /**
+     * An integer number type
+     */
+    public static class IntegerType extends NumberType<Integer> {
+
+        public IntegerType(String name, String parent, String id, String description, Object object, Field field, Integer minimum, Integer maximum, Integer interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
+    }
+
+    /**
+     * A long number type
+     */
+    public static class LongType extends NumberType<Long> {
+
+        public LongType(String name, String parent, String id, String description, Object object, Field field, Long minimum, Long maximum, Long interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
+    }
+
+    /**
+     * A float number type
+     */
+    public static class FloatType extends NumberType<Float> {
+
+        public FloatType(String name, String parent, String id, String description, Object object, Field field, Float minimum, Float maximum, Float interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
+    }
+
+    /**
+     * A double number type
+     */
+    public static class DoubleType extends NumberType<Double> {
+
+        public DoubleType(String name, String parent, String id, String description, Object object, Field field, Double minimum, Double maximum, Double interval) {
+            super(name, parent, id, description, object, field, minimum, maximum, interval);
+        }
     }
 }
