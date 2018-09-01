@@ -80,8 +80,7 @@ public final class EntityFilter implements EntityCheck {
      * @param filter The filter to add
      */
     public final void removeFilter(EntityCheck filter) {
-        if (this.checks.contains(filter))
-            this.checks.remove(filter);
+        this.checks.remove(filter);
     }
 
     /**
