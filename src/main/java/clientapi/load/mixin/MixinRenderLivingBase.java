@@ -17,7 +17,7 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.render.LayerRenderEvent;
+import clientapi.event.defaults.game.render.RenderLayerEvent;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
@@ -41,7 +41,7 @@ public class MixinRenderLivingBase {
     )
     @SuppressWarnings("unchecked")
     private void renderLayers$doRenderLayer(LayerRenderer renderer, EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scaleIn) {
-        LayerRenderEvent event = new LayerRenderEvent(entitylivingbaseIn, renderer);
+        RenderLayerEvent event = new RenderLayerEvent(entitylivingbaseIn, renderer);
         ClientAPI.EVENT_BUS.post(event);
         if (!event.isCancelled())
             renderer.doRenderLayer(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scaleIn);
