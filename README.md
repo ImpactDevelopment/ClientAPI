@@ -45,7 +45,7 @@ In order to create a Minecraft Launcher Profile for a ClientAPI based mod, you n
   --tweakClass clientapi.load.ClientTweaker
   ```
   If you are planning on using [Minecraft Forge](https://files.minecraftforge.net/) or [OptiFine](https://optifine.net/)
-  in parallel with ClientAPI, you should use their respective tweakers found [here](https://github.com/ImpactDevelopment/ClientAPI/tree/master/src/main/java/clientapi/load).
+  in parallel with ClientAPI, you should use their respective tweakers found [here](src/main/java/clientapi/load).
 * Add your client mod's dependency. This follows the same format as normal dependencies. If your
   client mod is not on a maven repository then the URL should not be defined, and the jar file
   should be installed into the ``libraries`` directory of minecraft.
