@@ -18,7 +18,7 @@ package clientapi.module;
 
 import clientapi.ClientAPI;
 import clientapi.util.io.Keybind;
-import clientapi.value.holder.ValueHolder;
+import org.lwjgl.input.Keyboard;
 
 /**
  * A type of module intended for use as a sub-module
@@ -26,39 +26,18 @@ import clientapi.value.holder.ValueHolder;
  * @author Brady
  * @since 2/24/2017
  */
-public class ModuleMode<T extends Module> extends ValueHolder implements IModule {
+public class ModuleMode<T extends Module> extends AbstractModule {
 
     /**
      * Parent Module
      */
     protected final T parent;
 
-    /**
-     * Name for the mode
-     */
-    private final String name;
-
-    /**
-     * Description of the mode
-     */
-    private final String description;
-
-    /**
-     * The Keybind of this Module
-     */
-    private Keybind bind;
-
-    /**
-     * The state of the mode
-     */
-    private boolean state;
-
     public ModuleMode(T parent, String name, String description) {
+        super(name, description);
         this.parent = parent;
-        this.name = name;
-        this.description = description;
 
-        this.bind = new Keybind(Keybind.Type.TOGGLE, 0, type -> {
+        this.bind = new Keybind(Keybind.Type.TOGGLE, Keyboard.KEY_NONE, type -> {
             if (type == Keybind.Action.CLICK) {
                 parent.setState(parent.getMode() != this || !parent.getState());
                 parent.setMode(this);
@@ -87,31 +66,8 @@ public class ModuleMode<T extends Module> extends ValueHolder implements IModule
         return this.parent;
     }
 
-    /**
-     * @return The name of the mode
-     */
-    @Override
-    public final String getName() {
-        return this.name;
-    }
-
-    @Override
-    public final String getDescription() {
-        return this.description;
-    }
-
-    @Override
-    public final boolean getState() {
-        return this.state;
-    }
-
-    @Override
-    public final Keybind getBind() {
-        return this.bind;
-    }
-
     @Override
     public final Class<?> getType() {
-        return parent.getClass();
+        return this.parent.getClass();
     }
 }

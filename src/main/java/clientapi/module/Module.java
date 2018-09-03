@@ -44,7 +44,7 @@ import java.util.Optional;
  * @author Brady
  * @since 1/19/2017
  */
-public abstract class Module extends ValueHolder implements IModule, Nameable, Describable, Taggable {
+public abstract class Module extends AbstractModule implements Taggable {
 
     /**
      * Reference to self-class
@@ -52,29 +52,9 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
     private final Class<? extends Module> self = this.getClass();
 
     /**
-     * Name of the node
-     */
-    protected String name;
-
-    /**
-     * Description of the node
-     */
-    protected String description;
-
-    /**
      * The type/category of the module
      */
     private Class<?> type;
-
-    /**
-     * The Keybind of this Module
-     */
-    private Keybind bind;
-
-    /**
-     * The state of the module, indicated whether it is on or off
-     */
-    private boolean state;
 
     /**
      * List of Modes
@@ -294,28 +274,8 @@ public abstract class Module extends ValueHolder implements IModule, Nameable, D
     }
 
     @Override
-    public final boolean getState() {
-        return this.state;
-    }
-
-    @Override
     public final Class<?> getType() {
         return this.type;
-    }
-
-    @Override
-    public final Keybind getBind() {
-        return this.bind;
-    }
-
-    @Override
-    public final String getName() {
-        return this.name;
-    }
-
-    @Override
-    public final String getDescription() {
-        return this.description;
     }
 
     @Override
