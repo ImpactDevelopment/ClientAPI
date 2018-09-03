@@ -44,7 +44,7 @@ import java.util.Optional;
  * @author Brady
  * @since 1/19/2017
  */
-public abstract class Module extends AbstractModule implements Taggable {
+public class Module extends AbstractModule implements Taggable {
 
     /**
      * Reference to self-class
