@@ -18,14 +18,11 @@ package clientapi.value.type.number;
 
 import clientapi.util.math.MathUtils;
 import clientapi.value.Value;
-import clientapi.value.annotation.NumberValue;
 
 import java.lang.reflect.Field;
 
 /**
  * Basic type for Number values
- *
- * @see NumberValue
  *
  * @author Brady
  * @since 1/23/2017
