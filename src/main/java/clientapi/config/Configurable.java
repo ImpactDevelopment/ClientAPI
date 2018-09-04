@@ -16,7 +16,6 @@
 
 package clientapi.config;
 
-import clientapi.Client;
 import clientapi.util.interfaces.Helper;
 import clientapi.util.interfaces.Initializable;
 
@@ -25,7 +24,6 @@ import clientapi.util.interfaces.Initializable;
  * taking in the generic configuration type.
  *
  * @see JsonConfiguration
- * @see Client
  * @see ClientConfiguration
  *
  * @author Brady
