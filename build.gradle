@@ -51,7 +51,7 @@ compileJava {
 
 sourceSets {
     example {
-        compileClasspath += main.compileClasspath + main.output
+        compileClasspath += main.compileClasspath + main.runtimeClasspath + main.output
     }
     debug {
         compileClasspath += example.compileClasspath + example.output
