@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/ImpactDevelopment/ClientAPI.svg?branch=master)](https://travis-ci.org/ImpactDevelopment/ClientAPI)
-[![License](https://img.shields.io/github/license/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/ImpactDevelopment/ClientAPI.svg)](LICENSE)
 [![Release](https://img.shields.io/github/release/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/releases)
 
 # ClientAPI
@@ -21,7 +21,7 @@ it up are included in the README.
 
 ### Developing a ClientAPI Mod
 An example ClientAPI mod is provided with the CDK, however if you choose to start from scratch, an overview
-of how to setup the core functionalities can be found [here](https://github.com/ImpactDevelopment/ClientAPI/blob/master/src/example/README.md).
+of how to setup the core functionalities can be found [here](src/example/README.md).
 
 ### Creating a Launcher Profile
 In order to create a Minecraft Launcher Profile for a ClientAPI based mod, you need to...
