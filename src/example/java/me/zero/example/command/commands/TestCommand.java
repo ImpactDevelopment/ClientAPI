@@ -16,9 +16,9 @@
 
 package me.zero.example.command.commands;
 
-import clientapi.command.Cmd;
 import clientapi.command.Command;
-import clientapi.command.Sub;
+import clientapi.command.annotation.Cmd;
+import clientapi.command.annotation.Sub;
 import clientapi.command.executor.ExecutionContext;
 import clientapi.util.builder.impl.ChatBuilder;
 import net.minecraft.util.text.TextFormatting;
