@@ -16,6 +16,8 @@
 
 package clientapi.command;
 
+import clientapi.command.annotation.Cmd;
+import clientapi.command.annotation.Sub;
 import clientapi.command.exception.CommandException;
 import clientapi.command.exception.CommandInitException;
 import clientapi.command.exception.UnknownSubCommandException;

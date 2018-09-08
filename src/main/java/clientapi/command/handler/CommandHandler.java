@@ -17,8 +17,8 @@
 package clientapi.command.handler;
 
 import clientapi.ClientAPI;
-import clientapi.command.Cmd;
 import clientapi.command.Command;
+import clientapi.command.annotation.Cmd;
 import clientapi.command.exception.CommandException;
 import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
