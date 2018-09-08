@@ -17,8 +17,8 @@
 package me.zero.example.mod.mods;
 
 import clientapi.event.defaults.game.entity.local.MoveEvent;
-import clientapi.module.Mod;
 import clientapi.module.Module;
+import clientapi.module.annotation.Mod;
 import clientapi.util.annotation.Label;
 import clientapi.value.annotation.number.DoubleValue;
 import me.zero.alpine.listener.EventHandler;

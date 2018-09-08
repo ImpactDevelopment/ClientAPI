@@ -17,8 +17,8 @@
 package clientapi.util;
 
 import clientapi.manage.Manager;
-import clientapi.module.Category;
 import clientapi.module.Module;
+import clientapi.module.annotation.Category;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;

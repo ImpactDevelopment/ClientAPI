@@ -18,14 +18,13 @@ package clientapi.module;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.internal.ModuleStateEvent;
+import clientapi.module.annotation.Category;
+import clientapi.module.annotation.Mod;
 import clientapi.module.exception.ModuleInitException;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.Tag;
-import clientapi.util.interfaces.Describable;
-import clientapi.util.interfaces.Nameable;
 import clientapi.util.interfaces.Taggable;
 import clientapi.util.io.Keybind;
-import clientapi.value.holder.ValueHolder;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;

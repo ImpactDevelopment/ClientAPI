@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package clientapi.module;
+package clientapi.module.annotation;
+
+import org.lwjgl.input.Keyboard;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,25 +24,29 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Category annotation to mark interfaces as
- * categories. This annotation isn't placed
- * anywhere in the API, only in Clients based
- * on it.
+ * Used to mark a class as a Module, clean place
+ * to store all of the information that would
+ * otherwise be passed down through a contructor.
  *
  * @author Brady
- * @since 2/6/2017
+ * @since 1/21/2017
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Category {
+public @interface Mod {
 
     /**
-     * @return The name of the Category
+     * Name of Module
      */
     String name();
 
     /**
-     * Default Category
+     * Description of Module
      */
-    @Category(name = "Default") class Default {}
+    String description();
+
+    /**
+     * Keybind of Module, Key is {@code KEY_NONE} by default.
+     */
+    int bind() default Keyboard.KEY_NONE;
 }
