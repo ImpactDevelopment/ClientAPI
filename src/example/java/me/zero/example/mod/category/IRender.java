@@ -16,7 +16,7 @@
 
 package me.zero.example.mod.category;
 
-import clientapi.module.Category;
+import clientapi.module.annotation.Category;
 
 /**
  * @author Brady

@@ -17,8 +17,8 @@
 package me.zero.example.mod.mods;
 
 import clientapi.event.defaults.game.render.RenderHudEvent;
-import clientapi.module.Mod;
 import clientapi.module.Module;
+import clientapi.module.annotation.Mod;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zero.example.ExampleClient;
