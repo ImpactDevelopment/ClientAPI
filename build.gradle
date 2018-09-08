@@ -93,6 +93,9 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
     }
+    compile ("pw.knx:feather:${project.featherVersion}") {
+        exclude module: 'lwjgl'
+    }
     testCompile "junit:junit:${project.junitVersion}"
 }
 
@@ -119,7 +122,7 @@ artifacts {
 mixin {
     defaultObfuscationEnv notch
     add sourceSets.main, 'mixins.capi.refmap.json'
-    add sourceSets.test, 'mixins.client.refmap.json'
+    add sourceSets.example, 'mixins.client.refmap.json'
 }
 
 // Create the pom configuration:

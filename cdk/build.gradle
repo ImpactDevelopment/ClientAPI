@@ -73,6 +73,9 @@ dependencies {
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
     }
+    compile('pw.knx:feather:@FEATHER_VERSION@') {
+        exclude module: 'lwjgl'
+    }
 }
 
 mixin {
