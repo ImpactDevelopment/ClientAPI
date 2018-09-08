@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package clientapi.command;
+package clientapi.command.annotation;
+
+import clientapi.command.ICommand;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
