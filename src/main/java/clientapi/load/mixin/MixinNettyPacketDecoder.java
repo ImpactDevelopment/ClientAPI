@@ -24,7 +24,9 @@ import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NettyPacketDecoder;
 import net.minecraft.network.Packet;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -39,6 +41,7 @@ import java.util.List;
 @Mixin(NettyPacketDecoder.class)
 public class MixinNettyPacketDecoder {
 
+    @Shadow @Final private EnumPacketDirection direction;
     private PacketEvent.Decode event;
 
     @Redirect(
@@ -49,9 +52,18 @@ public class MixinNettyPacketDecoder {
             )
     )
     private Packet<?> mutatePacket(EnumConnectionState state, EnumPacketDirection direction, int id) throws IllegalAccessException, InstantiationException {
-        event = new PacketEvent.Decode(state.getPacket(direction, id), state);
-        ClientAPI.EVENT_BUS.post(event);
-        return event.getPacket();
+        Packet<?> packet = state.getPacket(direction, id);
+
+        // Only call PacketEvent.Send if the NetworkManager that spawned this expects
+        // CLIENTBOUND type incoming packets, indicating that this is a pure
+        // client-sided NetworkManager and not from the Integrated Server.
+        if (this.direction == EnumPacketDirection.CLIENTBOUND) {
+            event = new PacketEvent.Decode(packet, state);
+            ClientAPI.EVENT_BUS.post(event);
+            return event.getPacket();
+        }
+
+        return packet;
     }
 
     @Inject(
