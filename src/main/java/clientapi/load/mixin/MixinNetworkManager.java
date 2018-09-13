@@ -24,9 +24,11 @@ import clientapi.util.interfaces.Helper;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import me.zero.alpine.type.EventState;
+import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -47,6 +49,8 @@ public abstract class MixinNetworkManager implements INetworkManager {
 
     @Shadow protected abstract void dispatchPacket(final Packet<?> inPacket, @Nullable final GenericFutureListener<? extends Future<? super Void>>[] futureListeners);
 
+    @Shadow @Final private EnumPacketDirection direction;
+
     @SuppressWarnings("unchecked")
     @Redirect(
             method = "channelRead0",
@@ -56,12 +60,19 @@ public abstract class MixinNetworkManager implements INetworkManager {
             )
     )
     private void channelRead0$processPacket(Packet<?> packetIn, INetHandler handler) {
-        PacketEvent event = new PacketEvent.Receive(packetIn);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            return;
+        // Only call PacketEvent.Receive if this NetworkManager expects
+        // CLIENTBOUND type incoming packets, indicating that this is a pure
+        // client-sided NetworkManager and not from the Integrated Server.
+        if (this.direction == EnumPacketDirection.CLIENTBOUND) {
+            PacketEvent event = new PacketEvent.Receive(packetIn);
+            ClientAPI.EVENT_BUS.post(event);
+            if (event.isCancelled())
+                return;
 
-        ((Packet<INetHandler>) event.getPacket()).processPacket(handler);
+            packetIn = event.getPacket();
+        }
+
+        ((Packet<INetHandler>) packetIn).processPacket(handler);
     }
 
     @SuppressWarnings("AmbiguousMixinReference")
@@ -73,12 +84,19 @@ public abstract class MixinNetworkManager implements INetworkManager {
             )
     )
     private void sendPacket$dispatchPacket(NetworkManager networkManager, Packet<?> packetIn, @Nullable final GenericFutureListener<? extends Future<?super Void>>[] futureListeners) {
-        PacketEvent event = new PacketEvent.Send(packetIn);
-        ClientAPI.EVENT_BUS.post(event);
-        if (event.isCancelled())
-            return;
+        // Only call PacketEvent.Send if this NetworkManager expects
+        // CLIENTBOUND type incoming packets, indicating that this is a pure
+        // client-sided NetworkManager and not from the Integrated Server.
+        if (this.direction == EnumPacketDirection.CLIENTBOUND) {
+            PacketEvent event = new PacketEvent.Send(packetIn);
+            ClientAPI.EVENT_BUS.post(event);
+            if (event.isCancelled())
+                return;
 
-        this.dispatchPacket(event.getPacket(), futureListeners);
+            packetIn = event.getPacket();
+        }
+
+        this.dispatchPacket(packetIn, futureListeners);
     }
 
     @SuppressWarnings("AmbiguousMixinReference")

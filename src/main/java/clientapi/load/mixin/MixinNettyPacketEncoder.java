@@ -20,9 +20,12 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.NettyPacketEncoder;
 import net.minecraft.network.Packet;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -35,6 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(NettyPacketEncoder.class)
 public class MixinNettyPacketEncoder {
 
+    @Shadow @Final private EnumPacketDirection direction;
     private PacketEvent event;
 
     @ModifyVariable(
@@ -44,9 +48,16 @@ public class MixinNettyPacketEncoder {
             remap = false
     )
     private Packet<?> mutatePacket(Packet<?> msg) {
-        event = new PacketEvent.Encode(msg);
-        ClientAPI.EVENT_BUS.post(event);
-        return event.getPacket();
+        // Only call PacketEvent.Send if the NetworkManager that spawned this expects
+        // CLIENTBOUND type incoming packets, indicating that this is a pure
+        // client-sided NetworkManager and not from the Integrated Server.
+        if (this.direction == EnumPacketDirection.CLIENTBOUND) {
+            event = new PacketEvent.Encode(msg);
+            ClientAPI.EVENT_BUS.post(event);
+            return event.getPacket();
+        }
+
+        return msg;
     }
 
     @Inject(
