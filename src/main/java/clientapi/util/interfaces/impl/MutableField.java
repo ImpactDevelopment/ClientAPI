@@ -17,6 +17,7 @@
 package clientapi.util.interfaces.impl;
 
 import clientapi.util.ReflectionUtils;
+import clientapi.util.interfaces.Mutable;
 
 import java.lang.reflect.Field;
 

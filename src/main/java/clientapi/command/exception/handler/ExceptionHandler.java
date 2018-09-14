@@ -40,8 +40,10 @@ public interface ExceptionHandler {
     void handle(CommandException exception);
 
     /**
-     * Returns the target {@link CommandException} that should be
-     * accepted by this handler.
+     * Checks if a given {@link CommandException} type should be
+     * accepted by this {@link ExceptionHandler}.
+     *
+     * @param type The type of a {@link CommandException}
      *
      * @return The command exception type
      */

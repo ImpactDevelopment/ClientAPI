@@ -74,6 +74,9 @@ public final class SessionBuilder implements Builder<Session> {
     /**
      * Defines a proxy to authenticate with. Defaults to
      * {@link Proxy#NO_PROXY} if not specified.
+     *
+     * @param proxy The proxy to use on login
+     * @return This builder
      */
     public final SessionBuilder proxy(Proxy proxy) {
         this.proxy = proxy;

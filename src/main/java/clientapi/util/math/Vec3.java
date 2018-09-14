@@ -167,6 +167,8 @@ public final class Vec3 {
      * Transfers the X/Y/Z from another Vec3 and sets this
      * Vec3's X/Y/Z to it
      *
+     * @param vec Another Vec3
+     *
      * @return This Vec3
      */
     public final Vec3 transfer(Vec3 vec) {
@@ -178,6 +180,8 @@ public final class Vec3 {
 
     /**
      * Calculates the distance to another Vec3
+     *
+     * @param vec Another Vec3
      *
      * @return The distance
      */

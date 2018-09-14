@@ -45,7 +45,7 @@ public final class RenderEntityLabelEvent extends Cancellable {
     }
 
     /**
-     * The entity having their name rendered
+     * @return The entity having their name rendered
      */
     public final Entity getEntity() {
         return this.entity;

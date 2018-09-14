@@ -77,7 +77,7 @@ public final class Colors implements Helper {
      *             1.0 = 100% first color
      *             0.5 = equally blended
      *             0.0 = 100% second color
-     * @return
+     * @return The final blended color, as a hex value
      */
     public static int blend(int c1, int c2, float perc) {
         float inverse = 1.0F - perc;
@@ -175,8 +175,8 @@ public final class Colors implements Helper {
      * Returns the current rainbow hex with custom
      * saturation and brightness.
      *
-     * @param saturation The color saturation applied (0.0 -> 1.0)
-     * @param brightness The color brightness applied (0.0 -> 1.0)
+     * @param saturation The color saturation applied (0.0 to 1.0)
+     * @param brightness The color brightness applied (0.0 to 1.0)
      * @return Rainbow hex
      */
     public static int rainbow(float saturation, float brightness) {
@@ -201,8 +201,8 @@ public final class Colors implements Helper {
      * offset is used to offset the System current
      * millisecond time
      *
-     * @param saturation The color saturation applied (0.0 -> 1.0)
-     * @param brightness The color brightness applied (0.0 -> 1.0)
+     * @param saturation The color saturation applied (0.0 to 1.0)
+     * @param brightness The color brightness applied (0.0 to 1.0)
      * @param offset The offset added onto the current millisecond time
      * @return Rainbow hex
      */
