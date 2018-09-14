@@ -17,13 +17,14 @@
 package clientapi.event.defaults.game.core;
 
 import me.zero.alpine.type.Cancellable;
+import org.lwjgl.input.Keyboard;
 
 /**
  * Generic input event. Cancelling will cause any ClientAPI
  * listeners to the event to not proceed with processing the event.
  *
  * The keycode will be equal to its respective value
- * in {@code Keyboard} if the input is from the keyboard.
+ * in {@link Keyboard} if the input is from the keyboard.
  *
  * The keycode will be equal to {@code button - 100}
  * if the input is from the mouse.

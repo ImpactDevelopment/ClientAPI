@@ -16,8 +16,10 @@
 
 package clientapi.load.mixin.extension;
 
+import net.minecraft.util.Timer;
+
 /**
- * Extension to {@code Timer} that allows the adjusting of the game tickrate.
+ * Extension to {@link Timer} that allows the adjusting of the game tickrate.
  *
  * @author Brady
  * @since 1/24/2018

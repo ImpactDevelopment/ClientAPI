@@ -68,51 +68,51 @@ public interface IEntity {
     void setMotion(Vec3 motion);
 
     /**
-     * Converts the entity position to a {@code Vec3}
+     * Converts the entity position to a {@link Vec3}
      *
-     * @return Position as a {@code Vec3}
+     * @return Position as a {@link Vec3}
      */
     Vec3 getPos();
 
     /**
-     * Converts the previous entity position to a {@code Vec3}
+     * Converts the previous entity position to a {@link Vec3}
      *
-     * @return Previous position as a {@code Vec3}
+     * @return Previous position as a {@link Vec3}
      */
     Vec3 getPrevPos();
 
     /**
-     * Converts the last tick entity position to a {@code Vec3}
+     * Converts the last tick entity position to a {@link Vec3}
      *
-     * @return Last tick position as a {@code Vec3}
+     * @return Last tick position as a {@link Vec3}
      */
     Vec3 getLastTickPos();
 
     /**
-     * Returns a {@code Vec3} with the world position of this entity's head
+     * Returns a {@link Vec3} with the world position of this entity's head
      *
      * @return This entity's head position
      */
     Vec3 getHeadPos();
 
     /**
-     * Converts the entity rotation angles to a {@code Vec2}
+     * Converts the entity rotation angles to a {@link Vec2}
      *
-     * @return Rotations as a {@code Vec2}
+     * @return Rotations as a {@link Vec2}
      */
     Vec2 getRotations();
 
     /**
-     * Converts the previous entity rotation angles to a {@code Vec2}
+     * Converts the previous entity rotation angles to a {@link Vec2}
      *
-     * @return Previous rotations as a {@code Vec2}
+     * @return Previous rotations as a {@link Vec2}
      */
     Vec2 getPrevRotations();
 
     /**
-     * Converts the entity motion to a {@code Vec3}
+     * Converts the entity motion to a {@link Vec3}
      *
-     * @return Motion as a {@code Vec3}
+     * @return Motion as a {@link Vec3}
      */
     Vec3 getMotion();
 

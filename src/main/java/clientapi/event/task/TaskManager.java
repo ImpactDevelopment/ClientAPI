@@ -38,7 +38,7 @@ public interface TaskManager {
      * if there isn't a task currently running, or if the current task
      * running has a lower priority than the specified task. If the task
      * cannot be started, it is added to a queue, and when the current
-     * task is finished by calling {@code TaskManager#finish}, the queued
+     * task is finished by calling {@link TaskManager#finish}, the queued
      * task will be called. Queued tasks will not be called when a task is
      * being started that overpowers the priority level of the current task.
      *

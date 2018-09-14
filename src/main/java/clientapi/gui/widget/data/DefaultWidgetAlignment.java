@@ -17,7 +17,7 @@
 package clientapi.gui.widget.data;
 
 /**
- * Default implementations of {@code WidgetAlignment}
+ * Default implementations of {@link WidgetAlignment}
  *
  * @see WidgetAlignment
  *

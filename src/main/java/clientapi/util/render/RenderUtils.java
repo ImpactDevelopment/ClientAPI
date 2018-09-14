@@ -50,12 +50,12 @@ public final class RenderUtils {
     private static final List<Integer> csBuffer = new ArrayList<>();
 
     /**
-     * Method reference to {@code GlStateManager#glEnableClientState(int)}
+     * Method reference to {@link GlStateManager#glEnableClientState(int)}
      */
     private static final Consumer<Integer> ENABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
 
     /**
-     * Method reference to {@code GlStateManager#glDisableClientState(int)}
+     * Method reference to {@link GlStateManager#glDisableClientState(int)}
      */
     private static final Consumer<Integer> DISABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
 

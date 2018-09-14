@@ -21,7 +21,7 @@ import net.minecraft.entity.Entity;
 import java.util.function.Function;
 
 /**
- * Implementation of {@code EntityCheck}.
+ * Implementation of {@link EntityCheck}.
  *
  * @see EntityCheck
  * @see CheckType

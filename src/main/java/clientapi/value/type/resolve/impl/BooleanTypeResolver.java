@@ -24,7 +24,7 @@ import clientapi.value.type.resolve.TypeResolver;
 import java.lang.reflect.Field;
 
 /**
- * Default implementation of {@code TypeResolver} used to parse {@code BooleanType} fields
+ * Default implementation of {@link TypeResolver} used to parse {@link BooleanType} fields
  *
  * @author Brady
  * @since 2/8/2018

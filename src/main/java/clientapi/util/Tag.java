@@ -20,7 +20,7 @@ import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Taggable;
 
 /**
- * A tag. Refer to {@code Taggable} for usage.
+ * A tag. Refer to {@link Taggable} for usage.
  *
  * @see Taggable
  *

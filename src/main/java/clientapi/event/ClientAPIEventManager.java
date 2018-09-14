@@ -19,7 +19,7 @@ package clientapi.event;
 import me.zero.alpine.EventManager;
 
 /**
- * Implementation of {@code EventManager} that allows the
+ * Implementation of {@link EventManager} that allows the
  * user to enable/disable the post function in order to
  * allow/prevent events from being posted to their listeners.
  *

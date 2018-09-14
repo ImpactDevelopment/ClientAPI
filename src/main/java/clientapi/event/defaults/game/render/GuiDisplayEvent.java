@@ -21,7 +21,7 @@ import net.minecraft.client.gui.GuiScreen;
 
 /**
  * Called when a Gui Screen is displayed. The screen can be
- * overriden by using the {@code setScreen(GuiScreen)} method.
+ * overriden by using the {@link GuiDisplayEvent#setScreen(GuiScreen)} method.
  *
  * @author Brady
  * @since 2/23/2017

@@ -38,7 +38,7 @@ public abstract class Benchmark {
     private final int passes;
 
     /**
-     * Number of times that the {@code run} is executed per pass
+     * Number of times that the {@link Benchmark#run} is executed per pass
      */
     private final int invocations;
 

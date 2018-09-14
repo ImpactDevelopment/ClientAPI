@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * {@code EntityCheck} implementation that can have multiple child entity checks.
+ * {@link EntityCheck} implementation that can have multiple child entity checks.
  *
  * @author Brady
  * @since 11/7/2017
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public final class EntityFilter implements EntityCheck {
 
     /**
-     * The child {@code EntityFilters} that are run when checking the validity of an {@code Entity}
+     * The list of child {@link EntityFilter} instances that are run when checking the validity of an {@link Entity}
      */
     private final List<EntityCheck> checks = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public final class EntityFilter implements EntityCheck {
     }
 
     /**
-     * Adds the specified check to this {@code EntityFilter}
+     * Adds the specified check to this {@link EntityFilter}
      * if it is not already a child filter.
      *
      * @param filter The filter to add
@@ -74,7 +74,7 @@ public final class EntityFilter implements EntityCheck {
     }
 
     /**
-     * Removes the specified check from this {@code EntityFilter}
+     * Removes the specified check from this {@link EntityFilter}
      * if it is already a child filter.
      *
      * @param filter The filter to add
@@ -84,7 +84,7 @@ public final class EntityFilter implements EntityCheck {
     }
 
     /**
-     * @return A copy of this {@code EntityFilter's} child checks.
+     * @return A copy of this {@link EntityFilter}'s child checks.
      */
     public final List<EntityCheck> getChecks() {
         return new ArrayList<>(this.checks);
@@ -92,7 +92,7 @@ public final class EntityFilter implements EntityCheck {
 
     /**
      * Filters the specified collection of entities with all of this
-     * {@code EntityFilter's} checks, and returns the filtered list.
+     * {@link EntityFilter}'s checks, and returns the filtered list.
      *
      * @param entities The collection to be filtered
      * @return A filtered list

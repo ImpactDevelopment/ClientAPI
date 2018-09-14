@@ -22,7 +22,7 @@ import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Helper;
 
 /**
- * Base for {@code Command}
+ * Base for {@link Command}
  *
  * @see Command
  *
@@ -33,7 +33,7 @@ public interface ICommand extends Describable, Helper {
 
     /**
      * Executes this command from the specified sender with
-     * the specified arguments, represented as a {@code String} array
+     * the specified arguments, represented as a {@link String} array
      *
      * @param context The context behind command execution
      * @param arguments The arguments that

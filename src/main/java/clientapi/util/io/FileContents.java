@@ -20,9 +20,9 @@ import java.util.*;
 
 /**
  * Holder for file contents, stores the raw data,
- * which is a single {@code String} and the split
+ * which is a single {@link String} and the split
  * data, which holds the raw data split at every
- * line break as a {@code List}.
+ * line break as a {@link List}.
  *
  * @author Brady
  * @since 5/17/2017

@@ -19,7 +19,7 @@ package clientapi.command.exception;
 import clientapi.command.Command;
 
 /**
- * Superclass for all exceptions in the {@code clientapi.command.exception} package.
+ * Superclass for all exceptions in the {@link clientapi.command.exception} package.
  *
  * @author Brady
  * @since 5/30/2017

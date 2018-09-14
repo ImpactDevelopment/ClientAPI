@@ -26,7 +26,7 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
- * Reads the lines returned from an {@code InputStream}.
+ * Reads the lines returned from an {@link InputStream}.
  *
  * @author Brady
  * @since 2/15/2017
@@ -43,10 +43,10 @@ public final class StreamReader {
     }
 
     /**
-     * Returns the lines found from the {@code InputStream}. An empty
-     * stream will be returned in the case of an {@code IOException} being thrown.
+     * Returns the lines found from the {@link InputStream}. An empty
+     * stream will be returned in the case of an {@link IOException} being thrown.
      *
-     * @return Stream containing all lines from the {@code InputStream}.
+     * @return Stream containing all lines from the {@link InputStream}.
      */
     public final List<String> lines() {
         try {
@@ -60,7 +60,7 @@ public final class StreamReader {
     }
 
     /**
-     * Returns all of the lines from the {@code InputStream}
+     * Returns all of the lines from the {@link InputStream}
      * as a single string. New lines are broken up by "\n"
      *
      * @return The stream's output

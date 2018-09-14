@@ -17,9 +17,10 @@
 package clientapi.event.defaults.game.render;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.client.particle.ParticleManager;
 
 /**
- * Called when {@code ParticleManager#spawnEffectParticle} is invoked.
+ * Called when {@link ParticleManager#spawnEffectParticle} is invoked.
  * If cancelled, the particle is not created and therefore does not
  * get spawned.
  *
