@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of {@code IValueHolder}, intended for
+ * Implementation of {@link IValueHolder}, intended for
  * use in classes containing annotated values.
  *
  * @see IValueHolder

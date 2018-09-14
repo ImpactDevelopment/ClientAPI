@@ -21,7 +21,7 @@ import clientapi.util.render.gl.ShaderProgram;
 import clientapi.util.render.gl.glenum.GLShaderType;
 
 /**
- * Implementation of {@code ShaderProgram} for more
+ * Implementation of {@link ShaderProgram} for more
  * basic uses. (Ones that only require a vertex and
  * fragment shader. Automatically compiles both the
  * vertex and fragment shader, along with generating
@@ -33,7 +33,7 @@ import clientapi.util.render.gl.glenum.GLShaderType;
 public class BasicShaderProgram extends ShaderProgram {
 
     /**
-     * Creates an instance of {@code BasicShaderProgram}
+     * Creates an instance of {@link BasicShaderProgram}
      *
      * @param vSource Source code of the vertex shader
      * @param fSource Source code of the fragment shader

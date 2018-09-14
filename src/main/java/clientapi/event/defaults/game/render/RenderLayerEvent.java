@@ -17,11 +17,12 @@
 package clientapi.event.defaults.game.render;
 
 import me.zero.alpine.type.Cancellable;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 
 /**
- * Called from {@code RenderLivingBase#renderLayers(EntityLivingBase, float, float, float, float, float, float, float)}.
+ * Called from {@link RenderLivingBase#renderLayers(EntityLivingBase, float, float, float, float, float, float, float)}.
  * When cancelled, the layer rendering won't execute.
  *
  * @author Brady

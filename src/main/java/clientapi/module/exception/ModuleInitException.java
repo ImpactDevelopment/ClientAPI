@@ -16,8 +16,10 @@
 
 package clientapi.module.exception;
 
+import clientapi.module.Module;
+
 /**
- * Thrown during the initialization of {@code Modules} if
+ * Thrown during the initialization of a {@link Module} if
  * invalid or insufficient data is provided.
  *
  * @author Brady

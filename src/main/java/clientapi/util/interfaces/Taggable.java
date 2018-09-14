@@ -66,9 +66,9 @@ public interface Taggable {
 
     /**
      * Checks whether or not this object has a tag with an ID
-     * that matches the ID of the specified {@code Identifiable}.
+     * that matches the ID of the specified {@link Identifiable}.
      *
-     * @param id The {@code Identifiable} being matched
+     * @param id The {@link Identifiable} being matched
      * @return Whether or not this object has a tag with the specified ID
      */
     default boolean hasTag(Identifiable id) {
@@ -84,21 +84,14 @@ public interface Taggable {
     Optional<Tag> getTag(String id);
 
     /**
-     * Gets a tag with an ID matching the ID of the specified {@code Identifiable}.
+     * Gets a tag with an ID matching the ID of the specified {@link Identifiable}.
      *
-     * @param id The {@code Identifiable} being matched
+     * @param id The {@link Identifiable} being matched
      * @return The tag with a matching ID
      */
     default Optional<Tag> getTag(Identifiable id) {
         return this.getTag(id.getID());
     }
-
-    /**
-     * Gets a tag with an ID matching that of the specified
-     * {@code Identifiable}'s ID.
-     *
-     * @param id The {@code Identifiable} being matched
-     */
 
     /**
      * @return A list of this object's tags

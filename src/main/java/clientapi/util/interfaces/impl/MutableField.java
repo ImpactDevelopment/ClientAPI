@@ -21,7 +21,7 @@ import clientapi.util.ReflectionUtils;
 import java.lang.reflect.Field;
 
 /**
- * {@code Mutable} that has access over a field via the Reflection API
+ * {@link Mutable} that has access over a field via the Reflection API
  *
  * @author Brady
  * @since 5/1/2018

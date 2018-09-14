@@ -25,12 +25,12 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 public interface RemotePlayerSender extends CommandSender {
 
     /**
-     * @return {@code NetworkPlayerInfo} representing this sender.
+     * @return {@link NetworkPlayerInfo} representing this sender.
      */
     NetworkPlayerInfo getPlayer();
 
     /**
-     * Implementation of {@code PlayerSender}
+     * Implementation of {@link RemotePlayerSender}
      */
     class Impl implements RemotePlayerSender {
 

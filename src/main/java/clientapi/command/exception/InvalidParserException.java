@@ -41,7 +41,7 @@ public final class InvalidParserException extends CommandException {
     private final String argument;
 
     /**
-     * The {@code Type} that doesn't have a defined parser.
+     * The {@link Type} that doesn't have a defined parser.
      */
     private final Type type;
 
@@ -67,7 +67,7 @@ public final class InvalidParserException extends CommandException {
     }
 
     /**
-     * @return The {@code Type} that doesn't have a defined parser.
+     * @return The {@link Type} that doesn't have a defined parser.
      */
     public final Type getType() {
         return this.type;

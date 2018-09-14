@@ -21,7 +21,7 @@ import net.minecraft.client.settings.GameSettings;
 
 /**
  * Called before the overlay rendering is setup, will call
- * regardless of the {@code GameSettings#hideGUI} value.
+ * regardless of the {@link GameSettings#hideGUI} value.
  *
  * @see EntityRenderer#updateCameraAndRender(float, long)
  *

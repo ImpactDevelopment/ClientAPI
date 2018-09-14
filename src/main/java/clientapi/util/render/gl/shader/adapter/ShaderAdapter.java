@@ -18,6 +18,8 @@ package clientapi.util.render.gl.shader.adapter;
 
 import clientapi.util.render.gl.glenum.GLShaderStatus;
 import clientapi.util.render.gl.glenum.GLShaderType;
+import clientapi.util.render.gl.shader.exception.ShaderException;
+import org.lwjgl.opengl.GL11;
 
 /**
  * The shell for a Shader Adapter. Used as
@@ -115,8 +117,8 @@ public interface ShaderAdapter {
 
     /**
      * Checks a program's variable status to see if
-     * the value is {@code GL_FALSE} or not, if it is,
-     * then a {@code ShaderException} should be thrown.
+     * the value is {@link GL11#GL_FALSE} or not, if it is,
+     * then a {@link ShaderException} should be thrown.
      *
      * @param program The shader program id
      * @param status The status flag being checked

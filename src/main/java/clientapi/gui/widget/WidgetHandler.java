@@ -45,7 +45,7 @@ public final class WidgetHandler {
     private final List<Widget> widgets = new ArrayList<>();
 
     /**
-     * {@code WidgetHandler#widgets} sorted by category
+     * {@link WidgetHandler#widgets} sorted by category
      */
     private final Map<WidgetPos, List<Widget>> widgetMap = new HashMap<>();
 

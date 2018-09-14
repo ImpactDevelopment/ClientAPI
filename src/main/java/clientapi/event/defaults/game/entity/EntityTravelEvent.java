@@ -21,11 +21,11 @@ import me.zero.alpine.type.EventState;
 import net.minecraft.entity.EntityLivingBase;
 
 /**
- * Called before and after {@code EntityLivingBase#travel(float, float, float)}
+ * Called before and after {@link EntityLivingBase#travel(float, float, float)}
  * with respective states. The main purpose of the event is to allow the developer
- * to control the movement of any entities that are instances of {@code EntityPlayerSP}.
+ * to control the movement of any entities that are instances of {@link EntityPlayerSP}.
  * This would include the local player and bots. Cancelling is only effective in the
- * {@code PRE} state, and prevents the entity from "travelling".
+ * {@link EventState#PRE} state, and prevents the entity from "travelling".
  *
  * @author Brady
  * @since 8/16/2017
@@ -34,12 +34,12 @@ public final class EntityTravelEvent extends Cancellable {
 
     /**
      * State of when the event was called relative to the invokation
-     * of {@code EntityLivingBase#travel(float, float, float)}
+     * of {@link EntityLivingBase#travel(float, float, float)}
      */
     private final EventState state;
 
     /**
-     * The {@code Entity} that is "travelling"
+     * The {@link EntityLivingBase} that is "travelling"
      */
     private final EntityLivingBase entity;
 
@@ -67,7 +67,7 @@ public final class EntityTravelEvent extends Cancellable {
     }
 
     /**
-     * Sets the strafe travel amount to be passed down to {@code EntityLivingBase#travel(float, float, float)}
+     * Sets the strafe travel amount to be passed down to {@link EntityLivingBase#travel(float, float, float)}
      * @param strafe New strafe travel amount
      * @return This event
      */
@@ -77,7 +77,7 @@ public final class EntityTravelEvent extends Cancellable {
     }
 
     /**
-     * Sets the vertical travel amount to be passed down to {@code EntityLivingBase#travel(float, float, float)}
+     * Sets the vertical travel amount to be passed down to {@link EntityLivingBase#travel(float, float, float)}
      * @param vertical New strafe travel amount
      * @return This event
      */
@@ -87,7 +87,7 @@ public final class EntityTravelEvent extends Cancellable {
     }
 
     /**
-     * Sets the forward travel amount to be passed down to {@code EntityLivingBase#travel(float, float, float)}
+     * Sets the forward travel amount to be passed down to {@link EntityLivingBase#travel(float, float, float)}
      * @param forward New forward travel amount
      * @return This event
      */

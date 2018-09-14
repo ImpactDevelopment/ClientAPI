@@ -25,11 +25,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Managers are used to store arrays of objects. {@code Manager}
- * extends {@code ArrayList}, allowing full access to the Manager's
+ * Managers are used to store arrays of objects. {@link Manager}
+ * extends {@link ArrayList}, allowing full access to the Manager's
  * contents. The usage of the manager is intended to store implementations
  * of the generic argument <T>, ex) in the context of modules or commands.
- * A {@code get(Class)} method is provided, allowing the access of entries
+ * A {@link Manager#get(Class)} method is provided, allowing the access of entries
  * by their class type.
  *
  * @see Loadable

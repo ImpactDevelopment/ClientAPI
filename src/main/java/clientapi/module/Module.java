@@ -242,7 +242,7 @@ public class Module extends AbstractModule implements Taggable {
 
     /**
      * Called when mode related actions are carried out,
-     * throws an {@code UnsupportedOperationException} if
+     * throws an {@link UnsupportedOperationException} if
      * modes aren't supported by this module.
      */
     private void checkModes() {

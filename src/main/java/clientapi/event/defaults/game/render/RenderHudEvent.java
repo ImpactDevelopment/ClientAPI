@@ -30,7 +30,7 @@ import net.minecraft.client.gui.ScaledResolution;
 public final class RenderHudEvent extends RenderEvent {
 
     /**
-     * Instance of the current {@code ScaledResolution}
+     * Instance of the current {@link ScaledResolution}
      */
     private final ScaledResolution scaledResolution;
 
@@ -40,7 +40,7 @@ public final class RenderHudEvent extends RenderEvent {
     }
 
     /**
-     * @return Instance of the current {@code ScaledResolution}
+     * @return Instance of the current {@link ScaledResolution}
      */
     public final ScaledResolution getScaledResolution() {
         return this.scaledResolution;

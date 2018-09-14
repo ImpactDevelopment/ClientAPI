@@ -26,7 +26,7 @@ import net.minecraft.entity.Entity;
  * there is reliability on the renderOutlines flag.
  *
  * To apply the color set by this event, the event
- * must be cancelled. {@code Cancellable#cancel}
+ * must be cancelled. {@link Cancellable#cancel}
  *
  * @author Brady
  * @since 5/21/2017

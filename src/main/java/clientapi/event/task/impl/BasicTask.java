@@ -21,7 +21,7 @@ import clientapi.event.task.TaskPriority;
 import clientapi.util.interfaces.Identifiable;
 
 /**
- * The most basic implementation of {@code Task}.
+ * The most basic implementation of {@link Task}.
  *
  * @author Brady
  * @since 11/30/2017

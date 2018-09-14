@@ -40,7 +40,7 @@ public final class EntityFilters implements Helper {
     private EntityFilters() {}
 
     /**
-     * Creates an {@code EntityCheck} that restricts the specified entity
+     * Creates an {@link EntityCheck} that restricts the specified entity
      *
      * @param targetEntity The entity to filter out
      * @return An entity check that can restrict entities that can't be seen
@@ -52,7 +52,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts entities that are dead.
+     * Creates an {@link EntityCheck} that restricts entities that are dead.
      *
      * @param allowDead Whether or not to allow entities that are dead
      * @return An entity check that can restrict entities that are dead
@@ -64,7 +64,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts entities that can't
+     * Creates an {@link EntityCheck} that restricts entities that can't
      * be seen by the local player.
      *
      * @param allowCantBeSeen Whether or not to allow entities that can't be seen
@@ -77,7 +77,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts sleeping players.
+     * Creates an {@link EntityCheck} that restricts sleeping players.
      *
      * @param allowSleeping Whether or not to allow sleeping players
      * @return An entity check that can restrict sleeping players
@@ -89,7 +89,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts invisible entities.
+     * Creates an {@link EntityCheck} that restricts invisible entities.
      *
      * @param allowInvisible Whether or not to allow invisible entities
      * @return An entity check that can restrict invisible entities
@@ -101,7 +101,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts other
+     * Creates an {@link EntityCheck} that restricts other
      * players that are on the same team as the local player.
      *
      * @see EntityFilters#onSameTeam(Entity, Entity)
@@ -116,7 +116,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts player,
+     * Creates an {@link EntityCheck} that restricts player,
      * hostile, and passive entities if their corresponding
      * suppliers return false.
      *
@@ -134,7 +134,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts player
+     * Creates an {@link EntityCheck} that restricts player
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isPlayer(Entity)
@@ -149,7 +149,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts hostile
+     * Creates an {@link EntityCheck} that restricts hostile
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isHostile(Entity)
@@ -164,7 +164,7 @@ public final class EntityFilters implements Helper {
     }
 
     /**
-     * Creates an {@code EntityCheck} that restricts passive
+     * Creates an {@link EntityCheck} that restricts passive
      * entities if the specified supplier returns false.
      *
      * @see EntityFilters#isPassive(Entity)

@@ -142,16 +142,16 @@ public final class ChildCommand implements ICommand {
     }
 
     /**
-     * @return The parent of this {@code ChildCommand}
+     * @return The parent of this {@link ChildCommand}
      */
     public final Command getParent() {
         return this.parent;
     }
 
     /**
-     * Finds and creates the arguments for this {@code ChildCommand}.
+     * Finds and creates the arguments for this {@link ChildCommand}.
      *
-     * @param sub The {@code @Sub} annotation on the handle method
+     * @param sub The {@link Sub} annotation on the handle method
      */
     private void setupArguments(Sub sub) {
         // Find argument names

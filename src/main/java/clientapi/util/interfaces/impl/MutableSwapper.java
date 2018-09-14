@@ -22,8 +22,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * An implementation of {@code Mutable} used to temporarily set the value
- * of a "child" {@code Mutable} and then reset it to the original value.
+ * An implementation of {@link Mutable} used to temporarily set the value
+ * of a "child" {@link Mutable} and then reset it to the original value.
  *
  * @see Mutable
  *
@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 public final class MutableSwapper<T> implements Mutable<T> {
 
     /**
-     * {@code Mutable} used to get/set some value
+     * {@link Mutable} used to get/set some value
      */
     private final Mutable<T> mutable;
 
@@ -62,7 +62,7 @@ public final class MutableSwapper<T> implements Mutable<T> {
     }
 
     /**
-     * Resets the child {@code Mutable}'s value to the original one.
+     * Resets the child {@link Mutable}'s value to the original one.
      */
     public final void reset() {
         mutable.accept(previous);

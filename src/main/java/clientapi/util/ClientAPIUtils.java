@@ -180,7 +180,7 @@ public final class ClientAPIUtils {
      * @see Thread#sleep(long)
      *
      * @param ms The milliseconds to sleep
-     * @return Whether or not an {@code InterruptedException} was thrown by {@code Thread#sleep(long)}
+     * @return Whether or not an {@link InterruptedException} was thrown by {@link Thread#sleep(long)}
      */
     public static boolean sleep(long ms) {
         if (ms <= 0) {

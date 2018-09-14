@@ -49,10 +49,10 @@ public final class Colors implements Helper {
     }
 
     /**
-     * Gets the hex from a {@code TextFormatting} value.
+     * Gets the hex from a {@link TextFormatting} value.
      *
-     * @param color The {@code TextFormatting} value
-     * @return Hex corresponding to {@code TextFormatting} value
+     * @param color The {@link TextFormatting} value
+     * @return Hex corresponding to {@link TextFormatting} value
      */
     public static int getColor(TextFormatting color) {
         return getColor(color.toString().charAt(1));

@@ -19,8 +19,8 @@ package clientapi.command.sender;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
- * Implementation of {@code CommandSender}, where the sender
- * is defined by an {@code EntityPlayer}
+ * Implementation of {@link CommandSender}, where the sender
+ * is defined by an {@link EntityPlayer}
  *
  * @author Brady
  * @since 10/17/2017
@@ -28,12 +28,12 @@ import net.minecraft.entity.player.EntityPlayer;
 public interface PlayerSender extends CommandSender {
 
     /**
-     * @return {@code EntityPlayer} representing this sender.
+     * @return {@link EntityPlayer} representing this sender.
      */
     EntityPlayer getPlayer();
 
     /**
-     * Implementation of {@code PlayerSender}
+     * Implementation of {@link PlayerSender}
      */
     class Impl implements PlayerSender {
 

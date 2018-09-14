@@ -16,18 +16,21 @@
 
 package clientapi.command.annotation;
 
+import clientapi.command.executor.ExecutionContext;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Optional;
 
 /**
  * Annotation for marking sub-command argument handler methods.
- * Method parameters should begin with a {@code ExecutionContext}
+ * Method parameters should begin with a {@link ExecutionContext}
  * parameter, followed by a reflection of the target sub-command
  * arguments. Usage is as follows...
  *
- * {@code java.util.Optional} may be used to mark arguments
+ * {@link Optional} may be used to mark arguments
  * as "optional", but only if the argument is the last.
  *
  * @author Brady

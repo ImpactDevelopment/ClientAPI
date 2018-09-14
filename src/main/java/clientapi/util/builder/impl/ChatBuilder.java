@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 
 /**
- * Used to build {@code ITextComponent}. Better alternative
+ * Used to build {@link ITextComponent}. Better alternative
  * to appending the control codes to text strings.
  *
  * @author Brady
@@ -94,7 +94,7 @@ public final class ChatBuilder implements Builder<ITextComponent> {
     /**
      * Appends a string with the specified color(s) and an event
      * triggered on text click and on text hover. Only one actual
-     * color should be specified, any other {@code TextFormatting}
+     * color should be specified, any other {@link TextFormatting}
      * type should be styling. (Bold, Italic, Underline, Strikethrough,
      * and Obfuscated)
      *
