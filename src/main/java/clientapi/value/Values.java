@@ -75,6 +75,7 @@ public final class Values {
      * Discovers all of the Values that an object defines
      *
      * @param holder Object holding values
+     * @return A list of all of the discovered values
      */
     public static List<IValue> discover(Object holder) {
         return DISCOVER_CACHE.computeIfAbsent(holder, obj -> {

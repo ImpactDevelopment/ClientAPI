@@ -61,6 +61,7 @@ public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHo
     /**
      * Adds a change listener to this value
      *
+     * @param state The state of the change, either before or after it happened
      * @param listener The change listener
      */
     void addChangeListener(EventState state, ValueChangeListener<T> listener);

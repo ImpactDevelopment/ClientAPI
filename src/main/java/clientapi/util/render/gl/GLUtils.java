@@ -121,6 +121,8 @@ public final class GLUtils {
     /**
      * Converts a Vec3 to its screen projection
      *
+     * @param pos The world position
+     *
      * @see GLUtils#toScreen(double, double, double)
      *
      * @return Screen projected coordinates
@@ -136,6 +138,10 @@ public final class GLUtils {
      * viewing frustum can be calculated by checking
      * the returned Z value.
      *
+     * @param x The world x position
+     * @param y The world y position
+     * @param z The world z position
+     *
      * @return Screen projected coordinates
      */
     public static Vec3 toScreen(double x, double y, double z) {
@@ -148,6 +154,8 @@ public final class GLUtils {
 
     /**
      * Converts a Vec3 to its world projection
+     *
+     * @param pos The screen position
      *
      * @see GLUtils#toWorld(double, double, double)
      *
@@ -162,6 +170,10 @@ public final class GLUtils {
      * a 3D position representing a world position. Can
      * be used to calculate what object the mouse over in
      * the 3D game world using raytracing.
+     *
+     * @param x The screen x position
+     * @param y The screen y position
+     * @param z The screen z position
      *
      * @return World projected coordinates
      */

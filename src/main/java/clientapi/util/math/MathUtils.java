@@ -36,6 +36,7 @@ public final class MathUtils {
      * @param value The value being clamped
      * @param minimum The minimum possible value
      * @param maximum The maximum possible value
+     * @param <T> The type of the number
      * @return The clamped value
      */
     public static <T extends Number> T clamp(T value, T minimum, T maximum) {

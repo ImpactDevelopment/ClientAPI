@@ -16,6 +16,8 @@
 
 package clientapi.event.task;
 
+import me.zero.alpine.type.EventPriority;
+
 /**
  * A duplicate of {@link EventPriority}. Used to define the execution
  * priority of tasks. Tasks with higher priorities will overpower tasks

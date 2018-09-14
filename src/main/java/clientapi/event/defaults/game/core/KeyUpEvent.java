@@ -27,19 +27,20 @@ package clientapi.event.defaults.game.core;
 public final class KeyUpEvent {
 
     /**
-     * Key code that belongs to the pressed key
+     * Key code that belongs to the released key
      */
     private final int key;
 
     /**
-     * Char representation of the pressed key
+     * Char representation of the released key
      */
     private final char character;
 
     /**
      * Creates a new instance of KeyEvent.
      *
-     * @param key - The key code for the key that was pressed
+     * @param key The key code for the key that was released
+     * @param character The character for the key that was released
      */
     public KeyUpEvent(int key, char character) {
         this.key = key;
@@ -47,14 +48,14 @@ public final class KeyUpEvent {
     }
 
     /**
-     * @return The key code that corresponds to the pressed key
+     * @return The key code that corresponds to the released key
      */
     public final int getKey() {
         return this.key;
     }
 
     /**
-     * @return The char that corresponds to the pressed key
+     * @return The char that corresponds to the released key
      */
     public final char getCharacter() {
         return this.character;

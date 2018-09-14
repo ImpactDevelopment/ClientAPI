@@ -180,6 +180,8 @@ public final class Vec2 {
      * Transfers the X/Y from another Vec2 and sets this
      * Vec2's X/Y to it
      *
+     * @param vec Another Vec2
+     *
      * @return This Vec2
      */
     public final Vec2 transfer(Vec2 vec) {
@@ -190,6 +192,8 @@ public final class Vec2 {
 
     /**
      * Calculates the distance to another Vec2
+     *
+     * @param vec Another Vec2
      *
      * @return The distance
      */

@@ -28,7 +28,7 @@ import java.util.Map;
  * Managers are used to store arrays of objects. {@link Manager}
  * extends {@link ArrayList}, allowing full access to the Manager's
  * contents. The usage of the manager is intended to store implementations
- * of the generic argument <T>, ex) in the context of modules or commands.
+ * of the generic argument {@code <T>}, ex) in the context of modules or commands.
  * A {@link Manager#get(Class)} method is provided, allowing the access of entries
  * by their class type.
  *
@@ -60,6 +60,7 @@ public abstract class Manager<T> extends ArrayList<T> implements Loadable, Savea
      * Retrieves an entry by the entry's class
      *
      * @param clazz The class
+     * @param <I> The type of the specified entry class
      * @return The retrieved entry
      */
     @SuppressWarnings("unchecked")

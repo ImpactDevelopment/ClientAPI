@@ -61,6 +61,7 @@ public final class Hash {
      *
      * @param data String being hashed
      * @param format The function used to interpret the hashed bytes
+     * @param <T> The resulting value given the formatting function
      * @return Hashed string in specified format, null if algorithm isn't valid
      * @throws NullPointerException if {@code format} is {@code null}
      */
@@ -73,6 +74,7 @@ public final class Hash {
      *
      * @param data Data being hashed
      * @param format The function used to interpret the hashed bytes
+     * @param <T> The resulting value given the formatting function
      * @return Hashed data in specified format, null if algorithm isn't valid
      * @throws NullPointerException if {@code format} is {@code null}
      */
