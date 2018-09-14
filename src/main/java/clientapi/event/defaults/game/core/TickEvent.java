@@ -39,7 +39,7 @@ public final class TickEvent {
     }
 
     /**
-     * The state of the event
+     * @return The state of the event
      */
     public final EventState getState() {
         return this.state;

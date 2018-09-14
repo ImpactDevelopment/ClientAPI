@@ -125,7 +125,6 @@ public class ShaderProgram extends GLObject {
      * method and there isn't already a shader with the same type.
      *
      * @param shader The shader
-     * @return Whether or not the operation was a success
      */
     public final void addShader(Shader shader) {
         if (isGen())

@@ -37,6 +37,7 @@ public final class ClientAPIUtils {
      * Concatenates an array of generic arrays
      *
      * @param arrays The arrays being concatenated
+     * @param <T> The array type
      * @return The concatenated array
      */
     @SafeVarargs
@@ -58,6 +59,8 @@ public final class ClientAPIUtils {
      * Checks if a generic array contains any null members.
      *
      * @param members The Members to be Checked
+     * @param <T> The array type
+     * @return Whether or not the array contained any null members
      */
     @SafeVarargs
     public static <T> boolean containsNull(T... members) {
@@ -73,6 +76,7 @@ public final class ClientAPIUtils {
      *
      * @param array Array of strings being checked
      * @param target String being searched for
+     * @return Whether or not the specified array contained the target, case in-sensitive
      */
     public static boolean containsIgnoreCase(String[] array, String target) {
         Objects.requireNonNull(array);
@@ -105,6 +109,7 @@ public final class ClientAPIUtils {
      *
      * @param object The value trying to be set
      * @param array The array that may/may not contain the value
+     * @param <T> The array type
      * @return The value found from the array
      */
     public static <T> T objectFrom(T object, T[] array) {
@@ -125,6 +130,7 @@ public final class ClientAPIUtils {
      * matching members.
      *
      * @param objects Objects being checked
+     * @param <T> The array type
      * @return Whether or not all members match
      */
     @SafeVarargs
@@ -144,6 +150,8 @@ public final class ClientAPIUtils {
     /**
      * Gets the categories that are represented by a manager containing modules.
      *
+     * @param moduleManager The manager containing modules
+     *
      * @return The categories
      */
     public static Collection<Class<?>> getCategories(Manager<Module> moduleManager) {
@@ -153,6 +161,7 @@ public final class ClientAPIUtils {
     /**
      * Gets the categories that are represented by a manager containing modules.
      *
+     * @param moduleManager The manager containing modules
      * @param sort Whether or not to sort alphabetically
      * @return The categories
      */

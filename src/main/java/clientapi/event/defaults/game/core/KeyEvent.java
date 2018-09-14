@@ -36,7 +36,8 @@ public final class KeyEvent extends InputEvent {
     /**
      * Creates a new instance of KeyEvent.
      *
-     * @param key - The key code for the key that was pressed
+     * @param key The key code for the key that was pressed
+     * @param character The character for the key that was pressed
      */
     public KeyEvent(int key, char character) {
         super(key);

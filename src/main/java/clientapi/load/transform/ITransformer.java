@@ -110,6 +110,7 @@ public interface ITransformer {
      * @param tag The handle tag
      * @param owner The method container
      * @param method The method
+     * @return The newly created handle
      */
     default Handle createMethodHandle(int tag, ClassNode owner, MethodNode method) {
         return createMethodHandle(tag, owner.name, method.name, method.desc);
@@ -121,6 +122,7 @@ public interface ITransformer {
      * @param tag The handle tag
      * @param owner The method container
      * @param method The method
+     * @return The newly created handle
      */
     default Handle createMethodHandle(int tag, String owner, MethodNode method) {
         return createMethodHandle(tag, owner, method.name, method.desc);
@@ -133,6 +135,7 @@ public interface ITransformer {
      * @param owner The method container
      * @param method The method name
      * @param desc The method description
+     * @return The newly created handle
      */
     default Handle createMethodHandle(int tag, ClassNode owner, String method, String desc) {
         return createMethodHandle(tag, owner.name, method, desc);
@@ -145,6 +148,7 @@ public interface ITransformer {
      * @param owner The method container
      * @param method The method name
      * @param desc The method description
+     * @return The newly created handle
      */
     default Handle createMethodHandle(int tag, String owner, String method, String desc) {
         return new Handle(tag, owner, method, desc);

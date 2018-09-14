@@ -83,8 +83,10 @@ public class AbstractNumberType<T extends Number> extends Value<T> {
     }
 
     /**
-     * Increments the value by the number specified
-     * times the number range divided by 10
+     * Increments the value of this {@link AbstractNumberType}
+     * by {@code 1/10th} the range, multiplied by the parameter.
+     *
+     * @param multiplier The incrementation multiplier
      */
     @SuppressWarnings("unchecked")
     public final void increment(float multiplier) {
@@ -93,8 +95,10 @@ public class AbstractNumberType<T extends Number> extends Value<T> {
     }
 
     /**
-     * Decrement the value by the number specified
-     * times the number range divided by 10
+     * Decrements the value of this {@link AbstractNumberType}
+     * by {@code 1/10th} the range, multiplied by the parameter.
+     *
+     * @param multiplier The decrementation multiplier
      */
     public final void decrement(float multiplier) {
         this.increment(-multiplier);

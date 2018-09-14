@@ -115,7 +115,7 @@ artifacts {
     archives jar
     archives releaseJar
     archives sourceJar
-//    archives javadocJar // FIXME JavaDoc build errors
+    archives javadocJar
     archives makeCDK
 }
 
@@ -164,7 +164,7 @@ publishing {
             from components.java
             artifact releaseJar
             artifact sourceJar
-//            artifact javadocJar // FIXME
+            artifact javadocJar
             groupId project.group
             artifactId project.name
             version project.version

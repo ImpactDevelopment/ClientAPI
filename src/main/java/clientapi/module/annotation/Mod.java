@@ -36,17 +36,17 @@ import java.lang.annotation.Target;
 public @interface Mod {
 
     /**
-     * Name of Module
+     * @return Name of Module
      */
     String name();
 
     /**
-     * Description of Module
+     * @return Description of Module
      */
     String description();
 
     /**
-     * Keybind of Module, Key is {@link Keyboard#KEY_NONE} by default.
+     * @return Keybind of Module, {@link Keyboard#KEY_NONE} by default.
      */
     int bind() default Keyboard.KEY_NONE;
 }

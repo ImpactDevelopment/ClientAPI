@@ -87,6 +87,7 @@ public final class RenderUtils {
     /**
      * Enables/Disables the specified client state cap.
      *
+     * @param state The client state to enable/disable
      * @param enabled The new enabled state of the specified client state cap
      */
     public static void setupClientState(GLClientState state, boolean enabled) {

@@ -180,6 +180,8 @@ public class Module extends AbstractModule implements Taggable {
      * Gets a mode that belongs to this
      * module from the mode's name
      *
+     * @param name The name of the mode
+     *
      * @return Mode from name
      */
     public final ModuleMode getMode(String name) {

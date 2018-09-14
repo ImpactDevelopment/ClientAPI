@@ -37,6 +37,7 @@ public interface ICommand extends Describable, Helper {
      *
      * @param context The context behind command execution
      * @param arguments The arguments that
+     * @throws CommandException If some error occurred prior to execution
      */
     void execute(ExecutionContext context, String[] arguments) throws CommandException;
 

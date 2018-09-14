@@ -48,13 +48,15 @@ public @interface Sub {
      * and there shouldn't be any other handle methods in the class
      * that have headers.
      *
-     * @return Headers for the subcommand.
+     * @return Headers for the sub command.
      */
     String[] headers() default {};
 
     /**
      * Returns the names of the arguments. Will be automatically
      * filled if not specified. Intended for use with obfuscation.
+     *
+     * @return Arguments for the sub command.
      */
     String[] arguments() default {};
 
@@ -63,6 +65,8 @@ public @interface Sub {
      * sub-command argument handler. If undefined,
      * any reference to this sub-command's description
      * will point back to the parent command's description.
+     *
+     * @return Description of the sub command
      */
     String description() default "";
 }
