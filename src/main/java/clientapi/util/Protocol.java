@@ -16,6 +16,8 @@
 
 package clientapi.util;
 
+import java.util.*;
+
 /**
  * List of official release version protocols
  * after the netty rewrite in 1.7
@@ -37,7 +39,29 @@ public enum Protocol {
     ProtocolVersion316(316, "1.11.1", "1.11.2"),
     ProtocolVersion335(335, "1.12"),
     ProtocolVersion338(338, "1.12.1"),
-    ProtocolVersion340(340, "1.12.2");
+    ProtocolVersion340(340, "1.12.2"),
+    ProtocolVersion393(393, "1.13"),
+    ProtocolVersion401(401, "1.13.1");
+
+    /**
+     * A list of all of the protocols in this enum
+     */
+    private static final List<Protocol> PROTOCOL_VALUES = Arrays.asList(Protocol.values());
+
+    /**
+     * A map of game versions to their respective {@link Protocol}
+     */
+    private static final Map<String, Protocol> VERSION_TO_PROTOCOL;
+
+    static {
+        Map<String, Protocol> versionToProtocolMap = new HashMap<>();
+        PROTOCOL_VALUES.forEach(protocol -> {
+            for (String version : protocol.getVersions()) {
+                versionToProtocolMap.put(version, protocol);
+            }
+        });
+        VERSION_TO_PROTOCOL = Collections.unmodifiableMap(versionToProtocolMap);
+    }
 
     /**
      * The Protocol ID
@@ -66,5 +90,15 @@ public enum Protocol {
      */
     public final String[] getVersions() {
         return this.versions;
+    }
+
+    /**
+     * Finds the {@link Protocol} associated with a game version.
+     *
+     * @param version The game version
+     * @return The associated {@link Protocol}
+     */
+    public static Protocol byVersion(String version) {
+        return VERSION_TO_PROTOCOL.get(version);
     }
 }
