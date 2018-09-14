@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Implementation of {@code ICommand}
+ * Implementation of {@link ICommand}
  *
  * @author Brady
  * @since 5/31/2017

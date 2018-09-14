@@ -18,9 +18,10 @@ package clientapi.event.defaults.game.entity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.server.SPacketCombatEvent;
 
 /**
- * Called when {@code SPacketCombatEvent} reports a player death
+ * Called when {@link SPacketCombatEvent} reports a player death
  *
  * @author Brady
  * @since 2/28/2017

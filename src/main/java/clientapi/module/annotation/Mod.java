@@ -46,7 +46,7 @@ public @interface Mod {
     String description();
 
     /**
-     * Keybind of Module, Key is {@code KEY_NONE} by default.
+     * Keybind of Module, Key is {@link Keyboard#KEY_NONE} by default.
      */
     int bind() default Keyboard.KEY_NONE;
 }

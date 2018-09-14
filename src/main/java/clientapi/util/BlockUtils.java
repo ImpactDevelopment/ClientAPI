@@ -61,7 +61,7 @@ public final class BlockUtils implements Helper {
     }
 
     /**
-     * Gets the block at the coordinates of the specified {@code Vec3}
+     * Gets the block at the coordinates of the specified {@link Vec3}
      *
      * @param vec The vector position
      * @return The block, returns null if the world isn't initialized
@@ -72,7 +72,7 @@ public final class BlockUtils implements Helper {
     }
 
     /**
-     * Gets the block at the specified {@code BlockPos}
+     * Gets the block at the specified {@link BlockPos}
      *
      * @param pos The position of the block
      * @return The block, returns null if the world isn't initialized

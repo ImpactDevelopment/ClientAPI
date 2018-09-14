@@ -33,9 +33,9 @@ import org.objectweb.asm.tree.MethodNode;
 public interface ITransformer {
 
     /**
-     * Transforms the specified {@code ClassNode}
+     * Transforms the specified {@link ClassNode}
      *
-     * @param cn The target {@code ClassNode}
+     * @param cn The target {@link ClassNode}
      */
     void transform(ClassNode cn);
 
@@ -81,7 +81,7 @@ public interface ITransformer {
     }
 
     /**
-     * Returns the {@code Class} name of the specified primitive type description
+     * Returns the {@link Class} name of the specified primitive type description
      *
      * @param desc Primitive type description
      * @return Type class name, null if not primitive

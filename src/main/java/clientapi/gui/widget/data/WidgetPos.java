@@ -48,7 +48,7 @@ public interface WidgetPos {
     /**
      * Takes this widget's pos and translates it to
      * the scaled position on the screen. This is done
-     * by multiplying the Vec2 returned by {@code getPos}
+     * by multiplying the Vec2 returned by {@link WidgetPos#getPos}
      * by the scaled resolution X and Y values.
      *
      * @param sr The scaled resolution used to calculate the screen pos

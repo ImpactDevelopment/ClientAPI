@@ -21,8 +21,8 @@ import me.zero.alpine.type.EventState;
 import net.minecraft.entity.EntityLivingBase;
 
 /**
- * Called before and after {@code EntityLivingBase#jump()} is
- * invoked. Should only be cancelled in the {@code PRE} state
+ * Called before and after {@link EntityLivingBase#jump()} is
+ * invoked. Should only be cancelled in the {@link EventState#PRE} state
  * to prevent the entity from jumping.
  *
  * @see EntityLivingBase#jump()
@@ -38,7 +38,7 @@ public final class EntityJumpEvent extends Cancellable {
     private final EventState state;
 
     /**
-     * The {@code EntityLivingBase} that is jumping
+     * The {@link EntityLivingBase} that is jumping
      */
     private final EntityLivingBase entity;
 
@@ -55,7 +55,7 @@ public final class EntityJumpEvent extends Cancellable {
     }
 
     /**
-     * @return The {@code EntityLivingBase} that is jumping
+     * @return The {@link EntityLivingBase} that is jumping
      */
     public final EntityLivingBase getEntity() {
         return this.entity;

@@ -21,7 +21,7 @@ import clientapi.command.sender.CommandSender;
 
 /**
  * Provides commands context to the cause of execution. Context
- * is defined by the {@code CommandSender} and {@code CommandHandler}.
+ * is defined by the {@link CommandSender} and {@link CommandHandler}.
  *
  * @author Brady
  * @since 10/18/2017
@@ -29,12 +29,12 @@ import clientapi.command.sender.CommandSender;
 public interface ExecutionContext {
 
     /**
-     * @return The {@code CommandSender} responsible for the command execution
+     * @return The {@link CommandSender} responsible for the command execution
      */
     CommandSender sender();
 
     /**
-     * @return The {@code CommandHandler} that carried out command execution
+     * @return The {@link CommandHandler} that carried out command execution
      */
     CommandHandler handler();
 
@@ -43,21 +43,21 @@ public interface ExecutionContext {
     }
 
     /**
-     * Implementation of {@code ExecutionContext}, used when
-     * creating an instance of {@code ExecutionContext}
-     * from {@code ExecutionContext#of(CommandSender, CommandHandler)}
+     * Implementation of {@link ExecutionContext}, used when
+     * creating an instance of {@link ExecutionContext}
+     * from {@link ExecutionContext#of(CommandSender, CommandHandler)}
      *
      * @see ExecutionContext#of(CommandSender, CommandHandler)
      */
     class Impl implements ExecutionContext {
 
         /**
-         * {@code CommandSender} responsible for command execution
+         * {@link CommandSender} responsible for command execution
          */
         private final CommandSender sender;
 
         /**
-         * {@code CommandHandler} that carried out command execution
+         * {@link CommandHandler} that carried out command execution
          */
         private final CommandHandler handler;
 

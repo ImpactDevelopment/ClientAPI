@@ -61,7 +61,7 @@ public final class CommandHandler implements Helper {
     /**
      * Executor that is called to execute commands. All commands
      * are passed through the executor. Default is set to
-     * {@code CommandExecutor#DIRECT}
+     * {@link CommandExecutor#DIRECT}
      *
      * @see CommandExecutor#DIRECT
      */
@@ -119,7 +119,7 @@ public final class CommandHandler implements Helper {
     });
 
     /**
-     * Finds handlers that target the specified {@code CommandException}
+     * Finds handlers that target the specified {@link CommandException}
      *
      * @param exception The command exception
      * @return The list of handlers, empty if none
@@ -129,11 +129,11 @@ public final class CommandHandler implements Helper {
     }
 
     /**
-     * Registers an {@code ExceptionHandler} to the handlers list.
+     * Registers an {@link ExceptionHandler} to the handlers list.
      *
      * @see ExceptionHandler
      *
-     * @param handler {@code ExceptionHandler} being registered.
+     * @param handler {@link ExceptionHandler} being registered.
      */
     public final void registerHandler(ExceptionHandler handler) {
         if (!handlers.contains(handler))
@@ -141,7 +141,7 @@ public final class CommandHandler implements Helper {
     }
 
     /**
-     * Finds a parser that targets the specified {@code Class} type.
+     * Finds a parser that targets the specified {@link Class} type.
      *
      * @param type The type
      * @return A parser targeting the type, {@code null} if none
@@ -151,12 +151,12 @@ public final class CommandHandler implements Helper {
     }
 
     /**
-     * Registers an {@code ArgumentParser} to the parsers list.
+     * Registers an {@link ArgumentParser} to the parsers list.
      *
      * @see ArgumentParser
      * @see CommandHandler#getParser(Type)
      *
-     * @param parser {@code ArgumentParser} being registered
+     * @param parser {@link ArgumentParser} being registered
      */
     public final void registerParser(ArgumentParser<?> parser) {
         if (!parsers.contains(parser))

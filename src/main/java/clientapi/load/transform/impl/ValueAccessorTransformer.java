@@ -26,6 +26,10 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
+import java.lang.invoke.LambdaMetafactory;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -44,7 +48,7 @@ import static org.objectweb.asm.Opcodes.*;
 public final class ValueAccessorTransformer implements ITransformer {
 
     /**
-     * Instance of the handle for {@code LambdaMetaFactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
+     * Instance of the handle for {@link LambdaMetafactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
      */
     private static final Handle METAFACTORY = new Handle(
             H_INVOKESTATIC,
@@ -98,7 +102,7 @@ public final class ValueAccessorTransformer implements ITransformer {
     }
 
     /**
-     * Creates the field-getter getter method in the specified {@code ClassNode}
+     * Creates the field-getter getter method in the specified {@link ClassNode}
      *
      * @param cn The ClassNode
      */
@@ -161,7 +165,7 @@ public final class ValueAccessorTransformer implements ITransformer {
     }
 
     /**
-     * Creates the field-setter getter method in the specified {@code ClassNode}
+     * Creates the field-setter getter method in the specified {@link ClassNode}
      *
      * @see ValueAccessor
      *

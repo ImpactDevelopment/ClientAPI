@@ -21,7 +21,7 @@ import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 
 /**
- * Default implementations of {@code WidgetPos}
+ * Default implementations of {@link WidgetPos}
  *
  * @see WidgetPos
  *

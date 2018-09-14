@@ -49,7 +49,7 @@ public class Value<T> implements IValue<T> {
     private final Map<String, IValue> valueCache = new HashMap<>();
 
     /**
-     * A list of all of the {@code ValueChangeListeners} waiting for this value to change
+     * A list of all of the {@link ValueChangeListener} instances waiting for this value to change
      */
     private final Map<EventState, List<ValueChangeListener<T>>> valueChangeListeners = new HashMap<>();
 
@@ -84,7 +84,7 @@ public class Value<T> implements IValue<T> {
     private final Field field;
 
     /**
-     * A {@code Mutable} used to set/get this value.
+     * A {@link Mutable} used to set/get this value.
      */
     private final Mutable<Object> mutable;
 

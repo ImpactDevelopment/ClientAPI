@@ -48,7 +48,7 @@ public final class Values {
 
     /**
      * Cache of objects that have already had their values discovered, prevents
-     * creating duplicate children on multiple calls to {@code discover(Object)}
+     * creating duplicate children on multiple calls to {@link Values#discover(Object)}
      */
     private static final Map<Object, List<IValue>> DISCOVER_CACHE = new HashMap<>();
 

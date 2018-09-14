@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of {@code IClassTransformer} used to run all {@code ITransformer}s.
+ * Implementation of {@link IClassTransformer} used to run all registered instances of {@link ITransformer}.
  *
  * @author Brady
  * @since 9/15/2017
@@ -107,7 +107,7 @@ public final class ClientTransformer implements IClassTransformer {
     }
 
     /**
-     * Creates a {@code ClassNode} from specified bytecode
+     * Creates a {@link ClassNode} from specified bytecode
      *
      * @param bytecode Class bytecode
      * @return ClassNode

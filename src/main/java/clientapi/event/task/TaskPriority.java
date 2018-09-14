@@ -17,7 +17,7 @@
 package clientapi.event.task;
 
 /**
- * A duplicate of {@code EventPriority}. Used to define the execution
+ * A duplicate of {@link EventPriority}. Used to define the execution
  * priority of tasks. Tasks with higher priorities will overpower tasks
  * of lower priorities when they are being started.
  *

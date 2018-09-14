@@ -19,7 +19,7 @@ package clientapi.util.entity;
 import net.minecraft.entity.Entity;
 
 /**
- * {@code FunctionalInterface} to determine the validity
+ * {@link FunctionalInterface} to determine the validity
  * of an entity based on this filter's standards.
  *
  * @author Brady

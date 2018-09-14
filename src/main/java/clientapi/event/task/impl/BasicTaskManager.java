@@ -23,7 +23,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * The most basic implementation of {@code TaskManager}.
+ * The most basic implementation of {@link TaskManager}.
  *
  * @author Brady
  * @since 11/30/2017

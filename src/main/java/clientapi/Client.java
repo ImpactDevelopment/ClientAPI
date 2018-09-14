@@ -21,7 +21,7 @@ import clientapi.config.Configurable;
 
 /**
  * The base for all ClientAPI Clients. The classpath of implementations
- * of {@code Client} should be defined in the {@code client.json} file.
+ * of {@link Client} should be defined in the {@code client.json} file.
  *
  * @see ClientConfiguration
  *

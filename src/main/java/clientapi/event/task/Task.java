@@ -25,16 +25,16 @@ import clientapi.util.interfaces.Identifiable;
 public interface Task extends Identifiable {
 
     /**
-     * Returns whether or not this {@code Task} is active. Active
+     * Returns whether or not this {@link Task} is active. Active
      * tasks indicate that the execution of the task will be conflict-free.
      * Tasks may only be run once at a time from the same manager.
      *
-     * @return Whether or not this {@code Task} is active.
+     * @return Whether or not this {@link Task} is active.
      */
     boolean isActive();
 
     /**
-     * Sets the active state of this {@code Task}.
+     * Sets the active state of this {@link Task}.
      *
      * @see Task#isActive()
      *

@@ -19,7 +19,7 @@ package clientapi.event;
 import me.zero.alpine.EventBus;
 
 /**
- * An implementation of {@code EventBus} where all inherited abstract methods
+ * An implementation of {@link EventBus} where all inherited abstract methods
  * have been implemented with empty bodies, so that only required methods have
  * to be implemented. This is particularly useful in child event buses, where
  * not all methods may need to be implemented.

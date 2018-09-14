@@ -20,12 +20,10 @@ import clientapi.command.exception.CommandException;
 
 /**
  * Put in place by developers to hook into when exceptions
- * are thrown. Implementations should have an {@code ExceptionTarget}
- * annotation placed at the type declaration so that the command
- * handler may identify the target exception type. The main purpose
- * of implementing handlers is to provide users with custom messages
- * when an exception is thrown, rather than a default console output
- * performed by the Client API.
+ * are thrown. The main purpose of implementing handlers is
+ * to provide users with custom messages when an exception
+ * is thrown, rather than a default console output performed
+ * by ClientAPI.
  *
  * @author Brady
  * @since 6/1/2017
@@ -33,7 +31,7 @@ import clientapi.command.exception.CommandException;
 public interface ExceptionHandler {
 
     /**
-     * Handles a thrown {@code CommandException} of a valid target type.
+     * Handles a thrown {@link CommandException} of a valid target type.
      *
      * @see ExceptionHandler#isTarget
      *
@@ -42,7 +40,7 @@ public interface ExceptionHandler {
     void handle(CommandException exception);
 
     /**
-     * Returns the target {@code CommandException} that should be
+     * Returns the target {@link CommandException} that should be
      * accepted by this handler.
      *
      * @return The command exception type

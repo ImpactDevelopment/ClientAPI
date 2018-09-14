@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.network;
 
 import me.zero.alpine.type.EventState;
+import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.multiplayer.ServerData;
 
 /**
@@ -81,7 +82,7 @@ public class ServerEvent {
 
             /**
              * Indicates that an exception occurred when trying to connect to the target server.
-             * This will be followed by an instance of {@code ServerEvent.Disconnect} being posted.
+             * This will be followed by an instance of {@link ServerEvent.Disconnect} being posted.
              */
             FAILED
         }
@@ -101,7 +102,7 @@ public class ServerEvent {
         /**
          * Whether or not the connection was forcefully closed. True if the
          * server called for the client to be disconnected. False if the
-         * client manually disconnected through {@code GuiIngameMenu}.
+         * client manually disconnected through {@link GuiIngameMenu}.
          */
         private final boolean forced;
 

@@ -23,15 +23,15 @@ package clientapi.util.interfaces;
 public interface Identifiable {
 
     /**
-     * @return The ID of this {@code Identifiable}
+     * @return The ID of this {@link Identifiable}
      */
     String getID();
 
     /**
-     * Checks if the ID of this {@code Identifiable} and
-     * the ID of another {@code Identifiable} match each other.
+     * Checks if the ID of this {@link Identifiable} and
+     * the ID of another {@link Identifiable} match each other.
      *
-     * @param id The other {@code Identifiable}
+     * @param id The other {@link Identifiable}
      * @return Whether or not they match
      */
     default boolean matches(Identifiable id) {

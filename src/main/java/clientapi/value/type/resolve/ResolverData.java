@@ -75,7 +75,7 @@ public final class ResolverData {
     }
 
     /**
-     * Instiates a new {@code ResolverData} type
+     * Instiates a new {@link ResolverData} type
      *
      * @param resolver The resolver for the target type
      * @param resolvableTypes The supported types for the resolver

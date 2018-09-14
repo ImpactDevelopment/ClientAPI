@@ -21,7 +21,7 @@ import me.zero.alpine.type.EventState;
 import net.minecraft.client.entity.EntityPlayerSP;
 
 /**
- * Called at the head of {@code EntityPlayerSP#onUpdate}
+ * Called at the head of {@link EntityPlayerSP#onUpdate}
  *
  * @see EntityPlayerSP#onUpdate()
  *

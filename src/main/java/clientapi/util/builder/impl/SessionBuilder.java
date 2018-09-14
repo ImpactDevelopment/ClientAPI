@@ -27,7 +27,7 @@ import net.minecraft.util.Session;
 import java.net.Proxy;
 
 /**
- * Builder used to create a {@code Session} object.
+ * Builder used to create a {@link Session} object.
  *
  * @author Brady
  * @since 8/13/2017
@@ -73,7 +73,7 @@ public final class SessionBuilder implements Builder<Session> {
 
     /**
      * Defines a proxy to authenticate with. Defaults to
-     * {@code Proxy.NO_PROXY} if not specified.
+     * {@link Proxy#NO_PROXY} if not specified.
      */
     public final SessionBuilder proxy(Proxy proxy) {
         this.proxy = proxy;
