@@ -18,7 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import clientapi.util.interfaces.Helper;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,14 +30,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 9/7/2017
  */
 @Mixin(GuiConnecting.class)
-public class MixinGuiConnecting {
+public class MixinGuiConnecting extends GuiScreen {
 
     @Inject(
             method = "connect",
             at = @At("HEAD")
     )
     private void onPreConnect(CallbackInfo info) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.PRE, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.PRE, this.mc.getCurrentServerData()));
     }
 
     @Inject(
@@ -48,7 +48,7 @@ public class MixinGuiConnecting {
             )
     )
     private void onError(CallbackInfo info) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.FAILED, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.FAILED, this.mc.getCurrentServerData()));
     }
 
     @Inject(
@@ -60,6 +60,6 @@ public class MixinGuiConnecting {
             )
     )
     private void onSendPacket(CallbackInfo info) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.CONNECT, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Connect(ServerEvent.Connect.State.CONNECT, this.mc.getCurrentServerData()));
     }
 }

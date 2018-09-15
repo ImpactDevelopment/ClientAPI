@@ -17,7 +17,7 @@
 package clientapi.event.defaults.game.entity.local;
 
 import clientapi.load.mixin.extension.IEntity;
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import me.zero.alpine.type.Cancellable;
@@ -30,7 +30,7 @@ import me.zero.alpine.type.EventState;
  * @author Brady
  * @since 2/12/2017
  */
-public final class MotionUpdateEvent extends Cancellable implements Helper {
+public final class MotionUpdateEvent extends Cancellable implements MinecraftAccessible {
 
     /**
      * Position

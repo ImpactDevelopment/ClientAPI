@@ -17,7 +17,6 @@
 package clientapi.gui.widget.data;
 
 import clientapi.gui.widget.WidgetHelper;
-import clientapi.util.interfaces.Helper;
 import clientapi.util.math.Vec2;
 
 /**
@@ -28,7 +27,7 @@ import clientapi.util.math.Vec2;
  * @author Brady
  * @since 5/28/2017
  */
-public enum DefaultWidgetPos implements WidgetPos, Helper {
+public enum DefaultWidgetPos implements WidgetPos {
 
     LEFT_TOP(0.0F, 0.0F, 0.0F),
     LEFT_MIDDLE(0.0F, 0.5F, -0.5F),

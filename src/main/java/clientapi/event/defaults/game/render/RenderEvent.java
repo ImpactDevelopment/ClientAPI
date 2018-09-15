@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.render;
 
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 
 /**
  * Abstract class to represent render events that have a partialTicks parameter.
@@ -24,7 +24,7 @@ import clientapi.util.interfaces.Helper;
  * @author Brady
  * @since 12/1/2017
  */
-abstract class RenderEvent implements Helper {
+abstract class RenderEvent implements MinecraftAccessible {
 
     /**
      * The render partial ticks

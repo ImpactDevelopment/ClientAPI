@@ -26,7 +26,7 @@ import clientapi.util.interfaces.*;
  * @author Brady
  * @since 1/21/2017
  */
-interface IModule extends Nameable, Describable, Helper, Toggleable, Bindable {
+interface IModule extends Nameable, Describable, MinecraftAccessible, Toggleable, Bindable {
 
     /**
      * @return The type of the Module

@@ -16,7 +16,7 @@
 
 package clientapi.util;
 
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.math.Vec3;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -32,7 +32,7 @@ import java.util.Objects;
  * @author Brady
  * @since 2/24/2017
  */
-public final class BlockUtils implements Helper {
+public final class BlockUtils implements MinecraftAccessible {
 
     private BlockUtils() {}
 

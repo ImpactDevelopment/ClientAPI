@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.render;
 
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 import me.zero.alpine.type.Cancellable;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ import net.minecraft.util.EnumHandSide;
  * @author Brady
  * @since 4/8/2017
  */
-public final class RenderItemEvent extends Cancellable implements Helper {
+public final class RenderItemEvent extends Cancellable implements MinecraftAccessible {
 
     /**
      * Instance of the ItemRenderer
