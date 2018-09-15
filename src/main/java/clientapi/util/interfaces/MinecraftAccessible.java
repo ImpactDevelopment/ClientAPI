@@ -20,12 +20,12 @@ import clientapi.load.mixin.extension.IMinecraft;
 import net.minecraft.client.Minecraft;
 
 /**
- *
+ * Provides fields to directly access the instance of the Minecraft game.
  *
  * @author Brady
  * @since 2/9/2017
  */
-public interface Helper {
+public interface MinecraftAccessible {
 
     /**
      * Instance of Minecraft

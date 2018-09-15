@@ -18,8 +18,8 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import clientapi.util.interfaces.Helper;
 import me.zero.alpine.type.EventState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiDisconnected;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,6 +38,6 @@ public class MixinGuiDisconnected {
             at = @At("RETURN")
     )
     private void onInit(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, true, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, true, Minecraft.getMinecraft().getCurrentServerData()));
     }
 }

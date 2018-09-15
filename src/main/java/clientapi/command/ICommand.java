@@ -19,7 +19,7 @@ package clientapi.command;
 import clientapi.command.exception.CommandException;
 import clientapi.command.executor.ExecutionContext;
 import clientapi.util.interfaces.Describable;
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 
 /**
  * Base for {@link Command}
@@ -29,7 +29,7 @@ import clientapi.util.interfaces.Helper;
  * @author Brady
  * @since 5/30/2017
  */
-public interface ICommand extends Describable, Helper {
+public interface ICommand extends Describable, MinecraftAccessible {
 
     /**
      * Executes this command from the specified sender with

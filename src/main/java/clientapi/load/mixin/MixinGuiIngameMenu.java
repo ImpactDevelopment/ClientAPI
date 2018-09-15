@@ -18,9 +18,9 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import clientapi.util.interfaces.Helper;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.gui.GuiIngameMenu;
+import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 9/7/2017
  */
 @Mixin(GuiIngameMenu.class)
-public class MixinGuiIngameMenu {
+public class MixinGuiIngameMenu extends GuiScreen {
 
     @Inject(
             method = "actionPerformed",
@@ -41,6 +41,6 @@ public class MixinGuiIngameMenu {
             )
     )
     private void postLoadWorld(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, this.mc.getCurrentServerData()));
     }
 }

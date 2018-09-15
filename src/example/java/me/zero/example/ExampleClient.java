@@ -21,6 +21,7 @@ import clientapi.command.Command;
 import clientapi.config.ClientConfiguration;
 import clientapi.manage.Manager;
 import clientapi.module.Module;
+import clientapi.util.interfaces.MinecraftAccessible;
 import me.zero.example.command.ExampleCommandManager;
 import me.zero.example.mod.ExampleModManager;
 
@@ -28,7 +29,7 @@ import me.zero.example.mod.ExampleModManager;
  * @author Brady
  * @since 1/19/2017 12:00 PM
  */
-public final class ExampleClient extends Client {
+public final class ExampleClient extends Client implements MinecraftAccessible {
 
     private static ExampleClient instance;
     private Manager<Module> moduleManager;
