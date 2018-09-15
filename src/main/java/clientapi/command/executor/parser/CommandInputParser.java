@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018 ImpactDevelopment
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package clientapi.command.executor.parser;
 
 import clientapi.command.ChildCommand;
@@ -66,7 +82,7 @@ public enum CommandInputParser {
                 return strictArgs
                         ? Optional.of(children.get(0))
                         // If argument count wasn't checked, find the closest argument length
-                        : children.stream().min(Comparator.comparingInt(c -> Math.abs(c.getHeaders().length - arguments.length)));
+                        : children.stream().min(Comparator.comparingInt(c -> Math.abs(c.getHandles().length - arguments.length)));
         }
     }
 
@@ -83,7 +99,7 @@ public enum CommandInputParser {
 
         // Find the command by the header defined by the first argument
         ChildCommand child = command.getChildren().stream()
-                .filter(c -> header == null ? c.getHeaders().length == 0 : ClientAPIUtils.containsIgnoreCase(c.getHeaders(), header))
+                .filter(c -> header == null ? c.getHandles().length == 0 : ClientAPIUtils.containsIgnoreCase(c.getHandles(), header))
                 .findFirst().orElse(null);
 
         if (child != null)
@@ -91,7 +107,7 @@ public enum CommandInputParser {
 
         // Find the command by the length of the arguments
         return command.getChildren().stream()
-                .filter(c -> c.getHeaders().length == 0 && (!strictArgs || arguments.length == c.getArguments().size()))
+                .filter(c -> c.getHandles().length == 0 && (!strictArgs || arguments.length == c.getArguments().size()))
                 .collect(Collectors.toList());
     }
 }

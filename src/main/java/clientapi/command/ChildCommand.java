@@ -35,9 +35,9 @@ import java.util.List;
 public final class ChildCommand implements ICommand {
 
     /**
-     * A list of headers used to execute this command
+     * A list of handles used to execute this command
      */
-    private final String[] headers;
+    private final String[] handles;
 
     /**
      * A description of this command's usage
@@ -62,7 +62,7 @@ public final class ChildCommand implements ICommand {
     ChildCommand(Command parent, Method handle) {
         Sub sub = handle.getAnnotation(Sub.class);
 
-        this.headers = sub.headers();
+        this.handles = sub.handles();
         this.description = sub.description();
         this.arguments = new ArrayList<>();
         this.parent = parent;
@@ -125,8 +125,8 @@ public final class ChildCommand implements ICommand {
     }
 
     @Override
-    public final String[] getHeaders() {
-        return this.headers;
+    public final String[] getHandles() {
+        return this.handles;
     }
 
     @Override

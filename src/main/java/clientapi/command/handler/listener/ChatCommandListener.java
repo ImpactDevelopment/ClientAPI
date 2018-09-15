@@ -18,9 +18,9 @@ package clientapi.command.handler.listener;
 
 import clientapi.ClientAPI;
 import clientapi.command.Command;
+import clientapi.command.executor.ExecutionContext;
 import clientapi.command.executor.parser.CommandInputParser;
 import clientapi.command.executor.parser.ParsedCommandInput;
-import clientapi.command.executor.ExecutionContext;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.sender.CommandSender;
 import clientapi.event.defaults.game.misc.ChatEvent;
@@ -77,7 +77,7 @@ public final class ChatCommandListener extends CommandListener implements Helper
             if (input.isPresent()) {
                 // Find a command that has a header matching the input command header
                 Command command = handler.getCommandManager().stream()
-                        .filter(cmd -> ClientAPIUtils.containsIgnoreCase(cmd.getHeaders(), input.get().getCommand()))
+                        .filter(cmd -> ClientAPIUtils.containsIgnoreCase(cmd.getHandles(), input.get().getCommand()))
                         .findFirst().orElse(null);
 
                 // Only handle the command if it's found

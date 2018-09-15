@@ -44,9 +44,9 @@ public class Command implements ICommand {
     private final List<ChildCommand> children = new ArrayList<>();
 
     /**
-     * A list of headers used to execute this command
+     * A list of handles used to execute this command
      */
-    private String[] headers;
+    private String[] handles;
 
     /**
      * A description of this command's usage
@@ -58,15 +58,15 @@ public class Command implements ICommand {
             throw new RuntimeException(new CommandInitException(this, "@Cmd annotation must be present if required parameters aren't passed through constructor"));
 
         Cmd data = this.getClass().getAnnotation(Cmd.class);
-        setup(data.headers(), data.description());
+        setup(data.handles(), data.description());
     }
 
-    public Command(String[] headers, String description) {
-        setup(headers, description);
+    public Command(String[] handles, String description) {
+        setup(handles, description);
     }
 
-    private void setup(String[] headers, String description) {
-        this.headers = headers;
+    private void setup(String[] handles, String description) {
+        this.handles = handles;
         this.description = description;
 
         for (Method method : this.getClass().getDeclaredMethods()) {
@@ -89,7 +89,7 @@ public class Command implements ICommand {
             children.add(new ChildCommand(this, method));
         }
 
-        if (ClientAPIUtils.containsNull(headers, description))
+        if (ClientAPIUtils.containsNull(handles, description))
             throw new NullPointerException("One or more Command members were null!");
     }
 
@@ -100,7 +100,7 @@ public class Command implements ICommand {
             throw new UnknownSubCommandException(this, arguments);
 
         // If the child was found by it's header, then remove the first argument.
-        if (sub.get().getHeaders().length > 0 && arguments.length > 0) {
+        if (sub.get().getHandles().length > 0 && arguments.length > 0) {
             String[] newArgs = new String[arguments.length - 1];
             System.arraycopy(arguments, 1, newArgs, 0, arguments.length - 1);
             arguments = newArgs;
@@ -110,8 +110,8 @@ public class Command implements ICommand {
     }
 
     @Override
-    public final String[] getHeaders() {
-        return this.headers;
+    public final String[] getHandles() {
+        return this.handles;
     }
 
     @Override
