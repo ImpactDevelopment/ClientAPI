@@ -16,7 +16,10 @@
 
 package clientapi.event;
 
-import me.zero.alpine.EventBus;
+
+import me.zero.alpine.bus.EventBus;
+import me.zero.alpine.listener.Listenable;
+import me.zero.alpine.listener.Listener;
 
 /**
  * An implementation of {@link EventBus} where all inherited abstract methods
@@ -30,29 +33,29 @@ import me.zero.alpine.EventBus;
 public abstract class AbstractEventBus implements EventBus {
 
     @Override
-    public void subscribe(Object object) {}
+    public void subscribe(Listenable listenable) {}
 
     @Override
-    public void subscribeAll(Object... objects) {}
+    public void subscribe(Listener listener) {}
 
     @Override
-    public void subscribeAll(Iterable<Object> objects) {}
+    public void subscribeAll(Listenable... listenables) {}
 
     @Override
-    public void unsubscribe(Object object) {}
+    public void subscribeAll(Iterable<Listenable> listenables) {}
 
     @Override
-    public void unsubscribeAll(Object... objects) {}
+    public void unsubscribe(Listenable listenable) {}
 
     @Override
-    public void unsubscribeAll(Iterable<Object> objects) {}
+    public void unsubscribe(Listener listener) {}
+
+    @Override
+    public void unsubscribeAll(Listenable... listenables) {}
+
+    @Override
+    public void unsubscribeAll(Iterable<Listenable> listenables) {}
 
     @Override
     public void post(Object event) {}
-
-    @Override
-    public void attach(EventBus bus) {}
-
-    @Override
-    public void detach(EventBus bus) {}
 }

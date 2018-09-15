@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.misc;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 

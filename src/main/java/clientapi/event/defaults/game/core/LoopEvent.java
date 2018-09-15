@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.core;
 
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.Minecraft;
 
 /**

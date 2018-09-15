@@ -19,6 +19,7 @@ package clientapi.event.bench.impl;
 import clientapi.ClientAPI;
 import clientapi.event.bench.Benchmark;
 import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listenable;
 import me.zero.alpine.listener.Listener;
 
 /**
@@ -28,7 +29,7 @@ import me.zero.alpine.listener.Listener;
  * @author Brady
  * @since 5/17/2017
  */
-public final class EventBenchmark extends Benchmark {
+public final class EventBenchmark extends Benchmark implements Listenable {
 
     public EventBenchmark(int passes, int invocations) {
         super(passes, invocations);

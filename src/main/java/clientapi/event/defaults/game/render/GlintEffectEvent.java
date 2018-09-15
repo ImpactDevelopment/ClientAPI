@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.render;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 
 /**
  * Called when the enchanted effect of a

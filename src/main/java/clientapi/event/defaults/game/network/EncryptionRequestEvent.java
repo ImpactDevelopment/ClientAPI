@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.network;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 import net.minecraft.client.network.NetHandlerLoginClient;
 import net.minecraft.network.login.server.SPacketEncryptionRequest;
 

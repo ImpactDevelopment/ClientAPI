@@ -22,7 +22,7 @@ import clientapi.event.defaults.game.network.ServerEvent;
 import clientapi.load.mixin.extension.INetworkManager;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.INetHandler;

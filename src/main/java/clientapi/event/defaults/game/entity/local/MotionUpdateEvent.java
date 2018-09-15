@@ -20,8 +20,8 @@ import clientapi.load.mixin.extension.IEntity;
 import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-import me.zero.alpine.type.Cancellable;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.Cancellable;
+import me.zero.alpine.event.EventState;
 
 /**
  * Called before and after packets are sent to

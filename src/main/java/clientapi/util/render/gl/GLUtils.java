@@ -20,7 +20,6 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.Colors;
-import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
@@ -52,15 +51,11 @@ public final class GLUtils {
     public static void init() {}
 
     static {
-        ClientAPI.EVENT_BUS.subscribe(new Object() {
-
-            @EventHandler
-            private final Listener<RenderWorldEvent> render3DListener = new Listener<>(event -> {
-                GlStateManager.getFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
-                GlStateManager.getFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
-                GlStateManager.glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
-            });
-        });
+        ClientAPI.EVENT_BUS.subscribe(new Listener<RenderWorldEvent>(event -> {
+            GlStateManager.getFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
+            GlStateManager.getFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
+            GlStateManager.glGetInteger(GL_VIEWPORT, (IntBuffer) VIEWPORT.clear());
+        }));
     }
 
     /**

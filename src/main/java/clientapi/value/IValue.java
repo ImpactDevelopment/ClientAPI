@@ -20,7 +20,7 @@ import clientapi.util.interfaces.Describable;
 import clientapi.util.interfaces.Identifiable;
 import clientapi.util.interfaces.Nameable;
 import clientapi.value.holder.IValueHolder;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 
 import java.util.stream.Stream;
 

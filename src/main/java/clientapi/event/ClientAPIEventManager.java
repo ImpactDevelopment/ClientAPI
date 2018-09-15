@@ -16,7 +16,7 @@
 
 package clientapi.event;
 
-import me.zero.alpine.EventManager;
+import me.zero.alpine.bus.EventManager;
 
 /**
  * Implementation of {@link EventManager} that allows the
