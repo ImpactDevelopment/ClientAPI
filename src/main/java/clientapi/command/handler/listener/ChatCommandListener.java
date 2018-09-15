@@ -16,7 +16,6 @@
 
 package clientapi.command.handler.listener;
 
-import clientapi.ClientAPI;
 import clientapi.command.Command;
 import clientapi.command.executor.ExecutionContext;
 import clientapi.command.executor.parser.CommandInputParser;
@@ -24,7 +23,6 @@ import clientapi.command.executor.parser.ParsedCommandInput;
 import clientapi.command.handler.CommandHandler;
 import clientapi.command.sender.CommandSender;
 import clientapi.event.defaults.game.misc.ChatEvent;
-import clientapi.event.defaults.internal.CommandExecutionEvent;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.interfaces.MinecraftAccessible;
 import me.zero.alpine.listener.EventHandler;
@@ -32,7 +30,6 @@ import me.zero.alpine.listener.Listener;
 import net.minecraft.util.text.TextComponentString;
 
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 /**
  * Command listener setup to listen to chat commands
@@ -42,8 +39,6 @@ import java.util.regex.Pattern;
  * @since 6/11/2017
  */
 public final class ChatCommandListener extends CommandListener implements MinecraftAccessible {
-
-    private static final Pattern REGEX = Pattern.compile("\"([^\"]+)\"|'([^']+)'|([^\\s]+)");
 
     public ChatCommandListener(CommandHandler handler) {
         super(handler);
@@ -82,16 +77,15 @@ public final class ChatCommandListener extends CommandListener implements Minecr
 
                 // Only handle the command if it's found
                 if (command != null) {
-                    ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(
+                    this.handler.execute(
                             command,
                             ExecutionContext.of(CommandSender.from(mc.player), this.handler),
                             input.get().getArguments()
-                    ));
+                    );
                     return;
                 }
             }
-
-            ClientAPI.EVENT_BUS.post(new CommandExecutionEvent(null, null, null));
+            this.handler.execute(null, null, null);
         }
     });
 }
