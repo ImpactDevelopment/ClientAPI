@@ -41,16 +41,16 @@ import java.util.Optional;
 public @interface Sub {
 
     /**
-     * The headers for this sub-command. If no headers are
+     * The handles for this sub-command. If no handles are
      * defined it is implied that the handle method should
      * take in anything if it matches the target arguments,
      * regardless of the first argument (Defining argument),
      * and there shouldn't be any other handle methods in the class
-     * that have headers.
+     * that have handles.
      *
-     * @return Headers for the sub command.
+     * @return Handles for the sub command.
      */
-    String[] headers() default {};
+    String[] handles() default {};
 
     /**
      * Returns the names of the arguments. Will be automatically

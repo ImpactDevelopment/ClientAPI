@@ -17,7 +17,7 @@
 package clientapi.command.exception;
 
 /**
- * Thrown when a command was expected, but no command headers
+ * Thrown when a command was expected, but no command handles
  * matched the specified command.
  *
  * @author Brady
