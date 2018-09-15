@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.world;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 import net.minecraft.block.Block;
 
 /**

@@ -18,7 +18,7 @@ package clientapi.event.defaults.internal;
 
 import clientapi.command.Command;
 import clientapi.command.executor.ExecutionContext;
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 
 /**
  * Called prior to a command being executed, allowing for the execution to be cancelled.

@@ -19,7 +19,7 @@ package clientapi.value;
 import clientapi.util.interfaces.Mutable;
 import clientapi.util.interfaces.impl.MutableField;
 import clientapi.value.holder.ValueAccessor;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

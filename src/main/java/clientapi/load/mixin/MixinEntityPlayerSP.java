@@ -22,7 +22,7 @@ import clientapi.event.defaults.game.entity.local.LivingUpdateEvent;
 import clientapi.event.defaults.game.entity.local.MotionUpdateEvent;
 import clientapi.event.defaults.game.entity.local.MoveEvent;
 import clientapi.event.defaults.game.misc.ChatEvent;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

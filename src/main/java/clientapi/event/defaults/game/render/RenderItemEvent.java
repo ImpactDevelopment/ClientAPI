@@ -17,7 +17,7 @@
 package clientapi.event.defaults.game.render;
 
 import clientapi.util.interfaces.MinecraftAccessible;
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;

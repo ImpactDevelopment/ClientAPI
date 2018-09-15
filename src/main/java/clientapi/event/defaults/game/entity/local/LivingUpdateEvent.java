@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.entity.local;
 
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 
 /**
  * Called before and after EntityPlayerSP#onLivingUpdate()

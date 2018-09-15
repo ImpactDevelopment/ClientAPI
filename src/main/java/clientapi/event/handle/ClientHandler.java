@@ -20,9 +20,10 @@ import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.game.core.KeyUpEvent;
 import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.io.Keybind;
+import me.zero.alpine.event.EventPriority;
 import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listenable;
 import me.zero.alpine.listener.Listener;
-import me.zero.alpine.type.EventPriority;
 
 import java.util.stream.Stream;
 
@@ -34,7 +35,7 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
  * @author Brady
  * @since 2/9/2017
  */
-public enum ClientHandler implements MinecraftAccessible {
+public enum ClientHandler implements Listenable, MinecraftAccessible {
 
     INSTANCE;
 

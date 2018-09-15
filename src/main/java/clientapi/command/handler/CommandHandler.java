@@ -30,6 +30,7 @@ import clientapi.event.defaults.internal.CommandExecutionEvent;
 import clientapi.manage.Manager;
 import clientapi.util.interfaces.MinecraftAccessible;
 import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listenable;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.gui.GuiChat;
 
@@ -47,7 +48,7 @@ import java.util.stream.Collectors;
  * @author Brady
  * @since 6/1/2017
  */
-public final class CommandHandler implements MinecraftAccessible {
+public final class CommandHandler implements Listenable, MinecraftAccessible {
 
     /**
      * Handlers to process command exceptions

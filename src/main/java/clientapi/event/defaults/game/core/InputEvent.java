@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.core;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 import org.lwjgl.input.Keyboard;
 
 /**
