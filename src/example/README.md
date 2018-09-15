@@ -197,7 +197,7 @@ All Commands extend ``clientapi.command.Command`` and are required to have a ``@
 (``clientapi.command.Cmd``) *or* an implementation of one of the multi-parameter constructors.
 In both cases, the bind parameter is optional. An example of both are below.
 ```java
-@Cmd(headers = { "example", "ex" }, description = "An example command")
+@Cmd(handles = { "example", "ex" }, description = "An example command")
 public final class ExampleCommand extends Command {
     
 }
@@ -212,11 +212,11 @@ public final class ExampleCommand extends Command {
 ```
 To create a new command handle, create a new method with a single ``ExecutionContext`` parameter
 (``clientapi.command.execute.ExecutionContext``) and the ``@Sub`` annotation (``clientapi.command.Sub``).
-``Sub`` is used to define the properties of the sub command, which are execution headers, argument
+``Sub`` is used to define the properties of the sub command, which are execution handles, argument
 names, and a description.
 
-The headers parameter is used to identify the handle from the first execution argument. If no
-headers are defined by a handle, it is assumed that the first given argument for execution
+The handles parameter is used to identify the handle from the first execution argument. If no
+handles are defined by a handle, it is assumed that the first given argument for execution
 directly correlates with the first argument of the method, excluding the Execution Context.
 
 The arguments paremeter is used to give a name to each argument parameter. It is not a requirement
@@ -228,7 +228,7 @@ can only be a single optional parameter per handle, and it must be the last para
 
 Here is an example of a command with a single default handle...
 ```java
-@Cmd(headers = { "example", "ex" }, description = "An example command")
+@Cmd(handles = { "example", "ex" }, description = "An example command")
 public final class ExampleCommand extends Command {
     
     @Sub(arguments = { "arg1", "arg2" }, description = "An example command handle")
@@ -253,15 +253,15 @@ The syntax would be as follows
 ```
 A command with multiple handles may look like...
 ```java
-@Cmd(headers = { "example", "ex" }, description = "An example command")
+@Cmd(handles = { "example", "ex" }, description = "An example command")
 public final class ExampleCommand extends Command {
     
-    @Sub(headers = { "add" }, arguments = { "element" }, description = "Adds an element")
+    @Sub(handles = { "add" }, arguments = { "element" }, description = "Adds an element")
     private void add(ExecutionContext context, String elementName) {
         // Add the element
     }
     
-    @Sub(headers = { "remove" }, arguments = { "element" }, description = "Removes an element")
+    @Sub(handles = { "remove" }, arguments = { "element" }, description = "Removes an element")
     private void remove(ExecutionContext context, String elementName) {
         // Remove the element
     }

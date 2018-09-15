@@ -42,11 +42,11 @@ public interface ICommand extends Describable, Helper {
     void execute(ExecutionContext context, String[] arguments) throws CommandException;
 
     /**
-     * Returns the array of possible command "headers"
+     * Returns the array of possible command handles
      * that can be used to execute this command. At least
      * one must be supplied, if not, then a
      *
-     * @return The list of possible command headers
+     * @return The list of possible command handles
      */
-    String[] getHeaders();
+    String[] getHandles();
 }

@@ -32,13 +32,13 @@ import java.lang.annotation.Target;
 public @interface Cmd {
 
     /**
-     * Provides the command class with the headers
+     * Provides the command class with the handles
      *
-     * @see ICommand#getHeaders()
+     * @see ICommand#getHandles()
      *
-     * @return Command headers
+     * @return Command handles
      */
-    String[] headers();
+    String[] handles();
 
     /**
      * Provides the command class with the description

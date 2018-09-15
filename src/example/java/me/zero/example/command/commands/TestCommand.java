@@ -29,7 +29,7 @@ import java.util.Optional;
  * @author Brady
  * @since 5/31/2017 6:18 PM
  */
-@Cmd(headers = { "test", "example"}, description = "Test Command")
+@Cmd(handles = { "test", "example"}, description = "Test Command")
 public final class TestCommand extends Command {
 
     /**
