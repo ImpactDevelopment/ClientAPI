@@ -18,13 +18,13 @@ package clientapi.load.mixin;
 
 import clientapi.Client;
 import clientapi.ClientAPI;
+import clientapi.config.ClientConfiguration;
+import clientapi.config.JsonConfiguration;
 import clientapi.event.defaults.game.core.*;
 import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
 import clientapi.event.handle.ClientHandler;
 import clientapi.load.ClientInitException;
-import clientapi.config.ClientConfiguration;
-import clientapi.config.JsonConfiguration;
 import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.MouseKeyTracker;
 import clientapi.util.render.gl.GLUtils;

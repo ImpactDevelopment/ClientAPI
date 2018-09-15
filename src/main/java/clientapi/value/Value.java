@@ -17,7 +17,6 @@
 package clientapi.value;
 
 import clientapi.util.interfaces.Mutable;
-import clientapi.util.interfaces.impl.MergedMutable;
 import clientapi.util.interfaces.impl.MutableField;
 import clientapi.value.holder.ValueAccessor;
 import me.zero.alpine.type.EventState;
