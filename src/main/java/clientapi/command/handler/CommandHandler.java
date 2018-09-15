@@ -23,6 +23,7 @@ import clientapi.command.exception.CommandException;
 import clientapi.command.exception.UnknownCommandException;
 import clientapi.command.exception.handler.ExceptionHandler;
 import clientapi.command.executor.CommandExecutor;
+import clientapi.command.executor.ExecutionContext;
 import clientapi.command.executor.parser.ArgumentParser;
 import clientapi.event.defaults.game.core.KeyEvent;
 import clientapi.event.defaults.internal.CommandExecutionEvent;
@@ -88,22 +89,21 @@ public final class CommandHandler implements MinecraftAccessible {
         ClientAPI.EVENT_BUS.subscribe(this);
     }
 
-    @EventHandler
-    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
-        // Check if opening chat with the prefix is supported
-        if (!openChat || prefix == null || mc.world == null)
-            return;
-
-        // Ensure the prefix is a single character
-        if (prefix.length() == 1 && prefix.charAt(0) == event.getCharacter())
-            mc.displayGuiScreen(new GuiChat(prefix));
-    });
-
-    @EventHandler
-    private final Listener<CommandExecutionEvent> commandExecutionListener = new Listener<>(event -> {
+    /**
+     * Executes the specified command, and if an error occurs, passes it to the registered handlers.
+     *
+     * @param command The command to execute
+     * @param context The execution context
+     * @param arguments The raw command arguments
+     */
+    public final void execute(Command command, ExecutionContext context, String[] arguments) {
         try {
-            if (event.getCommand() != null) {
-                executor.execute(event.getCommand(), event.getContext(), event.getArguments());
+            if (command != null) {
+                CommandExecutionEvent event = new CommandExecutionEvent(command, context, arguments);
+                ClientAPI.EVENT_BUS.post(event);
+                if (!event.isCancelled())
+                    executor.execute(command, context, arguments);
+
                 return;
             }
             throw new UnknownCommandException();
@@ -116,6 +116,17 @@ public final class CommandHandler implements MinecraftAccessible {
 
             handlers.forEach(handler -> handler.handle(e));
         }
+    }
+
+    @EventHandler
+    private final Listener<KeyEvent> keyEventListener = new Listener<>(event -> {
+        // Check if opening chat with the prefix is supported
+        if (!openChat || prefix == null || mc.world == null)
+            return;
+
+        // Ensure the prefix is a single character
+        if (prefix.length() == 1 && prefix.charAt(0) == event.getCharacter())
+            mc.displayGuiScreen(new GuiChat(prefix));
     });
 
     /**
