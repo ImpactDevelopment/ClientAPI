@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.network;
 
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.multiplayer.ServerData;
 

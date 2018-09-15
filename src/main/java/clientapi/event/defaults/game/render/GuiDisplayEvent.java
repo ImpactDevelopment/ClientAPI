@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.render;
 
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.gui.GuiScreen;
 
 /**

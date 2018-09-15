@@ -20,7 +20,7 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.EntityDeathEvent;
 import clientapi.event.defaults.game.entity.EntityJumpEvent;
 import clientapi.event.defaults.game.entity.EntityTravelEvent;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;

@@ -16,8 +16,8 @@
 
 package clientapi.event.defaults.game.entity;
 
-import me.zero.alpine.type.Cancellable;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.Cancellable;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
 

@@ -17,7 +17,7 @@
 package clientapi.event.defaults.internal;
 
 import clientapi.module.Module;
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.Cancellable;
 
 /**
  * Called when a Module's state is changed. If the

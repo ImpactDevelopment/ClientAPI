@@ -16,7 +16,7 @@
 
 package clientapi.event.task;
 
-import me.zero.alpine.type.EventPriority;
+import me.zero.alpine.event.EventPriority;
 
 /**
  * A duplicate of {@link EventPriority}. Used to define the execution

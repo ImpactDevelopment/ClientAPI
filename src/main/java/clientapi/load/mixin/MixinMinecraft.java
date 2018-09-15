@@ -28,7 +28,7 @@ import clientapi.load.ClientInitException;
 import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.MouseKeyTracker;
 import clientapi.util.render.gl.GLUtils;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;

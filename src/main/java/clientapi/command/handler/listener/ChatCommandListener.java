@@ -26,6 +26,7 @@ import clientapi.event.defaults.game.misc.ChatEvent;
 import clientapi.util.ClientAPIUtils;
 import clientapi.util.interfaces.MinecraftAccessible;
 import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listenable;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.util.text.TextComponentString;
 
@@ -38,7 +39,7 @@ import java.util.Optional;
  * @author Brady
  * @since 6/11/2017
  */
-public final class ChatCommandListener extends CommandListener implements MinecraftAccessible {
+public final class ChatCommandListener extends CommandListener implements Listenable, MinecraftAccessible {
 
     public ChatCommandListener(CommandHandler handler) {
         super(handler);

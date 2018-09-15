@@ -18,7 +18,7 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import me.zero.alpine.type.EventState;
+import me.zero.alpine.event.EventState;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;

@@ -17,6 +17,7 @@
 package clientapi.module;
 
 import clientapi.util.interfaces.*;
+import me.zero.alpine.listener.Listenable;
 
 /**
  * Base for Module
@@ -26,7 +27,7 @@ import clientapi.util.interfaces.*;
  * @author Brady
  * @since 1/21/2017
  */
-interface IModule extends Nameable, Describable, MinecraftAccessible, Toggleable, Bindable {
+interface IModule extends Listenable, Nameable, Describable, MinecraftAccessible, Toggleable, Bindable {
 
     /**
      * @return The type of the Module
