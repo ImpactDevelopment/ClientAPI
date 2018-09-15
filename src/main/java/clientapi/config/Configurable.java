@@ -16,7 +16,6 @@
 
 package clientapi.config;
 
-import clientapi.util.interfaces.Helper;
 import clientapi.util.interfaces.Initializable;
 
 /**
@@ -29,7 +28,7 @@ import clientapi.util.interfaces.Initializable;
  * @author Brady
  * @since 9/1/2017
  */
-public abstract class Configurable<T extends JsonConfiguration> implements Initializable, Helper {
+public abstract class Configurable<T extends JsonConfiguration> implements Initializable {
 
     /**
      * The configuration that was provided in the instantiation of this object

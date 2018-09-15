@@ -20,6 +20,7 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.entity.PlayerDeathEvent;
 import clientapi.event.defaults.game.misc.ChatEvent;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,12 +29,11 @@ import net.minecraft.network.play.server.SPacketCombatEvent;
 import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static clientapi.util.interfaces.Helper.mc;
 
 /**
  * @author Brady
@@ -41,6 +41,8 @@ import static clientapi.util.interfaces.Helper.mc;
  */
 @Mixin(NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {
+
+    @Shadow private WorldClient world;
 
     @Inject(
             method = "handleCombatEvent",
@@ -50,12 +52,12 @@ public class MixinNetHandlerPlayClient {
             )
     )
     private void handleCombatEvent(SPacketCombatEvent event, CallbackInfo ci) {
-        if (mc.world == null)
+        if (this.world == null)
             return;
 
         if (event.eventType == SPacketCombatEvent.Event.ENTITY_DIED) {
-            Entity died = mc.world.getEntityByID(event.playerId);
-            Entity killer = mc.world.getEntityByID(event.entityId);
+            Entity died = this.world.getEntityByID(event.playerId);
+            Entity killer = this.world.getEntityByID(event.entityId);
 
             // The entity that died should always be a player, this is just a safety measure.
             // The killer isn't checked because in some cases it can be null.

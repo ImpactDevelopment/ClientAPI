@@ -17,7 +17,7 @@
 package clientapi.util.render;
 
 import clientapi.util.Timer;
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.math.MathUtils;
 import net.minecraft.util.text.TextFormatting;
 
@@ -29,7 +29,7 @@ import java.awt.*;
  * @author Brady
  * @since 4/4/2017
  */
-public final class Colors implements Helper {
+public final class Colors implements MinecraftAccessible {
 
     private Colors() {}
 

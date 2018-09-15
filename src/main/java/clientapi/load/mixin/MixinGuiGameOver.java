@@ -18,9 +18,9 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import clientapi.util.interfaces.Helper;
 import me.zero.alpine.type.EventState;
 import net.minecraft.client.gui.GuiGameOver;
+import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 9/7/2017
  */
 @Mixin(GuiGameOver.class)
-public class MixinGuiGameOver {
+public class MixinGuiGameOver extends GuiScreen {
 
     @Inject(
             method = "confirmClicked",
@@ -41,7 +41,7 @@ public class MixinGuiGameOver {
             )
     )
     private void postLoadWorld(CallbackInfo ci) {
-        if (Helper.mc.getCurrentServerData() != null)
-            ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, Helper.mc.getCurrentServerData()));
+        if (this.mc.getCurrentServerData() != null)
+            ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, false, this.mc.getCurrentServerData()));
     }
 }

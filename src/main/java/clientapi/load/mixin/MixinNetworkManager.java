@@ -20,10 +20,10 @@ import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.PacketEvent;
 import clientapi.event.defaults.game.network.ServerEvent;
 import clientapi.load.mixin.extension.INetworkManager;
-import clientapi.util.interfaces.Helper;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import me.zero.alpine.type.EventState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.EnumPacketDirection;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetworkManager;
@@ -119,7 +119,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
             )
     )
     private void onDisconnect(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.POST, true, Minecraft.getMinecraft().getCurrentServerData()));
     }
 
     @Inject(

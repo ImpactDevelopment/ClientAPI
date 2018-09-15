@@ -18,10 +18,12 @@ package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
 import clientapi.event.defaults.game.network.ServerEvent;
-import clientapi.util.interfaces.Helper;
 import me.zero.alpine.type.EventState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -33,11 +35,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldClient.class)
 public class MixinWorldClient {
 
+    @Shadow @Final private Minecraft mc;
+
     @Inject(
             method = "sendQuittingDisconnectingPacket",
             at = @At("HEAD")
     )
     private void preSendQuittingDisconnectingPacket(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, false, Helper.mc.getCurrentServerData()));
+        ClientAPI.EVENT_BUS.post(new ServerEvent.Disconnect(EventState.PRE, false, this.mc.getCurrentServerData()));
     }
 }

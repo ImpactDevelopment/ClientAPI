@@ -16,7 +16,7 @@
 
 package clientapi.util.entity;
 
-import clientapi.util.interfaces.Helper;
+import clientapi.util.interfaces.MinecraftAccessible;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +35,7 @@ import java.util.function.Supplier;
  * @author Brady
  * @since 11/9/2017
  */
-public final class EntityFilters implements Helper {
+public final class EntityFilters implements MinecraftAccessible {
 
     private EntityFilters() {}
 

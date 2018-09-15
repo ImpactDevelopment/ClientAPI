@@ -18,7 +18,6 @@ package clientapi.gui.widget;
 
 import clientapi.gui.widget.data.WidgetAlignment;
 import clientapi.gui.widget.data.WidgetPos;
-import clientapi.util.interfaces.Helper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -28,7 +27,7 @@ import net.minecraft.client.gui.ScaledResolution;
  * @author Brady
  * @since 5/28/2017
  */
-public interface Widget extends Helper {
+public interface Widget {
 
     /**
      * Renders this widget on a screen with the specified
