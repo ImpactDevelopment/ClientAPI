@@ -190,7 +190,7 @@ public final class Values {
 
     /**
      * Registers a global value change listener. A global change listener
-     * will apply to every value that has been discovered through {@link Values#discover(Object).
+     * will apply to every value that has been discovered through {@link Values#discover(Object)}.
      *
      * @param listener The change listener
      */
@@ -200,7 +200,7 @@ public final class Values {
 
     /**
      * Registers a global value change listener. A global change listener
-     * will apply to every value that has been discovered through {@link Values#discover(Object).
+     * will apply to every value that has been discovered through {@link Values#discover(Object)}.
      *
      * @param state The state of the change, either before or after it happened
      * @param listener The change listener
