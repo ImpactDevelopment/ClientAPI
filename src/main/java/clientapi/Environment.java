@@ -43,7 +43,7 @@ public final class Environment {
      * @return Whether or not LiteLoader is detected
      */
     public static boolean isRunningLiteloader() {
-        return isClassLoaded("com.mumfrey.liteloader.LiteMod");
+        return isClassLoaded("com.mumfrey.liteloader.core.LiteLoader");
     }
 
     /**
