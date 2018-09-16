@@ -50,6 +50,25 @@ public interface IValue<T> extends Nameable, Describable, Identifiable, IValueHo
     void setValue(T value);
 
     /**
+     * Adds all of the specified change listeners, defaulting to EventState.PRE
+     *
+     * @param listeners The change listeners
+     */
+    default void addAllChangeListeners(Iterable<ValueChangeListener<T>> listeners) {
+        this.addAllChangeListeners(EventState.PRE, listeners);
+    }
+
+    /**
+     * Adds all of the specified change listeners
+     *
+     * @param state The state of the change, either before or after it happened
+     * @param listeners The change listeners
+     */
+    default void addAllChangeListeners(EventState state, Iterable<ValueChangeListener<T>> listeners) {
+        listeners.forEach(listener -> this.addChangeListener(state, listener));
+    }
+
+    /**
      * Adds a change listener to this value, defaulting to EventState.PRE
      *
      * @param listener The change listener

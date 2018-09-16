@@ -24,13 +24,11 @@ import clientapi.value.exception.ValueException;
 import clientapi.value.type.resolve.ResolverData;
 import clientapi.value.type.resolve.impl.*;
 import clientapi.value.type.resolve.impl.number.*;
+import me.zero.alpine.event.EventState;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +50,11 @@ public final class Values {
      */
     private static final Map<Object, List<IValue>> DISCOVER_CACHE = new HashMap<>();
 
+    /**
+     * List of the change listeners that apply to every value
+     */
+    private static final Map<EventState, List<ValueChangeListener<Object>>> GLOBAL_CHANGE_LISTENERS = new HashMap<>();
+
     private Values() {}
 
     static {
@@ -69,6 +72,10 @@ public final class Values {
         define(LongValue.class,    ResolverData.create(new LongTypeResolver(),    Long.class,    Long.TYPE));
         define(FloatValue.class,   ResolverData.create(new FloatTypeResolver(),   Float.class,   Float.TYPE));
         define(DoubleValue.class,  ResolverData.create(new DoubleTypeResolver(),  Double.class,  Double.TYPE));
+
+        for (EventState state : EventState.values()) {
+            GLOBAL_CHANGE_LISTENERS.put(state, new ArrayList<>());
+        }
     }
 
     /**
@@ -87,6 +94,10 @@ public final class Values {
 
             // Setup the parent values
             values.forEach(value -> {
+
+                // noinspection unchecked
+                GLOBAL_CHANGE_LISTENERS.forEach((state, listeners) -> value.addAllChangeListeners(state, listeners));
+
                 IValue parent;
                 // Check if the parent target isn't null and if there
                 // is a parent target, the corresponding target isn't null
@@ -175,5 +186,28 @@ public final class Values {
             throw new ValueException("Resolver for type annotation already exists");
 
         RESOLVERS.put(type, data);
+    }
+
+    /**
+     * Registers a global value change listener. A global change listener
+     * will apply to every value that has been discovered through {@link Values#discover(Object).
+     *
+     * @param listener The change listener
+     */
+    public static void addGlobalChangeListener(ValueChangeListener<Object> listener) {
+        addGlobalChangeListener(EventState.PRE, listener);
+    }
+
+    /**
+     * Registers a global value change listener. A global change listener
+     * will apply to every value that has been discovered through {@link Values#discover(Object).
+     *
+     * @param state The state of the change, either before or after it happened
+     * @param listener The change listener
+     */
+    public static void addGlobalChangeListener(EventState state, ValueChangeListener<Object> listener) {
+        GLOBAL_CHANGE_LISTENERS.get(state).add(listener);
+        // noinspection unchecked
+        DISCOVER_CACHE.values().stream().flatMap(Collection::stream).forEach(value -> value.addChangeListener(state, listener));
     }
 }
