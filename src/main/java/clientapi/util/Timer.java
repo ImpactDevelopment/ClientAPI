@@ -41,7 +41,7 @@ public final class Timer {
     }
 
     public final boolean delay(AbstractNumberType milliseconds) {
-        return delay(milliseconds.getValue().intValue());
+        return delay(milliseconds.getValue().longValue());
     }
 
     public final boolean delay(float milliSec) {
@@ -49,7 +49,9 @@ public final class Timer {
     }
 
     public final boolean speed(float speed) {
-        speed = Math.max(0, speed);
+        if (speed <= 0)
+            throw new IllegalArgumentException("Speed must have a value greater than 0");
+
         return getJVMTime() >= prevMS + (long) (1000 / speed);
     }
 
