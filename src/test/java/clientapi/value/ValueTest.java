@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+package clientapi.value;
+
 import clientapi.util.annotation.Label;
-import clientapi.value.IValue;
 import clientapi.value.annotation.BooleanValue;
 import clientapi.value.annotation.number.IntegerValue;
 import clientapi.value.holder.ValueHolder;
