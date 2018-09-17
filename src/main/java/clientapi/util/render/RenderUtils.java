@@ -20,11 +20,9 @@ import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.gl.GLUtils;
 import clientapi.util.render.gl.glenum.GLClientState;
-import clientapi.util.render.gl.glenum.GLenum;
 import net.minecraft.client.renderer.GlStateManager;
 import pw.knx.feather.tessellate.Tessellator;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -47,7 +45,7 @@ public final class RenderUtils {
     /**
      * Stores ClientState Gl Caps when setting up
      */
-    private static final Stack<Integer[]> clientStateStack = new Stack<>();
+    private static final Stack<GLClientState[]> clientStateStack = new Stack<>();
 
     /**
      * Called before rendering. Enables blending,
@@ -80,18 +78,17 @@ public final class RenderUtils {
      * @param states The client states to enable
      */
     public static void pushClientState(GLClientState... states) {
-        Integer[] caps = Arrays.stream(states).map(GLenum::getCap).toArray(Integer[]::new);
-        clientStateStack.push(caps);
-        for (int cap : caps)
-            GlStateManager.glEnableClientState(cap);
+        clientStateStack.push(states);
+        for (GLClientState state : states)
+            GlStateManager.glEnableClientState(state.getCap());
     }
 
     /**
      * Pops the client state stack, disabling whatever was on it.
      */
     public static void popClientState() {
-        for (int cap : clientStateStack.pop())
-            GlStateManager.glDisableClientState(cap);
+        for (GLClientState state : clientStateStack.pop())
+            GlStateManager.glDisableClientState(state.getCap());
     }
 
     /**
