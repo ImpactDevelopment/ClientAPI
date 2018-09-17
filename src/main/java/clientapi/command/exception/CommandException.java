@@ -24,7 +24,7 @@ import clientapi.command.Command;
  * @author Brady
  * @since 5/30/2017
  */
-public class CommandException extends Exception {
+public class CommandException extends RuntimeException {
 
     /**
      * Command that encountered an exception
