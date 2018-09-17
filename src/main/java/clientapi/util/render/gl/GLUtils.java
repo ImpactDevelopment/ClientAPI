@@ -47,10 +47,7 @@ public final class GLUtils {
     private static final FloatBuffer TO_SCREEN_BUFFER = BufferUtils.createFloatBuffer(3);
     private static final FloatBuffer TO_WORLD_BUFFER = BufferUtils.createFloatBuffer(3);
 
-    // Calls clinit
-    public static void init() {}
-
-    static {
+    public static void init() {
         ClientAPI.EVENT_BUS.subscribe(new Listener<RenderWorldEvent>(event -> {
             GlStateManager.getFloat(GL_MODELVIEW_MATRIX, (FloatBuffer) MODELVIEW.clear());
             GlStateManager.getFloat(GL_PROJECTION_MATRIX, (FloatBuffer) PROJECTION.clear());
