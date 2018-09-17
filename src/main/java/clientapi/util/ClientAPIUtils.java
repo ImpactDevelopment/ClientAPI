@@ -71,6 +71,21 @@ public final class ClientAPIUtils {
     }
 
     /**
+     * Checks if a generic array contains any only members.
+     *
+     * @param members The Members to be Checked
+     * @param <T> The array type
+     * @return Whether or not the array contained only null members
+     */
+    @SafeVarargs
+    public static <T> boolean containsOnlyNull(T... members) {
+        for (T member : members)
+            if (member != null)
+                return false;
+        return true;
+    }
+
+    /**
      * Checks if a string array contains the specified
      * string, non case-sensitive
      *
@@ -135,15 +150,17 @@ public final class ClientAPIUtils {
      */
     @SafeVarargs
     public static <T> boolean matchingMembers(T... objects) {
+        if (objects.length == 0)
+            return true;
+
+        if (containsNull(objects))
+            return containsOnlyNull(objects);
+
         T baseline = null;
-        boolean set = false;
-        for (T object : objects) {
-            if (!set)
-                baseline = object;
-            if (object != baseline)
+        for (T object : objects)
+            if (object != (baseline == null ? baseline = object : baseline))
                 return false;
-            set = true;
-        }
+
         return true;
     }
 
