@@ -43,7 +43,7 @@ public final class RenderUtils {
     public static final Tessellator tessellator = Tessellator.createExpanding(4, 1, 2);
 
     /**
-     * Stores ClientState Gl Caps when setting up
+     * The current OpenGL Client State stack
      */
     private static final Stack<GLClientState[]> clientStateStack = new Stack<>();
 
