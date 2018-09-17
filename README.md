@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/ImpactDevelopment/ClientAPI.svg?branch=master)](https://travis-ci.org/ImpactDevelopment/ClientAPI)
 [![License](https://img.shields.io/github/license/ImpactDevelopment/ClientAPI.svg)](LICENSE)
 [![Release](https://img.shields.io/github/release/ImpactDevelopment/ClientAPI.svg)](https://github.com/ImpactDevelopment/ClientAPI/releases)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b10fe09654754df8843fe796b835e38f)](https://app.codacy.com/app/ImpactDevelopment/ClientAPI?utm_source=github.com&utm_medium=referral&utm_content=ImpactDevelopment/ClientAPI&utm_campaign=Badge_Grade_Dashboard)
 
 # ClientAPI
 ClientAPI is a modding API/Framework for Minecraft just like Forge, Sponge and Liteloader, it
