@@ -158,7 +158,7 @@ public final class ClientAPIUtils {
 
         T baseline = null;
         for (T object : objects)
-            if (object != (baseline == null ? baseline = object : baseline))
+            if (!object.equals(baseline == null ? baseline = object : baseline))
                 return false;
 
         return true;
