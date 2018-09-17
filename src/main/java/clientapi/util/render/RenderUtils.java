@@ -20,12 +20,12 @@ import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
 import clientapi.util.render.gl.GLUtils;
 import clientapi.util.render.gl.glenum.GLClientState;
+import clientapi.util.render.gl.glenum.GLenum;
 import net.minecraft.client.renderer.GlStateManager;
 import pw.knx.feather.tessellate.Tessellator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.Arrays;
+import java.util.Stack;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -47,17 +47,7 @@ public final class RenderUtils {
     /**
      * Stores ClientState Gl Caps when setting up
      */
-    private static final List<Integer> csBuffer = new ArrayList<>();
-
-    /**
-     * Method reference to {@link GlStateManager#glEnableClientState(int)}
-     */
-    private static final Consumer<Integer> ENABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
-
-    /**
-     * Method reference to {@link GlStateManager#glDisableClientState(int)}
-     */
-    private static final Consumer<Integer> DISABLE_CLIENT_STATE = GlStateManager::glEnableClientState;
+    private static final Stack<Integer[]> clientStateStack = new Stack<>();
 
     /**
      * Called before rendering. Enables blending,
@@ -85,18 +75,23 @@ public final class RenderUtils {
     }
 
     /**
-     * Enables/Disables the specified client state cap.
+     * Pushes a set of client states onto the stack, and enabled them.
      *
-     * @param state The client state to enable/disable
-     * @param enabled The new enabled state of the specified client state cap
+     * @param states The client states to enable
      */
-    public static void setupClientState(GLClientState state, boolean enabled) {
-        csBuffer.clear();
-        if (state.ordinal() > 0)
-            csBuffer.add(state.getCap());
+    public static void pushClientState(GLClientState... states) {
+        Integer[] caps = Arrays.stream(states).map(GLenum::getCap).toArray(Integer[]::new);
+        clientStateStack.push(caps);
+        for (int cap : caps)
+            GlStateManager.glEnableClientState(cap);
+    }
 
-        csBuffer.add(GL_VERTEX_ARRAY);
-        csBuffer.forEach(enabled ? ENABLE_CLIENT_STATE : DISABLE_CLIENT_STATE);
+    /**
+     * Pops the client state stack, disabling whatever was on it.
+     */
+    public static void popClientState() {
+        for (int cap : clientStateStack.pop())
+            GlStateManager.glDisableClientState(cap);
     }
 
     /**
@@ -149,14 +144,14 @@ public final class RenderUtils {
         GlStateManager.glLineWidth(width);
 
         setupRender(true);
-        setupClientState(GLClientState.VERTEX, true);
+        pushClientState(GLClientState.VERTEX);
 
         tessellator
                 .addVertex(x, y, z)
                 .addVertex(x1, y1, z1)
                 .draw(GL_LINE_STRIP);
 
-        setupClientState(GLClientState.VERTEX, false);
+        popClientState();
         setupRender(false);
     }
 
@@ -169,7 +164,7 @@ public final class RenderUtils {
      * @param y2 Bottom right corner Y of the rectangle
      */
     public static void drawFlippedTexturedRect(float x1, float y1, float x2, float y2) {
-        setupClientState(GLClientState.TEXTURE, true);
+        pushClientState(GLClientState.VERTEX, GLClientState.TEXTURE);
 
         tessellator
                 .setTexture(0, 0).addVertex(x1, y2, 0)
@@ -178,7 +173,7 @@ public final class RenderUtils {
                 .setTexture(0, 1).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
-        setupClientState(GLClientState.TEXTURE, false);
+        popClientState();
     }
 
     /**
@@ -190,7 +185,7 @@ public final class RenderUtils {
      * @param y2 Bottom right corner Y of the rectangle
      */
     public static void drawReflectedTexturedRect(float x1, float y1, float x2, float y2) {
-        setupClientState(GLClientState.TEXTURE, true);
+        pushClientState(GLClientState.VERTEX, GLClientState.TEXTURE);
 
         tessellator
                 .setTexture(1, 0).addVertex(x1, y2, 0)
@@ -199,7 +194,7 @@ public final class RenderUtils {
                 .setTexture(1, 1).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
-        setupClientState(GLClientState.TEXTURE, false);
+        popClientState();
     }
 
     /**
@@ -227,7 +222,7 @@ public final class RenderUtils {
         }
 
         setupRender(true);
-        setupClientState(GLClientState.COLOR, true);
+        pushClientState(GLClientState.VERTEX, GLClientState.COLOR);
 
         tessellator
                 .setColor(color).addVertex(x1, y2, 0)
@@ -236,7 +231,7 @@ public final class RenderUtils {
                 .setColor(color).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
-        setupClientState(GLClientState.COLOR, false);
+        popClientState();
         setupRender(false);
     }
 
@@ -343,7 +338,7 @@ public final class RenderUtils {
         setupRender(true);
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.shadeModel(GL_FLAT);
-        setupClientState(GLClientState.COLOR, true);
+        pushClientState(GLClientState.VERTEX, GLClientState.COLOR);
 
         tessellator
                 .setColor(c1).addVertex(x1, y2, 0)
@@ -352,7 +347,7 @@ public final class RenderUtils {
                 .setColor(c4).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
-        setupClientState(GLClientState.COLOR, false);
+        popClientState();
         setupRender(false);
     }
 
