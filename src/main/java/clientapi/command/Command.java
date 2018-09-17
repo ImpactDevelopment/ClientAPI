@@ -55,7 +55,7 @@ public class Command implements ICommand {
 
     public Command() {
         if (!this.getClass().isAnnotationPresent(Cmd.class))
-            throw new RuntimeException(new CommandInitException(this, "@Cmd annotation must be present if required parameters aren't passed through constructor"));
+            throw new CommandInitException(this, "@Cmd annotation must be present if required parameters aren't passed through constructor");
 
         Cmd data = this.getClass().getAnnotation(Cmd.class);
         setup(data.handles(), data.description());
@@ -79,9 +79,9 @@ public class Command implements ICommand {
             for (int i = 0; i < parameters; i++) {
                 if (method.getParameterTypes()[i].isAssignableFrom(Optional.class)) {
                     if (i != parameters - 1)
-                        throw new RuntimeException(new CommandInitException(this, "Optionals must be defined as the last parameter"));
+                        throw new CommandInitException(this, "Optionals must be defined as the last parameter");
                     if (++optionals > 1)
-                        throw new RuntimeException(new CommandInitException(this, "More than one optional parameter is not supported"));
+                        throw new CommandInitException(this, "More than one optional parameter is not supported");
                 }
             }
 
