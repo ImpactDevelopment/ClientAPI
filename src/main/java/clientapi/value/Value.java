@@ -73,16 +73,6 @@ public class Value<T> implements IValue<T> {
     private final String description;
 
     /**
-     * The Object that the field representing the Value is inside
-     */
-    private final Object object;
-
-    /**
-     * The Field representing the Value
-     */
-    private final Field field;
-
-    /**
      * A {@link Mutable} used to set/get this value.
      */
     private final Mutable<Object> mutable;
@@ -93,10 +83,6 @@ public class Value<T> implements IValue<T> {
         this.parent = parent != null && parent.length() > 0 ? parent : null;
         this.id = id;
         this.description = description;
-
-        // Field reference
-        this.object = object;
-        this.field = field;
 
         this.mutable = object instanceof ValueAccessor
                 ? ((ValueAccessor) object).getFieldMutable(field.getName())
