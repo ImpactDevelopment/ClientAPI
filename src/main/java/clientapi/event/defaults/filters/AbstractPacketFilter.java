@@ -19,26 +19,23 @@ package clientapi.event.defaults.filters;
 import clientapi.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.Packet;
 
+import java.util.function.Predicate;
+
 /**
- * Basic filter for packets. Types are valid if their
- * class is assignable from one of the permitted types.
+ * An abstract filter for Packet Events that must have its predicate method implemented.
  *
  * @author Brady
- * @since 3/2/2017
+ * @since 9/17/2018
  */
-public final class PacketFilter<T extends PacketEvent> extends AbstractPacketFilter<T> {
+public abstract class AbstractPacketFilter<T extends PacketEvent> implements Predicate<T> {
+
+    /**
+     * Packets allowed by this filter
+     */
+    protected final Class<? extends Packet<?>>[] packets;
 
     @SafeVarargs
-    public PacketFilter(Class<? extends Packet<?>>... packets) {
-        super(packets);
-    }
-
-    @Override
-    public boolean test(T packetEvent) {
-        for (Class<? extends Packet<?>> packet : packets)
-            if (packet.isAssignableFrom(packetEvent.getPacket().getClass()))
-                return true;
-
-        return false;
+    public AbstractPacketFilter(Class<? extends Packet<?>>... packets) {
+        this.packets = packets;
     }
 }

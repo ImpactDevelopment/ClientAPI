@@ -19,8 +19,6 @@ package clientapi.event.defaults.filters;
 import clientapi.event.defaults.game.network.PacketEvent;
 import net.minecraft.network.Packet;
 
-import java.util.function.Predicate;
-
 /**
  * Stricter packet filter. Types are valid if their
  * class is the same as one of the permitted types.
@@ -28,16 +26,11 @@ import java.util.function.Predicate;
  * @author Brady
  * @since 9/12/2017
  */
-public final class StrictPacketFilter<T extends PacketEvent> implements Predicate<T> {
-
-    /**
-     * Packets allowed by this filter
-     */
-    private final Class<? extends Packet<?>>[] packets;
+public final class StrictPacketFilter<T extends PacketEvent> extends AbstractPacketFilter<T> {
 
     @SafeVarargs
     public StrictPacketFilter(Class<? extends Packet<?>>... packets) {
-        this.packets = packets;
+        super(packets);
     }
 
     @Override
