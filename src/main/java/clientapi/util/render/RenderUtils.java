@@ -296,10 +296,11 @@ public final class RenderUtils {
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
      * @param color The colors for each of the rectangle verticies clockwise
+     * @throws IllegalArgumentException if the length of the color array is equal to 0
      */
     public static void rectangleGradient(float x1, float y1, float x2, float y2, int[] color) {
         if (color.length == 0)
-            throw new RuntimeException("At least one set of colors should be supplied");
+            throw new IllegalArgumentException("At least one set of colors should be supplied");
 
         int c1, c2, c3, c4;
 
