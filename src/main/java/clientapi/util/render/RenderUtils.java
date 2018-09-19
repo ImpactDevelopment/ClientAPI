@@ -18,9 +18,9 @@ package clientapi.util.render;
 
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-import clientapi.util.render.gl.GLUtils;
 import clientapi.util.render.gl.glenum.GLClientState;
 import net.minecraft.client.renderer.GlStateManager;
+import pw.knx.feather.structures.Color;
 import pw.knx.feather.tessellate.Tessellator;
 
 import java.util.Stack;
@@ -201,11 +201,22 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param color The color of the rectangle
+     * @param color The color of the rectangle, in ARGB format
+     */
+    public static void rectangle(float x1, float y1, float x2, float y2, Color color) {
+        rectangle(x1, y1, x2, y2, color.getHex(Color.HexFormat.ARGB));
+    }
+
+    /**
+     * Renders a rectangle at the specified position with the specified color.
+     *
+     * @param x1 Top left corner X of the rectangle
+     * @param y1 Top left corner Y of the rectangle
+     * @param x2 Bottom right corner X of the rectangle
+     * @param y2 Bottom right corner Y of the rectangle
+     * @param color The color of the rectangle, in ARGB format
      */
     public static void rectangle(float x1, float y1, float x2, float y2, int color) {
-        GLUtils.glColor(color);
-
         if (x1 > x2) {
             float temp = x1;
             x1 = x2;
@@ -222,10 +233,10 @@ public final class RenderUtils {
         pushClientState(GLClientState.VERTEX, GLClientState.COLOR);
 
         tessellator
-                .setColor(color).addVertex(x1, y2, 0)
-                .setColor(color).addVertex(x2, y2, 0)
-                .setColor(color).addVertex(x2, y1, 0)
-                .setColor(color).addVertex(x1, y1, 0)
+                .setColor(ARGBtoABGR(color)).addVertex(x1, y2, 0)
+                .setColor(ARGBtoABGR(color)).addVertex(x2, y2, 0)
+                .setColor(ARGBtoABGR(color)).addVertex(x2, y1, 0)
+                .setColor(ARGBtoABGR(color)).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
         popClientState();
@@ -242,8 +253,8 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param borderColor The outer color of the rectangle
-     * @param internalColor The inner color of the rectangle
+     * @param borderColor The outer color of the rectangle, in ARGB format
+     * @param internalColor The inner color of the rectangle, in ARGB format
      */
     public static void rectangleBordered(float x1, float y1, float x2, float y2, int borderColor, int internalColor) {
         rectangleBordered(x1, y1, x2, y2, 0.5F, borderColor, internalColor);
@@ -260,8 +271,8 @@ public final class RenderUtils {
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
      * @param width The width of the border
-     * @param borderColor The outer color of the rectangle
-     * @param internalColor The inner color of the rectangle
+     * @param borderColor The outer color of the rectangle, in ARGB format
+     * @param internalColor The inner color of the rectangle, in ARGB format
      */
     public static void rectangleBordered(float x1, float y1, float x2, float y2, float width, int borderColor, int internalColor) {
         rectangle(x1 + width, y1 + width, x2 - width, y2 - width, internalColor);
@@ -279,8 +290,8 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param c1 The color at the top of the rectangle
-     * @param c2 The color at the bottom of the rectangle
+     * @param c1 The color at the top of the rectangle, in ARGB format
+     * @param c2 The color at the bottom of the rectangle, in ARGB format
      */
     public static void rectangleGradient(float x1, float y1, float x2, float y2, int c1, int c2) {
         rectangleGradient(x1, y1, x2, y2, new int[] { c1, c2 });
@@ -295,7 +306,7 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param color The colors for each of the rectangle verticies clockwise
+     * @param color The colors for each of the rectangle verticies clockwise, in ARGB format
      * @throws IllegalArgumentException if the length of the color array is equal to 0
      */
     public static void rectangleGradient(float x1, float y1, float x2, float y2, int[] color) {
@@ -339,10 +350,10 @@ public final class RenderUtils {
         pushClientState(GLClientState.VERTEX, GLClientState.COLOR);
 
         tessellator
-                .setColor(c1).addVertex(x1, y2, 0)
-                .setColor(c2).addVertex(x2, y2, 0)
-                .setColor(c3).addVertex(x2, y1, 0)
-                .setColor(c4).addVertex(x1, y1, 0)
+                .setColor(ARGBtoABGR(c1)).addVertex(x1, y2, 0)
+                .setColor(ARGBtoABGR(c2)).addVertex(x2, y2, 0)
+                .setColor(ARGBtoABGR(c3)).addVertex(x2, y1, 0)
+                .setColor(ARGBtoABGR(c4)).addVertex(x1, y1, 0)
                 .draw(GL_QUADS);
 
         popClientState();
@@ -358,9 +369,9 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param border The border color of the rectangle
-     * @param c1 The color at the top of the rectangle
-     * @param c2 The color at the bottom of the rectangle
+     * @param border The border color of the rectangle, in ARGB format
+     * @param c1 The color at the top of the rectangle, in ARGB format
+     * @param c2 The color at the bottom of the rectangle, in ARGB format
      */
     public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int border, int c1, int c2) {
         rectangleBorderedGradient(x1, y1, x2, y2, border, c1, c2, 0.5F);
@@ -375,9 +386,9 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param border The border color of the rectangle
-     * @param c1 The color at the top of the rectangle
-     * @param c2 The color at the bottom of the rectangle
+     * @param border The border color of the rectangle, in ARGB format
+     * @param c1 The color at the top of the rectangle, in ARGB format
+     * @param c2 The color at the bottom of the rectangle, in ARGB format
      * @param width The width of the border
      */
     public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int border, int c1, int c2, float width) {
@@ -395,7 +406,7 @@ public final class RenderUtils {
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
      * @param fill The fill vertex colors oriented clockwise
-     * @param border The border vertex colors oriented clockwise
+     * @param border The border vertex colors oriented clockwise, in ARGB format
      * @param width The width of the border
      */
     public static void rectangleBorderedGradient(float x1, float y1, float x2, float y2, int[] fill, int[] border, float width) {
@@ -412,7 +423,7 @@ public final class RenderUtils {
      * @param y1 Top left corner Y of the rectangle
      * @param x2 Bottom right corner X of the rectangle
      * @param y2 Bottom right corner Y of the rectangle
-     * @param color The vertex colors oriented clockwise
+     * @param color The vertex colors oriented clockwise, in ARGB format
      * @param width The width of the border
      */
     public static void rectangleOutlinedGradient(float x1, float y1, float x2, float y2, int[] color, float width) {
@@ -420,5 +431,15 @@ public final class RenderUtils {
         rectangleGradient(x1, y2 - width, x2, y2, color);
         rectangleGradient(x1, y1 + width, x1 + width, y2 - width, color);
         rectangleGradient(x2 - width, y1 + width, x2, y2 - width, color);
+    }
+
+    /**
+     * Converts the specified ARGB formatted color to the OpenGL preferred, ABGR format.
+     *
+     * @param color The input ARGB color
+     * @return The converted ABGR color
+     */
+    public static int ARGBtoABGR(int color) {
+        return Color.HexFormat.ARGB.convert(color, Color.HexFormat.ABGR);
     }
 }
