@@ -59,8 +59,7 @@ public final class ChatBuilder implements Builder<ITextComponent> {
      * @return This builder
      */
     public final ChatBuilder append(String text, TextFormatting... colors) {
-        this.append(text, null, null, colors);
-        return this;
+        return this.append(text, null, null, colors);
     }
 
     /**
@@ -73,8 +72,7 @@ public final class ChatBuilder implements Builder<ITextComponent> {
      * @return This builder
      */
     public final ChatBuilder append(String text, HoverEvent hoverEvent, TextFormatting... colors) {
-        this.append(text, null, hoverEvent, colors);
-        return this;
+        return this.append(text, null, hoverEvent, colors);
     }
 
     /**
@@ -87,8 +85,7 @@ public final class ChatBuilder implements Builder<ITextComponent> {
      * @return This builder
      */
     public final ChatBuilder append(String text, ClickEvent clickEvent, TextFormatting... colors) {
-        this.append(text, clickEvent, null, colors);
-        return this;
+        return this.append(text, clickEvent, null, colors);
     }
 
     /**
