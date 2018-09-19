@@ -20,6 +20,7 @@ import clientapi.util.ReflectionUtils;
 import clientapi.util.annotation.Label;
 import clientapi.value.type.ColorType;
 import clientapi.value.type.resolve.TypeResolver;
+import pw.knx.feather.structures.Color;
 
 import java.lang.reflect.Field;
 
@@ -34,9 +35,9 @@ public final class ColorTypeResolver implements TypeResolver<ColorType> {
     @Override
     public final ColorType resolve(Object parent, Field field) {
         Label label = field.getAnnotation(Label.class);
-        Integer value = (Integer) ReflectionUtils.getField(parent, field);
+        Color value = (Color) ReflectionUtils.getField(parent, field);
         if (value == null)
-            value = 0xFFFFFFFF;
+            value = Color.fromRGB(1.0F, 1.0F, 1.0F);
 
         ColorType type = new ColorType(label.name(), label.parent(), label.id(), label.description(), parent, field);
         type.setValue(value);

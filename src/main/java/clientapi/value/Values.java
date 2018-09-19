@@ -25,6 +25,7 @@ import clientapi.value.type.resolve.ResolverData;
 import clientapi.value.type.resolve.impl.*;
 import clientapi.value.type.resolve.impl.number.*;
 import me.zero.alpine.event.EventState;
+import pw.knx.feather.structures.Color;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -63,7 +64,7 @@ public final class Values {
         define(MultiValue.class,   ResolverData.create(new MultiTypeResolver(),   String.class));
         define(StringValue.class,  ResolverData.create(new StringTypeResolver(),  String.class));
         define(EnumValue.class,    ResolverData.create(new EnumTypeResolver(),    Enum.class));
-        define(ColorValue.class,   ResolverData.create(new ColorTypeResolver(),   Integer.class, Integer.TYPE));
+        define(ColorValue.class,   ResolverData.create(new ColorTypeResolver(),   Color.class));
         define(VoidValue.class,    ResolverData.create(new VoidTypeResolver(),    Void.class));
 
         define(ByteValue.class,    ResolverData.create(new ByteTypeResolver(),    Byte.class,    Byte.TYPE));

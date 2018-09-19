@@ -18,6 +18,7 @@ package clientapi.value.type;
 
 import clientapi.value.Value;
 import clientapi.value.annotation.ColorValue;
+import pw.knx.feather.structures.Color;
 
 import java.lang.reflect.Field;
 
@@ -29,7 +30,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 4/11/2018
  */
-public final class ColorType extends Value<Integer> {
+public final class ColorType extends Value<Color> {
 
     public ColorType(String name, String parent, String id, String description, Object object, Field field) {
         super(name, parent, id, description, object, field);
