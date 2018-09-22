@@ -169,6 +169,17 @@ public interface ShaderAdapter {
     void setUniform(int location, float value1, float value2, float value3);
 
     /**
+     * Sets the 4 float values of the specified uniform variable
+     *
+     * @param location The uniform variable location
+     * @param value1 The first float value
+     * @param value2 The second float value
+     * @param value3 The third float value
+     * @param value4 The fourth float value
+     */
+    void setUniform(int location, float value1, float value2, float value3, float value4);
+
+    /**
      * Retrieves the location of the specified uniform variable name
      * from the specified shader program.
      *

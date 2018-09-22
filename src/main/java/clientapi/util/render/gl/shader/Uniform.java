@@ -16,8 +16,6 @@
 
 package clientapi.util.render.gl.shader;
 
-import clientapi.util.math.Vec2;
-import clientapi.util.math.Vec3;
 import clientapi.util.render.gl.shader.adapter.ShaderAdapter;
 import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
 
@@ -79,19 +77,34 @@ public final class Uniform {
     /**
      * Sets the value of this Uniform as a Vec2
      *
-     * @param value New value
+     * @param value1 The first float value
+     * @param value2 The second float value
      */
-    public final void setVec(Vec2 value) {
-        adapter.setUniform(location, value.getX(), value.getY());
+    public final void setVec2(float value1, float value2) {
+        adapter.setUniform(location, value1, value2);
     }
 
     /**
      * Sets the value of this Uniform as a Vec3
      *
-     * @param value New value
+     * @param value1 The first float value
+     * @param value2 The second float value
+     * @param value3 The third float value
      */
-    public final void setVec(Vec3 value) {
-        adapter.setUniform(location, (float) value.getX(), (float) value.getY(), (float) value.getZ());
+    public final void setVec3(float value1, float value2, float value3) {
+        adapter.setUniform(location, value1, value2, value3);
+    }
+
+    /**
+     * Sets the value of this Uniform as a Vec4
+     *
+     * @param value1 The first float value
+     * @param value2 The second float value
+     * @param value3 The third float value
+     * @param value4 The fourth float value
+     */
+    public final void setVec4(float value1, float value2, float value3, float value4) {
+        adapter.setUniform(location, value1, value2, value3, value4);
     }
 
     /**
