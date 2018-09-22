@@ -19,6 +19,7 @@ package clientapi.util.render.gl.shader.adapter;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
 import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.shader.exception.ShaderException;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Matrix4f;
 
 import java.nio.FloatBuffer;
@@ -158,7 +159,7 @@ final class GL20ShaderAdapter implements ShaderAdapter {
     @Override
     public void setUniform(int location, Matrix4f value) {
         if (this.matrix4Buffer == null) {
-            this.matrix4Buffer = FloatBuffer.allocate(16);
+            this.matrix4Buffer = BufferUtils.createFloatBuffer(16);
         }
         value.store(this.matrix4Buffer);
         this.matrix4Buffer.flip();
