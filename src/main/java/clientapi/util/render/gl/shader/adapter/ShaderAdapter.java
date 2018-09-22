@@ -20,6 +20,7 @@ import clientapi.util.render.gl.glenum.GLShaderStatus;
 import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.shader.exception.ShaderException;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
 
 /**
  * The shell for a Shader Adapter. Used as
@@ -178,6 +179,14 @@ public interface ShaderAdapter {
      * @param value4 The fourth float value
      */
     void setUniform(int location, float value1, float value2, float value3, float value4);
+
+    /**
+     * Sets the value of this Uniform as a Matrix4f
+     *
+     * @param location The uniform variable location
+     * @param value The Matrix4f value
+     */
+    void setUniform(int location, Matrix4f value);
 
     /**
      * Retrieves the location of the specified uniform variable name

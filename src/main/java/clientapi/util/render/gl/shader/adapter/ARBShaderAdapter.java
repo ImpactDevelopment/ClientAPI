@@ -19,7 +19,9 @@ package clientapi.util.render.gl.shader.adapter;
 import clientapi.util.render.gl.glenum.GLShaderStatus;
 import clientapi.util.render.gl.glenum.GLShaderType;
 import clientapi.util.render.gl.shader.exception.ShaderException;
+import org.lwjgl.util.vector.Matrix4f;
 
+import java.nio.FloatBuffer;
 import java.util.Objects;
 
 import static org.lwjgl.opengl.ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
@@ -35,6 +37,8 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 final class ARBShaderAdapter implements ShaderAdapter {
 
     ARBShaderAdapter() {}
+
+    private FloatBuffer matrix4Buffer;
 
     @Override
     public int createProgram() {
@@ -151,6 +155,16 @@ final class ARBShaderAdapter implements ShaderAdapter {
     @Override
     public void setUniform(int location, float value1, float value2, float value3, float value4) {
         glUniform4fARB(location, value1, value2, value3, value4);
+    }
+
+    @Override
+    public void setUniform(int location, Matrix4f value) {
+        if (this.matrix4Buffer == null) {
+            this.matrix4Buffer = FloatBuffer.allocate(16);
+        }
+        value.store(this.matrix4Buffer);
+        this.matrix4Buffer.flip();
+        glUniformMatrix4ARB(location, true, this.matrix4Buffer);
     }
 
     @Override

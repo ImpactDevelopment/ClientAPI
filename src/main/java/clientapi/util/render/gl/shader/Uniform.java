@@ -18,6 +18,7 @@ package clientapi.util.render.gl.shader;
 
 import clientapi.util.render.gl.shader.adapter.ShaderAdapter;
 import clientapi.util.render.gl.shader.adapter.ShaderAdapters;
+import org.lwjgl.util.vector.Matrix4f;
 
 /**
  * A representation of a GLSL Uniform Variable
@@ -105,6 +106,15 @@ public final class Uniform {
      */
     public final void setVec4(float value1, float value2, float value3, float value4) {
         adapter.setUniform(location, value1, value2, value3, value4);
+    }
+
+    /**
+     * Sets the value of this Uniform as a Matrix4f
+     *
+     * @param value The Matrix4f value
+     */
+    public final void setMatrix4f(Matrix4f value) {
+        adapter.setUniform(location, value);
     }
 
     /**
