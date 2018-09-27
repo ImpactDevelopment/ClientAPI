@@ -16,18 +16,12 @@
 
 package clientapi.load.mixin;
 
-import clientapi.Client;
 import clientapi.ClientAPI;
-import clientapi.config.ClientConfiguration;
-import clientapi.config.JsonConfiguration;
 import clientapi.event.defaults.game.core.*;
 import clientapi.event.defaults.game.render.GuiDisplayEvent;
 import clientapi.event.defaults.game.world.WorldEvent;
-import clientapi.event.handle.ClientHandler;
-import clientapi.load.ClientInitException;
 import clientapi.load.mixin.extension.IMinecraft;
 import clientapi.util.io.MouseKeyTracker;
-import clientapi.util.render.gl.GLUtils;
 import me.zero.alpine.event.EventState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -45,9 +39,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
-import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 import static clientapi.event.defaults.game.core.ClickEvent.MouseButton.*;
 
@@ -152,42 +143,7 @@ public abstract class MixinMinecraft implements IMinecraft {
             at = @At("RETURN")
     )
     private void init(CallbackInfo ci) {
-        InputStream stream = this.getClass().getResourceAsStream("/client.json");
-
-        if (stream == null)
-            throw new ClientInitException("Unable to locate Client Configuration");
-
-        // Construct a ClientConfiguration object from the client json using GSON
-        ClientConfiguration clientConfig = JsonConfiguration.loadConfiguration(stream, ClientConfiguration.class);
-
-        if (clientConfig == null)
-            throw new ClientInitException("Unable to create Client Configuration from client.json");
-
-        // Attempt to instantiate the specified class from the client configuration
-        Client client;
-        try {
-            Class<?> clientClass = Class.forName(clientConfig.getMainClass());
-            Constructor<?> constructor;
-            if (clientClass != null && clientClass.getSuperclass().equals(Client.class) && (constructor = clientClass.getConstructor(ClientConfiguration.class)) != null) {
-                client = (Client) constructor.newInstance(clientConfig);
-            } else {
-                throw new ClientInitException("Client class is null or the superclass is not Client type");
-            }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ClientInitException("Unable to instantiate main client class");
-        } catch (ClassNotFoundException e) {
-            throw new ClientInitException("Unable to find client class");
-        } catch (NoSuchMethodException e) {
-            throw new ClientInitException("Unable to find constructor with valid parameters");
-        }
-
-        // Init GLUtils
-        GLUtils.init();
-
-        // Init client
-        client.init();
-
-        ClientAPI.EVENT_BUS.subscribe(ClientHandler.INSTANCE);
+        ClientAPI.start();
     }
 
     @ModifyVariable(

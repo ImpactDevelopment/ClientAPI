@@ -16,9 +16,19 @@
 
 package clientapi;
 
+import clientapi.config.ClientConfiguration;
+import clientapi.config.JsonConfiguration;
 import clientapi.event.ClientAPIEventManager;
+import clientapi.event.handle.KeybindEventHandler;
+import clientapi.load.ClientInitException;
+import clientapi.util.render.gl.GLUtils;
+import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Contains some constants that are used throughout the API.
@@ -42,4 +52,55 @@ public final class ClientAPI {
      * Instance of the API logger.
      */
     public static final Logger LOGGER = LogManager.getLogger("ClientAPI");
+
+    /**
+     * Called after the game has initialized. This method is responsible
+     * for initializing any core Client API classes and the discovered
+     * Client API mod.
+     *
+     * @see Minecraft#init()
+     */
+    public static void start() {
+        InputStream stream = ClientAPI.class.getResourceAsStream("/client.json");
+        if (stream == null) {
+            throw new ClientInitException("Unable to locate Client Configuration");
+        }
+
+        // Construct a ClientConfiguration object from the client json using GSON
+        ClientConfiguration clientConfig = JsonConfiguration.loadConfiguration(stream, ClientConfiguration.class);
+        if (clientConfig == null) {
+            throw new ClientInitException("Unable to create Client Configuration from client.json");
+        }
+
+        // Attempt to instantiate the main class from the client configuration
+        Client client;
+        try {
+            Class<?> clientClass = Class.forName(clientConfig.getMainClass());
+            if (clientClass == null) {
+                throw new ClientInitException("Unable to find the main class (%s)", clientConfig.getMainClass());
+            }
+
+            if (!clientClass.getSuperclass().equals(Client.class)) {
+                throw new ClientInitException("Main class does not inheit clientapi.Client");
+            }
+
+            Constructor<?> constructor = clientClass.getConstructor(ClientConfiguration.class);
+
+            client = (Client) constructor.newInstance(clientConfig);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new ClientInitException("Unable to instantiate main client class", e);
+        } catch (ClassNotFoundException e) {
+            throw new ClientInitException("Unable to find client class");
+        } catch (NoSuchMethodException e) {
+            throw new ClientInitException("Unable to find a suitable main class constructor");
+        }
+
+        // Init GLUtils
+        GLUtils.init();
+
+        // Init client
+        client.init();
+
+        ClientAPI.EVENT_BUS.subscribe(KeybindEventHandler.INSTANCE);
+    }
 }

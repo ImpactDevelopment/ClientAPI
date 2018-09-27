@@ -35,7 +35,7 @@ import static org.lwjgl.input.Keyboard.KEY_NONE;
  * @author Brady
  * @since 2/9/2017
  */
-public enum ClientHandler implements Listenable, MinecraftAccessible {
+public enum KeybindEventHandler implements Listenable, MinecraftAccessible {
 
     INSTANCE;
 
