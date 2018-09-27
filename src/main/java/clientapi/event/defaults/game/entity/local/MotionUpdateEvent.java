@@ -58,8 +58,8 @@ public final class MotionUpdateEvent extends Cancellable implements MinecraftAcc
             return;
 
         IEntity me = (IEntity) mc.player;
-        this.pos.transfer(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
-        this.rotations.transfer(me.getRotations());
+        this.pos.copyFrom(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
+        this.rotations.copyFrom(me.getRotations());
         this.onGround = mc.player.onGround;
     }
 
