@@ -164,14 +164,13 @@ public final class Vec3 {
     }
 
     /**
-     * Transfers the X/Y/Z from another Vec3 and sets this
-     * Vec3's X/Y/Z to it
+     * Copies the X/Y/Z values of the specified Vec3 to this Vec3
      *
      * @param vec Another Vec3
      *
      * @return This Vec3
      */
-    public final Vec3 transfer(Vec3 vec) {
+    public final Vec3 copyFrom(Vec3 vec) {
         this.x = vec.x;
         this.y = vec.y;
         this.z = vec.z;

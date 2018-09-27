@@ -177,14 +177,13 @@ public final class Vec2 {
     }
 
     /**
-     * Transfers the X/Y from another Vec2 and sets this
-     * Vec2's X/Y to it
+     * Copies the X/Y values of the specified Vec2 to this Vec2
      *
      * @param vec Another Vec2
      *
      * @return This Vec2
      */
-    public final Vec2 transfer(Vec2 vec) {
+    public final Vec2 copyFrom(Vec2 vec) {
         this.x = vec.x;
         this.y = vec.y;
         return this;
