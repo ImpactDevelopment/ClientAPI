@@ -76,16 +76,4 @@ public class AbstractNumberType<T extends Number> extends Value<T> implements IN
     public final T getInterval() {
         return this.interval;
     }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public final void increment(float multiplier) {
-        double range = maximum.doubleValue() - minimum.doubleValue();
-        this.setValue((T) (Number) (this.getValue().doubleValue() + (range / 10.0 * multiplier)));
-    }
-
-    @Override
-    public final void decrement(float multiplier) {
-        this.increment(-multiplier);
-    }
 }

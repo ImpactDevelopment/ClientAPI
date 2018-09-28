@@ -45,7 +45,11 @@ public interface INumberValue<T extends Number> extends IValue<T> {
      *
      * @param multiplier The incrementation multiplier
      */
-    void increment(float multiplier);
+    @SuppressWarnings("unchecked")
+    default void increment(float multiplier) {
+        double range = getMaximum().doubleValue() - getMinimum().doubleValue();
+        this.setValue((T) (Number) (this.getValue().doubleValue() + (range / 10.0 * multiplier)));
+    }
 
     /**
      * Decrements the value of this {@link AbstractNumberType}
@@ -53,5 +57,7 @@ public interface INumberValue<T extends Number> extends IValue<T> {
      *
      * @param multiplier The decrementation multiplier
      */
-    void decrement(float multiplier);
+    default void decrement(float multiplier) {
+        this.increment(-multiplier);
+    }
 }
