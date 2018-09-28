@@ -14,25 +14,10 @@
  * limitations under the License.
  */
 
-package clientapi.value.type;
-
-import clientapi.value.IStringValue;
-import clientapi.value.Value;
-import clientapi.value.annotation.StringValue;
-
-import java.lang.reflect.Field;
+package clientapi.value;
 
 /**
- * Basic type for String values
- *
- * @see StringValue
- *
  * @author Brady
- * @since 1/23/2017
+ * @since 9/27/2018
  */
-public final class StringType extends Value<String> implements IStringValue {
-
-    public StringType(String name, String parent, String id, String description, Object object, Field field) {
-        super(name, parent, id, description, object, field);
-    }
-}
+public interface IStringValue extends IValue<String> {}

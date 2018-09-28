@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 
-package clientapi.value.type;
-
-import clientapi.value.IStringValue;
-import clientapi.value.Value;
-import clientapi.value.annotation.StringValue;
-
-import java.lang.reflect.Field;
+package clientapi.value;
 
 /**
- * Basic type for String values
- *
- * @see StringValue
- *
  * @author Brady
- * @since 1/23/2017
+ * @since 9/27/2018
  */
-public final class StringType extends Value<String> implements IStringValue {
+public interface IVoidValue extends IValue<Void> {
 
-    public StringType(String name, String parent, String id, String description, Object object, Field field) {
-        super(name, parent, id, description, object, field);
+    @Override
+    default Void getValue() {
+        return null;
+    }
+
+    @Override
+    default void setValue(Void value) {
+        throw new UnsupportedOperationException("Attempted to set the value of an IVoidValue");
     }
 }

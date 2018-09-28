@@ -16,6 +16,7 @@
 
 package clientapi.value.type;
 
+import clientapi.value.IVoidValue;
 import clientapi.value.Value;
 import clientapi.value.annotation.VoidValue;
 
@@ -30,19 +31,9 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 8/21/2018
  */
-public final class VoidType extends Value<Void> {
+public final class VoidType extends Value<Void> implements IVoidValue {
 
     public VoidType(String name, String parent, String id, String description, Object object, Field field) {
         super(name, parent, id, description, object, field);
-    }
-
-    @Override
-    public Void getValue() {
-        return null;
-    }
-
-    @Override
-    public void setValue(Void value) {
-        throw new UnsupportedOperationException("Attempted to set the value of a VoidType");
     }
 }
