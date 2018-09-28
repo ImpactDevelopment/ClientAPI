@@ -25,6 +25,6 @@ import java.lang.reflect.Field;
 public class LongType extends AbstractNumberType<Long> {
 
     public LongType(String name, String parent, String id, String description, Object object, Field field, Long minimum, Long maximum, Long interval) {
-        super(name, parent, id, description, object, field, minimum, maximum, interval);
+        super(name, parent, id, description, object, field, minimum, maximum, interval, Number::longValue);
     }
 }

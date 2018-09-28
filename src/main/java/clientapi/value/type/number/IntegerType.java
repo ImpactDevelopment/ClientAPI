@@ -25,6 +25,6 @@ import java.lang.reflect.Field;
 public class IntegerType extends AbstractNumberType<Integer> {
 
     public IntegerType(String name, String parent, String id, String description, Object object, Field field, Integer minimum, Integer maximum, Integer interval) {
-        super(name, parent, id, description, object, field, minimum, maximum, interval);
+        super(name, parent, id, description, object, field, minimum, maximum, interval, Number::intValue);
     }
 }

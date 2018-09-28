@@ -25,6 +25,6 @@ import java.lang.reflect.Field;
 public class DoubleType extends AbstractNumberType<Double> {
 
     public DoubleType(String name, String parent, String id, String description, Object object, Field field, Double minimum, Double maximum, Double interval) {
-        super(name, parent, id, description, object, field, minimum, maximum, interval);
+        super(name, parent, id, description, object, field, minimum, maximum, interval, Number::doubleValue);
     }
 }

@@ -25,6 +25,6 @@ import java.lang.reflect.Field;
 public class FloatType extends AbstractNumberType<Float> {
 
     public FloatType(String name, String parent, String id, String description, Object object, Field field, Float minimum, Float maximum, Float interval) {
-        super(name, parent, id, description, object, field, minimum, maximum, interval);
+        super(name, parent, id, description, object, field, minimum, maximum, interval, Number::floatValue);
     }
 }

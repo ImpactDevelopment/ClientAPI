@@ -21,6 +21,7 @@ import clientapi.value.INumberValue;
 import clientapi.value.Value;
 
 import java.lang.reflect.Field;
+import java.util.function.Function;
 
 /**
  * Basic type for Number values
@@ -45,11 +46,17 @@ public class AbstractNumberType<T extends Number> extends Value<T> implements IN
      */
     private final T interval;
 
-    public AbstractNumberType(String name, String parent, String id, String description, Object object, Field field, T minimum, T maximum, T interval) {
+    /**
+     * The function that is called in {@link Number} to yield this Number Type's value
+     */
+    private final Function<Number, T> valueFunction;
+
+    public AbstractNumberType(String name, String parent, String id, String description, Object object, Field field, T minimum, T maximum, T interval, Function<Number, T> valueFunction) {
         super(name, parent, id, description, object, field);
         this.minimum = minimum;
         this.maximum = maximum;
         this.interval = interval;
+        this.valueFunction = valueFunction;
     }
 
     @Override
@@ -59,7 +66,7 @@ public class AbstractNumberType<T extends Number> extends Value<T> implements IN
 
     @Override
     public final void setValue(T value) {
-        super.setValue(MathUtils.clamp(value, minimum, maximum));
+        super.setValue(MathUtils.clamp(valueFunction.apply(value), minimum, maximum));
     }
 
     @Override

@@ -25,6 +25,6 @@ import java.lang.reflect.Field;
 public class ShortType extends AbstractNumberType<Short> {
 
     public ShortType(String name, String parent, String id, String description, Object object, Field field, Short minimum, Short maximum, Short interval) {
-        super(name, parent, id, description, object, field, minimum, maximum, interval);
+        super(name, parent, id, description, object, field, minimum, maximum, interval, Number::shortValue);
     }
 }
