@@ -16,10 +16,9 @@
 
 package clientapi.value.type;
 
-import clientapi.util.interfaces.Cycleable;
+import clientapi.value.ICycleableValue;
 import clientapi.value.Value;
 import clientapi.value.annotation.EnumValue;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 
@@ -31,48 +30,13 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 12/1/2017
  */
-public final class EnumType<T extends Enum<?>> extends Value<T> implements Cycleable<T> {
+public final class EnumType<T extends Enum<?>> extends Value<T> implements ICycleableValue<T> {
 
     private final T[] values;
 
     public EnumType(String name, String parent, String id, String description, Object object, Field field, Class<T> enumClass) {
         super(name, parent, id, description, object, field);
         this.values = enumClass.getEnumConstants();
-    }
-
-    @Override
-    public final T current() {
-        return this.getValue();
-    }
-
-    @Override
-    public final T next() {
-        T value = peekNext();
-        this.setValue(value);
-        return value;
-    }
-
-    @Override
-    public final T last() {
-        T value = peekLast();
-        this.setValue(value);
-        return value;
-    }
-
-    @Override
-    public final T peekNext() {
-        int index = ArrayUtils.indexOf(values, getValue());
-        if (++index >= values.length)
-            index = 0;
-        return values[index];
-    }
-
-    @Override
-    public final T peekLast() {
-        int index = ArrayUtils.indexOf(values, getValue());
-        if (--index < 0)
-            index = values.length - 1;
-        return values[index];
     }
 
     @Override

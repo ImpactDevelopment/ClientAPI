@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-package clientapi.value.type;
+package clientapi.value;
 
-import clientapi.value.IBooleanValue;
-import clientapi.value.Value;
-import clientapi.value.annotation.BooleanValue;
-
-import java.lang.reflect.Field;
+import clientapi.util.interfaces.Toggleable;
 
 /**
- * Basic type for Boolean values
- *
- * @see BooleanValue
- *
  * @author Brady
- * @since 1/23/2017
+ * @since 9/27/2018
  */
-public final class BooleanType extends Value<Boolean> implements IBooleanValue {
+public interface IBooleanValue extends IValue<Boolean>, Toggleable {
 
-    public BooleanType(String name, String parent, String id, String description, Object object, Field field) {
-        super(name, parent, id, description, object, field);
+    @Override
+    default void setState(boolean state) {
+        this.setValue(state);
+
+        if (this.getState()) {
+            this.onEnable();
+        } else {
+            this.onDisable();
+        }
+    }
+
+    @Override
+    default boolean getState() {
+        return this.getValue();
     }
 }

@@ -16,10 +16,8 @@
 
 package clientapi.value.type;
 
-import clientapi.util.ClientAPIUtils;
-import clientapi.util.interfaces.Cycleable;
+import clientapi.value.ICycleableValue;
 import clientapi.value.Value;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 
@@ -29,7 +27,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 2/24/2017
  */
-public final class MultiType extends Value<String> implements Cycleable<String> {
+public final class MultiType extends Value<String> implements ICycleableValue<String> {
 
     /**
      * Different values
@@ -40,46 +38,6 @@ public final class MultiType extends Value<String> implements Cycleable<String> 
         super(name, parent, id, description, object, field);
         this.values = values;
         this.setValue(values[0]);
-    }
-
-    @Override
-    public final void setValue(String value) {
-        super.setValue(ClientAPIUtils.objectFrom(value, values));
-    }
-
-    @Override
-    public final String current() {
-        return this.getValue();
-    }
-
-    @Override
-    public final String next() {
-        String value = peekNext();
-        this.setValue(value);
-        return value;
-    }
-
-    @Override
-    public final String last() {
-        String value = peekLast();
-        this.setValue(value);
-        return value;
-    }
-
-    @Override
-    public final String peekNext() {
-        int index = ArrayUtils.indexOf(values, getValue());
-        if (++index >= values.length)
-            index = 0;
-        return values[index];
-    }
-
-    @Override
-    public final String peekLast() {
-        int index = ArrayUtils.indexOf(values, getValue());
-        if (--index < 0)
-            index = values.length - 1;
-        return values[index];
     }
 
     @Override

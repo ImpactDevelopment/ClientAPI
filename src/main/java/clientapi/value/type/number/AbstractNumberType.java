@@ -17,6 +17,7 @@
 package clientapi.value.type.number;
 
 import clientapi.util.math.MathUtils;
+import clientapi.value.INumberValue;
 import clientapi.value.Value;
 
 import java.lang.reflect.Field;
@@ -27,7 +28,7 @@ import java.lang.reflect.Field;
  * @author Brady
  * @since 1/23/2017
  */
-public class AbstractNumberType<T extends Number> extends Value<T> {
+public class AbstractNumberType<T extends Number> extends Value<T> implements INumberValue<T> {
 
     /**
      * Minimum value of the number
@@ -61,45 +62,29 @@ public class AbstractNumberType<T extends Number> extends Value<T> {
         super.setValue(MathUtils.clamp(value, minimum, maximum));
     }
 
-    /**
-     * @return The minimum value of the number
-     */
+    @Override
     public final T getMinimum() {
         return this.minimum;
     }
 
-    /**
-     * @return The maximum value of this number
-     */
+    @Override
     public final T getMaximum() {
         return this.maximum;
     }
 
-    /**
-     * @return The interval of change for this value
-     */
+    @Override
     public final T getInterval() {
         return this.interval;
     }
 
-    /**
-     * Increments the value of this {@link AbstractNumberType}
-     * by {@code 1/10th} the range, multiplied by the parameter.
-     *
-     * @param multiplier The incrementation multiplier
-     */
+    @Override
     @SuppressWarnings("unchecked")
     public final void increment(float multiplier) {
         double range = maximum.doubleValue() - minimum.doubleValue();
         this.setValue((T) (Number) (this.getValue().doubleValue() + (range / 10.0 * multiplier)));
     }
 
-    /**
-     * Decrements the value of this {@link AbstractNumberType}
-     * by {@code 1/10th} the range, multiplied by the parameter.
-     *
-     * @param multiplier The decrementation multiplier
-     */
+    @Override
     public final void decrement(float multiplier) {
         this.increment(-multiplier);
     }
