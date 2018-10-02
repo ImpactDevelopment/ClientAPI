@@ -51,7 +51,8 @@ public class ModuleMode<T extends Module> extends AbstractModule {
         if (state) {
             if (parent.getState()) {
                 this.onEnable();
-                ClientAPI.EVENT_BUS.subscribe(this);
+                if (this.state)
+                    ClientAPI.EVENT_BUS.subscribe(this);
             }
         } else {
             ClientAPI.EVENT_BUS.unsubscribe(this);

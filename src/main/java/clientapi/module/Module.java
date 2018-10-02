@@ -264,7 +264,8 @@ public class Module extends AbstractModule implements Taggable {
 
         if (this.state = state) {
             onEnable();
-            ClientAPI.EVENT_BUS.subscribe(this);
+            if (this.state)
+                ClientAPI.EVENT_BUS.subscribe(this);
         } else {
             ClientAPI.EVENT_BUS.unsubscribe(this);
             onDisable();
