@@ -18,7 +18,7 @@ package clientapi.util.entity;
 
 import net.minecraft.entity.Entity;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Implementation of {@link EntityCheck}.
@@ -39,16 +39,16 @@ public final class EntityCheckFunction implements EntityCheck {
     /**
      * A function that tests the specified entity
      */
-    private final Function<Entity, Boolean> isValid;
+    private final Predicate<Entity> isValid;
 
-    public EntityCheckFunction(CheckType type, Function<Entity, Boolean> isValid) {
+    public EntityCheckFunction(CheckType type, Predicate<Entity> isValid) {
         this.type = type;
         this.isValid = isValid;
     }
 
     @Override
     public final boolean isValid(Entity entity) {
-        return this.isValid.apply(entity);
+        return this.isValid.test(entity);
     }
 
     @Override
