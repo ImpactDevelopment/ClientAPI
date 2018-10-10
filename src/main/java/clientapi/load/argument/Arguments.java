@@ -20,11 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Helper for argument parsing
+ *
  * @author Brady
  * @since 10/9/2018
  */
 public final class Arguments {
 
+    /**
+     * Parses a list of raw arguments into a list of joined classifier and singular ones.
+     *
+     * @param args The arguments to parse
+     * @return The parsed arguments
+     */
     public static List<Argument> parse(List<String> args) {
         List<Argument> argsOut = new ArrayList<>();
 
@@ -53,6 +61,12 @@ public final class Arguments {
         return argsOut;
     }
 
+    /**
+     * Joins a list of arguments back into a string list format
+     *
+     * @param args The arguments
+     * @return The joined arguments
+     */
     public static List<String> join(List<Argument> args) {
         List<String> argsOut = new ArrayList<>();
         args.forEach(argument -> argument.addToList(argsOut));

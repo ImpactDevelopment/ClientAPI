@@ -26,7 +26,7 @@ public final class SingularArgument implements Argument {
 
     private final String value;
 
-    public SingularArgument(String value) {
+    SingularArgument(String value) {
         this.value = value;
     }
 
@@ -36,7 +36,7 @@ public final class SingularArgument implements Argument {
     }
 
     @Override
-    public final boolean matches(Argument argument) {
+    public final boolean conflicts(Argument argument) {
         if (!(argument instanceof SingularArgument))
             return false;
 

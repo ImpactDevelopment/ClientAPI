@@ -106,8 +106,8 @@ public class ClientTweaker implements ITweaker {
         // Parse the arguments that are already being passed to the game
         List<Argument> existing = Arguments.parse((List<String>) Launch.blackboard.get("ArgumentList"));
 
-        // Remove any arguments that match already existing ones
-        parsed.removeIf(argument -> existing.stream().anyMatch(a -> a.matches(argument)));
+        // Remove any arguments that conflict with existing ones
+        parsed.removeIf(argument -> existing.stream().anyMatch(a -> a.conflicts(argument)));
 
         // Join back the filtered arguments and pass those to the game
         return Arguments.join(parsed).toArray(new String[0]);

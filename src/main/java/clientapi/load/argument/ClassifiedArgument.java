@@ -27,7 +27,7 @@ public final class ClassifiedArgument implements Argument {
     private final String classifier;
     private final String value;
 
-    public ClassifiedArgument(String classifier, String value) {
+    ClassifiedArgument(String classifier, String value) {
         this.classifier = classifier;
         this.value = value;
     }
@@ -39,7 +39,7 @@ public final class ClassifiedArgument implements Argument {
     }
 
     @Override
-    public final boolean matches(Argument argument) {
+    public final boolean conflicts(Argument argument) {
         if (!(argument instanceof ClassifiedArgument))
             return false;
 

@@ -19,12 +19,30 @@ package clientapi.load.argument;
 import java.util.List;
 
 /**
+ * A standard launch argument
+ *
  * @author Brady
  * @since 10/9/2018
  */
 public interface Argument {
 
+    /**
+     * Adds the "components" of this argument to the specified list.
+     *
+     * @see ClassifiedArgument#addToList(List)
+     * @see SingularArgument#addToList(List)
+     *
+     * @param arguments The argument list
+     */
     void addToList(List<String> arguments);
 
-    boolean matches(Argument argument);
+    /**
+     * Returns whether or not this argument conflicts with the specified one. In the context
+     * of singular arguments, this means that the singular argument itself matches, in the context
+     * of classified arguments, this means that the classifier matches.
+     *
+     * @param argument Another argument
+     * @return Whether or not this argument conflicts
+     */
+    boolean conflicts(Argument argument);
 }
