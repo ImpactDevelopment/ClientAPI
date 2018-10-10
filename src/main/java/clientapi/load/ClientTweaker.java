@@ -19,7 +19,10 @@ package clientapi.load;
 import clientapi.ClientAPI;
 import clientapi.config.ClientConfiguration;
 import clientapi.config.JsonConfiguration;
+import clientapi.load.argument.Argument;
+import clientapi.load.argument.Arguments;
 import net.minecraft.launchwrapper.ITweaker;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.launch.MixinBootstrap;
@@ -43,7 +46,7 @@ public class ClientTweaker implements ITweaker {
     /**
      * The Game Launch Arguments
      */
-    List<String> args;
+    private List<String> args;
 
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
@@ -61,7 +64,14 @@ public class ClientTweaker implements ITweaker {
         ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
 
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
-        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(ObfuscationServiceMCP.NOTCH);
+
+        String obfuscation = ObfuscationServiceMCP.NOTCH;
+        if (Launch.classLoader.getTransformers().stream().noneMatch(t -> t.getClass().getName().contains("fml"))) {
+            obfuscation = ObfuscationServiceMCP.SEARGE;
+        }
+
+        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(obfuscation);
+
         ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
 
         ClientConfiguration config = findClientConfig();
@@ -88,8 +98,19 @@ public class ClientTweaker implements ITweaker {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public final String[] getLaunchArguments() {
-        return this.args.toArray(new String[0]);
+        // Parse the arguments that we are able to pass to the game
+        List<Argument> parsed = Arguments.parse(this.args);
+
+        // Parse the arguments that are already being passed to the game
+        List<Argument> existing = Arguments.parse((List<String>) Launch.blackboard.get("ArgumentList"));
+
+        // Remove any arguments that match already existing ones
+        parsed.removeIf(argument -> existing.stream().anyMatch(a -> a.matches(argument)));
+
+        // Join back the filtered arguments and pass those to the game
+        return Arguments.join(parsed).toArray(new String[0]);
     }
 
     private ClientConfiguration findClientConfig() {

@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
-package clientapi.load;
+package clientapi.load.argument;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementation of ClientTweaker that leaves the argument list alone
- * so that optifine's tweaker does not cause any conflictions.
- *
  * @author Brady
- * @since 2/21/2018
+ * @since 10/9/2018
  */
-public final class ClientTweakerOptifine extends ClientTweaker {
+public interface Argument {
 
-    @Override
-    public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.args = new ArrayList<>();
-    }
+    void addToList(List<String> arguments);
+
+    boolean matches(Argument argument);
 }
