@@ -41,10 +41,10 @@ import java.util.List;
  * @author Brady
  * @since 1/20/2017
  */
-public class ClientTweaker implements ITweaker {
+public final class ClientTweaker implements ITweaker {
 
     /**
-     * The Game Launch Arguments
+     * The raw game launch arguments that are provided in {@link ClientTweaker#acceptOptions(List, File, File, String)}
      */
     private List<String> args;
 
@@ -60,19 +60,7 @@ public class ClientTweaker implements ITweaker {
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
 
-        MixinBootstrap.init();
-        ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
-
-        MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
-
-        String obfuscation = ObfuscationServiceMCP.NOTCH;
-        if (Launch.classLoader.getTransformers().stream().noneMatch(t -> t.getClass().getName().contains("fml"))) {
-            obfuscation = ObfuscationServiceMCP.SEARGE;
-        }
-
-        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(obfuscation);
-
-        ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
+        this.setupMixin();
 
         ClientConfiguration config = findClientConfig();
 
@@ -111,6 +99,22 @@ public class ClientTweaker implements ITweaker {
 
         // Join back the filtered arguments and pass those to the game
         return Arguments.join(parsed).toArray(new String[0]);
+    }
+
+    private void setupMixin() {
+        MixinBootstrap.init();
+        ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
+
+        String obfuscation = ObfuscationServiceMCP.NOTCH;
+
+        // If there are any transformers that have "fml" in their class name, then use the searge obfuscation context
+        if (Launch.classLoader.getTransformers().stream().anyMatch(t -> t.getClass().getName().contains("fml"))) {
+            obfuscation = ObfuscationServiceMCP.SEARGE;
+        }
+
+        MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
+        MixinEnvironment.getDefaultEnvironment().setObfuscationContext(obfuscation);
+        ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
     }
 
     private ClientConfiguration findClientConfig() {
