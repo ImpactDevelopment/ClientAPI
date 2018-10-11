@@ -78,8 +78,9 @@ public final class ClientTweaker extends SimpleTweaker {
         // Default to NOTCH obfuscation context
         String obfuscation = ObfuscationServiceMCP.NOTCH;
 
-        // If there are any tweak classes that contain "FMLTweaker", then set the obfuscation context to SEARGE
-        if (tweakClasses.stream().anyMatch(s -> s.contains("FMLTweaker"))) {
+        // If there are any tweak classes that are packaged under "net.minecraftforge.fml.common.launcher",
+        // switch the obfuscation context in the mixin environment to SEARGE
+        if (tweakClasses.stream().anyMatch(s -> s.contains("net.minecraftforge.fml.common.launcher"))) {
             obfuscation = ObfuscationServiceMCP.SEARGE;
             ClientAPI.LOGGER.info("Discovered FML! Switching to SEARGE mappings.");
         }
