@@ -16,7 +16,7 @@
 
 package clientapi.load.transform.impl;
 
-import clientapi.load.transform.ITransformer;
+import clientapi.load.transform.IExtendedTransformer;
 import clientapi.value.holder.ValueAccessor;
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Label;
@@ -45,7 +45,7 @@ import static org.objectweb.asm.Opcodes.*;
  * @author Brady
  * @since 9/13/2017
  */
-public final class ValueAccessorTransformer implements ITransformer {
+public final class ValueAccessorTransformer implements IExtendedTransformer {
 
     /**
      * Instance of the handle for {@link LambdaMetafactory#metafactory(MethodHandles.Lookup, String, MethodType, MethodType, MethodHandle, MethodType)}
@@ -121,7 +121,7 @@ public final class ValueAccessorTransformer implements ITransformer {
                 handle.visitFieldInsn(GETFIELD, cn.name, fn.name, fn.desc);
 
                 // If the field is a primitive type, get the object representation
-                String object = getObject(fn.desc);
+                String object = getPrimitiveWrapper(fn.desc);
                 if (!object.equals(fn.desc))
                     handle.visitMethodInsn(INVOKESTATIC, object, "valueOf", "(" + fn.desc + ")L" + object + ";", false);
 
@@ -183,12 +183,12 @@ public final class ValueAccessorTransformer implements ITransformer {
 
                 handle.visitVarInsn(ALOAD, 0);
                 handle.visitVarInsn(ALOAD, 1);
-                handle.visitTypeInsn(CHECKCAST, getStrippedDesc(getObject(fn.desc)));
+                handle.visitTypeInsn(CHECKCAST, getStrippedDesc(getPrimitiveWrapper(fn.desc)));
 
                 // If the field is a primitive type, get the primitive value
-                String object = getObject(fn.desc);
+                String object = getPrimitiveWrapper(fn.desc);
                 if (!object.equals(fn.desc))
-                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getClassName(fn.desc) + "Value", "()" + fn.desc, false);
+                    handle.visitMethodInsn(INVOKEVIRTUAL, object, getPrimitiveClassName(fn.desc) + "Value", "()" + fn.desc, false);
 
                 // Set the field value
                 handle.visitFieldInsn(PUTFIELD, cn.name, fn.name, fn.desc);

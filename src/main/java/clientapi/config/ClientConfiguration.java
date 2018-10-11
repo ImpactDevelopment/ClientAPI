@@ -17,8 +17,8 @@
 package clientapi.config;
 
 import clientapi.Client;
-import clientapi.load.transform.ITransformer;
 import com.google.gson.annotations.SerializedName;
+import io.github.impactdevelopment.simpletweaker.transform.ITransformer;
 
 /**
  * Representation of the {@code client.json} format.

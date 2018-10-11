@@ -16,8 +16,7 @@
 
 package clientapi.load.transform;
 
-import clientapi.ClientAPI;
-import org.apache.logging.log4j.Level;
+import io.github.impactdevelopment.simpletweaker.transform.ITransformer;
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -30,35 +29,17 @@ import org.objectweb.asm.tree.MethodNode;
  * @author Brady
  * @since 9/15/2017
  */
-public interface ITransformer {
+public interface IExtendedTransformer extends ITransformer {
 
     /**
-     * Transforms the specified {@link ClassNode}
-     *
-     * @param cn The target {@link ClassNode}
-     */
-    void transform(ClassNode cn);
-
-    /**
-     * Returns the target class names. If none are returned,
-     * then it is assumed that the transformer is targetting
-     * all classes.
-     *
-     * @return Target class names
-     */
-    default String[] getTargets() {
-        return new String[0];
-    }
-
-    /**
-     * Returns the object representation of a primitive
-     * type, if the specified description is a primitive type
-     * otherwise, the input value is returned.
+     * Returns the primitive wrapper class for the specified primitive
+     * type, if the specified type is not a valid primitive, then this
+     * method returns the type back.
      *
      * @param desc The description of the type
      * @return The object representation, if primitive
      */
-    default String getObject(String desc) {
+    default String getPrimitiveWrapper(String desc) {
         switch (desc) {
             case "B":
                 return "java/lang/Byte";
@@ -86,7 +67,7 @@ public interface ITransformer {
      * @param desc Primitive type description
      * @return Type class name, null if not primitive
      */
-    default String getClassName(String desc) {
+    default String getPrimitiveClassName(String desc) {
         return desc.length() == 1 ? Type.getType(desc).getClassName() : null;
     }
 
@@ -152,21 +133,5 @@ public interface ITransformer {
      */
     default Handle createMethodHandle(int tag, String owner, String method, String desc) {
         return new Handle(tag, owner, method, desc);
-    }
-
-    /**
-     * Creates a new transformer from the specified classpath.
-     *
-     * @param classpath The transformer classpath
-     * @return The new transformer, {@code null} if creation failed.
-     */
-    static ITransformer create(String classpath) {
-        try {
-            return (ITransformer) Class.forName(classpath).newInstance();
-        } catch (Exception e) {
-            ClientAPI.LOGGER.log(Level.ERROR, "Unable to instantiate transformer " + classpath);
-            e.printStackTrace();
-        }
-        return null;
     }
 }

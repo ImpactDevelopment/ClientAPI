@@ -19,9 +19,9 @@ package clientapi.load;
 import clientapi.ClientAPI;
 import clientapi.config.ClientConfiguration;
 import clientapi.config.JsonConfiguration;
-import clientapi.load.argument.Argument;
-import clientapi.load.argument.Arguments;
-import net.minecraft.launchwrapper.ITweaker;
+import clientapi.load.transform.impl.ValueAccessorTransformer;
+import io.github.impactdevelopment.simpletweaker.SimpleTweaker;
+import io.github.impactdevelopment.simpletweaker.transform.SimpleTransformer;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.apache.logging.log4j.Level;
@@ -30,9 +30,7 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.tools.obfuscation.mcp.ObfuscationServiceMCP;
 
-import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,34 +39,19 @@ import java.util.List;
  * @author Brady
  * @since 1/20/2017
  */
-public final class ClientTweaker implements ITweaker {
-
-    /**
-     * The raw game launch arguments that are provided in {@link ClientTweaker#acceptOptions(List, File, File, String)}
-     */
-    private List<String> args;
-
-    @Override
-    public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        (this.args = new ArrayList<>()).addAll(args);
-        addArg("gameDir", gameDir);
-        addArg("assetsDir", assetsDir);
-        addArg("version", profile);
-    }
+public final class ClientTweaker extends SimpleTweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
+        super.injectIntoClassLoader(classLoader);
+
         ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
 
         this.setupMixin();
 
         ClientConfiguration config = findClientConfig();
 
-        // Load bytecode transformers
-        classLoader.registerTransformer(ClientTransformer.class.getName());
-        ClientTransformer.getInstance().registerAll(config.getTransformers());
-
-        ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
+        this.setupTransformers(config);
 
         // Load mixin configs
         loadMixinConfig("mixins.capi.json");
@@ -85,36 +68,37 @@ public final class ClientTweaker implements ITweaker {
         return "net.minecraft.client.main.Main";
     }
 
-    @Override
     @SuppressWarnings("unchecked")
-    public final String[] getLaunchArguments() {
-        // Parse the arguments that we are able to pass to the game
-        List<Argument> parsed = Arguments.parse(this.args);
-
-        // Parse the arguments that are already being passed to the game
-        List<Argument> existing = Arguments.parse((List<String>) Launch.blackboard.get("ArgumentList"));
-
-        // Remove any arguments that conflict with existing ones
-        parsed.removeIf(argument -> existing.stream().anyMatch(a -> a.conflicts(argument)));
-
-        // Join back the filtered arguments and pass those to the game
-        return Arguments.join(parsed).toArray(new String[0]);
-    }
-
     private void setupMixin() {
         MixinBootstrap.init();
         ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
 
+        // Find all of the other tweakers that are being loaded
+        List<String> tweakClasses = (List<String>) Launch.blackboard.get("TweakClasses");
+
+        // Default to NOTCH obfuscation context
         String obfuscation = ObfuscationServiceMCP.NOTCH;
 
-        // If there are any transformers that have "fml" in their class name, then use the searge obfuscation context
-        if (Launch.classLoader.getTransformers().stream().anyMatch(t -> t.getClass().getName().contains("fml"))) {
+        // If there are any tweak classes that contain "FMLTweaker", then set the obfuscation context to SEARGE
+        if (tweakClasses.stream().anyMatch(s -> s.contains("FMLTweaker"))) {
             obfuscation = ObfuscationServiceMCP.SEARGE;
+            ClientAPI.LOGGER.log(Level.INFO, "Discovered FML! Switching to SEARGE mappings.");
         }
 
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext(obfuscation);
         ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
+    }
+
+    private void setupTransformers(ClientConfiguration config) {
+        SimpleTransformer transformer = SimpleTransformer.getInstance();
+
+        if (!Boolean.valueOf(System.getProperty("clientapi.load.devMode", "false")))
+            transformer.registerAll(new ValueAccessorTransformer());
+
+        transformer.registerAll(config.getTransformers());
+
+        ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
     }
 
     private ClientConfiguration findClientConfig() {
@@ -131,17 +115,5 @@ public final class ClientTweaker implements ITweaker {
             throw new ClientInitException("Unable to locate mixin configuration %s", config);
 
         Mixins.addConfiguration(config);
-    }
-
-    private void addArg(String label, File file) {
-        if (file != null)
-            addArg(label, file.getAbsolutePath());
-    }
-
-    private void addArg(String label, String value) {
-        if (!args.contains("--" + label) && value != null) {
-            this.args.add("--" + label);
-            this.args.add(value);
-        }
     }
 }

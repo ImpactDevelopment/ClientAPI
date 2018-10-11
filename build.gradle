@@ -84,6 +84,7 @@ repositories {
 
 dependencies {
     compile "com.github.ZeroMemes:Alpine:${project.alpineVersion}"
+    compile "com.github.ImpactDevelopment:SimpleTweaker:${project.simpleTweakerVersion}"
     compile "net.jodah:typetools:${project.typetoolsVersion}"
     compile("org.spongepowered:mixin:${project.mixinVersion}") {
         // Mixin includes a lot of dependencies that are too up-to-date
