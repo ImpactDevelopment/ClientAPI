@@ -24,7 +24,6 @@ import io.github.impactdevelopment.simpletweaker.SimpleTweaker;
 import io.github.impactdevelopment.simpletweaker.transform.SimpleTransformer;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
-import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
@@ -45,7 +44,7 @@ public final class ClientTweaker extends SimpleTweaker {
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         super.injectIntoClassLoader(classLoader);
 
-        ClientAPI.LOGGER.log(Level.INFO, "Injecting into ClassLoader");
+        ClientAPI.LOGGER.info("Injecting into ClassLoader");
 
         this.setupMixin();
 
@@ -60,7 +59,7 @@ public final class ClientTweaker extends SimpleTweaker {
         for (String mixin : config.getMixins())
             loadMixinConfig(mixin);
 
-        ClientAPI.LOGGER.log(Level.INFO, "Loaded Mixin Configurations");
+        ClientAPI.LOGGER.info("Loaded Mixin Configurations");
     }
 
     @Override
@@ -71,7 +70,7 @@ public final class ClientTweaker extends SimpleTweaker {
     @SuppressWarnings("unchecked")
     private void setupMixin() {
         MixinBootstrap.init();
-        ClientAPI.LOGGER.log(Level.INFO, "Initialized Mixin bootstrap");
+        ClientAPI.LOGGER.info("Initialized Mixin bootstrap");
 
         // Find all of the other tweakers that are being loaded
         List<String> tweakClasses = (List<String>) Launch.blackboard.get("TweakClasses");
@@ -82,12 +81,12 @@ public final class ClientTweaker extends SimpleTweaker {
         // If there are any tweak classes that contain "FMLTweaker", then set the obfuscation context to SEARGE
         if (tweakClasses.stream().anyMatch(s -> s.contains("FMLTweaker"))) {
             obfuscation = ObfuscationServiceMCP.SEARGE;
-            ClientAPI.LOGGER.log(Level.INFO, "Discovered FML! Switching to SEARGE mappings.");
+            ClientAPI.LOGGER.info("Discovered FML! Switching to SEARGE mappings.");
         }
 
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext(obfuscation);
-        ClientAPI.LOGGER.log(Level.INFO, "Setup Mixin Environment");
+        ClientAPI.LOGGER.info("Setup Mixin Environment");
     }
 
     private void setupTransformers(ClientConfiguration config) {
@@ -98,7 +97,7 @@ public final class ClientTweaker extends SimpleTweaker {
 
         transformer.registerAll(config.getTransformers());
 
-        ClientAPI.LOGGER.log(Level.INFO, "Registered Bytecode Transformes");
+        ClientAPI.LOGGER.info("Registered Bytecode Transformes");
     }
 
     private ClientConfiguration findClientConfig() {

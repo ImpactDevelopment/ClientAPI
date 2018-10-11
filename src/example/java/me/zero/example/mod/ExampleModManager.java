@@ -23,7 +23,6 @@ import me.zero.example.mod.mods.Aura;
 import me.zero.example.mod.mods.Fly;
 import me.zero.example.mod.mods.Hud;
 import me.zero.example.mod.mods.Speed;
-import org.apache.logging.log4j.Level;
 
 /**
  * @author Brady
@@ -37,7 +36,7 @@ public final class ExampleModManager extends Manager<Module> {
 
     @Override
     public final void load() {
-        ClientAPI.LOGGER.log(Level.INFO, "Loading Modules");
+        ClientAPI.LOGGER.info("Loading Modules");
 
         // Load Modules
         this.addAll(
