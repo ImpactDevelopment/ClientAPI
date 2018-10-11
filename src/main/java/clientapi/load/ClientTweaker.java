@@ -53,11 +53,11 @@ public final class ClientTweaker extends SimpleTweaker {
         this.setupTransformers(config);
 
         // Load mixin configs
-        loadMixinConfig("mixins.capi.json");
+        this.loadMixinConfig("mixins.capi.json");
 
         // Load Client defined mixin configs
         for (String mixin : config.getMixins())
-            loadMixinConfig(mixin);
+            this.loadMixinConfig(mixin);
 
         ClientAPI.LOGGER.info("Loaded Mixin Configurations");
     }
