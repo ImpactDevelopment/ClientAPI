@@ -62,11 +62,6 @@ public final class ClientTweaker extends SimpleTweaker {
         ClientAPI.LOGGER.info("Loaded Mixin Configurations");
     }
 
-    @Override
-    public final String getLaunchTarget() {
-        return "net.minecraft.client.main.Main";
-    }
-
     @SuppressWarnings("unchecked")
     private void setupMixin() {
         MixinBootstrap.init();
