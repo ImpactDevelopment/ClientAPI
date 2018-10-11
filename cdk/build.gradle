@@ -64,6 +64,7 @@ repositories {
 dependencies {
     deobfCompile 'com.github.ImpactDevelopment:ClientAPI:@CAPI_VERSION@-srg'
     compile 'com.github.ZeroMemes:Alpine:@ALPINE_VERSION@'
+    compile 'com.github.ImpactDevelopment:SimpleTweaker:@SIMPLETWEAKER_VERSION@'
     compile 'net.jodah:typetools:@TT_VERSION@'
     compile('org.spongepowered:mixin:@MIXIN_VERSION@') {
         // Mixin includes a lot of dependencies that are too up-to-date
