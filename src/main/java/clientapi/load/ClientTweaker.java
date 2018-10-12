@@ -33,7 +33,8 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * Calls the transformer and loads the target Client
+ * Initializes the Mixin environment, confirms that a ClientAPI mod configuration is
+ * present, and then loads the custom defined mixins and transformers.
  *
  * @author Brady
  * @since 1/20/2017
