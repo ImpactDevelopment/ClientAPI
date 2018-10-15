@@ -33,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.minecraft.block.material.Material.AIR;
 import static net.minecraft.block.material.Material.WATER;
+import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 
 /**
  * @author Brady
@@ -44,10 +45,10 @@ public class MixinEntityRenderer {
     @Inject(
             method = "updateCameraAndRender",
             at = @At(
-                    value = "INVOKE_STRING",
-                    target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V",
-                    args = { "ldc=gui" }
-                    )
+                    value = "FIELD",
+                    opcode = GETFIELD,
+                    target = "net/minecraft/client/renderer/OpenGlHelper.shadersSupported:Z"
+            )
     )
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
@@ -58,8 +59,8 @@ public class MixinEntityRenderer {
             at = @At(
                     value = "INVOKE_STRING",
                     target = "net/minecraft/profiler/Profiler.endStartSection(Ljava/lang/String;)V",
-                    args = { "ldc=hand" }
-                    )
+                    args = "ldc=hand"
+            )
     )
     private void onStartHand(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
         ClientAPI.EVENT_BUS.post(new RenderWorldEvent(partialTicks, pass));
