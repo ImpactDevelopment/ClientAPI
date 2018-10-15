@@ -23,9 +23,13 @@ import clientapi.event.defaults.game.render.RenderScreenEvent;
 import clientapi.event.defaults.game.render.RenderWorldEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -33,7 +37,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.minecraft.block.material.Material.AIR;
 import static net.minecraft.block.material.Material.WATER;
-import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.spongepowered.asm.lib.Opcodes.GETSTATIC;
 
 /**
  * @author Brady
@@ -42,17 +48,32 @@ import static org.spongepowered.asm.lib.Opcodes.GETFIELD;
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
 
+    @Shadow @Final private Minecraft mc;
+
     @Inject(
             method = "updateCameraAndRender",
             at = @At(
                     value = "FIELD",
-                    opcode = GETFIELD,
+                    opcode = GETSTATIC,
                     target = "net/minecraft/client/renderer/OpenGlHelper.shadersSupported:Z",
                     shift = At.Shift.BEFORE
             )
     )
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
+        GlStateManager.pushMatrix();
+
+        // Setup orthogonal projection for display size
+        GlStateManager.matrixMode(GL_PROJECTION);
+        GlStateManager.loadIdentity();
+        GlStateManager.ortho(0.0D, mc.displayWidth, mc.displayHeight, 0.0D, 1000.0D, 3000.0D);
+        GlStateManager.matrixMode(GL_MODELVIEW);
+        GlStateManager.loadIdentity();
+        GlStateManager.translate(0.0F, 0.0F, -2000.0F);
+        GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
+
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
+
+        GlStateManager.popMatrix();
     }
 
     @Inject(
