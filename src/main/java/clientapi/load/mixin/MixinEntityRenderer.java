@@ -60,8 +60,6 @@ public class MixinEntityRenderer {
             )
     )
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
-        GlStateManager.pushMatrix();
-
         // Setup orthogonal projection for display size
         GlStateManager.matrixMode(GL_PROJECTION);
         GlStateManager.loadIdentity();
@@ -72,8 +70,6 @@ public class MixinEntityRenderer {
         GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
 
         ClientAPI.EVENT_BUS.post(new RenderScreenEvent(partialTicks));
-
-        GlStateManager.popMatrix();
     }
 
     @Inject(
