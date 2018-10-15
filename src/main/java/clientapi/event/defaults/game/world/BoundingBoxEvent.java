@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * Called from {@link Block#addCollisionBoxToList(BlockPos, AxisAlignedBB, List, AxisAlignedBB)}.
+ * Called from Block#addCollisionBoxToList(BlockPos, AxisAlignedBB, List, AxisAlignedBB).
  * Used to hook into block collision, used to modify the bounding boxes of blocks.
  *
  * @author Brady
@@ -34,19 +34,14 @@ import java.util.List;
 public final class BoundingBoxEvent {
 
     /**
-     * Singleton instance of this event
-     */
-    private static final BoundingBoxEvent EVENT = new BoundingBoxEvent();
-
-    /**
      * The block itself
      */
-    private Block block;
+    private final Block block;
 
     /**
      * The position of the block
      */
-    private BlockPos pos;
+    private final BlockPos pos;
 
     /**
      * The bounding box of the block
@@ -56,12 +51,20 @@ public final class BoundingBoxEvent {
     /**
      * Colliding list being added onto
      */
-    private List<AxisAlignedBB> collidingBoxes;
+    private final List<AxisAlignedBB> collidingBoxes;
 
     /**
      * Entity being checked, may be {@code null}
      */
-    private Entity entity;
+    private final Entity entity;
+
+    public BoundingBoxEvent(Block block, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity) {
+        this.block = block;
+        this.pos = pos;
+        this.aabb = aabb;
+        this.collidingBoxes = collidingBoxes;
+        this.entity = entity;
+    }
 
     /**
      * Sets the block's bounding box. Setting it to
@@ -119,14 +122,5 @@ public final class BoundingBoxEvent {
                 ", collidingBoxes=" + collidingBoxes +
                 ", entity=" + entity +
                 '}';
-    }
-
-    public static BoundingBoxEvent get(Block block, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity) {
-        EVENT.block = block;
-        EVENT.pos = pos;
-        EVENT.aabb = aabb;
-        EVENT.collidingBoxes = collidingBoxes;
-        EVENT.entity = entity;
-        return EVENT;
     }
 }

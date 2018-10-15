@@ -64,7 +64,7 @@ public abstract class MixinBlock {
     private void addCollisionBox(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState, CallbackInfo ci) {
         synchronized (this) {
             Block block = (Block) (Object) (this);
-            bbEvent = BoundingBoxEvent.get(block, pos, block.getCollisionBoundingBox(state, world, pos), collidingBoxes, entity);
+            bbEvent = new BoundingBoxEvent(block, pos, block.getCollisionBoundingBox(state, world, pos), collidingBoxes, entity);
             ClientAPI.EVENT_BUS.post(bbEvent);
         }
     }
