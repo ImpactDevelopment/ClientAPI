@@ -47,7 +47,8 @@ public class MixinEntityRenderer {
             at = @At(
                     value = "FIELD",
                     opcode = GETFIELD,
-                    target = "net/minecraft/client/renderer/OpenGlHelper.shadersSupported:Z"
+                    target = "net/minecraft/client/renderer/OpenGlHelper.shadersSupported:Z",
+                    shift = At.Shift.BEFORE
             )
     )
     private void updateCameraAndRender(float partialTicks, long nanoTime, CallbackInfo ci) {
