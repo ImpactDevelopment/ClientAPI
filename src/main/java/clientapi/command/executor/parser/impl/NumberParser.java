@@ -33,7 +33,27 @@ public final class NumberParser implements ArgumentParser<Number> {
     @Override
     public final Number parse(ExecutionContext context, Type type, String raw) {
         if (NumberUtils.isCreatable(raw)) {
-            return NumberUtils.createNumber(raw);
+            Number result = NumberUtils.createNumber(raw);
+
+            // This is awful but at least it returns the expected type
+            if (type == Integer.class || type == Integer.TYPE) {
+                return result.intValue();
+            }
+            if (type == Long.class || type == Long.TYPE) {
+                return result.longValue();
+            }
+            if (type == BigInteger.class) {
+                return result instanceof BigInteger ? result : BigInteger.valueOf(result.longValue());
+            }
+            if (type == Float.class || type == Float.TYPE) {
+                return result.floatValue();
+            }
+            if (type == Double.class || type == Double.TYPE) {
+                return result.doubleValue();
+            }
+            if (type == BigDecimal.class) {
+                return result instanceof BigDecimal ? result : BigDecimal.valueOf(result.doubleValue());
+            }
         }
         return null;
     }
@@ -46,17 +66,15 @@ public final class NumberParser implements ArgumentParser<Number> {
 
         Class c = (Class) type;
         // Check all NumberUtils#createNumber(String) supported types
-        // Integer -> BigInteger
-        // Float -> BigDecimal
-        return Integer.class.isAssignableFrom(c)
-                || Long.class.isAssignableFrom(c)
-                || BigInteger.class.isAssignableFrom(c)
-                || Float.class.isAssignableFrom(c)
-                || Double.class.isAssignableFrom(c)
-                || BigDecimal.class.isAssignableFrom(c)
-                || Integer.TYPE.isAssignableFrom(c)
-                || Long.TYPE.isAssignableFrom(c)
-                || Float.TYPE.isAssignableFrom(c)
-                || Double.TYPE.isAssignableFrom(c);
+        return c == Integer.class
+                || c == Long.class
+                || c == BigInteger.class
+                || c == Float.class
+                || c == Double.class
+                || c == BigDecimal.class
+                || c == Integer.TYPE
+                || c == Long.TYPE
+                || c == Float.TYPE
+                || c == Double.TYPE;
     }
 }
