@@ -71,6 +71,7 @@ public final class ReflectionUtils {
      *
      * @param object An object of the defining class
      * @param field The field's name
+     * @return The discovered field, {@code null} if not found
      */
     public static Field findField(Object object, String field) {
         return findField(object.getClass(), field);
@@ -81,6 +82,7 @@ public final class ReflectionUtils {
      *
      * @param clazz The defining class
      * @param field The field's name
+     * @return The discovered field, {@code null} if not found
      */
     public static Field findField(Class<?> clazz, String field) {
         return Arrays.stream(clazz.getDeclaredFields())
