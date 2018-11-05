@@ -16,10 +16,17 @@
 
 package clientapi.util;
 
+import java.lang.invoke.LambdaMetafactory;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Util file used to clean up usages of the
@@ -32,12 +39,38 @@ public final class ReflectionUtils {
 
     private ReflectionUtils() {}
 
+    private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
+
+    public static <T> Supplier<T> createFieldGetter(Object obj, Field f) {
+        try {
+            if (!f.isAccessible()) {
+                f.setAccessible(true);
+            }
+
+            MethodHandle get = LOOKUP.findVirtual(Field.class, "get", MethodType.genericMethodType(1));
+            // noinspection unchecked
+            return (Supplier<T>) LambdaMetafactory.metafactory(
+                    LOOKUP,
+                    "get",
+                    get.type().changeReturnType(Supplier.class),
+                    MethodType.genericMethodType(0),
+                    get,
+                    MethodType.genericMethodType(0)
+            ).dynamicInvoker().invoke(f, Modifier.isStatic(f.getModifiers()) ? null : obj);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> Consumer<T> createFieldSetter(Object obj, Field f) {
+        return o -> ReflectionUtils.setField(obj, f, o);
+    }
+
     /**
      * Finds the field from the specified object's class
      *
      * @param object An object of the defining class
      * @param field The field's name
-     * @return The discovered field, {@code null} if not found
      */
     public static Field findField(Object object, String field) {
         return findField(object.getClass(), field);
@@ -48,7 +81,6 @@ public final class ReflectionUtils {
      *
      * @param clazz The defining class
      * @param field The field's name
-     * @return The discovered field, {@code null} if not found
      */
     public static Field findField(Class<?> clazz, String field) {
         return Arrays.stream(clazz.getDeclaredFields())

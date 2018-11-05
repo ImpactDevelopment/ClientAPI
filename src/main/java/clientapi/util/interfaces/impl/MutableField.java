@@ -29,19 +29,10 @@ import java.lang.reflect.Field;
  */
 public class MutableField<T> extends MergedMutable<T> {
 
-    public MutableField(Object object, String field) {
-        this(object, ReflectionUtils.findField(object, field));
-    }
-
-    public MutableField(Object object, Class<?> clazz, String field) {
-        this(object, ReflectionUtils.findField(clazz, field));
-    }
-
-    @SuppressWarnings("unchecked")
     public MutableField(Object object, Field field) {
         super(
-                value -> ReflectionUtils.setField(object, field, value),
-                () -> (T) ReflectionUtils.getField(object, field)
+                ReflectionUtils.createFieldSetter(object, field),
+                ReflectionUtils.createFieldGetter(object, field)
         );
     }
 }
