@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package clientapi.event.defaults.game.core;
+package clientapi.event.defaults.game.entity.local;
 
-import me.zero.alpine.event.Cancellable;
 import me.zero.alpine.event.EventState;
 import net.minecraft.client.entity.EntityPlayerSP;
 
@@ -28,11 +27,12 @@ import net.minecraft.client.entity.EntityPlayerSP;
  * @author Brady
  * @since 2/8/2017
  */
-public final class UpdateEvent extends Cancellable {
+public final class UpdateEvent extends LocalPlayerEvent.Cancellable {
 
     private final EventState state;
 
-    public UpdateEvent(EventState state) {
+    public UpdateEvent(EntityPlayerSP player, EventState state) {
+        super(player);
         this.state = state;
     }
 

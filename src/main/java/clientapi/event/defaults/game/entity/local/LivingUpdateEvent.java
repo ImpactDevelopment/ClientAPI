@@ -17,6 +17,7 @@
 package clientapi.event.defaults.game.entity.local;
 
 import me.zero.alpine.event.EventState;
+import net.minecraft.client.entity.EntityPlayerSP;
 
 /**
  * Called before and after EntityPlayerSP#onLivingUpdate()
@@ -24,14 +25,15 @@ import me.zero.alpine.event.EventState;
  * @author Brady
  * @since 2/10/2017
  */
-public final class LivingUpdateEvent {
+public final class LivingUpdateEvent extends LocalPlayerEvent {
 
     /**
      * The state of this event
      */
     private final EventState state;
 
-    public LivingUpdateEvent(EventState state) {
+    public LivingUpdateEvent(EntityPlayerSP player, EventState state) {
+        super(player);
         this.state = state;
     }
 

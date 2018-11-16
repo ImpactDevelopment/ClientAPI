@@ -20,8 +20,8 @@ import clientapi.load.mixin.extension.IEntity;
 import clientapi.util.interfaces.MinecraftAccessible;
 import clientapi.util.math.Vec2;
 import clientapi.util.math.Vec3;
-import me.zero.alpine.event.Cancellable;
 import me.zero.alpine.event.EventState;
+import net.minecraft.client.entity.EntityPlayerSP;
 
 /**
  * Called before and after packets are sent to
@@ -30,7 +30,7 @@ import me.zero.alpine.event.EventState;
  * @author Brady
  * @since 2/12/2017
  */
-public final class MotionUpdateEvent extends Cancellable implements MinecraftAccessible {
+public final class MotionUpdateEvent extends LocalPlayerEvent.Cancellable implements MinecraftAccessible {
 
     /**
      * Position
@@ -52,15 +52,17 @@ public final class MotionUpdateEvent extends Cancellable implements MinecraftAcc
      */
     private final EventState type;
 
-    public MotionUpdateEvent(EventState type) {
+    public MotionUpdateEvent(EntityPlayerSP player, EventState type) {
+        super(player);
+
         this.type = type;
         if (type == EventState.POST)
             return;
 
-        IEntity me = (IEntity) mc.player;
-        this.pos.copyFrom(me.getPos()).setY(mc.player.getEntityBoundingBox().minY);
+        IEntity me = (IEntity) player;
+        this.pos.copyFrom(me.getPos()).setY(player.getEntityBoundingBox().minY);
         this.rotations.copyFrom(me.getRotations());
-        this.onGround = mc.player.onGround;
+        this.onGround = player.onGround;
     }
 
     /**

@@ -16,7 +16,7 @@
 
 package clientapi.event.defaults.game.entity.local;
 
-import me.zero.alpine.event.Cancellable;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 
@@ -28,7 +28,7 @@ import net.minecraft.entity.MoverType;
  * @author Brady
  * @since 2/9/2017
  */
-public final class MoveEvent extends Cancellable {
+public final class MoveEvent extends LocalPlayerEvent.Cancellable {
 
     /**
      * The type of mover
@@ -40,7 +40,8 @@ public final class MoveEvent extends Cancellable {
      */
     private double x, y, z;
 
-    public MoveEvent(MoverType type, double x, double y, double z) {
+    public MoveEvent(EntityPlayerSP player, MoverType type, double x, double y, double z) {
+        super(player);
         this.type = type;
         this.x = x;
         this.y = y;

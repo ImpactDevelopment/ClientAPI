@@ -17,7 +17,7 @@
 package clientapi.load.mixin;
 
 import clientapi.ClientAPI;
-import clientapi.event.defaults.game.core.UpdateEvent;
+import clientapi.event.defaults.game.entity.local.UpdateEvent;
 import clientapi.event.defaults.game.entity.local.LivingUpdateEvent;
 import clientapi.event.defaults.game.entity.local.MotionUpdateEvent;
 import clientapi.event.defaults.game.entity.local.MoveEvent;
@@ -55,7 +55,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             cancellable = true
     )
     private void onPreUpdate(CallbackInfo ci) {
-        UpdateEvent preUpdateEvent = new UpdateEvent(EventState.PRE);
+        UpdateEvent preUpdateEvent = new UpdateEvent((EntityPlayerSP) (Object) this, EventState.PRE);
         ClientAPI.EVENT_BUS.post(preUpdateEvent);
         if (preUpdateEvent.isCancelled())
             ci.cancel();
@@ -66,7 +66,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             at = @At("RETURN")
     )
     private void onPostUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new UpdateEvent(EventState.POST));
+        ClientAPI.EVENT_BUS.post(new UpdateEvent((EntityPlayerSP) (Object) this, EventState.POST));
     }
 
     @Inject(
@@ -74,7 +74,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             at = @At("HEAD")
     )
     private void onPreLivingUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.PRE));
+        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent((EntityPlayerSP) (Object) this, EventState.PRE));
     }
 
     @Inject(
@@ -82,7 +82,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             at = @At("RETURN")
     )
     private void onPostLivingUpdate(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent(EventState.POST));
+        ClientAPI.EVENT_BUS.post(new LivingUpdateEvent((EntityPlayerSP) (Object) this, EventState.POST));
     }
 
     @Redirect(
@@ -93,7 +93,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             )
     )
     private void move$move(AbstractClientPlayer player, MoverType type, double x, double y, double z) {
-        MoveEvent event = new MoveEvent(type, x, y, z);
+        MoveEvent event = new MoveEvent((EntityPlayerSP) (Object) this, type, x, y, z);
         ClientAPI.EVENT_BUS.post(event);
         if (event.isCancelled())
             return;
@@ -122,7 +122,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             cancellable = true
     )
     private void onPreUpdateWalking(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(this.preMotionUpdateEvent = new MotionUpdateEvent(EventState.PRE));
+        ClientAPI.EVENT_BUS.post(this.preMotionUpdateEvent = new MotionUpdateEvent((EntityPlayerSP) (Object) this, EventState.PRE));
         if (this.preMotionUpdateEvent.isCancelled())
             ci.cancel();
     }
@@ -132,7 +132,7 @@ public abstract class MixinEntityPlayerSP extends MixinEntityLivingBase {
             at = @At("RETURN")
     )
     private void onPostUpdateWalking(CallbackInfo ci) {
-        ClientAPI.EVENT_BUS.post(new MotionUpdateEvent(EventState.POST));
+        ClientAPI.EVENT_BUS.post(new MotionUpdateEvent((EntityPlayerSP) (Object) this, EventState.POST));
         this.preMotionUpdateEvent = null;
     }
 

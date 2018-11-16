@@ -16,7 +16,7 @@
 
 package me.zero.example.mod.mods;
 
-import clientapi.event.defaults.game.core.UpdateEvent;
+import clientapi.event.defaults.game.entity.local.UpdateEvent;
 import clientapi.module.Module;
 import clientapi.module.annotation.Mod;
 import me.zero.alpine.listener.EventHandler;
